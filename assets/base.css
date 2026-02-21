@@ -2902,7 +2902,7 @@ product-price.text-block:is(.h1, .h2, .h3, .h4, .h5, .h6) > *:not(.tax-note) {
 .rte,
 .shopify-policy__title {
   :is(h1, h2, h3, h4, h5, h6) {
-    margin-block: clamp(1.5rem, 1em * 3.3, 2.5rem) clamp(1rem, 1em * 0.25, 2rem);
+    margin-block: clamp(1.5rem, 1em * 3.3, 2.5rem) var(--font-heading--spacing);
   }
 
   :first-child:is(p, h1, h2, h3, h4, h5, h6),
@@ -4301,8 +4301,8 @@ slideshow-arrows .slideshow-control.slideshow-control--style-none {
   display: none;
 }
 
-.section-resource-list.section--full-width product-card-link > .group-block,
-.section-carousel.section--full-width product-card-link > .group-block {
+:where(.section-resource-list.section--full-width) product-card[data-product-transition] > .group-block,
+:where(.section-carousel.section--full-width) product-card[data-product-transition] > .group-block {
   @media screen and (max-width: 749px) {
     padding-inline: max(var(--padding-xs), var(--padding-inline-start))
       max(var(--padding-xs), var(--padding-inline-end));

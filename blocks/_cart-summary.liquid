@@ -15,7 +15,16 @@
   ></div>
 {% endif %}
 <div
-  class="cart-summary border-style{% if block_settings.extend_summary == true %} cart-summary--extend {% if block_settings.inherit_color_scheme == false %} color-{{ block_settings.color_scheme }} inherit-parent-scheme--mobile{% endif %}{% endif %}{% if block_settings.border_radius > 0 %} has-border-radius{% endif %}"
+  class="
+    cart-summary border-style
+    {% if block_settings.extend_summary == true %}
+      cart-summary--extend
+      {% if block_settings.inherit_color_scheme == false %}
+        color-{{ block_settings.color_scheme }} inherit-parent-scheme--mobile
+      {% endif %}
+    {% endif %}
+    {% if block_settings.border_radius > 0 %} has-border-radius{% endif %}
+  "
   style="{% render 'border-override', settings: block_settings %}"
   {{ block.shopify_attributes }}
 >
@@ -42,7 +51,7 @@
     }
   }
 
-  body:has(> #header-group .header[sticky]) .cart-summary__inner {
+  body:has(> #header-group header-component[sticky]) .cart-summary__inner {
     top: var(--header-height, 0);
   }
 
@@ -56,11 +65,6 @@
       grid-template-rows: subgrid;
       grid-row: 1 / -1;
     }
-  }
-
-  .cart-summary:not(.cart-summary--extend),
-  .cart-summary:not(.cart-summary--extend) .cart-summary__inner {
-    height: auto;
   }
 
   .cart-summary--extend {

@@ -34,6 +34,7 @@
 slot[name='more']:not([hidden]) {
   display: flex;
   height: 100%;
+  align-items: center;
 }
 
 slot[name='more'] .button {
