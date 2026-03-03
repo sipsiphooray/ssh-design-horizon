@@ -332,7 +332,7 @@
         when 'top'
           assign first = drawer_menu
 
-          if bottom_row_blocks.size > 0 and section.settings.divider_size == 'page-width'
+          if bottom_row_blocks.size > 0 and section.settings.divider_size == 'page-width' or section.settings.divider_size == 'page-narrow'
             assign class = class | append: ' divider--page-width'
           endif
 
@@ -1365,6 +1365,10 @@
       "label": "t:settings.width",
       "options": [
         {
+          "value": "page-narrow",
+          "label": "Narrow"
+        },
+        {
           "value": "page-width",
           "label": "t:options.page"
         },
@@ -1426,6 +1430,10 @@
       "id": "divider_size",
       "label": "t:settings.divider_width",
       "options": [
+        {
+          "value": "page-narrow",
+          "label": "Narrow"
+        },
         {
           "value": "page-width",
           "label": "t:options.page"
