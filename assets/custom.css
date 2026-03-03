@@ -13,8 +13,42 @@ slideshow-controls.carousel-controls .icon-play {
     display: none !important;
 }
 
+:root {
+    --font-heading--family: 'League Spartan', sans-serif !important;
+    --font-heading--style: normal !important;
+    --font-heading--weight: 900 !important;
+    --narrow-page-width: 86rem !important;
+    --button-padding-block: 12px !important;
+}
+
+.menu-list__submenu-inner {
+    --menu-parent-font-size: var(--menu-font-sm--size) !important;
+    --menu-parent-font-family: var(--font-subheading--family) !important;
+    --menu-parent-font-weight: var(--font-subheading--weight) !important;
+    --menu-parent-font-case: uppercase !important;
+}
+
 .section--page-narrow {
   --page-width: calc(78rem + (var(--page-margin) * 2)) !important;
+}
+
+.menu-list__link:hover {
+    text-decoration: underline;
+    text-underline-offset: 5px;
+}
+
+.mega-menu__link--parent {
+    margin-bottom: var(--gap-xs);
+}
+
+.button {
+    font-weight: var(--font-accent--weight);
+}
+
+@media screen and (min-width: 60em) {
+    :root {
+        --section-height-large: 90svh !important;
+    }
 }
 
 @media (max-width: 749px) {

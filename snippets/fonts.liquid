@@ -40,3 +40,14 @@
   >
 {%- endunless -%}
 {% # theme-check-enable %}
+
+{% style %}
+  @font-face {
+    font-family: 'League Spartan';
+    src: url({{ 'LeagueSpartan-ExtraBold.woff2' | asset_url }}) format('woff2'),
+        url({{ 'LeagueSpartan-ExtraBold.woff' | asset_url }}) format('woff');
+    font-weight: bold;
+    font-style: normal;
+    font-display: swap;
+  }
+{% endstyle %}
