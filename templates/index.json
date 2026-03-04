@@ -818,7 +818,7 @@
                     "type_preset": "h3",
                     "font": "var(--font-body--family)",
                     "font_size": "1rem",
-                    "enable_mobile_size": false,
+                    "enable_mobile_size": true,
                     "mobile_font_size": "1rem",
                     "line_height": "normal",
                     "letter_spacing": "normal",
@@ -1414,7 +1414,7 @@
       "settings": {
         "alignment": "left",
         "layout_type": "grid",
-        "carousel_on_mobile": true,
+        "carousel_on_mobile": false,
         "enable_dots": false,
         "hide_arrows": false,
         "autoplay": false,
