@@ -1497,11 +1497,11 @@
             "padding-block-end": 0,
             "padding-inline-start": 0,
             "padding-inline-end": 0,
-            "custom_mobile_padding": false,
+            "custom_mobile_padding": true,
             "mobile-padding-block-start": 0,
             "mobile-padding-block-end": 0,
-            "mobile-padding-inline-start": 0,
-            "mobile-padding-inline-end": 0,
+            "mobile-padding-inline-start": 24,
+            "mobile-padding-inline-end": 24,
             "css_class": "left-offset"
           },
           "blocks": {
