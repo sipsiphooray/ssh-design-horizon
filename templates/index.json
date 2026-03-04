@@ -1651,7 +1651,7 @@
                 "template-type": "template-a",
                 "title-font-size": 40,
                 "title-font-size-portrait": 24,
-                "landscape-padding": 40,
+                "landscape-padding": 0,
                 "top-bottom-padding": 0,
                 "scroll-video-tile-size": 80,
                 "scroll-video-tile-size-portrait": 80,
