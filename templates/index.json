@@ -864,7 +864,7 @@
         "carousel_card_dTfWmr"
       ],
       "custom_css": [
-        ".section--page-width {--full-page-grid-central-column-width: min( 100% - var(--page-margin) * 2, calc(100% - var(--page-margin) * 2) ) !important;}"
+        ".section--page-width {--full-page-grid-central-column-width: min( 100% - var(--gap) * 2, calc(100% - var(--gap) * 2) ) !important;}"
       ],
       "name": "Grid Section",
       "settings": {
