@@ -570,7 +570,7 @@
                 "align_baseline": false,
                 "horizontal_alignment_flex_direction_column": "flex-start",
                 "vertical_alignment_flex_direction_column": "center",
-                "gap": 4,
+                "gap": 2,
                 "width": "fill",
                 "custom_width": 100,
                 "width_mobile": "fill",
@@ -629,14 +629,14 @@
                     "product": "{{closest.product}}"
                   }
                 },
-                "price_aA3MDG": {
+                "price_a637Pk": {
                   "type": "price",
                   "name": "t:names.product_price",
                   "settings": {
                     "show_sale_price_first": true,
                     "show_installments": false,
                     "show_tax_info": false,
-                    "type_preset": "",
+                    "type_preset": "h5",
                     "width": "100%",
                     "alignment": "left",
                     "font": "var(--font-body--family)",
@@ -645,7 +645,7 @@
                     "letter_spacing": "normal",
                     "case": "none",
                     "color": "var(--color-foreground)",
-                    "padding-block-start": 0,
+                    "padding-block-start": 6,
                     "padding-block-end": 0,
                     "padding-inline-start": 0,
                     "padding-inline-end": 0
@@ -656,7 +656,7 @@
               "block_order": [
                 "product_title_JLUHw9",
                 "okendo_star_rating_GFky8X",
-                "price_aA3MDG"
+                "price_a637Pk"
               ]
             }
           },
