@@ -863,6 +863,9 @@
       "block_order": [
         "carousel_card_dTfWmr"
       ],
+      "custom_css": [
+        "{--full-page-grid-central-column-width: min(100% - var(--page-margin) * 2, calc(100% - var(--page-margin) * 2)) !important;}"
+      ],
       "name": "Grid Section",
       "settings": {
         "alignment": "left",
