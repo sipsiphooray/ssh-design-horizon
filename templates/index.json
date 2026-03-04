@@ -1671,7 +1671,7 @@
         "group_7tfRFL"
       ],
       "custom_css": [
-        "@media (min-width: 990px) {.left-offset {margin-left: var(--util-page-margin-offset); } .whatmore-root .swiper-button-next {right: 1rem;}}"
+        "@media (min-width: 990px) {.left-offset {margin-left: var(--util-page-margin-offset); } .whatmore-root .swiper-button-next {right: 1rem; } .whatmore-root .swiper-button-prev {left: 1rem;}}"
       ],
       "name": "t:names.image_with_text",
       "settings": {
