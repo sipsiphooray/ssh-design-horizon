@@ -103,6 +103,11 @@
           "border_radius": 0,
           "subscription_policy_url": ""
         }
+      },
+      "14020781649437803805": {
+        "type": "shopify://apps/shopvid/blocks/app_embed/1216543a-6237-4445-a5f2-61991cd76022",
+        "disabled": false,
+        "settings": {}
       }
     },
     "color_schemes": {

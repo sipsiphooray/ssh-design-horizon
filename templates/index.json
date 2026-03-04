@@ -1656,6 +1656,7 @@
             },
             "whatmore_shoppable_videos_app_block_mPM3af": {
               "type": "shopify://apps/whatmore-shoppable-videos/blocks/app-block/20db8a72-315a-4364-8885-64219ee48303",
+              "disabled": true,
               "settings": {
                 "heading": "",
                 "template-type": "template-a",
