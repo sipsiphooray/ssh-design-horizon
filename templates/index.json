@@ -677,8 +677,8 @@
         "mobile_card_size": "60cqw",
         "columns_gap": 16,
         "rows_gap": 32,
-        "icons_style": "arrow",
-        "icons_shape": "none",
+        "icons_style": "chevron",
+        "icons_shape": "circle",
         "section_width": "page-width",
         "horizontal_alignment": "flex-start",
         "gap": 0,
@@ -793,6 +793,109 @@
             "text_FmCcQ3"
           ]
         },
+        "carousel_card_TBW3HU": {
+          "type": "_carousel-card",
+          "name": "Carousel Item",
+          "settings": {
+            "content_direction": "column",
+            "vertical_on_mobile": true,
+            "reverse_on_mobile": false,
+            "horizontal_alignment": "flex-start",
+            "vertical_alignment": "center",
+            "align_baseline": false,
+            "horizontal_alignment_flex_direction_column": "center",
+            "custom_mobile_alignment": false,
+            "mobile_vertical_alignment": "flex-start",
+            "vertical_alignment_flex_direction_column": "center",
+            "gap": 12,
+            "width": "fill",
+            "custom_width": 100,
+            "width_mobile": "fill",
+            "custom_width_mobile": 100,
+            "height": "fit",
+            "custom_height": 100,
+            "inherit_color_scheme": true,
+            "color_scheme": "",
+            "border": "none",
+            "border_width": 1,
+            "border_opacity": 100,
+            "border_radius": 0,
+            "enable_mobile_radius": false,
+            "mobile_border_radius": 0,
+            "padding-block-start": 0,
+            "padding-block-end": 0,
+            "padding-inline-start": 0,
+            "padding-inline-end": 0,
+            "custom_mobile_padding": false,
+            "mobile-padding-block-start": 0,
+            "mobile-padding-block-end": 0,
+            "mobile-padding-inline-start": 0,
+            "mobile-padding-inline-end": 0,
+            "css_class": ""
+          },
+          "blocks": {
+            "image_hhWT9j": {
+              "type": "image",
+              "name": "t:names.image",
+              "settings": {
+                "image": "shopify://shop_images/Mask_group_26.png",
+                "link": "",
+                "image_ratio": "adapt",
+                "width": "fill",
+                "custom_width": 100,
+                "width_mobile": "fill",
+                "custom_width_mobile": 100,
+                "height": "fit",
+                "border": "none",
+                "border_width": 1,
+                "border_opacity": 100,
+                "border_radius": 0,
+                "padding-block-start": 0,
+                "padding-block-end": 0,
+                "padding-inline-start": 0,
+                "padding-inline-end": 0
+              },
+              "blocks": {}
+            },
+            "text_CVXtXV": {
+              "type": "text",
+              "name": "t:names.heading",
+              "settings": {
+                "text": "<h3>St. Patrick's Day</h3>",
+                "width": "fit-content",
+                "max_width": "normal",
+                "alignment": "left",
+                "type_preset": "h3",
+                "font": "var(--font-body--family)",
+                "font_size": "1rem",
+                "enable_mobile_size": false,
+                "mobile_font_size": "1rem",
+                "line_height": "normal",
+                "letter_spacing": "normal",
+                "case": "none",
+                "wrap": "pretty",
+                "color": "var(--color-foreground)",
+                "background": false,
+                "background_color": "#00000026",
+                "corner_radius": 0,
+                "padding-block-start": 0,
+                "padding-block-end": 0,
+                "padding-inline-start": 0,
+                "padding-inline-end": 0,
+                "custom_mobile_padding": false,
+                "mobile-padding-block-start": 0,
+                "mobile-padding-block-end": 0,
+                "mobile-padding-inline-start": 0,
+                "mobile-padding-inline-end": 0
+              },
+              "blocks": {}
+            }
+          },
+          "block_order": [
+            "image_hhWT9j",
+            "text_CVXtXV"
+          ]
+        },
         "static-header": {
           "type": "_product-list-content",
           "name": "t:names.header",
@@ -861,7 +964,8 @@
         }
       },
       "block_order": [
-        "carousel_card_dTfWmr"
+        "carousel_card_dTfWmr",
+        "carousel_card_TBW3HU"
       ],
       "custom_css": [
         ".section--page-width {--page-margin: 24px !important; --full-page-grid-central-column-width: min( 100% - var(--page-margin) * 2, calc(100% - var(--page-margin) * 2) ) !important;}"
@@ -881,7 +985,7 @@
         "mobile_card_size": "60cqw",
         "columns_gap": 16,
         "rows_gap": 16,
-        "icons_style": "arrow",
+        "icons_style": "chevron",
         "icons_shape": "circle",
         "section_width": "full-width",
         "full_width_on_mobile": false,
@@ -896,9 +1000,9 @@
         "gradient_direction": "to top",
         "padding-block-start": 0,
         "padding-block-end": 60,
-        "custom_mobile_padding": false,
+        "custom_mobile_padding": true,
         "mobile-padding-block-start": 0,
-        "mobile-padding-block-end": 0,
+        "mobile-padding-block-end": 32,
         "mobile-padding-inline-start": 0,
         "mobile-padding-inline-end": 0,
         "css_class": "",
