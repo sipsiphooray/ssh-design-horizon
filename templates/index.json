@@ -1655,7 +1655,7 @@
                 "top-bottom-padding": 0,
                 "scroll-video-tile-size": 80,
                 "scroll-video-tile-size-portrait": 80,
-                "min-height": 380
+                "min-height": 480
               }
             }
           },
