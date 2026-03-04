@@ -1650,7 +1650,7 @@
               "type": "shopify://apps/whatmore-shoppable-videos/blocks/app-block/20db8a72-315a-4364-8885-64219ee48303",
               "settings": {
                 "heading": "",
-                "template-type": "template-h",
+                "template-type": "template-b",
                 "title-font-size": 40,
                 "title-font-size-portrait": 24,
                 "landscape-padding": 0,
