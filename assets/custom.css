@@ -53,11 +53,6 @@ slideshow-controls.carousel-controls .icon-play {
     object-fit: contain;
 }
 
-.okeReviews[data-oke-container] svg {
-    width: auto;
-    height: .8rem;
-}
-
 @media screen and (min-width: 60em) {
     :root {
         --section-height-large: 90svh !important;
