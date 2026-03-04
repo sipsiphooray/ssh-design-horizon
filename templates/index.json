@@ -1408,7 +1408,7 @@
         "carousel_card_jqDBL9"
       ],
       "custom_css": [
-        ".section--page-width {--page-margin: 24px !important; --full-page-grid-central-column-width: min( 100% - var(--page-margin) * 2, calc(100% - var(--page-margin) * 2) ) !important;}"
+        ".section--page-width {--page-margin: 16px; --full-page-grid-central-column-width: min( 100% - var(--page-margin) * 2, calc(100% - var(--page-margin) * 2) );}"
       ],
       "name": "Grid Section",
       "settings": {
@@ -1427,7 +1427,7 @@
         "rows_gap": 16,
         "icons_style": "chevron",
         "icons_shape": "circle",
-        "section_width": "full-width",
+        "section_width": "page-width",
         "full_width_on_mobile": false,
         "gap": 0,
         "color_scheme": "",
