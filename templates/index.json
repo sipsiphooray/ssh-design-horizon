@@ -1650,7 +1650,7 @@
               "type": "shopify://apps/whatmore-shoppable-videos/blocks/app-block/20db8a72-315a-4364-8885-64219ee48303",
               "settings": {
                 "heading": "",
-                "template-type": "template-a",
+                "template-type": "template-h",
                 "title-font-size": 40,
                 "title-font-size-portrait": 24,
                 "landscape-padding": 0,
@@ -1671,7 +1671,7 @@
         "group_7tfRFL"
       ],
       "custom_css": [
-        "@media (min-width: 990px) {.left-offset {margin-left: var(--util-page-margin-offset); } .whatmore-root .swiper-button-next {right: 1rem; } .whatmore-root .swiper-button-prev {left: 1rem;}}"
+        "@media (min-width: 990px) {.left-offset {margin-left: var(--util-page-margin-offset); } .whatmore-root .swiper-button-next {right: 1rem; } .whatmore-root .swiper-button-prev {left: 1rem; }}"
       ],
       "name": "t:names.image_with_text",
       "settings": {
