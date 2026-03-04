@@ -19,6 +19,7 @@ slideshow-controls.carousel-controls .icon-play {
     --font-heading--weight: 900 !important;
     --narrow-page-width: 86rem !important;
     --button-padding-block: 12px !important;
+    --letter-spacing--heading-tight: -0.05em !important;
 }
 
 .menu-list__submenu-inner {
@@ -27,7 +28,6 @@ slideshow-controls.carousel-controls .icon-play {
     --menu-parent-font-weight: var(--font-subheading--weight) !important;
     --menu-parent-font-case: uppercase !important;
     --menu-child-font-color: rgb(var(--color-foreground-rgb) / 1) !important;
-    --letter-spacing--heading-tight: -0.05em !important;
 }
 
 .section--page-narrow {
