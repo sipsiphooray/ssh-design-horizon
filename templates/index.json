@@ -65,11 +65,12 @@
             "css_class": "left-content"
           },
           "blocks": {
-            "text_ek9jmA": {
-              "type": "text",
-              "name": "t:names.heading",
+            "moving_line_text_QbT3QX": {
+              "type": "moving-line-text",
+              "name": "Moving line text",
               "settings": {
-                "text": "<p>lucky you. it’s your lucky season.</p>",
+                "text": "<h2><em>lucky you.</em> it’s your lucky season.</h2>",
+                "line_vector": "shopify://shop_images/curve1.png",
                 "width": "fit-content",
                 "max_width": "normal",
                 "alignment": "left",
@@ -115,7 +116,7 @@
             }
           },
           "block_order": [
-            "text_ek9jmA",
+            "moving_line_text_QbT3QX",
             "button_9JXtb4"
           ]
         },
