@@ -619,8 +619,8 @@
       "settings": {
         "collection": "best-sellers",
         "layout_type": "grid",
-        "carousel_on_mobile": false,
-        "max_products": 8,
+        "carousel_on_mobile": true,
+        "max_products": 4,
         "columns": 4,
         "mobile_columns": "2",
         "mobile_card_size": "60cqw",
