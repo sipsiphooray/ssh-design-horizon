@@ -69,9 +69,9 @@
               "type": "moving-line-text",
               "name": "Moving line text",
               "settings": {
-                "text": "<h2><em>Lucky you.</em> it’s your lucky season.</h2>",
+                "text": "<h2><em>lucky you.</em> it’s your lucky season.</h2>",
                 "line_vector": "shopify://shop_images/svgviewer-png-output_8_1.png",
-                "height": 20,
+                "height": 24,
                 "mobile_height": 16,
                 "width": "fit-content",
                 "max_width": "normal",
@@ -243,6 +243,184 @@
         "reflection_opacity": 75,
         "padding-block-start": 72,
         "padding-block-end": 0
+      }
+    },
+    "marquee_rfcVf9": {
+      "type": "marquee",
+      "blocks": {
+        "icon_iXDNQM": {
+          "type": "icon",
+          "name": "t:names.icon",
+          "settings": {
+            "icon": "price_tag",
+            "image_upload": "shopify://shop_images/VOGUE_LOGO.svg",
+            "width": 24,
+            "use_height": true,
+            "height": 28,
+            "custom_mobile_height": false,
+            "mobile-height": 24,
+            "link": "",
+            "open_in_new_tab": false
+          },
+          "blocks": {}
+        }
+      },
+      "block_order": [
+        "icon_iXDNQM"
+      ],
+      "name": "t:names.marquee_section",
+      "settings": {
+        "movement_direction": "normal",
+        "color_scheme": "scheme-738179cd-4e15-457b-be40-989a024001d6",
+        "padding-block-start": 24,
+        "padding-block-end": 24,
+        "gap_between_elements": 32
+      }
+    },
+    "grid_section_d8wkgr": {
+      "type": "grid-section",
+      "blocks": {
+        "carousel_card_ajwqPy": {
+          "type": "_carousel-card",
+          "name": "Carousel Item",
+          "settings": {
+            "content_direction": "column",
+            "vertical_on_mobile": true,
+            "reverse_on_mobile": false,
+            "horizontal_alignment": "flex-start",
+            "vertical_alignment": "center",
+            "align_baseline": false,
+            "horizontal_alignment_flex_direction_column": "center",
+            "custom_mobile_alignment": false,
+            "mobile_vertical_alignment": "flex-start",
+            "vertical_alignment_flex_direction_column": "center",
+            "gap": 12,
+            "width": "fill",
+            "custom_width": 100,
+            "width_mobile": "fill",
+            "custom_width_mobile": 100,
+            "height": "fit",
+            "custom_height": 100,
+            "inherit_color_scheme": true,
+            "color_scheme": "",
+            "border": "none",
+            "border_width": 1,
+            "border_opacity": 100,
+            "border_radius": 0,
+            "enable_mobile_radius": false,
+            "mobile_border_radius": 0,
+            "padding-block-start": 0,
+            "padding-block-end": 0,
+            "padding-inline-start": 0,
+            "padding-inline-end": 0,
+            "custom_mobile_padding": false,
+            "mobile-padding-block-start": 0,
+            "mobile-padding-block-end": 0,
+            "mobile-padding-inline-start": 0,
+            "mobile-padding-inline-end": 0,
+            "css_class": ""
+          },
+          "blocks": {
+            "icon_kCkzXN": {
+              "type": "icon",
+              "name": "t:names.icon",
+              "settings": {
+                "icon": "price_tag",
+                "image_upload": "shopify://shop_images/VOGUE_LOGO.svg",
+                "width": 24,
+                "use_height": true,
+                "height": 40,
+                "custom_mobile_height": false,
+                "mobile-height": 24,
+                "link": "",
+                "open_in_new_tab": false
+              },
+              "blocks": {}
+            }
+          },
+          "block_order": [
+            "icon_kCkzXN"
+          ]
+        },
+        "static-header": {
+          "type": "_product-list-content",
+          "name": "t:names.header",
+          "disabled": true,
+          "static": true,
+          "settings": {
+            "content_direction": "row",
+            "vertical_on_mobile": false,
+            "horizontal_alignment": "space-between",
+            "vertical_alignment": "flex-end",
+            "align_baseline": true,
+            "horizontal_alignment_flex_direction_column": "flex-start",
+            "vertical_alignment_flex_direction_column": "center",
+            "gap": 12,
+            "width": "fill",
+            "custom_width": 100,
+            "width_mobile": "fill",
+            "custom_width_mobile": 100,
+            "height": "fit",
+            "custom_height": 100,
+            "inherit_color_scheme": true,
+            "color_scheme": "",
+            "background_media": "none",
+            "video_position": "cover",
+            "background_image_position": "cover",
+            "border": "none",
+            "border_width": 1,
+            "border_opacity": 100,
+            "border_radius": 0,
+            "padding-block-start": 0,
+            "padding-block-end": 12,
+            "padding-inline-start": 0,
+            "padding-inline-end": 0
+          },
+          "blocks": {}
+        }
+      },
+      "block_order": [
+        "carousel_card_ajwqPy"
+      ],
+      "disabled": true,
+      "name": "Grid Section",
+      "settings": {
+        "alignment": "left",
+        "layout_type": "carousel",
+        "carousel_on_mobile": false,
+        "enable_dots": false,
+        "hide_arrows": false,
+        "autoplay": false,
+        "autoplay_speed": 4,
+        "columns": 3,
+        "peek_desktop": false,
+        "mobile_columns": "2",
+        "mobile_card_size": "60cqw",
+        "columns_gap": 8,
+        "rows_gap": 8,
+        "icons_style": "arrow",
+        "icons_shape": "circle",
+        "section_width": "page-width",
+        "full_width_on_mobile": false,
+        "gap": 0,
+        "color_scheme": "scheme-738179cd-4e15-457b-be40-989a024001d6",
+        "background_media": "none",
+        "video_position": "cover",
+        "background_image_position": "cover",
+        "toggle_overlay": false,
+        "overlay_color": "#00000026",
+        "overlay_style": "solid",
+        "gradient_direction": "to top",
+        "padding-block-start": 12,
+        "padding-block-end": 12,
+        "custom_mobile_padding": false,
+        "mobile-padding-block-start": 0,
+        "mobile-padding-block-end": 0,
+        "mobile-padding-inline-start": 0,
+        "mobile-padding-inline-end": 0,
+        "css_class": "",
+        "add_section_id": false,
+        "section_id": ""
       }
     },
     "product_list_fa6P9H": {
@@ -442,6 +620,8 @@
   },
   "order": [
     "hero_jVaWmY",
+    "marquee_rfcVf9",
+    "grid_section_d8wkgr",
     "product_list_fa6P9H"
   ]
 }

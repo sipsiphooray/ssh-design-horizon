@@ -46,6 +46,12 @@ slideshow-controls.carousel-controls .icon-play {
     font-weight: var(--font-accent--weight);
 }
 
+.use-height-icon img, .use-height-icon svg {
+    width: auto !important;
+    height: var(--height) !important;
+    object-fit: contain;
+}
+
 @media screen and (min-width: 60em) {
     :root {
         --section-height-large: 90svh !important;
@@ -125,5 +131,9 @@ slideshow-controls.carousel-controls .icon-play {
 
     [style*="--mobile-ratio"] > img,  [style*="--mobile-ratio"] > video {
        aspect-ratio: var(--mobile-ratio) !important;
+    }
+
+    .use-height-icon[style*="--mobile-height"] img, .use-height-icon[style*="--mobile-height"] svg {
+        height: var(--mobile-height) !important;
     }
 }
