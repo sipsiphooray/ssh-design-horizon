@@ -733,7 +733,7 @@
           "blocks": {
             "group_YihF6T": {
               "type": "group",
-              "name": "t:names.group",
+              "name": "Apply link to this parent",
               "settings": {
                 "link": "#",
                 "open_in_new_tab": false,
@@ -894,7 +894,7 @@
           "blocks": {
             "group_XtdiFJ": {
               "type": "group",
-              "name": "t:names.group",
+              "name": "Apply link to this parent",
               "settings": {
                 "link": "#",
                 "open_in_new_tab": false,
@@ -1055,7 +1055,7 @@
           "blocks": {
             "group_kTTKb8": {
               "type": "group",
-              "name": "t:names.group",
+              "name": "Apply link to this parent",
               "settings": {
                 "link": "#",
                 "open_in_new_tab": false,
@@ -1216,7 +1216,7 @@
           "blocks": {
             "group_U3QeQU": {
               "type": "group",
-              "name": "t:names.group",
+              "name": "Apply link to this parent",
               "settings": {
                 "link": "#",
                 "open_in_new_tab": false,
