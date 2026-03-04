@@ -53,6 +53,17 @@ slideshow-controls.carousel-controls .icon-play {
     object-fit: contain;
 }
 
+.button:has(.button--arrow) {
+    display: flex;
+    align-items: center;
+    gap: var(--gap-xs);
+    justify-content: center;
+}
+
+.button--arrow svg {
+    display: block;
+}
+
 @media screen and (min-width: 60em) {
     :root {
         --section-height-large: 90svh !important;
