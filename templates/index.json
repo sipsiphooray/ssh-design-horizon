@@ -1653,7 +1653,7 @@
                 "title-font-size-portrait": 24,
                 "landscape-padding": 0,
                 "top-bottom-padding": 0,
-                "scroll-video-tile-size": 97,
+                "scroll-video-tile-size": 100,
                 "scroll-video-tile-size-portrait": 80,
                 "min-height": 480
               }
