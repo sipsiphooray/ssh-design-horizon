@@ -26,6 +26,7 @@ slideshow-controls.carousel-controls .icon-play {
     --menu-parent-font-family: var(--font-subheading--family) !important;
     --menu-parent-font-weight: var(--font-subheading--weight) !important;
     --menu-parent-font-case: uppercase !important;
+    --menu-child-font-color: rgb(var(--color-foreground-rgb) / 1) !important;
 }
 
 .section--page-narrow {
