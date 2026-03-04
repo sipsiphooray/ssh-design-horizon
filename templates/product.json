@@ -207,6 +207,18 @@
               },
               "blocks": {}
             },
+            "subscriptions_app_block_JGAiFt": {
+              "type": "shopify://apps/subscriptions/blocks/app-block/a3bfe9ec-96f8-4508-a003-df608a36d2ad",
+              "settings": {
+                "color_text_body": "#6D7175",
+                "dividers_color": "#8F8D8D",
+                "bacgkround_color": "#FFFFFF",
+                "border_thickness": 1,
+                "border_radius": 0,
+                "subscription_policy_url": "",
+                "product": "{{closest.product}}"
+              }
+            },
             "buy_buttons_eYQEYi": {
               "type": "buy-buttons",
               "settings": {
@@ -274,27 +286,15 @@
                 "mobile-padding-inline-end": 0
               },
               "blocks": {}
-            },
-            "subscriptions_app_block_JGAiFt": {
-              "type": "shopify://apps/subscriptions/blocks/app-block/a3bfe9ec-96f8-4508-a003-df608a36d2ad",
-              "settings": {
-                "color_text_body": "#6D7175",
-                "dividers_color": "#8F8D8D",
-                "bacgkround_color": "#FFFFFF",
-                "border_thickness": 1,
-                "border_radius": 0,
-                "subscription_policy_url": "",
-                "product": "{{closest.product}}"
-              }
             }
           },
           "block_order": [
             "group_icgrde",
             "divider_VJhene",
             "variant_picker_R3rGDr",
+            "subscriptions_app_block_JGAiFt",
             "buy_buttons_eYQEYi",
-            "text_aEtTtq",
-            "subscriptions_app_block_JGAiFt"
+            "text_aEtTtq"
           ]
         }
       },
