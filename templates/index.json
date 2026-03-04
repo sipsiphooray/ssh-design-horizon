@@ -109,6 +109,7 @@
                 "link": "shopify://collections/st-patricks-day",
                 "open_in_new_tab": false,
                 "style_class": "button",
+                "add_arrow": true,
                 "width": "custom",
                 "custom_width": 36,
                 "width_mobile": "fit-content",
@@ -1579,6 +1580,7 @@
                 "link": "shopify://collections/all",
                 "open_in_new_tab": false,
                 "style_class": "button",
+                "add_arrow": true,
                 "width": "custom",
                 "custom_width": 45,
                 "width_mobile": "fit-content",
@@ -1646,6 +1648,12 @@
             "css_class": ""
           },
           "blocks": {
+            "shopvid_mp_tiktok_block_hygyjQ": {
+              "type": "shopify://apps/shopvid/blocks/mp_tiktok_block/1216543a-6237-4445-a5f2-61991cd76022",
+              "settings": {
+                "mp_tiktok_feed_id": "0403-426722"
+              }
+            },
             "whatmore_shoppable_videos_app_block_mPM3af": {
               "type": "shopify://apps/whatmore-shoppable-videos/blocks/app-block/20db8a72-315a-4364-8885-64219ee48303",
               "settings": {
@@ -1662,6 +1670,7 @@
             }
           },
           "block_order": [
+            "shopvid_mp_tiktok_block_hygyjQ",
             "whatmore_shoppable_videos_app_block_mPM3af"
           ]
         }
@@ -1673,7 +1682,7 @@
       "custom_css": [
         "@media (min-width: 990px) {.left-offset {margin-left: var(--util-page-margin-offset); } .whatmore-root .swiper-button-next {right: 1rem; } .whatmore-root .swiper-button-prev {left: 1rem; }}"
       ],
-      "name": "t:names.image_with_text",
+      "name": "Video Carousel",
       "settings": {
         "content_direction": "row",
         "vertical_on_mobile": true,
