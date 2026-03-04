@@ -1472,7 +1472,7 @@
             "enable_mobile_gap": false,
             "mobile_gap": 12,
             "width": "custom",
-            "custom_width": 100,
+            "custom_width": 33,
             "width_mobile": "fill",
             "custom_width_mobile": 100,
             "height": "fit",
@@ -1573,12 +1573,12 @@
             "button_a68XY3": {
               "type": "button",
               "settings": {
-                "label": "Shop now",
+                "label": "Shop Now",
                 "link": "shopify://collections/all",
                 "open_in_new_tab": false,
-                "style_class": "button",
+                "style_class": "button-secondary",
                 "width": "fit-content",
-                "custom_width": 100,
+                "custom_width": 20,
                 "width_mobile": "fit-content",
                 "custom_width_mobile": 100
               },
