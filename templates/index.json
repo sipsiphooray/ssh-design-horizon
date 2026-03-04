@@ -1502,7 +1502,7 @@
             "mobile-padding-block-end": 0,
             "mobile-padding-inline-start": 0,
             "mobile-padding-inline-end": 0,
-            "css_class": ""
+            "css_class": "left-offset"
           },
           "blocks": {
             "text_XmyfrA": {
@@ -1667,6 +1667,9 @@
       "block_order": [
         "group_qwbtmz",
         "group_7tfRFL"
+      ],
+      "custom_css": [
+        "@media (min-width: 990px) {.left-offset {margin-left: var(--util-page-margin-offset); }}"
       ],
       "name": "t:names.image_with_text",
       "settings": {
