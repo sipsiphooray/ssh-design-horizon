@@ -84,22 +84,27 @@
 %}
 
 {% capture line_image %}
-  {{
-    block_settings.line_vector
-    | image_url: width: 100
-    | image_tag: alt: block_settings.line_vector.alt, loading: 'lazy', class: 'line__image'
-  }}
+  <em class="line-image-em" style="--height: {{ block_settings.height }}px; --mobile-height:{{ block_settings.mobile_height }}px;">
+    <div class="marquee-line__wrapper">
+      {% for i in (1..20) %}
+          <span class="line-image-span">
+            {{
+              block_settings.line_vector
+              | image_url: width: 100
+              | image_tag: alt: block_settings.line_vector.alt, loading: 'eager', class: 'line__image'
+            }}
+          </span>
+      {% endfor %}
+    </div>
 {% endcapture %}
 
 {% if fallback_text != blank and visible_text == blank %}
   <div {{ attributes | strip_newlines | strip }}>
-    {{ fallback_text }}
-    {{ line_image }}
+    {{ fallback_text | replace: '<em>', line_image }}
   </div>
 {% elsif plain_text != blank %}
   <{{ element }} {{ attributes | strip_newlines | strip }}>
-    {{ block.settings.text }}
-    {{ line_image }}
+    {{ block.settings.text | replace: '<em>', line_image }}
   </{{ element }}>
 {% endif %}
 
@@ -110,126 +115,49 @@
 
   .moving-line-text .line__image {
     display: block;
-    height: 1rem;
+    height: var(--height);
+    width: auto;
   }
 
-  [style*='--horizontal-alignment: center'] .text-block {
-    --text-align-default: center;
+  .line-image-em {
+    position: relative;
+    font-style: normal;
   }
 
-  [style*='--horizontal-alignment: flex-end'] .text-block {
-    --text-align-default: right;
-  }
-
-  [style*='--horizontal-alignment: flex-start'] > .text-block {
-    --text-align-default: left;
-  }
-
-  [style*='--horizontal-alignment: center'] > .text-block {
-    --text-align-default: center;
-  }
-
-  [style*='--horizontal-alignment: flex-end'] > .text-block {
-    --text-align-default: right;
-  }
-
-  .text-block {
-    width: var(--width);
-    max-width: 100%;
+  .marquee-line__wrapper {
+    justify-content: flex-start;
+    align-items: center;
+    width: 100%;
     display: flex;
-    flex-direction: column;
-    align-items: var(--horizontal-alignment);
+    position: absolute;
+    bottom: -10px;
+    left: 0;
+    overflow: hidden;
+    z-index: -1;
   }
 
-  .text-block > * {
-    width: var(--width);
-    max-inline-size: min(100%, var(--max-width, 100%));
-    text-align: var(--text-align, var(--text-align-default));
-    text-wrap: var(--text-wrap);
+  .marquee-line__wrapper > span {
+      white-space: nowrap;
+      will-change: transform;
+      animation: 1s linear infinite reverse movingLine;
+      display: block;
+      transform: translate(0);
+      min-width: fit-content;
+      margin-left: -1px;
   }
 
-  .text-block:not(.text-block--full-width).rte,
-  .text-block:not(.text-block--full-width).paragraph {
-    /* Safari doesn't support pretty, so fallback to balance */
-    text-wrap: balance;
-    text-wrap: pretty;
+  @keyframes movingLine {
+    0% {
+        transform: translate(-100%);
+    }
+    100% {
+        transform: translate(0);
+    }
   }
 
-  .text-block:not(.text-block--full-width):is(.h1, .h2, .h3, .h4, .h5, .h6) {
-    text-wrap: balance;
-  }
-
-  /* Hide underline unless text is using paragraph styles. */
-  .text-block:is(.h1, .h2, .h3, .h4, .h5, .h6) a {
-    text-decoration-color: transparent;
-  }
-
-  .text-block h1,
-  .text-block.h1 > * {
-    margin-block: var(--font-h1--spacing);
-  }
-
-  .text-block h2,
-  .text-block.h2 > * {
-    margin-block: var(--font-h2--spacing);
-  }
-
-  .text-block h3,
-  .text-block.h3 > * {
-    margin-block: var(--font-h3--spacing);
-  }
-
-  .text-block h4,
-  .text-block.h4 > * {
-    margin-block: var(--font-h4--spacing);
-  }
-
-  .text-block h5,
-  .text-block.h5 > * {
-    margin-block: var(--font-h5--spacing);
-  }
-
-  .text-block h6,
-  .text-block.h6 > * {
-    margin-block: var(--font-h6--spacing);
-  }
-
-  .text-block p,
-  .text-block.p > * {
-    margin-block: var(--font-paragraph--spacing);
-  }
-
-  .text-block > *:first-child {
-    margin-block-start: 0;
-  }
-
-  .text-block > *:last-child {
-    margin-block-end: 0;
-  }
-
-  .text-block--align-center,
-  .text-block--align-center > * {
-    margin-inline: auto;
-  }
-
-  .text-block--align-right,
-  .text-block--align-right > * {
-    margin-inline-start: auto;
-  }
-
-  .text-block--background {
-    background-color: var(--text-background-color);
-    border-radius: var(--text-corner-radius);
-
-    /* To avoid text being cropped when using a border radius we add a minimum padding. */
-    padding-block-start: max(var(--text-padding), var(--padding-block-start, 0));
-    padding-block-end: max(var(--text-padding), var(--padding-block-end, 0));
-    padding-inline-start: max(var(--text-padding), var(--padding-inline-start, 0));
-    padding-inline-end: max(var(--text-padding), var(--padding-inline-end, 0));
-  }
-
-  .custom-color,
-  .custom-color > :is(h1, h2, h3, h4, h5, h6, p, *) {
-    color: var(--color);
+  @media (max-width: 749px) {
+    .moving-line-text .line__image {
+      height: var(--mobile-height);
+    }
   }
 {% endstylesheet %}

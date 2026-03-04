@@ -10,7 +10,8 @@
     {
       "type": "richtext",
       "id": "text",
-      "label": "t:settings.text"
+      "label": "t:settings.text",
+      "default": "<h2><em>lucky you.</em> it’s your lucky season.</h2>"
     },
     {
       "type": "paragraph",
@@ -21,6 +22,28 @@
       "id": "line_vector",
       "label": "Line Vector",
       "info": "recommended: 100px w x 40px h ratio"
+    },
+    {
+      "type": "range",
+      "id": "height",
+      "label": "Desktop Height",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "default": 20,
+      "unit": "px",
+      "visible_if": "{{ block.settings.line_vector != blank }}"
+    },
+    {
+      "type": "range",
+      "id": "mobile_height",
+      "label": "Mobile line height",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "default": 10,
+      "unit": "px",
+      "visible_if": "{{ block.settings.line_vector != blank }}"
     },
     {
       "type": "header",
