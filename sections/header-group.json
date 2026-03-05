@@ -76,7 +76,72 @@
             "drawer_accordion_expand_first": false,
             "drawer_dividers": false
           },
-          "blocks": {}
+          "blocks": {
+            "megamenu_item_k8awNn": {
+              "type": "_megamenu-item",
+              "name": "Megamenu item",
+              "settings": {
+                "assigned_to": "Shop",
+                "image": "shopify://shop_images/32z_MOCKEDhandleright_sshDOGPARK.jpg",
+                "zoom_on_hover": true,
+                "image_ratio": "square",
+                "height": "fit",
+                "border": "none",
+                "border_width": 1,
+                "border_opacity": 100,
+                "border_radius": 0,
+                "type_preset": "rte",
+                "font": "var(--font-body--family)",
+                "font_size": "1rem",
+                "line_height": "normal",
+                "letter_spacing": "normal",
+                "case": "none",
+                "wrap": "pretty",
+                "color": "var(--color-foreground)",
+                "text": "<p>Share information about your brand with your customers. Describe a product, make announcements, or welcome customers to your store.</p>",
+                "link": "",
+                "read_only": false,
+                "alignment": "left",
+                "show_alignment": true,
+                "open_in_new_tab": false
+              },
+              "blocks": {}
+            },
+            "megamenu_item_UUf8Hi": {
+              "type": "_megamenu-item",
+              "name": "Megamenu item",
+              "settings": {
+                "assigned_to": "Shop",
+                "image": "shopify://shop_images/32z_MOCKEDhandleright_sshDOGPARK.jpg",
+                "zoom_on_hover": true,
+                "image_ratio": "square",
+                "height": "fit",
+                "border": "none",
+                "border_width": 1,
+                "border_opacity": 100,
+                "border_radius": 0,
+                "type_preset": "rte",
+                "font": "var(--font-body--family)",
+                "font_size": "1rem",
+                "line_height": "normal",
+                "letter_spacing": "normal",
+                "case": "none",
+                "wrap": "pretty",
+                "color": "var(--color-foreground)",
+                "text": "<p>Share information about your brand with your customers. Describe a product, make announcements, or welcome customers to your store.</p>",
+                "link": "",
+                "read_only": false,
+                "alignment": "left",
+                "show_alignment": true,
+                "open_in_new_tab": false
+              },
+              "blocks": {}
+            }
+          },
+          "block_order": [
+            "megamenu_item_k8awNn",
+            "megamenu_item_UUf8Hi"
+          ]
         }
       },
       "settings": {

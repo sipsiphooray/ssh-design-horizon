@@ -6,6 +6,7 @@
   @param {string} [data_header_drawer_type] - The type of header drawer to render
   @param {object} [block] - The block that can be used to provide settings
   @param {object} [section] - The section that can be used to provide settings
+  @param {object} [list_items_array] - The megamenu items.
 
   @example
   {% render 'header-drawer', linklist: section.settings.menu, class: 'header-drawer--mobile' %}
@@ -137,8 +138,8 @@
                         class="menu-drawer__menu-item menu-drawer__menu-item--mainlist menu-drawer__animated-element focus-inset"
                       >
                         <span class="menu-drawer__menu-item-text wrap-text">{{ link.title | escape }}</span>
-                        <span class="svg-wrapper icon-plus">
-                          {{- 'icon-plus.svg' | inline_asset_content -}}
+                        <span class="svg-wrapper icon-caret icon-animated">
+                          {{- 'icon-caret.svg' | inline_asset_content -}}
                         </span>
                       </summary>
                       {% liquid
@@ -262,8 +263,39 @@
             {% assign animation_index = 0 %}
             {%- for link in linklist.links -%}
               {% assign animation_index = animation_index | plus: 1 %}
+
+              {% capture parent_link_name %}
+                  <!--@list/{{ link.title | handleize }}-->
+              {% endcapture %}
+
+              {% liquid
+                assign has_blocks = blank
+                assign filtered_items_array = blank
+                assign final_items_array = nil
+                assign parent_link_name = parent_link_name | strip
+                assign items_array = list_items_array | strip | split: '<!--@list/split-->'
+              %}
+
+              {% capture filtered_items_array %}
+                {% for item in items_array %}
+                  {% if item contains parent_link_name %}
+                    {{ item }}
+                  {% endif %}
+                {% endfor %}
+              {% endcapture %}
+
+
+              {% liquid
+                if filtered_items_array != blank
+                  assign final_items_array = filtered_items_array | strip | remove_last: parent_link_name | split: parent_link_name
+                endif
+
+                if final_items_array.size > 0
+                  assign has_blocks = true
+                endif
+              %}
               <li
-                class="menu-drawer__list-item"
+                class=" menu-drawer__list-item"
                 style="--menu-drawer-animation-index: {{ animation_index }};"
               >
                 {%- if link.links != blank -%}
@@ -388,8 +420,8 @@
                                         <span class="menu-drawer__menu-item-text wrap-text">
                                           {{- childlink.title | escape -}}
                                         </span>
-                                        <span class="svg-wrapper icon-plus">
-                                          {{- 'icon-plus.svg' | inline_asset_content -}}
+                                        <span class="svg-wrapper icon-caret icon-animated">
+                                          {{- 'icon-caret.svg' | inline_asset_content -}}
                                         </span>
                                       </summary>
                                       {% liquid
@@ -517,41 +549,125 @@
                           endif
                         -%}
 
-                        {% if featured_collections.size > 0 or featured_products_collection.products_count > 0 %}
-                          <div
-                            class="menu-drawer__featured-content menu-drawer__featured-content--childlist"
-                            style="--menu-drawer-animation-index: {{ linklist.links.size | plus: 1 }};"
-                          >
-                            <ul class="menu-drawer__featured-content-list list-unstyled">
-                              {% if featured_collections.size > 0 %}
-                                {%- for collection in featured_collections limit: max_featured_items -%}
-                                  <li class="menu-drawer__featured-content-list-item menu-drawer__featured-content-list-item--collection">
-                                    {% render 'resource-card',
-                                      resource: collection.object,
-                                      resource_type: 'collection',
-                                      style: 'overlay',
-                                      image_aspect_ratio: ratio,
-                                      image_sizes: 'auto, 400px'
-                                    %}
-                                  </li>
-                                {%- endfor -%}
-                              {% else %}
-                                {% paginate featured_products_collection.products by max_featured_items %}
-                                  {%- for product in featured_products_collection.products limit: max_featured_items -%}
-                                    <li class="menu-drawer__featured-content-list-item menu-drawer__featured-content-list-item--product">
+                        {% if has_blocks == true %}
+                          {% if final_items_array.size > 0 %}
+                            <div
+                              class="menu-drawer__featured-content menu-drawer__featured-content--childlist"
+                              style="--menu-drawer-animation-index: {{ linklist.links.size | plus: 1 }};"
+                            >
+                              <ul class="menu-drawer__featured-content-list list-unstyled">
+                                {% if final_items_array.size > 0 %}
+                                  {%- for item in final_items_array -%}
+                                    <li class="menu-drawer__featured-content-list-item menu-drawer__featured-content-list-item--collection">
+                                      {{ item }}
+                                    </li>
+                                  {%- endfor -%}
+                                {% endif %}
+                              </ul>
+                            </div>
+                          {% endif %}
+                        {% else %}
+                          {% if featured_collections.size > 0 or featured_products_collection.products_count > 0 %}
+                            <div
+                              class="menu-drawer__featured-content menu-drawer__featured-content--childlist"
+                              style="--menu-drawer-animation-index: {{ linklist.links.size | plus: 1 }};"
+                            >
+                              <ul class="menu-drawer__featured-content-list list-unstyled">
+                                {% if featured_collections.size > 0 %}
+                                  {%- for collection in featured_collections limit: max_featured_items -%}
+                                    <li class="menu-drawer__featured-content-list-item menu-drawer__featured-content-list-item--collection">
                                       {% render 'resource-card',
-                                        resource: product,
-                                        resource_type: 'product',
+                                        resource: collection.object,
+                                        resource_type: 'collection',
+                                        style: 'overlay',
                                         image_aspect_ratio: ratio,
                                         image_sizes: 'auto, 400px'
                                       %}
                                     </li>
                                   {%- endfor -%}
-                                {% endpaginate %}
-                              {% endif %}
-                            </ul>
-                          </div>
+                                {% else %}
+                                  {% paginate featured_products_collection.products by max_featured_items %}
+                                    {%- for product in featured_products_collection.products limit: max_featured_items -%}
+                                      <li class="menu-drawer__featured-content-list-item menu-drawer__featured-content-list-item--product">
+                                        {% render 'resource-card',
+                                          resource: product,
+                                          resource_type: 'product',
+                                          image_aspect_ratio: ratio,
+                                          image_sizes: 'auto, 400px'
+                                        %}
+                                      </li>
+                                    {%- endfor -%}
+                                  {% endpaginate %}
+                                {% endif %}
+                              </ul>
+                            </div>
+                          {% endif %}
                         {% endif %}
+                      </div>
+                    </div>
+                  </details>
+                {% elsif has_blocks == true %}
+                  <details
+                    id="Details-menu-drawer-menu-item-{{ forloop.index }}"
+                    class="menu-drawer__menu-container{% if block_settings.drawer_dividers %} menu-drawer__menu-container--divider{% endif %}"
+                  >
+                    <summary
+                      id="HeaderDrawer-{{ link.handle }}"
+                      class="menu-drawer__menu-item menu-drawer__menu-item--mainlist menu-drawer__animated-element focus-inset{% if link.child_active %} menu-drawer__menu-item--active{% endif %}"
+                      on:click="header-drawer/open/submenu"
+                    >
+                      <span class="menu-drawer__menu-item-text wrap-text">{{ link.title | escape }}</span>
+                      <span class="svg-wrapper icon-caret icon-caret--forward">
+                        {{- 'icon-caret.svg' | inline_asset_content -}}
+                      </span>
+                    </summary>
+                    <div
+                      id="link-{{ link.handle | escape }}"
+                      class="menu-drawer__submenu has-submenu gradient motion-reduce"
+                      tabindex="-1"
+                      style="--menu-drawer-animation-index: {{ animation_index }};"
+                    >
+                      <div class="menu-drawer__inner-submenu">
+                        <div class="menu-drawer__nav-buttons">
+                          <button
+                            class="button menu-drawer__back-button focus-inset"
+                            aria-expanded="true"
+                            on:click="header-drawer/back"
+                            aria-label="{{ 'actions.back' | t }}"
+                          >
+                            <span class="svg-wrapper icon-caret icon-caret--backward">
+                              {{- 'icon-caret.svg' | inline_asset_content -}}
+                            </span>
+                            <span class="menu-drawer__menu-item-text wrap-text">{{ link.title | escape }}</span>
+                          </button>
+                          <button
+                            class="button close-button menu-drawer__close-button"
+                            type="button"
+                            aria-label="{{ 'actions.close' | t }}"
+                            on:click="header-drawer/close"
+                          >
+                            <span class="svg-wrapper header-drawer-icon header-drawer-icon--close">
+                              {{- 'icon-close.svg' | inline_asset_content -}}
+                            </span>
+                          </button>
+                        </div>
+                        <ul
+                          class="menu-drawer__menu blocks-drawer-items menu-drawer__menu--childlist "
+                          role="list"
+                          tabindex="-1"
+                        >
+                          {% if final_items_array.size > 0 %}
+                            {%- for item in final_items_array -%}
+                              <li
+                                class="menu-drawer__list-item
+                                  {% if block_settings.drawer_dividers %} menu-drawer__list-item--divider{% endif %}
+                                "
+                              >
+                                {{ item }}
+                              </li>
+                            {%- endfor -%}
+                          {% endif %}
+                        </ul>
                       </div>
                     </div>
                   </details>
@@ -1222,10 +1338,10 @@
     width: 100%;
     top: 0;
     height: 100dvh;
-    left: 0;
+    right: 0;
     background-color: var(--color-background);
     z-index: var(--layer-flat);
-    transform: translateX(-5%);
+    transform: translateX(5%);
     visibility: hidden;
     overflow-y: auto;
     opacity: 0;

@@ -9,6 +9,10 @@
   assign block_settings = block.settings
 %}
 
+{% capture list_items %}
+  {% content_for 'blocks' %}
+{% endcapture %}
+
 {% case variant %}
   {% when 'mobile' %}
     <div
@@ -17,7 +21,9 @@
       data-hydration-key="header-drawer-mobile"
       {{ block.shopify_attributes }}
     >
-      {% render 'header-drawer', linklist: block_settings.menu, data_header_drawer_type: 'mobile-drawer' %}
+      {% render 'header-drawer', linklist: block_settings.menu, data_header_drawer_type: 'mobile-drawer',
+        list_items_array: list_items
+       %}
     </div>
 
   {% when 'navigation_bar' %}
@@ -124,7 +130,8 @@
                       grid_columns_count_collection_images: 8,
                       menu_content_type: menu_content_type,
                       content_aspect_ratio: ratio,
-                      image_border_radius: image_border_radius
+                      image_border_radius: image_border_radius,
+                      list_items_array: list_items
                     %}
                   </div>
                 </div>
@@ -671,6 +678,11 @@
 {
   "name": "t:names.menu",
   "tag": null,
+  "blocks": [
+    {
+      "type": "_megamenu-item"
+    }
+  ],
   "settings": [
     {
       "type": "link_list",

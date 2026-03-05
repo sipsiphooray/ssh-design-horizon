@@ -20,6 +20,7 @@ slideshow-controls.carousel-controls .icon-play {
     --narrow-page-width: 86rem !important;
     --button-padding-block: 12px !important;
     --letter-spacing--heading-tight: -0.05em !important;
+    --drawer-width: 100vw !important;
 }
 
 .menu-list__submenu-inner {
@@ -91,12 +92,29 @@ slideshow-controls.carousel-controls .icon-play {
     height: var(--icon-size-xs);
 }
 
-.menu-drawer__menu {
+.menu-drawer__menu:not(.menu-drawer__menu--childlist) {
     padding-block-start: var(--drawer-padding);
 }
 
 .menu-drawer {
     box-shadow: unset !important;
+}
+
+summary,.menu-drawer__back-button {
+    -webkit-tap-highlight-color: transparent;
+}
+
+.menu-drawer-container .menu-drawer__animated-element {
+    animation: unset !important;
+}
+
+
+.menu-drawer__featured-content-list-item:only-child {
+    flex: 1 auto;
+}
+
+.menu-drawer__featured-content-list-item:not(:only-child) {
+    max-width: 50cqw;
 }
 
 @media screen and (min-width: 60em) {
