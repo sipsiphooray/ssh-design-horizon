@@ -66,6 +66,16 @@
         {{- 'icon-close.svg' | inline_asset_content -}}
       </span>
     </summary>
+    <button
+      class="button button-unstyled close-button menu-drawer__close-button"
+      type="button"
+      aria-label="{{ 'actions.close' | t }}"
+      on:click="/close"
+    >
+      <span class="svg-wrapper header-drawer-icon header-drawer-icon--close">
+        {{- 'icon-close.svg' | inline_asset_content -}}
+      </span>
+    </button>
     <div
       ref="menuDrawer"
       class="
@@ -841,14 +851,14 @@
 
   .menu-drawer {
     position: fixed;
-    transform: translateX(-100%);
+    width: 100vw;
+    top: var(--header-group-height);
+    height: calc(var(--drawer-height) - var(--header-group-height));
     visibility: hidden;
-    height: var(--drawer-height);
-    width: var(--drawer-width);
+    opacity: 0;
     max-width: var(--drawer-max-width);
     z-index: var(--layer-menu-drawer);
     left: 0;
-    top: 0;
     padding: 0;
     background-color: var(--color-background);
     overflow: auto;
@@ -1269,13 +1279,13 @@
     0% {
       visibility: hidden;
       opacity: 0;
-      transform: translateX(-0.5rem);
+      transform: translateY(-0.5rem);
     }
 
     100% {
       visibility: visible;
       opacity: 1;
-      transform: translateX(0);
+      transform: translateY(0);
     }
   }
 
