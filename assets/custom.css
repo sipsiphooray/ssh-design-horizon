@@ -64,6 +64,41 @@ slideshow-controls.carousel-controls .icon-play {
     display: block;
 }
 
+
+[data-sticky-state="active"] .menu-drawer {
+    top: calc(var(--header-height) - 1px);
+    height: calc(var(--drawer-height) - var(--header-height));
+}
+
+.menu-drawer__backdrop {
+    display: none !important;
+}
+
+.menu-drawer__close-button {
+    display: none !important;
+}
+
+.menu-open > .menu-drawer__close-button {
+    display: block !important;
+}
+
+.menu-open > .header__icon--summary {
+    display: none !important;
+}
+
+.menu-drawer__close-button .svg-wrapper {
+    width: var(--icon-size-xs);
+    height: var(--icon-size-xs);
+}
+
+.menu-drawer__menu {
+    padding-block-start: var(--drawer-padding);
+}
+
+.menu-drawer {
+    box-shadow: unset !important;
+}
+
 @media screen and (min-width: 60em) {
     :root {
         --section-height-large: 90svh !important;
