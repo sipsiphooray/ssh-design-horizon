@@ -3307,7 +3307,7 @@
                     "icon_4": "shopify://shop_images/icon-4.png",
                     "text_4": "<p>Dishwasher<br/>Safe</p>",
                     "column_gap": 30,
-                    "icon_size": 32,
+                    "icon_size": 40,
                     "desktop_width_percent": 100,
                     "mobile_columns": "2",
                     "icon_size_mobile": 24,
