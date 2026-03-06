@@ -1,6 +1,351 @@
+{% doc %}
+  @prompt
+    image to the left, text to the right using richtext setting as value, and has line with circle to image as pointer. shoule be adjustable position top to bottom. the image should have height setting. the space should be justify between text and image, the image should render like this
+    
+              {{
+                block.settings.image
+                | image_url: width: 2560
+                | image_tag: width: width, height: block.settings.image.height, widths: widths, sizes: sizes, loading: 'lazy', alt: block.settings.image.alt, class: image_class
+              }}
+{% enddoc %}
+{% assign ai_gen_id = block.id | replace: '_', '' | downcase %}
+
+{% style %}
+  .ai-image-text-pointer-{{ ai_gen_id }} {
+    display: block;
+    width: {{ block.settings.desktop_width_percent }}%;
+    max-width: 100%;
+  }
+
+  .ai-image-text-pointer__container-{{ ai_gen_id }} {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: {{ block.settings.gap }}px;
+    position: relative;
+  }
+
+  .ai-image-text-pointer__image-wrapper-{{ ai_gen_id }} {
+    flex-shrink: 0;
+    position: relative;
+    width: {{ block.settings.image_width }}%;
+  }
+
+  .ai-image-text-pointer__image-{{ ai_gen_id }} {
+    width: 100%;
+    height: {{ block.settings.image_height }}px;
+    object-fit: cover;
+    border-radius: {{ block.settings.image_border_radius }}px;
+  }
+
+  .ai-image-text-pointer__image-placeholder-{{ ai_gen_id }} {
+    width: 100%;
+    height: {{ block.settings.image_height }}px;
+    background-color: #f4f4f4;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: {{ block.settings.image_border_radius }}px;
+    position: relative;
+  }
+
+  .ai-image-text-pointer__image-placeholder-{{ ai_gen_id }} svg {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .ai-image-text-pointer__empty-state-{{ ai_gen_id }} {
+    position: absolute;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    padding: 12px 20px;
+    font-size: 14px;
+    color: #666;
+    text-align: center;
+    pointer-events: none;
+  }
+
+  .ai-image-text-pointer__pointer-{{ ai_gen_id }} {
+    position: absolute;
+    right: 0;
+    top: {{ block.settings.pointer_position }}%;
+    transform: translateY(-50%);
+    width: {{ block.settings.pointer_circle_size }}px;
+    height: {{ block.settings.pointer_circle_size }}px;
+    z-index: 2;
+  }
+
+  .ai-image-text-pointer__circle-{{ ai_gen_id }} {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    background-color: {{ block.settings.pointer_color }};
+    border: {{ block.settings.pointer_border_width }}px solid {{ block.settings.pointer_border_color }};
+  }
+
+  .ai-image-text-pointer__line-{{ ai_gen_id }} {
+    position: absolute;
+    left: 100%;
+    top: 50%;
+    transform: translateY(-50%);
+    width: {{ block.settings.gap }}px;
+    height: {{ block.settings.line_thickness }}px;
+    background-color: {{ block.settings.line_color }};
+  }
+
+  .ai-image-text-pointer__text-wrapper-{{ ai_gen_id }} {
+    flex-grow: 1;
+    color: {{ block.settings.text_color }};
+  }
+
+  .ai-image-text-pointer__text-{{ ai_gen_id }} {
+    font-size: {{ block.settings.text_size }}px;
+    line-height: 1.5;
+  }
+
+  @media screen and (max-width: 749px) {
+    .ai-image-text-pointer__container-{{ ai_gen_id }} {
+      flex-direction: column;
+      gap: 30px;
+    }
+
+    .ai-image-text-pointer__image-wrapper-{{ ai_gen_id }} {
+      width: 100%;
+    }
+
+    .ai-image-text-pointer__pointer-{{ ai_gen_id }} {
+      right: auto;
+      top: auto;
+      bottom: 0;
+      left: {{ block.settings.pointer_position }}%;
+      transform: translateX(-50%) translateY(50%);
+    }
+
+    .ai-image-text-pointer__line-{{ ai_gen_id }} {
+      left: 50%;
+      top: 100%;
+      transform: translateX(-50%);
+      width: {{ block.settings.line_thickness }}px;
+      height: 30px;
+    }
+
+    .ai-image-text-pointer__text-wrapper-{{ ai_gen_id }} {
+      width: 100%;
+    }
+  }
+{% endstyle %}
+
+<div
+  class="ai-image-text-pointer-{{ ai_gen_id }}"
+  {{ block.shopify_attributes }}
+>
+  <div class="ai-image-text-pointer__container-{{ ai_gen_id }}">
+    <div class="ai-image-text-pointer__image-wrapper-{{ ai_gen_id }}">
+      {% if block.settings.image %}
+        {% assign widths = '375, 550, 750, 1100, 1500, 1780, 2000, 2560' %}
+        {% assign sizes = '(min-width: 750px) calc(100vw * {{ block.settings.image_width }} / 100), 100vw' %}
+        {% assign image_class = 'ai-image-text-pointer__image-' | append: ai_gen_id %}
+        {{
+          block.settings.image
+          | image_url: width: 2560
+          | image_tag: width: block.settings.image.width, height: block.settings.image.height, widths: widths, sizes: sizes, loading: 'lazy', alt: block.settings.image.alt, class: image_class
+        }}
+      {% else %}
+        <div class="ai-image-text-pointer__image-placeholder-{{ ai_gen_id }}">
+          {{ 'image' | placeholder_svg_tag }}
+          <div class="ai-image-text-pointer__empty-state-{{ ai_gen_id }}">
+            Next, add an image
+          </div>
+        </div>
+      {% endif %}
+
+      <div class="ai-image-text-pointer__pointer-{{ ai_gen_id }}">
+        <div class="ai-image-text-pointer__circle-{{ ai_gen_id }}"></div>
+        <div class="ai-image-text-pointer__line-{{ ai_gen_id }}"></div>
+      </div>
+    </div>
+
+    <div class="ai-image-text-pointer__text-wrapper-{{ ai_gen_id }}">
+      {% if block.settings.text != blank %}
+        <div class="ai-image-text-pointer__text-{{ ai_gen_id }}">
+          {{ block.settings.text }}
+        </div>
+      {% else %}
+        <div class="ai-image-text-pointer__text-{{ ai_gen_id }}">
+          <p>Add your text content here to describe the image.</p>
+        </div>
+      {% endif %}
+    </div>
+  </div>
+</div>
+
 {% schema %}
- {
-   "name": "AI_Block",
-   "tag": "shopify-ai-generated-block"
- }
+{
+  "name": "Image with text pointer",
+  "tag": null,
+  "settings": [
+    {
+      "type": "header",
+      "content": "Image"
+    },
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Image"
+    },
+    {
+      "type": "range",
+      "id": "image_width",
+      "label": "Image width",
+      "min": 30,
+      "max": 70,
+      "step": 5,
+      "unit": "%",
+      "default": 50
+    },
+    {
+      "type": "range",
+      "id": "image_height",
+      "label": "Image height",
+      "min": 200,
+      "max": 800,
+      "step": 50,
+      "unit": "px",
+      "default": 400
+    },
+    {
+      "type": "range",
+      "id": "image_border_radius",
+      "label": "Image border radius",
+      "min": 0,
+      "max": 40,
+      "step": 4,
+      "unit": "px",
+      "default": 0
+    },
+    {
+      "type": "header",
+      "content": "Text"
+    },
+    {
+      "type": "richtext",
+      "id": "text",
+      "label": "Text",
+      "default": "<p>Add your descriptive text here. This content will appear to the right of the image with a connecting line and pointer.</p>"
+    },
+    {
+      "type": "range",
+      "id": "text_size",
+      "label": "Text size",
+      "min": 12,
+      "max": 24,
+      "step": 1,
+      "unit": "px",
+      "default": 16
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Text color",
+      "default": "#2b2b2b"
+    },
+    {
+      "type": "header",
+      "content": "Pointer"
+    },
+    {
+      "type": "range",
+      "id": "pointer_position",
+      "label": "Pointer position",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "unit": "%",
+      "default": 50
+    },
+    {
+      "type": "range",
+      "id": "pointer_circle_size",
+      "label": "Circle size",
+      "min": 10,
+      "max": 40,
+      "step": 2,
+      "unit": "px",
+      "default": 20
+    },
+    {
+      "type": "color",
+      "id": "pointer_color",
+      "label": "Circle color",
+      "default": "#f0dfe7"
+    },
+    {
+      "type": "range",
+      "id": "pointer_border_width",
+      "label": "Circle border width",
+      "min": 0,
+      "max": 4,
+      "step": 1,
+      "unit": "px",
+      "default": 2
+    },
+    {
+      "type": "color",
+      "id": "pointer_border_color",
+      "label": "Circle border color",
+      "default": "#2b2b2b"
+    },
+    {
+      "type": "header",
+      "content": "Line"
+    },
+    {
+      "type": "range",
+      "id": "line_thickness",
+      "label": "Line thickness",
+      "min": 1,
+      "max": 6,
+      "step": 1,
+      "unit": "px",
+      "default": 2
+    },
+    {
+      "type": "color",
+      "id": "line_color",
+      "label": "Line color",
+      "default": "#2b2b2b"
+    },
+    {
+      "type": "header",
+      "content": "Layout"
+    },
+    {
+      "type": "range",
+      "id": "gap",
+      "label": "Space between image and text",
+      "min": 20,
+      "max": 100,
+      "step": 10,
+      "unit": "px",
+      "default": 60
+    },
+    {
+      "type": "range",
+      "id": "desktop_width_percent",
+      "label": "Desktop width",
+      "min": 50,
+      "max": 100,
+      "step": 5,
+      "unit": "%",
+      "default": 100
+    }
+  ],
+  "presets": [
+    {
+      "name": "Image with text pointer"
+    }
+  ]
+}
 {% endschema %}
