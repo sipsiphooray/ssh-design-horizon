@@ -1,6 +1,387 @@
+{% doc %}
+  @prompt
+    image to the left, text to the right using richtext setting as value, and has line with circle to image as pointer. shoule be adjustable position top to bottom. the image should have height setting. the space should be justify between text and image, the image should render like this
+    
+              {{
+                block.settings.image
+                | image_url: width: 2560
+                | image_tag: width: width, height: block.settings.image.height, widths: widths, sizes: sizes, loading: 'lazy', alt: block.settings.image.alt, class: image_class
+              }}, no height setting needed, the height should always adapt to image ratio, can u keep horizontal on mobile, make the text area and size smaller on mobile.
+    
+    i should be able to place dot to any horizontal and vertical area of the image, the text and image should align justify between based on parent container. , i dont see the dot, the dot should always start in left side of text. the dot position would be adjustable, the dot position should be adjustable beneath the image area. the text should have width adjuster, remove desktop width setting. should always default to 100%. i dont see the line and dot positioning in image doesnt wrok, doesnt work
+{% enddoc %}
+{% assign ai_gen_id = block.id | replace: '_', '' | downcase %}
+{% assign widths = '375, 550, 750, 1100, 1500, 1780, 2000, 2560' %}
+{% assign sizes = '(min-width: 750px) 50vw, 100vw' %}
+
+{% style %}
+  .ai-image-text-pointer-{{ ai_gen_id }} {
+    display: block;
+    width: 100%;
+  }
+
+  .ai-image-text-pointer__container-{{ ai_gen_id }} {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 40px;
+    width: 100%;
+    max-width: 100%;
+    position: relative;
+  }
+
+  .ai-image-text-pointer__image-wrapper-{{ ai_gen_id }} {
+    position: relative;
+    flex: 0 0 50%;
+    max-width: 50%;
+  }
+
+  .ai-image-text-pointer__image-{{ ai_gen_id }} {
+    width: 100%;
+    height: auto;
+    display: block;
+  }
+
+  .ai-image-text-pointer__image-placeholder-{{ ai_gen_id }} {
+    width: 100%;
+    background-color: #f4f4f4;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+  }
+
+  .ai-image-text-pointer__image-placeholder-{{ ai_gen_id }} svg {
+    width: 100%;
+    height: auto;
+    max-width: 500px;
+  }
+
+  .ai-image-text-pointer__empty-state-{{ ai_gen_id }} {
+    position: absolute;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    padding: 12px 20px;
+    font-size: 14px;
+    color: #666;
+    text-align: center;
+    pointer-events: none;
+  }
+
+  .ai-image-text-pointer__image-dot-{{ ai_gen_id }} {
+    position: absolute;
+    width: {{ block.settings.dot_size }}px;
+    height: {{ block.settings.dot_size }}px;
+    background-color: {{ block.settings.dot_color }};
+    border-radius: 50%;
+    left: {{ block.settings.dot_horizontal_position }}%;
+    top: {{ block.settings.dot_vertical_position }}%;
+    transform: translate(-50%, -50%);
+    z-index: 3;
+  }
+
+  .ai-image-text-pointer__text-wrapper-{{ ai_gen_id }} {
+    position: relative;
+    flex: 0 0 50%;
+    max-width: 50%;
+    width: {{ block.settings.text_width_percent }}%;
+  }
+
+  .ai-image-text-pointer__text-{{ ai_gen_id }} {
+    color: {{ block.settings.text_color }};
+    font-size: {{ block.settings.text_size }}px;
+    line-height: 1.6;
+  }
+
+  .ai-image-text-pointer__text-{{ ai_gen_id }} p {
+    margin: 0 0 1em 0;
+  }
+
+  .ai-image-text-pointer__text-{{ ai_gen_id }} p:last-child {
+    margin-bottom: 0;
+  }
+
+  .ai-image-text-pointer__text-dot-{{ ai_gen_id }} {
+    position: absolute;
+    width: {{ block.settings.dot_size }}px;
+    height: {{ block.settings.dot_size }}px;
+    background-color: {{ block.settings.dot_color }};
+    border-radius: 50%;
+    left: 0;
+    top: {{ block.settings.text_dot_position }}%;
+    transform: translate(-50%, -50%);
+    z-index: 3;
+  }
+
+  .ai-image-text-pointer__line-{{ ai_gen_id }} {
+    position: absolute;
+    height: {{ block.settings.line_thickness }}px;
+    background-color: {{ block.settings.line_color }};
+    transform-origin: 0 50%;
+    z-index: 2;
+    pointer-events: none;
+  }
+
+  @media screen and (max-width: 749px) {
+    .ai-image-text-pointer__container-{{ ai_gen_id }} {
+      gap: 20px;
+    }
+
+    .ai-image-text-pointer__text-wrapper-{{ ai_gen_id }} {
+      width: 100%;
+    }
+
+    .ai-image-text-pointer__text-{{ ai_gen_id }} {
+      font-size: {{ block.settings.text_size | times: 0.85 }}px;
+    }
+
+    .ai-image-text-pointer__image-dot-{{ ai_gen_id }} {
+      width: {{ block.settings.dot_size | times: 0.8 }}px;
+      height: {{ block.settings.dot_size | times: 0.8 }}px;
+    }
+
+    .ai-image-text-pointer__text-dot-{{ ai_gen_id }} {
+      width: {{ block.settings.dot_size | times: 0.8 }}px;
+      height: {{ block.settings.dot_size | times: 0.8 }}px;
+    }
+
+    .ai-image-text-pointer__line-{{ ai_gen_id }} {
+      height: {{ block.settings.line_thickness | times: 0.8 }}px;
+    }
+  }
+{% endstyle %}
+
+<image-text-pointer-{{ ai_gen_id }}
+  class="ai-image-text-pointer-{{ ai_gen_id }}"
+  {{ block.shopify_attributes }}
+>
+  <div class="ai-image-text-pointer__container-{{ ai_gen_id }}">
+    <div class="ai-image-text-pointer__image-wrapper-{{ ai_gen_id }}">
+      {% if block.settings.image %}
+        {{
+          block.settings.image
+          | image_url: width: 2560
+          | image_tag: widths: widths, sizes: sizes, loading: 'lazy', alt: block.settings.image.alt, class: 'ai-image-text-pointer__image-' | append: ai_gen_id
+        }}
+        <div class="ai-image-text-pointer__image-dot-{{ ai_gen_id }}"></div>
+      {% else %}
+        <div class="ai-image-text-pointer__image-placeholder-{{ ai_gen_id }}">
+          {{ 'image' | placeholder_svg_tag }}
+          <div class="ai-image-text-pointer__empty-state-{{ ai_gen_id }}">
+            Next, add an image
+          </div>
+        </div>
+      {% endif %}
+    </div>
+
+    <div class="ai-image-text-pointer__text-wrapper-{{ ai_gen_id }}">
+      <div class="ai-image-text-pointer__text-dot-{{ ai_gen_id }}"></div>
+      <svg class="ai-image-text-pointer__line-{{ ai_gen_id }}" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; overflow: visible; pointer-events: none;">
+        <line class="ai-image-text-pointer__line-element-{{ ai_gen_id }}" stroke="{{ block.settings.line_color }}" stroke-width="{{ block.settings.line_thickness }}" />
+      </svg>
+      {% if block.settings.text != blank %}
+        <div class="ai-image-text-pointer__text-{{ ai_gen_id }}">
+          {{ block.settings.text }}
+        </div>
+      {% else %}
+        <div class="ai-image-text-pointer__text-{{ ai_gen_id }}">
+          <p>Add your text content here to describe the image or highlight key features.</p>
+        </div>
+      {% endif %}
+    </div>
+  </div>
+</image-text-pointer-{{ ai_gen_id }}>
+
+<script>
+  (function() {
+    class ImageTextPointer{{ ai_gen_id }} extends HTMLElement {
+      constructor() {
+        super();
+        this.resizeObserver = null;
+        this.boundUpdate = this.updateLinePosition.bind(this);
+      }
+
+      connectedCallback() {
+        setTimeout(() => this.updateLinePosition(), 100);
+        
+        window.addEventListener('resize', this.boundUpdate);
+        
+        this.resizeObserver = new ResizeObserver(this.boundUpdate);
+        
+        const container = this.querySelector('.ai-image-text-pointer__container-{{ ai_gen_id }}');
+        if (container) {
+          this.resizeObserver.observe(container);
+        }
+
+        const img = this.querySelector('.ai-image-text-pointer__image-{{ ai_gen_id }}');
+        if (img) {
+          if (img.complete) {
+            setTimeout(() => this.updateLinePosition(), 100);
+          } else {
+            img.addEventListener('load', () => {
+              setTimeout(() => this.updateLinePosition(), 100);
+            });
+          }
+        }
+      }
+
+      disconnectedCallback() {
+        window.removeEventListener('resize', this.boundUpdate);
+        if (this.resizeObserver) {
+          this.resizeObserver.disconnect();
+        }
+      }
+
+      updateLinePosition() {
+        const imageDot = this.querySelector('.ai-image-text-pointer__image-dot-{{ ai_gen_id }}');
+        const textDot = this.querySelector('.ai-image-text-pointer__text-dot-{{ ai_gen_id }}');
+        const lineElement = this.querySelector('.ai-image-text-pointer__line-element-{{ ai_gen_id }}');
+
+        if (!imageDot || !textDot || !lineElement) return;
+
+        const imageDotRect = imageDot.getBoundingClientRect();
+        const textDotRect = textDot.getBoundingClientRect();
+        const container = this.querySelector('.ai-image-text-pointer__container-{{ ai_gen_id }}');
+        const containerRect = container.getBoundingClientRect();
+
+        const x1 = imageDotRect.left + (imageDotRect.width / 2) - containerRect.left;
+        const y1 = imageDotRect.top + (imageDotRect.height / 2) - containerRect.top;
+        const x2 = textDotRect.left + (textDotRect.width / 2) - containerRect.left;
+        const y2 = textDotRect.top + (textDotRect.height / 2) - containerRect.top;
+
+        lineElement.setAttribute('x1', x1);
+        lineElement.setAttribute('y1', y1);
+        lineElement.setAttribute('x2', x2);
+        lineElement.setAttribute('y2', y2);
+      }
+    }
+
+    customElements.define('image-text-pointer-{{ ai_gen_id }}', ImageTextPointer{{ ai_gen_id }});
+  })();
+</script>
+
 {% schema %}
- {
-   "name": "AI_Block",
-   "tag": "shopify-ai-generated-block"
- }
+{
+  "name": "Image with text pointer",
+  "tag": null,
+  "settings": [
+    {
+      "type": "header",
+      "content": "Image"
+    },
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Image"
+    },
+    {
+      "type": "header",
+      "content": "Text"
+    },
+    {
+      "type": "richtext",
+      "id": "text",
+      "label": "Text",
+      "default": "<p>Add your text content here to describe the image or highlight key features.</p>"
+    },
+    {
+      "type": "range",
+      "id": "text_size",
+      "label": "Text size",
+      "min": 12,
+      "max": 24,
+      "step": 1,
+      "unit": "px",
+      "default": 16
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Text color",
+      "default": "#2b2b2b"
+    },
+    {
+      "type": "range",
+      "id": "text_width_percent",
+      "label": "Text width",
+      "min": 50,
+      "max": 100,
+      "step": 5,
+      "unit": "%",
+      "default": 100
+    },
+    {
+      "type": "range",
+      "id": "text_dot_position",
+      "label": "Text dot vertical position",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "%",
+      "default": 50
+    },
+    {
+      "type": "header",
+      "content": "Pointer"
+    },
+    {
+      "type": "range",
+      "id": "dot_horizontal_position",
+      "label": "Image dot horizontal position",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "%",
+      "default": 80
+    },
+    {
+      "type": "range",
+      "id": "dot_vertical_position",
+      "label": "Image dot vertical position",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "%",
+      "default": 30
+    },
+    {
+      "type": "range",
+      "id": "dot_size",
+      "label": "Dot size",
+      "min": 6,
+      "max": 24,
+      "step": 2,
+      "unit": "px",
+      "default": 12
+    },
+    {
+      "type": "color",
+      "id": "dot_color",
+      "label": "Dot color",
+      "default": "#000000"
+    },
+    {
+      "type": "range",
+      "id": "line_thickness",
+      "label": "Line thickness",
+      "min": 1,
+      "max": 6,
+      "step": 1,
+      "unit": "px",
+      "default": 2
+    },
+    {
+      "type": "color",
+      "id": "line_color",
+      "label": "Line color",
+      "default": "#000000"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Image with text pointer"
+    }
+  ]
+}
 {% endschema %}
