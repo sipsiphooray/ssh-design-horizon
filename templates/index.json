@@ -3200,7 +3200,7 @@
                     "style_class": "button",
                     "add_arrow": true,
                     "width": "custom",
-                    "custom_width": 24,
+                    "custom_width": 22,
                     "width_mobile": "fit-content",
                     "custom_width_mobile": 100
                   },
