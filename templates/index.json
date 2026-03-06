@@ -3265,6 +3265,32 @@
                 "css_class": ""
               },
               "blocks": {
+                "ai_gen_block_426582e_hrFgqH": {
+                  "type": "ai_gen_block_426582e",
+                  "settings": {
+                    "text_1": "Feature 1",
+                    "text_2": "Feature 2",
+                    "text_3": "Feature 3",
+                    "text_4": "Feature 4",
+                    "column_gap": 30,
+                    "icon_size": 32,
+                    "desktop_width_percent": 100,
+                    "mobile_columns": "2",
+                    "icon_size_mobile": 24,
+                    "mobile_row_gap": 20,
+                    "mobile_column_gap": 15,
+                    "mobile_column_layout": false,
+                    "padding_top": 0,
+                    "padding_bottom": 0,
+                    "show_border_top": false,
+                    "show_border_bottom": false,
+                    "border_width": 1,
+                    "border_color": "#000000",
+                    "font_size_desktop": 14,
+                    "font_size_mobile": 12
+                  },
+                  "blocks": {}
+                },
                 "group_MGte8w": {
                   "type": "group",
                   "name": "t:names.group",
@@ -3829,6 +3855,7 @@
                 }
               },
               "block_order": [
+                "ai_gen_block_426582e_hrFgqH",
                 "group_MGte8w",
                 "group_MaLmTP"
               ]
