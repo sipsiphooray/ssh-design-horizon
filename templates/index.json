@@ -3109,7 +3109,7 @@
               "type": "text",
               "name": "t:names.heading",
               "settings": {
-                "text": "<h2>the daily sip companion</h2>",
+                "text": "<h2>the daily sip <br/>companion</h2>",
                 "width": "fit-content",
                 "max_width": "normal",
                 "alignment": "left",
