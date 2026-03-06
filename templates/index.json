@@ -3211,7 +3211,35 @@
             "mobile-padding-inline-end": 0,
             "css_class": ""
           },
-          "blocks": {}
+          "blocks": {
+            "ai_gen_block_5409bec_qL36V8": {
+              "type": "ai_gen_block_5409bec",
+              "settings": {
+                "image": "shopify://shop_images/Layer_1.png",
+                "image_width": 50,
+                "image_width_mobile": 50,
+                "image_border_radius": 0,
+                "text": "<p>Add your descriptive text here. This content will appear to the right of the image with a connecting line and pointer.</p>",
+                "text_size": 16,
+                "text_size_mobile": 12,
+                "text_color": "#2b2b2b",
+                "pointer_position": 50,
+                "pointer_circle_size": 20,
+                "pointer_color": "#f0dfe7",
+                "pointer_border_width": 2,
+                "pointer_border_color": "#2b2b2b",
+                "line_thickness": 2,
+                "line_color": "#2b2b2b",
+                "gap": 60,
+                "gap_mobile": 30,
+                "desktop_width_percent": 100
+              },
+              "blocks": {}
+            }
+          },
+          "block_order": [
+            "ai_gen_block_5409bec_qL36V8"
+          ]
         }
       },
       "block_order": [
