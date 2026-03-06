@@ -1,6 +1,313 @@
+{% doc %}
+  @prompt
+    generate icons row with inline text, no need for color settings, should have font size on desktop mobile setting. should have column gap setting. between icon and text the gap should be 8px by default. the icons should be from image picker and should use liquid  {{
+                block.settings.image
+                | image_url: width: 2560
+                | image_tag: width: width, height: block.settings.image.height, widths: widths, sizes: sizes, loading: 'lazy', alt: block.settings.image.alt, class: image_class
+              }}, should have padding top and bottom setting for the block. and border top and border bottom checkbox and color width visible_if checked. should have setting whether to display icon+text as column on mobile 
+{% enddoc %}
+{% assign ai_gen_id = block.id | replace: '_', '' | downcase %}
+
+{% style %}
+  .ai-icons-row-{{ ai_gen_id }} {
+    display: block;
+    width: {{ block.settings.desktop_width_percent }}%;
+    max-width: 100%;
+    padding-top: {{ block.settings.padding_top }}px;
+    padding-bottom: {{ block.settings.padding_bottom }}px;
+    {% if block.settings.show_border_top %}
+      border-top: {{ block.settings.border_width }}px solid {{ block.settings.border_color }};
+    {% endif %}
+    {% if block.settings.show_border_bottom %}
+      border-bottom: {{ block.settings.border_width }}px solid {{ block.settings.border_color }};
+    {% endif %}
+  }
+
+  .ai-icons-row__container-{{ ai_gen_id }} {
+    display: flex;
+    flex-wrap: wrap;
+    gap: {{ block.settings.column_gap }}px;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .ai-icons-row__item-{{ ai_gen_id }} {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .ai-icons-row__icon-{{ ai_gen_id }} {
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .ai-icons-row__icon-{{ ai_gen_id }} img {
+    width: {{ block.settings.icon_size }}px;
+    height: {{ block.settings.icon_size }}px;
+    object-fit: contain;
+  }
+
+  .ai-icons-row__text-{{ ai_gen_id }} {
+    font-size: {{ block.settings.font_size_desktop }}px;
+    line-height: 1.4;
+  }
+
+  @media screen and (max-width: 749px) {
+    .ai-icons-row__text-{{ ai_gen_id }} {
+      font-size: {{ block.settings.font_size_mobile }}px;
+    }
+
+    {% if block.settings.mobile_column_layout %}
+      .ai-icons-row__item-{{ ai_gen_id }} {
+        flex-direction: column;
+        text-align: center;
+      }
+    {% endif %}
+  }
+{% endstyle %}
+
+<icons-row-{{ ai_gen_id }} class="ai-icons-row-{{ ai_gen_id }}" {{ block.shopify_attributes }}>
+  <div class="ai-icons-row__container-{{ ai_gen_id }}">
+    {% for i in (1..4) %}
+      {% liquid
+        assign image_key = 'icon_' | append: i
+        assign text_key = 'text_' | append: i
+        assign image = block.settings[image_key]
+        assign text = block.settings[text_key]
+      %}
+
+      {% if image != blank or text != blank %}
+        <div class="ai-icons-row__item-{{ ai_gen_id }}">
+          {% if image != blank %}
+            <div class="ai-icons-row__icon-{{ ai_gen_id }}">
+              {% assign width = block.settings.icon_size %}
+              {% assign widths = width | times: 1 | append: ',' | append: width | times: 2 %}
+              {% assign sizes = width | append: 'px' %}
+              {{
+                image
+                | image_url: width: 2560
+                | image_tag: width: width, height: image.height, widths: widths, sizes: sizes, loading: 'lazy', alt: image.alt
+              }}
+            </div>
+          {% endif %}
+
+          {% if text != blank %}
+            <div class="ai-icons-row__text-{{ ai_gen_id }}">{{ text }}</div>
+          {% endif %}
+        </div>
+      {% endif %}
+    {% endfor %}
+  </div>
+</icons-row-{{ ai_gen_id }}>
+
+<script>
+  (function() {
+    class IconsRow{{ ai_gen_id }} extends HTMLElement {
+      constructor() {
+        super();
+      }
+
+      connectedCallback() {
+      }
+    }
+
+    customElements.define('icons-row-{{ ai_gen_id }}', IconsRow{{ ai_gen_id }});
+  })();
+</script>
+
 {% schema %}
- {
-   "name": "AI_Block",
-   "tag": "shopify-ai-generated-block"
- }
+{
+  "name": "Icons row",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Icon 1"
+    },
+    {
+      "type": "image_picker",
+      "id": "icon_1",
+      "label": "Icon"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "text_1",
+      "label": "Text",
+      "default": "Feature 1"
+    },
+    {
+      "type": "header",
+      "content": "Icon 2"
+    },
+    {
+      "type": "image_picker",
+      "id": "icon_2",
+      "label": "Icon"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "text_2",
+      "label": "Text",
+      "default": "Feature 2"
+    },
+    {
+      "type": "header",
+      "content": "Icon 3"
+    },
+    {
+      "type": "image_picker",
+      "id": "icon_3",
+      "label": "Icon"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "text_3",
+      "label": "Text",
+      "default": "Feature 3"
+    },
+    {
+      "type": "header",
+      "content": "Icon 4"
+    },
+    {
+      "type": "image_picker",
+      "id": "icon_4",
+      "label": "Icon"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "text_4",
+      "label": "Text",
+      "default": "Feature 4"
+    },
+    {
+      "type": "header",
+      "content": "Layout"
+    },
+    {
+      "type": "range",
+      "id": "column_gap",
+      "label": "Column gap",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "unit": "px",
+      "default": 30
+    },
+    {
+      "type": "range",
+      "id": "icon_size",
+      "label": "Icon size",
+      "min": 16,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "default": 32
+    },
+    {
+      "type": "range",
+      "id": "desktop_width_percent",
+      "label": "Desktop width",
+      "min": 50,
+      "max": 100,
+      "step": 5,
+      "unit": "%",
+      "default": 100
+    },
+    {
+      "type": "checkbox",
+      "id": "mobile_column_layout",
+      "label": "Display as column on mobile",
+      "default": false
+    },
+    {
+      "type": "header",
+      "content": "Spacing"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "label": "Padding top",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "unit": "px",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "label": "Padding bottom",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "unit": "px",
+      "default": 0
+    },
+    {
+      "type": "header",
+      "content": "Borders"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_border_top",
+      "label": "Show top border",
+      "default": false
+    },
+    {
+      "type": "checkbox",
+      "id": "show_border_bottom",
+      "label": "Show bottom border",
+      "default": false
+    },
+    {
+      "type": "range",
+      "id": "border_width",
+      "label": "Border width",
+      "min": 1,
+      "max": 10,
+      "step": 1,
+      "unit": "px",
+      "default": 1
+    },
+    {
+      "type": "color",
+      "id": "border_color",
+      "label": "Border color",
+      "default": "#000000"
+    },
+    {
+      "type": "header",
+      "content": "Typography"
+    },
+    {
+      "type": "range",
+      "id": "font_size_desktop",
+      "label": "Desktop font size",
+      "min": 10,
+      "max": 32,
+      "step": 1,
+      "unit": "px",
+      "default": 14
+    },
+    {
+      "type": "range",
+      "id": "font_size_mobile",
+      "label": "Mobile font size",
+      "min": 10,
+      "max": 24,
+      "step": 1,
+      "unit": "px",
+      "default": 12
+    }
+  ],
+  "presets": [
+    {
+      "name": "Icons row"
+    }
+  ],
+  "tag": null
+}
 {% endschema %}
