@@ -3321,7 +3321,7 @@
                     "border_width": 1,
                     "border_color": "#000000",
                     "font_size_desktop": 16,
-                    "font_size_mobile": 12
+                    "font_size_mobile": 14
                   },
                   "blocks": {}
                 }
