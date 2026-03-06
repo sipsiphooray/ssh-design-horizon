@@ -3927,7 +3927,7 @@
       ],
       "custom_css": [
         ".fit-contents {flex-wrap: wrap;}",
-        ".icons-top {border: 0; border-bottom: 1px solid;}",
+        ".icons-top {border: 0; border-bottom: 1.5px solid;}",
         ".fit-contents .group-block-content > * {max-width: fit-content;}",
         ".fit-contents > * .text-block {white-space: nowrap;}"
       ],
