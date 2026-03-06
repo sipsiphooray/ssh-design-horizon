@@ -3859,7 +3859,7 @@
             "enable_mobile_gap": false,
             "mobile_gap": 12,
             "width": "custom",
-            "custom_width": 38,
+            "custom_width": 32,
             "width_mobile": "fill",
             "custom_width_mobile": 100,
             "height": "fit",
