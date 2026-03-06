@@ -3262,7 +3262,7 @@
                 "mobile-padding-block-end": 0,
                 "mobile-padding-inline-start": 0,
                 "mobile-padding-inline-end": 0,
-                "css_class": ""
+                "css_class": "fit-contents"
               },
               "blocks": {
                 "text_icon_JwkawQ": {
@@ -3549,6 +3549,10 @@
       "block_order": [
         "group_ajQbV7",
         "group_EEepqN"
+      ],
+      "custom_css": [
+        ".fit-contents > * {max-width: fit-content;}",
+        ".fit-contents > * .text-block {white-space: nowrap;}"
       ],
       "name": "t:names.custom_section",
       "settings": {
