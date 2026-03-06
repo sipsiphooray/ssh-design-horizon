@@ -3551,6 +3551,7 @@
         "group_EEepqN"
       ],
       "custom_css": [
+        ".fit-contents {border: 0; border-bottom: 1px; flex-wrap: wrap;}",
         ".fit-contents > * {max-width: fit-content;}",
         ".fit-contents > * .text-block {white-space: nowrap;}"
       ],
