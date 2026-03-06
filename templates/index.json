@@ -3268,12 +3268,12 @@
                 "ai_gen_block_426582e_hrFgqH": {
                   "type": "ai_gen_block_426582e",
                   "settings": {
-                    "text_1": "Feature 1",
+                    "text_1": "1.5 - 3.5 hours hot",
                     "text_2": "Feature 2",
                     "text_3": "Feature 3",
                     "text_4": "Feature 4",
                     "column_gap": 30,
-                    "icon_size": 32,
+                    "icon_size": 20,
                     "desktop_width_percent": 100,
                     "mobile_columns": "2",
                     "icon_size_mobile": 24,
