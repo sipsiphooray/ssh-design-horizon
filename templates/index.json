@@ -3216,7 +3216,7 @@
               "type": "image",
               "name": "t:names.image",
               "settings": {
-                "image": "shopify://shop_images/Layer_11.png",
+                "image": "shopify://shop_images/sdsd.png",
                 "link": "",
                 "image_ratio": "adapt",
                 "width": "fill",
@@ -3275,7 +3275,7 @@
         "overlay_style": "solid",
         "gradient_direction": "to top",
         "padding-block-start": 80,
-        "padding-block-end": 80,
+        "padding-block-end": 0,
         "custom_mobile_padding": false,
         "mobile-padding-block-start": 0,
         "mobile-padding-block-end": 0,
