@@ -23,6 +23,7 @@
   </div>
   <div
     class="
+      block-carousel-content
       group-block-content
     "
     style="{% render 'layout-panel-style', settings: settings %}"
@@ -43,6 +44,20 @@
     </div>
   </div>
 </div>
+
+{% stylesheet %}
+.block-carousel-content {
+    align-items: center;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+
+    > div {
+      width: 100%;
+    }
+}
+
+{% endstylesheet %}
 
 {% schema %}
 {
