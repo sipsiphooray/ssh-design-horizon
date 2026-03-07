@@ -3655,7 +3655,7 @@
                     "background": false,
                     "background_color": "#00000026",
                     "corner_radius": 0,
-                    "padding-block-start": 12,
+                    "padding-block-start": 16,
                     "padding-block-end": 0,
                     "padding-inline-start": 0,
                     "padding-inline-end": 0,
@@ -3707,7 +3707,7 @@
                 "text_kkm7i3"
               ]
             },
-            "card_tYQBH3": {
+            "card_69LWPW": {
               "type": "_card",
               "name": "t:names.card",
               "settings": {
@@ -3735,7 +3735,7 @@
                 "padding-inline-end": 0
               },
               "blocks": {
-                "image_wpibz3": {
+                "image_x6aaDz": {
                   "type": "image",
                   "name": "t:names.image",
                   "settings": {
@@ -3757,7 +3757,7 @@
                   },
                   "blocks": {}
                 },
-                "text_LPWtNP": {
+                "text_piimhB": {
                   "type": "text",
                   "name": "t:names.heading",
                   "settings": {
@@ -3778,7 +3778,7 @@
                     "background": false,
                     "background_color": "#00000026",
                     "corner_radius": 0,
-                    "padding-block-start": 12,
+                    "padding-block-start": 16,
                     "padding-block-end": 0,
                     "padding-inline-start": 0,
                     "padding-inline-end": 0,
@@ -3790,7 +3790,7 @@
                   },
                   "blocks": {}
                 },
-                "text_CyiLcr": {
+                "text_WmEqCV": {
                   "type": "text",
                   "name": "t:names.text",
                   "settings": {
@@ -3825,12 +3825,12 @@
                 }
               },
               "block_order": [
-                "image_wpibz3",
-                "text_LPWtNP",
-                "text_CyiLcr"
+                "image_x6aaDz",
+                "text_piimhB",
+                "text_WmEqCV"
               ]
             },
-            "card_nKUYwj": {
+            "card_gVa4Lk": {
               "type": "_card",
               "name": "t:names.card",
               "settings": {
@@ -3858,7 +3858,7 @@
                 "padding-inline-end": 0
               },
               "blocks": {
-                "image_9YGzTa": {
+                "image_TtkpkM": {
                   "type": "image",
                   "name": "t:names.image",
                   "settings": {
@@ -3880,7 +3880,7 @@
                   },
                   "blocks": {}
                 },
-                "text_9dEbNE": {
+                "text_GYz3Nb": {
                   "type": "text",
                   "name": "t:names.heading",
                   "settings": {
@@ -3901,7 +3901,7 @@
                     "background": false,
                     "background_color": "#00000026",
                     "corner_radius": 0,
-                    "padding-block-start": 12,
+                    "padding-block-start": 16,
                     "padding-block-end": 0,
                     "padding-inline-start": 0,
                     "padding-inline-end": 0,
@@ -3913,7 +3913,7 @@
                   },
                   "blocks": {}
                 },
-                "text_yRzTmj": {
+                "text_hFxDe8": {
                   "type": "text",
                   "name": "t:names.text",
                   "settings": {
@@ -3948,12 +3948,12 @@
                 }
               },
               "block_order": [
-                "image_9YGzTa",
-                "text_9dEbNE",
-                "text_yRzTmj"
+                "image_TtkpkM",
+                "text_GYz3Nb",
+                "text_hFxDe8"
               ]
             },
-            "card_NFj93C": {
+            "card_CErWfe": {
               "type": "_card",
               "name": "t:names.card",
               "settings": {
@@ -3981,7 +3981,7 @@
                 "padding-inline-end": 0
               },
               "blocks": {
-                "image_hFQjz3": {
+                "image_6TPKzY": {
                   "type": "image",
                   "name": "t:names.image",
                   "settings": {
@@ -4003,7 +4003,7 @@
                   },
                   "blocks": {}
                 },
-                "text_wVCEHa": {
+                "text_4dgBtR": {
                   "type": "text",
                   "name": "t:names.heading",
                   "settings": {
@@ -4024,7 +4024,7 @@
                     "background": false,
                     "background_color": "#00000026",
                     "corner_radius": 0,
-                    "padding-block-start": 12,
+                    "padding-block-start": 16,
                     "padding-block-end": 0,
                     "padding-inline-start": 0,
                     "padding-inline-end": 0,
@@ -4036,7 +4036,7 @@
                   },
                   "blocks": {}
                 },
-                "text_E6UWD4": {
+                "text_XzKQr4": {
                   "type": "text",
                   "name": "t:names.text",
                   "settings": {
@@ -4071,17 +4071,17 @@
                 }
               },
               "block_order": [
-                "image_hFQjz3",
-                "text_wVCEHa",
-                "text_E6UWD4"
+                "image_6TPKzY",
+                "text_4dgBtR",
+                "text_XzKQr4"
               ]
             }
           },
           "block_order": [
             "card_4MNxzJ",
-            "card_tYQBH3",
-            "card_nKUYwj",
-            "card_NFj93C"
+            "card_69LWPW",
+            "card_gVa4Lk",
+            "card_CErWfe"
           ]
         }
       },
