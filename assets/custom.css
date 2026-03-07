@@ -117,6 +117,13 @@ summary,.menu-drawer__back-button {
     max-width: 50cqw;
 }
 
+.slideshow-controls__dots button:after {
+    --size: .45rem !important;
+    height: var(--size);
+    width: var(--size);
+    box-shadow: unset !important;
+}
+
 @media screen and (min-width: 60em) {
     :root {
         --section-height-large: 90svh !important;
