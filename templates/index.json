@@ -3429,7 +3429,7 @@
         ".fit-contents .group-block-content > * {max-width: fit-content;}",
         ".fit-contents > * .text-block {white-space: nowrap;}"
       ],
-      "name": "t:names.custom_section",
+      "name": "daily sip",
       "settings": {
         "content_direction": "row",
         "vertical_on_mobile": true,
