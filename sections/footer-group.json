@@ -515,7 +515,7 @@
         "rows_gap": 12,
         "icons_style": "arrow",
         "icons_shape": "circle",
-        "section_width": "page-narrow",
+        "section_width": "page-width",
         "full_width_on_mobile": true,
         "gap": 0,
         "color_scheme": "",
