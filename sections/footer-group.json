@@ -493,7 +493,10 @@
         "carousel_card_Hphnkp",
         "carousel_card_4adCD6"
       ],
-      "name": "Grid Section",
+      "custom_css": [
+        ".bordered-top {border-top: 1px solid #2B2B2B;}"
+      ],
+      "name": "USP Icons",
       "settings": {
         "alignment": "left",
         "layout_type": "grid",
@@ -528,7 +531,7 @@
         "mobile-padding-block-end": 0,
         "mobile-padding-inline-start": 0,
         "mobile-padding-inline-end": 0,
-        "css_class": "",
+        "css_class": "bordered-top",
         "add_section_id": false,
         "section_id": ""
       }
