@@ -458,7 +458,7 @@
       "id": "full_width_on_mobile",
       "label": "t:settings.full_width_on_mobile",
       "default": false,
-      "visible_if": "{{ section.settings.section_width == 'page-width' }}"
+      "visible_if": "{{ section.settings.section_width == 'page-width' or section.settings.section_width == 'page-narrow' }}"
     },
     {
       "type": "range",
