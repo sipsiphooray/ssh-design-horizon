@@ -3786,7 +3786,7 @@
             "overlay_style": "solid",
             "gradient_direction": "to top",
             "padding-block-start": 0,
-            "padding-block-end": 36,
+            "padding-block-end": 24,
             "padding-inline-start": 0,
             "padding-inline-end": 0,
             "custom_mobile_padding": true,
