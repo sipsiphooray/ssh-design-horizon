@@ -654,7 +654,7 @@
             "horizontal_alignment_flex_direction_column": "flex-start",
             "custom_mobile_alignment": false,
             "mobile_vertical_alignment": "flex-start",
-            "vertical_alignment_flex_direction_column": "center",
+            "vertical_alignment_flex_direction_column": "flex-start",
             "gap": 6,
             "enable_mobile_gap": false,
             "mobile_gap": 12,
@@ -795,6 +795,9 @@
       "block_order": [
         "group_qV6frY",
         "group_wErUQf"
+      ],
+      "custom_css": [
+        ".social-icons__icon-wrapper svg {color: var(--color-foreground);}"
       ],
       "name": "t:names.footer",
       "settings": {
