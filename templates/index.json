@@ -5050,7 +5050,8 @@
         "carousel_card_R4ceke"
       ],
       "custom_css": [
-        ".divider__line {--color-border: rgb(43 43 43 / 0.1);}"
+        ".divider__line {--color-border: rgb(43 43 43 / 0.1);}",
+        "@media (min-width: 990px) {.resource-list__carousel {--peek-next-slide-size: 0rem;}}"
       ],
       "name": "Testimonials",
       "settings": {
