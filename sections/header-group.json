@@ -20,7 +20,7 @@
             "text": "FREE SHIPPING OVER $40",
             "link": "",
             "font": "var(--font-subheading--family)",
-            "font_size": "0.9375rem",
+            "font_size": "0.875rem",
             "weight": "",
             "letter_spacing": "normal",
             "case": "none"
