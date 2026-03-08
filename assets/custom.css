@@ -211,12 +211,14 @@ summary,.menu-drawer__back-button {
 
     .mobile-column[style*="--horizontal-mobile-alignment: flex-start"] {
         > .text-block {
+            --text-align: left;
             text-align: left;
         }
     }
 
     .mobile-column[style*="--horizontal-mobile-alignment: center"] {
         > .text-block, .text-block > * {
+            --text-align: center;
             text-align: center;
         }
     }
