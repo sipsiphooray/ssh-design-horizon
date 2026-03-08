@@ -1955,6 +1955,7 @@
         "group_7tfRFL"
       ],
       "custom_css": [
+        ".Shopvid__VideoBlock__Card .Shopvid__VideoBlock__ProductCard {background: transparent;}",
         "@media (min-width: 990px) {.left-offset {margin-left: var(--util-page-margin-offset); } .Shopvid__VideoBlock__Carousel .swiper-button-next {right: 1rem; } .Shopvid__VideoBlock__Carousel .swiper-button-prev {left: 1rem; }}"
       ],
       "name": "Video Carousel",
