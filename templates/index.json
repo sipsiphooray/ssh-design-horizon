@@ -5051,7 +5051,7 @@
       ],
       "custom_css": [
         ".divider__line {--color-border: rgb(43 43 43 / 0.1);}",
-        "@media (min-width: 990px) {.resource-list__carousel {--peek-next-slide-size: 0rem;}}"
+        "@media (min-width: 990px) {.resource-list__carousel {--peek-next-slide-size: 0rem; }}"
       ],
       "name": "Testimonials",
       "settings": {
@@ -5081,8 +5081,8 @@
         "overlay_color": "#00000026",
         "overlay_style": "solid",
         "gradient_direction": "to top",
-        "padding-block-start": 48,
-        "padding-block-end": 48,
+        "padding-block-start": 80,
+        "padding-block-end": 80,
         "custom_mobile_padding": false,
         "mobile-padding-block-start": 0,
         "mobile-padding-block-end": 0,
