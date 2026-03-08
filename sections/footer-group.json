@@ -933,7 +933,8 @@
         "group_wErUQf"
       ],
       "custom_css": [
-        ".social-icons__icon-wrapper svg {color: var(--color-foreground);}"
+        ".social-icons__icon-wrapper svg {color: var(--color-foreground);}",
+        "@media (max-width: 989px) {summary {padding-block: var(--padding-md);}}"
       ],
       "name": "t:names.footer",
       "settings": {
