@@ -4469,39 +4469,6 @@
               },
               "blocks": {}
             },
-            "text_tXLDRz": {
-              "type": "text",
-              "name": "t:names.text",
-              "settings": {
-                "text": "<p><strong>Jane D. </strong>Verified Buyer</p>",
-                "width": "fit-content",
-                "max_width": "normal",
-                "alignment": "left",
-                "type_preset": "rte",
-                "font": "var(--font-body--family)",
-                "font_size": "1rem",
-                "enable_mobile_size": false,
-                "mobile_font_size": "1rem",
-                "line_height": "normal",
-                "letter_spacing": "normal",
-                "case": "none",
-                "wrap": "pretty",
-                "color": "var(--color-foreground)",
-                "background": false,
-                "background_color": "#00000026",
-                "corner_radius": 0,
-                "padding-block-start": 0,
-                "padding-block-end": 0,
-                "padding-inline-start": 0,
-                "padding-inline-end": 0,
-                "custom_mobile_padding": false,
-                "mobile-padding-block-start": 0,
-                "mobile-padding-block-end": 0,
-                "mobile-padding-inline-start": 0,
-                "mobile-padding-inline-end": 0
-              },
-              "blocks": {}
-            },
             "ai_gen_block_c3963ee_98cxni": {
               "type": "ai_gen_block_c3963ee",
               "settings": {
@@ -4548,7 +4515,6 @@
             "icon_BwffgP",
             "custom_liquid_LwMDTT",
             "text_F9De8P",
-            "text_tXLDRz",
             "ai_gen_block_c3963ee_98cxni",
             "divider_TxKFYp",
             "ai_gen_block_f16862d_npGiWm"
