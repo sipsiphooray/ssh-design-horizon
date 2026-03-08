@@ -496,7 +496,8 @@
       "custom_css": [
         ".bordered-top {border-top: 1px solid #2b2b2b1f;}",
         "slideshow-controls {min-height: unset;}",
-        "@media (min-width: 990px) {.resource-list--grid {display: flex; justify-content: space-between; }}"
+        "@media (min-width: 990px) {.resource-list--grid {display: flex; justify-content: space-between; }}",
+        "@media (max-width: 749px) {.resource-list {--resource-list-mobile-gap-max: var(--resource-list-column-gap-desktop); }}"
       ],
       "name": "USP Icons",
       "settings": {
