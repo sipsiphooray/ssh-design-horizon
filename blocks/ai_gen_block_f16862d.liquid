@@ -50,48 +50,53 @@
   }
 {% endstyle %}
 
-<div
-  class="ai-product-row-{{ ai_gen_id }}"
-  {{ block.shopify_attributes }}
->
-  <div class="ai-product-row__thumbnail-{{ ai_gen_id }}">
-    {% if block.settings.custom_image != blank %}
-      <img
-        src="{{ block.settings.custom_image | image_url: width: 200 }}"
-        alt="{{ block.settings.custom_image.alt | escape }}"
-        loading="lazy"
-        width="200"
-        height="200"
-      >
-    {% elsif block.settings.product != blank and block.settings.product.featured_image %}
-      <img
-        src="{{ block.settings.product.featured_image | image_url: width: 200 }}"
-        alt="{{ block.settings.product.featured_image.alt | escape }}"
-        loading="lazy"
-        width="200"
-        height="200"
-      >
-    {% else %}
-      <div class="ai-product-row__thumbnail-placeholder-{{ ai_gen_id }}">
-        {{ 'product-1' | placeholder_svg_tag }}
-      </div>
-    {% endif %}
-  </div>
+<div class="product-wrap-ai">
+{% if block.settings.product != blank %}
+ <a class="product-wrap-link" href="{{ block.settings.product.url }}"></a>
+{% endif %}
+  <div
+    class="ai-product-row-{{ ai_gen_id }}"
+    {{ block.shopify_attributes }}
+  >
+    <div class="ai-product-row__thumbnail-{{ ai_gen_id }}">
+      {% if block.settings.custom_image != blank %}
+        <img
+          src="{{ block.settings.custom_image | image_url: width: 200 }}"
+          alt="{{ block.settings.custom_image.alt | escape }}"
+          loading="lazy"
+          width="200"
+          height="200"
+        >
+      {% elsif block.settings.product != blank and block.settings.product.featured_image %}
+        <img
+          src="{{ block.settings.product.featured_image | image_url: width: 200 }}"
+          alt="{{ block.settings.product.featured_image.alt | escape }}"
+          loading="lazy"
+          width="200"
+          height="200"
+        >
+      {% else %}
+        <div class="ai-product-row__thumbnail-placeholder-{{ ai_gen_id }}">
+          {{ 'product-1' | placeholder_svg_tag }}
+        </div>
+      {% endif %}
+    </div>
 
-  <div class="ai-product-row__title-{{ ai_gen_id }}">
-    {% if block.settings.product != blank %}
-      {{ block.settings.product.title }}
-    {% else %}
-      <span class="ai-product-row__empty-state-{{ ai_gen_id }}">
-        Next, select a product
-      </span>
-    {% endif %}
+    <div class="ai-product-row__title-{{ ai_gen_id }}">
+      {% if block.settings.product != blank %}
+        {{ block.settings.product.title }}
+      {% else %}
+        <span class="ai-product-row__empty-state-{{ ai_gen_id }}">
+          Next, select a product
+        </span>
+      {% endif %}
+    </div>
   </div>
 </div>
-
 {% schema %}
 {
   "name": "Product row",
+  "tag": null,
   "settings": [
     {
       "type": "product",
