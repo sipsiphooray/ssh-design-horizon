@@ -1042,7 +1042,7 @@
         "payment_icons_Ui6pKt"
       ],
       "custom_css": [
-        "@media (max-width: 989px) {.payment-icons__list {justify-content: center; } .payment-icons__list svg {height: 1rem; }}"
+        "@media (max-width: 989px) {.payment-icons__list {justify-content: center; } .payment-icons__list svg {height: 1rem; width: auto; }}"
       ],
       "settings": {
         "section_width": "page-width",
