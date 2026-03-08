@@ -1,6 +1,258 @@
+{% doc %}
+  @prompt
+    generate a text block, an inline text where first text should have customer name, 2nd column should have verified icon and Verified Buer text,\, verified badge should be this <svg xmlns="http://www.w3.org/2000/svg" id="Layer_1" data-name="Layer 1" viewBox="0 0 122.88 116.87"><defs><style>.cls-1{fill:#10a64a;fill-rule:evenodd;}.cls-2{fill:#fff;}</style></defs><title>verified-symbol</title><polygon class="cls-1" points="61.37 8.24 80.43 0 90.88 17.79 111.15 22.32 109.15 42.85 122.88 58.43 109.2 73.87 111.15 94.55 91 99 80.43 116.87 61.51 108.62 42.45 116.87 32 99.08 11.73 94.55 13.73 74.01 0 58.43 13.68 42.99 11.73 22.32 31.88 17.87 42.45 0 61.37 8.24 61.37 8.24"/><path class="cls-2" d="M37.92,65c-6.07-6.53,3.25-16.26,10-10.1,2.38,2.17,5.84,5.34,8.24,7.49L74.66,39.66C81.1,33,91.27,42.78,84.91,49.48L61.67,77.2a7.13,7.13,0,0,1-9.9.44C47.83,73.89,42.05,68.5,37.92,65Z"/></svg>
+    
+    with ability to change color. get rid of desktop width setting. always defaults to width: 100%
+{% enddoc %}
+{% assign ai_gen_id = block.id | replace: '_', '' | downcase %}
+
+{% style %}
+  .ai-verified-buyer-{{ ai_gen_id }} {
+    display: block;
+    width: 100%;
+  }
+
+  .ai-verified-buyer-container-{{ ai_gen_id }} {
+    display: inline-flex;
+    align-items: center;
+    gap: {{ block.settings.spacing }}px;
+    padding: {{ block.settings.padding }}px;
+    background-color: {{ block.settings.background_color }};
+    border-radius: {{ block.settings.border_radius }}px;
+  }
+
+  .ai-verified-buyer-name-{{ ai_gen_id }} {
+    font-size: {{ block.settings.name_font_size }}px;
+    color: {{ block.settings.name_color }};
+    font-weight: {{ block.settings.name_font_weight }};
+    margin: 0;
+  }
+
+  .ai-verified-buyer-badge-{{ ai_gen_id }} {
+    display: inline-flex;
+    align-items: center;
+    gap: {{ block.settings.badge_spacing }}px;
+  }
+
+  .ai-verified-buyer-icon-{{ ai_gen_id }} {
+    width: {{ block.settings.icon_size }}px;
+    height: {{ block.settings.icon_size }}px;
+    flex-shrink: 0;
+  }
+
+  .ai-verified-buyer-icon-{{ ai_gen_id }} svg {
+    width: 100%;
+    height: 100%;
+  }
+
+  .ai-verified-buyer-icon-{{ ai_gen_id }} .cls-1 {
+    fill: {{ block.settings.icon_color }};
+  }
+
+  .ai-verified-buyer-text-{{ ai_gen_id }} {
+    font-size: {{ block.settings.badge_font_size }}px;
+    color: {{ block.settings.badge_text_color }};
+    font-weight: {{ block.settings.badge_font_weight }};
+    margin: 0;
+  }
+{% endstyle %}
+
+<div class="ai-verified-buyer-{{ ai_gen_id }}" {{ block.shopify_attributes }}>
+  <div class="ai-verified-buyer-container-{{ ai_gen_id }}">
+    <span class="ai-verified-buyer-name-{{ ai_gen_id }}">{{ block.settings.customer_name }}</span>
+    
+    <div class="ai-verified-buyer-badge-{{ ai_gen_id }}">
+      <span class="ai-verified-buyer-icon-{{ ai_gen_id }}">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 122.88 116.87">
+          <polygon class="cls-1" points="61.37 8.24 80.43 0 90.88 17.79 111.15 22.32 109.15 42.85 122.88 58.43 109.2 73.87 111.15 94.55 91 99 80.43 116.87 61.51 108.62 42.45 116.87 32 99.08 11.73 94.55 13.73 74.01 0 58.43 13.68 42.99 11.73 22.32 31.88 17.87 42.45 0 61.37 8.24 61.37 8.24"/>
+          <path class="cls-2" fill="#fff" d="M37.92,65c-6.07-6.53,3.25-16.26,10-10.1,2.38,2.17,5.84,5.34,8.24,7.49L74.66,39.66C81.1,33,91.27,42.78,84.91,49.48L61.67,77.2a7.13,7.13,0,0,1-9.9.44C47.83,73.89,42.05,68.5,37.92,65Z"/>
+        </svg>
+      </span>
+      <span class="ai-verified-buyer-text-{{ ai_gen_id }}">{{ block.settings.verified_text }}</span>
+    </div>
+  </div>
+</div>
+
 {% schema %}
- {
-   "name": "AI_Block",
-   "tag": "shopify-ai-generated-block"
- }
+{
+  "name": "Verified buyer",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Content"
+    },
+    {
+      "type": "text",
+      "id": "customer_name",
+      "label": "Customer name",
+      "default": "John Smith"
+    },
+    {
+      "type": "text",
+      "id": "verified_text",
+      "label": "Verified text",
+      "default": "Verified Buyer"
+    },
+    {
+      "type": "header",
+      "content": "Layout"
+    },
+    {
+      "type": "range",
+      "id": "spacing",
+      "label": "Spacing between elements",
+      "min": 4,
+      "max": 32,
+      "step": 2,
+      "unit": "px",
+      "default": 12
+    },
+    {
+      "type": "range",
+      "id": "padding",
+      "label": "Padding",
+      "min": 0,
+      "max": 40,
+      "step": 2,
+      "unit": "px",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "border_radius",
+      "label": "Border radius",
+      "min": 0,
+      "max": 40,
+      "step": 2,
+      "unit": "px",
+      "default": 0
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Background color",
+      "default": "rgba(0,0,0,0)"
+    },
+    {
+      "type": "header",
+      "content": "Customer name"
+    },
+    {
+      "type": "range",
+      "id": "name_font_size",
+      "label": "Font size",
+      "min": 10,
+      "max": 32,
+      "step": 1,
+      "unit": "px",
+      "default": 16
+    },
+    {
+      "type": "color",
+      "id": "name_color",
+      "label": "Text color",
+      "default": "#2b2b2b"
+    },
+    {
+      "type": "select",
+      "id": "name_font_weight",
+      "label": "Font weight",
+      "options": [
+        {
+          "value": "400",
+          "label": "Normal"
+        },
+        {
+          "value": "500",
+          "label": "Medium"
+        },
+        {
+          "value": "600",
+          "label": "Semibold"
+        },
+        {
+          "value": "700",
+          "label": "Bold"
+        }
+      ],
+      "default": "600"
+    },
+    {
+      "type": "header",
+      "content": "Verified badge"
+    },
+    {
+      "type": "range",
+      "id": "icon_size",
+      "label": "Icon size",
+      "min": 12,
+      "max": 32,
+      "step": 2,
+      "unit": "px",
+      "default": 18
+    },
+    {
+      "type": "color",
+      "id": "icon_color",
+      "label": "Icon color",
+      "default": "#10a64a"
+    },
+    {
+      "type": "range",
+      "id": "badge_spacing",
+      "label": "Spacing",
+      "min": 2,
+      "max": 16,
+      "step": 1,
+      "unit": "px",
+      "default": 6
+    },
+    {
+      "type": "range",
+      "id": "badge_font_size",
+      "label": "Font size",
+      "min": 10,
+      "max": 24,
+      "step": 1,
+      "unit": "px",
+      "default": 14
+    },
+    {
+      "type": "color",
+      "id": "badge_text_color",
+      "label": "Text color",
+      "default": "#2b2b2b"
+    },
+    {
+      "type": "select",
+      "id": "badge_font_weight",
+      "label": "Font weight",
+      "options": [
+        {
+          "value": "400",
+          "label": "Normal"
+        },
+        {
+          "value": "500",
+          "label": "Medium"
+        },
+        {
+          "value": "600",
+          "label": "Semibold"
+        },
+        {
+          "value": "700",
+          "label": "Bold"
+        }
+      ],
+      "default": "400"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Verified buyer"
+    }
+  ],
+  "tag": null
+}
 {% endschema %}
