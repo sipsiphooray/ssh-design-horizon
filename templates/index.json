@@ -5233,7 +5233,8 @@
       "block_order": [
         "okendo_reviews_carousel_GNigiV"
       ],
-      "name": "t:names.custom_section",
+      "disabled": true,
+      "name": "Okendo Carousel",
       "settings": {
         "content_direction": "column",
         "vertical_on_mobile": true,
@@ -5333,8 +5334,7 @@
         "text_ijH64g",
         "instafeed_app_block_aB6eXR"
       ],
-      "disabled": true,
-      "name": "Okendo Carousel",
+      "name": "Instafeed",
       "settings": {
         "content_direction": "column",
         "vertical_on_mobile": true,
