@@ -4472,7 +4472,7 @@
             "ai_gen_block_c3963ee_98cxni": {
               "type": "ai_gen_block_c3963ee",
               "settings": {
-                "customer_name": "John Smith",
+                "customer_name": "John S.",
                 "verified_text": "Verified Buyer",
                 "spacing": 8,
                 "padding": 0,
@@ -4518,6 +4518,453 @@
             "ai_gen_block_c3963ee_98cxni",
             "divider_TxKFYp",
             "ai_gen_block_f16862d_npGiWm"
+          ]
+        },
+        "carousel_card_ArnqrJ": {
+          "type": "_carousel-card",
+          "name": "Carousel Item",
+          "settings": {
+            "content_direction": "column",
+            "vertical_on_mobile": true,
+            "reverse_on_mobile": false,
+            "horizontal_alignment": "flex-start",
+            "vertical_alignment": "center",
+            "align_baseline": false,
+            "horizontal_alignment_flex_direction_column": "flex-start",
+            "custom_mobile_alignment": false,
+            "mobile_vertical_alignment": "flex-start",
+            "vertical_alignment_flex_direction_column": "flex-start",
+            "gap": 6,
+            "width": "fill",
+            "custom_width": 100,
+            "width_mobile": "fill",
+            "custom_width_mobile": 100,
+            "height": "fit",
+            "custom_height": 100,
+            "inherit_color_scheme": false,
+            "color_scheme": "",
+            "border": "none",
+            "border_width": 1,
+            "border_opacity": 100,
+            "border_radius": 12,
+            "enable_mobile_radius": false,
+            "mobile_border_radius": 0,
+            "padding-block-start": 24,
+            "padding-block-end": 24,
+            "padding-inline-start": 24,
+            "padding-inline-end": 24,
+            "custom_mobile_padding": false,
+            "mobile-padding-block-start": 0,
+            "mobile-padding-block-end": 0,
+            "mobile-padding-inline-start": 0,
+            "mobile-padding-inline-end": 0,
+            "css_class": ""
+          },
+          "blocks": {
+            "icon_FyLDXY": {
+              "type": "icon",
+              "name": "t:names.icon",
+              "settings": {
+                "icon": "price_tag",
+                "image_upload": "shopify://shop_images/Vector.png",
+                "width": 24,
+                "use_height": true,
+                "height": 24,
+                "custom_mobile_height": false,
+                "mobile-height": 24,
+                "link": "",
+                "open_in_new_tab": false
+              },
+              "blocks": {}
+            },
+            "custom_liquid_GyRFqL": {
+              "type": "custom-liquid",
+              "name": "Star Icons",
+              "settings": {
+                "custom_liquid": "<div class=\"oke-reviewContent-stars\">\n    <div class=\"oke-stars\">\n        <!---->\n        <div class=\"oke-stars-background\">\n            <svg height=\"12\" viewBox=\"0 0 79.22222222222221 14\" aria-hidden=\"true\" role=\"none\">\n                <use x=\"0\" href=\"#oke-star-empty\"></use>\n                <use x=\"16.155555555555555\" href=\"#oke-star-empty\"></use>\n                <use x=\"32.31111111111111\" href=\"#oke-star-empty\"></use>\n                <use x=\"48.46666666666667\" href=\"#oke-star-empty\"></use>\n                <use x=\"64.62222222222222\" href=\"#oke-star-empty\"></use>\n            </svg>\n        </div>\n        <div class=\"oke-stars-foreground\" style=\"width: 100%;\">\n            <svg height=\"12\" viewBox=\"0 0 79.22222222222221 14\" aria-hidden=\"true\" role=\"none\">\n                <use x=\"0\" href=\"#oke-star-filled\"></use>\n                <use x=\"16.155555555555555\" href=\"#oke-star-filled\"></use>\n                <use x=\"32.31111111111111\" href=\"#oke-star-filled\"></use>\n                <use x=\"48.46666666666667\" href=\"#oke-star-filled\"></use>\n                <use x=\"64.62222222222222\" href=\"#oke-star-filled\"></use>\n            </svg>\n        </div>\n    </div>\n</div>"
+              },
+              "blocks": {}
+            },
+            "text_NEbyDn": {
+              "type": "text",
+              "name": "t:names.text",
+              "settings": {
+                "text": "<p><em>“The designs are absolutely stunning. I get compliments every single day at the office. Everyone wants to know where I got it.”</em></p>",
+                "width": "fit-content",
+                "max_width": "normal",
+                "alignment": "left",
+                "type_preset": "rte",
+                "font": "var(--font-body--family)",
+                "font_size": "1rem",
+                "enable_mobile_size": false,
+                "mobile_font_size": "1rem",
+                "line_height": "normal",
+                "letter_spacing": "normal",
+                "case": "none",
+                "wrap": "pretty",
+                "color": "var(--color-foreground)",
+                "background": false,
+                "background_color": "#00000026",
+                "corner_radius": 0,
+                "padding-block-start": 0,
+                "padding-block-end": 0,
+                "padding-inline-start": 0,
+                "padding-inline-end": 0,
+                "custom_mobile_padding": false,
+                "mobile-padding-block-start": 0,
+                "mobile-padding-block-end": 0,
+                "mobile-padding-inline-start": 0,
+                "mobile-padding-inline-end": 0
+              },
+              "blocks": {}
+            },
+            "ai_gen_block_c3963ee_WEg8EU": {
+              "type": "ai_gen_block_c3963ee",
+              "settings": {
+                "customer_name": "John S.",
+                "verified_text": "Verified Buyer",
+                "spacing": 8,
+                "padding": 0,
+                "border_radius": 0,
+                "background_color": "rgba(0,0,0,0)",
+                "name_font_size": 15,
+                "name_color": "#2b2b2b",
+                "name_font_weight": "600",
+                "icon_size": 14,
+                "icon_color": "#f0dfe7",
+                "badge_spacing": 6,
+                "badge_font_size": 14,
+                "badge_text_color": "#2b2b2b",
+                "badge_font_weight": "400"
+              },
+              "blocks": {}
+            },
+            "divider_AmWTeg": {
+              "type": "_divider",
+              "name": "t:names.divider",
+              "settings": {
+                "thickness": 1,
+                "corner_radius": "square",
+                "width_percent": 100,
+                "padding-block-start": 6,
+                "padding-block-end": 6
+              },
+              "blocks": {}
+            },
+            "ai_gen_block_f16862d_UqntkA": {
+              "type": "ai_gen_block_f16862d",
+              "settings": {
+                "product": "gym-girly-clear-glass-mug-with-lid-straw",
+                "thumbnail_width": 40
+              },
+              "blocks": {}
+            }
+          },
+          "block_order": [
+            "icon_FyLDXY",
+            "custom_liquid_GyRFqL",
+            "text_NEbyDn",
+            "ai_gen_block_c3963ee_WEg8EU",
+            "divider_AmWTeg",
+            "ai_gen_block_f16862d_UqntkA"
+          ]
+        },
+        "carousel_card_gjhh8j": {
+          "type": "_carousel-card",
+          "name": "Carousel Item",
+          "settings": {
+            "content_direction": "column",
+            "vertical_on_mobile": true,
+            "reverse_on_mobile": false,
+            "horizontal_alignment": "flex-start",
+            "vertical_alignment": "center",
+            "align_baseline": false,
+            "horizontal_alignment_flex_direction_column": "flex-start",
+            "custom_mobile_alignment": false,
+            "mobile_vertical_alignment": "flex-start",
+            "vertical_alignment_flex_direction_column": "flex-start",
+            "gap": 6,
+            "width": "fill",
+            "custom_width": 100,
+            "width_mobile": "fill",
+            "custom_width_mobile": 100,
+            "height": "fit",
+            "custom_height": 100,
+            "inherit_color_scheme": false,
+            "color_scheme": "",
+            "border": "none",
+            "border_width": 1,
+            "border_opacity": 100,
+            "border_radius": 12,
+            "enable_mobile_radius": false,
+            "mobile_border_radius": 0,
+            "padding-block-start": 24,
+            "padding-block-end": 24,
+            "padding-inline-start": 24,
+            "padding-inline-end": 24,
+            "custom_mobile_padding": false,
+            "mobile-padding-block-start": 0,
+            "mobile-padding-block-end": 0,
+            "mobile-padding-inline-start": 0,
+            "mobile-padding-inline-end": 0,
+            "css_class": ""
+          },
+          "blocks": {
+            "icon_UP4kNH": {
+              "type": "icon",
+              "name": "t:names.icon",
+              "settings": {
+                "icon": "price_tag",
+                "image_upload": "shopify://shop_images/Vector.png",
+                "width": 24,
+                "use_height": true,
+                "height": 24,
+                "custom_mobile_height": false,
+                "mobile-height": 24,
+                "link": "",
+                "open_in_new_tab": false
+              },
+              "blocks": {}
+            },
+            "custom_liquid_7UcbTy": {
+              "type": "custom-liquid",
+              "name": "Star Icons",
+              "settings": {
+                "custom_liquid": "<div class=\"oke-reviewContent-stars\">\n    <div class=\"oke-stars\">\n        <!---->\n        <div class=\"oke-stars-background\">\n            <svg height=\"12\" viewBox=\"0 0 79.22222222222221 14\" aria-hidden=\"true\" role=\"none\">\n                <use x=\"0\" href=\"#oke-star-empty\"></use>\n                <use x=\"16.155555555555555\" href=\"#oke-star-empty\"></use>\n                <use x=\"32.31111111111111\" href=\"#oke-star-empty\"></use>\n                <use x=\"48.46666666666667\" href=\"#oke-star-empty\"></use>\n                <use x=\"64.62222222222222\" href=\"#oke-star-empty\"></use>\n            </svg>\n        </div>\n        <div class=\"oke-stars-foreground\" style=\"width: 100%;\">\n            <svg height=\"12\" viewBox=\"0 0 79.22222222222221 14\" aria-hidden=\"true\" role=\"none\">\n                <use x=\"0\" href=\"#oke-star-filled\"></use>\n                <use x=\"16.155555555555555\" href=\"#oke-star-filled\"></use>\n                <use x=\"32.31111111111111\" href=\"#oke-star-filled\"></use>\n                <use x=\"48.46666666666667\" href=\"#oke-star-filled\"></use>\n                <use x=\"64.62222222222222\" href=\"#oke-star-filled\"></use>\n            </svg>\n        </div>\n    </div>\n</div>"
+              },
+              "blocks": {}
+            },
+            "text_6FbT3y": {
+              "type": "text",
+              "name": "t:names.text",
+              "settings": {
+                "text": "<p><em>“The designs are absolutely stunning. I get compliments every single day at the office. Everyone wants to know where I got it.”</em></p>",
+                "width": "fit-content",
+                "max_width": "normal",
+                "alignment": "left",
+                "type_preset": "rte",
+                "font": "var(--font-body--family)",
+                "font_size": "1rem",
+                "enable_mobile_size": false,
+                "mobile_font_size": "1rem",
+                "line_height": "normal",
+                "letter_spacing": "normal",
+                "case": "none",
+                "wrap": "pretty",
+                "color": "var(--color-foreground)",
+                "background": false,
+                "background_color": "#00000026",
+                "corner_radius": 0,
+                "padding-block-start": 0,
+                "padding-block-end": 0,
+                "padding-inline-start": 0,
+                "padding-inline-end": 0,
+                "custom_mobile_padding": false,
+                "mobile-padding-block-start": 0,
+                "mobile-padding-block-end": 0,
+                "mobile-padding-inline-start": 0,
+                "mobile-padding-inline-end": 0
+              },
+              "blocks": {}
+            },
+            "ai_gen_block_c3963ee_PJGbMi": {
+              "type": "ai_gen_block_c3963ee",
+              "settings": {
+                "customer_name": "John S.",
+                "verified_text": "Verified Buyer",
+                "spacing": 8,
+                "padding": 0,
+                "border_radius": 0,
+                "background_color": "rgba(0,0,0,0)",
+                "name_font_size": 15,
+                "name_color": "#2b2b2b",
+                "name_font_weight": "600",
+                "icon_size": 14,
+                "icon_color": "#f0dfe7",
+                "badge_spacing": 6,
+                "badge_font_size": 14,
+                "badge_text_color": "#2b2b2b",
+                "badge_font_weight": "400"
+              },
+              "blocks": {}
+            },
+            "divider_EJa8HP": {
+              "type": "_divider",
+              "name": "t:names.divider",
+              "settings": {
+                "thickness": 1,
+                "corner_radius": "square",
+                "width_percent": 100,
+                "padding-block-start": 6,
+                "padding-block-end": 6
+              },
+              "blocks": {}
+            },
+            "ai_gen_block_f16862d_VpdMpe": {
+              "type": "ai_gen_block_f16862d",
+              "settings": {
+                "product": "gym-girly-clear-glass-mug-with-lid-straw",
+                "thumbnail_width": 40
+              },
+              "blocks": {}
+            }
+          },
+          "block_order": [
+            "icon_UP4kNH",
+            "custom_liquid_7UcbTy",
+            "text_6FbT3y",
+            "ai_gen_block_c3963ee_PJGbMi",
+            "divider_EJa8HP",
+            "ai_gen_block_f16862d_VpdMpe"
+          ]
+        },
+        "carousel_card_R4ceke": {
+          "type": "_carousel-card",
+          "name": "Carousel Item",
+          "settings": {
+            "content_direction": "column",
+            "vertical_on_mobile": true,
+            "reverse_on_mobile": false,
+            "horizontal_alignment": "flex-start",
+            "vertical_alignment": "center",
+            "align_baseline": false,
+            "horizontal_alignment_flex_direction_column": "flex-start",
+            "custom_mobile_alignment": false,
+            "mobile_vertical_alignment": "flex-start",
+            "vertical_alignment_flex_direction_column": "flex-start",
+            "gap": 6,
+            "width": "fill",
+            "custom_width": 100,
+            "width_mobile": "fill",
+            "custom_width_mobile": 100,
+            "height": "fit",
+            "custom_height": 100,
+            "inherit_color_scheme": false,
+            "color_scheme": "",
+            "border": "none",
+            "border_width": 1,
+            "border_opacity": 100,
+            "border_radius": 12,
+            "enable_mobile_radius": false,
+            "mobile_border_radius": 0,
+            "padding-block-start": 24,
+            "padding-block-end": 24,
+            "padding-inline-start": 24,
+            "padding-inline-end": 24,
+            "custom_mobile_padding": false,
+            "mobile-padding-block-start": 0,
+            "mobile-padding-block-end": 0,
+            "mobile-padding-inline-start": 0,
+            "mobile-padding-inline-end": 0,
+            "css_class": ""
+          },
+          "blocks": {
+            "icon_w7E9Fh": {
+              "type": "icon",
+              "name": "t:names.icon",
+              "settings": {
+                "icon": "price_tag",
+                "image_upload": "shopify://shop_images/Vector.png",
+                "width": 24,
+                "use_height": true,
+                "height": 24,
+                "custom_mobile_height": false,
+                "mobile-height": 24,
+                "link": "",
+                "open_in_new_tab": false
+              },
+              "blocks": {}
+            },
+            "custom_liquid_YjWQ96": {
+              "type": "custom-liquid",
+              "name": "Star Icons",
+              "settings": {
+                "custom_liquid": "<div class=\"oke-reviewContent-stars\">\n    <div class=\"oke-stars\">\n        <!---->\n        <div class=\"oke-stars-background\">\n            <svg height=\"12\" viewBox=\"0 0 79.22222222222221 14\" aria-hidden=\"true\" role=\"none\">\n                <use x=\"0\" href=\"#oke-star-empty\"></use>\n                <use x=\"16.155555555555555\" href=\"#oke-star-empty\"></use>\n                <use x=\"32.31111111111111\" href=\"#oke-star-empty\"></use>\n                <use x=\"48.46666666666667\" href=\"#oke-star-empty\"></use>\n                <use x=\"64.62222222222222\" href=\"#oke-star-empty\"></use>\n            </svg>\n        </div>\n        <div class=\"oke-stars-foreground\" style=\"width: 100%;\">\n            <svg height=\"12\" viewBox=\"0 0 79.22222222222221 14\" aria-hidden=\"true\" role=\"none\">\n                <use x=\"0\" href=\"#oke-star-filled\"></use>\n                <use x=\"16.155555555555555\" href=\"#oke-star-filled\"></use>\n                <use x=\"32.31111111111111\" href=\"#oke-star-filled\"></use>\n                <use x=\"48.46666666666667\" href=\"#oke-star-filled\"></use>\n                <use x=\"64.62222222222222\" href=\"#oke-star-filled\"></use>\n            </svg>\n        </div>\n    </div>\n</div>"
+              },
+              "blocks": {}
+            },
+            "text_NndxkJ": {
+              "type": "text",
+              "name": "t:names.text",
+              "settings": {
+                "text": "<p><em>“The designs are absolutely stunning. I get compliments every single day at the office. Everyone wants to know where I got it.”</em></p>",
+                "width": "fit-content",
+                "max_width": "normal",
+                "alignment": "left",
+                "type_preset": "rte",
+                "font": "var(--font-body--family)",
+                "font_size": "1rem",
+                "enable_mobile_size": false,
+                "mobile_font_size": "1rem",
+                "line_height": "normal",
+                "letter_spacing": "normal",
+                "case": "none",
+                "wrap": "pretty",
+                "color": "var(--color-foreground)",
+                "background": false,
+                "background_color": "#00000026",
+                "corner_radius": 0,
+                "padding-block-start": 0,
+                "padding-block-end": 0,
+                "padding-inline-start": 0,
+                "padding-inline-end": 0,
+                "custom_mobile_padding": false,
+                "mobile-padding-block-start": 0,
+                "mobile-padding-block-end": 0,
+                "mobile-padding-inline-start": 0,
+                "mobile-padding-inline-end": 0
+              },
+              "blocks": {}
+            },
+            "ai_gen_block_c3963ee_eexifb": {
+              "type": "ai_gen_block_c3963ee",
+              "settings": {
+                "customer_name": "John S.",
+                "verified_text": "Verified Buyer",
+                "spacing": 8,
+                "padding": 0,
+                "border_radius": 0,
+                "background_color": "rgba(0,0,0,0)",
+                "name_font_size": 15,
+                "name_color": "#2b2b2b",
+                "name_font_weight": "600",
+                "icon_size": 14,
+                "icon_color": "#f0dfe7",
+                "badge_spacing": 6,
+                "badge_font_size": 14,
+                "badge_text_color": "#2b2b2b",
+                "badge_font_weight": "400"
+              },
+              "blocks": {}
+            },
+            "divider_QxTeXi": {
+              "type": "_divider",
+              "name": "t:names.divider",
+              "settings": {
+                "thickness": 1,
+                "corner_radius": "square",
+                "width_percent": 100,
+                "padding-block-start": 6,
+                "padding-block-end": 6
+              },
+              "blocks": {}
+            },
+            "ai_gen_block_f16862d_MKfP96": {
+              "type": "ai_gen_block_f16862d",
+              "settings": {
+                "product": "gym-girly-clear-glass-mug-with-lid-straw",
+                "thumbnail_width": 40
+              },
+              "blocks": {}
+            }
+          },
+          "block_order": [
+            "icon_w7E9Fh",
+            "custom_liquid_YjWQ96",
+            "text_NndxkJ",
+            "ai_gen_block_c3963ee_eexifb",
+            "divider_QxTeXi",
+            "ai_gen_block_f16862d_MKfP96"
           ]
         },
         "static-header": {
@@ -4597,7 +5044,10 @@
         }
       },
       "block_order": [
-        "carousel_card_YVhk7A"
+        "carousel_card_YVhk7A",
+        "carousel_card_ArnqrJ",
+        "carousel_card_gjhh8j",
+        "carousel_card_R4ceke"
       ],
       "custom_css": [
         ".divider__line {--color-border: rgb(43 43 43 / 0.1);}"
@@ -4614,8 +5064,8 @@
         "columns": 3,
         "peek_desktop": false,
         "mobile_columns": "2",
-        "mobile_card_size": "60cqw",
-        "columns_gap": 8,
+        "mobile_card_size": "80%",
+        "columns_gap": 16,
         "rows_gap": 8,
         "icons_style": "arrow",
         "icons_shape": "circle",
