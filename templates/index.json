@@ -3279,6 +3279,9 @@
         "carousel_card_wpgHmf",
         "carousel_card_WQ6BFq"
       ],
+      "custom_css": [
+        "@media (max-width: 749px) {.text-icon-block .text-block {--text-align: left !important;}}"
+      ],
       "name": "Giving Back Bottom",
       "settings": {
         "alignment": "left",
