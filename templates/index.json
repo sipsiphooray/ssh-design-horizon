@@ -5071,7 +5071,7 @@
         "icons_style": "arrow",
         "icons_shape": "circle",
         "section_width": "page-narrow",
-        "full_width_on_mobile": false,
+        "full_width_on_mobile": true,
         "gap": 12,
         "color_scheme": "scheme-738179cd-4e15-457b-be40-989a024001d6",
         "background_media": "none",
