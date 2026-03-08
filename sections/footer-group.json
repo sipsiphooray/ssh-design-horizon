@@ -934,7 +934,7 @@
       ],
       "custom_css": [
         ".social-icons__icon-wrapper svg {color: var(--color-foreground);}",
-        "@media (max-width: 989px) {summary {padding-block: var(--padding-md);}}"
+        "@media (max-width: 989px) {summary {padding-block: var(--padding-md); line-height: 1em; }}"
       ],
       "name": "t:names.footer",
       "settings": {
