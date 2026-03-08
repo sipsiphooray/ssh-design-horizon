@@ -4469,18 +4469,6 @@
               },
               "blocks": {}
             },
-            "divider_TxKFYp": {
-              "type": "_divider",
-              "name": "t:names.divider",
-              "settings": {
-                "thickness": 1,
-                "corner_radius": "square",
-                "width_percent": 100,
-                "padding-block-start": 6,
-                "padding-block-end": 6
-              },
-              "blocks": {}
-            },
             "text_tXLDRz": {
               "type": "text",
               "name": "t:names.text",
@@ -4513,14 +4501,35 @@
                 "mobile-padding-inline-end": 0
               },
               "blocks": {}
+            },
+            "divider_TxKFYp": {
+              "type": "_divider",
+              "name": "t:names.divider",
+              "settings": {
+                "thickness": 1,
+                "corner_radius": "square",
+                "width_percent": 100,
+                "padding-block-start": 6,
+                "padding-block-end": 6
+              },
+              "blocks": {}
+            },
+            "ai_gen_block_f16862d_npGiWm": {
+              "type": "ai_gen_block_f16862d",
+              "settings": {
+                "product": "gym-girly-clear-glass-mug-with-lid-straw",
+                "thumbnail_width": 40
+              },
+              "blocks": {}
             }
           },
           "block_order": [
             "icon_BwffgP",
             "custom_liquid_LwMDTT",
             "text_F9De8P",
+            "text_tXLDRz",
             "divider_TxKFYp",
-            "text_tXLDRz"
+            "ai_gen_block_f16862d_npGiWm"
           ]
         },
         "static-header": {
