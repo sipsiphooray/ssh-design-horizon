@@ -211,7 +211,7 @@
       ],
       "custom_css": [
         ".left-content {padding-left: var(--util-page-margin-offset);}",
-        ".button {font-size: var(--font-size--xl);}"
+        "@media (min-width: 750px) {.button {font-size: var(--font-size--xl);}}"
       ],
       "name": "t:names.hero",
       "settings": {
