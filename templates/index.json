@@ -4384,14 +4384,14 @@
             "custom_mobile_alignment": false,
             "mobile_vertical_alignment": "flex-start",
             "vertical_alignment_flex_direction_column": "flex-start",
-            "gap": 0,
+            "gap": 4,
             "width": "fill",
             "custom_width": 100,
             "width_mobile": "fill",
             "custom_width_mobile": 100,
             "height": "fit",
             "custom_height": 100,
-            "inherit_color_scheme": true,
+            "inherit_color_scheme": false,
             "color_scheme": "",
             "border": "none",
             "border_width": 1,
@@ -4399,10 +4399,10 @@
             "border_radius": 0,
             "enable_mobile_radius": false,
             "mobile_border_radius": 0,
-            "padding-block-start": 0,
-            "padding-block-end": 0,
-            "padding-inline-start": 0,
-            "padding-inline-end": 0,
+            "padding-block-start": 24,
+            "padding-block-end": 24,
+            "padding-inline-start": 24,
+            "padding-inline-end": 24,
             "custom_mobile_padding": false,
             "mobile-padding-block-start": 0,
             "mobile-padding-block-end": 0,
@@ -4429,7 +4429,7 @@
             },
             "custom_liquid_LwMDTT": {
               "type": "custom-liquid",
-              "name": "t:names.custom_liquid",
+              "name": "Star Icons",
               "settings": {
                 "custom_liquid": "<div class=\"oke-reviewContent-stars\">\n    <div class=\"oke-stars\">\n        <!---->\n        <div class=\"oke-stars-background\">\n            <svg height=\"12\" viewBox=\"0 0 79.22222222222221 14\" aria-hidden=\"true\" role=\"none\">\n                <use x=\"0\" href=\"#oke-star-empty\"></use>\n                <use x=\"16.155555555555555\" href=\"#oke-star-empty\"></use>\n                <use x=\"32.31111111111111\" href=\"#oke-star-empty\"></use>\n                <use x=\"48.46666666666667\" href=\"#oke-star-empty\"></use>\n                <use x=\"64.62222222222222\" href=\"#oke-star-empty\"></use>\n            </svg>\n        </div>\n        <div class=\"oke-stars-foreground\" style=\"width: 100%;\">\n            <svg height=\"12\" viewBox=\"0 0 79.22222222222221 14\" aria-hidden=\"true\" role=\"none\">\n                <use x=\"0\" href=\"#oke-star-filled\"></use>\n                <use x=\"16.155555555555555\" href=\"#oke-star-filled\"></use>\n                <use x=\"32.31111111111111\" href=\"#oke-star-filled\"></use>\n                <use x=\"48.46666666666667\" href=\"#oke-star-filled\"></use>\n                <use x=\"64.62222222222222\" href=\"#oke-star-filled\"></use>\n            </svg>\n        </div>\n    </div>\n</div>"
               },
@@ -4467,12 +4467,46 @@
                 "mobile-padding-inline-end": 0
               },
               "blocks": {}
+            },
+            "text_tXLDRz": {
+              "type": "text",
+              "name": "t:names.text",
+              "settings": {
+                "text": "<p><strong>Jane D. </strong>Verified Buyer</p>",
+                "width": "fit-content",
+                "max_width": "normal",
+                "alignment": "left",
+                "type_preset": "rte",
+                "font": "var(--font-body--family)",
+                "font_size": "1rem",
+                "enable_mobile_size": false,
+                "mobile_font_size": "1rem",
+                "line_height": "normal",
+                "letter_spacing": "normal",
+                "case": "none",
+                "wrap": "pretty",
+                "color": "var(--color-foreground)",
+                "background": false,
+                "background_color": "#00000026",
+                "corner_radius": 0,
+                "padding-block-start": 0,
+                "padding-block-end": 0,
+                "padding-inline-start": 0,
+                "padding-inline-end": 0,
+                "custom_mobile_padding": false,
+                "mobile-padding-block-start": 0,
+                "mobile-padding-block-end": 0,
+                "mobile-padding-inline-start": 0,
+                "mobile-padding-inline-end": 0
+              },
+              "blocks": {}
             }
           },
           "block_order": [
             "icon_BwffgP",
             "custom_liquid_LwMDTT",
-            "text_F9De8P"
+            "text_F9De8P",
+            "text_tXLDRz"
           ]
         },
         "static-header": {
@@ -4574,7 +4608,7 @@
         "section_width": "page-width",
         "full_width_on_mobile": false,
         "gap": 12,
-        "color_scheme": "",
+        "color_scheme": "scheme-738179cd-4e15-457b-be40-989a024001d6",
         "background_media": "none",
         "video_position": "cover",
         "background_image_position": "cover",
