@@ -4599,6 +4599,9 @@
       "block_order": [
         "carousel_card_YVhk7A"
       ],
+      "custom_css": [
+        ".divider__line {--color-border: rgb(43 43 43 / 0.1);}"
+      ],
       "name": "Testimonials",
       "settings": {
         "alignment": "left",
