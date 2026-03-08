@@ -1,6 +1,121 @@
+{% doc %}
+  @prompt
+    generate a row where it has thumbnail on left, has thumbnail width setting, and product title to the left. no font size setting needed. the thumbnail and title source is based on product picker. row should be align center vertically, get rid of title color setting
+{% enddoc %}
+{% assign ai_gen_id = block.id | replace: '_', '' | downcase %}
+
+{% style %}
+  .ai-product-row-{{ ai_gen_id }} {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    width: {{ block.settings.desktop_width_percent }}%;
+    max-width: 100%;
+  }
+
+  .ai-product-row__thumbnail-{{ ai_gen_id }} {
+    flex-shrink: 0;
+    width: {{ block.settings.thumbnail_width }}px;
+    height: {{ block.settings.thumbnail_width }}px;
+  }
+
+  .ai-product-row__thumbnail-{{ ai_gen_id }} img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+
+  .ai-product-row__thumbnail-placeholder-{{ ai_gen_id }} {
+    width: 100%;
+    height: 100%;
+    background-color: #f4f4f4;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .ai-product-row__thumbnail-placeholder-{{ ai_gen_id }} svg {
+    width: 60%;
+    height: 60%;
+  }
+
+  .ai-product-row__title-{{ ai_gen_id }} {
+    flex-grow: 1;
+    margin: 0;
+  }
+
+  .ai-product-row__empty-state-{{ ai_gen_id }} {
+    color: #999;
+    font-style: italic;
+  }
+{% endstyle %}
+
+<div
+  class="ai-product-row-{{ ai_gen_id }}"
+  {{ block.shopify_attributes }}
+>
+  <div class="ai-product-row__thumbnail-{{ ai_gen_id }}">
+    {% if block.settings.product != blank and block.settings.product.featured_image %}
+      <img
+        src="{{ block.settings.product.featured_image | image_url: width: 200 }}"
+        alt="{{ block.settings.product.featured_image.alt | escape }}"
+        loading="lazy"
+        width="200"
+        height="200"
+      >
+    {% else %}
+      <div class="ai-product-row__thumbnail-placeholder-{{ ai_gen_id }}">
+        {{ 'product-1' | placeholder_svg_tag }}
+      </div>
+    {% endif %}
+  </div>
+
+  <div class="ai-product-row__title-{{ ai_gen_id }}">
+    {% if block.settings.product != blank %}
+      {{ block.settings.product.title }}
+    {% else %}
+      <span class="ai-product-row__empty-state-{{ ai_gen_id }}">
+        Next, select a product
+      </span>
+    {% endif %}
+  </div>
+</div>
+
 {% schema %}
- {
-   "name": "AI_Block",
-   "tag": "shopify-ai-generated-block"
- }
+{
+  "name": "Product row",
+  "settings": [
+    {
+      "type": "product",
+      "id": "product",
+      "label": "Product"
+    },
+    {
+      "type": "range",
+      "id": "thumbnail_width",
+      "label": "Thumbnail width",
+      "min": 40,
+      "max": 200,
+      "step": 10,
+      "unit": "px",
+      "default": 80
+    },
+    {
+      "type": "range",
+      "id": "desktop_width_percent",
+      "label": "Desktop width",
+      "min": 50,
+      "max": 100,
+      "step": 5,
+      "unit": "%",
+      "default": 100
+    }
+  ],
+  "presets": [
+    {
+      "name": "Product row"
+    }
+  ]
+}
 {% endschema %}
