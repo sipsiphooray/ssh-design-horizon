@@ -1021,11 +1021,25 @@
             "case": "none"
           },
           "blocks": {}
+        },
+        "payment_icons_Ui6pKt": {
+          "type": "payment-icons",
+          "name": "t:names.payment_icons",
+          "settings": {
+            "horizontal_alignment": "flex-end",
+            "gap": 10,
+            "padding-block-start": 0,
+            "padding-block-end": 0,
+            "padding-inline-start": 0,
+            "padding-inline-end": 0
+          },
+          "blocks": {}
         }
       },
       "block_order": [
         "copyright",
-        "policy_list"
+        "policy_list",
+        "payment_icons_Ui6pKt"
       ],
       "settings": {
         "section_width": "page-width",
