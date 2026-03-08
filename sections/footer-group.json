@@ -619,8 +619,8 @@
               "name": "t:names.text",
               "settings": {
                 "text": "<p>All of our cups are shipped with LOVE from Lafayette, Louisiana.</p>",
-                "width": "100%",
-                "max_width": "none",
+                "width": "fit-content",
+                "max_width": "narrow",
                 "alignment": "left",
                 "type_preset": "rte",
                 "font": "var(--font-body--family)",
