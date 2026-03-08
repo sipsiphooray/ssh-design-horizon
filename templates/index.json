@@ -674,7 +674,7 @@
       },
       "name": "t:names.featured_collection",
       "settings": {
-        "collection": "best-sellers",
+        "collection": "new-sips",
         "layout_type": "grid",
         "carousel_on_mobile": true,
         "max_products": 4,
