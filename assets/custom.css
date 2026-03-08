@@ -124,6 +124,12 @@ summary,.menu-drawer__back-button {
     box-shadow: unset !important;
 }
 
+.slideshow-control.slideshow-control--shape-square, .slideshow-control.slideshow-control--shape-circle {
+    background-color: var(--color-primary-button-text);
+    color: var(--color-primary-button-background);
+    border: 1px solid var(--color-primary-button-background);
+}
+
 @media screen and (min-width: 60em) {
     :root {
         --section-height-large: 90svh !important;
