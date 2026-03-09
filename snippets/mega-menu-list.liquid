@@ -162,12 +162,12 @@
             >
               <a
                 href="{{ childLink.url }}"
-                class="mega-menu__link {% if thumbnail != blank %}link-menu-thumbnail{% endif %}"
+                class="mega-menu__link {% if thumbnail[0] != blank %}link-menu-thumbnail{% endif %}"
                 {% if thumbnail.card_image != blank %}data-card-image="{{ thumbnail[0].card_image | image_url: width: 500 }}"{% endif %}
               >
                 {% if thumbnail[0].thumbnail_color != blank %}
                   <span class="image-thumbnail-link">
-                    <span class="thumbnail-block__image"></span>
+                    <span class="thumbnail-block__image" style="--bgcolor: {{ thumbnail[0].thumbnail_color }};"></span>
                   </span>
                 {% elsif thumbnail[0].thumbnail_image != blank %}
                   <span class="image-thumbnail-link">
