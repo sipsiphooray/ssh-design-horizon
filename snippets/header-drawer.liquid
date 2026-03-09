@@ -36,6 +36,8 @@
   if section.index == blank
     assign eager_loading = true
   endif
+
+  assign megamenu_thumbnails = shop.metaobjects['megamenu_thumbnails'].values
 %}
 
 <script
@@ -159,6 +161,13 @@
                         tabindex="-1"
                       >
                         {%- for childlink in link.links -%}
+                          {% assign thumbnail = megamenu_thumbnails | where: 'assigned_to', childlink.title %}
+                          {% liquid
+                            assign media_width_desktop = '100vw'
+                            assign media_width_mobile = '100vw'
+                            assign sizes = 'auto, (min-width: 750px) ' | append: media_width_desktop | append: ', ' | append: media_width_mobile
+                            assign widths = '240, 352, 832, 1200, 1600, 1920, 2560, 3840'
+                          %}
                           <li
                             class="menu-drawer__list-item"
                             style="--menu-drawer-animation-index: {{ forloop.index }};"
@@ -166,12 +175,29 @@
                             <a
                               id="HeaderDrawer-{{ link.handle }}-{{ childlink.handle }}"
                               href="{{ childlink.url }}"
-                              class="menu-drawer__menu-item menu-drawer__menu-item--child focus-inset{% if childlink.current %} menu-drawer__menu-item--active{% endif %}"
+                              class="menu-drawer__menu-item menu-drawer__menu-item--child focus-inset {% if thumbnail[0] != blank %}link-menu-thumbnail{% endif %} {% if childlink.current %} menu-drawer__menu-item--active{% endif %}"
                               {% if childlink.current %}
                                 aria-current="page"
                               {% endif %}
                             >
-                              {% if render_link_image %}
+                              {% if thumbnail[0].thumbnail_color != blank %}
+                                <span class="image-thumbnail-link">
+                                  <span class="thumbnail-block__image" style="--bgcolor: {{ thumbnail[0].thumbnail_color }};"></span>
+                                </span>
+                              {% elsif thumbnail[0].thumbnail_image != blank %}
+                                <span class="image-thumbnail-link">
+                                    {{
+                                    thumbnail[0].thumbnail_image
+                                    | image_url: width: 89
+                                    | image_tag:
+                                        width: thumbnail[0].thumbnail_image.width,
+                                        widths: widths,
+                                        height: thumbnail[0].thumbnail_image.height,
+                                        class: 'thumbnail-block__image',
+                                        sizes: sizes
+                                    }}
+                                </span>
+                              {% elsif render_link_image %}
                                 {% render 'link-featured-image',
                                   link: childlink,
                                   class: 'menu-drawer__link-image',
@@ -216,18 +242,42 @@
                     tabindex="-1"
                   >
                     {%- for childlink in link.links -%}
+                      {% assign thumbnail = megamenu_thumbnails | where: 'assigned_to', childlink.title %}
+                      {% liquid
+                        assign media_width_desktop = '100vw'
+                        assign media_width_mobile = '100vw'
+                        assign sizes = 'auto, (min-width: 750px) ' | append: media_width_desktop | append: ', ' | append: media_width_mobile
+                        assign widths = '240, 352, 832, 1200, 1600, 1920, 2560, 3840'
+                      %}
                       <li
                         class="menu-drawer__list-item"
                         style="--menu-drawer-animation-index: {{ animation_index }};"
                       >
                         <a
                           href="{{ childlink.url }}"
-                          class="menu-drawer__menu-item menu-drawer__menu-item--child menu-drawer__animated-element focus-inset{% if childlink.current %} menu-drawer__menu-item--active{% endif %}"
+                          class="menu-drawer__menu-item menu-drawer__menu-item--child {% if thumbnail[0] != blank %}link-menu-thumbnail{% endif %}  menu-drawer__animated-element focus-inset{% if childlink.current %} menu-drawer__menu-item--active{% endif %}"
                           {% if childlink.current %}
                             aria-current="page"
                           {% endif %}
                         >
-                          {% if render_link_image %}
+                          {% if thumbnail[0].thumbnail_color != blank %}
+                            <span class="image-thumbnail-link">
+                              <span class="thumbnail-block__image" style="--bgcolor: {{ thumbnail[0].thumbnail_color }};"></span>
+                            </span>
+                          {% elsif thumbnail[0].thumbnail_image != blank %}
+                            <span class="image-thumbnail-link">
+                                {{
+                                thumbnail[0].thumbnail_image
+                                | image_url: width: 89
+                                | image_tag:
+                                    width: thumbnail[0].thumbnail_image.width,
+                                    widths: widths,
+                                    height: thumbnail[0].thumbnail_image.height,
+                                    class: 'thumbnail-block__image',
+                                    sizes: sizes
+                                }}
+                            </span>
+                          {% elsif render_link_image %}
                             {% render 'link-featured-image',
                               link: childlink,
                               class: 'menu-drawer__link-image',
@@ -441,6 +491,13 @@
                                         tabindex="-1"
                                       >
                                         {%- for grandchildlink in childlink.links -%}
+                                          {% assign thumbnail = megamenu_thumbnails | where: 'assigned_to', grandchildlink.title %}
+                                          {% liquid
+                                            assign media_width_desktop = '100vw'
+                                            assign media_width_mobile = '100vw'
+                                            assign sizes = 'auto, (min-width: 750px) ' | append: media_width_desktop | append: ', ' | append: media_width_mobile
+                                            assign widths = '240, 352, 832, 1200, 1600, 1920, 2560, 3840'
+                                          %}
                                           <li
                                             class="menu-drawer__list-item"
                                             style="--menu-drawer-animation-index: {{ forloop.index }};"
@@ -448,18 +505,35 @@
                                             <a
                                               id="HeaderDrawer-{{ link.handle }}-{{ childlink.handle }}-{{ grandchildlink.handle }}"
                                               href="{{ grandchildlink.url }}"
-                                              class="menu-drawer__menu-item menu-drawer__menu-item--child focus-inset{% if grandchildlink.current %} menu-drawer__menu-item--active{% endif %}"
+                                              class="menu-drawer__menu-item menu-drawer__menu-item--child {% if thumbnail[0] != blank %}link-menu-thumbnail{% endif %} focus-inset{% if grandchildlink.current %} menu-drawer__menu-item--active{% endif %}"
                                               {% if grandchildlink.current %}
                                                 aria-current="page"
                                               {% endif %}
                                             >
-                                              {% if render_link_image %}
+                                            {% if thumbnail[0].thumbnail_color != blank %}
+                                              <span class="image-thumbnail-link">
+                                                <span class="thumbnail-block__image" style="--bgcolor: {{ thumbnail[0].thumbnail_color }};"></span>
+                                              </span>
+                                            {% elsif thumbnail[0].thumbnail_image != blank %}
+                                              <span class="image-thumbnail-link">
+                                                  {{
+                                                  thumbnail[0].thumbnail_image
+                                                  | image_url: width: 89
+                                                  | image_tag:
+                                                      width: thumbnail[0].thumbnail_image.width,
+                                                      widths: widths,
+                                                      height: thumbnail[0].thumbnail_image.height,
+                                                      class: 'thumbnail-block__image',
+                                                      sizes: sizes
+                                                  }}
+                                              </span>
+                                            {% elsif render_link_image %}
                                                 {% render 'link-featured-image',
                                                   link: grandchildlink,
                                                   class: 'menu-drawer__link-image',
                                                   sizes: 'auto, 400px'
                                                 %}
-                                              {% endif %}
+                                            {% endif %}
                                               <span class="menu-drawer__menu-item-text wrap-text">
                                                 {{- grandchildlink.title | escape -}}
                                               </span>
@@ -502,6 +576,14 @@
                                     tabindex="-1"
                                   >
                                     {%- for grandchildlink in childlink.links -%}
+                                      {% assign thumbnail = megamenu_thumbnails | where: 'assigned_to', grandchildlink.title %}
+                                      {% liquid
+                                        assign media_width_desktop = '100vw'
+                                        assign media_width_mobile = '100vw'
+                                        assign sizes = 'auto, (min-width: 750px) ' | append: media_width_desktop | append: ', ' | append: media_width_mobile
+                                        assign widths = '240, 352, 832, 1200, 1600, 1920, 2560, 3840'
+                                      %}
+
                                       <li
                                         class="menu-drawer__list-item"
                                         style="--menu-drawer-animation-index: {{ forloop.index }};"
@@ -509,12 +591,29 @@
                                         <a
                                           id="HeaderDrawer-{{ link.handle }}-{{ childlink.handle }}-{{ grandchildlink.handle }}"
                                           href="{{ grandchildlink.url }}"
-                                          class="menu-drawer__menu-item menu-drawer__menu-item--child focus-inset{% if grandchildlink.current %} menu-drawer__menu-item--active{% endif %}"
+                                          class="menu-drawer__menu-item menu-drawer__menu-item--child {% if thumbnail[0] != blank %}link-menu-thumbnail{% endif %} focus-inset{% if grandchildlink.current %} menu-drawer__menu-item--active{% endif %}"
                                           {% if grandchildlink.current %}
                                             aria-current="page"
                                           {% endif %}
                                         >
-                                          {% if render_link_image %}
+                                          {% if thumbnail[0].thumbnail_color != blank %}
+                                            <span class="image-thumbnail-link">
+                                              <span class="thumbnail-block__image" style="--bgcolor: {{ thumbnail[0].thumbnail_color }};"></span>
+                                            </span>
+                                          {% elsif thumbnail[0].thumbnail_image != blank %}
+                                            <span class="image-thumbnail-link">
+                                                {{
+                                                thumbnail[0].thumbnail_image
+                                                | image_url: width: 89
+                                                | image_tag:
+                                                    width: thumbnail[0].thumbnail_image.width,
+                                                    widths: widths,
+                                                    height: thumbnail[0].thumbnail_image.height,
+                                                    class: 'thumbnail-block__image',
+                                                    sizes: sizes
+                                                }}
+                                            </span>
+                                          {% elsif render_link_image %}
                                             {% render 'link-featured-image',
                                               link: grandchildlink,
                                               class: 'menu-drawer__link-image',

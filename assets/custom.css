@@ -193,6 +193,10 @@ summary,.menu-drawer__back-button {
     height: 1.5rem;
 }
 
+.menu-drawer__menu-item:has(.image-thumbnail-link) {
+    justify-content: flex-start;
+}
+
 @media screen and (min-width: 60em) {
     :root {
         --section-height-large: 90svh !important;
