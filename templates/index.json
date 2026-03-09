@@ -3373,7 +3373,7 @@
         "carousel_on_mobile": true,
         "enable_dots": true,
         "hide_arrows": false,
-        "autoplay": true,
+        "autoplay": false,
         "autoplay_speed": 6,
         "columns": 3,
         "peek_desktop": false,
