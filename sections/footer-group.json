@@ -936,6 +936,7 @@
       "custom_css": [
         ".social-icons__icon-wrapper svg {color: var(--color-foreground);}",
         ".text-block {--max-width--body-narrow: 18.75em;}",
+        "@media (min-width: 990px) {.menu__details .menu__heading {padding-top: 0; }}",
         "@media (max-width: 989px) {summary {padding-block: var(--padding-md); line-height: 1em; }}"
       ],
       "name": "t:names.footer",
@@ -943,8 +944,8 @@
         "section_width": "page-width",
         "gap": 36,
         "color_scheme": "scheme-1",
-        "padding-block-start": 36,
-        "padding-block-end": 36
+        "padding-block-start": 52,
+        "padding-block-end": 52
       }
     },
     "utilities": {
