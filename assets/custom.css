@@ -178,7 +178,7 @@ summary,.menu-drawer__back-button {
     align-items: center;
 }
 
-.link-menu-thumbnail .thubnail-block__image {
+.link-menu-thumbnail .thumbnail-block__image {
     width: 2rem;
     height: 2rem;
     display: block;
