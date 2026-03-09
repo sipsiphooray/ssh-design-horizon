@@ -9,6 +9,92 @@
  */
 {
   "sections": {
+    "scroll_navigation_EKMqeR": {
+      "type": "scroll-navigation",
+      "blocks": {
+        "item_XbNUBH": {
+          "type": "item",
+          "settings": {
+            "image": "shopify://shop_images/cup.png",
+            "text": "Tumblers",
+            "link": "#"
+          }
+        },
+        "item_NTP6AR": {
+          "type": "item",
+          "settings": {
+            "image": "shopify://shop_images/3_2.png",
+            "text": "Silicone Bottom",
+            "link": "#"
+          }
+        },
+        "item_zdzAU7": {
+          "type": "item",
+          "settings": {
+            "image": "shopify://shop_images/1_2.png",
+            "text": "Candles",
+            "link": "#"
+          }
+        },
+        "item_74XFCd": {
+          "type": "item",
+          "settings": {
+            "image": "shopify://shop_images/4_2.png",
+            "text": "Mugs",
+            "link": "#"
+          }
+        }
+      },
+      "block_order": [
+        "item_XbNUBH",
+        "item_NTP6AR",
+        "item_zdzAU7",
+        "item_74XFCd"
+      ],
+      "custom_css": [
+        ".custom-section-background {display: none;}"
+      ],
+      "name": "Scroll navigation",
+      "settings": {
+        "content_direction": "column",
+        "vertical_on_mobile": true,
+        "reverse_on_mobile": false,
+        "horizontal_alignment": "flex-start",
+        "vertical_alignment": "center",
+        "align_baseline": false,
+        "horizontal_alignment_flex_direction_column": "center",
+        "vertical_alignment_flex_direction_column": "center",
+        "gap": 12,
+        "enable_mobile_gap": false,
+        "mobile_gap": 12,
+        "section_width": "page-narrow",
+        "full_width_on_mobile": true,
+        "section_height": "",
+        "section_height_custom": 50,
+        "color_scheme": "scheme-738179cd-4e15-457b-be40-989a024001d6",
+        "background_media": "image",
+        "video_position": "cover",
+        "background_image_position": "cover",
+        "border": "none",
+        "border_width": 1,
+        "border_opacity": 100,
+        "border_radius": 0,
+        "toggle_overlay": true,
+        "overlay_color": "#00000021",
+        "overlay_style": "gradient",
+        "gradient_direction": "to bottom",
+        "padding-block-start": 16,
+        "padding-block-end": 16,
+        "custom_mobile_padding": false,
+        "mobile-padding-block-start": 0,
+        "mobile-padding-block-end": 0,
+        "mobile-padding-inline-start": 0,
+        "mobile-padding-inline-end": 0,
+        "css_class": "",
+        "add_section_id": false,
+        "section_id": ""
+      }
+    },
     "hero_jVaWmY": {
       "type": "hero",
       "blocks": {
@@ -5366,6 +5452,7 @@
     }
   },
   "order": [
+    "scroll_navigation_EKMqeR",
     "hero_jVaWmY",
     "marquee_rfcVf9",
     "grid_section_d8wkgr",
