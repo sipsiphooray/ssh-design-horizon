@@ -174,7 +174,7 @@ summary,.menu-drawer__back-button {
 }
 
 .link-menu-thumbnail {
-    gap: var(--gap-2xs);
+    gap: var(--gap-xs);
     align-items: center;
 }
 
