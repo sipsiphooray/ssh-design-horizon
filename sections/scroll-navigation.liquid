@@ -65,7 +65,7 @@
     >
         <div
             class="menu-list scroll-navigation"
-            style="--menu-horizontal-gap: 15px; --mobile-nav-margin: auto;"
+            style="--menu-horizontal-gap: 32px; --mobile-nav-margin: auto;"
             data-hydration-key="scroll-navigation"
         >
         <div class="scroll-nav-list__scroll-container">
@@ -113,6 +113,11 @@
       display: grid;
     }
 
+    .image-scroll {
+        margin-block-end: var(--gap-3xs);
+        display: block;
+    }
+
     .image-scroll img {
         display: block;
         max-width: 100%;
@@ -121,6 +126,11 @@
         object-fit: contain;
         margin: auto;
         object-position: bottom;
+
+        @media (min-width: 750px) {
+            height: 5rem;
+            width: 5rem;
+        }
     }
 
     .scroll-list-wrapper {
@@ -176,6 +186,10 @@
 
     display: flex;
     height: 100%;
+
+    @media (max-width: 749px) {
+        --menu-horizontal-gap: var(--gap-xl) !important;
+    }
   }
 
   .scroll-list__list {

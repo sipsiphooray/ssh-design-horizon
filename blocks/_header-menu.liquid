@@ -84,6 +84,36 @@
 
     {% capture children %}
       {% for link in block_settings.menu.links %}
+
+        {% capture parent_link_name %}
+            <!--@list/{{ link.title | handleize }}-->
+        {% endcapture %}
+
+        {% liquid
+          assign filtered_items_array = blank
+          assign final_items_array = nil
+          assign parent_link_name = parent_link_name | strip
+          assign items_array = list_items | strip | split: '<!--@list/split-->'
+        %}
+
+        {% capture filtered_items_array %}
+          {% for item in items_array %}
+            {% if item contains parent_link_name %}
+              {{ item }}
+            {% endif %}
+          {% endfor %}
+        {% endcapture %}
+
+
+        {% liquid
+          if filtered_items_array != blank
+            assign final_items_array = filtered_items_array | strip | remove_last: parent_link_name | split: parent_link_name
+          endif
+
+          if final_items_array.size > 0
+            assign menu_content_type = 'mega_blocks'
+          endif
+        %}
         <li
           role="presentation"
           class="menu-list__list-item"
@@ -96,7 +126,7 @@
             href="{{ link.url }}"
             data-skip-node-update="true"
             class="menu-list__link{% if link.active %} menu-list__link--active{% endif %}"
-            {%- if link.links != blank -%}
+            {%- if link.links != blank or final_items_array.size > 0 -%}
               aria-controls="submenu-{{ forloop.index }}"
               aria-haspopup="true"
               aria-expanded="false"
@@ -108,7 +138,7 @@
           >
             <span class="menu-list__link-title">{{- link.title -}}</span>
           </a>
-          {%- if link.links != blank -%}
+          {%- if link.links != blank or final_items_array.size > 0 -%}
             <div class="menu-list__submenu{{ color_scheme_classes }}" ref="submenu[]">
               <div
                 id="submenu-{{ forloop.index }}"
@@ -131,7 +161,7 @@
                       menu_content_type: menu_content_type,
                       content_aspect_ratio: ratio,
                       image_border_radius: image_border_radius,
-                      list_items_array: list_items
+                      list_items_array: final_items_array
                     %}
                   </div>
                 </div>
@@ -716,6 +746,10 @@
         {
           "value": "0.875rem",
           "label": "14px"
+        },
+        {
+          "value": "0.9375rem",
+          "label": "15px"
         },
         {
           "value": "1rem",

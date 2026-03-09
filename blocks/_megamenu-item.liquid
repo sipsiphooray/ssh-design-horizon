@@ -81,29 +81,28 @@
         layout-panel-flex--column
         mobile-column" 
         style="
-            --flex-direction: column; --flex-wrap: nowrap; --flex-wrap-mobile: wrap; --gap: 8px;
+            --flex-direction: column; --flex-wrap: nowrap; --flex-wrap-mobile: wrap; --gap: 16px;
             --horizontal-alignment: flex-start;
             --vertical-alignment: flex-start;
             --vertical-alignment-mobile: flex-start;
         "
         >
-            
-            <div class="image-block-wrapper {% if block_settings.zoom_on_hover == true %}zoom-on-hover{% endif %}">
-                {% if block_settings.image != blank %}
-                    {{
-                    block_settings.image
-                    | image_url: width: 3840
-                    | image_tag:
-                        width: block_settings.image.width,
-                        widths: widths,
-                        height: block_settings.image.height,
-                        class: 'image-block__image border-style',
-                        style: image_border_style,
-                        sizes: sizes,
-                        alt: shop.name
-                    }}
-                {% endif %}
-            </div>
+            {% if block_settings.image != blank %}
+              <div class="image-block-wrapper {% if block_settings.zoom_on_hover == true %}zoom-on-hover{% endif %}">
+                      {{
+                      block_settings.image
+                      | image_url: width: 3840
+                      | image_tag:
+                          width: block_settings.image.width,
+                          widths: widths,
+                          height: block_settings.image.height,
+                          class: 'image-block__image border-style',
+                          style: image_border_style,
+                          sizes: sizes,
+                          alt: shop.name
+                      }}
+              </div>
+            {% endif %}
 
             {% if block_settings.text != blank %}
                 {% assign text = block_settings.text %}
@@ -117,6 +116,10 @@
             position: relative;
             aspect-ratio: var(--ratio);
             overflow: hidden;
+        }
+
+        .megamenu-block-item .image-block-wrapper {
+          width: 100%;
         }
 
         placeholder-image img {
@@ -142,35 +145,12 @@
         }
 
         .blocks-drawer-items .megamenu-block-item {
-            padding: var(--padding-2xs) var(--padding-sm) !important;
-            background: #F7F5F4;
-            width: 100%;
+          width: 100%;
         }
 
         .blocks-drawer-items .menu-drawer__list-item {
             > div {
                 width: 100%;
-            }
-        }
-
-        @media (max-width: 749px) {
-            .blocks-drawer-items .megamenu-block-item .group-block-content {
-                flex-flow: row nowrap !important;
-                align-items: center !important;
-                --gap: 12px !important;
-
-
-                .image-block-wrapper {
-                  width: 8rem;
-                }
-
-                .image-block__image {
-                    --ratio: 1 !important;
-                }
-
-                .text-block {
-                    --text-align: left !important;
-                }
             }
         }
     {% endstylesheet %}
@@ -180,7 +160,7 @@
 
 {% schema %}
 {
-  "name": "Megamenu item",
+  "name": "Megamenu card",
   "tag": null,
   "settings": [
     {
@@ -609,7 +589,10 @@
   ],
   "presets": [
     {
-      "name": "Megamenu item"
+      "name": "Megamenu card",
+      "settings": {
+        "text": "<h3>LOREM IPSUM</h3>"
+      }
     }
   ]
 }

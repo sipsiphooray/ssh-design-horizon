@@ -52,7 +52,8 @@
         "item_74XFCd"
       ],
       "custom_css": [
-        ".custom-section-background {display: none;}"
+        ".custom-section-background {display: none;}",
+        ".custom-section-content {background: linear-gradient( var(--overlay-direction), var(--overlay-color) 3%, var(--overlay-color--end) 55% );}"
       ],
       "name": "Scroll navigation",
       "settings": {
@@ -350,10 +351,27 @@
             "open_in_new_tab": false
           },
           "blocks": {}
+        },
+        "icon_LCBd8t": {
+          "type": "icon",
+          "name": "t:names.icon",
+          "settings": {
+            "icon": "price_tag",
+            "image_upload": "shopify://shop_images/shark_tank.svg",
+            "width": 24,
+            "use_height": true,
+            "height": 28,
+            "custom_mobile_height": false,
+            "mobile-height": 24,
+            "link": "",
+            "open_in_new_tab": false
+          },
+          "blocks": {}
         }
       },
       "block_order": [
-        "icon_iXDNQM"
+        "icon_iXDNQM",
+        "icon_LCBd8t"
       ],
       "name": "t:names.marquee_section",
       "settings": {
@@ -518,9 +536,9 @@
           "name": "t:names.header",
           "static": true,
           "settings": {
-            "content_direction": "column",
+            "content_direction": "row",
             "vertical_on_mobile": false,
-            "horizontal_alignment": "center",
+            "horizontal_alignment": "space-between",
             "vertical_alignment": "center",
             "align_baseline": true,
             "horizontal_alignment_flex_direction_column": "center",
@@ -575,44 +593,24 @@
               },
               "blocks": {}
             },
-            "text_FcWLz8": {
-              "type": "text",
-              "name": "t:names.text",
-              "disabled": true,
+            "product_list_button_3pigbH": {
+              "type": "_product-list-button",
+              "name": "t:names.product_list_button",
               "settings": {
-                "text": "<p>Our most-loved picks, chosen by customers for their style, quality, and everyday appeal.</p>",
-                "width": "100%",
-                "max_width": "normal",
-                "alignment": "center",
-                "type_preset": "rte",
-                "font": "var(--font-body--family)",
-                "font_size": "1rem",
-                "enable_mobile_size": false,
-                "mobile_font_size": "1rem",
-                "line_height": "normal",
-                "letter_spacing": "normal",
-                "case": "none",
-                "wrap": "pretty",
-                "color": "var(--color-foreground)",
-                "background": false,
-                "background_color": "#00000026",
-                "corner_radius": 0,
-                "padding-block-start": 0,
-                "padding-block-end": 0,
-                "padding-inline-start": 0,
-                "padding-inline-end": 0,
-                "custom_mobile_padding": false,
-                "mobile-padding-block-start": 0,
-                "mobile-padding-block-end": 0,
-                "mobile-padding-inline-start": 0,
-                "mobile-padding-inline-end": 0
+                "label": "View all",
+                "open_in_new_tab": false,
+                "style_class": "link",
+                "width": "fit-content",
+                "custom_width": 100,
+                "width_mobile": "fit-content",
+                "custom_width_mobile": 100
               },
               "blocks": {}
             }
           },
           "block_order": [
             "product_list_text_YFtzcL",
-            "text_FcWLz8"
+            "product_list_button_3pigbH"
           ]
         },
         "static-product-card": {
@@ -787,9 +785,9 @@
           "name": "t:names.header",
           "static": true,
           "settings": {
-            "content_direction": "column",
+            "content_direction": "row",
             "vertical_on_mobile": false,
-            "horizontal_alignment": "center",
+            "horizontal_alignment": "space-between",
             "vertical_alignment": "center",
             "align_baseline": true,
             "horizontal_alignment_flex_direction_column": "center",
@@ -844,6 +842,20 @@
               },
               "blocks": {}
             },
+            "product_list_button_9pLUL4": {
+              "type": "_product-list-button",
+              "name": "t:names.product_list_button",
+              "settings": {
+                "label": "View all",
+                "open_in_new_tab": false,
+                "style_class": "link",
+                "width": "fit-content",
+                "custom_width": 100,
+                "width_mobile": "fit-content",
+                "custom_width_mobile": 100
+              },
+              "blocks": {}
+            },
             "text_bpji8T": {
               "type": "text",
               "name": "t:names.text",
@@ -881,6 +893,7 @@
           },
           "block_order": [
             "product_list_text_iKEr3b",
+            "product_list_button_9pLUL4",
             "text_bpji8T"
           ]
         },
@@ -1096,7 +1109,7 @@
               "type": "group",
               "name": "Apply link to this parent",
               "settings": {
-                "link": "#",
+                "link": "shopify://collections/st-patricks-day",
                 "open_in_new_tab": false,
                 "content_direction": "column",
                 "vertical_on_mobile": true,
@@ -1104,7 +1117,7 @@
                 "horizontal_alignment": "flex-start",
                 "vertical_alignment": "center",
                 "align_baseline": false,
-                "horizontal_alignment_flex_direction_column": "center",
+                "horizontal_alignment_flex_direction_column": "flex-start",
                 "custom_mobile_alignment": false,
                 "mobile_vertical_alignment": "flex-start",
                 "vertical_alignment_flex_direction_column": "center",
@@ -1265,7 +1278,7 @@
                 "horizontal_alignment": "flex-start",
                 "vertical_alignment": "center",
                 "align_baseline": false,
-                "horizontal_alignment_flex_direction_column": "center",
+                "horizontal_alignment_flex_direction_column": "flex-start",
                 "custom_mobile_alignment": false,
                 "mobile_vertical_alignment": "flex-start",
                 "vertical_alignment_flex_direction_column": "center",
@@ -1426,7 +1439,7 @@
                 "horizontal_alignment": "flex-start",
                 "vertical_alignment": "center",
                 "align_baseline": false,
-                "horizontal_alignment_flex_direction_column": "center",
+                "horizontal_alignment_flex_direction_column": "flex-start",
                 "custom_mobile_alignment": false,
                 "mobile_vertical_alignment": "flex-start",
                 "vertical_alignment_flex_direction_column": "center",
@@ -1587,7 +1600,7 @@
                 "horizontal_alignment": "flex-start",
                 "vertical_alignment": "center",
                 "align_baseline": false,
-                "horizontal_alignment_flex_direction_column": "center",
+                "horizontal_alignment_flex_direction_column": "flex-start",
                 "custom_mobile_alignment": false,
                 "mobile_vertical_alignment": "flex-start",
                 "vertical_alignment_flex_direction_column": "center",

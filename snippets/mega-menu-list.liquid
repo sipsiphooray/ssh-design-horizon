@@ -10,7 +10,7 @@
   @param {number} [content_aspect_ratio] - Aspect ratio for content images.
   @param {number} [image_border_radius] - Border radius for content images.
   @param {object} [section] - The section object.
-  @param {object} [list_items_array] - The megamenu items.
+  @param {object} list_items_array - The megamenu items.
 
   @example
   {% render 'mega-menu-list', parent_link: link, id: 'MegaMenuList-1', grid_columns_count: 6, menu_content_type: 'featured_products' %}
@@ -245,6 +245,46 @@
     assign max_featured_collections_tablet = 1
     assign max_menu_columns_tablet = max_menu_columns_tablet | minus: max_collection_columns_tablet
   endif
+
+  if menu_content_type == 'mega_blocks'
+    # desktop breakpoint
+    assign min_featured_block_columns = 1 | times: 2
+    assign temp_column_count = column_count | plus: min_featured_block_columns
+
+    if temp_column_count > max_menu_columns
+      assign max_block_columns = 2
+    else
+      assign max_block_columns = max_menu_columns | minus: column_count
+    endif
+
+    if column_count > 0
+      if list_items_array.size == 1
+        if parent_link.links == blank
+          assign max_featured_blocks = 5
+        else
+          assign max_featured_blocks = 1
+        endif
+      else
+        if parent_link.links == blank
+          assign max_featured_blocks = 5
+        else
+          assign max_featured_blocks = max_block_columns
+        endif
+      endif
+    else
+      if parent_link.links == blank
+        assign max_featured_blocks = 5
+      else
+        assign max_featured_blocks = list_items_array.size
+      endif
+    endif
+    assign max_menu_columns = max_menu_columns | minus: max_block_columns
+
+    # tablet breakpoint
+    assign max_block_columns_tablet = 2
+    assign max_featured_blocks_tablet = 1
+    assign max_menu_columns_tablet = max_menu_columns_tablet | minus: max_block_columns_tablet
+  endif
 %}
 
 {% style %}
@@ -339,6 +379,22 @@
               image_aspect_ratio: content_aspect_ratio,
               image_sizes: image_sizes
             %}
+          </li>
+        {% endfor %}
+      </ul>
+    </span>
+  {% when 'mega_blocks' %}
+    <span
+      class="mega-menu__content"
+      style="--menu-content-columns-desktop: {{ max_block_columns }}; --menu-content-columns-tablet: {{ max_block_columns_tablet }}; --resource-card-corner-radius: {{ image_border_radius }}px;"
+    >
+      <ul
+        class="mega-menu__content-list mega-menu__content-list--blocks list-unstyled"
+        style="--menu-content-columns-desktop: {{ max_featured_blocks }}; --menu-content-columns-tablet: {{ max_featured_blocks_tablet }};"
+      >
+        {% for item in list_items_array %}
+          <li class="mega-menu__content-list-item">
+            {{ item }}
           </li>
         {% endfor %}
       </ul>
