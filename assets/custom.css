@@ -197,6 +197,10 @@ summary,.menu-drawer__back-button {
     justify-content: flex-start;
 }
 
+.header__row[style*="--border-bottom-width: 0px"] .menu-list__submenu.color-scheme-matches-parent, .header__row[style*="--border-bottom-width: 0px"] .overflow-menu.color-scheme-matches-parent::part(overflow) {
+    --submenu-padding-block-start: var(--padding-3xl) !important;
+}
+
 @media screen and (min-width: 60em) {
     :root {
         --section-height-large: 90svh !important;
