@@ -49,13 +49,13 @@ a.size-style.link:after {
   --page-width: calc(78rem + (var(--page-margin) * 2)) !important;
 }
 
-.menu-list__link:hover,.mega-menu__link:hover {
+.menu-list__link:hover,.mega-menu__link:not(.mega-menu__link--parent):hover {
     text-decoration: underline;
     text-underline-offset: 5px;
 }
 
 .mega-menu__link--parent {
-    margin-bottom: var(--gap-xs);
+    margin-bottom: var(--gap-sm);
 }
 
 .button {
