@@ -71,6 +71,8 @@
       assign menu_content_type = 'text'
     endif
   endif
+
+  assign megamenu_thumbnails = shop.metaobjects['megamenu_thumbnails'].values
 %}
 <ul
   data-menu-list-id="{{ id }}"
@@ -144,6 +146,14 @@
           {% endif %}
         >
           {% for childLink in link.links %}
+            {% assign thumbnail = megamenu_thumbnails | where: 'assigned_to', childLink.title %}
+            {% liquid
+              assign media_width_desktop = '100vw'
+              assign media_width_mobile = '100vw'
+              assign sizes = 'auto, (min-width: 750px) ' | append: media_width_desktop | append: ', ' | append: media_width_mobile
+              assign widths = '240, 352, 832, 1200, 1600, 1920, 2560, 3840'
+            %}
+
             {% assign break_after_modulo = forloop.index | modulo: links_before_wrap %}
             <li
               {% if break_after_modulo == 0 and should_break_columns %}
@@ -152,8 +162,23 @@
             >
               <a
                 href="{{ childLink.url }}"
-                class="mega-menu__link"
+                class="mega-menu__link {% if thumbnail != blank %}link-menu-thumbnail{% endif %}"
+                {% if thumbnail.card_image != blank %}data-card-image="{{ thumbnail[0].card_image | image_url: width: 500 }}"{% endif %}
               >
+                {% if thumbnail[0].thumbnail_image != blank %}
+                  <span class="image-thumbnail-link">
+                      {{
+                      thumbnail[0].thumbnail_image
+                      | image_url: width: 89
+                      | image_tag:
+                          width: thumbnail[0].thumbnail_image.width,
+                          widths: widths,
+                          height: thumbnail[0].thumbnail_image.height,
+                          class: 'thubnail-block__image',
+                          sizes: sizes
+                      }}
+                  </span>
+                {% endif %}
                 <span class="wrap-text">{{- childLink.title -}}</span>
               </a>
             </li>
