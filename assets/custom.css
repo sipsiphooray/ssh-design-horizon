@@ -185,6 +185,12 @@ summary,.menu-drawer__back-button {
     object-fit: contain;
 }
 
+.thumbnail-block__image[style*="--bgcolor"] {
+    background: var(--bgcolor);
+    border-radius: 50%;
+    border: 1px solid currentColor;
+}
+
 @media screen and (min-width: 60em) {
     :root {
         --section-height-large: 90svh !important;

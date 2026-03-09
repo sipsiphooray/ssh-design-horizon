@@ -165,7 +165,11 @@
                 class="mega-menu__link {% if thumbnail != blank %}link-menu-thumbnail{% endif %}"
                 {% if thumbnail.card_image != blank %}data-card-image="{{ thumbnail[0].card_image | image_url: width: 500 }}"{% endif %}
               >
-                {% if thumbnail[0].thumbnail_image != blank %}
+                {% if thumbnail[0].thumbnail_color != blank %}
+                  <span class="image-thumbnail-link">
+                    <span class="thumbnail-block__image"></span>
+                  </span>
+                {% elsif thumbnail[0].thumbnail_image != blank %}
                   <span class="image-thumbnail-link">
                       {{
                       thumbnail[0].thumbnail_image
@@ -174,7 +178,7 @@
                           width: thumbnail[0].thumbnail_image.width,
                           widths: widths,
                           height: thumbnail[0].thumbnail_image.height,
-                          class: 'thubnail-block__image',
+                          class: 'thumbnail-block__image',
                           sizes: sizes
                       }}
                   </span>
