@@ -163,7 +163,7 @@
               <a
                 href="{{ childLink.url }}"
                 class="mega-menu__link {% if thumbnail[0] != blank %}link-menu-thumbnail{% endif %}"
-                {% if thumbnail.card_image != blank %}data-card-image="{{ thumbnail[0].card_image | image_url: width: 500 }}"{% endif %}
+                {% if thumbnail[0].card_image != blank %}data-card-image="{{ thumbnail[0].card_image | image_url: width: 300 }}"{% endif %}
               >
                 {% if thumbnail[0].thumbnail_color != blank %}
                   <span class="image-thumbnail-link">
@@ -332,8 +332,13 @@
       --menu-columns-desktop: {{ grid_columns_count_collection_images }};
       --menu-columns-tablet: {{ max_menu_columns_tablet }};
     {% else %}
-      --menu-columns-desktop: {{ max_menu_columns }};
-      --menu-columns-tablet: {{ max_menu_columns_tablet }};
+      {% if thumbnail.size > 0 %}
+        --menu-columns-desktop: {{ max_menu_columns | minus: 2 }};
+        --menu-columns-tablet: {{ max_menu_columns_tablet | minus: 2 }};
+      {% else %}
+        --menu-columns-desktop: {{ max_menu_columns }};
+        --menu-columns-tablet: {{ max_menu_columns_tablet }};
+      {% endif %}
     {% endif %}
   }
 {% endstyle %}
@@ -428,4 +433,13 @@
         {% endfor %}
       </ul>
     </span>
+  {% else %}
+    {% if thumbnail.size > 0 %}
+    <span
+      class="mega-thumbnail-hover mega-menu__content"
+      style="--menu-content-columns-desktop: 2; --menu-content-columns-tablet: 1; --resource-card-corner-radius: {{ image_border_radius }}px;"
+    >
+      <div class="thumbnail-hover-canvas"></div>
+    </span>
+    {% endif %}
 {% endcase %}

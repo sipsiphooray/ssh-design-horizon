@@ -28,3 +28,37 @@ scrollToHash();
 
 // Run on hash change
 window.addEventListener("hashchange", scrollToHash);
+
+
+// Set initial thumbnail from first [data-card-image] in each mega menu
+document.querySelectorAll('.mega-menu').forEach(menu => {
+  const firstImage = menu.querySelector('[data-card-image]');
+  const canvas = menu.querySelector('.thumbnail-hover-canvas');
+  if (firstImage && canvas) {
+    canvas.style.backgroundImage = `url('${firstImage.dataset.cardImage}')`;
+  }
+});
+
+// Handle hover updates
+document.addEventListener('mouseover', e => {
+  const card = e.target.closest('[data-card-image]');
+  if (!card) return;
+  
+  const menu = card.closest('.mega-menu');
+  const canvas = menu?.querySelector('.thumbnail-hover-canvas');
+  if (canvas) {
+    canvas.style.backgroundImage = `url('${card.dataset.cardImage}')`;
+  }
+});
+
+// Reset to first image when leaving mega menu
+document.addEventListener('mouseout', e => {
+  const menu = e.target.closest('.mega-menu');
+  if (!menu || menu.contains(e.relatedTarget)) return;
+  
+  const firstImage = menu.querySelector('[data-card-image]');
+  const canvas = menu.querySelector('.thumbnail-hover-canvas');
+  if (firstImage && canvas) {
+    canvas.style.backgroundImage = `url('${firstImage.dataset.cardImage}')`;
+  }
+});

@@ -210,6 +210,17 @@ summary,.menu-drawer__back-button {
     --submenu-animation-speed: 0s !important;
 }
 
+.thumbnail-hover-canvas {
+    display: block;
+    max-width: 332px;
+    height: 100%;
+    background-size: contain;
+    background-position: center;
+    background-repeat: no-repeat;
+    transition: all var(--animation-speed) var(--animation-easing);
+    width: 100%;
+}
+
 @media screen and (min-width: 60em) {
     :root {
         --section-height-large: 90svh !important;
