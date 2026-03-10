@@ -285,7 +285,7 @@ summary,.menu-drawer__back-button {
         border-radius: var(--mobile-border-radius) !important;
     }
 
-    .mobile-column[style*="--horizontal-mobile-alignment"], {
+    .mobile-column[style*="--horizontal-mobile-alignment"] {
         align-items: var(--horizontal-mobile-alignment) !important;
     }
 
