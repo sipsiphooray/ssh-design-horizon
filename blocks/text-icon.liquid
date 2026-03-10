@@ -42,7 +42,7 @@
       {% if request.design_mode %}group-block-content--design-mode{% endif %}
       layout-panel-flex
       layout-panel-flex--{{ block_settings.content_direction | default: 'column' }}
-      {% if block_settings.vertical_on_mobile %} mobile-column{% endif %}
+      {% if block_settings.vertical_on_mobile or block_settings.content_direction == 'column' %} mobile-column{% endif %}
     "
     style="{% render 'layout-panel-style', settings: block_settings %}
     {% unless block_settings.vertical_on_mobile == true %}
