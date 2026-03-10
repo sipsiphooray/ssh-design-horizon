@@ -204,6 +204,10 @@ summary,.menu-drawer__back-button {
 .mega-menu__link {
     padding: var(--padding-xs) 0 !important;
 }
+/* 
+.header__underlay-open {
+    --submenu-animation-speed: 0s !important;
+} */
 
 @media screen and (min-width: 60em) {
     :root {
