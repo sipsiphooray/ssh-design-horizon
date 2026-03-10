@@ -201,6 +201,10 @@ summary,.menu-drawer__back-button {
     --submenu-padding-block-start: var(--padding-3xl) !important;
 }
 
+.mega-menu__link {
+    padding: var(--padding-xs) 0 !important;
+}
+
 @media screen and (min-width: 60em) {
     :root {
         --section-height-large: 90svh !important;
