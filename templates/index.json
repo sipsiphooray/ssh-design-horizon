@@ -2823,8 +2823,8 @@
         "block_carousel_UXEG8W"
       ],
       "custom_css": [
-        ".section--page-width {--page-margin: 16px; --full-page-grid-central-column-width: min( 100% - var(--page-margin) * 2, calc(100% - var(--page-margin) * 2) );}",
         ".image-block__image {object-fit: contain;}",
+        "slideshow-arrows .slideshow-control {pointer-events: auto; opacity: 1;}",
         "@media (min-width: 750px) {.product-card-group {margin-top: -5rem; }}"
       ],
       "name": "Image with slider",
@@ -2856,9 +2856,9 @@
         "overlay_color": "#00000026",
         "overlay_style": "solid",
         "gradient_direction": "to top",
-        "padding-block-start": 16,
-        "padding-block-end": 0,
-        "custom_mobile_padding": false,
+        "padding-block-start": 42,
+        "padding-block-end": 32,
+        "custom_mobile_padding": true,
         "mobile-padding-block-start": 0,
         "mobile-padding-block-end": 0,
         "mobile-padding-inline-start": 0,
