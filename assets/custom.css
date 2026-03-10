@@ -21,6 +21,7 @@ slideshow-controls.carousel-controls .icon-play {
     --button-padding-block: 12px !important;
     --letter-spacing--heading-tight: -0.05em !important;
     --drawer-width: 100vw !important;
+    --submenu-animation-speed: 0s !important;
 }
 
 a.size-style.link {
@@ -204,10 +205,10 @@ summary,.menu-drawer__back-button {
 .mega-menu__link {
     padding: var(--padding-xs) 0 !important;
 }
-/* 
+
 .header__underlay-open {
     --submenu-animation-speed: 0s !important;
-} */
+}
 
 @media screen and (min-width: 60em) {
     :root {
