@@ -2151,7 +2151,7 @@
             "custom_mobile_alignment": false,
             "mobile_vertical_alignment": "flex-start",
             "vertical_alignment_flex_direction_column": "center",
-            "gap": 12,
+            "gap": 32,
             "enable_mobile_gap": false,
             "mobile_gap": 12,
             "width": "custom",
