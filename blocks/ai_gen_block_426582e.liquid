@@ -60,7 +60,7 @@
     .ai-icons-row__container-{{ ai_gen_id }} {
       display: grid;
       grid-template-columns: repeat({{ block.settings.mobile_columns }}, 1fr);
-      column-gap: {{ block.settings.mobile_row_gap }}px {{ block.settings.mobile_column_gap }}px;
+      column-gap: {{ block.settings.mobile_row_gap }}px ;
       row-gap: {{ block.settings.mobile_row_gap }}px;
     }
 
@@ -289,16 +289,6 @@
       "step": 4,
       "unit": "px",
       "default": 24
-    },
-    {
-      "type": "range",
-      "id": "mobile_row_gap",
-      "label": "Mobile row gap",
-      "min": 0,
-      "max": 50,
-      "step": 5,
-      "unit": "px",
-      "default": 20
     },
     {
       "type": "range",
