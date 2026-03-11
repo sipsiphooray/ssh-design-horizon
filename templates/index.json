@@ -2177,12 +2177,12 @@
             "overlay_color": "#00000026",
             "overlay_style": "solid",
             "gradient_direction": "to top",
-            "padding-block-start": 24,
-            "padding-block-end": 24,
-            "padding-inline-start": 24,
-            "padding-inline-end": 24,
+            "padding-block-start": 0,
+            "padding-block-end": 0,
+            "padding-inline-start": 0,
+            "padding-inline-end": 0,
             "custom_mobile_padding": false,
-            "mobile-padding-block-start": 24,
+            "mobile-padding-block-start": 0,
             "mobile-padding-block-end": 0,
             "mobile-padding-inline-start": 0,
             "mobile-padding-inline-end": 0,
@@ -2193,7 +2193,7 @@
               "type": "block-carousel",
               "name": "Block Carousel",
               "settings": {
-                "background_media": "none",
+                "background_media": "image",
                 "video_position": "cover",
                 "background_image": "shopify://shop_images/image_1_1772761922839.png",
                 "background_image_position": "cover",
@@ -2282,8 +2282,8 @@
                             "border_radius": 0,
                             "padding-block-start": 0,
                             "padding-block-end": 0,
-                            "padding-inline-start": 16,
-                            "padding-inline-end": 16
+                            "padding-inline-start": 0,
+                            "padding-inline-end": 0
                           },
                           "blocks": {
                             "image_X4tJp7": {
@@ -2485,8 +2485,8 @@
                             "border_radius": 0,
                             "padding-block-start": 0,
                             "padding-block-end": 0,
-                            "padding-inline-start": 16,
-                            "padding-inline-end": 16
+                            "padding-inline-start": 0,
+                            "padding-inline-end": 0
                           },
                           "blocks": {
                             "image_8hahGz": {
@@ -2688,8 +2688,8 @@
                             "border_radius": 0,
                             "padding-block-start": 0,
                             "padding-block-end": 0,
-                            "padding-inline-start": 16,
-                            "padding-inline-end": 16
+                            "padding-inline-start": 0,
+                            "padding-inline-end": 0
                           },
                           "blocks": {
                             "image_ViDQVQ": {
@@ -2915,7 +2915,7 @@
         "vertical_on_mobile": true,
         "reverse_on_mobile": false,
         "horizontal_alignment": "flex-start",
-        "vertical_alignment": "center",
+        "vertical_alignment": "flex-start",
         "align_baseline": false,
         "horizontal_alignment_flex_direction_column": "flex-start",
         "vertical_alignment_flex_direction_column": "center",
@@ -3090,7 +3090,7 @@
         "padding-block-start": 42,
         "padding-block-end": 80,
         "custom_mobile_padding": true,
-        "mobile-padding-block-start": 32,
+        "mobile-padding-block-start": 42,
         "mobile-padding-block-end": 52,
         "mobile-padding-inline-start": 0,
         "mobile-padding-inline-end": 0,
