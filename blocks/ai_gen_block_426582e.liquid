@@ -26,7 +26,8 @@
   .ai-icons-row__container-{{ ai_gen_id }} {
     display: flex;
     flex-wrap: wrap;
-    gap: {{ block.settings.column_gap }}px;
+    column-gap: {{ block.settings.column_gap }}px;
+    row-gap: {{ block.settings.row_gap }}px;
     justify-content: {{ block.settings.alignment }};
     align-items: flex-start;
   }
@@ -59,7 +60,8 @@
     .ai-icons-row__container-{{ ai_gen_id }} {
       display: grid;
       grid-template-columns: repeat({{ block.settings.mobile_columns }}, 1fr);
-      gap: {{ block.settings.mobile_row_gap }}px {{ block.settings.mobile_column_gap }}px;
+      column-gap: {{ block.settings.mobile_row_gap }}px {{ block.settings.mobile_column_gap }}px;
+      row-gap: {{ block.settings.mobile_row_gap }}px;
     }
 
     .ai-icons-row__icon-{{ ai_gen_id }} img {
@@ -222,6 +224,16 @@
     },
     {
       "type": "range",
+      "id": "row_gap",
+      "label": "Desktop row gap",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "unit": "px",
+      "default": 12
+    },
+    {
+      "type": "range",
       "id": "icon_size",
       "label": "Desktop icon height",
       "min": 16,
@@ -297,6 +309,16 @@
       "step": 5,
       "unit": "px",
       "default": 15
+    },
+    {
+      "type": "range",
+      "id": "mobile_row_gap",
+      "label": "Mobile row gap",
+      "min": 0,
+      "max": 50,
+      "step": 5,
+      "unit": "px",
+      "default": 12
     },
     {
       "type": "checkbox",
