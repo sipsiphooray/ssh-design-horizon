@@ -2863,13 +2863,13 @@
             "content_direction": "row",
             "vertical_on_mobile": false,
             "horizontal_alignment": "space-between",
-            "vertical_alignment": "flex-end",
+            "vertical_alignment": "flex-start",
             "align_baseline": true,
             "horizontal_alignment_flex_direction_column": "flex-start",
             "custom_mobile_alignment": false,
             "mobile_vertical_alignment": "flex-start",
             "vertical_alignment_flex_direction_column": "flex-start",
-            "gap": 12,
+            "gap": 32,
             "width": "fill",
             "custom_width": 100,
             "width_mobile": "fill",
@@ -2931,10 +2931,44 @@
                 "mobile-padding-inline-end": 0
               },
               "blocks": {}
+            },
+            "text_CENwdG": {
+              "type": "text",
+              "name": "t:names.text",
+              "settings": {
+                "text": "<p>At <strong>Sip-Sip Hooray®</strong>, we also know that looking cute and trendy doesn't have to break the bank. We take pride in affordability and we launch fresh collections every month to keep your style on point. Not to mention, you’ll love our customer service just as much as you love our designs! We’re here for you seven days a week, and all orders ship within three business days. So go ahead, treat yourself to a cup (or two).</p>",
+                "width": "100%",
+                "max_width": "none",
+                "alignment": "left",
+                "type_preset": "rte",
+                "font": "var(--font-body--family)",
+                "font_size": "1rem",
+                "enable_mobile_size": false,
+                "mobile_font_size": "1rem",
+                "line_height": "normal",
+                "letter_spacing": "normal",
+                "case": "none",
+                "wrap": "pretty",
+                "color": "var(--color-foreground)",
+                "background": false,
+                "background_color": "#00000026",
+                "corner_radius": 0,
+                "padding-block-start": 0,
+                "padding-block-end": 0,
+                "padding-inline-start": 0,
+                "padding-inline-end": 0,
+                "custom_mobile_padding": false,
+                "mobile-padding-block-start": 0,
+                "mobile-padding-block-end": 0,
+                "mobile-padding-inline-start": 0,
+                "mobile-padding-inline-end": 0
+              },
+              "blocks": {}
             }
           },
           "block_order": [
-            "moving_line_text_DjtaKU"
+            "moving_line_text_DjtaKU",
+            "text_CENwdG"
           ]
         }
       },
