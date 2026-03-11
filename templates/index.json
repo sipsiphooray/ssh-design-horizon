@@ -2170,7 +2170,7 @@
                 "icons_shape": "circle",
                 "inherit_color_scheme": false,
                 "color_scheme": "scheme-58084d4c-a86e-4d0a-855e-a0966e5043f7",
-                "height": "fit",
+                "height": "fill",
                 "position": "top",
                 "border": "none",
                 "border_width": 1,
