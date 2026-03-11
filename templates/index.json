@@ -2210,7 +2210,14 @@
                 "height": "fill",
                 "custom_height": 100,
                 "padding-block-start": 12,
-                "padding-block-end": 12
+                "padding-block-end": 12,
+                "padding-inline-start": 0,
+                "padding-inline-end": 0,
+                "custom_mobile_padding": true,
+                "mobile-padding-block-start": 24,
+                "mobile-padding-block-end": 24,
+                "mobile-padding-inline-start": 24,
+                "mobile-padding-inline-end": 24
               },
               "blocks": {
                 "static-carousel-content": {
