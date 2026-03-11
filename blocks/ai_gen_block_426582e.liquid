@@ -35,7 +35,7 @@
   .ai-icons-row__item-{{ ai_gen_id }} {
     display: flex;
     align-items: center;
-    gap: 12px;
+    gap: {{ block.settings.icon_gap }}px;
   }
 
   .ai-icons-row__icon-{{ ai_gen_id }} {
@@ -218,6 +218,16 @@
         { "value": "center", "label": "Center" },
         { "value": "flex-end", "label": "Right" }
       ]
+    },
+    {
+      "type": "range",
+      "id": "icon_gap",
+      "label": "Icon gap",
+      "min": 0,
+      "max": 60,
+      "step": 1,
+      "unit": "px",
+      "default": 8
     },
     {
       "type": "range",

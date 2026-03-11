@@ -236,6 +236,9 @@
           ]
         }
       },
+      "custom_css": [
+        ".cart-bubble__background {background: #f0dfe7;}"
+      ],
       "settings": {
         "logo_position": "left",
         "menu_position": "center",
