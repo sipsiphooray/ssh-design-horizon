@@ -27,7 +27,7 @@
     display: flex;
     flex-wrap: wrap;
     gap: {{ block.settings.column_gap }}px;
-    justify-content: flex-start;
+    justify-content: {{ block.settings.alignment }};
     align-items: flex-start;
   }
 
@@ -198,6 +198,17 @@
     {
       "type": "header",
       "content": "Layout"
+    },
+    {
+      "type": "select",
+      "id": "alignment",
+      "label": "Alignment",
+      "default": "flex-start",
+      "options": [
+        { "value": "flex-start", "label": "Left" },
+        { "value": "center", "label": "center" },
+        { "value": "flex-end", "label": "Right" }
+      ]
     },
     {
       "type": "range",
