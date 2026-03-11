@@ -2821,7 +2821,7 @@
         "align_baseline": false,
         "horizontal_alignment_flex_direction_column": "flex-start",
         "vertical_alignment_flex_direction_column": "center",
-        "gap": 16,
+        "gap": 37,
         "enable_mobile_gap": false,
         "mobile_gap": 12,
         "section_width": "page-width",
