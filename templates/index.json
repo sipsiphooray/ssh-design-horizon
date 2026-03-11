@@ -2865,13 +2865,13 @@
             "ai_gen_block_426582e_WVTHV9": {
               "type": "ai_gen_block_426582e",
               "settings": {
-                "icon_1": "shopify://shop_images/check.svg",
+                "icon_1": "shopify://shop_images/starburst-four-point-icon.svg",
                 "text_1": "<p>Easy to <br/>Grab</p>",
-                "icon_2": "shopify://shop_images/check.svg",
+                "icon_2": "shopify://shop_images/starburst-four-point-icon.svg",
                 "text_2": "<p>Press-in <br/>Lid</p>",
-                "icon_3": "shopify://shop_images/check.svg",
+                "icon_3": "shopify://shop_images/starburst-four-point-icon.svg",
                 "text_3": "<p>Fits <br/>Cupholders</p>",
-                "icon_4": "shopify://shop_images/check.svg",
+                "icon_4": "shopify://shop_images/starburst-four-point-icon.svg",
                 "text_4": "<p>Temperature <br/>Lock</p>",
                 "alignment": "center",
                 "icon_gap": 8,
