@@ -2889,7 +2889,7 @@
                 "enable_padding_inline_mobile": false,
                 "mobile_padding_left": 16,
                 "mobile_padding_right": 16,
-                "show_border_top": true,
+                "show_border_top": false,
                 "show_border_bottom": false,
                 "border_width": 1,
                 "border_color": "#2b2b2b",
