@@ -2928,7 +2928,7 @@
               "type": "moving-line-text",
               "name": "Moving line text",
               "settings": {
-                "text": "<h2><em>giving</em> back, one <br/>sip at a time</h2>",
+                "text": "<p>& as always, made with<em> love</em>.</p>",
                 "line_vector": "shopify://shop_images/pink-curve.png",
                 "height": 24,
                 "mobile_height": 16,
