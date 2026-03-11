@@ -2884,7 +2884,7 @@
                 "mobile_column_gap": 10,
                 "mobile_row_gap": 12,
                 "mobile_column_layout": false,
-                "padding_top": 20,
+                "padding_top": 0,
                 "padding_bottom": 0,
                 "enable_padding_inline_mobile": false,
                 "mobile_padding_left": 16,
