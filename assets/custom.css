@@ -259,7 +259,7 @@ summary,.menu-drawer__back-button {
     padding: var(--padding-xs) 0 !important;
 }
 
-.menu-drawer__list-item:has(.megamenu-block-item) {
+.menu-drawer__list-item:has( > .megamenu-block-item) {
     padding-bottom: var(--padding-2xl);
 }
 
