@@ -3638,7 +3638,7 @@
               "type": "moving-line-text",
               "name": "Moving line text",
               "settings": {
-                "text": "<h2>& as always, <br/>made with <em>love.</em></h2>",
+                "text": "<h2>& as always,  made with <em>love.</em></h2>",
                 "line_vector": "shopify://shop_images/pink-curve.png",
                 "height": 18,
                 "mobile_height": 16,
