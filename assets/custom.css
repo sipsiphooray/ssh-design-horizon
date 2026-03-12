@@ -124,6 +124,9 @@ summary,.menu-drawer__back-button {
     animation: unset !important;
 }
 
+.menu-drawer, details[open]>.menu-drawer__submenu {
+    transition: unset !important;
+}
 
 .menu-drawer__featured-content-list-item:only-child {
     flex: 1 auto;
@@ -234,7 +237,27 @@ summary,.menu-drawer__back-button {
 .menu-list__link .icon-starburst {
     margin-left: calc(-1 * var(--gap-2xs));
 }
+.menu-drawer__navigation {
+    --menu-top-level-font-size: var(--menu-font-xl--size) !important;
+    --menu-child-font-size: var(--menu-font-md--size) !important;
+    --menu-parent-font-weight: 500 !important;
+}
+.menu-drawer__menu:not(.menu-drawer__menu--childlist) {
+    padding-block-start: var(--padding-xs) !important;
+}
 
+.menu-drawer__menu-item--parent {
+    padding-block-end: var(--padding-xs);
+    border-bottom: 1.5px solid var(--color-border);
+}
+
+.menu-drawer__menu-item--child {
+    padding: var(--padding-xs) 0 !important;
+}
+
+.menu-drawer__inner-submenu {
+    padding-bottom: 8rem;
+}
 
 @media screen and (min-width: 60em) {
     :root {
