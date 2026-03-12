@@ -263,7 +263,7 @@ summary,.menu-drawer__back-button {
     padding-bottom: var(--padding-2xl);
 }
 
-.menu-drawer__inner-submenu {
+.menu-drawer__inner-submenu, .menu-drawer__submenu {
     overflow-y: unset !important;
 }
 
