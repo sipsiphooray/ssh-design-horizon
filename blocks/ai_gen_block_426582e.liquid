@@ -99,7 +99,7 @@
       %}
 
       {% if image != blank or text != blank %}
-        <div class="ai-icons-row__item-{{ ai_gen_id }}">
+        <div class="ai-icons-row__item-{{ ai_gen_id }} ai-icons-row__item">
           {% if image != blank %}
             <div class="ai-icons-row__icon-{{ ai_gen_id }}">
               {% liquid
@@ -117,7 +117,7 @@
           {% endif %}
 
           {% if text != blank %}
-            <div class="ai-icons-row__text-{{ ai_gen_id }}">{{ text }}</div>
+            <div class="ai-icons-row__text-{{ ai_gen_id }} ai-icons-row__text">{{ text }}</div>
           {% endif %}
         </div>
       {% endif %}
@@ -253,9 +253,9 @@
       "type": "range",
       "id": "icon_size",
       "label": "Desktop icon height",
-      "min": 16,
+      "min": 5,
       "max": 100,
-      "step": 4,
+      "step": 1,
       "unit": "px",
       "default": 32
     },
@@ -301,9 +301,9 @@
       "type": "range",
       "id": "icon_size_mobile",
       "label": "Mobile icon height",
-      "min": 16,
+      "min": 5,
       "max": 80,
-      "step": 4,
+      "step": 1,
       "unit": "px",
       "default": 24
     },

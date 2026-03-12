@@ -221,6 +221,21 @@ summary,.menu-drawer__back-button {
     width: 100%;
 }
 
+.menu-list__link:has(.icon-starburst) {
+    flex-direction: row;
+    align-items: center;
+}
+
+.svg-wrapper.icon-starburst, .svg-wrapper.icon-starburst > svg {
+    width: var(--icon-size-2xs);
+    height: var(--icon-size-2xs);
+}
+
+.menu-list__link .icon-starburst {
+    margin-left: calc(-1 * var(--gap-2xs));
+}
+
+
 @media screen and (min-width: 60em) {
     :root {
         --section-height-large: 90svh !important;
