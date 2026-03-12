@@ -124,8 +124,12 @@ summary,.menu-drawer__back-button {
     animation: unset !important;
 }
 
-.menu-drawer, details[open]>.menu-drawer__submenu {
+/* .menu-drawer, details[open]>.menu-drawer__submenu {
     transition: unset !important;
+} */
+
+.menu-drawer {
+    overflow-x: hidden !important;
 }
 
 .menu-drawer__featured-content-list-item:only-child {
@@ -255,9 +259,6 @@ summary,.menu-drawer__back-button {
     padding: var(--padding-xs) 0 !important;
 }
 
-.menu-drawer__inner-submenu {
-    padding-bottom: 8rem;
-}
 
 @media screen and (min-width: 60em) {
     :root {
