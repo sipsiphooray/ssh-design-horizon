@@ -267,6 +267,10 @@ summary,.menu-drawer__back-button {
     overflow-y: unset !important;
 }
 
+.menu-drawer__menu--childlist .menu-drawer__list-item--flat:last-child {
+    margin-block-end: var(--margin-xl);
+}
+
 @media screen and (min-width: 60em) {
     :root {
         --section-height-large: 90svh !important;
