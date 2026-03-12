@@ -3242,7 +3242,7 @@
         "rows_gap": 8,
         "icons_style": "arrow",
         "icons_shape": "circle",
-        "section_width": "page-width",
+        "section_width": "page-narrow",
         "full_width_on_mobile": false,
         "gap": 12,
         "color_scheme": "",
