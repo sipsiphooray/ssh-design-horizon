@@ -263,6 +263,10 @@ summary,.menu-drawer__back-button {
     padding-bottom: var(--padding-2xl);
 }
 
+.menu-drawer__inner-submenu {
+    overflow-y: unset !important;
+}
+
 @media screen and (min-width: 60em) {
     :root {
         --section-height-large: 90svh !important;
