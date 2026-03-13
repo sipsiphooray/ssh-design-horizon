@@ -3718,6 +3718,7 @@
         "carousel_card_tkWM8P"
       ],
       "custom_css": [
+        ".resource-list {--mobile-card-size: fit-content !important;}",
         "@media screen and (min-width: 750px) {.resource-list--grid {--resource-list-columns: repeat(4, minmax(auto, max-content)) !important; }}"
       ],
       "name": "Grid Section",
