@@ -376,4 +376,8 @@ summary,.menu-drawer__back-button {
     .use-height-icon[style*="--mobile-height"] img, .use-height-icon[style*="--mobile-height"] svg {
         height: var(--mobile-height) !important;
     }
+
+    .product-badges__badge {
+        --badge-font-size: var(--font-size--2xs) !important;
+    }
 }

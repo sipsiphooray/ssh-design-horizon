@@ -9,6 +9,28 @@
         --badge-font-family: var(--font-{{ settings.badge_font_family }}--family); --badge-font-weight: var(--font-{{ settings.badge_font_family }}--weight); --badge-text-transform: {{ settings.badge_text_transform }};
       "
     >
+      {% if product.metafields.custom.product_badges.value != blank %}
+        {% for i in product.metafields.custom.product_badges.value %}
+          {% if i.label != blank %}
+            <div
+              class="
+                product-badges__badge product-badges__badge--rectangle
+                color-{{ settings.badge_sale_color_scheme }}
+              "
+                style="
+                  {% if i.badge_background_color != blank %}
+                    --color-background: {{ i.badge_background_color }};
+                  {% endif %}
+                  {% if i.badge_text_color != blank %}
+                    --color-foreground: {{ i.badge_text_color }};
+                  {% endif %}
+                "
+            >
+              {{ i.label }}
+            </div>
+          {% endif %}
+        {% endfor %}
+      {% endif %}
       {%- if product.available == false or product.compare_at_price > product.price -%}
         <div
           class="
