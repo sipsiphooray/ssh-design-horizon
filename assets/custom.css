@@ -271,6 +271,10 @@ summary,.menu-drawer__back-button {
     margin-block-end: var(--margin-xl);
 }
 
+.product-card .shopify-app-block:has([data-oke-star-rating]) {
+    margin-top: calc(-1 * var(--gap-2xs));
+}
+
 @media screen and (min-width: 60em) {
     :root {
         --section-height-large: 90svh !important;
