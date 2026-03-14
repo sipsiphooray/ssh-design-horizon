@@ -24,7 +24,12 @@
 <div class="section-background color-{{ section.settings.color_scheme }}"></div>
 <results-list
   class="section product-grid-container color-{{ section.settings.color_scheme }}"
-  style="--padding-block-start: {{ section.settings.padding-block-start }}px; --padding-block-end: {{ section.settings.padding-block-end }}px;"
+  style="--padding-block-start: {{ section.settings.padding-block-start }}px; --padding-block-end: {{ section.settings.padding-block-end }}px;
+    {% if section.settings.custom_mobile_padding == true %}
+      --mobile-padding-block-start: {{ section.settings.mobile-padding-block-start }}px;
+      --mobile-padding-block-end: {{ section.settings.mobile-padding-block-end }}px;
+    {% endif %}
+  "
   section-id="{{ section.id }}"
   infinite-scroll="{{ section.settings.enable_infinite_scroll }}"
 >
@@ -260,6 +265,34 @@
       "step": 1,
       "unit": "px",
       "default": 8
+    },
+    {
+      "type": "checkbox",
+      "id": "custom_mobile_padding",
+      "label": "Custom Mobile Padding",
+      "default": false
+    },
+    {
+      "type": "range",
+      "id": "mobile-padding-block-start",
+      "label": "t:settings.top",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "default": 0,
+      "visible_if": "{{ section.settings.custom_mobile_padding == true }}"
+    },
+    {
+      "type": "range",
+      "id": "mobile-padding-block-end",
+      "label": "t:settings.bottom",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "default": 0,
+      "visible_if": "{{ section.settings.custom_mobile_padding == true }}"
     }
   ],
   "presets": []

@@ -275,6 +275,20 @@ summary,.menu-drawer__back-button {
     margin-top: calc(-1 * var(--gap-2xs));
 }
 
+.facets__form .breadcrumbs {
+    align-self: center;
+}
+
+.hero-wrapper:has(svg.hero__media) + .section-wrapper:has(.breadcrumb-sec) {
+  display: none;
+}
+
+.size-available-text {
+    line-height: 1em;
+    font-size: var(--font-size--xs);
+    opacity:  var(--opacity-subdued-text);
+}
+
 @media screen and (min-width: 60em) {
     :root {
         --section-height-large: 90svh !important;
@@ -326,7 +340,7 @@ summary,.menu-drawer__back-button {
         flex-direction: column-reverse !important;
     }
 
-    .spacing-style[style*="--mobile-padding-block-start"] {
+    .spacing-style[style*="--mobile-padding-block-start"], [style*="--mobile-padding-block-start"] {
         padding-block: calc(var(--mobile-padding-block-start) + var(--section-top-offset, 0px)) var(--mobile-padding-block-end) !important;
     }
 

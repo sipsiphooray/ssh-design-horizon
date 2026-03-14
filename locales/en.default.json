@@ -206,6 +206,7 @@
     "price": "Price",
     "price_compare_at": "Compare at price",
     "price_from": "From {{ price }}",
+    "sizes_available": "{{ number }} cup sizes available",
     "price_regular": "Regular price",
     "price_sale": "Sale price",
     "price_filter_html": "The highest price is {{ price }}",
