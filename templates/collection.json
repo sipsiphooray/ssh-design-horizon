@@ -106,7 +106,7 @@
         "color_scheme": "scheme-1",
         "toggle_overlay": false,
         "overlay_color": "#00000026",
-        "overlay_style": "gradient",
+        "overlay_style": "solid",
         "gradient_direction": "to top",
         "blurred_reflection": false,
         "reflection_opacity": 75,
