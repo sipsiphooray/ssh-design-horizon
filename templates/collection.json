@@ -47,7 +47,7 @@
         "text_Yrhhfy": {
           "type": "text",
           "settings": {
-            "text": "<p>Made with care and unconditionally loved by our customers.</p>",
+            "text": "{{ collection.description }}",
             "width": "fit-content",
             "max_width": "narrow",
             "alignment": "left",
