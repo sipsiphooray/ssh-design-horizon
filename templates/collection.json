@@ -93,6 +93,7 @@
         "stack_media_on_mobile": true,
         "custom_mobile_media": true,
         "media_type_1_mobile": "image",
+        "image_1_mobile": "{{ collection.metafields.custom.mobile_banner.value }}",
         "media_type_2_mobile": "image",
         "link": "",
         "open_in_new_tab": false,
