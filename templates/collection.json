@@ -344,7 +344,8 @@
                 },
                 "custom_liquid_3DRnnd": {
                   "type": "custom-liquid",
-                  "name": "t:names.custom_liquid",
+                  "name": "sizes available",
+                  "disabled": true,
                   "settings": {
                     "custom_liquid": "{% assign sizes_option = closest.product.options_by_name['Cup Style'] %}\n{% if sizes_option != blank %}\n<span class=\"size-available-text\">\n    {{ 'content.sizes_available' | t: number: sizes_option.values.size }}\n</span>\n{% endif %}"
                   },
