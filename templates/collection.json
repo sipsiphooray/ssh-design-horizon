@@ -82,6 +82,9 @@
         "text_gtynUV",
         "text_Yrhhfy"
       ],
+      "custom_css": [
+        "@media (max-width: 749px) {{--section-height-medium: 20rem; }}"
+      ],
       "name": "t:names.hero",
       "settings": {
         "media_type_1": "image",
