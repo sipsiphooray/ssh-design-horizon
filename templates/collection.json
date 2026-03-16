@@ -30,7 +30,7 @@
             "vertical_alignment_flex_direction_column": "center",
             "gap": 12,
             "enable_mobile_gap": true,
-            "mobile_gap": 12,
+            "mobile_gap": 8,
             "width": "fill",
             "custom_width": 100,
             "width_mobile": "fill",
@@ -76,7 +76,7 @@
             "text_AgJgy9": {
               "type": "text",
               "settings": {
-                "text": "<h1>New arrivals</h1>",
+                "text": "<p>{{ closest.collection.title }}</p>",
                 "width": "fit-content",
                 "max_width": "narrow",
                 "alignment": "left",
