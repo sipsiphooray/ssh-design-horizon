@@ -173,10 +173,10 @@ summary,.menu-drawer__back-button {
     width: 100%;
 }
 
-.mega-menu__link--parent {
+/* .mega-menu__link--parent {
     display: block !important;
     border-bottom: 1px solid var(--color-border);
-}
+} */
 
 .menu-list {
     --menu-horizontal-gap: var(--gap-2xl) !important;
