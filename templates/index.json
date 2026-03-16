@@ -2186,7 +2186,7 @@
             "mobile-padding-block-end": 0,
             "mobile-padding-inline-start": 0,
             "mobile-padding-inline-end": 0,
-            "css_class": ""
+            "css_class": "card-box"
           },
           "blocks": {
             "block_carousel_JJNi8t": {
@@ -2254,7 +2254,7 @@
                         "align_baseline": false,
                         "horizontal_alignment_flex_direction_column": "center",
                         "vertical_alignment_flex_direction_column": "center",
-                        "gap": 12,
+                        "gap": 0,
                         "inherit_color_scheme": false,
                         "color_scheme": "scheme-58084d4c-a86e-4d0a-855e-a0966e5043f7",
                         "background_media": "none",

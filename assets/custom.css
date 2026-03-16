@@ -178,6 +178,10 @@ summary,.menu-drawer__back-button {
     border-bottom: 1px solid var(--color-border);
 } */
 
+.card-box .product-card {
+    --size-style-width: 420px !important;
+}
+
 .menu-list {
     --menu-horizontal-gap: var(--gap-2xl) !important;
 }
