@@ -355,7 +355,7 @@
                 "background_color": "#00000026",
                 "corner_radius": 0,
                 "padding-block-start": 0,
-                "padding-block-end": 0,
+                "padding-block-end": 8,
                 "padding-inline-start": 0,
                 "padding-inline-end": 0,
                 "custom_mobile_padding": false,
@@ -413,7 +413,7 @@
       ],
       "name": "t:names.footer",
       "settings": {
-        "section_width": "page-width",
+        "section_width": "page-narrow",
         "gap": 36,
         "color_scheme": "scheme-738179cd-4e15-457b-be40-989a024001d6",
         "padding-block-start": 52,

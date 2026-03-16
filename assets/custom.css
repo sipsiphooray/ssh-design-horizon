@@ -48,6 +48,7 @@ a.size-style.link:after {
 
 .section--page-narrow {
   --page-width: calc(78rem + (var(--page-margin) * 2)) !important;
+  --page-content-width: 78rem !important;
 }
 
 .menu-list__link:hover,.mega-menu__link:not(.mega-menu__link--parent):hover {

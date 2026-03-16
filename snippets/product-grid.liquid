@@ -85,9 +85,9 @@
   "
 
   style="
-    --grid--margin--mobile: 0{% if section.settings.product_grid_width == 'centered' and section.settings.full_width_on_mobile == false %} var(--margin-lg){% else %} 0{% endif %};
-    --grid-column--desktop: var(--{% if section.settings.product_grid_width == 'centered' %}centered{% else %}full-width{% endif %});
-    --grid-column--mobile: var(--{% if section.settings.full_width_on_mobile %}full-width{% else %}{% if section.settings.product_grid_width == 'centered' %}centered{% else %}full-width{% endif %}{% endif %});
+    --grid--margin--mobile: 0{% if section.settings.product_grid_width == 'centered' or section.settings.product_grid_width == 'page-narrow' and section.settings.full_width_on_mobile == false %} var(--margin-lg){% else %} 0{% endif %};
+    --grid-column--desktop: var(--{% if section.settings.product_grid_width == 'centered' or section.settings.product_grid_width == 'page-narrow' %}centered{% else %}full-width{% endif %});
+    --grid-column--mobile: var(--{% if section.settings.full_width_on_mobile %}full-width{% else %}{% if section.settings.product_grid_width == 'centered' or section.settings.product_grid_width == 'page-narrow' %}centered{% else %}full-width{% endif %}{% endif %});
     --padding-inline-start: {{ section.settings.padding-inline-start }}px;
     --padding-inline-end: {{ section.settings.padding-inline-end }}px;
   "

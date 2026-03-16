@@ -23,7 +23,7 @@
 {% comment %} We always render this full-width, as the child blocks have width: page/full settings {% endcomment %}
 <div class="section-background color-{{ section.settings.color_scheme }}"></div>
 <results-list
-  class="section product-grid-container color-{{ section.settings.color_scheme }}"
+  class="section {% if section.settings.product_grid_width == 'page-narrow' %}section--page-narrow{% endif %} product-grid-container color-{{ section.settings.color_scheme }}"
   style="--padding-block-start: {{ section.settings.padding-block-start }}px; --padding-block-end: {{ section.settings.padding-block-end }}px;
     {% if section.settings.custom_mobile_padding == true %}
       --mobile-padding-block-start: {{ section.settings.mobile-padding-block-start }}px;
@@ -178,6 +178,10 @@
       "id": "product_grid_width",
       "label": "t:settings.width",
       "options": [
+        {
+          "value": "page-narrow",
+          "label": "Narrow"
+        },
         {
           "value": "centered",
           "label": "t:options.page"
