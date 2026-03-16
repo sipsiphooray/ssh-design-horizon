@@ -2151,7 +2151,7 @@
             "custom_mobile_alignment": false,
             "mobile_vertical_alignment": "flex-start",
             "vertical_alignment_flex_direction_column": "center",
-            "gap": 32,
+            "gap": 12,
             "enable_mobile_gap": false,
             "mobile_gap": 12,
             "width": "custom",
@@ -2912,9 +2912,8 @@
       "custom_css": [
         ".image-block__image {object-fit: contain;}",
         "slideshow-arrows .slideshow-control {pointer-events: auto; opacity: 1;}",
-        ".section--page-width {--full-page-grid-central-column-width: min( 100% - var(--page-margin) * 2, calc(100% - var(--page-margin) * 2) ) !important;}",
         "@media (min-width: 750px) {.ai-icons-row br {display: none; } .section--page-width {--page-margin: 24px; } .product-card-group {margin-top: -5rem; }}",
-        "@media (max-width: 749px) {.slideshow-controls__dots {padding-bottom: 0; } slideshow-controls {min-height: unset; }}"
+        "@media (max-width: 749px) {.slideshow-controls__dots {padding-bottom: 0; } slideshow-controls {min-height: unset; } .card .image-block, .card .image-block__image {--ratio: 3 / 2 !important; }}"
       ],
       "name": "Image with slider",
       "settings": {
@@ -2926,10 +2925,10 @@
         "align_baseline": false,
         "horizontal_alignment_flex_direction_column": "flex-start",
         "vertical_alignment_flex_direction_column": "center",
-        "gap": 16,
+        "gap": 32,
         "enable_mobile_gap": false,
         "mobile_gap": 12,
-        "section_width": "page-width",
+        "section_width": "page-narrow",
         "full_width_on_mobile": false,
         "section_height": "",
         "section_height_custom": 50,
