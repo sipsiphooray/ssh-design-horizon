@@ -80,7 +80,7 @@
                 "width": "fit-content",
                 "max_width": "narrow",
                 "alignment": "left",
-                "type_preset": "h2",
+                "type_preset": "h1",
                 "font": "var(--font-body--family)",
                 "font_size": "1rem",
                 "enable_mobile_size": false,
