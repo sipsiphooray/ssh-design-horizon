@@ -272,9 +272,9 @@ summary,.menu-drawer__back-button {
     margin-block-end: var(--margin-xl);
 }
 
-.product-card .shopify-app-block:has([data-oke-star-rating]) {
+/* .product-card .shopify-app-block:has([data-oke-star-rating]) {
     margin-top: calc(-1 * var(--gap-2xs));
-}
+} */
 
 .facets__form .breadcrumbs {
     align-self: center;
