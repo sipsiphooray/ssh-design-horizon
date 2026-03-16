@@ -3,8 +3,8 @@
   It is used in the product block,featured product block, and the product card block.
 
   @param {product} product_resource - The product to render
-  @param {boolean} [show_unit_price] - Whether to show the unit price
   @param {boolean} [show_sale_price_first] - Whether to show the sale price first
+  @param {boolean} [show_unit_price] - Whether to show the unit price
 {%- enddoc -%}
 
 {%- liquid
@@ -73,7 +73,7 @@
 -%}
 
 <div ref="priceContainer">
-  {% if product_resource.price_varies %}
+  {% if is_product_card and product_resource.price_varies %}
       {% liquid
         if settings.currency_code_enabled_product_cards
           assign price_min = product_resource.price_min | money_with_currency
