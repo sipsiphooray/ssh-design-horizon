@@ -296,6 +296,7 @@ summary,.menu-drawer__back-button {
     padding: 0 !important;
     margin: 0;
     list-style: none;
+    justify-content: center;
 }
 
 .card-box ul li:not(:first-child):after {
