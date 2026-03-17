@@ -327,6 +327,9 @@ summary,.menu-drawer__back-button {
     border-color: rgba(var(--color-border-rgb) / .1) !important;
 }
 
+.slideshow-controls__thumbnails .slideshow-control {
+    width: clamp(60px, 7vw, var(--thumbnail-width)) !important;
+}
 
 @media screen and (min-width: 60em) {
     :root {
