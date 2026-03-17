@@ -192,7 +192,7 @@
               "type": "button",
               "name": "t:names.button",
               "settings": {
-                "label": "shop st. paddy's",
+                "label": "Shop St. Paddy's",
                 "link": "shopify://collections/st-patricks-day",
                 "open_in_new_tab": false,
                 "style_class": "button",
@@ -2085,7 +2085,7 @@
             "button_a68XY3": {
               "type": "button",
               "settings": {
-                "label": "shop now",
+                "label": "Shop now",
                 "link": "shopify://collections/all",
                 "open_in_new_tab": false,
                 "style_class": "button-secondary",
@@ -2523,7 +2523,7 @@
                                   "type": "button",
                                   "name": "t:names.button",
                                   "settings": {
-                                    "label": "explore",
+                                    "label": "Explore",
                                     "link": "{{ closest.product.url }}",
                                     "open_in_new_tab": false,
                                     "style_class": "button-secondary",
@@ -2726,7 +2726,7 @@
                                   "type": "button",
                                   "name": "t:names.button",
                                   "settings": {
-                                    "label": "explore",
+                                    "label": "Explore",
                                     "link": "{{ closest.product.url }}",
                                     "open_in_new_tab": false,
                                     "style_class": "button-secondary",
@@ -2929,7 +2929,7 @@
                                   "type": "button",
                                   "name": "t:names.button",
                                   "settings": {
-                                    "label": "explore",
+                                    "label": "Explore",
                                     "link": "{{ closest.product.url }}",
                                     "open_in_new_tab": false,
                                     "style_class": "button-secondary",

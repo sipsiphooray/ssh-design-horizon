@@ -178,7 +178,7 @@
                 {%- endif -%}
               "
             >
-              <select
+              {% comment %} <select
                 id="Option-{{ block.id }}-{{ forloop.index0 }}"
                 name="options[{{ product_option.name | escape }}]"
                 class="variant-option__select"
@@ -209,7 +209,8 @@
                 viewBox="0 0 10 6"
               >
                 {%- render 'icon', icon: 'caret' -%}
-              </svg>
+              </svg> {% endcomment %}
+              {% render 'variant-select', block: block, forloop: forloop, product_option: product_option %}
             </div>
           </div>
         {%- endif -%}

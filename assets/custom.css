@@ -22,6 +22,7 @@ slideshow-controls.carousel-controls .icon-play {
     --letter-spacing--heading-tight: -0.05em !important;
     --drawer-width: 100vw !important;
     --submenu-animation-speed: 0s !important;
+    --sidebar-width: 32rem !important;
 }
 
 a.size-style.link {
@@ -319,6 +320,10 @@ summary,.menu-drawer__back-button {
 
 .okeReviews[data-oke-container], div.okeReviews {
     line-height: 1 !important;
+}
+
+.variant-option__select-wrapper {
+    border-color: rgba(var(--color-border-rgb) / .1) !important;
 }
 
 

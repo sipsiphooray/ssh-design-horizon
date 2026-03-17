@@ -1,0 +1,231 @@
+
+{% capture id %}Option-{{ block.id }}-{{ forloop.index0 }}{% endcapture %}
+
+<variant-select class="custom-select-wrapper">
+    <select
+        name="options[{{ product_option.name | escape }}]"
+        id="{{ id }}"
+        class="variant-option__select"
+        required
+        hidden
+    >
+        {%- for product_option_value in product_option.values -%}
+        <option
+            value="{{ product_option_value | escape }}"
+            data-input-id="{{ product_option.position }}-{{ forloop.index0 }}"
+            data-option-value-id="{{ product_option_value.id }}"
+            data-variant-id="{{ product_option_value.variant.id }}"
+            data-connected-product-url="{{ product_option_value.product_url }}"
+            {% if product_option_value.selected %}
+            selected="selected"
+            {% endif %}
+            {% if product_option_value.available == false %}
+            disabled
+            {% endif %}
+        >
+            {% if product_option_value.available == false %}
+            {{ product_option_value | escape }} - {{ 'content.unavailable' | t }}
+            {% else %}
+            {{ product_option_value | escape }}
+            {% endif %}
+        </option>
+        {%- endfor -%}
+    </select>
+
+    <div class="custom-select" role="combobox" aria-expanded="false" aria-controls="{{ id }}-menu">
+        <div class="cs-display" aria-hidden="true"
+            {% if product.selected_variant == blank and product.metafields.custom.default_label != blank %}
+                {% if product_option.position == 1 %}
+                    data-custom-label="{{ product.metafields.custom.default_label | escape | upcase }}"
+                {% elsif product_option.position == 2 and product.options_with_values.size >= 2 and product.metafields.custom.default_label_2 != blank %}
+                    data-custom-label="{{ product.metafields.custom.default_label_2 | escape | upcase }}"
+                {% endif %}
+            {% endif %}
+        >
+            {%- assign selected_option = product_option.values | where: "selected", true | first -%}
+            {%- assign display_option = selected_option | default: product_option.values.first -%}
+            {{ display_option | escape }}
+        </div>
+        <div class="cs-menu" id="{{ id }}-menu" role="listbox">
+        {%- for product_option_value in product_option.values -%}
+            <div class="cs-option {% if product_option_value.selected %}selected{% endif %}"
+                role="option"
+                aria-selected="{% if product_option_value.selected %}true{% else %}false{% endif %}"
+                data-value="{{ product_option_value | escape }}"
+                {% if product_option_value.available == false %}
+                data-unavailable
+                aria-disabled="true"
+                {% endif %}>
+            {% if product_option_value.available == false %}
+                {{ product_option_value | escape }} - {{ 'content.unavailable' | t }}
+            {% else %}
+                {{ product_option_value | escape }}
+            {% endif %}
+            </div>
+        {%- endfor -%}
+        </div>
+    </div>
+
+    <svg
+        aria-hidden="true"
+        focusable="false"
+        class="icon icon-caret"
+        viewBox="0 0 10 6"
+    >
+        {%- render 'icon', icon: 'caret' -%}
+    </svg>
+</variant-select>
+
+{% stylesheet %}
+    .custom-select-wrapper {
+        position: relative;
+        width: 100%;
+
+        @media (max-width: 749px) {
+            font-size: var(--font-size--md);
+        }
+    }
+
+    .variant-option__select-wrapper:has(.custom-select-wrapper) {
+        overflow: unset;
+        --style-border-width-inputs: 2px !important;
+    }
+
+    .variant-option--dropdowns {
+
+        @media (max-width: 749px) {
+            font-size: var(--font-size--lg);
+        }
+    }
+
+    .variant-option__select-wrapper:has(.custom-select-wrapper) .cs-display {
+        font-weight: var(--font-heading--weight);
+    }
+
+    .variant-option__select-wrapper:has(.custom-select-wrapper) .custom-select {
+        border: 0 !important;
+    }
+
+    .error-message {
+        margin-top: var(--margin-2xs);
+        line-height: 1em;
+    }
+
+    .loading-select {
+        opacity: 0.6;
+        pointer-events: none;
+    }
+
+    .flex-option-meta {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+    }
+
+    .custom-select-wrapper label {
+        position: absolute;
+        top: 1rem;
+        left: var(--margin-xl);
+        pointer-events: none;
+        transition: all var(--hover-transition-duration) cubic-bezier(0.4, 0, 0.2, 1);
+        width: calc(100% - var(--margin-xl));
+        line-height: 1em;
+        z-index: 1;
+    }
+    .custom-select-wrapper .icon {
+        position: absolute;
+        right: var(--padding-md);
+        top: 50%;
+        transform: translateY(-50%);
+        width: var(--icon-size-2xs);
+        height: var(--icon-size-2xs);
+        pointer-events: none;
+    }
+    /* When no real selection is made (placeholder is selected) */
+    custom-select.has-value + label {
+        font-size: var(--font-size--xs);
+        letter-spacing: 0.2px;
+        top: 6px;
+    }
+
+    .custom-select-wrapper .error-message {
+        margin-top: var(--margin-2xs);
+        line-height: 1em;
+    }
+
+    .has-error .error-message {
+        display: block !important;
+        color: var(--color-primary-hover);
+    }
+
+    .custom-dropdown--field.has-error label {
+        color: var(--color-primary-hover);
+    }
+
+    .custom-dropdown--field.has-error {
+        --color-input-border: var(--color-primary-hover);
+    }
+
+    .custom-select {
+        position: relative;
+        width: 100%;
+        border: 0;
+        padding: var(--padding-lg) var(--padding-lg);
+        background-color: var(--color-background);
+        box-sizing: border-box;
+    }
+
+    .custom-select-wrapper label [aria-hidden='true'] {
+        margin-left: 0.2rem;
+        line-height: 1em;
+        position: relative;
+        bottom: -0.1rem;
+    }
+
+    .cs-display {
+        cursor: pointer;
+        font: inherit;
+        line-height: 1em;
+        display: flex;
+        align-items: center;
+        -webkit-tap-highlight-color: transparent;
+        color: var(--color-foreground);
+    }
+
+    .cs-menu {
+        position: absolute;
+        left: 0;
+        right: 0;
+        border: 1px solid rgba(var(--color-border-rgb) / .1);
+        background-color: var(--color-background);
+        display: none;
+        max-height: 300px;
+        overflow-y: auto;
+        z-index: 2;
+        top: 100%;
+        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+    }
+
+    .cs-option {
+        padding: var(--padding-lg) var(--padding-lg);
+        cursor: pointer;
+        color: rgb(var(--color-foreground));
+        line-height: 1em;
+
+        @media (max-width: 749px) {
+            padding-block: var(--padding-lg);
+        }
+    }
+
+    .cs-option.selected {
+        background: rgba(var(--color-border-rgb) / .1);
+    }
+
+    .cs-option:hover {
+        background: rgba(var(--color-border-rgb) / .1);
+    }
+
+    .cs-menu.open {
+        display: block;
+    }
+{% endstylesheet %}
