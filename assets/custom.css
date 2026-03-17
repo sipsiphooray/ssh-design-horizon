@@ -325,6 +325,7 @@ summary,.menu-drawer__back-button {
 
 .variant-option__select-wrapper {
     border-color: rgba(var(--color-border-rgb) / .1) !important;
+    margin-top: var(--margin-xs);
 }
 
 .slideshow-controls__thumbnails .slideshow-control {
