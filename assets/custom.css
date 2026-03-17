@@ -294,6 +294,29 @@ summary,.menu-drawer__back-button {
     opacity:  var(--opacity-subdued-text);
 }
 
+.card-box ul {
+    display: flex;
+    padding: 0 !important;
+    margin: 0;
+    list-style: none;
+}
+
+.card-box ul li:not(:first-child):after {
+    content: '•';
+    display: block;
+    position: absolute;
+    top: 0;
+    left: 7px;
+}
+
+.card-box ul li:not(:first-child) {
+    padding-left: var(--gap-xl);
+}
+
+.card-box ul li {
+    position: relative;
+}
+
 @media screen and (min-width: 60em) {
     :root {
         --section-height-large: 90svh !important;
@@ -402,5 +425,26 @@ summary,.menu-drawer__back-button {
 
     .product-badges__badge {
         --badge-font-size: var(--font-size--2xs) !important;
+    }
+
+    .card-box ul li {
+        position: relative;
+    }
+
+    .card-box ul {
+        display: block;
+        column-count: 2;
+    }
+
+    .card-box ul li:after {
+        content: '•';
+        display: block;
+        position: absolute;
+        top: 0;
+        left: 7px;
+    }
+
+    .card-box ul li {
+        padding-left: var(--gap-xl);
     }
 }

@@ -2864,6 +2864,7 @@
             },
             "ai_gen_block_426582e_WVTHV9": {
               "type": "ai_gen_block_426582e",
+              "disabled": true,
               "settings": {
                 "icon_1": "shopify://shop_images/starburst-four-point-icon.svg",
                 "text_1": "<p>Easy to Grab</p>",
@@ -2897,11 +2898,45 @@
                 "font_size_mobile": 15
               },
               "blocks": {}
+            },
+            "text_dVT3Pa": {
+              "type": "text",
+              "name": "t:names.text",
+              "settings": {
+                "text": "<ul><li>Easy to Grab</li><li>Press-in Lid</li><li>Fits Cupholders</li><li>Temperature Lock</li></ul>",
+                "width": "100%",
+                "max_width": "none",
+                "alignment": "left",
+                "type_preset": "rte",
+                "font": "var(--font-body--family)",
+                "font_size": "1rem",
+                "enable_mobile_size": false,
+                "mobile_font_size": "1rem",
+                "line_height": "normal",
+                "letter_spacing": "normal",
+                "case": "none",
+                "wrap": "pretty",
+                "color": "var(--color-foreground)",
+                "background": false,
+                "background_color": "#00000026",
+                "corner_radius": 0,
+                "padding-block-start": 0,
+                "padding-block-end": 0,
+                "padding-inline-start": 0,
+                "padding-inline-end": 0,
+                "custom_mobile_padding": false,
+                "mobile-padding-block-start": 0,
+                "mobile-padding-block-end": 0,
+                "mobile-padding-inline-start": 0,
+                "mobile-padding-inline-end": 0
+              },
+              "blocks": {}
             }
           },
           "block_order": [
             "block_carousel_JJNi8t",
-            "ai_gen_block_426582e_WVTHV9"
+            "ai_gen_block_426582e_WVTHV9",
+            "text_dVT3Pa"
           ]
         }
       },
