@@ -5390,6 +5390,7 @@
       "block_order": [
         "okendo_reviews_carousel_GNigiV"
       ],
+      "disabled": true,
       "name": "Okendo Carousel",
       "settings": {
         "content_direction": "column",
