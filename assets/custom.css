@@ -325,11 +325,38 @@ summary,.menu-drawer__back-button {
 
 .variant-option__select-wrapper {
     border-color: rgba(var(--color-border-rgb) / .1) !important;
-    margin-top: var(--margin-xs);
+    margin-top: var(--margin-sm) !important;
+}
+
+.custom-select-wrapper .icon-caret {
+    transition: all ease 0.2s;
+}
+
+.custom-select-wrapper:has(.cs-menu.open) .icon-caret {
+    transform: translateY(-50%) rotate(180deg);
 }
 
 .slideshow-controls__thumbnails .slideshow-control {
     width: clamp(60px, 7vw, var(--thumbnail-width)) !important;
+}
+
+.media-gallery--carousel slideshow-arrows {
+    mix-blend-mode: unset;
+}
+
+.media-gallery--carousel slideshow-arrows .slideshow-control {
+    padding-inline: var(--padding-3xs);
+    background: rgba(var(--color-background-rgb) / .5);
+    min-width: unset;
+    opacity: 1 !important;
+    color: var(--color-primary);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.media-gallery--carousel slideshow-arrows {
+    display: flex !important;
 }
 
 @media screen and (min-width: 60em) {

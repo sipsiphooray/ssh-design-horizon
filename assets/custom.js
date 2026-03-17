@@ -124,12 +124,7 @@ class VariantSelect extends Component {
       const hasCustomLabel = this.display.hasAttribute('data-custom-label');
       
       if (hasCustomLabel && !this.userHasInteracted) {
-        // On initial load: show custom label if it exists
-        this.display.textContent = this.display.getAttribute('data-custom-label');
-        // Don't add has-value class when showing custom label
       } else {
-        // Otherwise show the selected option text
-        this.display.textContent = this.getDisplayText(selectedOption);
         this.classList.add("has-value");
       }
       
@@ -188,9 +183,6 @@ class VariantSelect extends Component {
       bubbles: true, 
       composed: true 
     }));
-    
-    // Update display - always show selected option text after user interaction
-    this.display.textContent = this.getDisplayText(option);
     
     // Update selected styling
     this.optionEls.forEach(el => el.classList.remove("selected"));

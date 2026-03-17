@@ -1,5 +1,6 @@
 
 {% capture id %}Option-{{ block.id }}-{{ forloop.index0 }}{% endcapture %}
+{% assign product_option_swatches = shop.metaobjects.product_option_swatches.values %}
 
 <variant-select class="custom-select-wrapper">
     <select
@@ -44,6 +45,20 @@
         >
             {%- assign selected_option = product_option.values | where: "selected", true | first -%}
             {%- assign display_option = selected_option | default: product_option.values.first -%}
+
+            {% if block.settings.show_swatches == true and product_option_swatches.count > 0 %}
+                {% assign matching_swatch = product_option_swatches | where: 'assign_to', display_option %}
+                {% if matching_swatch.size > 0 %}
+                    <span class="swatch-image">
+                        {{
+                            matching_swatch[0].icon_or_image
+                            | image_url: width: 50
+                            | image_tag: alt: matching_swatch[0].icon_or_image.alt
+                            | default: matching_swatch[0].assign_to
+                        }}
+                    </span>
+                {% endif %}
+            {% endif %}
             {{ display_option | escape }}
         </div>
         <div class="cs-menu" id="{{ id }}-menu" role="listbox">
@@ -56,6 +71,21 @@
                 data-unavailable
                 aria-disabled="true"
                 {% endif %}>
+
+            {% if block.settings.show_swatches == true and product_option_swatches.count > 0 %}
+                {% assign matching_swatch = product_option_swatches | where: 'assign_to', product_option_value %}
+                {% if matching_swatch.size > 0 %}
+                    <span class="swatch-image">
+                        {{
+                            matching_swatch[0].icon_or_image
+                            | image_url: width: 50
+                            | image_tag: alt: matching_swatch[0].icon_or_image.alt
+                            | default: matching_swatch[0].assign_to
+                        }}
+                    </span>
+                {% endif %}
+            {% endif %}
+
             {% if product_option_value.available == false %}
                 {{ product_option_value | escape }} - {{ 'content.unavailable' | t }}
             {% else %}
@@ -82,9 +112,40 @@
         width: 100%;
     }
 
+    .swatch-image {
+        width: 30px;
+        height: 30px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 50%;
+        background-color: var(--color-background);
+        padding: var(--padding-2xs);
+    }
+
+    .swatch-image img {
+        display: block;
+        max-width: 100%;
+        height: 22px;
+        width: auto;
+    }
+
+    .cs-option:has(.swatch-image) {
+        display: flex;
+        align-items: center;
+        padding: var(--padding-sm) var(--padding-lg) !important;
+    }
+
+    .custom-select:has(.swatch-image) {
+        padding: var(--padding-sm) var(--padding-lg) !important;
+    }
+
+    .cs-display:has(.swatch-image), .cs-option:has(.swatch-image) {
+        gap: var(--gap-sm);
+    }
+
     .variant-option__select-wrapper:has(.custom-select-wrapper) {
         overflow: unset;
-        --style-border-width-inputs: 2px !important;
     }
 
     .variant-option__select-wrapper:has(.custom-select-wrapper) .custom-select {
@@ -155,9 +216,9 @@
         position: relative;
         width: 100%;
         border: 0;
-        padding: var(--padding-xl) var(--padding-lg);
-        background-color: var(--color-background);
+        padding: var(--padding-lg) var(--padding-lg);
         box-sizing: border-box;
+        cursor: pointer;
     }
 
     .custom-select-wrapper label [aria-hidden='true'] {
@@ -192,7 +253,7 @@
     }
 
     .cs-option {
-        padding: var(--padding-xl) var(--padding-lg);
+        padding: var(--padding-lg) var(--padding-lg);
         cursor: pointer;
         color: rgb(var(--color-foreground));
         line-height: 1em;
