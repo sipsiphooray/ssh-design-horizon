@@ -150,7 +150,7 @@ summary,.menu-drawer__back-button {
 }
 
 .slideshow-control.slideshow-control--shape-square, .slideshow-control.slideshow-control--shape-circle {
-    border: 1px solid var(--color-primary-button-text) !important;
+    border: 1px solid var(--color-primary-button-background) !important;
 }
 
 .mega-menu__content-list--blocks {
@@ -357,6 +357,11 @@ summary,.menu-drawer__back-button {
 
 .media-gallery--carousel slideshow-arrows {
     display: flex !important;
+}
+
+.slideshow-control.slideshow-control--shape-square, .slideshow-control.slideshow-control--shape-circle {
+    background-color: var(--color-primary-button-text) !important;
+    color: var(--color-primary-button-background) !important;
 }
 
 @media screen and (min-width: 60em) {
