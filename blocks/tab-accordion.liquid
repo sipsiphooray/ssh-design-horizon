@@ -1,0 +1,429 @@
+<script
+  src="{{ 'tab-accordion.js' | asset_url }}"
+  type="module"
+  fetchpriority="low"
+></script>
+<script
+  src="{{ 'tab-row-custom.js' | asset_url }}"
+  type="module"
+  fetchpriority="low"
+></script>
+
+{% assign block_settings = block.settings %}
+<tab-accordion
+  class="accordion accordion--{{ block.id }} accordion--{{ block_settings.icon }} border-style spacing-style{% if block_settings.inherit_color_scheme == false %} color-{{ block_settings.color_scheme }}{% endif %}{% if block_settings.dividers %} accordion--dividers{% endif %}"
+  style="
+    --summary-font-family: var(--font-{{ block_settings.type_preset }}--family);
+    --summary-font-style: var(--font-{{ block_settings.type_preset }}--style);
+    --summary-font-weight: var(--font-{{ block_settings.type_preset }}--weight);
+    --summary-font-size: var(--font-{{ block_settings.type_preset }}--size);
+    --summary-font-line-height: var(--font-{{ block_settings.type_preset }}--line-height);
+    --summary-font-case: var(--font-{{ block_settings.type_preset }}--case);
+    {% render 'spacing-style', settings: block_settings %}
+    {% render 'border-override', settings: block_settings %}
+  "
+  {{ block.shopify_attributes }}
+>
+  {% content_for 'blocks' %}
+</tab-accordion>
+
+{% stylesheet %}
+    .accordion {
+        flex: 1;
+        width: 100%;
+    }
+
+    .accordion summary {
+      padding-block: var(--padding-md);
+    }
+
+    /* Tabs styles */
+    .tabs-header {
+        display: none;
+        flex-wrap: nowrap;
+        margin-bottom: var(--spacing-md);
+        position: relative;
+    }
+
+    /* Swipeable tabs container */
+    .tabs-scroll-container {
+        display: flex;
+        gap: var(--gap-xl);
+        padding: 0;
+        width: 100%;
+        -webkit-overflow-scrolling: touch;
+        scrollbar-width: none;
+        -ms-overflow-style: none;
+        scroll-behavior: smooth;
+    }
+
+    .tabs-scroll-container::-webkit-scrollbar {
+        display: none;
+    }
+
+    /* Make tab buttons non-flexible in swipeable mode */
+    .tabs-header.swipeable .tab-button {
+        flex: 0 0 auto;
+        white-space: nowrap;
+    }
+
+    /* Show navigation arrows only when swipeable */
+    .tabs-header.swipeable .tab-nav-arrow {
+        display: flex;
+    }
+
+    /* Adjust scroll container padding when arrows are visible */
+    .tabs-header.swipeable .tabs-scroll-container {
+        padding-left: 0;
+        padding-right: 55px;
+    }
+
+    /* Hide scrollbar in swipeable mode */
+    .tabs-header.swipeable {
+        overflow: hidden;
+    }
+
+    .tabs-header.swipeable .tabs-scroll-container {
+      overflow-x: auto;
+    }
+    .tabs-arrows-container {
+      position: absolute;
+      right: 0;
+      top: 0;
+      display: flex;
+      align-items: center;
+      height: 100%;
+      background: linear-gradient(to right, transparent 0%, var(--color-background) 20%);
+    }
+
+    .tab-nav-arrow {
+      background: transparent;
+      border: 0;
+      cursor: pointer;
+      height: 100%;
+      align-items: center;
+      padding: 0;
+      justify-content: center;
+      width: 2rem;
+    }
+
+    .tab-nav-arrow[disabled] {
+      opacity: 0.5;
+    }
+
+    .tab-nav-arrow svg {
+      display: block;
+      height: 1.2rem;
+      width: auto;
+    }
+
+    .tab-nav-arrow-left svg {
+      transform: rotate(90deg);
+    }
+
+    .tab-nav-arrow-right svg {
+      transform: rotate(-90deg);
+    }
+    
+
+    .tab-button {
+        background: none;
+        border: none;
+        font-family: var(--summary-font-family);
+        font-style: var(--summary-font-style);
+        font-weight: var(--summary-font-weight);
+        font-size: var(--summary-font-size);
+        line-height: var(--summary-font-line-height);
+        text-transform: var(--summary-font-case);
+        cursor: pointer;
+        transition: all 0.2s ease;
+        position: relative;
+        padding: 0 !important;
+    }
+
+    .tab-button:after {
+      content: '';
+      position: absolute;
+      bottom: calc(-1 * var(--gap-2xs));
+      height: 1.5px;
+      width: 100%;
+      background: rgba(var(--color-border-rgb) / .2);
+      left: 0;
+    }
+
+    .tab-button.active:after {
+      background: var(--color-border);
+    }
+
+    .tab-content {
+        display: none;
+        padding-block: var(--padding-2xl) 0;
+    }
+
+  .tab-content.active {
+    display: block;
+  }
+
+  /* Accordion divider styles */
+  .accordion--dividers tab-row-custom:not(:first-child) .details {
+    border-block-start: var(--style-border-width) solid var(--color-border);
+  }
+
+  /* When accordion borders are not set, show fallback borders */
+  .accordion--dividers {
+    /* stylelint-disable-next-line declaration-property-value-disallowed-list */
+    --show-fallback-borders: 0;
+  }
+
+  .accordion--dividers:not([class*='color-'])[style*='--border-width: 0'],
+  .accordion--dividers:not([class*='color-'])[style*='--border-style: none'] {
+    --show-fallback-borders: 1;
+  }
+
+  .accordion--dividers tab-row-custom:first-child .details {
+    border-block-start: calc(var(--style-border-width) * var(--show-fallback-borders)) solid var(--color-border);
+  }
+
+  .accordion--dividers tab-row-custom:last-child .details {
+    border-block-end: calc(var(--style-border-width) * var(--show-fallback-borders)) solid var(--color-border);
+  }
+
+  .accordion--dividers .details-content {
+    padding-block-end: var(--padding-sm);
+  }
+
+  .accordion--caret .icon-plus,
+  .accordion--plus .icon-caret {
+    display: none;
+  }
+
+  /* because we can't pass apply a specific class on a block based on its parent block setting */
+  .accordion .details__header {
+    font-family: var(--summary-font-family);
+    font-style: var(--summary-font-style);
+    font-weight: var(--summary-font-weight);
+    font-size: var(--summary-font-size);
+    line-height: var(--summary-font-line-height);
+    text-transform: var(--summary-font-case);
+    min-height: var(--minimum-touch-target);
+    cursor: pointer;
+  }
+
+  /* Mobile-specific styles */
+  @media (max-width: 749px) {
+    .tabs-header {
+      display: none !important;
+    }
+    
+    .tab-content {
+      display: none !important;
+    }
+    
+    tab-row-custom details {
+      display: block !important;
+    }
+  }
+
+  /* Desktop-specific styles */
+  @media (min-width: 750px) {
+    .tabs-header {
+      display: flex;
+    }
+    
+    tab-row-custom details {
+      display: none;
+    }
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "Tab accordion",
+  "tag": null,
+  "class": "accordion",
+  "blocks": [
+    {
+      "type": "_tab-row"
+    }
+  ],
+  "settings": [
+    {
+      "type": "select",
+      "id": "icon",
+      "label": "t:settings.icon",
+      "options": [
+        {
+          "value": "caret",
+          "label": "t:options.caret"
+        },
+        {
+          "value": "plus",
+          "label": "t:options.plus"
+        }
+      ],
+      "default": "caret"
+    },
+    {
+      "type": "checkbox",
+      "id": "dividers",
+      "label": "t:settings.dividers",
+      "default": true
+    },
+    {
+      "type": "select",
+      "id": "type_preset",
+      "label": "t:settings.heading_preset",
+      "options": [
+        {
+          "value": "",
+          "label": "t:options.default"
+        },
+        {
+          "value": "paragraph",
+          "label": "t:options.paragraph"
+        },
+        {
+          "value": "h1",
+          "label": "t:options.h1"
+        },
+        {
+          "value": "h2",
+          "label": "t:options.h2"
+        },
+        {
+          "value": "h3",
+          "label": "t:options.h3"
+        },
+        {
+          "value": "h4",
+          "label": "t:options.h4"
+        },
+        {
+          "value": "h5",
+          "label": "t:options.h5"
+        },
+        {
+          "value": "h6",
+          "label": "t:options.h6"
+        }
+      ],
+      "default": "h6",
+      "info": "t:info.edit_presets_in_theme_settings"
+    },
+    {
+      "type": "checkbox",
+      "id": "inherit_color_scheme",
+      "label": "t:settings.inherit_color_scheme",
+      "default": true
+    },
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "t:settings.color_scheme",
+      "default": "scheme-1",
+      "visible_if": "{{ block.settings.inherit_color_scheme == false }}"
+    },
+    {
+      "type": "header",
+      "content": "t:content.borders"
+    },
+    {
+      "type": "select",
+      "id": "border",
+      "label": "t:settings.style",
+      "options": [
+        {
+          "value": "none",
+          "label": "t:options.none"
+        },
+        {
+          "value": "solid",
+          "label": "t:options.solid"
+        }
+      ],
+      "default": "none"
+    },
+    {
+      "type": "range",
+      "id": "border_width",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "label": "t:settings.thickness",
+      "default": 1,
+      "visible_if": "{{ block.settings.border != \"none\" }}"
+    },
+    {
+      "type": "range",
+      "id": "border_opacity",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "%",
+      "label": "t:settings.opacity",
+      "default": 100,
+      "visible_if": "{{ block.settings.border != \"none\" }}"
+    },
+    {
+      "type": "range",
+      "id": "border_radius",
+      "label": "t:settings.border_radius",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "default": 0
+    },
+    {
+      "type": "header",
+      "content": "t:content.padding"
+    },
+    {
+      "type": "range",
+      "id": "padding-block-start",
+      "label": "t:settings.top",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "padding-block-end",
+      "label": "t:settings.bottom",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "padding-inline-start",
+      "label": "t:settings.left",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "padding-inline-end",
+      "label": "t:settings.right",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "default": 0
+    }
+  ],
+  "presets": [
+    {
+      "name": "Tab accordion",
+      "category": "t:categories.layout"
+    }
+  ]
+}
+{% endschema %}

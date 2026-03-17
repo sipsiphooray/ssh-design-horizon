@@ -154,6 +154,12 @@
                   },
                   "blocks": {}
                 },
+                "okendo_star_rating_7P7JpH": {
+                  "type": "shopify://apps/okendo/blocks/star-rating/bb689e69-ea70-4661-8fb7-ad24a2e23c29",
+                  "settings": {
+                    "product": "{{closest.product}}"
+                  }
+                },
                 "price_tVjtKg": {
                   "type": "price",
                   "settings": {
@@ -179,6 +185,7 @@
               },
               "block_order": [
                 "text_xpVMaM",
+                "okendo_star_rating_7P7JpH",
                 "price_tVjtKg"
               ]
             },
@@ -211,12 +218,14 @@
               "type": "shopify://apps/subscriptions/blocks/app-block/a3bfe9ec-96f8-4508-a003-df608a36d2ad",
               "disabled": true,
               "settings": {
+                "widget_style": "card",
+                "widget_style_card_selector": "radio_button",
+                "subscription_policy_url": "",
                 "color_text_body": "#6d7175",
                 "dividers_color": "#8f8d8d",
-                "bacgkround_color": "#ffffff",
+                "background_color": "#ffffff",
                 "border_thickness": 1,
                 "border_radius": 0,
-                "subscription_policy_url": "",
                 "product": "{{closest.product}}"
               }
             },
@@ -234,6 +243,7 @@
               "blocks": {
                 "quantity": {
                   "type": "quantity",
+                  "disabled": true,
                   "static": true,
                   "settings": {},
                   "blocks": {}
@@ -288,6 +298,113 @@
                 "mobile-padding-inline-end": 0
               },
               "blocks": {}
+            },
+            "tab_accordion_GLQmPe": {
+              "type": "tab-accordion",
+              "name": "Tab accordion",
+              "settings": {
+                "icon": "plus",
+                "dividers": true,
+                "type_preset": "",
+                "inherit_color_scheme": true,
+                "color_scheme": "",
+                "border": "none",
+                "border_width": 1,
+                "border_opacity": 100,
+                "border_radius": 0,
+                "padding-block-start": 0,
+                "padding-block-end": 0,
+                "padding-inline-start": 0,
+                "padding-inline-end": 0
+              },
+              "blocks": {
+                "tab_row_LAfmYz": {
+                  "type": "_tab-row",
+                  "name": "Tab row",
+                  "settings": {
+                    "heading": "Description",
+                    "content": "{{ closest.product.description }}",
+                    "page": "",
+                    "liquid": "",
+                    "image_ratio": "adapt",
+                    "open_by_default": false,
+                    "type_preset": "rte",
+                    "enable_mobile_size": false,
+                    "mobile_font_size": "1rem",
+                    "font": "var(--font-body--family)",
+                    "font_size": "1rem",
+                    "line_height": "normal",
+                    "letter_spacing": "normal",
+                    "case": "none",
+                    "wrap": "pretty",
+                    "disable_on_mobile": false,
+                    "disable_on_desktop": false,
+                    "close_with_escape": false,
+                    "icon": "none",
+                    "width": 20
+                  },
+                  "blocks": {}
+                },
+                "tab_row_gTXc8k": {
+                  "type": "_tab-row",
+                  "name": "Tab row",
+                  "settings": {
+                    "heading": "What's included",
+                    "content": "{{ closest.product.metafields.custom.what_s_included | metafield_tag }}",
+                    "page": "",
+                    "liquid": "",
+                    "image_ratio": "adapt",
+                    "open_by_default": false,
+                    "type_preset": "rte",
+                    "enable_mobile_size": false,
+                    "mobile_font_size": "1rem",
+                    "font": "var(--font-body--family)",
+                    "font_size": "1rem",
+                    "line_height": "normal",
+                    "letter_spacing": "normal",
+                    "case": "none",
+                    "wrap": "pretty",
+                    "disable_on_mobile": false,
+                    "disable_on_desktop": false,
+                    "close_with_escape": false,
+                    "icon": "none",
+                    "width": 20
+                  },
+                  "blocks": {}
+                },
+                "tab_row_LHM7yz": {
+                  "type": "_tab-row",
+                  "name": "Tab row",
+                  "settings": {
+                    "heading": "Why you'll love it",
+                    "content": "{{ closest.product.metafields.custom.why_you_ll_love_it | metafield_tag }}",
+                    "page": "",
+                    "liquid": "",
+                    "image_ratio": "adapt",
+                    "open_by_default": false,
+                    "type_preset": "rte",
+                    "enable_mobile_size": false,
+                    "mobile_font_size": "1rem",
+                    "font": "var(--font-body--family)",
+                    "font_size": "1rem",
+                    "line_height": "normal",
+                    "letter_spacing": "normal",
+                    "case": "none",
+                    "wrap": "pretty",
+                    "disable_on_mobile": false,
+                    "disable_on_desktop": false,
+                    "close_with_escape": false,
+                    "icon": "none",
+                    "width": 20
+                  },
+                  "blocks": {}
+                }
+              },
+              "block_order": [
+                "tab_row_LAfmYz",
+                "tab_row_gTXc8k",
+                "tab_row_LHM7yz"
+              ]
             }
           },
           "block_order": [
@@ -296,7 +413,8 @@
             "variant_picker_R3rGDr",
             "subscriptions_app_block_JGAiFt",
             "buy_buttons_eYQEYi",
-            "text_aEtTtq"
+            "text_aEtTtq",
+            "tab_accordion_GLQmPe"
           ]
         }
       },
