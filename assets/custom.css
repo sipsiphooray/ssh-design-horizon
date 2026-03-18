@@ -83,6 +83,10 @@ a.size-style.link:after {
     display: block;
 }
 
+.header-actions__action:not(.account-button) svg {
+    width: var(--icon-size-sm) !important;
+    height: var(--icon-size-sm) !important;
+}
 
 [data-sticky-state="active"] .menu-drawer {
     top: calc(var(--header-height) - 1px);
