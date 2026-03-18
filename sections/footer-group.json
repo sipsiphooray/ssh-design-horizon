@@ -304,7 +304,7 @@
               "type": "text",
               "name": "Heading",
               "settings": {
-                "text": "<p>Join The Club</p>",
+                "text": "<p>Sign Up & Save</p>",
                 "width": "100%",
                 "max_width": "normal",
                 "alignment": "left",
@@ -337,7 +337,7 @@
               "type": "text",
               "name": "Text",
               "settings": {
-                "text": "<p>Get exclusive deals and early access to new products.</p>",
+                "text": "<p>Join the Sip List for new aesthetics, fresh drops, and 10% off.</p>",
                 "width": "100%",
                 "max_width": "normal",
                 "alignment": "left",
