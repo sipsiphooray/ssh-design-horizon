@@ -99,6 +99,10 @@
       assign controls = true
       assign enable_js_api = false
     endif
+
+    if video.host == blank and video_autoplay == true
+      assign controls = false
+    endif
   %}
 
   {% capture video_tag %}
