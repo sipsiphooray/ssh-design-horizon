@@ -336,7 +336,7 @@ summary,.menu-drawer__back-button {
 }
 
 .variant-option__select-wrapper {
-    border-color: rgba(var(--color-border-rgb) / .1) !important;
+    border: var(--style-border-width-inputs) solid var(--color-input-border) !important;
     margin-top: var(--margin-sm) !important;
 }
 
