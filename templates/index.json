@@ -3346,7 +3346,7 @@
               "type": "text",
               "name": "t:names.text",
               "settings": {
-                "text": "<p>At <strong>Sip-Sip Hooray®</strong>, we also know that looking cute and trendy doesn't have to break the bank. We take pride in affordability and we launch fresh collections every month to keep your style on point. Not to mention, you’ll love our customer service just as much as you love our designs! We’re here for you seven days a week, and all orders ship within three business days. So go ahead, treat yourself to a cup (or two).</p>",
+                "text": "<p>At <strong>Sip-Sip Hooray®</strong>, we also know that looking cute and trendy doesn't have to break the bank. We take pride in affordability and we launch fresh collections every month to keep your style on point. Not to mention, you’ll love our customer service just as much as you love our designs!</p><p>We’re here for you seven days a week, and all orders ship within three business days. So go ahead, treat yourself to a cup (or two).</p>",
                 "width": "fit-content",
                 "max_width": "normal",
                 "alignment": "left",
