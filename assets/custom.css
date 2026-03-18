@@ -397,6 +397,10 @@ summary .svg-wrapper {
     display: none;
 }
 
+.shopify-app-block:has([data-oke-star-rating]) {
+    margin-top: calc(-1 * var(--gap-sm));
+}
+
 @media screen and (min-width: 60em) {
     :root {
         --section-height-large: 90svh !important;
