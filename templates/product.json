@@ -135,11 +135,13 @@
                 "css_class": ""
               },
               "blocks": {
-                "okendo_star_rating_7P7JpH": {
-                  "type": "shopify://apps/okendo/blocks/star-rating/bb689e69-ea70-4661-8fb7-ad24a2e23c29",
+                "custom_liquid_qE6bdP": {
+                  "type": "custom-liquid",
+                  "name": "Badges",
                   "settings": {
-                    "product": "{{closest.product}}"
-                  }
+                    "custom_liquid": "<style>\n.badges-product-details {\n    margin-bottom: var(--gap-2xs);\n    line-height: 1em;\n}\n</style>\n<div class=\"flex badges-product-details\">\n      {% if product.metafields.custom.product_badges.value != blank %}\n        {% for i in product.metafields.custom.product_badges.value %}\n          {% if i.label != blank %}\n            <div>\n                <div\n                class=\"\n                    product-badges__badge product-badges__badge--rectangle\n                    color-{{ settings.badge_sale_color_scheme }}\n                \"\n                    style=\"\n                    {% if i.badge_background_color != blank %}\n                        --color-background: {{ i.badge_background_color }};\n                    {% endif %}\n                    {% if i.badge_text_color != blank %}\n                        --color-foreground: {{ i.badge_text_color }};\n                    {% endif %}\n                    \"\n                >\n                {{ i.label }}\n                </div>\n            </div>\n          {% endif %}\n        {% endfor %}\n      {% endif %}\n</div>"
+                  },
+                  "blocks": {}
                 },
                 "text_xpVMaM": {
                   "type": "text",
@@ -174,6 +176,12 @@
                   },
                   "blocks": {}
                 },
+                "okendo_star_rating_7P7JpH": {
+                  "type": "shopify://apps/okendo/blocks/star-rating/bb689e69-ea70-4661-8fb7-ad24a2e23c29",
+                  "settings": {
+                    "product": "{{closest.product}}"
+                  }
+                },
                 "price_tVjtKg": {
                   "type": "price",
                   "settings": {
@@ -198,8 +206,9 @@
                 }
               },
               "block_order": [
-                "okendo_star_rating_7P7JpH",
+                "custom_liquid_qE6bdP",
                 "text_xpVMaM",
+                "okendo_star_rating_7P7JpH",
                 "price_tVjtKg"
               ]
             },
@@ -221,7 +230,7 @@
               "name": "t:names.product_inventory",
               "settings": {
                 "min_days": 1,
-                "max_days": 3,
+                "max_days": 5,
                 "inventory_threshold": 10,
                 "show_inventory_quantity": true,
                 "padding-block-start": 0,
@@ -411,6 +420,7 @@
                     "content": "{{ closest.product.description }}",
                     "page": "",
                     "liquid": "",
+                    "placement": "below-content",
                     "image_ratio": "adapt",
                     "open_by_default": true,
                     "type_preset": "rte",
@@ -438,6 +448,7 @@
                     "content": "{{ closest.product.metafields.custom.what_s_included | metafield_tag }}",
                     "page": "",
                     "liquid": "",
+                    "placement": "below-content",
                     "image_ratio": "adapt",
                     "open_by_default": false,
                     "type_preset": "rte",
@@ -465,6 +476,7 @@
                     "content": "{{ closest.product.metafields.custom.why_you_ll_love_it | metafield_tag }}",
                     "page": "",
                     "liquid": "",
+                    "placement": "below-content",
                     "image_ratio": "adapt",
                     "open_by_default": false,
                     "type_preset": "rte",
@@ -489,9 +501,10 @@
                   "name": "Tab row",
                   "settings": {
                     "heading": "Shipping + Returns",
-                    "content": "<p>Orders are handmade and ship from Louisiana. Most orders process in 1–3 business days, with standard delivery taking 3–5 business days after shipment.<br/><br/>Returns are accepted on non-personalized, unused items within 7 days of delivery. Items damaged in transit or defective will be replaced or refunded. Full details are available in our Policies.</p>",
+                    "content": "<p>Orders are handmade and ship from Louisiana. Most orders process in <strong>1–3 business days</strong>, with <strong>standard delivery </strong>taking <strong>3–5 business days</strong> after shipment.<br/><br/>Returns are accepted on non-personalized, unused items within 7 days of delivery. Items damaged in transit or defective will be replaced or refunded. Full details are available in our Policies.</p>",
                     "page": "",
                     "liquid": "",
+                    "placement": "below-content",
                     "image_ratio": "adapt",
                     "open_by_default": false,
                     "type_preset": "rte",
@@ -519,6 +532,7 @@
                     "content": "<p>UVDTF (Ultraviolet Direct-to-Film) printing is an advanced printing technology that allows high-resolution, full-color designs to be transferred onto various surfaces with exceptional durability. Unlike traditional printing methods, UVDTF printing utilizes ultraviolet (UV) light to cure specially formulated inks, creating vibrant and long-lasting prints.</p><p>The texture you feel on the cup is the top layer of UV ink called varnish. The varnish gives the designs their glossy appearance.</p><p><strong>Our UV prints are not stickers. </strong>Stickers are smaller, individually cut designs printed on various materials (vinyl, paper, or polyester) with an adhesive backing for easy peel-and-stick application. Stickers are remove-able, and do not last.</p>",
                     "page": "",
                     "liquid": "",
+                    "placement": "below-content",
                     "image_ratio": "adapt",
                     "open_by_default": false,
                     "type_preset": "rte",
