@@ -494,8 +494,15 @@ summary,.menu-drawer__back-button {
     }
 
     .card-box ul {
-        display: block;
-        column-count: 2;
+        display: flex;
+        column-gap: var(--gap-lg);
+        row-gap: var(--gap-2xs);
+        flex-wrap: wrap;
+    }
+
+    .card-box ul li {
+        width: calc(50% - var(--gap-lg) / 2);
+        font-size: var(--font-size--sm);
     }
 
     .card-box ul li:after {
@@ -503,11 +510,11 @@ summary,.menu-drawer__back-button {
         display: block;
         position: absolute;
         top: 0;
-        left: 7px;
+        left: 0 !important;
     }
 
     .card-box ul li {
-        padding-left: var(--gap-xl);
+        padding-left: var(--gap-sm) !important;
     }
 
     .product-card .shopify-app-block:has([data-oke-star-rating]) {
