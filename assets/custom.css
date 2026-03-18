@@ -89,6 +89,10 @@ a.size-style.link:after {
     height: calc(var(--drawer-height) - var(--header-height));
 }
 
+.menu-list__link-title {
+    padding-inline: calc(var(--gap-2xl) / 2) !important;
+}
+
 .menu-drawer__backdrop {
     display: none !important;
 }
