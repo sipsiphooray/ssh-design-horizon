@@ -3076,7 +3076,7 @@
         "full_width_on_mobile": false,
         "section_height": "",
         "section_height_custom": 50,
-        "color_scheme": "scheme-2",
+        "color_scheme": "scheme-761f80f0-0e3a-4090-9168-95d4d4a71356",
         "background_media": "none",
         "video_position": "cover",
         "background_image_position": "cover",
@@ -3226,7 +3226,7 @@
         "full_width_on_mobile": false,
         "section_height": "",
         "section_height_custom": 50,
-        "color_scheme": "scheme-2",
+        "color_scheme": "scheme-761f80f0-0e3a-4090-9168-95d4d4a71356",
         "background_media": "none",
         "video_position": "cover",
         "background_image_position": "cover",
@@ -3509,7 +3509,7 @@
                   "settings": {
                     "icon_position": "left",
                     "icon": "apple",
-                    "image_upload": "shopify://shop_images/shipping_2x_e43f5636-b6e0-4195-8c29-165af16054be.png",
+                    "image_upload": "shopify://shop_images/shipping_2x_dcdef06a-fec4-4f47-81d0-0dbf922bf639.png",
                     "icon_width": 32,
                     "use_height": true,
                     "icon_height": 24,
@@ -6245,7 +6245,7 @@
         "overlay_style": "solid",
         "gradient_direction": "to top",
         "padding-block-start": 80,
-        "padding-block-end": 24
+        "padding-block-end": 0
       }
     }
   },

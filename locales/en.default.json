@@ -174,12 +174,12 @@
       "single_item": "Single",
       "zoom_out": "Zoom out"
     },
-    "inventory_low_stock_show_count": {
-      "one": "{{ count }} left",
-      "other": "{{ count }} left"
+    "inventory_low_stock_show_count_html": {
+      "one": "{{ count }} left - Get it By {{ date }}",
+      "other": "{{ count }} left - Get it By{{ date }}"
     },
-    "inventory_low_stock": "Low stock",
-    "inventory_in_stock": "In stock",
+    "inventory_low_stock_html": "Low stock - Get it By {{ date }}",
+    "inventory_in_stock_html": "In stock - Get it By {{ date }}",
     "inventory_out_of_stock": "Out of stock",
     "item_count": {
       "one": "{{ count }} item",

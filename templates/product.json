@@ -9,6 +9,20 @@
  */
 {
   "sections": {
+    "custom_liquid_acNN9e": {
+      "type": "custom-liquid",
+      "name": "t:names.custom_liquid",
+      "settings": {
+        "custom_liquid": "{% render 'breadcrumbs' %}",
+        "color_scheme": "",
+        "section_width": "page-narrow",
+        "padding-block-start": 4,
+        "padding-block-end": 0,
+        "custom_mobile_padding": false,
+        "mobile-padding-block-start": 0,
+        "mobile-padding-block-end": 0
+      }
+    },
     "main": {
       "type": "product-information",
       "blocks": {
@@ -32,7 +46,7 @@
             "media_radius": 0,
             "extend_media": false,
             "zoom": true,
-            "video_loop": false,
+            "video_loop": true,
             "hide_variants": false,
             "padding-block-start": 0,
             "padding-block-end": 0,
@@ -166,11 +180,11 @@
                     "show_sale_price_first": true,
                     "show_installments": false,
                     "show_tax_info": false,
-                    "type_preset": "h3",
+                    "type_preset": "custom",
                     "width": "100%",
                     "alignment": "left",
-                    "font": "var(--font-body--family)",
-                    "font_size": "1rem",
+                    "font": "var(--font-subheading--family)",
+                    "font_size": "1.125rem",
                     "line_height": "normal",
                     "letter_spacing": "normal",
                     "case": "none",
@@ -195,6 +209,21 @@
                 "variant_style": "dropdowns",
                 "show_swatches": true,
                 "alignment": "left",
+                "padding-block-start": 0,
+                "padding-block-end": 0,
+                "padding-inline-start": 0,
+                "padding-inline-end": 0
+              },
+              "blocks": {}
+            },
+            "product_inventory_CGNRga": {
+              "type": "product-inventory",
+              "name": "t:names.product_inventory",
+              "settings": {
+                "min_days": 1,
+                "max_days": 3,
+                "inventory_threshold": 10,
+                "show_inventory_quantity": true,
                 "padding-block-start": 0,
                 "padding-block-end": 0,
                 "padding-inline-start": 0,
@@ -238,6 +267,89 @@
               },
               "block_order": []
             },
+            "popup_link_WVU7VM": {
+              "type": "popup-link",
+              "name": "t:names.popup_link",
+              "settings": {
+                "behavior": "default",
+                "heading": "We’ve got you! 1 free lifetime replacement.",
+                "type_preset": "paragraph",
+                "padding-block-start": 0,
+                "padding-block-end": 0,
+                "padding-inline-start": 0,
+                "padding-inline-end": 0
+              },
+              "blocks": {
+                "text_fJKeHy": {
+                  "type": "text",
+                  "settings": {
+                    "text": "<h3>Lifetime Replacement Policy</h3>",
+                    "width": "fit-content",
+                    "max_width": "normal",
+                    "alignment": "left",
+                    "type_preset": "h3",
+                    "font": "var(--font-body--family)",
+                    "font_size": "1rem",
+                    "enable_mobile_size": false,
+                    "mobile_font_size": "1rem",
+                    "line_height": "normal",
+                    "letter_spacing": "normal",
+                    "case": "none",
+                    "wrap": "pretty",
+                    "color": "var(--color-foreground)",
+                    "background": false,
+                    "background_color": "#00000026",
+                    "corner_radius": 0,
+                    "padding-block-start": 0,
+                    "padding-block-end": 16,
+                    "padding-inline-start": 0,
+                    "padding-inline-end": 0,
+                    "custom_mobile_padding": false,
+                    "mobile-padding-block-start": 0,
+                    "mobile-padding-block-end": 0,
+                    "mobile-padding-inline-start": 0,
+                    "mobile-padding-inline-end": 0
+                  },
+                  "blocks": {}
+                },
+                "text_Fnwpzg": {
+                  "type": "text",
+                  "settings": {
+                    "text": "<p>Every Sip-Sip Hooray order includes <strong>one free replacement per order, for life</strong>.</p><p>Replacements are for the <strong>same item originally purchased</strong> and require a <strong>clear photo of the damage</strong>. Exchanges for different items are not allowed. Applies to eligible products and US orders only.</p><p><a href=\"https://sipsiphooraydesign.com/policies/contact-information\" title=\"Contact Information\">Contact Us</a></p>",
+                    "width": "100%",
+                    "max_width": "none",
+                    "alignment": "left",
+                    "type_preset": "rte",
+                    "font": "var(--font-body--family)",
+                    "font_size": "1rem",
+                    "enable_mobile_size": false,
+                    "mobile_font_size": "1rem",
+                    "line_height": "normal",
+                    "letter_spacing": "normal",
+                    "case": "none",
+                    "wrap": "pretty",
+                    "color": "var(--color-foreground)",
+                    "background": false,
+                    "background_color": "#00000026",
+                    "corner_radius": 0,
+                    "padding-block-start": 0,
+                    "padding-block-end": 0,
+                    "padding-inline-start": 0,
+                    "padding-inline-end": 0,
+                    "custom_mobile_padding": false,
+                    "mobile-padding-block-start": 0,
+                    "mobile-padding-block-end": 0,
+                    "mobile-padding-inline-start": 0,
+                    "mobile-padding-inline-end": 0
+                  },
+                  "blocks": {}
+                }
+              },
+              "block_order": [
+                "text_fJKeHy",
+                "text_Fnwpzg"
+              ]
+            },
             "text_aEtTtq": {
               "type": "text",
               "name": "Product description",
@@ -278,7 +390,7 @@
               "settings": {
                 "icon": "plus",
                 "dividers": true,
-                "type_preset": "",
+                "type_preset": "h4",
                 "inherit_color_scheme": true,
                 "color_scheme": "",
                 "border": "none",
@@ -371,30 +483,103 @@
                     "width": 20
                   },
                   "blocks": {}
+                },
+                "tab_row_dkjeXC": {
+                  "type": "_tab-row",
+                  "name": "Tab row",
+                  "settings": {
+                    "heading": "Shipping + Returns",
+                    "content": "<p>Orders are handmade and ship from Louisiana. Most orders process in 1–3 business days, with standard delivery taking 3–5 business days after shipment.<br/><br/>Returns are accepted on non-personalized, unused items within 7 days of delivery. Items damaged in transit or defective will be replaced or refunded. Full details are available in our Policies.</p>",
+                    "page": "",
+                    "liquid": "",
+                    "image_ratio": "adapt",
+                    "open_by_default": false,
+                    "type_preset": "rte",
+                    "enable_mobile_size": false,
+                    "mobile_font_size": "1rem",
+                    "font": "var(--font-body--family)",
+                    "font_size": "1rem",
+                    "line_height": "normal",
+                    "letter_spacing": "normal",
+                    "case": "none",
+                    "wrap": "pretty",
+                    "disable_on_mobile": false,
+                    "disable_on_desktop": false,
+                    "close_with_escape": false,
+                    "icon": "none",
+                    "width": 20
+                  },
+                  "blocks": {}
+                },
+                "tab_row_KLaPxi": {
+                  "type": "_tab-row",
+                  "name": "Tab row",
+                  "settings": {
+                    "heading": "What Is UV Ink?",
+                    "content": "<p>UVDTF (Ultraviolet Direct-to-Film) printing is an advanced printing technology that allows high-resolution, full-color designs to be transferred onto various surfaces with exceptional durability. Unlike traditional printing methods, UVDTF printing utilizes ultraviolet (UV) light to cure specially formulated inks, creating vibrant and long-lasting prints.</p><p>The texture you feel on the cup is the top layer of UV ink called varnish. The varnish gives the designs their glossy appearance.</p><p><strong>Our UV prints are not stickers. </strong>Stickers are smaller, individually cut designs printed on various materials (vinyl, paper, or polyester) with an adhesive backing for easy peel-and-stick application. Stickers are remove-able, and do not last.</p>",
+                    "page": "",
+                    "liquid": "",
+                    "image_ratio": "adapt",
+                    "open_by_default": false,
+                    "type_preset": "rte",
+                    "enable_mobile_size": false,
+                    "mobile_font_size": "1rem",
+                    "font": "var(--font-body--family)",
+                    "font_size": "1rem",
+                    "line_height": "normal",
+                    "letter_spacing": "normal",
+                    "case": "none",
+                    "wrap": "pretty",
+                    "disable_on_mobile": false,
+                    "disable_on_desktop": false,
+                    "close_with_escape": false,
+                    "icon": "none",
+                    "width": 20
+                  },
+                  "blocks": {}
                 }
               },
               "block_order": [
                 "tab_row_LAfmYz",
                 "tab_row_gTXc8k",
-                "tab_row_LHM7yz"
+                "tab_row_LHM7yz",
+                "tab_row_dkjeXC",
+                "tab_row_KLaPxi"
               ]
+            },
+            "shopvid_mp_tiktok_block_QzJRyi": {
+              "type": "shopify://apps/shopvid/blocks/mp_tiktok_block/1216543a-6237-4445-a5f2-61991cd76022",
+              "settings": {
+                "mp_tiktok_feed_id": "1803-164740"
+              }
             }
           },
           "block_order": [
             "group_icgrde",
             "variant_picker_R3rGDr",
+            "product_inventory_CGNRga",
             "buy_buttons_eYQEYi",
+            "popup_link_WVU7VM",
             "text_aEtTtq",
-            "tab_accordion_GLQmPe"
+            "tab_accordion_GLQmPe",
+            "shopvid_mp_tiktok_block_QzJRyi"
           ]
         }
       },
+      "custom_css": [
+        ".Shopvid__VideoBlock__Title {text-align: left; font-size: inherit !important; font-weight: normal;}",
+        "product-inventory {margin-bottom: -1rem !important;}",
+        ".tab-button {line-height: 1.4em;}",
+        ".Shopvid__VideoBlock__Carousel {padding-block: 12px;}",
+        ".popup-link__button {font-family: var(--font-body--family); font-weight: var(--font-body--weight); text-decoration: underline; text-align: center; width: 100%; font-size: inherit; margin-top: -1rem !important;}",
+        ".popup-link__button svg {display: none;}"
+      ],
       "settings": {
         "content_width": "page-narrow",
         "desktop_media_position": "left",
         "equal_columns": true,
         "limit_details_width": true,
-        "gap": 48,
+        "gap": 36,
         "enable_sticky_add_to_cart": true,
         "color_scheme": "",
         "padding-block-start": 12,
@@ -454,7 +639,7 @@
                 "image_upload": "shopify://shop_images/heart_2x_1e793947-a88b-4e5f-9f8c-9b3e26c65ef0.png",
                 "icon_width": 24,
                 "use_height": true,
-                "icon_height": 32,
+                "icon_height": 28,
                 "custom_mobile_height": true,
                 "mobile-height": 24,
                 "text": "<p>Handmade in Louisiana</p>",
@@ -572,10 +757,10 @@
               "settings": {
                 "icon_position": "left",
                 "icon": "apple",
-                "image_upload": "shopify://shop_images/shipping_2x_e43f5636-b6e0-4195-8c29-165af16054be.png",
+                "image_upload": "shopify://shop_images/shipping_2x_dcdef06a-fec4-4f47-81d0-0dbf922bf639.png",
                 "icon_width": 24,
                 "use_height": true,
-                "icon_height": 32,
+                "icon_height": 28,
                 "custom_mobile_height": true,
                 "mobile-height": 24,
                 "text": "<p>Free Shipping Over $40</p>",
@@ -693,13 +878,13 @@
               "settings": {
                 "icon_position": "left",
                 "icon": "apple",
-                "image_upload": "shopify://shop_images/support_2x_43cfe8c2-c81d-46bb-98bd-308cec30dd09.png",
+                "image_upload": "shopify://shop_images/ship_2x_e7b29ba1-945e-46af-be4c-ff8016246fd5.png",
                 "icon_width": 24,
                 "use_height": true,
-                "icon_height": 32,
+                "icon_height": 28,
                 "custom_mobile_height": true,
                 "mobile-height": 24,
-                "text": "<p>Support 7 Days A Week</p>",
+                "text": "<p>Ships Worldwide</p>",
                 "text_width": "fit-content",
                 "max_width": "normal",
                 "alignment": "left",
@@ -964,7 +1149,7 @@
         "section_width": "page-narrow",
         "full_width_on_mobile": false,
         "gap": 0,
-        "color_scheme": "scheme-738179cd-4e15-457b-be40-989a024001d6",
+        "color_scheme": "scheme-761f80f0-0e3a-4090-9168-95d4d4a71356",
         "background_media": "none",
         "video_position": "cover",
         "background_image_position": "cover",
@@ -1339,7 +1524,6 @@
         "group_rxtAzb",
         "image_reLhMB"
       ],
-      "disabled": true,
       "custom_css": [
         ".deferred-media__poster-button {--video-aspect-ratio: 1.3 !important;}",
         "video {--size-style-aspect-ratio: 1.3 !important;}",
@@ -1468,7 +1652,7 @@
               "type": "text",
               "name": "t:names.heading",
               "settings": {
-                "text": "<h2>Built for the Daily Go</h2>",
+                "text": "<h2>Sip Gives Back</h2>",
                 "width": "100%",
                 "max_width": "none",
                 "alignment": "left",
@@ -1500,7 +1684,7 @@
             "text_9D7Xpx": {
               "type": "text",
               "settings": {
-                "text": "<p>From our cozy 17oz glass mugs perfect for morning matcha, to our massive 40oz handled tumblers built for all-day hydration. Paired with snug bamboo or secure plastic lids and reusable straws, our sleek profiles are designed to slide right into your car cup holder and your busy lifestyle.</p>",
+                "text": "<p>Drinkware with a purpose. Each month, we partner with a new charity to donate a percentage of every sale to causes that matter. From funding research to supporting local communities, we ensure your purchase creates real, transparent impact where it's needed most.</p>",
                 "width": "100%",
                 "max_width": "normal",
                 "alignment": "left",
@@ -1540,7 +1724,6 @@
         "image_M9BBzM",
         "group_3RAqAU"
       ],
-      "disabled": true,
       "custom_css": [
         ".deferred-media__poster-button {--video-aspect-ratio: 1.3 !important;}",
         "video {--size-style-aspect-ratio: 1.3 !important;}",
@@ -1577,352 +1760,6 @@
         "gradient_direction": "to top",
         "padding-block-start": 0,
         "padding-block-end": 72,
-        "custom_mobile_padding": false,
-        "mobile-padding-block-start": 0,
-        "mobile-padding-block-end": 0,
-        "mobile-padding-inline-start": 0,
-        "mobile-padding-inline-end": 0,
-        "css_class": "",
-        "add_section_id": false,
-        "section_id": ""
-      }
-    },
-    "section_qV8z8P": {
-      "type": "section",
-      "blocks": {
-        "text_J9DqYz": {
-          "type": "text",
-          "name": "t:names.heading",
-          "settings": {
-            "text": "<h2>FAQs</h2>",
-            "width": "fit-content",
-            "max_width": "narrow",
-            "alignment": "left",
-            "type_preset": "h2",
-            "font": "var(--font-body--family)",
-            "font_size": "1rem",
-            "enable_mobile_size": true,
-            "mobile_font_size": "2rem",
-            "line_height": "normal",
-            "letter_spacing": "normal",
-            "case": "none",
-            "wrap": "pretty",
-            "color": "var(--color-foreground)",
-            "background": false,
-            "background_color": "#00000026",
-            "corner_radius": 0,
-            "padding-block-start": 0,
-            "padding-block-end": 0,
-            "padding-inline-start": 0,
-            "padding-inline-end": 0,
-            "custom_mobile_padding": false,
-            "mobile-padding-block-start": 0,
-            "mobile-padding-block-end": 0,
-            "mobile-padding-inline-start": 0,
-            "mobile-padding-inline-end": 0
-          },
-          "blocks": {}
-        },
-        "accordion_KAam6G": {
-          "type": "accordion",
-          "name": "t:names.accordion",
-          "settings": {
-            "icon": "plus",
-            "dividers": true,
-            "type_preset": "",
-            "inherit_color_scheme": true,
-            "color_scheme": "",
-            "border": "none",
-            "border_width": 1,
-            "border_opacity": 100,
-            "border_radius": 0,
-            "padding-block-start": 0,
-            "padding-block-end": 0,
-            "padding-inline-start": 0,
-            "padding-inline-end": 0
-          },
-          "blocks": {
-            "accordion_row_yE8zL3": {
-              "type": "_accordion-row",
-              "settings": {
-                "heading": "What is the return policy?",
-                "open_by_default": false,
-                "icon": "none",
-                "width": 20
-              },
-              "blocks": {
-                "text_mQYPnx": {
-                  "type": "text",
-                  "settings": {
-                    "text": "<p>Our goal is for every customer to be totally satisfied with their purchase. If this isn't the case, let us know and we'll do our best to work with you to make it right.</p>",
-                    "width": "100%",
-                    "max_width": "normal",
-                    "alignment": "left",
-                    "type_preset": "rte",
-                    "font": "var(--font-body--family)",
-                    "font_size": "1rem",
-                    "enable_mobile_size": false,
-                    "mobile_font_size": "1rem",
-                    "line_height": "normal",
-                    "letter_spacing": "normal",
-                    "case": "none",
-                    "wrap": "pretty",
-                    "color": "var(--color-foreground)",
-                    "background": false,
-                    "background_color": "#00000026",
-                    "corner_radius": 0,
-                    "padding-block-start": 0,
-                    "padding-block-end": 0,
-                    "padding-inline-start": 0,
-                    "padding-inline-end": 0,
-                    "custom_mobile_padding": false,
-                    "mobile-padding-block-start": 0,
-                    "mobile-padding-block-end": 0,
-                    "mobile-padding-inline-start": 0,
-                    "mobile-padding-inline-end": 0
-                  },
-                  "blocks": {}
-                }
-              },
-              "block_order": [
-                "text_mQYPnx"
-              ]
-            },
-            "accordion_row_Lx4r6H": {
-              "type": "_accordion-row",
-              "settings": {
-                "heading": "Are any purchases final sale?",
-                "open_by_default": false,
-                "icon": "none",
-                "width": 20
-              },
-              "blocks": {
-                "text_WdLRfN": {
-                  "type": "text",
-                  "settings": {
-                    "text": "<p>We are unable to accept returns on certain items. These will be carefully marked before purchase.</p>",
-                    "width": "100%",
-                    "max_width": "normal",
-                    "alignment": "left",
-                    "type_preset": "rte",
-                    "font": "var(--font-body--family)",
-                    "font_size": "1rem",
-                    "enable_mobile_size": false,
-                    "mobile_font_size": "1rem",
-                    "line_height": "normal",
-                    "letter_spacing": "normal",
-                    "case": "none",
-                    "wrap": "pretty",
-                    "color": "var(--color-foreground)",
-                    "background": false,
-                    "background_color": "#00000026",
-                    "corner_radius": 0,
-                    "padding-block-start": 0,
-                    "padding-block-end": 0,
-                    "padding-inline-start": 0,
-                    "padding-inline-end": 0,
-                    "custom_mobile_padding": false,
-                    "mobile-padding-block-start": 0,
-                    "mobile-padding-block-end": 0,
-                    "mobile-padding-inline-start": 0,
-                    "mobile-padding-inline-end": 0
-                  },
-                  "blocks": {}
-                }
-              },
-              "block_order": [
-                "text_WdLRfN"
-              ]
-            },
-            "accordion_row_wBhgqW": {
-              "type": "_accordion-row",
-              "name": "t:names.accordion_row",
-              "settings": {
-                "heading": "When will I get my order?",
-                "open_by_default": false,
-                "icon": "none",
-                "width": 20
-              },
-              "blocks": {
-                "text_qE4bcJ": {
-                  "type": "text",
-                  "name": "t:names.text",
-                  "settings": {
-                    "text": "<p>We will work quickly to ship your order as soon as possible. Once your order has shipped, you will receive an email with further information. Delivery times vary depending on your location.</p>",
-                    "width": "100%",
-                    "max_width": "normal",
-                    "alignment": "left",
-                    "type_preset": "rte",
-                    "font": "var(--font-body--family)",
-                    "font_size": "1rem",
-                    "enable_mobile_size": false,
-                    "mobile_font_size": "1rem",
-                    "line_height": "normal",
-                    "letter_spacing": "normal",
-                    "case": "none",
-                    "wrap": "pretty",
-                    "color": "var(--color-foreground)",
-                    "background": false,
-                    "background_color": "#00000026",
-                    "corner_radius": 0,
-                    "padding-block-start": 0,
-                    "padding-block-end": 0,
-                    "padding-inline-start": 0,
-                    "padding-inline-end": 0,
-                    "custom_mobile_padding": false,
-                    "mobile-padding-block-start": 0,
-                    "mobile-padding-block-end": 0,
-                    "mobile-padding-inline-start": 0,
-                    "mobile-padding-inline-end": 0
-                  },
-                  "blocks": {}
-                }
-              },
-              "block_order": [
-                "text_qE4bcJ"
-              ]
-            },
-            "accordion_row_JYUkrF": {
-              "type": "_accordion-row",
-              "name": "t:names.accordion_row",
-              "settings": {
-                "heading": "Where are your products manufactured?",
-                "open_by_default": false,
-                "icon": "none",
-                "width": 20
-              },
-              "blocks": {
-                "text_NRXf97": {
-                  "type": "text",
-                  "name": "t:names.text",
-                  "settings": {
-                    "text": "<p>Our products are manufactured both locally and globally. We carefully select our manufacturing partners to ensure our products are high quality and a fair value.</p>",
-                    "width": "100%",
-                    "max_width": "normal",
-                    "alignment": "left",
-                    "type_preset": "rte",
-                    "font": "var(--font-body--family)",
-                    "font_size": "1rem",
-                    "enable_mobile_size": false,
-                    "mobile_font_size": "1rem",
-                    "line_height": "normal",
-                    "letter_spacing": "normal",
-                    "case": "none",
-                    "wrap": "pretty",
-                    "color": "var(--color-foreground)",
-                    "background": false,
-                    "background_color": "#00000026",
-                    "corner_radius": 0,
-                    "padding-block-start": 0,
-                    "padding-block-end": 0,
-                    "padding-inline-start": 0,
-                    "padding-inline-end": 0,
-                    "custom_mobile_padding": false,
-                    "mobile-padding-block-start": 0,
-                    "mobile-padding-block-end": 0,
-                    "mobile-padding-inline-start": 0,
-                    "mobile-padding-inline-end": 0
-                  },
-                  "blocks": {}
-                }
-              },
-              "block_order": [
-                "text_NRXf97"
-              ]
-            },
-            "accordion_row_4YtiT8": {
-              "type": "_accordion-row",
-              "name": "t:names.accordion_row",
-              "settings": {
-                "heading": "How much does shipping cost?",
-                "open_by_default": false,
-                "icon": "none",
-                "width": 20
-              },
-              "blocks": {
-                "text_wHVkAk": {
-                  "type": "text",
-                  "name": "t:names.text",
-                  "settings": {
-                    "text": "<p>Shipping is calculated based on your location and the items in your order. You will always know the shipping price before you purchase.</p>",
-                    "width": "100%",
-                    "max_width": "normal",
-                    "alignment": "left",
-                    "type_preset": "rte",
-                    "font": "var(--font-body--family)",
-                    "font_size": "1rem",
-                    "enable_mobile_size": false,
-                    "mobile_font_size": "1rem",
-                    "line_height": "normal",
-                    "letter_spacing": "normal",
-                    "case": "none",
-                    "wrap": "pretty",
-                    "color": "var(--color-foreground)",
-                    "background": false,
-                    "background_color": "#00000026",
-                    "corner_radius": 0,
-                    "padding-block-start": 0,
-                    "padding-block-end": 0,
-                    "padding-inline-start": 0,
-                    "padding-inline-end": 0,
-                    "custom_mobile_padding": false,
-                    "mobile-padding-block-start": 0,
-                    "mobile-padding-block-end": 0,
-                    "mobile-padding-inline-start": 0,
-                    "mobile-padding-inline-end": 0
-                  },
-                  "blocks": {}
-                }
-              },
-              "block_order": [
-                "text_wHVkAk"
-              ]
-            }
-          },
-          "block_order": [
-            "accordion_row_yE8zL3",
-            "accordion_row_Lx4r6H",
-            "accordion_row_wBhgqW",
-            "accordion_row_JYUkrF",
-            "accordion_row_4YtiT8"
-          ]
-        }
-      },
-      "block_order": [
-        "text_J9DqYz",
-        "accordion_KAam6G"
-      ],
-      "name": "t:names.faq_section",
-      "settings": {
-        "content_direction": "column",
-        "vertical_on_mobile": true,
-        "reverse_on_mobile": false,
-        "horizontal_alignment": "flex-start",
-        "vertical_alignment": "center",
-        "align_baseline": false,
-        "horizontal_alignment_flex_direction_column": "flex-start",
-        "vertical_alignment_flex_direction_column": "center",
-        "gap": 32,
-        "enable_mobile_gap": false,
-        "mobile_gap": 12,
-        "section_width": "page-narrow",
-        "full_width_on_mobile": false,
-        "section_height": "",
-        "section_height_custom": 50,
-        "color_scheme": "",
-        "background_media": "none",
-        "video_position": "cover",
-        "background_image_position": "cover",
-        "border": "none",
-        "border_width": 1,
-        "border_opacity": 100,
-        "border_radius": 0,
-        "toggle_overlay": false,
-        "overlay_color": "#00000026",
-        "overlay_style": "solid",
-        "gradient_direction": "to top",
-        "padding-block-start": 48,
-        "padding-block-end": 48,
         "custom_mobile_padding": false,
         "mobile-padding-block-start": 0,
         "mobile-padding-block-end": 0,
@@ -1972,7 +1809,202 @@
         "overlay_style": "solid",
         "gradient_direction": "to top",
         "padding-block-start": 0,
-        "padding-block-end": 62
+        "padding-block-end": 36
+      }
+    },
+    "section_qV8z8P": {
+      "type": "section",
+      "blocks": {
+        "text_J9DqYz": {
+          "type": "text",
+          "name": "t:names.heading",
+          "settings": {
+            "text": "<h2>Product & Care FAQs</h2>",
+            "width": "fit-content",
+            "max_width": "narrow",
+            "alignment": "left",
+            "type_preset": "h2",
+            "font": "var(--font-body--family)",
+            "font_size": "1rem",
+            "enable_mobile_size": true,
+            "mobile_font_size": "2rem",
+            "line_height": "normal",
+            "letter_spacing": "normal",
+            "case": "none",
+            "wrap": "pretty",
+            "color": "var(--color-foreground)",
+            "background": false,
+            "background_color": "#00000026",
+            "corner_radius": 0,
+            "padding-block-start": 0,
+            "padding-block-end": 0,
+            "padding-inline-start": 0,
+            "padding-inline-end": 0,
+            "custom_mobile_padding": false,
+            "mobile-padding-block-start": 0,
+            "mobile-padding-block-end": 0,
+            "mobile-padding-inline-start": 0,
+            "mobile-padding-inline-end": 0
+          },
+          "blocks": {}
+        },
+        "accordion_KAam6G": {
+          "type": "accordion",
+          "name": "t:names.accordion",
+          "settings": {
+            "icon": "plus",
+            "dividers": true,
+            "type_preset": "",
+            "inherit_color_scheme": true,
+            "color_scheme": "",
+            "border": "none",
+            "border_width": 1,
+            "border_opacity": 100,
+            "border_radius": 0,
+            "padding-block-start": 0,
+            "padding-block-end": 0,
+            "padding-inline-start": 0,
+            "padding-inline-end": 0
+          },
+          "blocks": {
+            "accordion_row_dynamic_yqhLYG": {
+              "type": "_accordion-row-dynamic",
+              "name": "Accordion row (dynamic)",
+              "settings": {
+                "heading": "What are your cups made from?",
+                "content": "<p>Our cups and straws are made from 100% non-toxic, lead-free borosilicate glass, a very long-lasting and sturdy material. Our lids are made from sustainably sourced, reusable bamboo.</p>",
+                "open_by_default": false,
+                "icon": "none",
+                "width": 20,
+                "add_color_scheme": true,
+                "color_scheme": ""
+              },
+              "blocks": {}
+            },
+            "accordion_row_dynamic_Wwmqij": {
+              "type": "_accordion-row-dynamic",
+              "name": "Accordion row (dynamic)",
+              "settings": {
+                "heading": "Are the designs stickers? Will they peel off?",
+                "content": "<p>No, our cups are NOT made with stickers! We use UVDTF prints which are permanent, ultra-durable, and cured with UV light for a glossy, high-quality finish. The slight texture you feel is a protective varnish layer. They won't peel, fade, or rub off.</p>",
+                "open_by_default": false,
+                "icon": "none",
+                "width": 20,
+                "add_color_scheme": true,
+                "color_scheme": ""
+              },
+              "blocks": {}
+            },
+            "accordion_row_dynamic_LcbBda": {
+              "type": "_accordion-row-dynamic",
+              "name": "Accordion row (dynamic)",
+              "settings": {
+                "heading": "How do I care for my bamboo lid?",
+                "content": "<p>Because bamboo is a natural, porous material, it needs specific care. Hand wash only (no soaking), and ensure it is dried completely before sealing it back on your cup. Do not leave your lid sealed on your cup for more than 24 hours at a time, as trapped moisture without airflow can cause mold growth. (Note: Check out our acrylic lids for a dishwasher-safe, low-maintenance option!)</p>",
+                "open_by_default": false,
+                "icon": "none",
+                "width": 20,
+                "add_color_scheme": true,
+                "color_scheme": ""
+              },
+              "blocks": {}
+            },
+            "accordion_row_dynamic_UzcG6b": {
+              "type": "_accordion-row-dynamic",
+              "name": "Accordion row (dynamic)",
+              "settings": {
+                "heading": "What is your processing and shipping time?",
+                "content": "<p>Please allow 1-3 business days (Monday-Friday) for us to process and create your order. We ship with USPS and UPS from Louisiana, USA. Standard domestic shipping usually takes 3-5 days to deliver.</p>",
+                "open_by_default": false,
+                "icon": "none",
+                "width": 20,
+                "add_color_scheme": true,
+                "color_scheme": ""
+              },
+              "blocks": {}
+            },
+            "accordion_row_dynamic_eD8Vzm": {
+              "type": "_accordion-row-dynamic",
+              "name": "Accordion row (dynamic)",
+              "settings": {
+                "heading": "Do you ship internationally?",
+                "content": "<p>Yes, we ship everywhere in the United States and internationally! We use Global Post for international orders, which usually takes 3-5 weeks to deliver. <em>(Please note: International buyers are responsible for any applicable customs fees, duties, and taxes).</em></p>",
+                "open_by_default": false,
+                "icon": "none",
+                "width": 20,
+                "add_color_scheme": true,
+                "color_scheme": ""
+              },
+              "blocks": {}
+            },
+            "accordion_row_dynamic_DL8xHf": {
+              "type": "_accordion-row-dynamic",
+              "name": "Accordion row (dynamic)",
+              "settings": {
+                "heading": "Can I return or exchange my cup?",
+                "content": "<p>We accept returns on non-used, non-personalized items within 7 days of delivery. We are also happy to replace or refund any items that arrive broken in transit or appear to be defective. If you need to cancel or swap an item on a new order, please reach out within 12 hours of placing the order!</p>",
+                "open_by_default": false,
+                "icon": "none",
+                "width": 20,
+                "add_color_scheme": true,
+                "color_scheme": ""
+              },
+              "blocks": {}
+            }
+          },
+          "block_order": [
+            "accordion_row_dynamic_yqhLYG",
+            "accordion_row_dynamic_Wwmqij",
+            "accordion_row_dynamic_LcbBda",
+            "accordion_row_dynamic_UzcG6b",
+            "accordion_row_dynamic_eD8Vzm",
+            "accordion_row_dynamic_DL8xHf"
+          ]
+        }
+      },
+      "block_order": [
+        "text_J9DqYz",
+        "accordion_KAam6G"
+      ],
+      "name": "t:names.faq_section",
+      "settings": {
+        "content_direction": "column",
+        "vertical_on_mobile": true,
+        "reverse_on_mobile": false,
+        "horizontal_alignment": "flex-start",
+        "vertical_alignment": "center",
+        "align_baseline": false,
+        "horizontal_alignment_flex_direction_column": "flex-start",
+        "vertical_alignment_flex_direction_column": "center",
+        "gap": 32,
+        "enable_mobile_gap": false,
+        "mobile_gap": 12,
+        "section_width": "page-narrow",
+        "full_width_on_mobile": false,
+        "section_height": "",
+        "section_height_custom": 50,
+        "color_scheme": "",
+        "background_media": "none",
+        "video_position": "cover",
+        "background_image_position": "cover",
+        "border": "none",
+        "border_width": 1,
+        "border_opacity": 100,
+        "border_radius": 0,
+        "toggle_overlay": false,
+        "overlay_color": "#00000026",
+        "overlay_style": "solid",
+        "gradient_direction": "to top",
+        "padding-block-start": 48,
+        "padding-block-end": 48,
+        "custom_mobile_padding": true,
+        "mobile-padding-block-start": 24,
+        "mobile-padding-block-end": 32,
+        "mobile-padding-inline-start": 0,
+        "mobile-padding-inline-end": 0,
+        "css_class": "",
+        "add_section_id": false,
+        "section_id": ""
       }
     },
     "product_recommendations_qggXJq": {
@@ -2223,13 +2255,14 @@
     }
   },
   "order": [
+    "custom_liquid_acNN9e",
     "main",
     "grid_section_HD8gtH",
     "section_P8A676",
     "section_jfT3jX",
     "section_nfr7dm",
-    "section_qV8z8P",
     "17726425831d4fe2dc",
+    "section_qV8z8P",
     "product_recommendations_qggXJq"
   ]
 }

@@ -358,7 +358,6 @@ class TabAccordion extends HTMLElement {
       if (this.#isSwipeable) {
         this.#scrollContainer.style.overflowX = 'auto';
         this.#scrollContainer.style.scrollBehavior = 'smooth';
-        this.#scrollContainer.style.cursor = 'grab';
         
         // Add swipeable class to tabs header
         if (this.tabsHeader) {

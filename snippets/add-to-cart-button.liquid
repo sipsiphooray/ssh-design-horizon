@@ -57,6 +57,14 @@
           </span>
         </span>
       </span>
+      <span class="button-divider">•</span>
+      <span class="button--price">
+        {% if settings.currency_code_enabled_product_pages %}
+          {{ product.selected_or_first_available_variant.price | money_with_currency | replace: '.00', '' }}
+        {% else %}
+          {{ product.selected_or_first_available_variant.price | money_without_trailing_zeros }}
+        {% endif %}
+      </span>
     </span>
     {% comment %} checkmark burst markup {% endcomment %}
     <span class="add-to-cart__added">

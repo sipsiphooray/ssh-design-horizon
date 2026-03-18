@@ -22,6 +22,10 @@ slideshow-controls.carousel-controls .icon-play {
     --letter-spacing--heading-tight: -0.05em !important;
     --drawer-width: 100vw !important;
     --submenu-animation-speed: 0s !important;
+}
+
+
+.product-information__grid--limit-details .product-details>.group-block {
     --sidebar-width: 32rem !important;
 }
 
@@ -375,6 +379,18 @@ summary,.menu-drawer__back-button {
 .cart-drawer__heading .cart-bubble[data-maintain-ratio] {
     width: min(2lh, 22px) !important;
     height: min(2lh, 22px) !important;
+}
+
+.accordion summary {
+    padding-block: var(--padding-lg) !important;
+}
+
+summary .svg-wrapper {
+    min-width: var(--icon-size-xs);
+}
+
+.header-actions__cart-icon {
+    --cart-bubble-size: 16px !important;
 }
 
 @media screen and (min-width: 60em) {

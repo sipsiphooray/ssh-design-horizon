@@ -150,7 +150,7 @@ class VariantSelect extends Component {
     return option.text;
   }
 
-  toggleMenu() {
+toggleMenu() {
     const isOpening = !this.menu.classList.contains("open");
     
     if (isOpening) {
@@ -161,6 +161,14 @@ class VariantSelect extends Component {
           otherMenu.closest('variant-select').wrapper.setAttribute('aria-expanded', 'false');
         }
       });
+      
+      // Lock scrolling on HTML element ONLY if screen width is 750px or greater
+      if (window.innerWidth >= 750) {
+        document.documentElement.setAttribute('scroll-lock', '');
+      }
+    } else {
+      // Unlock scrolling if toggling closed
+      document.documentElement.removeAttribute('scroll-lock');
     }
     
     this.menu.classList.toggle("open");
@@ -168,8 +176,13 @@ class VariantSelect extends Component {
   }
 
   closeMenu() {
-    this.menu.classList.remove("open");
-    this.wrapper.setAttribute('aria-expanded', 'false');
+    if (this.menu.classList.contains("open")) {
+      this.menu.classList.remove("open");
+      this.wrapper.setAttribute('aria-expanded', 'false');
+      
+      // Always unlock scrolling when closing to prevent resize bugs
+      document.documentElement.removeAttribute('scroll-lock');
+    }
   }
 
   onOptionSelect(option, optionEl) {

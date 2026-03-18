@@ -1,3 +1,60 @@
+{% assign min_days = block.settings.min_days %}
+{% assign max_days = block.settings.max_days %}
+
+{% assign now_ts = 'now' | date: "%s" %}
+
+{% assign min_date = now_ts %}
+{% assign counted = 0 %}
+{% for i in (1..60) %}
+  {% assign min_date = min_date | plus: 86400 %}
+  {% assign weekday = min_date | date: "%w" %}
+  {% unless weekday == '0' or weekday == '6' %}
+    {% assign counted = counted | plus: 1 %}
+  {% endunless %}
+  {% if counted == min_days %}
+    {% break %}
+  {% endif %}
+{% endfor %}
+
+{% assign max_date = now_ts %}
+{% assign counted = 0 %}
+{% for i in (1..60) %}
+  {% assign max_date = max_date | plus: 86400 %}
+  {% assign weekday = max_date | date: "%w" %}
+  {% unless weekday == '0' or weekday == '6' %}
+    {% assign counted = counted | plus: 1 %}
+  {% endunless %}
+  {% if counted == max_days %}
+    {% break %}
+  {% endif %}
+{% endfor %}
+
+{% capture min_formatted -%}
+  {{- min_date | date: "%B %-d" -}}
+  {%- assign day = min_date | date: "%-d" -%}
+  {%- case day -%}
+    {%- when '1' or '21' or '31' -%}st
+    {%- when '2' or '22' -%}nd
+    {%- when '3' or '23' -%}rd
+    {%- else -%}th
+  {%- endcase -%}
+{%- endcapture %}
+
+{% capture max_formatted -%}
+  {{- max_date | date: "%B %-d" -}}
+  {%- assign day = max_date | date: "%-d" -%}
+  {%- case day -%}
+    {%- when '1' or '21' or '31' -%}st
+    {%- when '2' or '22' -%}nd
+    {%- when '3' or '23' -%}rd
+    {%- else -%}th
+  {%- endcase -%}
+{%- endcapture %}
+
+{% capture date -%}
+  {{- min_formatted -}} - {{- max_formatted -}}
+{%- endcapture %}
+
 {%- liquid
   assign block_settings = block.settings
   assign variant = closest.product.selected_or_first_available_variant
@@ -14,16 +71,16 @@
         assign status = 'low'
         assign show_quantity = block_settings.show_inventory_quantity
         if show_quantity == false
-          assign translation_key = 'content.inventory_low_stock'
+          assign translation_key = 'content.inventory_low_stock_html'
         endif
       else
         assign status = 'in_stock'
-        assign translation_key = 'content.inventory_in_stock'
+        assign translation_key = 'content.inventory_in_stock_html'
       endif
     else
       if inventory_policy == 'continue'
         assign status = 'in_stock'
-        assign translation_key = 'content.inventory_in_stock'
+        assign translation_key = 'content.inventory_in_stock_html'
       else
         assign status = 'out_of_stock'
         assign translation_key = 'content.inventory_out_of_stock'
@@ -64,9 +121,9 @@
       aria-label="{{ 'accessibility.inventory_status' | t }}"
     >
       {%- if show_quantity -%}
-        {{ 'content.inventory_low_stock_show_count' | t: count: inventory_quantity }}
+        {{ 'content.inventory_low_stock_show_count_html' | t: count: inventory_quantity, date: date }}
       {%- else -%}
-        {{- translation_key | t -}}
+        {{- translation_key | t: date: date -}}
       {%- endif -%}
     </span>
   </span>
@@ -109,6 +166,18 @@
   "name": "t:names.product_inventory",
   "tag": null,
   "settings": [
+    {
+      "type": "number",
+      "id": "min_days",
+      "label": "Shipping Minimum Days",
+      "default": 1
+    },
+    {
+      "type": "number",
+      "id": "max_days",
+      "label": "Shipping Maximum Days",
+      "default": 3
+    },
     {
       "type": "paragraph",
       "content": "t:content.resource_reference_product_inventory"
