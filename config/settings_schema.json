@@ -1780,6 +1780,42 @@
         "default": "/collections/all"
       },
       {
+        "type": "checkbox",
+        "id": "show_shipping_bar",
+        "label": "Show Shipping bar",
+        "default": true
+      },
+      {
+        "type": "header",
+        "content": "Shipping bar settings",
+        "visible_if": "{{ settings.show_shipping_bar == true }}"
+      },
+      {
+        "type": "number",
+        "id": "shipping_threshold",
+        "label": "Shipping threshold",
+        "visible_if": "{{ settings.show_shipping_bar == true }}"
+      },
+      {
+        "type": "inline_richtext",
+        "id": "progress_message",
+        "label": "Progress message",
+        "visible_if": "{{ settings.show_shipping_bar == true }}"
+      },
+      {
+        "type": "inline_richtext",
+        "id": "success_message",
+        "label": "Success message",
+        "visible_if": "{{ settings.show_shipping_bar == true }}"
+      },
+      {
+        "type": "color_scheme",
+        "id": "shipping_color_scheme",
+        "label": "t:settings.color_scheme",
+        "default": "scheme-2",
+        "visible_if": "{{ settings.show_shipping_bar == true }}"
+      },
+      {
         "type": "header",
         "content": "t:content.product_media"
       },

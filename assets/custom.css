@@ -364,6 +364,11 @@ summary,.menu-drawer__back-button {
     color: var(--color-primary-button-background) !important;
 }
 
+.cart-drawer__heading .cart-bubble[data-maintain-ratio] {
+    width: min(2lh, 22px) !important;
+    height: min(2lh, 22px) !important;
+}
+
 @media screen and (min-width: 60em) {
     :root {
         --section-height-large: 90svh !important;

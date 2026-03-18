@@ -63,6 +63,10 @@
     "cart_price_font": "subheading",
     "show_cart_note": false,
     "show_add_discount_code": true,
+    "shipping_threshold": 40,
+    "progress_message": "You’re [money] away from free shipping",
+    "success_message": "🎉 You’ve unlocked FREE SHIPPING!",
+    "shipping_color_scheme": "scheme-1",
     "drawer_drop_shadow": true,
     "icon_stroke": "default",
     "input_border_width": 1,
@@ -161,7 +165,7 @@
       },
       "scheme-2": {
         "settings": {
-          "background": "#f0dfe7",
+          "background": "#fbe1ec",
           "foreground_heading": "#2b2b2b",
           "foreground": "#2b2b2b",
           "primary": "#2b2b2b",

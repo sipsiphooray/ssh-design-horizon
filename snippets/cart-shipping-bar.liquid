@@ -1,0 +1,144 @@
+{% assign threshold = settings.shipping_threshold | times: 100 %}
+
+<shipping-bar>
+    <div class="shipping-bar-inner color-{{ settings.shipping_color_scheme }}">
+        <div class="border-style shipping-bar-spacer spacing-style
+        size-style"
+        style="
+            --border-width: 1px; --border-style: none; 
+            --border-color: rgb(var(--color-border-rgb) / 1.0);
+            --border-radius:0px; 
+            --padding-block-start: 0;
+            --padding-block-end: var(--padding-xs);
+            --padding-inline-start: var(--padding-lg);
+            --padding-inline-end: var(--padding-lg);
+            --size-style-width: 100%;
+            --size-style-height: fit;
+            --size-style-width-mobile: 100%;
+            --size-style-width-mobile-min: 5rem;
+        "
+    >
+            <div class="layout-panel-flex
+            layout-panel-flex--column
+            mobile-column spacing-style gap-style"
+            style="--flex-direction: column; --flex-wrap: nowrap;
+                --gap: 8px;
+                --horizontal-alignment: center; --vertical-alignment: flex-start;
+                --vertical-alignment-mobile: flex-start;
+            "
+            >
+                <div style="width: 100%;">
+                    {% if cart.total_price < threshold %}
+                        {% assign price = threshold | minus: cart.total_price | money %}
+                        <div class="text-block custom custom-typography custom-font-size custom-color" style="
+                            --color: var(--color-foreground);--font-size: var(--font-size--xs);
+                            --font-weight: var(--font-subheading--weight);
+                            --font-family: var(--font-subheading--family);
+                            --text-transform: none;
+                            --text-wrap: pretty;
+                            --line-height: var(--line-height--body-normal);
+                            --letter-spacing: var(--letter-spacing--body-normal);
+                            --width: 100%;
+                            --max-width: 100%;
+                        ">
+                            <h5>{{ settings.progress_message | replace: '[money]', price }}</h5>
+                        </div>
+                    {% else %}
+                        <div class="text-block custom custom-typography  custom-font-size custom-color" style="
+                            --color: var(--color-foreground);--font-size: var(--font-size--xs);
+                            --font-weight: var(--font-subheading--weight);
+                            --font-family: var(--font-subheading--family);
+                            --text-transform: none;
+                            --text-wrap: pretty;
+                            --line-height: var(--line-height--body-normal);
+                            --letter-spacing: var(--letter-spacing--body-normal);
+                            --width: 100%;
+                            --max-width: 100%;
+                        ">
+                            <h5>{{ settings.success_message }}</h5>
+                        </div>
+                    {% endif %}
+                </div>
+                <div style="width: 100%;">
+                    {% assign threshold = settings.shipping_threshold | times: 100 %}
+                    {% assign cart_total = cart.total_price %}
+                    {% assign progress = cart_total | times: 1.0 | divided_by: threshold %}
+
+                    {% if progress > 1 %}
+                        {% assign progress = 1 %}
+                    {% endif %}
+
+                    <div class="progress-bar">
+                        <div class="progress-fill" style="transform: scaleX({{ progress }});"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</shipping-bar>
+
+{% stylesheet %}
+    shipping-bar {
+        margin-bottom: 1rem;
+        display: block;
+    }
+.progress-bar {
+    width: 100%;
+    height: .375rem;
+    position: relative;
+    display: flex;
+    border-radius: 12px;
+    background: rgb(var(--color-primary-rgb) / .2);
+    overflow: hidden;
+}
+
+/* Progress fill with striped pattern */
+.progress-fill {
+    transition-duration: .15s;
+    transition-property: transform;
+    transition-timing-function: cubic-bezier(.4, 0, .2, 1);
+    background: var(--color-foreground);
+    transform-origin: left;
+    width: 100%;
+    height: 100%;
+    border-radius: 12px;
+    position: absolute;
+    left: 0;
+    
+    /* Create diagonal stripe pattern */
+    background-image: repeating-linear-gradient(
+        45deg,
+        transparent,
+        transparent 10px,
+        rgba(255, 255, 255, 0.2) 10px,
+        rgba(255, 255, 255, 0.2) 20px
+    );
+    
+    /* Animated stripes effect */
+    animation: stripeMove 1s linear infinite;
+    background-size: 28px 28px;
+}
+
+/* Stripe animation */
+@keyframes stripeMove {
+    0% {
+        background-position: 0 0;
+    }
+    100% {
+        background-position: 28px 0;
+    }
+}
+
+    @media (max-width: 749px) {
+        .shipping-bar-spacer {
+            --padding-block-start: var(--padding-sm) !important;
+            --padding-block-end: var(--padding-sm) !important;
+            --padding-inline-start: var(--padding-sm) !important;
+            --padding-inline-end: var(--padding-sm) !important;
+        }
+
+        .shipping-bar-spacer h5 {
+            font-size: var(--font-size--2xs);
+        }
+    }
+{% endstylesheet %}
