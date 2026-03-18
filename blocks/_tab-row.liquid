@@ -6,10 +6,6 @@
   {% assign tab_content = block_settings.page.content %}
 {% endif %}
 
-{% if block_settings.liquid != blank %}
-  {% assign tab_content = block_settings.liquid %}
-{% endif %}
-
 {% if tab_content == blank %}
     {% break %}
 {% endif %}
@@ -130,7 +126,13 @@
     <div class="details-content">
         <div class="tab-row-content--inner">
             <{{ element }} {{ attributes }}>
+              {% if block_settings.liquid != blank and block_settings.placement == 'above-content' %}
+                {{ block_settings.liquid }}
+              {% endif %}
               {{ tab_content }}
+              {% if block_settings.liquid != blank and block_settings.placement == 'below-content' %}
+                {{ block_settings.liquid }}
+              {% endif %}
             </{{ element }}>
         </div>
         {% if block_settings.image != blank %}
@@ -231,6 +233,16 @@
       "type": "liquid",
       "id": "liquid",
       "label": "Liquid"
+    },
+    {
+      "type": "select",
+      "id": "placement",
+      "label": "Liquid code Placement",
+      "default": "below-content",
+      "options": [
+        { "value": "above-content", "label": "Above content" },
+        { "value": "below-content", "label": "Below content" }
+      ]
     },
     {
         "type": "image_picker",
