@@ -1,0 +1,174 @@
+{% assign block_settings = block.settings %}
+
+{% if block_settings.link_list != blank %}
+    <div class="navigation--buttons flex spacing-style
+        {% if block_settings.inherit_color_scheme == false %} color-{{ block_settings.color_scheme }}{% endif %}
+        "
+        style="
+            {% render 'spacing-style', settings: block_settings %}
+        "
+        {{ block_settings.shopify_attributes }}
+    >
+        {% for link in linklists[block_settings.link_list].links %}
+            <div>
+                <a href="{{ link.url }}" class="{% if link.active %}active button{% else %}button-secondary{% endif %}">{{ link.title }}</a>
+            </div>
+        {% endfor %}
+    </div>
+{% endif %}
+
+
+{% stylesheet %}
+    .navigation--buttons .button, .navigation--buttons .button-secondary {
+        padding: var(--padding-xs) var(--padding-xl);
+    }
+
+    .navigation--buttons {
+        overflow-x: auto;
+        width: 100%;
+        white-space: nowrap;
+        padding-bottom: var(--gap-xs);
+        grid-column: -1 / 1;
+    }
+
+    @media (max-width: 989px) {
+        .navigation--buttons {
+            > div:first-child {
+                margin-left: var(--gap-md);
+            }
+
+            &:after {
+                content: '';
+                display: block;
+                padding-right: 0;
+            }
+        }
+    }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "Navigation buttons",
+  "tag": null,
+  "settings": [
+    {
+        "type": "link_list",
+        "id": "link_list",
+        "label": "Menu"
+    },
+    {
+      "type": "checkbox",
+      "id": "inherit_color_scheme",
+      "label": "t:settings.inherit_color_scheme",
+      "default": true
+    },
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "t:settings.color_scheme",
+      "default": "scheme-1",
+      "visible_if": "{{ block.settings.inherit_color_scheme == false }}"
+    },
+    {
+      "type": "header",
+      "content": "t:content.padding"
+    },
+    {
+      "type": "range",
+      "id": "padding-block-start",
+      "label": "t:settings.top",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "padding-block-end",
+      "label": "t:settings.bottom",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "padding-inline-start",
+      "label": "t:settings.left",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "padding-inline-end",
+      "label": "t:settings.right",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "default": 0
+    },
+    {
+      "type": "checkbox",
+      "id": "custom_mobile_padding",
+      "label": "Custom Mobile Padding",
+      "default": false
+    },
+    {
+      "type": "range",
+      "id": "mobile-padding-block-start",
+      "label": "t:settings.top",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "default": 0,
+      "visible_if": "{{ block.settings.custom_mobile_padding == true }}"
+    },
+    {
+      "type": "range",
+      "id": "mobile-padding-block-end",
+      "label": "t:settings.bottom",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "default": 0,
+      "visible_if": "{{ block.settings.custom_mobile_padding == true }}"
+    },
+    {
+      "type": "range",
+      "id": "mobile-padding-inline-start",
+      "label": "t:settings.left",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "default": 0,
+      "visible_if": "{{ block.settings.custom_mobile_padding == true }}"
+    },
+    {
+      "type": "range",
+      "id": "mobile-padding-inline-end",
+      "label": "t:settings.right",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "default": 0,
+      "visible_if": "{{ block.settings.custom_mobile_padding == true }}"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Navigation buttons",
+      "category": "t:categories.layout"
+    }
+  ]
+}
+{% endschema %}

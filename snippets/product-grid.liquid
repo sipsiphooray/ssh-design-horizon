@@ -13,6 +13,10 @@
   {% render 'util-product-grid-card-size' section: section %}
 {% endcapture %}
 {% assign product_card_size = product_card_size | strip %}
+{% capture column_card_size %}
+  {% render 'util-column-grid-size' section: section %}
+{% endcapture %}
+{% assign column_card_size = column_card_size | strip %}
 
 {% style %}
   @media screen and (min-width: 750px) {
@@ -20,7 +24,7 @@
       {% when 'grid' %}
         .product-grid--{{ section.id }}:is(.product-grid--grid) {
           /* --product-grid-columns-desktop: repeat(auto-fill, minmax({{ product_card_size }}, 1fr)); */
-          --product-grid-columns-desktop: repeat({{ product_card_size }}, 1fr);
+          --product-grid-columns-desktop: repeat({{ column_card_size }}, 1fr);
         }
 
 

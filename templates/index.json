@@ -645,22 +645,6 @@
             "padding-inline-end": 0
           },
           "blocks": {
-            "product_card_gallery_677WP3": {
-              "type": "_product-card-gallery",
-              "name": "t:names.product_card_media",
-              "settings": {
-                "image_ratio": "square",
-                "border": "none",
-                "border_width": 1,
-                "border_opacity": 100,
-                "border_radius": 0,
-                "padding-block-start": 0,
-                "padding-block-end": 0,
-                "padding-inline-start": 0,
-                "padding-inline-end": 0
-              },
-              "blocks": {}
-            },
             "product_card_group_PwHcx4": {
               "type": "_product-card-group",
               "name": "t:names.group",
@@ -804,7 +788,6 @@
                 "custom_liquid_tjRcWa": {
                   "type": "custom-liquid",
                   "name": "sizes available",
-                  "disabled": true,
                   "settings": {
                     "custom_liquid": "{% assign sizes_option = closest.product.options_by_name['Cup Style'] %}\n{% if sizes_option != blank %}\n<span class=\"size-available-text\">\n    {{ 'content.sizes_available' | t: number: sizes_option.values.size }}\n</span>\n{% endif %}"
                   },
@@ -816,10 +799,25 @@
                 "price_a3EQxk",
                 "custom_liquid_tjRcWa"
               ]
+            },
+            "product-card-gallery": {
+              "type": "_product-card-gallery",
+              "static": true,
+              "settings": {
+                "image_ratio": "square",
+                "border": "none",
+                "border_width": 1,
+                "border_opacity": 100,
+                "border_radius": 0,
+                "padding-block-start": 0,
+                "padding-block-end": 0,
+                "padding-inline-start": 0,
+                "padding-inline-end": 0
+              },
+              "blocks": {}
             }
           },
           "block_order": [
-            "product_card_gallery_677WP3",
             "product_card_group_PwHcx4"
           ]
         }
@@ -990,22 +988,6 @@
             "padding-inline-end": 0
           },
           "blocks": {
-            "product_card_gallery_J4RYXN": {
-              "type": "_product-card-gallery",
-              "name": "t:names.product_card_media",
-              "settings": {
-                "image_ratio": "square",
-                "border": "none",
-                "border_width": 1,
-                "border_opacity": 100,
-                "border_radius": 0,
-                "padding-block-start": 0,
-                "padding-block-end": 0,
-                "padding-inline-start": 0,
-                "padding-inline-end": 0
-              },
-              "blocks": {}
-            },
             "product_card_group_JtQaQR": {
               "type": "_product-card-group",
               "name": "t:names.group",
@@ -1149,7 +1131,6 @@
                 "custom_liquid_zg49X4": {
                   "type": "custom-liquid",
                   "name": "sizes available",
-                  "disabled": true,
                   "settings": {
                     "custom_liquid": "{% assign sizes_option = closest.product.options_by_name['Cup Style'] %}\n{% if sizes_option != blank %}\n<span class=\"size-available-text\">\n    {{ 'content.sizes_available' | t: number: sizes_option.values.size }}\n</span>\n{% endif %}"
                   },
@@ -1161,10 +1142,25 @@
                 "price_NmfAT4",
                 "custom_liquid_zg49X4"
               ]
+            },
+            "product-card-gallery": {
+              "type": "_product-card-gallery",
+              "static": true,
+              "settings": {
+                "image_ratio": "square",
+                "border": "none",
+                "border_width": 1,
+                "border_opacity": 100,
+                "border_radius": 0,
+                "padding-block-start": 0,
+                "padding-block-end": 0,
+                "padding-inline-start": 0,
+                "padding-inline-end": 0
+              },
+              "blocks": {}
             }
           },
           "block_order": [
-            "product_card_gallery_J4RYXN",
             "product_card_group_JtQaQR"
           ]
         }

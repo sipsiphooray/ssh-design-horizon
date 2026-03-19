@@ -9,7 +9,7 @@
     ref="productTitleLink"
     href="{{ closest.product.selected_or_first_available_variant.url }}"
   >
-    {% render 'text', fallback_text: product_title, block: block %}
+    {% render 'text', fallback_text: product_title, block: block, class: 'product-title-block' %}
   </a>
 {% endif %}
 

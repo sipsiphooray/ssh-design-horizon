@@ -195,3 +195,44 @@ class VariantSelect extends Component {
 }
 
 customElements.define("variant-select", VariantSelect);
+
+
+// Function to append the render title to the product card
+function appendRenderTitleToCards() {
+  const productCards = document.querySelectorAll('product-card[data-variant-id][data-render-text]');
+
+  productCards.forEach(card => {
+    // Prevent appending multiple times
+    if (card.hasAttribute('data-title-appended')) return;
+
+    const renderTitle = card.getAttribute('data-render-text');
+    const titleTextElement = card.querySelector('.product-title-block > *');
+
+    if (titleTextElement && renderTitle) {
+      titleTextElement.textContent += ` - ${renderTitle}`;
+      
+      // CRITICAL: Mark this card as processed so we don't duplicate the text later!
+      card.setAttribute('data-title-appended', 'true');
+    }
+  });
+}
+
+// 1. Run immediately. Because type="module" defers execution, the DOM is ready.
+appendRenderTitleToCards();
+
+// 2. Set up an observer to catch any cards loaded dynamically via AJAX/Infinite Scroll
+const cardObserver = new MutationObserver((mutations) => {
+  let shouldRun = false;
+  mutations.forEach((mutation) => {
+    if (mutation.addedNodes.length > 0) {
+      shouldRun = true;
+    }
+  });
+  
+  if (shouldRun) {
+    appendRenderTitleToCards();
+  }
+});
+
+// Start observing the body for dynamically injected elements
+cardObserver.observe(document.body, { childList: true, subtree: true });

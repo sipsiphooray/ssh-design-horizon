@@ -83,8 +83,8 @@
                 "type_preset": "h1",
                 "font": "var(--font-body--family)",
                 "font_size": "1rem",
-                "enable_mobile_size": false,
-                "mobile_font_size": "1rem",
+                "enable_mobile_size": true,
+                "mobile_font_size": "2rem",
                 "line_height": "normal",
                 "letter_spacing": "normal",
                 "case": "none",
@@ -187,6 +187,7 @@
         ".hero:has(svg.hero__media) {min-height: unset;}",
         ".hero:has(svg.hero__media) .text-block.text-block--background {padding: 0 !important; background: transparent;}",
         "svg.hero__media {display: none;}",
+        "@media (min-width: 750px) {.h1 {--max-width--body-narrow: 11.75em; }}",
         "@media (max-width: 749px) {{--section-height-medium: 20rem; }}"
       ],
       "name": "t:names.hero",
@@ -266,21 +267,6 @@
             "padding-inline-end": 0
           },
           "blocks": {
-            "card-gallery": {
-              "type": "_product-card-gallery",
-              "settings": {
-                "image_ratio": "square",
-                "border": "none",
-                "border_width": 1,
-                "border_opacity": 100,
-                "border_radius": 0,
-                "padding-block-start": 0,
-                "padding-block-end": 0,
-                "padding-inline-start": 0,
-                "padding-inline-end": 0
-              },
-              "blocks": {}
-            },
             "product_card_group_YrHRaj": {
               "type": "_product-card-group",
               "name": "t:names.group",
@@ -421,10 +407,23 @@
                   },
                   "blocks": {}
                 },
+                "swatches_T9bDVf": {
+                  "type": "swatches",
+                  "name": "t:names.swatches",
+                  "settings": {
+                    "product_swatches_alignment": "flex-start",
+                    "product_swatches_alignment_mobile": "flex-start",
+                    "hide_padding": false,
+                    "product_swatches_padding_top": 4,
+                    "product_swatches_padding_bottom": 0,
+                    "product_swatches_padding_left": 0,
+                    "product_swatches_padding_right": 0
+                  },
+                  "blocks": {}
+                },
                 "custom_liquid_3DRnnd": {
                   "type": "custom-liquid",
                   "name": "sizes available",
-                  "disabled": true,
                   "settings": {
                     "custom_liquid": "{% assign sizes_option = closest.product.options_by_name['Cup Style'] %}\n{% if sizes_option != blank %}\n<span class=\"size-available-text\">\n    {{ 'content.sizes_available' | t: number: sizes_option.values.size }}\n</span>\n{% endif %}"
                   },
@@ -434,12 +433,28 @@
               "block_order": [
                 "product_card_group_67QeQj",
                 "price_fjyCgJ",
+                "swatches_T9bDVf",
                 "custom_liquid_3DRnnd"
               ]
+            },
+            "product-card-gallery": {
+              "type": "_product-card-gallery",
+              "static": true,
+              "settings": {
+                "image_ratio": "square",
+                "border": "none",
+                "border_width": 1,
+                "border_opacity": 100,
+                "border_radius": 0,
+                "padding-block-start": 0,
+                "padding-block-end": 0,
+                "padding-inline-start": 0,
+                "padding-inline-end": 0
+              },
+              "blocks": {}
             }
           },
           "block_order": [
-            "card-gallery",
             "product_card_group_YrHRaj"
           ]
         }

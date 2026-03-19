@@ -54,17 +54,77 @@
     {% paginate collection.products by products_per_page %}
       {% capture children %}
         {% for product in collection.products %}
-          <li
-            id="{{ section.id }}-{{ product.id }}"
-            class="product-grid__item product-grid__item--{{ forloop.index0 }}"
-            data-page="{{ paginate.current_page }}"
-            data-product-id="{{ product.id }}"
-            ref="cards[]"
-          >
-            {% # theme-check-disable %}
-            {% content_for 'block', type: '_product-card', id: 'product-card', closest.product: product %}
-            {% # theme-check-enable %}
-          </li>
+{% liquid
+          if collection.metafields.custom.variants_to_render != blank and product.has_only_default_variant == false
+            assign to_render = collection.metafields.custom.variants_to_render.value
+            assign active_variants = '' | split: ','
+            
+            # 1. Create a string to hold ALL the texts we find in order
+            assign render_texts_string = ''
+
+            for variant in product.variants
+              if variant.featured_media == blank or variant.featured_media.id == product.featured_media.id
+                continue
+              endif
+
+              assign variant_matched = false
+
+              for option in variant.options
+                for render in to_render
+                  if option contains render
+                    assign active_variant = product.variants | where: 'id', variant.id
+                    assign active_variants = active_variants | concat: active_variant
+                    
+                    # 2. Append the text with a comma so we can split it later!
+                    assign render_texts_string = render_texts_string | append: render | append: ','
+                    
+                    assign variant_matched = true
+                    break
+                  endif
+                endfor
+                
+                if variant_matched
+                  break
+                endif
+              endfor
+            endfor
+            
+            # 3. Split that string into a true array matching the active_variants array
+            assign render_texts_array = render_texts_string | split: ','
+          endif
+          %}
+
+          {% if active_variants.size > 0 %}
+            {% for active_variant in active_variants %}
+              
+              {% # 4. Grab the matching text using the current loop index! %}
+              {% assign current_render_text = render_texts_array[forloop.index0] %}
+
+              <li
+                id="{{ section.id }}-{{ product.id }}-{{ active_variant.id }}"
+                class="product-grid__item product-grid__item--{{ forloop.index0 }}"
+                data-page="{{ paginate.current_page }}"
+                data-product-id="{{ product.id }}"
+                ref="cards[]"
+              >
+                {% # theme-check-disable %}
+                {% content_for 'block', type: '_product-card', render_text: current_render_text, active_variant: active_variant, id: 'product-card', closest.product: product %}
+                {% # theme-check-enable %}
+              </li>
+            {% endfor %}
+          {% else %}
+            <li
+              id="{{ section.id }}-{{ product.id }}"
+              class="product-grid__item product-grid__item--{{ forloop.index0 }}"
+              data-page="{{ paginate.current_page }}"
+              data-product-id="{{ product.id }}"
+              ref="cards[]"
+            >
+              {% # theme-check-disable %}
+              {% content_for 'block', type: '_product-card', id: 'product-card', closest.product: product %}
+              {% # theme-check-enable %}
+            </li>
+          {% endif %}
         {% endfor %}
       {% endcapture %}
 

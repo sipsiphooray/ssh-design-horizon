@@ -1,45 +1,45 @@
 {%- doc -%}
-  Output the minimum column size for cards in a product grid (main collection and search results).
+  Output the minimum product card size for cards in a product grid (main collection and search results).
 
-  @param {object} section - Section object that contains the column block.
+  @param {object} section - Section object that contains the product card block.
 
   @example
-  {% capture column_card_size %}
-    {% render 'util-column-grid-size' section: section %}
+  {% capture product_card_size %}
+    {% render 'util-product-grid-card-size' section: section %}
   {% endcapture %}
 {%- enddoc -%}
 
 {% liquid
   if section.settings.layout_type == 'organic'
     if section.settings.product_grid_width == 'centered'
-      assign column_card_size = '250px'
+      assign product_card_size = '250px'
     else
-      assign column_card_size = '260px'
+      assign product_card_size = '260px'
     endif
   elsif section.settings.product_grid_width == 'centered'
     # Hardcoded values for product card size when width set to 'centered'
     case section.settings.product_card_size
       when 'small'
-        assign column_card_size = '5'
+        assign product_card_size = '165px'
       when 'medium'
-        assign column_card_size = '4'
+        assign product_card_size = '250px'
       when 'large'
-        assign column_card_size = '3'
+        assign product_card_size = '340px'
       when 'extra-large'
-        assign column_card_size = '2'
+        assign product_card_size = '480px'
     endcase
   else
     # Hardcoded values for product card size when width set to 'full-width'
     case section.settings.product_card_size
       when 'small'
-        assign column_card_size = '5'
+        assign product_card_size = '180px'
       when 'medium'
-        assign column_card_size = '4'
+        assign product_card_size = '260px'
       when 'large'
-        assign column_card_size = '3'
+        assign product_card_size = '365px'
       when 'extra-large'
-        assign column_card_size = '2'
+        assign product_card_size = '530px'
     endcase
   endif
-  echo column_card_size
+  echo product_card_size
 %}

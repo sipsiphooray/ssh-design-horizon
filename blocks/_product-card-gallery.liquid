@@ -1,3 +1,13 @@
+{%- doc -%}
+  Displays product images in a carousel.
+  Settings allow for a full slideshow, showing only the first image, or showing the second image when hovering.
+  Note: When the product card itself is in a carousel layout, the card-gallery's carousel is disabled with JavaScript.
+
+  @param {object} [active_variant] - The variant object
+  @param {object} [product] - The product object
+{%- enddoc -%}
+
+
 {% assign product = closest.product %}
 
 {% capture children %}
@@ -52,7 +62,7 @@
   {% endunless %}
 {% endcapture %}
 
-{% render 'card-gallery', children: children %}
+{% render 'card-gallery', children: children, active_variant: active_variant %}
 
 {% # Title and price for the zoomed out grid view %}
 <div class="product-grid-view-zoom-out--details">
@@ -242,7 +252,10 @@
   "presets": [
     {
       "name": "t:names.product_card_media",
-      "category": "t:categories.product"
+      "category": "t:categories.product",
+      "settings": {
+        "image_ratio": "square"
+      }
     }
   ]
 }

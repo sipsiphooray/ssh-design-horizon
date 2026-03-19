@@ -1,0 +1,45 @@
+{%- doc -%}
+  Output the minimum column size for cards in a product grid (main collection and search results).
+
+  @param {object} section - Section object that contains the column block.
+
+  @example
+  {% capture column_card_size %}
+    {% render 'util-column-grid-size' section: section %}
+  {% endcapture %}
+{%- enddoc -%}
+
+{% liquid
+  if section.settings.layout_type == 'organic'
+    if section.settings.product_grid_width == 'centered' or section.settings.product_grid_width == 'page-narrow'
+      assign column_card_size = '250px'
+    else
+      assign column_card_size = '260px'
+    endif
+  elsif section.settings.product_grid_width == 'centered' or section.settings.product_grid_width == 'page-narrow'
+    # Hardcoded values for product card size when width set to 'centered'
+    case section.settings.product_card_size
+      when 'small'
+        assign column_card_size = '5'
+      when 'medium'
+        assign column_card_size = '4'
+      when 'large'
+        assign column_card_size = '3'
+      when 'extra-large'
+        assign column_card_size = '2'
+    endcase
+  else
+    # Hardcoded values for product card size when width set to 'full-width'
+    case section.settings.product_card_size
+      when 'small'
+        assign column_card_size = '5'
+      when 'medium'
+        assign column_card_size = '4'
+      when 'large'
+        assign column_card_size = '3'
+      when 'extra-large'
+        assign column_card_size = '2'
+    endcase
+  endif
+  echo column_card_size
+%}

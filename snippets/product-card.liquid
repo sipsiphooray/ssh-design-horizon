@@ -4,6 +4,8 @@
   The product object is null or when placeholders are rendered.
 
   @param {object} product - The product object
+  @param {object} [active_variant] - The variant object
+  @param {string} [render_text] - The render text
   @param {object} children - The children of the product card
   @param {object} [block] - The block object
   @param {number} [product_card_gap] - The gap between the product card children (overrides block settings)
@@ -37,18 +39,8 @@
   # Logic to determine which variant URL to use (matching swatch selection logic)
   assign variant_to_link = product.selected_or_first_available_variant
 
-  if collection.metafields.custom.variants_to_render != blank and product.has_only_default_variant == false
-    assign map_variants = product.variants | where: 'option1', collection.metafields.custom.variants_to_render.value
-
-    if map_variants.size == 0
-      assign map_variants = product.variants | where: 'option2', collection.metafields.custom.variants_to_render.value
-    endif
-
-    if map_variants.size == 0
-      assign map_variants = product.variants | where: 'option3', collection.metafields.custom.variants_to_render.value
-    endif
-
-    assign variant_to_link = map_variants[0]
+  if active_variant != blank
+    assign variant_to_link = active_variant
   endif
 
   if settings.transition_to_main_product
@@ -72,6 +64,11 @@
   class="product-card size-style"
   style="{% render 'size-style', settings: block_settings %}"
   data-product-id="{{ product.id }}"
+  {% if active_variant != blank %}
+    data-variant-id="{{ active_variant.id }}"
+    data-variant-title="{{ active_variant.title }}"
+    data-render-text="{{ render_text }}"
+  {% endif %}
   id="product-card-{{ block.id }}"
   {% if settings.transition_to_main_product %}
     data-product-transition="true"

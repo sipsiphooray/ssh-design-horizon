@@ -303,6 +303,10 @@ summary,.menu-drawer__back-button {
     opacity:  var(--opacity-subdued-text);
 }
 
+div:has(> .size-available-text) {
+    margin-top: calc(-1 * var(--gap-2xs));
+}
+
 .card-box ul {
     display: flex;
     padding: 0 !important;
@@ -397,7 +401,7 @@ summary .svg-wrapper {
     display: none;
 }
 
-.shopify-app-block:has([data-oke-star-rating]) {
+.product-details .shopify-app-block:has([data-oke-star-rating]) {
     margin-top: calc(-1 * var(--gap-sm));
 }
 
