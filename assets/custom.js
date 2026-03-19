@@ -173,7 +173,6 @@ class VariantSelect extends Component {
   }
 
   onOptionSelect(option, optionEl) {
-    if (option.disabled) return;
     
     // Update native select
     this.select.value = option.value;

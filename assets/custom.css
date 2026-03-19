@@ -401,6 +401,10 @@ summary .svg-wrapper {
     margin-top: calc(-1 * var(--gap-sm));
 }
 
+#klaviyo-bis-button-container {
+    margin-bottom: 0 !important;
+}
+
 @media screen and (min-width: 60em) {
     :root {
         --section-height-large: 90svh !important;

@@ -59,18 +59,18 @@
                     </span>
                 {% endif %}
             {% endif %}
-            {{ display_option | escape }}
+            {{ display_option | escape }}{% if selected_option.available == false %} - {{ 'content.unavailable' | t }}{% endif %}
         </div>
         <div class="cs-menu" id="{{ id }}-menu" role="listbox">
         {%- for product_option_value in product_option.values -%}
             <div class="cs-option {% if product_option_value.selected %}selected{% endif %}"
                 role="option"
                 aria-selected="{% if product_option_value.selected %}true{% else %}false{% endif %}"
-                data-value="{{ product_option_value | escape }}"
+                data-value="{{ product_option_value | escape }}{% if product_option_value.available == false %}{{ product_option_value | escape }} - {{ 'content.unavailable' | t }}{% endif %}"
                 {% if product_option_value.available == false %}
                 data-unavailable
-                aria-disabled="true"
-                {% endif %}>
+                {% endif %}
+            >
 
             {% if block.settings.show_swatches == true and product_option_swatches.count > 0 %}
                 {% assign matching_swatch = product_option_swatches | where: 'assign_to', product_option_value %}
