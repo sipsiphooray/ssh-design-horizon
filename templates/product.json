@@ -16,7 +16,7 @@
         "custom_liquid": "{% render 'breadcrumbs' %}",
         "color_scheme": "",
         "section_width": "page-narrow",
-        "padding-block-start": 4,
+        "padding-block-start": 12,
         "padding-block-end": 0,
         "custom_mobile_padding": false,
         "mobile-padding-block-start": 0,
