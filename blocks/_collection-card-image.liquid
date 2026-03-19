@@ -7,7 +7,9 @@
   @example
   {% content_for 'block', type: '_collection-card-image', id: 'collection-card-image', parent_block_id: block.id %}
 {%- enddoc -%}
-
+{% if condition %}
+  
+{% endif %}
 {% comment %} Render using unified resource image component {% endcomment %}
 {% comment %} Note: image_source auto-determined from closest.collection for collections {% endcomment %}
 {% render 'resource-image',
@@ -27,6 +29,11 @@
     {
       "type": "paragraph",
       "content": "t:content.resource_reference_collection_card_image"
+    },
+    {
+      "type": "image_picker",
+      "id": "custom_image",
+      "label": "Custom Image"
     },
     {
       "type": "select",

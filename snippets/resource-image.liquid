@@ -50,9 +50,15 @@
     assign image_resource = image_source
   elsif content_type == 'collections'
     assign collection = closest.collection
-    assign image_resource = collection.image
-    if image_resource == blank
-      assign image_resource = collection.products.first.featured_image
+
+    if block_settings.custom_image != blank
+      assign image_resource = block_settings.custom_image
+    else
+      assign image_resource = collection.image
+
+      if image_resource == blank
+        assign image_resource = collection.products.first.featured_image
+      endif
     endif
   else
     assign image_resource = image_source
