@@ -297,3 +297,20 @@ cardObserver.observe(document.body, {
   subtree: true,
   characterData: true 
 });
+
+document.addEventListener('click', (e) => {
+  const card = e.target.closest('.addon-card');
+  if (!card) return;
+
+  // respect product-card logic (no navigation already handled)
+  if (card.hasAttribute('data-no-navigation') === false) return;
+
+  const checkbox = card.querySelector('input[type="checkbox"]');
+  if (!checkbox) return;
+
+  // ignore real interactive elements
+  if (e.target.closest('input, label, button, a')) return;
+
+  checkbox.checked = !checkbox.checked;
+  checkbox.dispatchEvent(new Event('change', { bubbles: true }));
+});
