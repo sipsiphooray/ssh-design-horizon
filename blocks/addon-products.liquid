@@ -5,13 +5,12 @@
   https://shopify.dev/docs/api/section-rendering-api
 {%- enddoc -%}
 
-<script
-  src="{{ 'addon-products.js' | asset_url }}"
-  type="module"
-></script>
-
 {% liquid
   assign addon_products = product.metafields.shopify--discovery--product_recommendation.complementary_products.value
+
+  if addon_products.size == 0
+    break
+  endif
 
   assign block_settings = block.settings
   case block_settings.layout_type
@@ -21,6 +20,11 @@
       assign classes = 'resource-list--carousel'
   endcase
 %}
+
+<script
+  src="{{ 'addon-products.js' | asset_url }}"
+  type="module"
+></script>
 
 {% comment %}
   [data-section-id] {section.id} - used to fetch the product recommendations from the Section Rendering API
@@ -68,6 +72,7 @@
             {% content_for 'block',
               type: '_addon-card',
               id: 'static-addon-card',
+              card_layout_type: block_settings.card_layout_type,
               closest.product: product
             %}
           </div>
@@ -168,6 +173,22 @@
     }
   ],
   "settings": [
+    {
+      "type": "select",
+      "id": "card_layout_type",
+      "label": "Card layout type",
+      "options": [
+        {
+          "value": "card-layout-addon",
+          "label": "Product addons"
+        },
+        {
+          "value": "card-layout-addon-frequently",
+          "label": "Frequently bought"
+        }
+      ],
+      "default": "card-layout-addon"
+    },
     {
       "type": "paragraph",
       "content": "t:content.resource_reference_product_recommendations"

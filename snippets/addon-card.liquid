@@ -3,6 +3,7 @@
   It is used in the product block, featured product block, and the product card block.
   The product object is null or when placeholders are rendered.
 
+  @param {string} [card_layout_type] - Card layout type
   @param {object} product - The product object
   @param {string} card_gallery - The card gallery
   @param {object} [active_variant] - The variant object
@@ -62,7 +63,7 @@
 %}
 
 <product-card
-  class="product-card addon-card size-style"
+  class="product-card {{ card_layout_type }} addon-card size-style"
   style="{% render 'size-style', settings: block_settings %}"
   data-product-id="{{ product.id }}"
   {% if active_variant != blank %}
@@ -124,6 +125,24 @@
   >
     <div class="addon-flex flex">
         <div>
+            {% liquid 
+                assign property_name = 'addon-' | append: block.id
+                assign element_id = 'addon-' | append: product.id | append: '-' | append: block.id
+                assign product_form_id = 'BuyButtons-ProductForm-' | append: section.id
+            %}
+            {% render 'checkbox',
+                name: property_name,
+                value: product.selected_or_first_available_variant.id,
+                label: block_settings.checkbox_label,
+                id: element_id,
+                checked: false,
+                events: '',
+                disabled: false,
+                required: false,
+                formId: product_form_id
+            %}
+        </div>
+        <div>
             {{ card_gallery }}
         </div>
         <div>
@@ -138,12 +157,28 @@
         height: 100%;
     }
 
+    .addon-card {
+        --checkbox-size: 20px;
+        --checkbox-border-radius: 4px;
+        --checkbox-border: 1.5px solid rgb(var(--color-foreground-rgb) / 1);
+        --color-border-rgb: var(--color-foreground-rgb);
+        --max-width--display-tight: auto;
+    }
+
     .addon-card .product-card__link {
         pointer-events: none !important;
         display: none !important;
     }
 
-    .addon-card .contents.user-select-text {
+    .addon-card .checkbox__label {
+        min-width: unset;
+    }
+
+    .addon-card .checkbox__label-text {
+        display: none;
+    }
+
+    .addon-card .contents {
         pointer-events: none;
     }
 
@@ -151,12 +186,34 @@
         content: '+ ';
     }
 
-    .addon-flex > div:first-child {
-        width: calc(12% - var(--gap-md) / 2);
+    .card-layout-addon .product-title-block > * {
+        white-space: nowrap;
+        text-overflow: ellipsis;
+        overflow: hidden;
     }
 
-    .addon-flex > div:last-child {
-        width: calc(88% - var(--gap-md) / 2);
+    .card-layout-addon .addon-flex {
+        min-width: 0;
+    }
+
+    .card-layout-addon .addon-flex > div:first-child {
+        width: fit-content;
+        align-self: center;
+    }
+
+    .card-layout-addon .addon-flex > div:nth-child(2) {
+        width: 55px;
+        min-width: 55px;
+    }
+
+    .card-layout-addon .addon-flex > div:last-child {
+        width: 100%;
+        flex: 1 auto;
+        display: flex;
+        gap: var(--gap-2xs);
+        flex-direction: column;
+        justify-content: space-between;
+        min-width: 0;
     }
 
     .addon-card .product-badges__badge {
@@ -166,6 +223,10 @@
   @media screen and (max-width: 749px) {
     .product-card slideshow-arrows .slideshow-control {
       display: none;
+    }
+
+    .card-layout-addon .product-card-group .group-block-content {
+        --vertical-alignment: flex-start !important;
     }
   }
 {% endstylesheet %}
