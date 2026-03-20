@@ -41,7 +41,7 @@
             "thumbnail_width": 72,
             "thumbnail_radius": 0,
             "aspect_ratio": "1",
-            "constrain_to_viewport": true,
+            "constrain_to_viewport": false,
             "media_fit": "contain",
             "media_radius": 0,
             "extend_media": false,
@@ -127,8 +127,8 @@
                 "padding-block-end": 0,
                 "padding-inline-start": 0,
                 "padding-inline-end": 0,
-                "custom_mobile_padding": false,
-                "mobile-padding-block-start": 0,
+                "custom_mobile_padding": true,
+                "mobile-padding-block-start": 12,
                 "mobile-padding-block-end": 0,
                 "mobile-padding-inline-start": 0,
                 "mobile-padding-inline-end": 0,
@@ -211,6 +211,44 @@
                 "okendo_star_rating_7P7JpH",
                 "price_tVjtKg"
               ]
+            },
+            "ai_gen_block_426582e_ADbVqH": {
+              "type": "ai_gen_block_426582e",
+              "name": "Icons row",
+              "settings": {
+                "icon_1": "shopify://shop_images/starburst-four-point-icon.svg",
+                "text_1": "<p>Premium, Durable Build</p>",
+                "icon_2": "shopify://shop_images/starburst-four-point-icon.svg",
+                "text_2": "<p>Permanent UV Prints</p>",
+                "icon_3": "shopify://shop_images/starburst-four-point-icon.svg",
+                "text_3": "<p>Toxic & Lead-Free</p>",
+                "icon_4": "shopify://shop_images/starburst-four-point-icon.svg",
+                "text_4": "<p>1K+ Happy Sippers</p>",
+                "desktop_columns": "2",
+                "alignment": "flex-start",
+                "icon_size": 15,
+                "icon_gap": 8,
+                "column_gap": 24,
+                "row_gap": 12,
+                "desktop_width_percent": 100,
+                "mobile_columns": "2",
+                "mobile_column_layout": false,
+                "icon_size_mobile": 15,
+                "mobile_column_gap": 15,
+                "mobile_row_gap": 12,
+                "font_size_desktop": 15,
+                "font_size_mobile": 15,
+                "padding_top": 0,
+                "padding_bottom": 0,
+                "enable_padding_inline_mobile": false,
+                "mobile_padding_left": 0,
+                "mobile_padding_right": 0,
+                "show_border_top": false,
+                "show_border_bottom": false,
+                "border_width": 1,
+                "border_color": "#e5e5e5"
+              },
+              "blocks": {}
             },
             "variant_picker_R3rGDr": {
               "type": "variant-picker",
@@ -399,7 +437,7 @@
               "settings": {
                 "icon": "plus",
                 "dividers": true,
-                "type_preset": "h4",
+                "type_preset": "",
                 "inherit_color_scheme": true,
                 "color_scheme": "",
                 "border": "none",
@@ -436,6 +474,7 @@
                     "disable_on_desktop": false,
                     "close_with_escape": false,
                     "icon": "none",
+                    "image_upload": "shopify://shop_images/svgexport-26.svg",
                     "width": 20
                   },
                   "blocks": {}
@@ -463,7 +502,7 @@
                     "disable_on_mobile": false,
                     "disable_on_desktop": false,
                     "close_with_escape": false,
-                    "icon": "none",
+                    "icon": "box",
                     "width": 20
                   },
                   "blocks": {}
@@ -491,7 +530,7 @@
                     "disable_on_mobile": false,
                     "disable_on_desktop": false,
                     "close_with_escape": false,
-                    "icon": "none",
+                    "icon": "heart",
                     "width": 20
                   },
                   "blocks": {}
@@ -519,7 +558,7 @@
                     "disable_on_mobile": false,
                     "disable_on_desktop": false,
                     "close_with_escape": false,
-                    "icon": "none",
+                    "icon": "truck",
                     "width": 20
                   },
                   "blocks": {}
@@ -547,7 +586,7 @@
                     "disable_on_mobile": false,
                     "disable_on_desktop": false,
                     "close_with_escape": false,
-                    "icon": "none",
+                    "icon": "eye",
                     "width": 20
                   },
                   "blocks": {}
@@ -570,6 +609,7 @@
           },
           "block_order": [
             "group_icgrde",
+            "ai_gen_block_426582e_ADbVqH",
             "variant_picker_R3rGDr",
             "product_inventory_CGNRga",
             "buy_buttons_eYQEYi",
@@ -1163,7 +1203,7 @@
         "section_width": "page-narrow",
         "full_width_on_mobile": false,
         "gap": 0,
-        "color_scheme": "scheme-761f80f0-0e3a-4090-9168-95d4d4a71356",
+        "color_scheme": "scheme-738179cd-4e15-457b-be40-989a024001d6",
         "background_media": "none",
         "video_position": "cover",
         "background_image_position": "cover",
@@ -1833,7 +1873,7 @@
           "type": "text",
           "name": "t:names.heading",
           "settings": {
-            "text": "<h2>Product & Care FAQs</h2>",
+            "text": "<h2>FAQs</h2>",
             "width": "fit-content",
             "max_width": "narrow",
             "alignment": "left",

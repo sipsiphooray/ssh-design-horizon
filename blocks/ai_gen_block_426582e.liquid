@@ -1,11 +1,3 @@
-{% doc %}
-  @prompt
-    generate icons row with inline text, no need for color settings, should have font size on desktop mobile setting. should have column gap setting. between icon and text the gap should be 8px by default. the icons should be from image picker and should use liquid  {{
-                block.settings.image
-                | image_url: width: 2560
-                | image_tag: width: width, height: block.settings.image.height, widths: widths, sizes: sizes, loading: 'lazy', alt: block.settings.image.alt, class: image_class
-              }}, should have padding top and bottom setting for the block. and border top and border bottom checkbox and color width visible_if checked. should have setting whether to display icon+text as column on mobile , Liquid error (temp/ai_gen_block_0db0af7 line 89): expected widths to be a string, got Integer, the icon size should only in height. the width should be auto, the main row on mobile should have setting column upto 4 on mobile, on desktop just dpeends on column content width, should have gap setting on mobile row and column., should have icon height setting on mobile, on desktop main row should be in justify flex start
-{% enddoc %}
 {% assign ai_gen_id = block.id | replace: '_', '' | downcase %}
 
 {% style %}
@@ -13,6 +5,8 @@
     display: block;
     width: {{ block.settings.desktop_width_percent }}%;
     max-width: 100%;
+    margin-left: auto;
+    margin-right: auto;
     padding-top: {{ block.settings.padding_top }}px;
     padding-bottom: {{ block.settings.padding_bottom }}px;
     {% if block.settings.show_border_top %}
@@ -24,12 +18,12 @@
   }
 
   .ai-icons-row__container-{{ ai_gen_id }} {
-    display: flex;
-    flex-wrap: wrap;
+    display: grid;
+    grid-template-columns: repeat({{ block.settings.desktop_columns }}, minmax(0, auto));
     column-gap: {{ block.settings.column_gap }}px;
     row-gap: {{ block.settings.row_gap }}px;
     justify-content: {{ block.settings.alignment }};
-    align-items: flex-start;
+    align-items: center;
   }
 
   .ai-icons-row__item-{{ ai_gen_id }} {
@@ -42,32 +36,35 @@
     flex-shrink: 0;
     display: flex;
     align-items: center;
-    justify-content: center;
   }
 
   .ai-icons-row__icon-{{ ai_gen_id }} img {
     width: auto;
     height: {{ block.settings.icon_size }}px;
-    object-fit: contain;
+    display: block;
   }
 
   .ai-icons-row__text-{{ ai_gen_id }} {
     font-size: {{ block.settings.font_size_desktop }}px;
-    line-height: 1.2em;
+    line-height: 1.2;
+  }
+
+  /* Reset rich text margin */
+  .ai-icons-row__text-{{ ai_gen_id }} p {
+    margin: 0;
   }
 
   @media screen and (max-width: 749px) {
     .ai-icons-row__container-{{ ai_gen_id }} {
-      display: grid;
       grid-template-columns: repeat({{ block.settings.mobile_columns }}, 1fr);
-      column-gap: {{ block.settings.mobile_column_gap }}px ;
+      column-gap: {{ block.settings.mobile_column_gap }}px;
       row-gap: {{ block.settings.mobile_row_gap }}px;
     }
 
-    {% if block.settings.enable_padding_inline_mobile == true %}
+    {% if block.settings.enable_padding_inline_mobile %}
       .ai-icons-row-{{ ai_gen_id }} {
-        padding-inline-start: {{ block.settings.mobile_padding_left }}px;
-        padding-inline-end: {{ block.settings.mobile_padding_right }}px;
+        padding-left: {{ block.settings.mobile_padding_left }}px;
+        padding-right: {{ block.settings.mobile_padding_right }}px;
       }
     {% endif %}
 
@@ -83,6 +80,7 @@
       .ai-icons-row__item-{{ ai_gen_id }} {
         flex-direction: column;
         text-align: center;
+        justify-content: center;
       }
     {% endif %}
   }
@@ -99,25 +97,30 @@
       %}
 
       {% if image != blank or text != blank %}
-        <div class="ai-icons-row__item-{{ ai_gen_id }} ai-icons-row__item">
+        <div class="ai-icons-row__item-{{ ai_gen_id }}">
           {% if image != blank %}
             <div class="ai-icons-row__icon-{{ ai_gen_id }}">
               {% liquid
                 assign height = block.settings.icon_size
-                assign height_2x = height | times: 2
-                assign widths = '50,100,150,200,300'
+                assign widths = '100, 200, 300'
                 assign sizes = height | append: 'px'
               %}
               {{
                 image
-                | image_url: width: 2560
-                | image_tag: height: height, widths: widths, sizes: sizes, loading: 'lazy', alt: image.alt
+                | image_url: width: 600
+                | image_tag: 
+                  height: height, 
+                  widths: widths, 
+                  sizes: sizes, 
+                  loading: 'lazy', 
+                  alt: image.alt,
+                  class: 'icon-img'
               }}
             </div>
           {% endif %}
 
           {% if text != blank %}
-            <div class="ai-icons-row__text-{{ ai_gen_id }} ai-icons-row__text">{{ text }}</div>
+            <div class="ai-icons-row__text-{{ ai_gen_id }}">{{ text }}</div>
           {% endif %}
         </div>
       {% endif %}
@@ -125,88 +128,37 @@
   </div>
 </icons-row-{{ ai_gen_id }}>
 
-<script>
-  (function() {
-    class IconsRow{{ ai_gen_id }} extends HTMLElement {
-      constructor() {
-        super();
-      }
-
-      connectedCallback() {
-      }
-    }
-
-    customElements.define('icons-row-{{ ai_gen_id }}', IconsRow{{ ai_gen_id }});
-  })();
-</script>
-
 {% schema %}
 {
   "name": "Icons row",
   "settings": [
     {
       "type": "header",
-      "content": "Icon 1"
+      "content": "Content"
     },
-    {
-      "type": "image_picker",
-      "id": "icon_1",
-      "label": "Icon"
-    },
-    {
-      "type": "richtext",
-      "id": "text_1",
-      "label": "Text",
-      "default": "<p>Feature 1</p>"
-    },
+    { "type": "image_picker", "id": "icon_1", "label": "Icon 1" },
+    { "type": "richtext", "id": "text_1", "label": "Text 1", "default": "<p>Feature 1</p>" },
+    { "type": "image_picker", "id": "icon_2", "label": "Icon 2" },
+    { "type": "richtext", "id": "text_2", "label": "Text 2", "default": "<p>Feature 2</p>" },
+    { "type": "image_picker", "id": "icon_3", "label": "Icon 3" },
+    { "type": "richtext", "id": "text_3", "label": "Text 3", "default": "<p>Feature 3</p>" },
+    { "type": "image_picker", "id": "icon_4", "label": "Icon 4" },
+    { "type": "richtext", "id": "text_4", "label": "Text 4", "default": "<p>Feature 4</p>" },
     {
       "type": "header",
-      "content": "Icon 2"
+      "content": "Desktop Layout"
     },
     {
-      "type": "image_picker",
-      "id": "icon_2",
-      "label": "Icon"
-    },
-    {
-      "type": "richtext",
-      "id": "text_2",
-      "label": "Text",
-      "default": "<p>Feature 2</p>"
-    },
-    {
-      "type": "header",
-      "content": "Icon 3"
-    },
-    {
-      "type": "image_picker",
-      "id": "icon_3",
-      "label": "Icon"
-    },
-    {
-      "type": "richtext",
-      "id": "text_3",
-      "label": "Text",
-      "default": "<p>Feature 3</p>"
-    },
-    {
-      "type": "header",
-      "content": "Icon 4"
-    },
-    {
-      "type": "image_picker",
-      "id": "icon_4",
-      "label": "Icon"
-    },
-    {
-      "type": "richtext",
-      "id": "text_4",
-      "label": "Text",
-      "default": "<p>Feature 4</p>"
-    },
-    {
-      "type": "header",
-      "content": "Layout"
+      "type": "select",
+      "id": "desktop_columns",
+      "label": "Columns on desktop",
+      "options": [
+        { "value": "1", "label": "1" },
+        { "value": "2", "label": "2" },
+        { "value": "3", "label": "3" },
+        { "value": "4", "label": "4" }
+      ],
+      "default": "4"
     },
     {
       "type": "select",
@@ -221,39 +173,9 @@
     },
     {
       "type": "range",
-      "id": "icon_gap",
-      "label": "Icon gap",
-      "min": 0,
-      "max": 60,
-      "step": 1,
-      "unit": "px",
-      "default": 8
-    },
-    {
-      "type": "range",
-      "id": "column_gap",
-      "label": "Desktop column gap",
-      "min": 0,
-      "max": 100,
-      "step": 1,
-      "unit": "px",
-      "default": 30
-    },
-    {
-      "type": "range",
-      "id": "row_gap",
-      "label": "Desktop row gap",
-      "min": 0,
-      "max": 100,
-      "step": 1,
-      "unit": "px",
-      "default": 12
-    },
-    {
-      "type": "range",
       "id": "icon_size",
-      "label": "Desktop icon height",
-      "min": 5,
+      "label": "Icon height",
+      "min": 10,
       "max": 100,
       "step": 1,
       "unit": "px",
@@ -261,9 +183,39 @@
     },
     {
       "type": "range",
+      "id": "icon_gap",
+      "label": "Gap between Icon & Text",
+      "min": 0,
+      "max": 40,
+      "step": 1,
+      "unit": "px",
+      "default": 8
+    },
+    {
+      "type": "range",
+      "id": "column_gap",
+      "label": "Column gap",
+      "min": 0,
+      "max": 100,
+      "step": 2,
+      "unit": "px",
+      "default": 30
+    },
+    {
+      "type": "range",
+      "id": "row_gap",
+      "label": "Row gap",
+      "min": 0,
+      "max": 100,
+      "step": 2,
+      "unit": "px",
+      "default": 12
+    },
+    {
+      "type": "range",
       "id": "desktop_width_percent",
       "label": "Desktop width",
-      "min": 50,
+      "min": 10,
       "max": 100,
       "step": 5,
       "unit": "%",
@@ -271,37 +223,31 @@
     },
     {
       "type": "header",
-      "content": "Mobile layout"
+      "content": "Mobile Layout"
     },
     {
       "type": "select",
       "id": "mobile_columns",
       "label": "Columns on mobile",
       "options": [
-        {
-          "value": "1",
-          "label": "1"
-        },
-        {
-          "value": "2",
-          "label": "2"
-        },
-        {
-          "value": "3",
-          "label": "3"
-        },
-        {
-          "value": "4",
-          "label": "4"
-        }
+        { "value": "1", "label": "1" },
+        { "value": "2", "label": "2" },
+        { "value": "3", "label": "3" },
+        { "value": "4", "label": "4" }
       ],
       "default": "2"
     },
     {
+      "type": "checkbox",
+      "id": "mobile_column_layout",
+      "label": "Stack icon above text",
+      "default": false
+    },
+    {
       "type": "range",
       "id": "icon_size_mobile",
-      "label": "Mobile icon height",
-      "min": 5,
+      "label": "Icon height mobile",
+      "min": 10,
       "max": 80,
       "step": 1,
       "unit": "px",
@@ -310,7 +256,7 @@
     {
       "type": "range",
       "id": "mobile_column_gap",
-      "label": "Mobile column gap",
+      "label": "Column gap mobile",
       "min": 0,
       "max": 50,
       "step": 1,
@@ -320,102 +266,12 @@
     {
       "type": "range",
       "id": "mobile_row_gap",
-      "label": "Mobile row gap",
+      "label": "Row gap mobile",
       "min": 0,
       "max": 50,
       "step": 1,
-      "unit": "px", 
+      "unit": "px",
       "default": 12
-    },
-    {
-      "type": "checkbox",
-      "id": "mobile_column_layout",
-      "label": "Display icon and text as column on mobile",
-      "default": false
-    },
-    {
-      "type": "header",
-      "content": "Spacing"
-    },
-    {
-      "type": "range",
-      "id": "padding_top",
-      "label": "Padding top",
-      "min": 0,
-      "max": 100,
-      "step": 5,
-      "unit": "px",
-      "default": 0
-    },
-    {
-      "type": "range",
-      "id": "padding_bottom",
-      "label": "Padding bottom",
-      "min": 0,
-      "max": 100,
-      "step": 5,
-      "unit": "px",
-      "default": 0
-    },
-    {
-      "type": "checkbox",
-      "id": "enable_padding_inline_mobile",
-      "label": "Enable inline padding on mobile",
-      "default": false
-    },
-    {
-      "type": "range",
-      "id": "mobile_padding_left",
-      "label": "Mobile padding left",
-      "min": 0,
-      "max": 100,
-      "step": 1,
-      "unit": "px",
-      "default": 0,
-      "visible_if": "{{ block.settings.enable_padding_inline_mobile == true }}"
-    },
-    {
-      "type": "range",
-      "id": "mobile_padding_right",
-      "label": "Mobile padding right",
-      "min": 0,
-      "max": 100,
-      "step": 1,
-      "unit": "px",
-      "default": 0,
-      "visible_if": "{{ block.settings.enable_padding_inline_mobile == true }}"
-    },
-    {
-      "type": "header",
-      "content": "Borders"
-    },
-    {
-      "type": "checkbox",
-      "id": "show_border_top",
-      "label": "Show top border",
-      "default": false
-    },
-    {
-      "type": "checkbox",
-      "id": "show_border_bottom",
-      "label": "Show bottom border",
-      "default": false
-    },
-    {
-      "type": "range",
-      "id": "border_width",
-      "label": "Border width",
-      "min": 1,
-      "max": 10,
-      "step": 1,
-      "unit": "px",
-      "default": 1
-    },
-    {
-      "type": "color",
-      "id": "border_color",
-      "label": "Border color",
-      "default": "#000000"
     },
     {
       "type": "header",
@@ -426,7 +282,7 @@
       "id": "font_size_desktop",
       "label": "Desktop font size",
       "min": 10,
-      "max": 32,
+      "max": 40,
       "step": 1,
       "unit": "px",
       "default": 14
@@ -436,17 +292,25 @@
       "id": "font_size_mobile",
       "label": "Mobile font size",
       "min": 10,
-      "max": 24,
+      "max": 30,
       "step": 1,
       "unit": "px",
       "default": 12
-    }
-  ],
-  "presets": [
+    },
     {
-      "name": "Icons row"
-    }
+      "type": "header",
+      "content": "Spacing & Borders"
+    },
+    { "type": "range", "id": "padding_top", "label": "Padding top", "min": 0, "max": 100, "step": 5, "unit": "px", "default": 20 },
+    { "type": "range", "id": "padding_bottom", "label": "Padding bottom", "min": 0, "max": 100, "step": 5, "unit": "px", "default": 20 },
+    { "type": "checkbox", "id": "enable_padding_inline_mobile", "label": "Custom mobile inline padding", "default": false },
+    { "type": "range", "id": "mobile_padding_left", "label": "Padding left mobile", "min": 0, "max": 50, "default": 0 },
+    { "type": "range", "id": "mobile_padding_right", "label": "Padding right mobile", "min": 0, "max": 50, "default": 0 },
+    { "type": "checkbox", "id": "show_border_top", "label": "Show top border", "default": false },
+    { "type": "checkbox", "id": "show_border_bottom", "label": "Show bottom border", "default": false },
+    { "type": "range", "id": "border_width", "label": "Border width", "min": 1, "max": 10, "default": 1 },
+    { "type": "color", "id": "border_color", "label": "Border color", "default": "#e5e5e5" }
   ],
-  "tag": null
+  "presets": [{ "name": "Icons row" }]
 }
 {% endschema %}

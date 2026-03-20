@@ -452,7 +452,7 @@ summary .svg-wrapper {
         margin-right: 0 !important;
     }
 
-    :root {
+    .product-card {
       --badge-rectangle-padding-block: 1px !important;
     }
 }
