@@ -136,7 +136,7 @@
           "foreground": "#2b2b2b",
           "primary": "#2b2b2b",
           "primary_hover": "#2b2b2b",
-          "border": "#2b2b2b",
+          "border": "#dfdfdf",
           "shadow": "#2b2b2b",
           "primary_button_background": "#2b2b2b",
           "primary_button_text": "#ffffff",

@@ -1554,7 +1554,7 @@
           "type": "image",
           "name": "t:names.image",
           "settings": {
-            "image": "shopify://shop_images/png_-_2026-03-18T171520.670.png",
+            "image": "shopify://shop_images/skincare-treatment-and-a-nice-coffee.jpg",
             "link": "",
             "image_ratio": "adapt",
             "width": "fill",
@@ -1631,7 +1631,7 @@
           "type": "image",
           "name": "t:names.image",
           "settings": {
-            "image": "shopify://shop_images/png_-_2026-03-18T171520.670.png",
+            "image": "shopify://shop_images/all-ribbons-center.jpg",
             "link": "",
             "image_ratio": "adapt",
             "width": "fill",
