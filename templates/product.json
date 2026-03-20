@@ -484,7 +484,7 @@
                   "name": "Tab row",
                   "settings": {
                     "heading": "What's included",
-                    "content": "{{ closest.product.metafields.custom.what_s_included | metafield_tag }}",
+                    "content": "<ul><li><strong>40oz Glass:</strong> Bamboo lid with silicone seal + glass straw + plastic straw + straw cleaner</li><li><strong>40oz Plastic:</strong> Plastic dishwasher-safe lid + plastic straw</li><li><strong>32oz Glass:</strong> Bamboo lid with silicone seal + straw</li></ul>",
                     "page": "",
                     "liquid": "",
                     "placement": "below-content",
@@ -507,12 +507,12 @@
                   },
                   "blocks": {}
                 },
-                "tab_row_LHM7yz": {
+                "tab_row_TMbKRt": {
                   "type": "_tab-row",
                   "name": "Tab row",
                   "settings": {
-                    "heading": "Why you'll love it",
-                    "content": "{{ closest.product.metafields.custom.why_you_ll_love_it | metafield_tag }}",
+                    "heading": "Care Instructions",
+                    "content": "<p><strong>Bamboo lid care (for bamboo lid styles)</strong></p><ul><li><strong>No soaking. Hand wash only.</strong> Dry completely before putting it back on the cup.</li><li><strong>Do not leave the lid on for more than 24 hours</strong> at a time. Closed containers with no airflow can cause growth.</li><li><strong>We are not responsible for lids that develop mold or fuzzies</strong> due to improper care. Want low maintenance? Choose a plastic dishwasher-safe lid style.</li></ul><p><strong>Dishwasher guidance</strong></p><ul><li>Glass cups: Top rack is usually fine, but soaps, heat, and water hardness vary. Hand wash is safest.</li><li><strong>Do not dishwash plastic cups or tumblers.<br/></strong></li></ul><p><strong>No vent hole note</strong></p><ul><li>Our lids <strong>do not have vent holes.</strong> This does not affect suction as long as the cup is not overfilled.</li></ul><p><strong>Straw note (40oz glass)</strong></p><ul><li>The <strong>glass straw may not reach the very bottom</strong>, but it still sips perfectly. Every 40oz glass tumbler also includes a <strong>plastic straw that reaches the bottom</strong>.<br/></li></ul><p><strong>Why liquid creeps up the straw (easy fix)</strong></p><ul><li>If liquid rises when inserting the straw after securing the lid, it is <strong>air displacement</strong>. Insert the straw <strong>before </strong>sealing the lid to avoid it.</li></ul><p><strong>Plastic tumbler scuffing PSA</strong></p><ul><li>Acrylic and plastic can pick up light surface marks from static and friction during shipping or normal use. If you are sensitive to that look, choose glass. We do not accept returns or exchanges for slight shipping scuffs.</li></ul><p><strong>Need help choosing?<br/></strong>Message us and we will help you pick the best size and lid style for how you sip.</p>",
                     "page": "",
                     "liquid": "",
                     "placement": "below-content",
@@ -530,7 +530,7 @@
                     "disable_on_mobile": false,
                     "disable_on_desktop": false,
                     "close_with_escape": false,
-                    "icon": "heart",
+                    "icon": "box",
                     "width": 20
                   },
                   "blocks": {}
@@ -595,7 +595,7 @@
               "block_order": [
                 "tab_row_LAfmYz",
                 "tab_row_gTXc8k",
-                "tab_row_LHM7yz",
+                "tab_row_TMbKRt",
                 "tab_row_dkjeXC",
                 "tab_row_KLaPxi"
               ]
