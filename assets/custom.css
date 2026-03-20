@@ -340,7 +340,7 @@ div:has(> .size-available-text) {
 }
 
 .variant-option__select-wrapper {
-    border: var(--style-border-width-inputs) solid var(--color-input-border) !important;
+    border: var(--style-border-width-inputs) solid var(--color-primary) !important;
     margin-top: var(--margin-sm) !important;
 }
 
@@ -439,6 +439,14 @@ summary .svg-wrapper {
 
 .add-to-cart-icon svg path {
     --icon-stroke-width: 1px !important;
+}
+
+.below-atc {
+    margin-top: -1rem !important;
+}
+
+.payment-icons__item svg {
+    width: 1.8rem;
 }
 
 @media screen and (min-width: 60em) {

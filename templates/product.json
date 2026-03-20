@@ -232,6 +232,7 @@
                 "row_gap": 12,
                 "desktop_width_percent": 100,
                 "mobile_columns": "2",
+                "mobile_alignment": "flex-start",
                 "mobile_column_layout": false,
                 "icon_size_mobile": 15,
                 "mobile_column_gap": 15,
@@ -262,6 +263,168 @@
                 "padding-inline-end": 0
               },
               "blocks": {}
+            },
+            "addon_products_LmHTx7": {
+              "type": "addon-products",
+              "name": "Addon Products",
+              "settings": {
+                "layout_type": "grid",
+                "carousel_on_mobile": false,
+                "max_products": 10,
+                "columns_gap": 16,
+                "rows_gap": 8,
+                "icons_style": "arrow",
+                "icons_shape": "none",
+                "gap": 12,
+                "border_radius": 0,
+                "inherit_color_scheme": true,
+                "color_scheme": "",
+                "padding-block-start": 0,
+                "padding-block-end": 0,
+                "padding-inline-start": 0,
+                "padding-inline-end": 0
+              },
+              "blocks": {
+                "text_LtTDHn": {
+                  "type": "text",
+                  "settings": {
+                    "text": "<p>Complete the Set</p>",
+                    "width": "fit-content",
+                    "max_width": "normal",
+                    "alignment": "left",
+                    "type_preset": "rte",
+                    "font": "var(--font-body--family)",
+                    "font_size": "1rem",
+                    "enable_mobile_size": false,
+                    "mobile_font_size": "1rem",
+                    "line_height": "normal",
+                    "letter_spacing": "normal",
+                    "case": "none",
+                    "wrap": "pretty",
+                    "color": "var(--color-foreground)",
+                    "background": false,
+                    "background_color": "#00000026",
+                    "corner_radius": 0,
+                    "padding-block-start": 0,
+                    "padding-block-end": 0,
+                    "padding-inline-start": 0,
+                    "padding-inline-end": 0,
+                    "custom_mobile_padding": false,
+                    "mobile-padding-block-start": 0,
+                    "mobile-padding-block-end": 0,
+                    "mobile-padding-inline-start": 0,
+                    "mobile-padding-inline-end": 0
+                  },
+                  "blocks": {}
+                },
+                "static-addon-card": {
+                  "type": "_addon-card",
+                  "static": true,
+                  "settings": {
+                    "product_card_gap": 12,
+                    "inherit_color_scheme": true,
+                    "color_scheme": "",
+                    "border": "solid",
+                    "border_width": 1,
+                    "border_opacity": 100,
+                    "border_radius": 0,
+                    "padding-block-start": 12,
+                    "padding-block-end": 12,
+                    "padding-inline-start": 12,
+                    "padding-inline-end": 12
+                  },
+                  "blocks": {
+                    "product_title_BfLedQ": {
+                      "type": "product-title",
+                      "name": "t:names.product_title",
+                      "settings": {
+                        "width": "fit-content",
+                        "max_width": "narrow",
+                        "alignment": "left",
+                        "type_preset": "rte",
+                        "font": "var(--font-body--family)",
+                        "font_size": "1rem",
+                        "enable_mobile_size": false,
+                        "mobile_font_size": "1.125rem",
+                        "line_height": "normal",
+                        "letter_spacing": "normal",
+                        "case": "none",
+                        "wrap": "pretty",
+                        "color": "var(--color-foreground-heading)",
+                        "background": false,
+                        "background_color": "#00000026",
+                        "corner_radius": 0,
+                        "padding-block-start": 0,
+                        "padding-block-end": 12,
+                        "padding-inline-start": 0,
+                        "padding-inline-end": 0
+                      },
+                      "blocks": {}
+                    },
+                    "price_nQFknL": {
+                      "type": "price",
+                      "name": "t:names.product_price",
+                      "settings": {
+                        "show_sale_price_first": true,
+                        "show_installments": false,
+                        "show_tax_info": false,
+                        "type_preset": "custom",
+                        "width": "fit-content",
+                        "alignment": "left",
+                        "font": "var(--font-body--family)",
+                        "font_size": "0.875rem",
+                        "line_height": "normal",
+                        "letter_spacing": "normal",
+                        "case": "none",
+                        "color": "var(--color-foreground)",
+                        "padding-block-start": 0,
+                        "padding-block-end": 0,
+                        "padding-inline-start": 0,
+                        "padding-inline-end": 0
+                      },
+                      "blocks": {}
+                    },
+                    "swatches_wqbN7h": {
+                      "type": "swatches",
+                      "name": "t:names.swatches",
+                      "settings": {
+                        "product_swatches_alignment": "flex-start",
+                        "product_swatches_alignment_mobile": "flex-start",
+                        "hide_padding": false,
+                        "product_swatches_padding_top": 4,
+                        "product_swatches_padding_bottom": 0,
+                        "product_swatches_padding_left": 0,
+                        "product_swatches_padding_right": 0
+                      },
+                      "blocks": {}
+                    },
+                    "product-card-gallery": {
+                      "type": "_product-card-gallery",
+                      "static": true,
+                      "settings": {
+                        "image_ratio": "square",
+                        "border": "solid",
+                        "border_width": 1,
+                        "border_opacity": 100,
+                        "border_radius": 0,
+                        "padding-block-start": 0,
+                        "padding-block-end": 0,
+                        "padding-inline-start": 0,
+                        "padding-inline-end": 0
+                      },
+                      "blocks": {}
+                    }
+                  },
+                  "block_order": [
+                    "product_title_BfLedQ",
+                    "price_nQFknL",
+                    "swatches_wqbN7h"
+                  ]
+                }
+              },
+              "block_order": [
+                "text_LtTDHn"
+              ]
             },
             "product_inventory_CGNRga": {
               "type": "product-inventory",
@@ -314,61 +477,70 @@
               },
               "block_order": []
             },
-            "popup_link_WVU7VM": {
-              "type": "popup-link",
-              "name": "t:names.popup_link",
+            "group_Yfptbh": {
+              "type": "group",
+              "name": "Below Button",
               "settings": {
-                "behavior": "default",
-                "heading": "We’ve got you! 1 free lifetime replacement.",
-                "type_preset": "paragraph",
+                "link": "",
+                "open_in_new_tab": false,
+                "content_direction": "column",
+                "vertical_on_mobile": true,
+                "reverse_on_mobile": false,
+                "horizontal_alignment": "flex-start",
+                "vertical_alignment": "center",
+                "align_baseline": false,
+                "horizontal_alignment_flex_direction_column": "flex-start",
+                "custom_mobile_alignment": false,
+                "mobile_vertical_alignment": "flex-start",
+                "vertical_alignment_flex_direction_column": "flex-start",
+                "gap": 12,
+                "enable_mobile_gap": false,
+                "mobile_gap": 12,
+                "width": "fill",
+                "custom_width": 100,
+                "width_mobile": "fill",
+                "custom_width_mobile": 100,
+                "height": "fit",
+                "custom_height": 100,
+                "inherit_color_scheme": true,
+                "color_scheme": "",
+                "background_media": "none",
+                "video_position": "cover",
+                "background_image_position": "cover",
+                "border": "none",
+                "border_width": 1,
+                "border_opacity": 100,
+                "border_radius": 0,
+                "enable_mobile_radius": false,
+                "mobile_border_radius": 0,
+                "placeholder": "",
+                "toggle_overlay": false,
+                "overlay_color": "#00000026",
+                "overlay_style": "solid",
+                "gradient_direction": "to top",
                 "padding-block-start": 0,
                 "padding-block-end": 0,
                 "padding-inline-start": 0,
-                "padding-inline-end": 0
+                "padding-inline-end": 0,
+                "custom_mobile_padding": false,
+                "mobile-padding-block-start": 0,
+                "mobile-padding-block-end": 0,
+                "mobile-padding-inline-start": 0,
+                "mobile-padding-inline-end": 0,
+                "css_class": "b"
               },
               "blocks": {
-                "text_fJKeHy": {
+                "text_B79mcD": {
                   "type": "text",
+                  "name": "t:names.text",
                   "settings": {
-                    "text": "<h3>Lifetime Replacement Policy</h3>",
-                    "width": "fit-content",
-                    "max_width": "normal",
-                    "alignment": "left",
-                    "type_preset": "h3",
-                    "font": "var(--font-body--family)",
-                    "font_size": "1rem",
-                    "enable_mobile_size": false,
-                    "mobile_font_size": "1rem",
-                    "line_height": "normal",
-                    "letter_spacing": "normal",
-                    "case": "none",
-                    "wrap": "pretty",
-                    "color": "var(--color-foreground)",
-                    "background": false,
-                    "background_color": "#00000026",
-                    "corner_radius": 0,
-                    "padding-block-start": 0,
-                    "padding-block-end": 16,
-                    "padding-inline-start": 0,
-                    "padding-inline-end": 0,
-                    "custom_mobile_padding": false,
-                    "mobile-padding-block-start": 0,
-                    "mobile-padding-block-end": 0,
-                    "mobile-padding-inline-start": 0,
-                    "mobile-padding-inline-end": 0
-                  },
-                  "blocks": {}
-                },
-                "text_Fnwpzg": {
-                  "type": "text",
-                  "settings": {
-                    "text": "<p>Every Sip-Sip Hooray order includes <strong>one free replacement per order, for life</strong>.</p><p>Replacements are for the <strong>same item originally purchased</strong> and require a <strong>clear photo of the damage</strong>. Exchanges for different items are not allowed. Applies to eligible products and US orders only.</p><p><a href=\"https://sipsiphooraydesign.com/policies/contact-information\" title=\"Contact Information\">Contact Us</a></p>",
+                    "text": "<p>Free Shipping On Orders Over $40</p>",
                     "width": "100%",
-                    "max_width": "none",
-                    "alignment": "left",
-                    "type_preset": "rte",
+                    "max_width": "normal",
+                    "alignment": "center",
+                    "type_preset": "custom",
                     "font": "var(--font-body--family)",
-                    "font_size": "1rem",
+                    "font_size": "0.875rem",
                     "enable_mobile_size": false,
                     "mobile_font_size": "1rem",
                     "line_height": "normal",
@@ -390,11 +562,109 @@
                     "mobile-padding-inline-end": 0
                   },
                   "blocks": {}
+                },
+                "popup_link_yA8PQ7": {
+                  "type": "popup-link",
+                  "name": "t:names.popup_link",
+                  "disabled": true,
+                  "settings": {
+                    "behavior": "default",
+                    "heading": "We’ve got you! 1 free lifetime replacement.",
+                    "type_preset": "paragraph",
+                    "padding-block-start": 0,
+                    "padding-block-end": 0,
+                    "padding-inline-start": 0,
+                    "padding-inline-end": 0
+                  },
+                  "blocks": {
+                    "text_NVqV4R": {
+                      "type": "text",
+                      "settings": {
+                        "text": "<h3>Lifetime Replacement Policy</h3>",
+                        "width": "fit-content",
+                        "max_width": "normal",
+                        "alignment": "left",
+                        "type_preset": "h3",
+                        "font": "var(--font-body--family)",
+                        "font_size": "1rem",
+                        "enable_mobile_size": false,
+                        "mobile_font_size": "1rem",
+                        "line_height": "normal",
+                        "letter_spacing": "normal",
+                        "case": "none",
+                        "wrap": "pretty",
+                        "color": "var(--color-foreground)",
+                        "background": false,
+                        "background_color": "#00000026",
+                        "corner_radius": 0,
+                        "padding-block-start": 0,
+                        "padding-block-end": 16,
+                        "padding-inline-start": 0,
+                        "padding-inline-end": 0,
+                        "custom_mobile_padding": false,
+                        "mobile-padding-block-start": 0,
+                        "mobile-padding-block-end": 0,
+                        "mobile-padding-inline-start": 0,
+                        "mobile-padding-inline-end": 0
+                      },
+                      "blocks": {}
+                    },
+                    "text_E9xwtU": {
+                      "type": "text",
+                      "settings": {
+                        "text": "<p>Every Sip-Sip Hooray order includes <strong>one free replacement per order, for life</strong>.</p><p>Replacements are for the <strong>same item originally purchased</strong> and require a <strong>clear photo of the damage</strong>. Exchanges for different items are not allowed. Applies to eligible products and US orders only.</p><p><a href=\"https://sipsiphooraydesign.com/policies/contact-information\" title=\"Contact Information\">Contact Us</a></p>",
+                        "width": "100%",
+                        "max_width": "none",
+                        "alignment": "left",
+                        "type_preset": "rte",
+                        "font": "var(--font-body--family)",
+                        "font_size": "1rem",
+                        "enable_mobile_size": false,
+                        "mobile_font_size": "1rem",
+                        "line_height": "normal",
+                        "letter_spacing": "normal",
+                        "case": "none",
+                        "wrap": "pretty",
+                        "color": "var(--color-foreground)",
+                        "background": false,
+                        "background_color": "#00000026",
+                        "corner_radius": 0,
+                        "padding-block-start": 0,
+                        "padding-block-end": 0,
+                        "padding-inline-start": 0,
+                        "padding-inline-end": 0,
+                        "custom_mobile_padding": false,
+                        "mobile-padding-block-start": 0,
+                        "mobile-padding-block-end": 0,
+                        "mobile-padding-inline-start": 0,
+                        "mobile-padding-inline-end": 0
+                      },
+                      "blocks": {}
+                    }
+                  },
+                  "block_order": [
+                    "text_NVqV4R",
+                    "text_E9xwtU"
+                  ]
+                },
+                "payment_icons_e9f7YR": {
+                  "type": "payment-icons",
+                  "name": "t:names.payment_icons",
+                  "settings": {
+                    "horizontal_alignment": "center",
+                    "gap": 10,
+                    "padding-block-start": 0,
+                    "padding-block-end": 0,
+                    "padding-inline-start": 0,
+                    "padding-inline-end": 0
+                  },
+                  "blocks": {}
                 }
               },
               "block_order": [
-                "text_fJKeHy",
-                "text_Fnwpzg"
+                "text_B79mcD",
+                "popup_link_yA8PQ7",
+                "payment_icons_e9f7YR"
               ]
             },
             "text_aEtTtq": {
@@ -483,7 +753,7 @@
                   "type": "_tab-row",
                   "name": "Tab row",
                   "settings": {
-                    "heading": "What's included",
+                    "heading": "What's Included",
                     "content": "<ul><li><strong>40oz Glass:</strong> Bamboo lid with silicone seal + glass straw + plastic straw + straw cleaner</li><li><strong>40oz Plastic:</strong> Plastic dishwasher-safe lid + plastic straw</li><li><strong>32oz Glass:</strong> Bamboo lid with silicone seal + straw</li></ul>",
                     "page": "",
                     "liquid": "",
@@ -611,9 +881,10 @@
             "group_icgrde",
             "ai_gen_block_426582e_ADbVqH",
             "variant_picker_R3rGDr",
+            "addon_products_LmHTx7",
             "product_inventory_CGNRga",
             "buy_buttons_eYQEYi",
-            "popup_link_WVU7VM",
+            "group_Yfptbh",
             "text_aEtTtq",
             "tab_accordion_GLQmPe",
             "shopvid_mp_tiktok_block_QzJRyi"
@@ -625,7 +896,7 @@
         "product-inventory {margin-bottom: -1rem !important;}",
         ".tab-button {line-height: 1.4em;}",
         ".Shopvid__VideoBlock__Carousel {padding-block: 12px;}",
-        ".popup-link__button {font-family: var(--font-body--family); font-weight: var(--font-body--weight); text-decoration: underline; text-align: center; width: 100%; font-size: inherit; margin-top: -1rem !important;}",
+        ".popup-link__button {font-family: var(--font-body--family); font-weight: var(--font-body--weight); text-decoration: underline; text-align: center; width: 100%; font-size: var(--font-size--xs);}",
         ".popup-link__button svg {display: none;}"
       ],
       "settings": {

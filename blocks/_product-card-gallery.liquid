@@ -2,7 +2,7 @@
   Displays product images in a carousel.
   Settings allow for a full slideshow, showing only the first image, or showing the second image when hovering.
   Note: When the product card itself is in a carousel layout, the card-gallery's carousel is disabled with JavaScript.
-
+  @param {boolean} [hide_quick_add] - Hide quick add
   @param {object} [active_variant] - The variant object
   @param {object} [product] - The product object
 {%- enddoc -%}
@@ -56,9 +56,11 @@
         </div>
       {%- endif -%}
     </div>
-    {%  if settings.quick_add or settings.mobile_quick_add %}
-      {% render 'quick-add', product: product, active_variant: active_variant, section_id: section.id %}
-    {% endif %}
+    {% unless hide_quick_add == true %}
+      {%  if settings.quick_add or settings.mobile_quick_add %}
+        {% render 'quick-add', product: product, active_variant: active_variant, section_id: section.id %}
+      {% endif %}
+    {% endunless %}
   {% endunless %}
 {% endcapture %}
 
