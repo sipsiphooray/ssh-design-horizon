@@ -437,6 +437,10 @@ summary .svg-wrapper {
     flex-wrap: wrap;
 }
 
+.add-to-cart-icon svg path {
+    --icon-stroke-width: 1px !important;
+}
+
 @media screen and (min-width: 60em) {
     :root {
         --section-height-large: 90svh !important;
