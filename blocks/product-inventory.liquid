@@ -29,31 +29,69 @@
   {% endif %}
 {% endfor %}
 
-{% capture min_formatted -%}
-  {{- min_date | date: "%B %-d" -}}
-  {%- assign day = min_date | date: "%-d" -%}
-  {%- case day -%}
-    {%- when '1' or '21' or '31' -%}st
-    {%- when '2' or '22' -%}nd
-    {%- when '3' or '23' -%}rd
-    {%- else -%}th
-  {%- endcase -%}
-{%- endcapture %}
+{% comment %}Check if both dates are in the same month and year{% endcomment %}
+{% assign min_month = min_date | date: "%B" %}
+{% assign max_month = max_date | date: "%B" %}
+{% assign min_year = min_date | date: "%Y" %}
+{% assign max_year = max_date | date: "%Y" %}
 
-{% capture max_formatted -%}
-  {{- max_date | date: "%B %-d" -}}
-  {%- assign day = max_date | date: "%-d" -%}
-  {%- case day -%}
-    {%- when '1' or '21' or '31' -%}st
-    {%- when '2' or '22' -%}nd
-    {%- when '3' or '23' -%}rd
-    {%- else -%}th
-  {%- endcase -%}
-{%- endcapture %}
+{% if min_month == max_month and min_year == max_year %}
+  {% comment %}Same month - only show month once{% endcomment %}
+  {% capture min_formatted -%}
+    {{- min_date | date: "%-d" -}}
+    {%- assign day = min_date | date: "%-d" -%}
+    {%- case day -%}
+      {%- when '1' or '21' or '31' -%}st
+      {%- when '2' or '22' -%}nd
+      {%- when '3' or '23' -%}rd
+      {%- else -%}th
+    {%- endcase -%}
+  {%- endcapture %}
 
-{% capture date -%}
-  {{- min_formatted -}} - {{- max_formatted -}}
-{%- endcapture %}
+  {% capture max_formatted -%}
+    {{- max_date | date: "%-d" -}}
+    {%- assign day = max_date | date: "%-d" -%}
+    {%- case day -%}
+      {%- when '1' or '21' or '31' -%}st
+      {%- when '2' or '22' -%}nd
+      {%- when '3' or '23' -%}rd
+      {%- else -%}th
+    {%- endcase -%}
+  {%- endcapture %}
+
+  {% capture date -%}
+    {{- min_month }} {{ min_formatted }} - {{ max_formatted -}}
+  {%- endcapture %}
+
+{% else %}
+  {% comment %}Different months - show full format for both{% endcomment %}
+  {% capture min_formatted -%}
+    {{- min_date | date: "%B %-d" -}}
+    {%- assign day = min_date | date: "%-d" -%}
+    {%- case day -%}
+      {%- when '1' or '21' or '31' -%}st
+      {%- when '2' or '22' -%}nd
+      {%- when '3' or '23' -%}rd
+      {%- else -%}th
+    {%- endcase -%}
+  {%- endcapture %}
+
+  {% capture max_formatted -%}
+    {{- max_date | date: "%B %-d" -}}
+    {%- assign day = max_date | date: "%-d" -%}
+    {%- case day -%}
+      {%- when '1' or '21' or '31' -%}st
+      {%- when '2' or '22' -%}nd
+      {%- when '3' or '23' -%}rd
+      {%- else -%}th
+    {%- endcase -%}
+  {%- endcapture %}
+
+  {% capture date -%}
+    {{- min_formatted -}} - {{- max_formatted -}}
+  {%- endcapture %}
+
+{% endif %}
 
 {%- liquid
   assign block_settings = block.settings
