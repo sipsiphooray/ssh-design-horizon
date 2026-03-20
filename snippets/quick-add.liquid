@@ -3,6 +3,7 @@
 
   @param {object} product - The product object
   @param {string} section_id - The section ID
+  @param {object} [active_variant] - The variant object
   @param {object} [block] - The block object
   @param {string} [color_scheme] - The color scheme to use
 {%- enddoc -%}
@@ -16,6 +17,10 @@
   # Logic to determine which variant to use (matching swatch selection logic from product-card)
   assign variant = product.selected_or_first_available_variant
 
+  if active_variant != blank
+    assign variant = active_variant
+  endif
+
   if variant.available
     assign can_add_to_cart = true
   else
@@ -23,7 +28,10 @@
   endif
 
   assign quick_add_button = 'choose'
-  if product.variants_count == 1 or product.options.size == 1 and product.selected_variant
+
+  if active_variant != blank
+    assign quick_add_button = 'add'
+  elsif product.variants_count == 1 or product.options.size == 1 and product.selected_variant
     assign quick_add_button = 'add'
   endif
 %}
@@ -76,6 +84,7 @@
       {% endcomment %}
       {% render 'add-to-cart-button',
         add_to_cart_text: add_to_cart_text,
+        quick_add: true,
         class: 'button quick-add__button quick-add__button--add add-to-cart-button',
         can_add_to_cart: can_add_to_cart,
         icon_only_on_mobile: true,
@@ -97,7 +106,7 @@
             aria-hidden="true"
             class="svg-wrapper add-to-cart-icon"
           >
-            {{- 'icon-add-to-cart.svg' | inline_asset_content -}}
+            {{- 'icon-plus.svg' | inline_asset_content -}}
           </span>
           <span class="add-to-cart-text__content is-visually-hidden-mobile">
             <span>

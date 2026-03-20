@@ -98,9 +98,10 @@
       if active_variant.featured_media != blank and active_variant.featured_media.id != product.featured_media.id and variant_images
         # Match by ID instead of src, and query product.media to guarantee an object array
         assign variant_media = product.media | where: 'id', active_variant.featured_media.id
+        assign other_media = product.media | reject: 'src', active_variant.featured_media
 
         # Concat requires an array, and 'where' automatically returns an array (so drop the [0])
-        assign media_list_to_show =  variant_media
+        assign media_list_to_show =  variant_media | concat: other_media
       endif
 
       if product.media.size > 2 and generic_media_size > 0
@@ -122,7 +123,7 @@
 
           assign hidden = false
           assign attributes = ''
-          if variant_images contains media.src and active_variant == blank
+          if variant_images contains media.src
             assign attributes = 'variant-image'
  
             if forloop.first == false

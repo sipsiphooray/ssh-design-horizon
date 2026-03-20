@@ -197,42 +197,103 @@ class VariantSelect extends Component {
 customElements.define("variant-select", VariantSelect);
 
 
-// Function to append the render title to the product card
-function appendRenderTitleToCards() {
-  const productCards = document.querySelectorAll('product-card[data-variant-id][data-render-text]');
+// Function to update both Titles and Prices on product cards
+function updateProductCardData() {
+  const productCards = document.querySelectorAll('product-card[data-variant-id]');
 
   productCards.forEach(card => {
-    // Prevent appending multiple times
-    if (card.hasAttribute('data-title-appended')) return;
+    const variantId = card.getAttribute('data-variant-id');
 
+    // ------------------------------------------
+    // 1. TITLE UPDATE LOGIC
+    // ------------------------------------------
     const renderTitle = card.getAttribute('data-render-text');
     const titleTextElement = card.querySelector('.product-title-block > *');
 
     if (titleTextElement && renderTitle) {
-      titleTextElement.textContent += ` - ${renderTitle}`;
-      
-      // CRITICAL: Mark this card as processed so we don't duplicate the text later!
-      card.setAttribute('data-title-appended', 'true');
+      const suffix = ` - ${renderTitle}`;
+      if (!titleTextElement.textContent.endsWith(suffix)) {
+        titleTextElement.textContent += suffix;
+      }
+    }
+
+    // ------------------------------------------
+    // 2. PRICE UPDATE LOGIC
+    // ------------------------------------------
+    const priceContainer = card.querySelector('product-price [ref="priceContainer"]') || card.querySelector('[ref="priceContainer"]');
+    const variantPrice = card.getAttribute('data-variant-price');
+    const variantComparePrice = card.getAttribute('data-variant-compare-price');
+
+    if (priceContainer && variantPrice) {
+      // Prevent infinite MutationObserver loops by checking if we already rendered this exact variant's price
+      if (priceContainer.getAttribute('data-rendered-variant') === variantId) {
+        return; // Skip, we already processed this price
+      }
+
+      // Helper function to format Shopify's raw cents (e.g., "500") into dollars ("$5.00")
+      // Note: If your Liquid outputs "$5.00" already, this function safely ignores it.
+      const formatMoney = (val) => {
+        if (!val || val === 'null') return '';
+        if (String(val).includes('$')) return val; // Already formatted
+        return '$' + (parseInt(val, 10) / 100).toFixed(2);
+      };
+
+      const formattedPrice = formatMoney(variantPrice);
+
+      // Check if compare price exists and is higher than 0
+      if (variantComparePrice && variantComparePrice !== 'null' && variantComparePrice !== '0' && variantComparePrice !== '') {
+        const formattedComparePrice = formatMoney(variantComparePrice);
+        
+        // Inject Sale Layout
+        priceContainer.innerHTML = `
+          <span role="group">
+            <span class="visually-hidden">Sale price&nbsp;</span>
+            <span class="price">${formattedPrice}</span>
+          </span>
+          <span role="group">
+            <span class="visually-hidden">Regular price&nbsp;</span>
+            <span class="compare-at-price">${formattedComparePrice}</span>
+          </span>
+        `;
+      } else {
+        // Inject Standard Layout (Replaces the "From $10.99" text)
+        priceContainer.innerHTML = `
+          <span class="price">${formattedPrice}</span>
+        `;
+      }
+
+      // CRITICAL: Mark this container with the current variant ID so the observer doesn't loop
+      priceContainer.setAttribute('data-rendered-variant', variantId);
     }
   });
 }
 
-// 1. Run immediately. Because type="module" defers execution, the DOM is ready.
-appendRenderTitleToCards();
+// 1. Run immediately on load.
+updateProductCardData();
 
-// 2. Set up an observer to catch any cards loaded dynamically via AJAX/Infinite Scroll
+// 2. Set up the observer with a Debounce.
+let debounceTimer;
 const cardObserver = new MutationObserver((mutations) => {
   let shouldRun = false;
-  mutations.forEach((mutation) => {
-    if (mutation.addedNodes.length > 0) {
+  
+  for (const mutation of mutations) {
+    if (mutation.addedNodes.length > 0 || mutation.type === 'characterData') {
       shouldRun = true;
+      break; 
     }
-  });
+  }
   
   if (shouldRun) {
-    appendRenderTitleToCards();
+    clearTimeout(debounceTimer);
+    debounceTimer = setTimeout(() => {
+      updateProductCardData();
+    }, 150); 
   }
 });
 
-// Start observing the body for dynamically injected elements
-cardObserver.observe(document.body, { childList: true, subtree: true });
+// Start observing the body for dynamically injected elements AND text mutations
+cardObserver.observe(document.body, { 
+  childList: true, 
+  subtree: true,
+  characterData: true 
+});

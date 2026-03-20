@@ -57,7 +57,7 @@
       {%- endif -%}
     </div>
     {%  if settings.quick_add or settings.mobile_quick_add %}
-      {% render 'quick-add', product: product, section_id: section.id %}
+      {% render 'quick-add', product: product, active_variant: active_variant, section_id: section.id %}
     {% endif %}
   {% endunless %}
 {% endcapture %}

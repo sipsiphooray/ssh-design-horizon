@@ -9,10 +9,10 @@
  */
 {
   "sections": {
-    "hero_xJ7LyG": {
-      "type": "hero",
+    "collection_hero_E4wGR9": {
+      "type": "collection-hero",
       "blocks": {
-        "group_XrccDx": {
+        "group_3fpgR6": {
           "type": "group",
           "name": "t:names.group",
           "settings": {
@@ -65,7 +65,7 @@
             "css_class": ""
           },
           "blocks": {
-            "custom_liquid_r39hAE": {
+            "custom_liquid_qVVdVJ": {
               "type": "custom-liquid",
               "name": "t:names.custom_liquid",
               "settings": {
@@ -73,7 +73,7 @@
               },
               "blocks": {}
             },
-            "text_AgJgy9": {
+            "text_AMqRpF": {
               "type": "text",
               "settings": {
                 "text": "<p>{{ closest.collection.title }}</p>",
@@ -105,7 +105,7 @@
               },
               "blocks": {}
             },
-            "text_pHAr6n": {
+            "text_JF9Bme": {
               "type": "text",
               "name": "t:names.text",
               "settings": {
@@ -140,62 +140,26 @@
             }
           },
           "block_order": [
-            "custom_liquid_r39hAE",
-            "text_AgJgy9",
-            "text_pHAr6n"
+            "custom_liquid_qVVdVJ",
+            "text_AMqRpF",
+            "text_JF9Bme"
           ]
-        },
-        "text_Yrhhfy": {
-          "type": "text",
-          "disabled": true,
-          "settings": {
-            "text": "{{ collection.description }}",
-            "width": "fit-content",
-            "max_width": "narrow",
-            "alignment": "left",
-            "type_preset": "rte",
-            "font": "var(--font-body--family)",
-            "font_size": "1rem",
-            "enable_mobile_size": false,
-            "mobile_font_size": "1rem",
-            "line_height": "normal",
-            "letter_spacing": "normal",
-            "case": "none",
-            "wrap": "pretty",
-            "color": "var(--color-foreground)",
-            "background": false,
-            "background_color": "#00000026",
-            "corner_radius": 0,
-            "padding-block-start": 0,
-            "padding-block-end": 32,
-            "padding-inline-start": 0,
-            "padding-inline-end": 0,
-            "custom_mobile_padding": false,
-            "mobile-padding-block-start": 0,
-            "mobile-padding-block-end": 0,
-            "mobile-padding-inline-start": 0,
-            "mobile-padding-inline-end": 0
-          },
-          "blocks": {}
         }
       },
       "block_order": [
-        "group_XrccDx",
-        "text_Yrhhfy"
+        "group_3fpgR6"
       ],
       "custom_css": [
-        ".hero:has(svg.hero__media) {min-height: unset;}",
-        ".hero:has(svg.hero__media) .text-block.text-block--background {padding: 0 !important; background: transparent;}",
-        "svg.hero__media {display: none;}",
+        ".hero:not(:has(.hero__media-grid)) {min-height: unset;}",
         "@media (min-width: 750px) {.h1 {--max-width--body-narrow: 11.75em; }}",
-        "@media (max-width: 749px) {{--section-height-medium: 20rem; }}"
+        "@media (max-width: 749px) {{--section-height-medium: 20rem; } .hero__media-wrapper--desktop.hero__media-wrapper--mobile img {object-position: left; }}"
       ],
-      "name": "t:names.hero",
+      "name": "Collection Hero",
       "settings": {
         "media_type_1": "image",
         "image_1": "{{ collection.image }}",
         "media_type_2": "image",
-        "stack_media_on_mobile": true,
+        "stack_media_on_mobile": false,
         "custom_mobile_media": true,
         "media_type_1_mobile": "image",
         "image_1_mobile": "{{ collection.metafields.custom.mobile_banner.value }}",
@@ -209,14 +173,14 @@
         "align_baseline": false,
         "horizontal_alignment_flex_direction_column": "flex-start",
         "vertical_alignment_flex_direction_column": "flex-start",
-        "gap": 12,
-        "section_width": "page-narrow",
+        "gap": 16,
+        "section_width": "page-width",
         "section_height": "medium",
         "section_height_custom": 50,
         "color_scheme": "scheme-738179cd-4e15-457b-be40-989a024001d6",
         "toggle_overlay": false,
         "overlay_color": "#00000026",
-        "overlay_style": "solid",
+        "overlay_style": "gradient",
         "gradient_direction": "to top",
         "blurred_reflection": false,
         "reflection_opacity": 75,
@@ -565,7 +529,7 @@
     }
   },
   "order": [
-    "hero_xJ7LyG",
+    "collection_hero_E4wGR9",
     "main",
     "section_dxFFCW"
   ]

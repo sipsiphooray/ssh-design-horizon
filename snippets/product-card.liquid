@@ -68,6 +68,10 @@
     data-variant-id="{{ active_variant.id }}"
     data-variant-title="{{ active_variant.title }}"
     data-render-text="{{ render_text }}"
+    data-variant-price="{{ active_variant.price | money_without_trailing_zeros }}"
+    {% if active_variant.compare_at_price and active_variant.compare_at_price > active_variant.price %}
+      data-variant-compare-price="{{ active_variant.compare_at_price | money_without_trailing_zeros }}"
+    {% endif %}
   {% endif %}
   id="product-card-{{ block.id }}"
   {% if settings.transition_to_main_product %}
