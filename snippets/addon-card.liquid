@@ -130,6 +130,10 @@
                 assign property_name = 'addon-' | append: block.id
                 assign element_id = 'addon-' | append: product.id | append: '-' | append: block.id
                 assign product_form_id = 'BuyButtons-ProductForm-' | append: section.id
+                assign disabled = false
+                if product.selected_or_first_available_variant.available == false
+                    assign disabled = true
+                endif
             %}
             {% render 'checkbox',
                 name: property_name,
@@ -138,7 +142,7 @@
                 id: element_id,
                 checked: false,
                 events: '',
-                disabled: false,
+                disabled: disabled,
                 required: false,
                 formId: product_form_id
             %}

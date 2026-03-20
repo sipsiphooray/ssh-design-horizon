@@ -343,14 +343,9 @@ class ProductFormComponent extends Component {
         const errorMessage = errorTemplate.replace('{{ maximum }}', validation.maxQuantity?.toString() || '');
         if (addToCartTextError) {
           addToCartTextError.classList.remove('hidden');
-
           const textNode = addToCartTextError.childNodes[2];
-          if (textNode) {
-            textNode.textContent = errorMessage;
-          } else {
-            const newTextNode = document.createTextNode(errorMessage);
-            addToCartTextError.appendChild(newTextNode);
-          }
+          if (textNode) textNode.textContent = errorMessage;
+          else addToCartTextError.appendChild(document.createTextNode(errorMessage));
 
           this.#setLiveRegionText(errorMessage);
 
@@ -363,23 +358,82 @@ class ProductFormComponent extends Component {
         }
 
         setTimeout(() => {
-          for (const container of allAddToCartContainers) {
-            container.enable();
-          }
+          for (const container of allAddToCartContainers) container.enable();
         }, ERROR_BUTTON_REENABLE_DELAY);
 
         return;
       }
     }
 
-    const formData = new FormData(form);
+    // Use let so we can overwrite it if addons are present
+    let formData = new FormData(form);
 
-    if (overrideVariantId) {
-      formData.set('id', overrideVariantId);
+    if (overrideVariantId) formData.set('id', overrideVariantId);
+    if (overrideQuantity !== undefined) formData.set('quantity', overrideQuantity.toString());
+
+    // --- ADDON LOGIC WITH PARENT_ID START ---
+    const mainVariantId = formData.get('id');
+    const mainQuantity = formData.get('quantity') || this.dataset.quantityDefault || '1';
+    let totalQuantityAdded = Number(mainQuantity);
+
+    const addon_items = [];
+    for (const [key, value] of formData.entries()) {
+      // Find our checkbox addons
+      if (key.startsWith('addon-') && value) {
+        addon_items.push({ 
+          id: value.toString(), 
+          quantity: 1, // Default addon quantity
+          parent_id: mainVariantId,
+          properties: {
+            '_parentProduct': mainVariantId
+          }
+        });
+      }
     }
-    if (overrideQuantity !== undefined) {
-      formData.set('quantity', overrideQuantity.toString());
+debugger
+    // If addons are checked, reconstruct formData into Shopify's multi-item array format
+    if (addon_items.length > 0) {
+      const itemsFormData = new FormData();
+      totalQuantityAdded += addon_items.length;
+
+      // 1. Add main product as items[0]
+      itemsFormData.append('items[0][id]', mainVariantId.toString());
+      itemsFormData.append('items[0][quantity]', mainQuantity.toString());
+
+      // Extract and attach properties to main product if they exist
+      for (const [key, value] of formData.entries()) {
+        const propMatch = key.match(/^properties\[(.+)]$/);
+        if (propMatch && propMatch[1]) {
+          itemsFormData.append(`items[0][properties][${propMatch[1]}]`, value.toString());
+        }
+      }
+
+      // 2. Add selected addon items with parent linking as items[1], items[2], etc.
+      addon_items.forEach((addon, index) => {
+        itemsFormData.append(`items[${index + 1}][id]`, addon.id);
+        itemsFormData.append(`items[${index + 1}][quantity]`, addon.quantity.toString());
+        
+        if (addon.parent_id) {
+          itemsFormData.append(`items[${index + 1}][parent_id]`, addon.parent_id.toString());
+        }
+        
+        if (addon.properties) {
+          Object.entries(addon.properties).forEach(([key, value]) => {
+            itemsFormData.append(`items[${index + 1}][properties][${key}]`, value.toString());
+          });
+        }
+      });
+
+      // 3. Copy other necessary form data (sections) while ignoring old ids/quantities
+      for (const [key, value] of formData.entries()) {
+        if (key !== 'id' && key !== 'quantity' && !key.startsWith('properties[') && !key.startsWith('addon-')) {
+          itemsFormData.append(key, value);
+        }
+      }
+
+      formData = itemsFormData; // Override original formData
     }
+    // --- ADDON LOGIC WITH PARENT_ID END ---
 
     const cartItemsComponents = document.querySelectorAll('cart-items-component');
     let cartItemComponentsSectionIds = [];
@@ -394,65 +448,45 @@ class ProductFormComponent extends Component {
 
     fetch(Theme.routes.cart_add_url, {
       ...fetchCfg,
-      headers: {
-        ...fetchCfg.headers,
-        Accept: 'text/html',
-      },
+      headers: { ...fetchCfg.headers, Accept: 'text/html' },
     })
       .then((response) => response.json())
       .then(async (response) => {
         if (response.status) {
-          this.dispatchEvent(
-            new CartErrorEvent(form.getAttribute('id') || '', response.message, response.description, response.errors)
-          );
+          this.dispatchEvent(new CartErrorEvent(form.getAttribute('id') || '', response.message, response.description, response.errors));
 
           if (!addToCartTextError) return;
           addToCartTextError.classList.remove('hidden');
 
-          // Reuse the text node if the user is spam-clicking
           const textNode = addToCartTextError.childNodes[2];
-          if (textNode) {
-            textNode.textContent = response.message;
-          } else {
-            const newTextNode = document.createTextNode(response.message);
-            addToCartTextError.appendChild(newTextNode);
-          }
+          if (textNode) textNode.textContent = response.message;
+          else addToCartTextError.appendChild(document.createTextNode(response.message));
 
-          // Create or get existing error live region for screen readers
           this.#setLiveRegionText(response.message);
 
           this.#timeout = setTimeout(() => {
             if (!addToCartTextError) return;
             addToCartTextError.classList.add('hidden');
-
-            // Clear the announcement
             this.#clearLiveRegionText();
           }, ERROR_MESSAGE_DISPLAY_DURATION);
 
-          // When we add more than the maximum amount of items to the cart, we need to dispatch a cart update event
-          // because our back-end still adds the max allowed amount to the cart.
           this.dispatchEvent(
             new CartAddEvent({}, this.id, {
               didError: true,
               source: 'product-form-component',
-              itemCount: Number(formData.get('quantity')) || Number(this.dataset.quantityDefault),
+              itemCount: totalQuantityAdded,
               productId: this.dataset.productId,
             })
           );
-
           return;
         } else {
-          const id = formData.get('id');
-
           if (addToCartTextError) {
             addToCartTextError.classList.add('hidden');
             addToCartTextError.removeAttribute('aria-live');
           }
 
-          if (!id) throw new Error('Form ID is required');
+          if (!mainVariantId) throw new Error('Form ID is required');
 
-          // Add aria-live region to inform screen readers that the item was added
-          // Get the added text from any add-to-cart button
           const anyAddToCartButton = allAddToCartContainers[0]?.refs.addToCartButton;
           if (anyAddToCartButton) {
             const addedTextElement = anyAddToCartButton.querySelector('.add-to-cart-text--added');
@@ -465,26 +499,21 @@ class ProductFormComponent extends Component {
             }, SUCCESS_MESSAGE_DISPLAY_DURATION);
           }
 
-          // Fetch the updated cart to get the actual total quantity for this variant
           await this.#fetchAndUpdateCartQuantity();
 
           this.dispatchEvent(
-            new CartAddEvent({}, id.toString(), {
+            new CartAddEvent({}, mainVariantId.toString(), {
               source: 'product-form-component',
-              itemCount: Number(formData.get('quantity')) || Number(this.dataset.quantityDefault),
+              itemCount: totalQuantityAdded,
               productId: this.dataset.productId,
               sections: response.sections,
             })
           );
         }
       })
-      .catch((error) => {
-        console.error(error);
-      })
+      .catch((error) => console.error(error))
       .finally(() => {
-        if (event) {
-          cartPerformance.measureFromEvent('add:user-action', event);
-        }
+        if (event) cartPerformance.measureFromEvent('add:user-action', event);
       });
   }
 

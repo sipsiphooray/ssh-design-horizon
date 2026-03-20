@@ -308,6 +308,9 @@ document.addEventListener('click', (e) => {
   const checkbox = card.querySelector('input[type="checkbox"]');
   if (!checkbox) return;
 
+  // Check if disabled, abort if true
+  if (checkbox.disabled) return;
+
   // ignore real interactive elements
   if (e.target.closest('input, label, button, a')) return;
 
