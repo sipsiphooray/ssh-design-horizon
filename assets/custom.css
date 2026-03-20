@@ -402,7 +402,7 @@ summary .svg-wrapper {
 }
 
 .product-details .shopify-app-block:has([data-oke-star-rating]) {
-    margin-top: calc(-1 * var(--gap-xs));
+    margin-top: calc(-1 * var(--gap-2xs));
 }
 
 #klaviyo-bis-button-container {
