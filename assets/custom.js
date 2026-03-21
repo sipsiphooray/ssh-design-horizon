@@ -1,5 +1,6 @@
 import { Component } from '@theme/component';
-import { ThemeEvents } from '@theme/events';
+import { ThemeEvents, PriceChangeEvent } from '@theme/events';
+
 
 function scrollToHash() {
   const hash = window.location.hash; // "#faq"
@@ -301,4 +302,28 @@ cardObserver.observe(document.body, {
   childList: true, 
   subtree: true,
   characterData: true 
+});
+
+// Listen for the variant update event and call the handler
+document.addEventListener(ThemeEvents.variantUpdate, (event) => {
+  console.log(event);
+  
+  // The target is the variant-picker element
+  const variantPicker = event.target;
+  
+  // Check if the target is a variant-picker
+  if (variantPicker && variantPicker.matches('variant-picker, swatches-variant-picker-component')) {
+    // Find all checked addon checkboxes
+    const checkedAddons = document.querySelectorAll('addon-card input[type="checkbox"]:checked');
+
+    console.log(`Found ${checkedAddons.length} checked addons`);
+    
+    if (checkedAddons.length > 0) {
+      // Dispatch price change event if there are checked addons
+      document.dispatchEvent(new PriceChangeEvent());
+      console.log('PriceChangeEvent dispatched due to checked addons');
+    }
+  }
+  
+  console.log(event.target);
 });

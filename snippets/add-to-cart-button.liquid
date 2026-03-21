@@ -64,7 +64,9 @@
       </span>
       {% unless quick_add == true %}
         <span class="button-divider">•</span>
-        <span class="button--price" data-price="{{ product.selected_or_first_available_variant.price }}"  data-symbol="{{ cart.currency.symbol }}" data-currency="{{ localization.country.currency.iso_code }}" >
+        <span class="button--price" data-price="{{ product.selected_or_first_available_variant.price }}" data-symbol="{{ cart.currency.symbol }}" 
+          {% comment %} data-currency="{{ localization.country.currency.iso_code }}" {% endcomment %}
+        >
           {% if settings.currency_code_enabled_product_pages %}
             {{ product.selected_or_first_available_variant.price | money_with_currency | replace: '.00', '' }}
           {% else %}
