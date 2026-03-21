@@ -313,15 +313,17 @@ document.addEventListener(ThemeEvents.variantUpdate, (event) => {
   
   // Check if the target is a variant-picker
   if (variantPicker && variantPicker.matches('variant-picker, swatches-variant-picker-component')) {
-    // Find all checked addon checkboxes
-    const checkedAddons = document.querySelectorAll('addon-card input[type="checkbox"]:checked');
-
-    console.log(`Found ${checkedAddons.length} checked addons`);
+    // Find the parent container (shopify-section, dialog, or product-card)
+    const parent = variantPicker.closest('.shopify-section, dialog, product-card');
     
-    if (checkedAddons.length > 0) {
-      // Dispatch price change event if there are checked addons
-      document.dispatchEvent(new PriceChangeEvent());
-      console.log('PriceChangeEvent dispatched due to checked addons');
+    if (parent) {
+      // Find all checked addon checkboxes WITHIN the same parent container
+      const checkedAddons = parent.querySelectorAll('addon-card input[type="checkbox"]:checked');
+      
+      if (checkedAddons.length > 0) {
+        // Dispatch price change event if there are checked addons
+        document.dispatchEvent(new PriceChangeEvent());
+      }
     }
   }
   
