@@ -1,4 +1,4 @@
-import { ThemeEvents, PriceChangeEvent } from '@theme/events';
+import { ThemeEvents, PriceChangeEvent, CartAddEvent, CartErrorEvent, CartUpdateEvent, VariantUpdateEvent } from '@theme/events';
 
 /**
  * AddonCard Component - A lightweight component for addon products
@@ -436,3 +436,79 @@ const CURRENCY_DECIMALS = {
   XTS: 0,
   XUA: 0,
 };
+
+document.addEventListener('click', (event) => {
+  const button = event.target.closest('.frequent-add-to-cart');
+  if (!button) return;
+
+  const frequentRow = button.closest('.frequent-row');
+  if (!frequentRow) return;
+
+  const checkedAddons = frequentRow.querySelectorAll('.checkbox__input:checked');
+  if (checkedAddons.length === 0) return;
+
+  const items = [];
+  checkedAddons.forEach(addon => {
+    items.push({
+      id: parseInt(addon.value),
+      quantity: 1
+    });
+  });
+
+  // Get cart sections to update (matching product-form.js pattern)
+  const cartItemsComponents = document.querySelectorAll('cart-items-component');
+  const sections = [];
+  cartItemsComponents.forEach(item => {
+    if (item instanceof HTMLElement && item.dataset.sectionId) {
+      sections.push(item.dataset.sectionId);
+    }
+  });
+
+  const payload = {
+    items,
+    sections: sections.join(',')
+  };
+
+  // Trigger animations on the frequent button itself
+  if (button.dataset.added !== 'true') {
+    button.dataset.added = 'true';
+    setTimeout(() => {
+      button.removeAttribute('data-added');
+    }, 800);
+  }
+
+  fetch(Theme.routes.cart_add_url, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      'Accept': 'application/json'
+    },
+    body: JSON.stringify(payload)
+  })
+    .then(response => response.json())
+    .then(data => {
+      if (data.status) {
+        // Error case
+        console.error('Error adding to cart:', data);
+        return;
+      }
+
+      // Trigger animations on existing add-to-cart components
+      const allAddToCartContainers = document.querySelectorAll('add-to-cart-component');
+      allAddToCartContainers.forEach(container => {
+        if (container.animateAddToCart) {
+          container.animateAddToCart();
+        }
+      });
+
+      // Dispatch CartAddEvent with sections (matching product-form.js)
+      document.dispatchEvent(
+        new CartAddEvent({}, 'frequently-bought', {
+          source: 'frequently-bought',
+          itemCount: items.length,
+          sections: data.sections
+        })
+      );
+    })
+    .catch(error => console.error('Failed to add to cart:', error));
+});
