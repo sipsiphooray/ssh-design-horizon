@@ -65,8 +65,8 @@ export class AddonCard extends HTMLElement {
    */
   handleCardClick(event) {
     // Ignore clicks on interactive elements
-    if (event.target.closest('input, label, button, a, select')) return;
-    
+    if (event.target.closest('a')) return;
+
     if (!this.checkbox) return;
     
     // Check if disabled, abort if true

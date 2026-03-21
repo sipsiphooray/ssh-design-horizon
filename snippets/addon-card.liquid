@@ -321,6 +321,57 @@
         overflow: hidden;
     }
 
+    .card-layout-addon-frequently {
+      height: 100%;
+    }
+
+    .card-layout-addon-frequently .addon-flex {
+      display: grid;
+      grid-template-columns: auto 1fr;
+      gap: var(--gap-sm);
+      align-items: start;
+      width: 100%;
+      min-width: 0;
+    }
+
+    .card-layout-addon-frequently .addon-flex > div:first-child {
+        width: fit-content;
+        align-self: center;
+        flex-shrink: 0;
+        grid-column: 1;
+        grid-row: 1 / span 2;
+    }
+
+    .card-layout-addon-frequently .addon-image-wrapper {
+        grid-column: 2;
+        grid-row: 1;
+        width: 100%;
+        min-width: 0;
+    }
+
+    .card-layout-addon-frequently .addon-product-image {
+        width: 100%;
+        height: auto;
+        display: block;
+        border-radius: var(--border-radius-sm);
+    }
+
+    .card-layout-addon-frequently .addon-flex > div:last-child {
+        grid-column: 2;
+        grid-row: 2;
+        width: 100%;
+        flex: 1 auto;
+        display: flex;
+        gap: var(--gap-2xs);
+        flex-direction: column;
+        justify-content: space-between;
+        min-width: 0;
+    }
+
+    .card-layout-addon-frequently .addon-variant-wrapper {
+        max-width: 100%;
+    }
+
     .addon-card .product-badges__badge {
         display: none;
     }

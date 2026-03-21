@@ -47,14 +47,15 @@
       block-resource-list
       spacing-style
       gap-style
+      border-style
     "
     style="
       {%  render 'spacing-style', settings: block_settings %}
       {%  render 'gap-style', value: block_settings.gap %}
+      {% render 'border-override', settings: block_settings %}
       --resource-list-column-gap-desktop: {{ block_settings.columns_gap }}px;
       --resource-list-row-gap-desktop: {{ block_settings.rows_gap }}px;
       --resource-list-columns-mobile: 1fr;
-      --border-radius: {{ block_settings.border_radius }}px;
     "
   >
     <div class="section-resource-list__content">
@@ -325,14 +326,69 @@
       "default": 12
     },
     {
+      "type": "select",
+      "id": "border",
+      "label": "t:settings.borders",
+      "options": [
+        {
+          "value": "none",
+          "label": "t:options.none"
+        },
+        {
+          "value": "solid",
+          "label": "t:options.solid"
+        }
+      ],
+      "default": "none"
+    },
+    {
+      "type": "range",
+      "id": "border_width",
+      "min": 0,
+      "max": 10,
+      "step": 0.5,
+      "unit": "px",
+      "label": "t:settings.border_width",
+      "default": 1,
+      "visible_if": "{{ block.settings.border != 'none' }}"
+    },
+    {
+      "type": "range",
+      "id": "border_opacity",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "%",
+      "label": "t:settings.border_opacity",
+      "default": 100,
+      "visible_if": "{{ block.settings.border != 'none' }}"
+    },
+    {
       "type": "range",
       "id": "border_radius",
       "label": "t:settings.border_radius",
       "min": 0,
-      "max": 32,
+      "max": 100,
       "step": 1,
       "unit": "px",
       "default": 0
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_mobile_radius",
+      "label": "Custom mobile radius",
+      "default": false
+    },
+    {
+      "type": "range",
+      "id": "mobile_border_radius",
+      "label": "Mobile corner radius",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "default": 0,
+      "visible_if": "{{ block.settings.enable_mobile_radius == true }}"
     },
     {
       "type": "checkbox",
