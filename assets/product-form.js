@@ -390,7 +390,7 @@ class ProductFormComponent extends Component {
         });
       }
     }
-debugger
+
     // If addons are checked, reconstruct formData into Shopify's multi-item array format
     if (addon_items.length > 0) {
       const itemsFormData = new FormData();
@@ -800,6 +800,13 @@ debugger
 
   /** @param {import('./events').VariantSelectedEvent} _event */
   #onVariantSelected = (_event) => {
+    // Check if the event originated from inside an addon card
+    const isAddon = _event.target.closest('.addon-card');
+
+    // If it's an addon, do nothing and exit early
+    if (isAddon) return;
+
+    // Otherwise, proceed with the normal main product logic
     this.#variantChangeInProgress = true;
   };
 }

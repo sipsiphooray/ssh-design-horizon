@@ -317,3 +317,39 @@ document.addEventListener('click', (e) => {
   checkbox.checked = !checkbox.checked;
   checkbox.dispatchEvent(new Event('change', { bubbles: true }));
 });
+
+document.querySelectorAll('.addon-card').forEach((card) => {
+  card.addEventListener(ThemeEvents.variantUpdate, (e) => {
+    // 1. Get the availability and the new variant ID from the event payload
+    const isAvailable = e.detail?.resource?.available;
+    const newVariantId = e.detail?.resource?.id;
+
+    // Make sure we actually have the resource data before proceeding
+    if (typeof isAvailable === 'undefined') return;
+
+    // 2. Find the elements inside this specific card
+    const soldOutBadge = card.querySelector('.sold-out-addon');
+    const checkbox = card.querySelector('.checkbox__input');
+
+    // 3. Toggle the hidden attribute for the sold out badge
+    if (soldOutBadge) {
+      soldOutBadge.toggleAttribute('hidden', isAvailable);
+    }
+
+    // 4. Update the checkbox properties
+    if (checkbox) {
+      // Update the value so the correct variant gets added to the cart
+      if (newVariantId) {
+        checkbox.value = newVariantId;
+      }
+
+      // Disable if sold out
+      checkbox.disabled = !isAvailable; 
+      
+      // Uncheck it if the newly selected variant is sold out
+      if (!isAvailable) {
+        checkbox.checked = false;
+      }
+    }
+  });
+});

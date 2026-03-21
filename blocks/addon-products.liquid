@@ -8,7 +8,7 @@
 {% liquid
   assign addon_products = product.metafields.shopify--discovery--product_recommendation.complementary_products.value
 
-  if addon_products.size == 0
+  if addon_products == blank
     break
   endif
 

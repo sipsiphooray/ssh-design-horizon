@@ -152,6 +152,9 @@
         </div>
         <div>
             {{ children }}
+            <span class="sold-out-addon" {% if product.selected_or_first_available_variant.available == true %} hidden{% endif %}>
+              {{ 'content.product_badge_sold_out' | t }}
+            </span>
         </div>
     </div>
   </div>
@@ -168,6 +171,18 @@
         --checkbox-border: 1.5px solid rgb(var(--color-foreground-rgb) / 1);
         --color-border-rgb: var(--color-foreground-rgb);
         --max-width--display-tight: auto;
+    }
+
+    .addon-card:has(.checkbox__input:checked) {
+      --color-border-rgb: var(--color-variant-border) !important;
+      --checkbox-border: 1.5px solid var(--color-variant-border);
+    }
+
+    .sold-out-addon {
+      line-height: 1em;
+      font-size: var(--font-size--2xs);
+      font-style: italic;
+      opacity: var(--opacity-60);
     }
 
     .addon-card .product-card__link {
@@ -192,7 +207,7 @@
     }
 
     .addon-card product-price .price:before {
-        content: '+ ';
+        content: '+';
     }
 
     .card-layout-addon .product-title-block > * {
