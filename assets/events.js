@@ -295,35 +295,49 @@ export class FilterUpdateEvent extends Event {
  * @extends {Event}
  */
 export class PriceChangeEvent extends Event {
-  constructor() {
+  /**
+   * @param {Element} [target] - The target element that triggered the event
+   */
+  constructor(target) {
     super(PriceChangeEvent.eventName, { bubbles: true });
     /** @type {Record<string, number>} */
     const prices = {};
     let total = 0;
 
-    // Include base product price if available
-    const basePriceEl = document.querySelector('.button--price[data-price]');
+    // Find parent container from target - this is REQUIRED
+    let parent = null;
+    if (target && target instanceof Element) {
+      parent = target.closest('.shopify-section, dialog, product-card');
+    }
+
+    // If no parent found, don't calculate anything
+    if (!parent) {
+      console.warn('PriceChangeEvent: No parent container found');
+      this.detail = { prices, total, parent: null };
+      return;
+    }
+
+    // Find base price element within the parent
+    const basePriceEl = parent.querySelector('.total-price-display[data-price]');
     if (basePriceEl && basePriceEl.dataset.price) {
       const basePrice = Number(basePriceEl.dataset.price) || 0;
       prices['base_product'] = basePrice;
       total += basePrice;
     }
 
-    // Add prices from all checked product addons
-    document.querySelectorAll('.addon-card input[type="checkbox"]:checked').forEach(el => {
+    // Add prices from checked addons ONLY within the same parent
+    parent.querySelectorAll('.addon-card input[type="checkbox"]:checked').forEach(el => {
       const inputEl = /** @type {HTMLInputElement} */ (el);
       const name = inputEl.name || 'addon';
-      
-      // Grab the price directly from your data-price attribute
       const price = Number(inputEl.dataset.price || 0);
-
       prices[name] = price;
       total += price;
     });
 
     this.detail = {
       prices,
-      total
+      total,
+      parent
     };
   }
 

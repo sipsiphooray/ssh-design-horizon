@@ -150,6 +150,8 @@
     "cart_title": "Cart",
     "cart_subtotal": "Subtotal",
     "cart_total": "Cart total",
+    "total": "Total:",
+    "frequent_no_chosen": "Choose items to buy together.",
     "checkout": "Check out",
     "collection_placeholder": "Collection title",
     "discount_code": "Discount code",

@@ -46,6 +46,9 @@ export class AddonCard extends HTMLElement {
     
     // Initialize variant state
     this.updateVariantState();
+
+    // Update frequently bought section display
+    this.updateFrequentlyBoughtDisplay();
   }
 
   disconnectedCallback() {
@@ -65,7 +68,7 @@ export class AddonCard extends HTMLElement {
    */
   handleCardClick(event) {
     // Ignore clicks on interactive elements
-    if (event.target.closest('a')) return;
+    if (event.target.closest('input, label, button, select')) return;
 
     if (!this.checkbox) return;
     
@@ -76,35 +79,78 @@ export class AddonCard extends HTMLElement {
     this.checkbox.dispatchEvent(new Event('change', { bubbles: true }));
     
     // Fire price calculation when card is clicked
-    document.dispatchEvent(new PriceChangeEvent());
-  }
-    /**
-     * Handle price change events globally
-     * @param {Event} event
-     */
-    handlePriceChange(event) {
-    const priceEl = document.querySelector('.button--price[data-price]');
-    if (!priceEl) return;
+    document.dispatchEvent(new PriceChangeEvent(this.checkbox));
     
+    // Update frequently bought section display
+    this.updateFrequentlyBoughtDisplay();
+  }
+
+  /**
+   * Handle price change events globally
+   * @param {Event} event
+   */
+  handlePriceChange(event) {
+    // Get the parent from the event detail
+    const parent = event.detail?.parent;
+    
+    // If no parent, don't update anything
+    if (!parent) return;
+    
+    // Find price element within the parent
+    const priceEl = parent.querySelector('.total-price-display[data-price]');
+    if (!priceEl) return;
+
     const symbol = priceEl.dataset.symbol;
     const currency = priceEl.dataset.currency;
     const total = event.detail.total;
 
-    if (priceEl) {
-        let formattedPrice;
-        
-        // If currency is provided, use the formatMoney method
-        if (currency) {
-        formattedPrice = this.formatMoney(total.toString(), currency);
-        // Add symbol if provided, otherwise just show the formatted price
-        priceEl.textContent = symbol ? `${symbol} ${formattedPrice} ${currency}` : `${formattedPrice} ${currency}`;
-        } else {
-        // Fallback to simple number formatting if no currency
-        formattedPrice = (total / 100).toFixed(2);
-        priceEl.textContent = symbol ? `${symbol} ${formattedPrice}` : formattedPrice;
-        }
+    let formattedPrice;
+    
+    // If currency is provided, use the formatMoney method
+    if (currency) {
+      formattedPrice = this.formatMoney(total.toString(), currency);
+      // Add symbol with no space, add space before currency if currency exists
+      priceEl.textContent = symbol ? `${symbol}${formattedPrice} ${currency}` : `${formattedPrice} ${currency}`;
+    } else {
+      // Fallback to simple number formatting if no currency
+      formattedPrice = (total / 100).toFixed(2);
+      priceEl.textContent = symbol ? `${symbol}${formattedPrice}` : formattedPrice;
     }
+  }
+
+  /**
+   * Update frequently bought section display based on checked addons
+   */
+  updateFrequentlyBoughtDisplay() {
+    // Find the frequently bought section
+    const section = this.closest('.frequently-bought-section');
+    if (!section) return;
+    
+    // Find the total price element and no-chosen message
+    const totalPriceEl = section.querySelector('.total-frequent-price');
+    const noChosenEl = section.querySelector('.frequent-no-chosen');
+    
+    // Count checked addons within this section
+    const checkedAddons = section.querySelectorAll('.addon-card input[type="checkbox"]:checked');
+    
+    if (checkedAddons.length > 0) {
+      // Show total price, hide no-chosen message
+      if (totalPriceEl) {
+        totalPriceEl.removeAttribute('hidden');
+      }
+      if (noChosenEl) {
+        noChosenEl.setAttribute('hidden', '');
+      }
+    } else {
+      // Hide total price, show no-chosen message
+      if (totalPriceEl) {
+        totalPriceEl.setAttribute('hidden', '');
+      }
+      if (noChosenEl) {
+        noChosenEl.removeAttribute('hidden');
+      }
     }
+  }
 
   /**
    * Handle variant selection from dropdown
@@ -129,7 +175,8 @@ export class AddonCard extends HTMLElement {
       // Uncheck if variant is unavailable and was checked
       if (!isAvailable && this.checkbox.checked) {
         this.checkbox.checked = false;
-        document.dispatchEvent(new PriceChangeEvent());
+        document.dispatchEvent(new PriceChangeEvent(this.checkbox));
+        this.updateFrequentlyBoughtDisplay();
       }
     }
     
@@ -158,7 +205,7 @@ export class AddonCard extends HTMLElement {
     
     // Dispatch price change event if checkbox is checked
     if (this.checkbox && this.checkbox.checked) {
-      document.dispatchEvent(new PriceChangeEvent());
+      document.dispatchEvent(new PriceChangeEvent(this.checkbox));
     }
     
     // Update card data attributes
@@ -187,7 +234,10 @@ export class AddonCard extends HTMLElement {
     }
     
     // Dispatch price change event when checkbox is toggled
-    document.dispatchEvent(new PriceChangeEvent());
+    document.dispatchEvent(new PriceChangeEvent(this.checkbox));
+
+    // Update frequently bought section display
+    this.updateFrequentlyBoughtDisplay();
   }
 
   /**

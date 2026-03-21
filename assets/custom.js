@@ -319,7 +319,7 @@ document.addEventListener(ThemeEvents.variantUpdate, (event) => {
     if (parent) {
       // Find all checked addon checkboxes WITHIN the same parent container
       const checkedAddons = parent.querySelectorAll('addon-card input[type="checkbox"]:checked');
-      
+
       if (checkedAddons.length > 0) {
         // Dispatch price change event if there are checked addons
         document.dispatchEvent(new PriceChangeEvent());

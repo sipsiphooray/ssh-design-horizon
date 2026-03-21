@@ -225,9 +225,12 @@
         --max-width--display-tight: auto;
         border: 1.5px solid var(--color-border);
         background: var(--color-background);
-        transition: border-color 0.2s ease;
         cursor: pointer;
     } 
+
+    .card-layout-addon-frequently {
+      border-radius: 12px !important;
+    }
 
     .addon-card:has(.checkbox__input:disabled) {
       background: rgb(var(--color-foreground-rgb) / .05);
@@ -235,7 +238,8 @@
     }
 
     .addon-card:has(.checkbox__input:checked) {
-        border-color: rgb(var(--color-foreground-rgb) / 1);
+        border: 2px solid rgb(var(--color-foreground-rgb) / 1);
+        box-shadow: 0 2px 8px rgba(var(--color-foreground-rgb) / 0.15);
     }
 
     .sold-out-addon {
@@ -321,55 +325,58 @@
         overflow: hidden;
     }
 
-    .card-layout-addon-frequently {
-      height: 100%;
-    }
+    @media (min-width: 750px) {
+      .card-layout-addon-frequently {
+        height: 100%;
+      }
 
-    .card-layout-addon-frequently .addon-flex {
-      display: grid;
-      grid-template-columns: auto 1fr;
-      gap: var(--gap-sm);
-      align-items: start;
-      width: 100%;
-      min-width: 0;
-    }
-
-    .card-layout-addon-frequently .addon-flex > div:first-child {
-        width: fit-content;
-        align-self: center;
-        flex-shrink: 0;
-        grid-column: 1;
-        grid-row: 1 / span 2;
-    }
-
-    .card-layout-addon-frequently .addon-image-wrapper {
-        grid-column: 2;
-        grid-row: 1;
+      .card-layout-addon-frequently .addon-flex {
+        display: grid;
+        grid-template-columns: auto 1fr;
+        gap: var(--gap-sm);
+        align-items: start;
         width: 100%;
         min-width: 0;
-    }
+      }
 
-    .card-layout-addon-frequently .addon-product-image {
-        width: 100%;
-        height: auto;
-        display: block;
-        border-radius: var(--border-radius-sm);
-    }
+      .card-layout-addon-frequently .addon-flex > div:first-child {
+          width: fit-content;
+          align-self: center;
+          flex-shrink: 0;
+          grid-column: 1;
+          grid-row: 1 / span 2;
+      }
 
-    .card-layout-addon-frequently .addon-flex > div:last-child {
-        grid-column: 2;
-        grid-row: 2;
-        width: 100%;
-        flex: 1 auto;
-        display: flex;
-        gap: var(--gap-2xs);
-        flex-direction: column;
-        justify-content: space-between;
-        min-width: 0;
-    }
+      .card-layout-addon-frequently .addon-image-wrapper {
+          grid-column: 2;
+          grid-row: 1;
+          width: 100%;
+          min-width: 0;
+      }
 
-    .card-layout-addon-frequently .addon-variant-wrapper {
-        max-width: 100%;
+      .card-layout-addon-frequently .addon-product-image {
+          width: 100%;
+          height: auto;
+          display: block;
+          border-radius: var(--border-radius-sm);
+      }
+
+      .card-layout-addon-frequently .addon-flex > div:last-child {
+          grid-column: 2;
+          grid-row: 2;
+          width: 100%;
+          flex: 1 auto;
+          display: flex;
+          gap: var(--gap-2xs);
+          flex-direction: column;
+          justify-content: space-between;
+          min-width: 0;
+          grid-column: 1 / -1;
+      }
+
+      .card-layout-addon-frequently .addon-variant-wrapper {
+          max-width: 100%;
+      }
     }
 
     .addon-card .product-badges__badge {
@@ -405,8 +412,8 @@
 
   @media screen and (max-width: 749px) {
     .addon-image-wrapper {
-        width: 45px;
-        min-width: 45px;
+        width: 65px;
+        min-width: 65px;
     }
     
     .addon-variant-selector {

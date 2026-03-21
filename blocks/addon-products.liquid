@@ -21,11 +21,6 @@
   endcase
 %}
 
-<script
-  src="{{ 'addon-products.js' | asset_url }}"
-  type="module"
-></script>
-
 {% comment %}
   [data-section-id] {section.id} - used to fetch the product recommendations from the Section Rendering API
 {% endcomment %}
@@ -154,6 +149,10 @@
 
   .addon-products-wrapper {
     width: 100%;
+  }
+
+  .addon-products-wrapper:empty {
+    display: none;
   }
 
   .addon-products-wrapper:has(addon-products[data-shopify-editor-preview]) {
