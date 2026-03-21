@@ -167,7 +167,7 @@
                 {% if products.size > 0 %}
                     <div class="total-frequent-price" hidden>
                         <span class="total-label-wrapper">
-                            <span class="total-label">{{ 'content.total' | t }}</span>
+                            <span class="h4 total-label">{{ 'content.total' | t }}</span>
                             <div class="total-price-display" data-price="0" data-symbol="{{ cart.currency.symbol }}"></div>
                         </span>
                         <button type="button" class="button-secondary frequent-add-to-cart">
@@ -271,6 +271,9 @@
     gap: var(--gap-xs);
 }
 
+.total-label-wrapper .total-price-display {
+    font-size: var(--font-h4--size);
+}
 .frequent-no-chosen {
     padding: var(--padding-xs) var(--padding-lg);
     border: 1.5px solid var(--color-variant-border);
