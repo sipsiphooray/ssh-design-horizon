@@ -1,27 +1,23 @@
 {%- doc -%}
-  This snippet is used to render a product card.
-  It is used in the product block, featured product block, and the product card block.
-  The product object is null or when placeholders are rendered.
+  This snippet is used to render an addon card.
+  It is used in the product block for addon products.
 
   @param {string} [card_layout_type] - Card layout type
   @param {object} product - The product object
-  @param {string} card_gallery - The card gallery
-  @param {object} [active_variant] - The variant object
+  @param {object} [active_variant] - The active variant object
   @param {string} [render_text] - The render text
-  @param {object} children - The children of the product card
+  @param {object} children - The children of the addon card
   @param {object} [block] - The block object
-  @param {number} [product_card_gap] - The gap between the product card children (overrides block settings)
+  @param {number} [product_card_gap] - The gap between the addon card children (overrides block settings)
 {%- enddoc -%}
 
 {% assign block_settings = block.settings %}
 
 {% style %}
-  {% if request.visual_preview_mode %}
-    product-card[data-product-transition] {
-      width: 100%;
-      min-width: 250px;
-    }
-  {% endif %}
+  addon-card {
+    display: block;
+    width: 100%;
+  }
 {% endstyle %}
 
 {% liquid
@@ -35,7 +31,7 @@
     assign has_mobile_quick_add = true
   endif
 
-  assign product_card_id = 'product-card-link-' | append: block.id | append: '-' | append: product.id
+  assign product_card_id = 'addon-card-link-' | append: block.id | append: '-' | append: product.id
   assign product_card_gap_value = product_card_gap | default: block_settings.product_card_gap
 
   # Logic to determine which variant URL to use (matching swatch selection logic)
@@ -60,11 +56,29 @@
   if product.id == empty or product == blank
     assign onboarding = true
   endif
+  
+  # Check if product has variants
+  assign has_variants = false
+  if product.variants.size > 1
+    assign has_variants = true
+  endif
+  
+  assign selected_variant = active_variant | default: product.selected_or_first_available_variant
+  
+  # Get the image for the selected variant, fallback to product featured image
+  assign variant_image = selected_variant.featured_image
+  if variant_image == blank
+    assign variant_image = product.featured_image
+  endif
+  
+  # Get image dimensions and attributes
+  assign image_width = variant_image.width | default: 500
+  assign image_height = variant_image.height | default: 500
 %}
 
-<product-card
+<addon-card
   data-no-navigation
-  class="product-card {{ card_layout_type }} addon-card size-style"
+  class="addon-card {{ card_layout_type }} size-style"
   style="{% render 'size-style', settings: block_settings %}"
   data-product-id="{{ product.id }}"
   {% if active_variant != blank %}
@@ -76,35 +90,21 @@
       data-variant-compare-price="{{ active_variant.compare_at_price | money_without_trailing_zeros }}"
     {% endif %}
   {% endif %}
-  id="product-card-{{ block.id }}"
+  id="addon-card-{{ block.id }}"
   {% if settings.transition_to_main_product %}
     data-product-transition="true"
     data-featured-media-url="{{ featured_media_url }}"
-    on:click="/handleViewTransition"
   {% endif %}
   {{ block.shopify_attributes }}
   {% if onboarding %}
     data-placeholder="true"
   {% endif %}
 >
-  <a
-    id="{{ product_card_id | md5 }}"
-    {% unless onboarding %}
-      href="{{ variant_to_link.url }}"
-    {% endunless %}
-    class="product-card__link"
-    ref="productCardLink"
-  >
-    <span class="visually-hidden">
-      {{ product.title }}
-    </span>
-  </a>
   <div
     class="
-      product-card__content
+      addon-card__content
       layout-panel-flex
       layout-panel-flex--column
-      product-grid__card
       spacing-style
       border-style
       gap-style
@@ -131,51 +131,111 @@
                 assign element_id = 'addon-' | append: product.id | append: '-' | append: block.id
                 assign product_form_id = 'BuyButtons-ProductForm-' | append: section.id
                 assign disabled = false
-                if product.selected_or_first_available_variant.available == false
+                if selected_variant.available == false
                     assign disabled = true
                 endif
             %}
+            {% capture attributes %}
+              data-price="{{ selected_variant.price }}"
+              data-variant-id="{{ selected_variant.id }}"
+            {% endcapture %}
+
             {% render 'checkbox',
                 name: property_name,
-                value: product.selected_or_first_available_variant.id,
+                value: selected_variant.id,
                 label: block_settings.checkbox_label,
                 id: element_id,
                 checked: false,
                 events: '',
                 disabled: disabled,
                 required: false,
-                formId: product_form_id
+                formId: product_form_id,
+                attributes: attributes
             %}
         </div>
-        <div>
-            {{ card_gallery }}
+        <div class="addon-image-wrapper">
+          {% if variant_image != blank %}
+            {{
+              variant_image
+              | image_url: width: 3840
+              | image_tag:
+                width: image_width,
+                widths: '240, 352, 832, 1200, 1600, 1920, 2560, 3840',
+                height: image_height,
+                class: 'addon-product-image border-style',
+                sizes: 'auto, (min-width: 750px) 100vw, 100vw',
+                loading: 'eager',
+                fetchpriority: 'high',
+                alt: variant_image.alt | default: product.title
+            }}
+          {% else %}
+            <div class="addon-image-placeholder">
+              {{ 'product' | placeholder_svg_tag: 'placeholder-svg' }}
+            </div>
+          {% endif %}
         </div>
         <div>
             {{ children }}
-            <span class="sold-out-addon" {% if product.selected_or_first_available_variant.available == true %} hidden{% endif %}>
+            
+            {% if has_variants %}
+              <div class="addon-variant-wrapper">
+                <select 
+                  class="addon-variant-selector"
+                  data-product-id="{{ product.id }}"
+                  id="select-{{ block.id }}"
+                >
+                  {% for variant in product.variants %}
+                    {% assign variant_image = variant.featured_image | default: product.featured_image %}
+                    <option 
+                      value="{{ variant.id }}"
+                      {% if variant.id == selected_variant.id %}selected{% endif %}
+                      data-available="{{ variant.available }}"
+                      data-price="{{ variant.price }}"
+                      {% if variant_image %}
+                        data-image-url="{{ variant_image | image_url: width: 500 }}"
+                      {% endif %}
+                      {% if variant.compare_at_price and variant.compare_at_price > variant.price %}
+                        data-compare-price="{{ variant.compare_at_price }}"
+                      {% endif %}
+                    >
+                      {{ variant.title }}
+                      {% unless variant.available %}
+                        - {{ 'products.product.sold_out' | t }}
+                      {% endunless %}
+                    </option>
+                  {% endfor %}
+                </select>
+              </div>
+            {% endif %}
+            
+            <span class="sold-out-addon" {% if selected_variant.available == true %} hidden{% endif %}>
               {{ 'content.product_badge_sold_out' | t }}
             </span>
         </div>
     </div>
   </div>
-</product-card>
+</addon-card>
 
 {% stylesheet %}
-    .product-card__placeholder-image svg {
-        height: 100%;
-    }
-
     .addon-card {
         --checkbox-size: 20px;
         --checkbox-border-radius: 4px;
         --checkbox-border: 1.5px solid rgb(var(--color-foreground-rgb) / 1);
         --color-border-rgb: var(--color-foreground-rgb);
         --max-width--display-tight: auto;
+        border: 1.5px solid var(--color-border);
+        background: var(--color-background);
+        transition: border-color 0.2s ease;
+        cursor: pointer;
+    } 
+
+    .addon-card:has(.checkbox__input:disabled) {
+      background: rgb(var(--color-foreground-rgb) / .05);
+      cursor: not-allowed;
     }
 
     .addon-card:has(.checkbox__input:checked) {
-      --color-border-rgb: var(--color-variant-border) !important;
-      --checkbox-border: 1.5px solid var(--color-variant-border);
+        border-color: rgb(var(--color-foreground-rgb) / 1);
     }
 
     .sold-out-addon {
@@ -183,11 +243,6 @@
       font-size: var(--font-size--2xs);
       font-style: italic;
       opacity: var(--opacity-60);
-    }
-
-    .addon-card .product-card__link {
-        pointer-events: none !important;
-        display: none !important;
     }
 
     .addon-card .checkbox .icon-checkmark {
@@ -210,27 +265,47 @@
         content: '+';
     }
 
-    .card-layout-addon .product-title-block > * {
-        white-space: nowrap;
-        text-overflow: ellipsis;
-        overflow: hidden;
-    }
-
-    .card-layout-addon .addon-flex {
+    .addon-flex {
+        display: flex;
+        gap: var(--gap-sm);
+        align-items: flex-start;
+        width: 100%;
         min-width: 0;
     }
 
-    .card-layout-addon .addon-flex > div:first-child {
+    .addon-flex > div:first-child {
         width: fit-content;
         align-self: center;
+        flex-shrink: 0;
     }
 
-    .card-layout-addon .addon-flex > div:nth-child(2) {
+    .addon-image-wrapper {
         width: 55px;
         min-width: 55px;
+        flex-shrink: 0;
     }
 
-    .card-layout-addon .addon-flex > div:last-child {
+    .addon-product-image {
+        width: 100%;
+        height: auto;
+        display: block;
+        border-radius: var(--border-radius-sm);
+    }
+
+    .addon-image-placeholder {
+        width: 100%;
+        height: auto;
+        background: rgb(var(--color-foreground-rgb) / 0.05);
+        border-radius: var(--border-radius-sm);
+    }
+
+    .addon-image-placeholder .placeholder-svg {
+        width: 100%;
+        height: auto;
+        display: block;
+    }
+
+    .addon-flex > div:last-child {
         width: 100%;
         flex: 1 auto;
         display: flex;
@@ -240,17 +315,52 @@
         min-width: 0;
     }
 
+    .addon-card .product-title-block > * {
+        white-space: nowrap;
+        text-overflow: ellipsis;
+        overflow: hidden;
+    }
+
     .addon-card .product-badges__badge {
         display: none;
     }
-
-  @media screen and (max-width: 749px) {
-    .product-card slideshow-arrows .slideshow-control {
-      display: none;
+    
+    /* Styles for variant selector */
+    .addon-variant-wrapper {
+      margin-top: var(--gap-2xs);
+      max-width: 8rem;
+    }
+    
+    .addon-variant-selector {
+        width: 100%;
+        padding: var(--gap-2xs) var(--gap-xs);
+        font-size: var(--font-size--sm);
+        border: 1px solid rgb(var(--color-border-rgb) / 0.2);
+        border-radius: var(--border-radius-sm);
+        background: var(--color-background);
+        cursor: pointer;
+        transition: all 0.2s ease;
+    }
+    
+    .addon-variant-selector:hover {
+        border-color: rgb(var(--color-border-rgb) / 0.5);
+    }
+    
+    .addon-variant-selector:focus {
+        outline: none;
+        border-color: rgb(var(--color-foreground-rgb) / 0.5);
+        box-shadow: 0 0 0 2px rgb(var(--color-foreground-rgb) / 0.1);
     }
 
-    .card-layout-addon .product-card-group .group-block-content {
-        --vertical-alignment: flex-start !important;
+  @media screen and (max-width: 749px) {
+    .addon-image-wrapper {
+        width: 45px;
+        min-width: 45px;
+    }
+    
+    .addon-variant-selector {
+        font-size: var(--font-size--xs);
+        padding: var(--gap-3xs) var(--gap-2xs);
     }
   }
 {% endstylesheet %}

@@ -288,3 +288,44 @@ export class FilterUpdateEvent extends Event {
     return [...this.detail.queryParams.entries()].filter(([key]) => key.startsWith('filter.')).length > 0;
   }
 }
+
+
+/**
+ * Event class for price changes based on checked .addon-card checkboxes
+ * @extends {Event}
+ */
+export class PriceChangeEvent extends Event {
+  constructor() {
+    super(PriceChangeEvent.eventName, { bubbles: true });
+    /** @type {Record<string, number>} */
+    const prices = {};
+    let total = 0;
+
+    // Include base product price if available
+    const basePriceEl = document.querySelector('.button--price[data-price]');
+    if (basePriceEl && basePriceEl.dataset.price) {
+      const basePrice = Number(basePriceEl.dataset.price) || 0;
+      prices['base_product'] = basePrice;
+      total += basePrice;
+    }
+
+    // Add prices from all checked product addons
+    document.querySelectorAll('.addon-card input[type="checkbox"]:checked').forEach(el => {
+      const inputEl = /** @type {HTMLInputElement} */ (el);
+      const name = inputEl.name || 'addon';
+      
+      // Grab the price directly from your data-price attribute
+      const price = Number(inputEl.dataset.price || 0);
+
+      prices[name] = price;
+      total += price;
+    });
+
+    this.detail = {
+      prices,
+      total
+    };
+  }
+
+  static eventName = 'price:change';
+}

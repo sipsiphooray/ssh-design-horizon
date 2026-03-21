@@ -59,7 +59,9 @@
                     </span>
                 {% endif %}
             {% endif %}
-            {{ display_option | escape }}{% if selected_option.available == false %} - {{ 'content.unavailable' | t }}{% endif %}
+            <span class="cs-display-text">
+                {{ display_option | escape }}{% if selected_option.available == false %} - {{ 'content.unavailable' | t }}{% endif %}
+            </span>
         </div>
         <div class="cs-menu" id="{{ id }}-menu" role="listbox">
         {%- for product_option_value in product_option.values -%}
