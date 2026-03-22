@@ -549,6 +549,10 @@ details {
     justify-content: flex-end;
 }
 
+.cart-totals__tax-note {
+    display: none !important;
+}
+
 @media screen and (min-width: 60em) {
     :root {
         --section-height-large: 90svh !important;
