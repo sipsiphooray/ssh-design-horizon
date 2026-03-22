@@ -461,6 +461,8 @@ summary .svg-wrapper {
     font-weight: 500;
     font-family: var(--font-body--family);
     font-size: var(--font-size--sm);
+    text-decoration: underline;
+    text-underline-offset: .2rem;
 }
 
 .shipping-summary .flex {
@@ -511,6 +513,40 @@ details {
     padding-top: 0;
     margin-top: calc(-1 * var(--margin-xs));
     font-size: var(--font-size--sm);
+}
+
+/* Targets the narrow/drawer layout specifically */
+.cart-drawer .cart-items__table-row--full-width-variants[data-shipping-protection] {
+  grid-template-areas:
+    "media details price"
+    "media variants variants"
+    "media unit_price quantity"
+    "media error error" !important;
+}
+
+/* Aligns the trash can to the right, under the total price */
+.cart-items__table-row[data-shipping-protection] .cart-items__quantity {
+  grid-area: quantity;
+  grid-column: auto; /* Resets any previous overrides */
+  justify-content: flex-end; /* Pushes the trash can to the right side */
+  margin-top: 0; /* Keeps it horizontally aligned with the unit price */
+}
+
+.cart-drawer__items .cart-items__table-row:not(:has(+.cart-items__nested-line)) {
+    padding-bottom: 0 !important;
+}
+
+.cart-items__nested-line .cart-items__product-info * {
+    font-size: var(--font-size--sm) !important;
+    line-height: 1.3em;
+}
+
+.cart-drawer .cart-items__table-row--full-width-variants .cart-items__price {
+    margin-left: auto !important;
+}
+
+[data-shipping-protection] .cart-items__remove {
+    justify-content: flex-end;
 }
 
 @media screen and (min-width: 60em) {
