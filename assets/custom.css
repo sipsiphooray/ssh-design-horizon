@@ -553,6 +553,14 @@ details {
     display: none !important;
 }
 
+.cart-drawer__header {
+    padding-block: var(--padding-sm) !important;
+}
+
+.cart-drawer__close-button {
+    height: auto;
+}
+
 @media screen and (min-width: 60em) {
     :root {
         --section-height-large: 90svh !important;
