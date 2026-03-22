@@ -259,7 +259,7 @@
     },
     "search_results_view_all": "View all",
     "search_results_view_all_button": "View all",
-    "seller_note": "Special instructions",
+    "seller_note": "Add order note",
     "shipping_policy": "Shipping calculated at checkout.",
     "shipping_policy_html": "<a href=\"{{ link }}\">Shipping</a> calculated at checkout.",
     "store_owner_link_html": "Are you the store owner? <a href=\"{{ link }}\">Log in here</a>",

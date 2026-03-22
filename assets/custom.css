@@ -458,7 +458,7 @@ summary .svg-wrapper {
     margin: auto;
     cursor: pointer;
     padding: 0;
-    font-weight: 500;
+    font-weight: normal !important;
     font-family: var(--font-body--family);
     font-size: var(--font-size--sm);
     text-decoration: underline;
@@ -515,6 +515,22 @@ details {
     font-size: var(--font-size--sm);
 }
 
+.cart-totals cart-note {
+    margin-top: calc(-1 * var(--margin-sm));
+}
+
+.cart-discount__label {
+    font-size: var(--font-size--sm) !important;
+}
+
+.cart-note__inner {
+    padding-top: var(--padding-xs);
+}
+
+.cart-actions__divider {
+    display: none;
+}
+
 /* Targets the narrow/drawer layout specifically */
 .cart-drawer .cart-items__table-row--full-width-variants[data-shipping-protection] {
   grid-template-areas:
@@ -560,6 +576,44 @@ details {
 .cart-drawer__close-button {
     height: auto;
 }
+
+.cart-note__summary {
+    padding: 0;
+    text-decoration: underline;
+}
+
+.cart-note__label {
+    font-size: var(--font-size--sm) !important;
+    font-weight: normal !important;
+}
+
+.loading-button--icon {
+    display: none;
+    width: 100%;
+}
+
+.loading-button--icon svg {
+    width: 100%;
+    height: 1.5rem;
+    margin: auto;
+}
+
+.is-loading .button--text {
+    display: none;
+}
+
+.is-loading .loading-button--icon {
+    display: block;
+}
+
+.normal__checkout-button.is-loading:after {
+    content: unset !important;
+}
+
+[data-shipping-protection] cart-quantity-selector-component {
+    display: none !important;
+}
+
 
 @media screen and (min-width: 60em) {
     :root {

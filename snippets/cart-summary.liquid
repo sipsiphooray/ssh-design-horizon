@@ -38,57 +38,8 @@
     {%- endif -%}
   </div>
 
-  {% if settings.show_cart_note or settings.show_add_discount_code %}
+  {% if settings.show_add_discount_code %}
     <div class="cart-actions">
-      {% if settings.show_cart_note %}
-        <script
-          type="module"
-          src="{{ 'cart-note.js' | asset_url }}"
-        ></script>
-
-        <cart-note style="display: flex;">
-          <accordion-custom
-            class="cart-note"
-            {% if settings.cart_note_open_by_default %}
-              open-by-default-on-desktop
-              open-by-default-on-mobile
-            {% endif %}
-          >
-            <details
-              class="details"
-              {% if settings.cart_note_open_by_default %}
-                open
-              {% endif %}
-            >
-              <summary class="cart-note__summary">
-                <span class="cart-note__label cart-primary-typography">
-                  {{ 'content.seller_note' | t }}
-                </span>
-
-                <span class="cart-totals__icon">
-                  {{- 'icon-plus.svg' | inline_asset_content -}}
-                </span>
-              </summary>
-
-              <div class="details-content cart-note__inner">
-                <label
-                  for="cart-note"
-                  class="visually-hidden"
-                >
-                  {{- 'content.seller_note' | t -}}
-                </label>
-                <textarea
-                  form="cart-form"
-                  on:input="/updateCartNote"
-                  id="cart-note"
-                  class="cart-note__instructions"
-                  name="note"
-                >{{ cart.note }}</textarea>
-              </div>
-            </details>
-          </accordion-custom>
-        </cart-note>
-      {% endif %}
       {% if settings.show_cart_note and settings.show_add_discount_code %}
         <div class="cart-actions__divider"></div>
       {% endif %}
@@ -251,6 +202,51 @@
       {% render 'tax-info', has_discounts_enabled: settings.show_add_discount_code %}
     </div>
   </div>
+  {% if settings.show_cart_note %}
+    <script
+      type="module"
+      src="{{ 'cart-note.js' | asset_url }}"
+    ></script>
+
+    <cart-note style="display: flex;">
+      <accordion-custom
+        class="cart-note"
+        {% if settings.cart_note_open_by_default %}
+          open-by-default-on-desktop
+          open-by-default-on-mobile
+        {% endif %}
+      >
+        <details
+          class="details"
+          {% if settings.cart_note_open_by_default %}
+            open
+          {% endif %}
+        >
+          <summary class="cart-note__summary">
+            <span class="cart-note__label cart-primary-typography">
+              {{ 'content.seller_note' | t }}
+            </span>
+          </summary>
+
+          <div class="details-content cart-note__inner">
+            <label
+              for="cart-note"
+              class="visually-hidden"
+            >
+              {{- 'content.seller_note' | t -}}
+            </label>
+            <textarea
+              form="cart-form"
+              on:input="/updateCartNote"
+              id="cart-note"
+              class="cart-note__instructions"
+              name="note"
+            >{{ cart.note }}</textarea>
+          </div>
+        </details>
+      </accordion-custom>
+    </cart-note>
+  {% endif %}
 </div>
 
 <div class="cart__ctas">
