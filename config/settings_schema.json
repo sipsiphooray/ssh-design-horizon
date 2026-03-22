@@ -1772,7 +1772,23 @@
         "info": "t:info.checkout_buttons",
         "default": true
       },
-
+      {
+        "type": "checkbox",
+        "id": "enable_shipping_protection",
+        "label": "Enable shipping protection",
+        "default": false
+      },
+      {
+        "type": "richtext",
+        "id": "shipping_protection_text",
+        "label": "Shipping protection text",
+        "visible_if": "{{ settings.enable_shipping_protection == true }}"
+      },
+      {
+        "type": "product",
+        "id": "protection_product",
+        "label": "Protection Product"
+      },
       {
         "type": "url",
         "id": "empty_cart_button_link",

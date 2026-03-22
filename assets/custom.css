@@ -449,6 +449,70 @@ summary .svg-wrapper {
     width: 1.8rem;
 }
 
+.normal__checkout-button {
+    display: block;
+    width: fit-content;
+    background: transparent;
+    border: 0;
+    position: relative;
+    margin: auto;
+    cursor: pointer;
+    padding: 0;
+    font-weight: 500;
+    font-family: var(--font-body--family);
+    font-size: var(--font-size--sm);
+}
+
+.shipping-summary .flex {
+    gap: var(--gap-2xs);
+}
+
+.shipping-summary svg {
+    display: block;
+    fill: var(--color-foreground);
+    width: auto;
+    height: var(--icon-size-xs);
+}
+
+details {
+    -webkit-tap-highlight-color: transparent;
+}
+
+.shipping-summary {
+    padding-top: 0;
+    font-size: var(--font-size--sm);
+}
+
+.shipping-summary .flex {
+    gap: var(--gap-2xs);
+}
+
+.align-items-center {
+    align-items: center;
+}
+
+.protection--buttons {
+    display: flex;
+    flex-direction: column;
+    gap: var(--gap-md);
+    margin-bottom: var(--margin-md);
+}
+
+[data-shipping-protection] cart-quantity-selector-component {
+    display: none !important;
+}
+
+[data-shipping-protection] a {
+    pointer-events: none;
+}
+
+.shipping-content {
+    padding: var(--padding-xs) 0 var(--padding-lg);
+    padding-top: 0;
+    margin-top: calc(-1 * var(--margin-xs));
+    font-size: var(--font-size--sm);
+}
+
 @media screen and (min-width: 60em) {
     :root {
         --section-height-large: 90svh !important;

@@ -128,6 +128,10 @@
                 ref="cartItemRows[]"
                 data-parent-key="{{ item.parent_relationship.parent.key }}"
                 data-key="{{ item.key }}"
+
+                {% if item.product.type == 'Shipping Protection' %}
+                  data-shipping-protection
+                {% endif %}
               >
                 <td
                   class="cart-items__media"
