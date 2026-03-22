@@ -1655,7 +1655,7 @@
         ".resource-list {--mobile-card-size: fit-content !important;}",
         ".text-block {line-height: 1.2em;}",
         "@media (min-width: 750px) {.resource-list--grid {--resource-list-columns: repeat(4, minmax(auto, max-content)) !important; justify-content: center; }}",
-        "@media (max-width: 749px) {.text-icon-block {--max-width--body-normal: 10.5em; }}"
+        "@media (max-width: 749px) {.text-icon-block {--max-width--body-normal: 10.5em; } .resource-list {--resource-list-mobile-gap-max: 24px; }}"
       ],
       "name": "Grid Section",
       "settings": {
@@ -1677,7 +1677,7 @@
         "section_width": "page-narrow",
         "full_width_on_mobile": false,
         "gap": 0,
-        "color_scheme": "scheme-738179cd-4e15-457b-be40-989a024001d6",
+        "color_scheme": "scheme-761f80f0-0e3a-4090-9168-95d4d4a71356",
         "background_media": "none",
         "video_position": "cover",
         "background_image_position": "cover",
@@ -1685,8 +1685,8 @@
         "overlay_color": "#00000026",
         "overlay_style": "solid",
         "gradient_direction": "to top",
-        "padding-block-start": 24,
-        "padding-block-end": 24,
+        "padding-block-start": 42,
+        "padding-block-end": 42,
         "custom_mobile_padding": false,
         "mobile-padding-block-start": 80,
         "mobile-padding-block-end": 0,
