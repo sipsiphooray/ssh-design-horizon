@@ -4882,7 +4882,7 @@
               "type": "text",
               "name": "t:names.text",
               "settings": {
-                "text": "<p><em>“The designs are absolutely stunning. I get compliments every single day at the office. Everyone wants to know where I got it.”</em></p>",
+                "text": "<p><em>\"obsessed with the sunflower & bee print 🐝added a little glass heart straw to mine.use it literally every single day for work!\"</em></p>",
                 "width": "fit-content",
                 "max_width": "normal",
                 "alignment": "left",
@@ -4914,7 +4914,7 @@
             "ai_gen_block_c3963ee_98cxni": {
               "type": "ai_gen_block_c3963ee",
               "settings": {
-                "customer_name": "John S.",
+                "customer_name": "Sarah M.",
                 "verified_text": "Verified Buyer",
                 "spacing": 8,
                 "padding": 0,
@@ -4947,7 +4947,7 @@
             "ai_gen_block_f16862d_npGiWm": {
               "type": "ai_gen_block_f16862d",
               "settings": {
-                "product": "gym-girly-clear-glass-mug-with-lid-straw",
+                "product": "sunflower-with-bees",
                 "thumbnail_width": 40
               },
               "blocks": {}
