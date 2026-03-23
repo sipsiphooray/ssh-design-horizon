@@ -322,7 +322,7 @@ document.addEventListener(ThemeEvents.variantUpdate, (event) => {
 
       if (checkedAddons.length > 0) {
         // Dispatch price change event if there are checked addons
-        document.dispatchEvent(new PriceChangeEvent());
+        document.dispatchEvent(new PriceChangeEvent(variantPicker));
       }
     }
   }
