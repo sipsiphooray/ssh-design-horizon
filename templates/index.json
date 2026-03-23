@@ -5180,7 +5180,7 @@
               "type": "text",
               "name": "t:names.text",
               "settings": {
-                "text": "<p><em>“The designs are absolutely stunning. I get compliments every single day at the office. Everyone wants to know where I got it.”</em></p>",
+                "text": "<p><em>\"the funky chickens pattern makes me laugh every time lol<br/>paired it with a bright pink acrylic lid.<br/>holds a ton and does fine in the dishwasher!\"</em></p>",
                 "width": "fit-content",
                 "max_width": "normal",
                 "alignment": "left",
@@ -5212,7 +5212,7 @@
             "ai_gen_block_c3963ee_PJGbMi": {
               "type": "ai_gen_block_c3963ee",
               "settings": {
-                "customer_name": "John S.",
+                "customer_name": "Emily R.",
                 "verified_text": "Verified Buyer",
                 "spacing": 8,
                 "padding": 0,
@@ -5245,7 +5245,7 @@
             "ai_gen_block_f16862d_VpdMpe": {
               "type": "ai_gen_block_f16862d",
               "settings": {
-                "product": "gym-girly-clear-glass-mug-with-lid-straw",
+                "product": "funky-chickens",
                 "thumbnail_width": 40
               },
               "blocks": {}
