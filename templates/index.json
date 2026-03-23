@@ -5180,7 +5180,7 @@
               "type": "text",
               "name": "t:names.text",
               "settings": {
-                "text": "<p><em>\"the funky chickens pattern makes me laugh every time lol<br/>paired it with a bright pink acrylic lid.<br/>holds a ton and does fine in the dishwasher!\"</em></p>",
+                "text": "<p><em>\"the funky chickens pattern makes me laugh every time lol paired it with a bright pink acrylic lid.<br/>holds a ton and does fine in the dishwasher!\"</em></p>",
                 "width": "fit-content",
                 "max_width": "normal",
                 "alignment": "left",
