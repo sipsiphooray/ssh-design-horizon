@@ -17,15 +17,15 @@
           "settings": {
             "image": "shopify://shop_images/cup.png",
             "text": "Tumblers",
-            "link": "#"
+            "link": "shopify://collections/32oz-40oz-tumblers-remake"
           }
         },
         "item_NTP6AR": {
           "type": "item",
           "settings": {
             "image": "shopify://shop_images/3_2.png",
-            "text": "Silicone Bottom",
-            "link": "#"
+            "text": "Silicone Bottoms",
+            "link": "shopify://collections/silicone-bottoms"
           }
         },
         "item_zdzAU7": {
@@ -33,7 +33,7 @@
           "settings": {
             "image": "shopify://shop_images/1_2.png",
             "text": "Candles",
-            "link": "#"
+            "link": "shopify://collections/candles"
           }
         },
         "item_74XFCd": {
@@ -41,7 +41,15 @@
           "settings": {
             "image": "shopify://shop_images/4_2.png",
             "text": "Mugs",
-            "link": "#"
+            "link": "shopify://collections/17oz-mugs"
+          }
+        },
+        "item_FRYFdQ": {
+          "type": "item",
+          "settings": {
+            "image": "shopify://shop_images/coasters.png",
+            "text": "Coasters",
+            "link": "shopify://collections/coasters"
           }
         }
       },
@@ -49,7 +57,8 @@
         "item_XbNUBH",
         "item_NTP6AR",
         "item_zdzAU7",
-        "item_74XFCd"
+        "item_74XFCd",
+        "item_FRYFdQ"
       ],
       "custom_css": [
         ".custom-section-background {display: none;}",
