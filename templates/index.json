@@ -5329,7 +5329,7 @@
               "type": "text",
               "name": "t:names.text",
               "settings": {
-                "text": "<p><em>“The designs are absolutely stunning. I get compliments every single day at the office. Everyone wants to know where I got it.”</em></p>",
+                "text": "<p><em>\"Love the minimalist blue flowers 💙<br/>Highly recommend getting the glitter boot for the bottom. Keeps it from clanking on my desk all day.\"</em></p>",
                 "width": "fit-content",
                 "max_width": "normal",
                 "alignment": "left",
@@ -5361,7 +5361,7 @@
             "ai_gen_block_c3963ee_eexifb": {
               "type": "ai_gen_block_c3963ee",
               "settings": {
-                "customer_name": "John S.",
+                "customer_name": "Lauren K.",
                 "verified_text": "Verified Buyer",
                 "spacing": 8,
                 "padding": 0,
@@ -5394,7 +5394,7 @@
             "ai_gen_block_f16862d_MKfP96": {
               "type": "ai_gen_block_f16862d",
               "settings": {
-                "product": "gym-girly-clear-glass-mug-with-lid-straw",
+                "product": "minimalist-blue-flowers-cups",
                 "thumbnail_width": 40
               },
               "blocks": {}
