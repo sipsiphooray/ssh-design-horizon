@@ -5031,7 +5031,7 @@
               "type": "text",
               "name": "t:names.text",
               "settings": {
-                "text": "<p><em>“The designs are absolutely stunning. I get compliments every single day at the office. Everyone wants to know where I got it.”</em></p>",
+                "text": "<p><em>\"The lemon design is so cute in person! Grabbed a bamboo lid to go with it.Perfect for my morning iced coffee 🍋✨\"</em></p>",
                 "width": "fit-content",
                 "max_width": "normal",
                 "alignment": "left",
@@ -5063,7 +5063,7 @@
             "ai_gen_block_c3963ee_WEg8EU": {
               "type": "ai_gen_block_c3963ee",
               "settings": {
-                "customer_name": "John S.",
+                "customer_name": "Jessica T.",
                 "verified_text": "Verified Buyer",
                 "spacing": 8,
                 "padding": 0,
@@ -5096,7 +5096,7 @@
             "ai_gen_block_f16862d_UqntkA": {
               "type": "ai_gen_block_f16862d",
               "settings": {
-                "product": "gym-girly-clear-glass-mug-with-lid-straw",
+                "product": "spring-lemons",
                 "thumbnail_width": 40
               },
               "blocks": {}
