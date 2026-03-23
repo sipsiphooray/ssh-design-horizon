@@ -74,7 +74,7 @@
                 role="list"
             >
                 {% for block in section.blocks %}
-                    <li>
+                    <li {{ block.shopify_attributes }}>
                         <div class="scroll-list-wrapper">
                             {% if block.settings.image != blank %}
                                 <span class="image-scroll">
