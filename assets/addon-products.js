@@ -1,3 +1,4 @@
+import { convertMoneyToMinorUnits, formatMoney } from '@theme/money-formatting';
 import { ThemeEvents, PriceChangeEvent, CartAddEvent, CartErrorEvent, CartUpdateEvent, VariantUpdateEvent } from '@theme/events';
 
 /**
@@ -100,22 +101,13 @@ export class AddonCard extends HTMLElement {
     const priceEl = parent.querySelector('.total-price-display[data-price]');
     if (!priceEl) return;
 
-    const symbol = priceEl.dataset.symbol;
-    const currency = priceEl.dataset.currency;
     const total = event.detail.total;
+    const currency = priceEl.dataset.currency || window.Shopify?.currency?.active || 'USD';
+    const moneyFormat = window.theme?.moneyFormat || '${{amount}}';
 
-    let formattedPrice;
-    
-    // If currency is provided, use the formatMoney method
-    if (currency) {
-      formattedPrice = this.formatMoney(total.toString(), currency);
-      // Add symbol with no space, add space before currency if currency exists
-      priceEl.textContent = symbol ? `${symbol}${formattedPrice} ${currency}` : `${formattedPrice} ${currency}`;
-    } else {
-      // Fallback to simple number formatting if no currency
-      formattedPrice = (total / 100).toFixed(2);
-      priceEl.textContent = symbol ? `${symbol}${formattedPrice}` : formattedPrice;
-    }
+    // Format using the imported utility. 
+    // Purposefully omitting the appended currency text per instructions.
+    priceEl.textContent = formatMoney(total, moneyFormat, currency);
   }
 
   /**
@@ -287,7 +279,7 @@ export class AddonCard extends HTMLElement {
   }
 
   /**
-   * Format price for display
+   * Format price for display using the imported formatMoney utility
    * @param {string|number} price
    * @returns {string}
    */
@@ -295,87 +287,10 @@ export class AddonCard extends HTMLElement {
     const numericPrice = typeof price === 'string' ? parseInt(price, 10) : price;
     if (isNaN(numericPrice)) return '';
     
-    const formatter = new Intl.NumberFormat(window.Shopify.locale || 'en-US', {
-      style: 'currency',
-      currency: window.Shopify.currency?.active || 'USD',
-      minimumFractionDigits: 2,
-      maximumFractionDigits: 2
-    });
+    const moneyFormat = window.theme?.moneyFormat || '${{amount}}';
+    const currency = window.Shopify?.currency?.active || 'USD';
     
-    return formatter.format(numericPrice / 100);
-  }
-
-  /**
-   * Formats money, replicating Shopify's `money` liquid filter behavior.
-   * @param {number} moneyValue - Money value in cents (e.g., 12345 = $123.45)
-   * @param {string} currency - Currency code (e.g., "USD", "EUR")
-   * @param {string} template - Money format template (default: "{{amount}}")
-   * @returns {string} The formatted money value
-   */
-  formatMoney(moneyValue, currency, template = '{{amount}}') {
-    const upperCurrency = currency.toUpperCase();
-    const basePrecision = CURRENCY_DECIMALS[upperCurrency] ?? DEFAULT_CURRENCY_DECIMALS;
-
-    return template.replace(/{{\s*(\w+)\s*}}/g, (_, placeholder) => {
-      let thousandsSeparator = ',';
-      let decimalSeparator = '.';
-      let precision = basePrecision;
-
-      switch (placeholder) {
-        case 'currency':
-          return currency;
-        case 'amount_no_decimals':
-          precision = 0;
-          break;
-        case 'amount_with_comma_separator':
-          thousandsSeparator = '.';
-          decimalSeparator = ',';
-          break;
-        case 'amount_no_decimals_with_comma_separator':
-          thousandsSeparator = '.';
-          precision = 0;
-          break;
-        case 'amount_no_decimals_with_space_separator':
-          thousandsSeparator = ' ';
-          precision = 0;
-          break;
-        case 'amount_with_space_separator':
-          thousandsSeparator = ' ';
-          decimalSeparator = ',';
-          break;
-        case 'amount_with_period_and_space_separator':
-          thousandsSeparator = ' ';
-          decimalSeparator = '.';
-          break;
-        case 'amount_with_apostrophe_separator':
-          thousandsSeparator = "'";
-          decimalSeparator = '.';
-          break;
-      }
-
-      return this.formatCents(moneyValue, thousandsSeparator, decimalSeparator, precision);
-    });
-  }
-
-  /**
-   * Formats money in cents
-   * @param {number} moneyValue - The money value in cents
-   * @param {string} thousandsSeparator - The thousands separator
-   * @param {string} decimalSeparator - The decimal separator
-   * @param {number} precision - The precision
-   * @returns {string} The formatted money value
-   */
-  formatCents(moneyValue, thousandsSeparator, decimalSeparator, precision) {
-    const roundedNumber = (moneyValue / 100).toFixed(precision);
-
-    let [a, b] = roundedNumber.split('.');
-    if (!a) a = '0';
-    if (!b) b = '';
-
-    // Add thousands separator
-    a = a.replace(/\d(?=(\d\d\d)+(?!\d))/g, digit => digit + thousandsSeparator);
-
-    return precision <= 0 ? a : a + decimalSeparator + b.padEnd(precision, '0');
+    return formatMoney(numericPrice, moneyFormat, currency);
   }
 }
 
@@ -383,59 +298,6 @@ export class AddonCard extends HTMLElement {
 if (!customElements.get('addon-card')) {
   customElements.define('addon-card', AddonCard);
 }
-
-/**
- * Default currency decimals used in most currenies
- * @constant {number}
- */
-const DEFAULT_CURRENCY_DECIMALS = 2;
-
-/**
- * Decimal precision for currencies that have a non-default precision
- * @type {Record<string, number>}
- */
-const CURRENCY_DECIMALS = {
-  BHD: 3,
-  BIF: 0,
-  BYR: 0,
-  CLF: 4,
-  CLP: 0,
-  DJF: 0,
-  GNF: 0,
-  IQD: 3,
-  ISK: 0,
-  JOD: 3,
-  JPY: 0,
-  KMF: 0,
-  KRW: 0,
-  KWD: 3,
-  LYD: 3,
-  MRO: 5,
-  OMR: 3,
-  PYG: 0,
-  RWF: 0,
-  TND: 3,
-  UGX: 0,
-  UYI: 0,
-  UYW: 4,
-  VND: 0,
-  VUV: 0,
-  XAF: 0,
-  XAG: 0,
-  XAU: 0,
-  XBA: 0,
-  XBB: 0,
-  XBC: 0,
-  XBD: 0,
-  XDR: 0,
-  XOF: 0,
-  XPD: 0,
-  XPF: 0,
-  XPT: 0,
-  XSU: 0,
-  XTS: 0,
-  XUA: 0,
-};
 
 document.addEventListener('click', (event) => {
   const button = event.target.closest('.frequent-add-to-cart');
