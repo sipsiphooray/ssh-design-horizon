@@ -573,10 +573,6 @@ details {
     padding-block: var(--padding-sm) !important;
 }
 
-.cart-drawer__close-button {
-    height: auto;
-}
-
 .cart-note__summary {
     padding: 0;
     text-decoration: underline;
@@ -632,6 +628,10 @@ details {
 
     .product-card {
       --badge-rectangle-padding-block: 1px !important;
+    }
+    
+    .cart-drawer__close-button {
+        height: auto;
     }
 }
 
