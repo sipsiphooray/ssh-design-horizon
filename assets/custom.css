@@ -548,9 +548,9 @@ details {
   margin-top: 0; /* Keeps it horizontally aligned with the unit price */
 }
 
-.cart-drawer__items .cart-items__table-row:not(:has(+.cart-items__nested-line)) {
+/* .cart-drawer__items .cart-items__table-row:not(:has(+.cart-items__nested-line)) {
     padding-bottom: 0 !important;
-}
+} */
 
 .cart-items__nested-line .cart-items__product-info * {
     font-size: var(--font-size--sm) !important;
