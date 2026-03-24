@@ -774,4 +774,8 @@ details {
     .product-card div[ref="priceContainer"] {
         line-height: 1em;
     }
+
+    .cart-drawer__close-button {
+        top: 0 !important;
+    }
 }
