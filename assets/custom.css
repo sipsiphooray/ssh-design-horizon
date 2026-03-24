@@ -614,6 +614,11 @@ body:has(.overlay.active) .sticky-add-to-cart__bar {
     display: none;
 }
 
+.shopify-section:has(.overlay.active) {
+    position: relative;
+    z-index: 9999999;
+}
+
 @media screen and (min-width: 60em) {
     :root {
         --section-height-large: 90svh !important;
