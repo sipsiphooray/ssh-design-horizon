@@ -74,6 +74,7 @@
       "block_order": [
         "spin_wheel_R6naGJ"
       ],
+      "name": "Spin the wheel",
       "settings": {
         "content_direction": "column",
         "vertical_on_mobile": true,
