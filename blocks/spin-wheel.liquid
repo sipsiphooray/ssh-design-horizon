@@ -1,0 +1,1028 @@
+{% assign ai_gen_id = block.id | replace: '_', '' | downcase %}
+
+{% style %}
+  /* Namespace all CSS under the custom element to prevent theme conflicts */
+  spin-wheel-{{ ai_gen_id }} {
+    display: block;
+    width: 100%;
+  }
+
+  spin-wheel-{{ ai_gen_id }} .teaser {
+    position: fixed;
+    bottom: {{ block.settings.teaser_position_bottom }}px;
+    right: {{ block.settings.teaser_position_right }}px;
+    z-index: 2147483647 !important; /* Max z-index */
+    cursor: pointer;
+    transition: transform 0.3s ease;
+    pointer-events: auto !important;
+  }
+
+  spin-wheel-{{ ai_gen_id }} .teaser:hover {
+    transform: scale(1.05);
+  }
+
+  spin-wheel-{{ ai_gen_id }} .teaser-btn {
+    {% if block.settings.teaser_display_type == 'text' %}
+      width: auto;
+      height: auto;
+      padding: 12px 24px;
+      border-radius: {{ block.settings.teaser_border_radius }}px;
+    {% else %}
+      width: {{ block.settings.teaser_size }}px;
+      height: {{ block.settings.teaser_size }}px;
+      border-radius: 50%;
+    {% endif %}
+    background-color: {{ block.settings.teaser_bg_color }};
+    border: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    cursor: pointer;
+    position: relative;
+  }
+
+  {% if block.settings.teaser_display_type == 'text' %}
+    spin-wheel-{{ ai_gen_id }} .teaser-text {
+      color: {{ block.settings.teaser_text_color }};
+      font-size: {{ block.settings.teaser_text_size }}px;
+      font-weight: 600;
+      white-space: nowrap;
+    }
+  {% else %}
+    spin-wheel-{{ ai_gen_id }} .teaser-img {
+      width: calc({{ block.settings.teaser_size }}px * 0.7);
+      height: calc({{ block.settings.teaser_size }}px * 0.7);
+      object-fit: cover;
+      border-radius: 50%;
+    }
+
+    spin-wheel-{{ ai_gen_id }} .teaser-icon {
+      width: calc({{ block.settings.teaser_size }}px * 0.6);
+      height: calc({{ block.settings.teaser_size }}px * 0.6);
+      color: {{ block.settings.teaser_icon_color }};
+    }
+  {% endif %}
+
+  spin-wheel-{{ ai_gen_id }} .pulse {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    {% if block.settings.teaser_display_type == 'text' %}
+      border-radius: {{ block.settings.teaser_border_radius }}px;
+    {% else %}
+      border-radius: 50%;
+    {% endif %}
+    background-color: {{ block.settings.teaser_bg_color }};
+    opacity: 0.6;
+    animation: spin-pulse-{{ ai_gen_id }} 2s infinite;
+    pointer-events: none !important; /* Prevents pulse from blocking clicks */
+  }
+
+  @keyframes spin-pulse-{{ ai_gen_id }} {
+    0% { transform: scale(1); opacity: 0.6; }
+    50% { transform: scale(1.2); opacity: 0; }
+    100% { transform: scale(1); opacity: 0; }
+  }
+
+  spin-wheel-{{ ai_gen_id }} .overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.7);
+    z-index: 2147483647 !important; /* Max layer possible */
+    display: none;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    padding: 20px;
+    overflow-y: auto;
+  }
+
+  spin-wheel-{{ ai_gen_id }} .overlay.active {
+    display: flex;
+    opacity: 1;
+  }
+
+  spin-wheel-{{ ai_gen_id }} .modal {
+    background-color: {{ block.settings.modal_bg_color }};
+    border-radius: {{ block.settings.modal_border_radius }}px;
+    padding: 30px 20px;
+    max-width: 90%;
+    width: 450px;
+    max-height: 85vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    overflow-y: auto;
+    position: relative;
+    transform: scale(0.8);
+    transition: transform 0.3s ease;
+    margin: auto;
+    z-index: 2147483647 !important;
+    pointer-events: auto !important;
+  }
+
+  spin-wheel-{{ ai_gen_id }} .overlay.active .modal {
+    transform: scale(1);
+  }
+
+  spin-wheel-{{ ai_gen_id }} .close-btn {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 5px;
+    color: {{ block.settings.text_color }};
+    opacity: 0.7;
+    z-index: 2147483647 !important;
+    pointer-events: auto !important;
+  }
+
+  spin-wheel-{{ ai_gen_id }} .close-btn:hover {
+    opacity: 1;
+  }
+
+  spin-wheel-{{ ai_gen_id }} .title {
+    font-size: {{ block.settings.title_size }}px;
+    color: {{ block.settings.text_color }};
+    margin: 0 0 10px;
+    text-align: center;
+  }
+
+  spin-wheel-{{ ai_gen_id }} .subtitle {
+    font-size: {{ block.settings.subtitle_size }}px;
+    color: {{ block.settings.text_color }};
+    margin: 0 0 30px;
+    text-align: center;
+    opacity: 0.8;
+  }
+
+  spin-wheel-{{ ai_gen_id }} .canvas-wrap {
+    position: relative;
+    width: 100%;
+    max-width: 100%;
+    margin: 0 auto 20px;
+    flex-shrink: 0;
+  }
+
+  spin-wheel-{{ ai_gen_id }} canvas {
+    width: 100%;
+    height: auto;
+    display: block;
+    pointer-events: none !important; /* Prevents canvas from blocking button */
+  }
+
+  spin-wheel-{{ ai_gen_id }} .pointer {
+    position: absolute;
+    top: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 0;
+    height: 0;
+    border-left: 15px solid transparent;
+    border-right: 15px solid transparent;
+    border-top: 25px solid {{ block.settings.pointer_color }};
+    z-index: 2;
+  }
+
+  spin-wheel-{{ ai_gen_id }} .spin-btn,
+  spin-wheel-{{ ai_gen_id }} .submit-btn {
+    display: block;
+    width: 100%;
+    padding: 15px 30px;
+    background-color: {{ block.settings.button_bg_color }};
+    color: {{ block.settings.button_text_color }};
+    border: none;
+    border-radius: {{ block.settings.button_border_radius }}px;
+    font-size: {{ block.settings.button_text_size }}px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    margin-bottom: 20px;
+    position: relative;
+    z-index: 2147483647 !important;
+    pointer-events: auto !important;
+  }
+
+  spin-wheel-{{ ai_gen_id }} .spin-btn:hover:not(:disabled),
+  spin-wheel-{{ ai_gen_id }} .submit-btn:hover {
+    background-color: {{ block.settings.button_hover_color }};
+  }
+
+  spin-wheel-{{ ai_gen_id }} .spin-btn:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+
+  spin-wheel-{{ ai_gen_id }} .result {
+    text-align: center;
+    font-size: 18px;
+    color: {{ block.settings.text_color }};
+    font-weight: 600;
+    min-height: 30px;
+    margin-bottom: 20px;
+  }
+
+  spin-wheel-{{ ai_gen_id }} .email-form {
+    display: none;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    width: 100%;
+  }
+
+  spin-wheel-{{ ai_gen_id }} .email-form.show {
+    display: block;
+    opacity: 1;
+  }
+
+  spin-wheel-{{ ai_gen_id }} .email-input {
+    width: 100%;
+    padding: 12px 16px;
+    border: 1px solid {{ block.settings.input_border_color }};
+    border-radius: {{ block.settings.input_border_radius }}px;
+    font-size: 16px;
+    margin-bottom: 10px;
+    position: relative;
+    z-index: 2147483647 !important;
+    pointer-events: auto !important;
+  }
+
+  spin-wheel-{{ ai_gen_id }} .email-input:focus {
+    outline: none;
+    border-color: {{ block.settings.button_bg_color }};
+  }
+
+  spin-wheel-{{ ai_gen_id }} .error-msg {
+    color: #d82c0d;
+    font-size: 14px;
+    margin-top: 5px;
+    display: none;
+  }
+
+  spin-wheel-{{ ai_gen_id }} .success-msg {
+    text-align: center;
+    color: #008060;
+    font-size: 16px;
+    margin-top: 15px;
+    display: none;
+  }
+
+  @media screen and (max-width: 749px) {
+    spin-wheel-{{ ai_gen_id }} .modal {
+      padding: 30px 20px;
+      width: 95%;
+    }
+    spin-wheel-{{ ai_gen_id }} .teaser {
+      bottom: {{ block.settings.teaser_position_bottom | times: 0.7 }}px;
+      right: {{ block.settings.teaser_position_right | times: 0.7 }}px;
+    }
+    {% if block.settings.teaser_display_type == 'icon' %}
+      spin-wheel-{{ ai_gen_id }} .teaser-btn {
+        width: {{ block.settings.teaser_size | times: 0.8 }}px;
+        height: {{ block.settings.teaser_size | times: 0.8 }}px;
+      }
+    {% endif %}
+    spin-wheel-{{ ai_gen_id }} .title { font-size: {{ block.settings.title_size | times: 0.8 }}px; }
+    spin-wheel-{{ ai_gen_id }} .subtitle { font-size: {{ block.settings.subtitle_size | times: 0.9 }}px; }
+  }
+{% endstyle %}
+
+<spin-wheel-{{ ai_gen_id }} {{ block.shopify_attributes }}>
+  <div class="teaser">
+    <button class="teaser-btn" aria-label="Open spin wheel">
+      <div class="pulse"></div>
+      {% if block.settings.teaser_display_type == 'text' %}
+        <span class="teaser-text">{{ block.settings.teaser_text }}</span>
+      {% else %}
+        {% if block.settings.teaser_icon_image %}
+          <img src="{{ block.settings.teaser_icon_image | image_url: width: 200 }}" alt="Spin wheel" class="teaser-img" loading="lazy">
+        {% else %}
+          <svg class="teaser-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="10"></circle>
+            <path d="M12 6v6l4 2"></path>
+          </svg>
+        {% endif %}
+      {% endif %}
+    </button>
+  </div>
+
+  <div class="overlay">
+    <div class="modal">
+      <button class="close-btn" aria-label="Close">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <line x1="18" y1="6" x2="6" y2="18"></line>
+          <line x1="6" y1="6" x2="18" y2="18"></line>
+        </svg>
+      </button>
+
+      <h2 class="title">{{ block.settings.title }}</h2>
+      <p class="subtitle">{{ block.settings.subtitle }}</p>
+
+      <div class="canvas-wrap">
+        <div class="pointer"></div>
+        <canvas width="400" height="400"></canvas>
+      </div>
+
+      <button class="button spin-btn">{{ block.settings.button_text }}</button>
+      
+      <div class="result" style="display: none;">
+        {{ block.settings.result_text | replace: '[prize]', '<span class="target"></span>' }}
+      </div>
+
+      <div class="email-form">
+        <input type="email" class="email-input" placeholder="{{ block.settings.email_placeholder }}" required>
+        <div class="error-msg">Please enter a valid email address</div>
+        <button class="button submit-btn">{{ block.settings.submit_button_text }}</button>
+        <div class="success-msg">Thank you! Your prize is on the way.</div>
+      </div>
+    </div>
+  </div>
+</spin-wheel-{{ ai_gen_id }}>
+
+<script>
+  if (!customElements.get('spin-wheel-{{ ai_gen_id }}')) {
+    class SpinWheel{{ ai_gen_id }} extends HTMLElement {
+      constructor() {
+        super();
+        this.isSpinning = false;
+        this.hasSpun = false;
+        this.prizeWon = null;
+      }
+
+      connectedCallback() {
+        this.teaser = this.querySelector('.teaser');
+        
+        const isDesignMode = typeof Shopify !== 'undefined' && Shopify.designMode;
+        if (localStorage.getItem('spinWheelPrizeWon') === 'true' && !isDesignMode) {
+          if(this.teaser) this.teaser.style.display = 'none';
+          return; 
+        }
+
+        this.overlay = this.querySelector('.overlay');
+        this.closeBtn = this.querySelector('.close-btn');
+        this.spinBtn = this.querySelector('.spin-btn');
+        this.canvas = this.querySelector('canvas');
+        this.resultDiv = this.querySelector('.result');
+        this.emailForm = this.querySelector('.email-form');
+        this.emailInput = this.querySelector('.email-input');
+        this.errorMsg = this.querySelector('.error-msg');
+        this.submitBtn = this.querySelector('.submit-btn');
+        this.successMsg = this.querySelector('.success-msg');
+        this.ctx = this.canvas.getContext('2d');
+
+        this.klaviyoApiKey = '{{ block.settings.klaviyo_api_key }}';
+        this.klaviyoListId = '{{ block.settings.klaviyo_list_id }}';
+
+        this.segments = [
+          { text: '{{ block.settings.segment_1_text | replace: "'", "\'" }}', bgColor: '{{ block.settings.segment_1_color }}', textColor: '{{ block.settings.segment_1_text_color }}' },
+          { text: '{{ block.settings.segment_2_text | replace: "'", "\'" }}', bgColor: '{{ block.settings.segment_2_color }}', textColor: '{{ block.settings.segment_2_text_color }}' },
+          { text: '{{ block.settings.segment_3_text | replace: "'", "\'" }}', bgColor: '{{ block.settings.segment_3_color }}', textColor: '{{ block.settings.segment_3_text_color }}' },
+          { text: '{{ block.settings.segment_4_text | replace: "'", "\'" }}', bgColor: '{{ block.settings.segment_4_color }}', textColor: '{{ block.settings.segment_4_text_color }}' },
+          { text: '{{ block.settings.segment_5_text | replace: "'", "\'" }}', bgColor: '{{ block.settings.segment_5_color }}', textColor: '{{ block.settings.segment_5_text_color }}' },
+          { text: '{{ block.settings.segment_6_text | replace: "'", "\'" }}', bgColor: '{{ block.settings.segment_6_color }}', textColor: '{{ block.settings.segment_6_text_color }}' }
+        ];
+
+        this.currentRotation = 0;
+        this.drawWheel();
+        this.setupEventListeners();
+      }
+
+      setupEventListeners() {
+        this.teaser.addEventListener('click', () => this.openModal());
+        this.closeBtn.addEventListener('click', () => this.closeModal());
+        this.overlay.addEventListener('click', (e) => {
+          if (e.target === this.overlay) this.closeModal();
+        });
+        this.spinBtn.addEventListener('click', () => this.spin());
+        this.submitBtn.addEventListener('click', () => this.handleSubmit());
+        this.emailInput.addEventListener('input', () => {
+          this.errorMsg.style.display = 'none';
+        });
+      }
+
+      openModal() {
+        this.overlay.classList.add('active');
+        document.body.style.overflow = 'hidden';
+      }
+
+      closeModal() {
+        this.overlay.classList.remove('active');
+        document.body.style.overflow = '';
+      }
+
+      drawWheel() {
+        const centerX = this.canvas.width / 2;
+        const centerY = this.canvas.height / 2;
+        const radius = 180;
+        const segmentAngle = (2 * Math.PI) / this.segments.length;
+
+        this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
+        this.ctx.save();
+        this.ctx.translate(centerX, centerY);
+        this.ctx.rotate(this.currentRotation);
+
+        this.segments.forEach((segment, i) => {
+          const startAngle = i * segmentAngle;
+          const endAngle = startAngle + segmentAngle;
+
+          this.ctx.beginPath();
+          this.ctx.moveTo(0, 0);
+          this.ctx.arc(0, 0, radius, startAngle, endAngle);
+          this.ctx.closePath();
+          this.ctx.fillStyle = segment.bgColor;
+          this.ctx.fill();
+          this.ctx.strokeStyle = '{{ block.settings.modal_bg_color }}';
+          this.ctx.lineWidth = 3;
+          this.ctx.stroke();
+
+          this.ctx.save();
+          this.ctx.rotate(startAngle + segmentAngle / 2);
+          this.ctx.textAlign = 'center';
+          this.ctx.fillStyle = segment.textColor;
+          this.ctx.font = 'bold 16px sans-serif';
+          this.ctx.fillText(segment.text, radius * 0.65, 0);
+          this.ctx.restore();
+        });
+
+        this.ctx.restore();
+        this.ctx.beginPath();
+        this.ctx.arc(centerX, centerY, 30, 0, 2 * Math.PI);
+        this.ctx.fillStyle = '{{ block.settings.button_bg_color }}';
+        this.ctx.fill();
+        this.ctx.strokeStyle = '{{ block.settings.modal_bg_color }}';
+        this.ctx.lineWidth = 3;
+        this.ctx.stroke();
+      }
+
+      async submitToKlaviyo(email, prize) {
+        if (!this.klaviyoApiKey || !this.klaviyoListId) return;
+
+        const payload = {
+          data: {
+            type: "subscription",
+            attributes: {
+              custom_source: "Spin the Wheel Form",
+              profile: {
+                data: {
+                  type: "profile",
+                  attributes: {
+                    email: email,
+                    properties: { Prize_Won: prize }
+                  }
+                }
+              }
+            },
+            relationships: {
+              list: {
+                data: { type: "list", id: this.klaviyoListId.trim() }
+              }
+            }
+          }
+        };
+
+        try {
+          const response = await fetch(`https://a.klaviyo.com/client/subscriptions/?company_id=${this.klaviyoApiKey.trim()}`, {
+            method: 'POST',
+            headers: {
+              'revision': '2024-10-15',
+              'content-type': 'application/json'
+            },
+            body: JSON.stringify(payload)
+          });
+
+          if (!response.ok) {
+            console.error('Klaviyo API Error:', await response.json());
+          }
+        } catch (error) {
+          console.error('Network Error:', error);
+        }
+      }
+
+      async handleSubmit() {
+        const email = this.emailInput.value.trim();
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+        if (!email || !emailRegex.test(email)) {
+          this.errorMsg.style.display = 'block';
+          return;
+        }
+
+        this.errorMsg.style.display = 'none';
+        this.submitBtn.disabled = true;
+        this.submitBtn.textContent = 'Submitting...';
+
+        await this.submitToKlaviyo(email, this.prizeWon);
+
+        localStorage.setItem('spinWheelPrizeWon', 'true');
+
+        this.emailForm.style.display = 'none';
+        this.successMsg.style.display = 'block';
+
+        setTimeout(() => {
+          this.closeModal();
+          setTimeout(() => {
+            const isDesignMode = typeof Shopify !== 'undefined' && Shopify.designMode;
+            if (!isDesignMode && this.teaser) {
+              this.teaser.style.display = 'none'; 
+            }
+            this.resetWheel();
+          }, 500);
+        }, 2000);
+      }
+
+      resetWheel() {
+        this.hasSpun = false;
+        this.prizeWon = null;
+        
+        this.resultDiv.style.display = 'none';
+        const targetSpan = this.resultDiv.querySelector('.target');
+        if (targetSpan) targetSpan.textContent = '';
+        
+        this.emailForm.classList.remove('show');
+        this.emailForm.style.display = 'none';
+        this.emailInput.value = '';
+        this.successMsg.style.display = 'none';
+        this.submitBtn.disabled = false;
+        this.submitBtn.textContent = '{{ block.settings.submit_button_text }}';
+        this.spinBtn.style.display = 'block';
+      }
+
+      spin() {
+        if (this.isSpinning || this.hasSpun) return;
+
+        this.isSpinning = true;
+        this.spinBtn.disabled = true;
+
+        const spinDuration = 4000;
+        const totalRotation = (5 + Math.random() * 3) * 2 * Math.PI;
+        const startTime = Date.now();
+        const startRotation = this.currentRotation;
+
+        const animate = () => {
+          const elapsed = Date.now() - startTime;
+          const progress = Math.min(elapsed / spinDuration, 1);
+          const easeOut = 1 - Math.pow(1 - progress, 3);
+
+          this.currentRotation = startRotation + totalRotation * easeOut;
+          this.drawWheel();
+
+          if (progress < 1) {
+            requestAnimationFrame(animate);
+          } else {
+            this.currentRotation = this.currentRotation % (2 * Math.PI);
+            const segmentAngle = (2 * Math.PI) / this.segments.length;
+            const normalizedRotation = (2 * Math.PI - this.currentRotation) % (2 * Math.PI);
+            const winningIndex = Math.floor(normalizedRotation / segmentAngle) % this.segments.length;
+            
+            this.prizeWon = this.segments[winningIndex].text;
+            
+            const targetSpan = this.resultDiv.querySelector('.target');
+            if (targetSpan) targetSpan.textContent = this.prizeWon;
+            this.resultDiv.style.display = 'block';
+            
+            this.isSpinning = false;
+            this.hasSpun = true;
+            this.spinBtn.style.display = 'none';
+
+            // Show form and scroll it into view
+            setTimeout(() => {
+              this.emailForm.classList.add('show');
+              this.emailForm.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+            }, 500);
+          }
+        };
+
+        animate();
+      }
+    }
+
+    customElements.define('spin-wheel-{{ ai_gen_id }}', SpinWheel{{ ai_gen_id }});
+  }
+</script>
+
+{% schema %}
+{
+  "name": "Spin the wheel",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Klaviyo integration"
+    },
+    {
+      "type": "text",
+      "id": "klaviyo_api_key",
+      "label": "Public API key",
+      "info": "Found in Account > Settings > API Keys"
+    },
+    {
+      "type": "text",
+      "id": "klaviyo_list_id",
+      "label": "List ID",
+      "info": "Found in Audience > Lists & Segments"
+    },
+    {
+      "type": "header",
+      "content": "Teaser button"
+    },
+    {
+      "type": "select",
+      "id": "teaser_display_type",
+      "label": "Display type",
+      "options": [
+        {
+          "value": "text",
+          "label": "Text"
+        },
+        {
+          "value": "icon",
+          "label": "Icon"
+        }
+      ],
+      "default": "icon"
+    },
+    {
+      "type": "text",
+      "id": "teaser_text",
+      "label": "Button text",
+      "default": "Spin to Win!",
+      "visible_if": "{{ settings.teaser_display_type == 'text' }}"
+    },
+    {
+      "type": "range",
+      "id": "teaser_text_size",
+      "label": "Text size",
+      "min": 12,
+      "max": 24,
+      "step": 1,
+      "unit": "px",
+      "default": 16,
+      "visible_if": "{{ settings.teaser_display_type == 'text' }}"
+    },
+    {
+      "type": "color",
+      "id": "teaser_text_color",
+      "label": "Text color",
+      "default": "#ffffff",
+      "visible_if": "{{ settings.teaser_display_type == 'text' }}"
+    },
+    {
+      "type": "range",
+      "id": "teaser_border_radius",
+      "label": "Border radius",
+      "min": 0,
+      "max": 50,
+      "step": 2,
+      "unit": "px",
+      "default": 8,
+      "visible_if": "{{ settings.teaser_display_type == 'text' }}"
+    },
+    {
+      "type": "image_picker",
+      "id": "teaser_icon_image",
+      "label": "Icon image",
+      "visible_if": "{{ settings.teaser_display_type == 'icon' }}"
+    },
+    {
+      "type": "range",
+      "id": "teaser_size",
+      "label": "Size",
+      "min": 50,
+      "max": 100,
+      "step": 5,
+      "unit": "px",
+      "default": 70,
+      "visible_if": "{{ settings.teaser_display_type == 'icon' }}"
+    },
+    {
+      "type": "color",
+      "id": "teaser_icon_color",
+      "label": "Icon color",
+      "default": "#ffffff",
+      "visible_if": "{{ settings.teaser_display_type == 'icon' }}"
+    },
+    {
+      "type": "range",
+      "id": "teaser_position_bottom",
+      "label": "Position from bottom",
+      "min": 10,
+      "max": 100,
+      "step": 5,
+      "unit": "px",
+      "default": 30
+    },
+    {
+      "type": "range",
+      "id": "teaser_position_right",
+      "label": "Position from right",
+      "min": 10,
+      "max": 100,
+      "step": 5,
+      "unit": "px",
+      "default": 30
+    },
+    {
+      "type": "color",
+      "id": "teaser_bg_color",
+      "label": "Background color",
+      "default": "#2b684d"
+    },
+    {
+      "type": "header",
+      "content": "Modal"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "title",
+      "label": "Title",
+      "default": "Spin to Win!"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "subtitle",
+      "label": "Subtitle",
+      "default": "Try your luck for a special prize"
+    },
+    {
+      "type": "range",
+      "id": "title_size",
+      "label": "Title size",
+      "min": 18,
+      "max": 40,
+      "step": 2,
+      "unit": "px",
+      "default": 28
+    },
+    {
+      "type": "range",
+      "id": "subtitle_size",
+      "label": "Subtitle size",
+      "min": 12,
+      "max": 24,
+      "step": 1,
+      "unit": "px",
+      "default": 16
+    },
+    {
+      "type": "color",
+      "id": "modal_bg_color",
+      "label": "Background color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Text color",
+      "default": "#222222"
+    },
+    {
+      "type": "range",
+      "id": "modal_border_radius",
+      "label": "Border radius",
+      "min": 0,
+      "max": 30,
+      "step": 2,
+      "unit": "px",
+      "default": 12
+    },
+    {
+      "type": "header",
+      "content": "Email input"
+    },
+    {
+      "type": "richtext",
+      "id": "result_text",
+      "label": "Result text",
+      "default": "<p>🎉 You won: <strong>[prize]</strong>!</p>",
+      "info": "Use [prize] where you want the winning text to appear."
+    },
+    {
+      "type": "text",
+      "id": "email_placeholder",
+      "label": "Placeholder text",
+      "default": "Enter your email address"
+    },
+    {
+      "type": "color",
+      "id": "input_border_color",
+      "label": "Border color",
+      "default": "#e6e6e6"
+    },
+    {
+      "type": "range",
+      "id": "input_border_radius",
+      "label": "Border radius",
+      "min": 0,
+      "max": 20,
+      "step": 2,
+      "unit": "px",
+      "default": 8
+    },
+    {
+      "type": "text",
+      "id": "submit_button_text",
+      "label": "Submit button text",
+      "default": "Claim my prize"
+    },
+    {
+      "type": "header",
+      "content": "Wheel"
+    },
+    {
+      "type": "color",
+      "id": "pointer_color",
+      "label": "Pointer color",
+      "default": "#222222"
+    },
+    {
+      "type": "header",
+      "content": "Segment 1"
+    },
+    {
+      "type": "text",
+      "id": "segment_1_text",
+      "label": "Text",
+      "default": "10% OFF"
+    },
+    {
+      "type": "color",
+      "id": "segment_1_color",
+      "label": "Background color",
+      "default": "#2b684d"
+    },
+    {
+      "type": "color",
+      "id": "segment_1_text_color",
+      "label": "Text color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "header",
+      "content": "Segment 2"
+    },
+    {
+      "type": "text",
+      "id": "segment_2_text",
+      "label": "Text",
+      "default": "Free Ship"
+    },
+    {
+      "type": "color",
+      "id": "segment_2_color",
+      "label": "Background color",
+      "default": "#222222"
+    },
+    {
+      "type": "color",
+      "id": "segment_2_text_color",
+      "label": "Text color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "header",
+      "content": "Segment 3"
+    },
+    {
+      "type": "text",
+      "id": "segment_3_text",
+      "label": "Text",
+      "default": "20% OFF"
+    },
+    {
+      "type": "color",
+      "id": "segment_3_color",
+      "label": "Background color",
+      "default": "#2b684d"
+    },
+    {
+      "type": "color",
+      "id": "segment_3_text_color",
+      "label": "Text color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "header",
+      "content": "Segment 4"
+    },
+    {
+      "type": "text",
+      "id": "segment_4_text",
+      "label": "Text",
+      "default": "Try Again"
+    },
+    {
+      "type": "color",
+      "id": "segment_4_color",
+      "label": "Background color",
+      "default": "#222222"
+    },
+    {
+      "type": "color",
+      "id": "segment_4_text_color",
+      "label": "Text color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "header",
+      "content": "Segment 5"
+    },
+    {
+      "type": "text",
+      "id": "segment_5_text",
+      "label": "Text",
+      "default": "15% OFF"
+    },
+    {
+      "type": "color",
+      "id": "segment_5_color",
+      "label": "Background color",
+      "default": "#2b684d"
+    },
+    {
+      "type": "color",
+      "id": "segment_5_text_color",
+      "label": "Text color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "header",
+      "content": "Segment 6"
+    },
+    {
+      "type": "text",
+      "id": "segment_6_text",
+      "label": "Text",
+      "default": "Gift"
+    },
+    {
+      "type": "color",
+      "id": "segment_6_color",
+      "label": "Background color",
+      "default": "#222222"
+    },
+    {
+      "type": "color",
+      "id": "segment_6_text_color",
+      "label": "Text color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "header",
+      "content": "Spin button"
+    },
+    {
+      "type": "text",
+      "id": "button_text",
+      "label": "Button text",
+      "default": "Spin the wheel"
+    },
+    {
+      "type": "range",
+      "id": "button_text_size",
+      "label": "Text size",
+      "min": 12,
+      "max": 24,
+      "step": 1,
+      "unit": "px",
+      "default": 16
+    },
+    {
+      "type": "color",
+      "id": "button_bg_color",
+      "label": "Background color",
+      "default": "#2b684d"
+    },
+    {
+      "type": "color",
+      "id": "button_text_color",
+      "label": "Text color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "button_hover_color",
+      "label": "Hover background color",
+      "default": "#1a4d38"
+    },
+    {
+      "type": "range",
+      "id": "button_border_radius",
+      "label": "Border radius",
+      "min": 0,
+      "max": 50,
+      "step": 2,
+      "unit": "px",
+      "default": 8
+    }
+  ],
+  "presets": [
+    {
+      "name": "Spin the wheel"
+    }
+  ]
+}
+{% endschema %}

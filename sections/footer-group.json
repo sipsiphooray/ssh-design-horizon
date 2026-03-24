@@ -11,6 +11,97 @@
   "type": "footer",
   "name": "t:names.footer",
   "sections": {
+    "17743614190243bb0c": {
+      "type": "_blocks",
+      "blocks": {
+        "spin_wheel_R6naGJ": {
+          "type": "spin-wheel",
+          "name": "Spin the wheel",
+          "settings": {
+            "klaviyo_api_key": "V6hBxK",
+            "klaviyo_list_id": "UasyxS",
+            "teaser_display_type": "icon",
+            "teaser_text": "Spin to Win!",
+            "teaser_text_size": 16,
+            "teaser_text_color": "#ffffff",
+            "teaser_border_radius": 8,
+            "teaser_size": 70,
+            "teaser_icon_color": "#ffffff",
+            "teaser_position_bottom": 30,
+            "teaser_position_right": 20,
+            "teaser_bg_color": "#2b2b2b",
+            "title": "Spin to Win!",
+            "subtitle": "Try your luck for a special prize",
+            "title_size": 28,
+            "subtitle_size": 16,
+            "modal_bg_color": "#ffffff",
+            "text_color": "#222222",
+            "modal_border_radius": 0,
+            "result_text": "<p>🎉 You won: <strong>[prize]</strong>!</p>",
+            "email_placeholder": "Enter your email address",
+            "input_border_color": "#2b2b2b",
+            "input_border_radius": 0,
+            "submit_button_text": "Claim my prize",
+            "pointer_color": "#2b2b2b",
+            "segment_1_text": "10% OFF",
+            "segment_1_color": "#fbe1ec",
+            "segment_1_text_color": "#2b2b2b",
+            "segment_2_text": "Free Ship",
+            "segment_2_color": "#2b2b2b",
+            "segment_2_text_color": "#ffffff",
+            "segment_3_text": "20% OFF",
+            "segment_3_color": "#fbe1ec",
+            "segment_3_text_color": "#2b2b2b",
+            "segment_4_text": "Try Again",
+            "segment_4_color": "#2b2b2b",
+            "segment_4_text_color": "#ffffff",
+            "segment_5_text": "15% OFF",
+            "segment_5_color": "#fbe1ec",
+            "segment_5_text_color": "#2b2b2b",
+            "segment_6_text": "Gift",
+            "segment_6_color": "#2b2b2b",
+            "segment_6_text_color": "#ffffff",
+            "button_text": "Spin the wheel",
+            "button_text_size": 16,
+            "button_bg_color": "#2b2b2b",
+            "button_text_color": "#ffffff",
+            "button_hover_color": "#2b2b2b",
+            "button_border_radius": 0
+          },
+          "blocks": {}
+        }
+      },
+      "block_order": [
+        "spin_wheel_R6naGJ"
+      ],
+      "settings": {
+        "content_direction": "column",
+        "vertical_on_mobile": true,
+        "horizontal_alignment": "flex-start",
+        "vertical_alignment": "center",
+        "align_baseline": false,
+        "horizontal_alignment_flex_direction_column": "flex-start",
+        "vertical_alignment_flex_direction_column": "center",
+        "gap": 12,
+        "section_width": "page-width",
+        "section_height": "",
+        "section_height_custom": 50,
+        "color_scheme": "",
+        "background_media": "none",
+        "video_position": "cover",
+        "background_image_position": "cover",
+        "border": "none",
+        "border_width": 1,
+        "border_opacity": 100,
+        "border_radius": 0,
+        "toggle_overlay": false,
+        "overlay_color": "#00000026",
+        "overlay_style": "solid",
+        "gradient_direction": "to top",
+        "padding-block-start": 0,
+        "padding-block-end": 0
+      }
+    },
     "footer": {
       "type": "footer",
       "blocks": {
@@ -473,6 +564,7 @@
     }
   },
   "order": [
+    "17743614190243bb0c",
     "footer",
     "utilities"
   ]

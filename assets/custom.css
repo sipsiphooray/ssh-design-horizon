@@ -610,6 +610,9 @@ details {
     display: none !important;
 }
 
+body:has(.overlay.active) .sticky-add-to-cart__bar {
+    display: none;
+}
 
 @media screen and (min-width: 60em) {
     :root {
@@ -777,5 +780,9 @@ details {
 
     .cart-drawer__close-button {
         top: 0 !important;
+    }
+
+    .quick-add-modal__content:has(.cs-menu.open) {
+        padding-bottom: var(--padding-4xl) !important;
     }
 }
