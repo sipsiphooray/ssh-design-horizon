@@ -668,7 +668,7 @@
       "id": "teaser_text_color",
       "label": "Text color",
       "default": "#ffffff",
-      "visible_if": "{{ settings.teaser_display_type == 'text' }}"
+      "visible_if": "{{ block.settings.teaser_display_type == 'text' }}"
     },
     {
       "type": "range",
@@ -679,13 +679,13 @@
       "step": 2,
       "unit": "px",
       "default": 8,
-      "visible_if": "{{ settings.teaser_display_type == 'text' }}"
+      "visible_if": "{{ block.settings.teaser_display_type == 'text' }}"
     },
     {
       "type": "image_picker",
       "id": "teaser_icon_image",
       "label": "Icon image",
-      "visible_if": "{{ settings.teaser_display_type == 'icon' }}"
+      "visible_if": "{{ block.settings.teaser_display_type == 'icon' }}"
     },
     {
       "type": "range",
@@ -696,14 +696,14 @@
       "step": 5,
       "unit": "px",
       "default": 70,
-      "visible_if": "{{ settings.teaser_display_type == 'icon' }}"
+      "visible_if": "{{ block.settings.teaser_display_type == 'icon' }}"
     },
     {
       "type": "color",
       "id": "teaser_icon_color",
       "label": "Icon color",
       "default": "#ffffff",
-      "visible_if": "{{ settings.teaser_display_type == 'icon' }}"
+      "visible_if": "{{ block.settings.teaser_display_type == 'icon' }}"
     },
     {
       "type": "range",
