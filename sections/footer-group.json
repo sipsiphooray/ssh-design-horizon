@@ -20,7 +20,7 @@
           "settings": {
             "klaviyo_api_key": "V6hBxK",
             "klaviyo_list_id": "UasyxS",
-            "teaser_display_type": "icon",
+            "teaser_display_type": "text",
             "teaser_text": "Spin to Win!",
             "teaser_text_size": 16,
             "teaser_text_color": "#ffffff",
