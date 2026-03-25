@@ -35,7 +35,7 @@
             "title_size": 28,
             "subtitle_size": 16,
             "modal_bg_color": "#ffffff",
-            "text_color": "#222222",
+            "text_color": "#2b2b2b",
             "modal_border_radius": 0,
             "result_text": "<p>🎉 You won: <strong>[prize]</strong>!</p>",
             "email_placeholder": "Enter your email address",
