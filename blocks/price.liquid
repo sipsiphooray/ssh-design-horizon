@@ -32,6 +32,18 @@
       echo ' rte'
     endif
   endcapture
+
+  if shop.metafields.custom.customer_discounts.value != blank
+    capture discount_label
+      render 'discount-label', product: product
+    endcapture
+    capture discount_background
+      render 'discount-badge-background', product: product
+    endcapture
+    capture discount_color_text
+      render 'discount-badge-text', product: product
+    endcapture
+  endif
 %}
 
 <product-price
@@ -58,6 +70,14 @@
           class="
             product-badges__badge product-badges__badge--rectangle
             color-{{ settings.badge_sale_color_scheme }}
+          "
+          style="
+            {% if discount_background != blank %}
+              --color-background: {{ discount_background }};
+            {% endif %}
+            {% if discount_color_text != blank %}
+              --color-foreground: {{ discount_color_text }};
+            {% endif %}
           "
         >
           {{ discount_label }}
