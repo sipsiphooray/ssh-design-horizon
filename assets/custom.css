@@ -635,7 +635,7 @@ body:has(.overlay.active) .sticky-add-to-cart__bar {
 }
 
 .menu-drawer-container .header__icon--summary {
-    padding-inline-start: var(--padding-xs) !important;
+    margin-inline-start: calc(-1 * var(--padding-xs)) !important;
 }
 
 @media screen and (min-width: 60em) {
