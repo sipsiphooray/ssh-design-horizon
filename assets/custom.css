@@ -620,6 +620,15 @@ body:has(.overlay.active) .sticky-add-to-cart__bar {
     z-index: 9999999;
 }
 
+[ref="priceContainer"] .product-badges__badge {
+    display: inline-block;
+    margin-left: var(--gap-2xs);
+}
+
+.product-details .compare-at-price {
+    font-size: var(--font-size--sm);
+}
+
 @media screen and (min-width: 60em) {
     :root {
         --section-height-large: 90svh !important;

@@ -5,6 +5,9 @@
 
   @param {string} [render_text] - The render text
   @param {object} [active_variant] - The variant object
+  @param {string} [discount_label] - The discount label
+  @param {string} [discount_background] - The discount background color
+  @param {string} [discount_color_text] - The discount text color
 {%- enddoc -%}
 
 {% liquid
@@ -12,7 +15,7 @@
 -%}
 
 {% capture children %}
-  {% content_for 'block', type: '_product-card-gallery', id: 'product-card-gallery', product: product, active_variant: active_variant %}
+  {% content_for 'block', type: '_product-card-gallery', id: 'product-card-gallery', discount_label: discount_label, discount_background: discount_background, discount_color_text: discount_color_text, product: product, active_variant: active_variant %}
   {% content_for 'blocks', closest.product: product %}
 {% endcapture %}
 

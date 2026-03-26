@@ -3,16 +3,56 @@
   It is used in the product block,featured product block, and the product card block.
 
   @param {product} product_resource - The product to render
-  @param {boolean} [show_sale_price_first] - Whether to show the sale price first
   @param {boolean} [show_unit_price] - Whether to show the unit price
+  @param {boolean} [show_sale_price_first] - Whether to show the sale price first
+  @param {string} [badge] - Product badge
 {%- enddoc -%}
 
 {%- liquid
+  assign customer_tag_shop = shop.metafields.custom.customer_discounts.value
+  assign discount = blank
+
+  capture discount_label
+    render 'discount-label'
+  endcapture
+
+  assign discount_label = discount_label | strip
+
+  capture customer_tag
+    render 'customer-tag'
+  endcapture
+  assign customer_tag = customer_tag | strip
+
+  if customer_tag_shop.size > 0
+      for item in customer_tag_shop
+          assign applies_to = item.applies_to.value.products | where: 'id', product.id
+
+          if item.customer_tag == blank and customer_tag == 'false'
+              assign applies_to = item.applies_to.value.products | where: 'id', product.id
+
+              if applies_to.size > 0 and item.discount != blank
+                  assign discount = item.discount
+                  break
+              endif
+          endif
+      endfor
+  endif
+
   assign show_unit_price = show_unit_price | default: false
   assign show_sale_price_first = show_sale_price_first | default: false
   assign selected_variant = product_resource.selected_or_first_available_variant
   assign price = selected_variant.price
   assign compare_at_price = selected_variant.compare_at_price
+
+  if discount != blank
+    assign discount_percentage = discount | plus: 0
+    assign discount_multiplier = 100 | minus: discount_percentage
+
+    assign discounted_price = price | times: discount_multiplier | divided_by: 100
+
+    assign compare_at_price = price
+    assign price = discounted_price
+  endif
 
   assign show_compare_price = false
   if compare_at_price > price
@@ -73,57 +113,43 @@
 -%}
 
 <div ref="priceContainer">
-  {% if is_product_card and product_resource.price_varies %}
-      {% liquid
-        if settings.currency_code_enabled_product_cards
-          assign price_min = product_resource.price_min | money_with_currency
-        else
-          assign price_min = product_resource.price_min | money
-        endif
-      %}
-      {% assign display_price = 'content.price_from' | t: price: price_min %}
-
-      <span class="price">{{ display_price }}</span>
-  {% else %}
-    {% if has_volume_pricing %}
-      {% comment %} Volume pricing display {% endcomment %}
-      {% if show_compare_price %}
-        <span role="group">
-          <span class="visually-hidden">{{ 'content.price_regular' | t }}&nbsp;</span>
-          <span class="compare-at-price">{{- compare_at_price -}}</span>
-        </span>
-      {% endif %}
+  {% if has_volume_pricing %}
+    {% comment %} Volume pricing display {% endcomment %}
+    {% if show_compare_price %}
       <span role="group">
-        <span class="visually-hidden">{{ 'content.price_range' | t }}&nbsp;</span>
-        <span class="price">{{ price_min }} - {{ price_max }}</span>
+        <span class="visually-hidden">{{ 'content.price_regular' | t }}&nbsp;</span>
+        <span class="compare-at-price">{{- compare_at_price -}}</span>
+      </span>
+    {% endif %}
+    <span role="group">
+      <span class="visually-hidden">{{ 'content.price_range' | t }}&nbsp;</span>
+      <span class="price">{{ price_min }} - {{ price_max }}</span>
+    </span>
+  {% else %}
+    {% comment %} Standard pricing display {% endcomment %}
+    {% if show_sale_price_first == false and show_compare_price %}
+      <span role="group">
+        <span class="visually-hidden">{{ 'content.price_regular' | t }}&nbsp;</span>
+        <span class="compare-at-price">{{- compare_at_price -}}</span>
+      </span>
+    {% endif %}
+
+    {% if show_compare_price %}
+      <span role="group">
+        <span class="visually-hidden">{{ 'content.price_sale' | t }}&nbsp;</span>
+        <span class="price">{{ price | default: '&nbsp;' }}</span>
       </span>
     {% else %}
-      {% comment %} Standard pricing display {% endcomment %}
-      {% if show_sale_price_first == false and show_compare_price %}
-        <span role="group">
-          <span class="visually-hidden">{{ 'content.price_regular' | t }}&nbsp;</span>
-          <span class="compare-at-price">{{- compare_at_price -}}</span>
-        </span>
-      {% endif %}
+      <span class="price">{{ price | default: '&nbsp;' }}</span>
+    {% endif %}
 
-      {% if show_compare_price %}
-        <span role="group">
-          <span class="visually-hidden">{{ 'content.price_sale' | t }}&nbsp;</span>
-          <span class="price">{{ price | default: '&nbsp;' }}</span>
-        </span>
-      {% else %}
-        <span class="price">{{ price | default: '&nbsp;' }}</span>
-      {% endif %}
-
-      {% if show_sale_price_first == true and show_compare_price %}
-        <span role="group">
-          <span class="visually-hidden">{{ 'content.price_regular' | t }}&nbsp;</span>
-          <span class="compare-at-price">{{- compare_at_price -}}</span>
-        </span>
-      {% endif %}
+    {% if show_sale_price_first == true and show_compare_price %}
+      <span role="group">
+        <span class="visually-hidden">{{ 'content.price_regular' | t }}&nbsp;</span>
+        <span class="compare-at-price">{{- compare_at_price -}}</span>
+      </span>
     {% endif %}
   {% endif %}
-
   {%- if selected_variant.unit_price and show_unit_price %}
     {%- liquid
       if use_currency
@@ -134,6 +160,7 @@
     -%}
     {% render 'unit-price', price: unit_price, measurement: selected_variant.unit_price_measurement %}
   {%- endif -%}
+  {{ badge }}
 </div>
 {%- if has_volume_pricing -%}
   <small ref="volumePricingNote" class="volume-pricing-note">{{ 'content.volume_pricing_available' | t }}</small>

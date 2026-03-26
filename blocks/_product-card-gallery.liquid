@@ -4,6 +4,9 @@
   Note: When the product card itself is in a carousel layout, the card-gallery's carousel is disabled with JavaScript.
   @param {boolean} [hide_quick_add] - Hide quick add
   @param {object} [active_variant] - The variant object
+  @param {string} [discount_label] - The discount label
+  @param {string} [discount_background] - The discount background color
+  @param {string} [discount_color_text] - The discount text color
   @param {object} [product] - The product object
 {%- enddoc -%}
 
@@ -40,8 +43,45 @@
             </div>
           {% endif %}
         {% endfor %}
+
+        {% if discount_label != blank %}
+          <div
+            class="
+              product-badges__badge product-badges__badge--rectangle
+              color-{{ settings.badge_sale_color_scheme }}
+            "
+            style="
+              {% if discount_background != blank %}
+                --color-background: {{ discount_background }};
+              {% endif %}
+              {% if discount_color_text != blank %}
+                --color-foreground: {{ discount_color_text }};
+              {% endif %}
+            "
+          >
+            {{ discount_label }}
+          </div>
+        {% endif %}
       {% endif %}
-      {%- if product.available == false or product.compare_at_price > product.price -%}
+
+      {% if discount_label != blank and product.metafields.custom.product_badges.value == blank %}
+        <div
+          class="
+            product-badges__badge product-badges__badge--rectangle
+            color-{{ settings.badge_sale_color_scheme }}
+          "
+          style="
+            {% if discount_background != blank %}
+              --color-background: {{ discount_background }};
+            {% endif %}
+            {% if discount_color_text != blank %}
+              --color-foreground: {{ discount_color_text }};
+            {% endif %}
+          "
+        >
+          {{ discount_label }}
+        </div>
+      {%- elsif product.available == false or product.compare_at_price > product.price -%}
         <div
           class="
             product-badges__badge product-badges__badge--rectangle
@@ -54,7 +94,7 @@
             {{ 'content.product_badge_sale' | t }}
           {%- endif -%}
         </div>
-      {%- endif -%}
+      {% endif %}
     </div>
     {% unless hide_quick_add == true %}
       {%  if settings.quick_add or settings.mobile_quick_add %}

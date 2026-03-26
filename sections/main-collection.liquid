@@ -54,44 +54,56 @@
     {% paginate collection.products by products_per_page %}
       {% capture children %}
         {% for product in collection.products %}
-{% liquid
-          if collection.metafields.custom.variants_to_render != blank and product.has_only_default_variant == false
-            assign to_render = collection.metafields.custom.variants_to_render.value
-            assign active_variants = '' | split: ','
-            
-            # 1. Create a string to hold ALL the texts we find in order
-            assign render_texts_string = ''
+          {% liquid
+            if collection.metafields.custom.variants_to_render != blank and product.has_only_default_variant == false
+              assign to_render = collection.metafields.custom.variants_to_render.value
+              assign active_variants = '' | split: ','
+              
+              # 1. Create a string to hold ALL the texts we find in order
+              assign render_texts_string = ''
 
-            for variant in product.variants
-              if variant.featured_media == blank or variant.featured_media.id == product.featured_media.id
-                continue
-              endif
+              for variant in product.variants
+                if variant.featured_media == blank or variant.featured_media.id == product.featured_media.id
+                  continue
+                endif
 
-              assign variant_matched = false
+                assign variant_matched = false
 
-              for option in variant.options
-                for render in to_render
-                  if option contains render
-                    assign active_variant = product.variants | where: 'id', variant.id
-                    assign active_variants = active_variants | concat: active_variant
-                    
-                    # 2. Append the text with a comma so we can split it later!
-                    assign render_texts_string = render_texts_string | append: render | append: ','
-                    
-                    assign variant_matched = true
+                for option in variant.options
+                  for render in to_render
+                    if option contains render
+                      assign active_variant = product.variants | where: 'id', variant.id
+                      assign active_variants = active_variants | concat: active_variant
+                      
+                      # 2. Append the text with a comma so we can split it later!
+                      assign render_texts_string = render_texts_string | append: render | append: ','
+                      
+                      assign variant_matched = true
+                      break
+                    endif
+                  endfor
+                  
+                  if variant_matched
                     break
                   endif
                 endfor
-                
-                if variant_matched
-                  break
-                endif
               endfor
-            endfor
-            
-            # 3. Split that string into a true array matching the active_variants array
-            assign render_texts_array = render_texts_string | split: ','
-          endif
+              
+              # 3. Split that string into a true array matching the active_variants array
+              assign render_texts_array = render_texts_string | split: ','
+            endif
+
+            if shop.metafields.custom.customer_discounts.value != blank
+              capture discount_label
+                render 'discount-label', product: product
+              endcapture
+              capture discount_background
+                render 'discount-badge-background', product: product
+              endcapture
+              capture discount_color_text
+                render 'discount-badge-text', product: product
+              endcapture
+            endif
           %}
 
           {% if active_variants.size > 0 %}
@@ -108,7 +120,7 @@
                 ref="cards[]"
               >
                 {% # theme-check-disable %}
-                {% content_for 'block', type: '_product-card', render_text: current_render_text, active_variant: active_variant, id: 'product-card', closest.product: product %}
+                {% content_for 'block', type: '_product-card', render_text: current_render_text, active_variant: active_variant, discount_label: discount_label, discount_background: discount_background, discount_color_text: discount_color_text, id: 'product-card', closest.product: product %}
                 {% # theme-check-enable %}
               </li>
             {% endfor %}
@@ -121,7 +133,7 @@
               ref="cards[]"
             >
               {% # theme-check-disable %}
-              {% content_for 'block', type: '_product-card', id: 'product-card', closest.product: product %}
+              {% content_for 'block', discount_label: discount_label, discount_background: discount_background, discount_color_text: discount_color_text, type: '_product-card', id: 'product-card', closest.product: product %}
               {% # theme-check-enable %}
             </li>
           {% endif %}

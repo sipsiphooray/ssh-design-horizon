@@ -26,11 +26,25 @@
     {% if section.settings.collection != blank and shop.products_count != 0 %}
       {% paginate section.settings.collection.products by max_items %}
         {% for product in section.settings.collection.products limit: max_items %}
+          {% liquid
+            if shop.metafields.custom.customer_discounts.value != blank
+              capture discount_label
+                render 'discount-label', product: product
+              endcapture
+              capture discount_background
+                render 'discount-badge-background', product: product
+              endcapture
+              capture discount_color_text
+                render 'discount-badge-text', product: product
+              endcapture
+            endif
+          %}
+
           <div
             class="resource-list__item"
           >
             {% # theme-check-disable UniqueStaticBlockId %}
-              {% content_for 'block', type: '_product-card', id: 'static-product-card', closest.product: product %}
+              {% content_for 'block', discount_label: discount_label, discount_background: discount_background, discount_color_text: discount_color_text, type: '_product-card', id: 'static-product-card', closest.product: product %}
             {% # theme-check-enable UniqueStaticBlockId %}
           </div>
 

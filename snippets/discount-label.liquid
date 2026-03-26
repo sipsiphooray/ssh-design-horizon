@@ -1,0 +1,21 @@
+{% liquid
+    assign customer_tag_shop = shop.metafields.custom.customer_discounts.value
+    assign discount_label = blank
+
+    if customer_tag_shop.size > 0 
+        for item in customer_tag_shop
+
+            if item.customer_tag == blank
+
+                if under_product_page == true
+                    assign discount_label = item.pdp_discount_price_label
+                    break
+                else
+                    assign discount_label = item.discount_label
+                    break
+                endif
+            endif
+        endfor
+    endif
+    echo discount_label
+%}
