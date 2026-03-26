@@ -633,6 +633,14 @@ body:has(.overlay.active) .sticky-add-to-cart__bar {
     margin-inline-start: calc(-1 * var(--padding-xs)) !important;
 }
 
+.xb-wishlist__btn-custom .xb-wishlist__add:not([xb-add]) {
+    display: none;
+}
+
+.xb-wishlist__btn-custom:not(:has([xb-add])) {
+    display: none;
+}
+
 @media screen and (min-width: 60em) {
     :root {
         --section-height-large: 90svh !important;
