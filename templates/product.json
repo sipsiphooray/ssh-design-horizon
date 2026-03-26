@@ -132,12 +132,13 @@
                 "mobile-padding-block-end": 0,
                 "mobile-padding-inline-start": 0,
                 "mobile-padding-inline-end": 0,
-                "css_class": ""
+                "css_class": "product-header"
               },
               "blocks": {
                 "custom_liquid_qE6bdP": {
                   "type": "custom-liquid",
                   "name": "Badges",
+                  "disabled": true,
                   "settings": {
                     "custom_liquid": "<style>\n.badges-product-details {\n    margin-bottom: var(--gap-2xs);\n    line-height: 1em;\n}\n</style>\n<div class=\"flex badges-product-details\">\n      {% if product.metafields.custom.product_badges.value != blank %}\n        {% for i in product.metafields.custom.product_badges.value %}\n          {% if i.label != blank %}\n            <div>\n                <div\n                class=\"\n                    product-badges__badge product-badges__badge--rectangle\n                    color-{{ settings.badge_sale_color_scheme }}\n                \"\n                    style=\"\n                        --badge-border-radius: {{ settings.badge_corner_radius }}px;\n                        --badge-font-family: var(--font-{{ settings.badge_font_family }}--family); --badge-font-weight: var(--font-{{ settings.badge_font_family }}--weight); --badge-text-transform: {{ settings.badge_text_transform }};\n                    {% if i.badge_background_color != blank %}\n                        --color-background: {{ i.badge_background_color }};\n                    {% endif %}\n                    {% if i.badge_text_color != blank %}\n                        --color-foreground: {{ i.badge_text_color }};\n                    {% endif %}\n                    \"\n                >\n                {{ i.label }}\n                </div>\n            </div>\n          {% endif %}\n        {% endfor %}\n      {% endif %}\n</div>"
                   },
@@ -204,13 +205,22 @@
                     "padding-inline-end": 0
                   },
                   "blocks": {}
+                },
+                "custom_liquid_7BVx6i": {
+                  "type": "custom-liquid",
+                  "name": "Wishlist Icon",
+                  "settings": {
+                    "custom_liquid": "<div class='xb-wishlist__btn-custom'>\n  <div\n    class='xb-wishlist__add'\n    xb-product-id='{{closest.product.id}}'\n    xb-product-title='{{closest.product.title }}'\n    xb-product-variant='{{closest.product.selected_or_first_available_variant.id }}'\n    xb-is-in-stock='{{closest.product.available }}'\n    xb-product-handle='{{closest.product.handle }}'\n  >\n    <button>\n      <svg\n        xmlns='http://www.w3.org/2000/svg'\n        width='20'\n        height='20'\n        viewBox='0 0 24 24'\n        fill='none'\n        stroke='#f0dfe7'\n        stroke-width='1.5'\n        stroke-linecap='round'\n        stroke-linejoin='round'\n      >\n        <path d=\"M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z\"></path>\n      </svg>\n    </button>\n  </div>\n  {% comment %}\n     - optional\n    <div class=\"xb-wishlist__loading\" xb-product-id=\"{{closest.product.id}}\">Loading...</div>\n  {% endcomment %}\n  <div class='xb-wishlist__remove' xb-product-id='{{closest.product.id}}' xb-is-in-stock='{{closest.product.available }}' xb-product-variant=\"{{closest.product.selected_or_first_available_variant.id }}\">\n    <button>\n      <svg\n        xmlns='http://www.w3.org/2000/svg'\n        width='20'\n        height='20'\n        viewBox='0 0 24 24'\n        fill='#f0dfe7'\n        stroke='#f0dfe7'\n        stroke-width='1.5'\n        stroke-linecap='round'\n        stroke-linejoin='round'\n      >\n        <path d=\"M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z\"></path>\n      </svg>\n    </button>\n  </div>\n</div>"
+                  },
+                  "blocks": {}
                 }
               },
               "block_order": [
                 "custom_liquid_qE6bdP",
                 "text_xpVMaM",
                 "okendo_star_rating_7P7JpH",
-                "price_tVjtKg"
+                "price_tVjtKg",
+                "custom_liquid_7BVx6i"
               ]
             },
             "ai_gen_block_426582e_ADbVqH": {
