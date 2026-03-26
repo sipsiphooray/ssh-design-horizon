@@ -629,6 +629,15 @@ body:has(.overlay.active) .sticky-add-to-cart__bar {
     font-size: var(--font-size--sm);
 }
 
+.header__icon--summary .header-drawer-icon {
+    width: var(--icon-size-sm) !important;
+    height: var(--icon-size-sm) !important;
+}
+
+.menu-drawer-container .header__icon--summary {
+    padding-inline-start: var(--padding-xs) !important;
+}
+
 @media screen and (min-width: 60em) {
     :root {
         --section-height-large: 90svh !important;
