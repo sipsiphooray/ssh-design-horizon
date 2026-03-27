@@ -326,8 +326,12 @@ document.addEventListener(ThemeEvents.variantUpdate, (event) => {
       }
     }
   }
-  
-  console.log(event.target);
+
+  document.querySelectorAll(`[xb-product-id="${event.detail.data.productId}"][xb-product-variant]`).forEach(item => {
+    if (item.getAttribute('xb-product-variant')) {
+      item.setAttribute('xb-product-variant', event.detail.resource.id)
+    }
+  })
 });
 
 export class ProtectionButtons extends Component {
