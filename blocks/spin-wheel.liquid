@@ -169,6 +169,11 @@
     max-width: 365px;
     margin: 0 auto 20px;
     flex-shrink: 0;
+    transition: all 0.3s ease;
+  }
+
+  spin-wheel-{{ ai_gen_id }}.email-active .canvas-wrap {
+    max-width: 215px;
   }
 
   spin-wheel-{{ ai_gen_id }} canvas {
@@ -330,9 +335,7 @@
 
       <button class="button spin-btn">{{ block.settings.button_text }}</button>
       
-      <div class="result" style="display: none;">
-        {{ block.settings.result_text | replace: '[prize]', '<span class="target"></span>' }}
-      </div>
+      <div class="result" style="display: none;"></div>
 
       <div class="email-form">
         <input type="email" class="email-input" placeholder="{{ block.settings.email_placeholder }}" required>
@@ -377,6 +380,9 @@
 
         this.klaviyoApiKey = '{{ block.settings.klaviyo_api_key }}';
         this.klaviyoListId = '{{ block.settings.klaviyo_list_id }}';
+        
+        this.tryAgainSegmentIndex = parseInt('{{ block.settings.try_again_segment }}', 10) - 1;
+        this.tryAgainMessage = {{ block.settings.try_again_message | json }};
 
         this.segments = [
           { text: '{{ block.settings.segment_1_text | replace: "'", "\'" }}', bgColor: '{{ block.settings.segment_1_color }}', textColor: '{{ block.settings.segment_1_text_color }}' },
@@ -419,8 +425,6 @@
         const centerX = this.canvas.width / 2;
         const centerY = this.canvas.height / 2;
         
-        // Calculate radius dynamically to fill the canvas. 
-        // Subtract 4px so the 3px border stroke doesn't get clipped by the canvas edges.
         const radius = (Math.min(this.canvas.width, this.canvas.height) / 2) - 4; 
 
         const segmentAngle = (2 * Math.PI) / this.segments.length;
@@ -543,9 +547,9 @@
         this.hasSpun = false;
         this.prizeWon = null;
         
+        this.classList.remove('email-active');
         this.resultDiv.style.display = 'none';
-        const targetSpan = this.resultDiv.querySelector('.target');
-        if (targetSpan) targetSpan.textContent = '';
+        this.resultDiv.innerHTML = '';
         
         this.emailForm.classList.remove('show');
         this.emailForm.style.display = 'none';
@@ -585,19 +589,34 @@
             
             this.prizeWon = this.segments[winningIndex].text;
             
-            const targetSpan = this.resultDiv.querySelector('.target');
-            if (targetSpan) targetSpan.textContent = this.prizeWon;
-            this.resultDiv.style.display = 'block';
-            
-            this.isSpinning = false;
-            this.hasSpun = true;
-            this.spinBtn.style.display = 'none';
+            // Add email-active class to shrink canvas
+            this.classList.add('email-active');
 
-            // Show form and scroll it into view
-            setTimeout(() => {
-              this.emailForm.classList.add('show');
-              this.emailForm.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
-            }, 500);
+            if (winningIndex === this.tryAgainSegmentIndex) {
+              // Try Again scenario
+              this.resultDiv.innerHTML = this.tryAgainMessage;
+              this.resultDiv.style.display = 'block';
+              
+              this.isSpinning = false;
+              this.hasSpun = true;
+              this.spinBtn.style.display = 'none';
+            } else {
+              // Prize Won scenario
+              this.resultDiv.innerHTML = `{{ block.settings.result_text | replace: '[prize]', '<span class="target"></span>' }}`;
+              const targetSpan = this.resultDiv.querySelector('.target');
+              if (targetSpan) targetSpan.textContent = this.prizeWon;
+              this.resultDiv.style.display = 'block';
+              
+              this.isSpinning = false;
+              this.hasSpun = true;
+              this.spinBtn.style.display = 'none';
+
+              // Show form and scroll it into view
+              setTimeout(() => {
+                this.emailForm.classList.add('show');
+                this.emailForm.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+              }, 500);
+            }
           }
         };
 
@@ -795,14 +814,42 @@
     },
     {
       "type": "header",
-      "content": "Email input"
+      "content": "Result Settings"
     },
     {
       "type": "richtext",
       "id": "result_text",
-      "label": "Result text",
+      "label": "Win text",
       "default": "<p>🎉 You won: <strong>[prize]</strong>!</p>",
       "info": "Use [prize] where you want the winning text to appear."
+    },
+    {
+      "type": "header",
+      "content": "Try Again Settings"
+    },
+    {
+      "type": "select",
+      "id": "try_again_segment",
+      "label": "Which segment is 'Try Again'?",
+      "options": [
+        { "value": "1", "label": "Segment 1" },
+        { "value": "2", "label": "Segment 2" },
+        { "value": "3", "label": "Segment 3" },
+        { "value": "4", "label": "Segment 4" },
+        { "value": "5", "label": "Segment 5" },
+        { "value": "6", "label": "Segment 6" }
+      ],
+      "default": "4"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "try_again_message",
+      "label": "Try again message",
+      "default": "Oops! Better luck next time."
+    },
+    {
+      "type": "header",
+      "content": "Email input"
     },
     {
       "type": "text",
