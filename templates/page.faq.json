@@ -1,0 +1,485 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "main": {
+      "type": "main-page",
+      "blocks": {
+        "heading": {
+          "type": "text",
+          "name": "Title",
+          "settings": {
+            "text": "<h1>{{ closest.page.title }}</h1>",
+            "width": "100%",
+            "max_width": "normal",
+            "alignment": "left",
+            "type_preset": "h2",
+            "font": "var(--font-primary--family)",
+            "font_size": "",
+            "enable_mobile_size": false,
+            "mobile_font_size": "1rem",
+            "line_height": "normal",
+            "letter_spacing": "normal",
+            "case": "none",
+            "wrap": "pretty",
+            "color": "",
+            "background": false,
+            "background_color": "#00000026",
+            "corner_radius": 0,
+            "padding-block-start": 0,
+            "padding-block-end": 0,
+            "padding-inline-start": 0,
+            "padding-inline-end": 0,
+            "custom_mobile_padding": false,
+            "mobile-padding-block-start": 0,
+            "mobile-padding-block-end": 0,
+            "mobile-padding-inline-start": 0,
+            "mobile-padding-inline-end": 0
+          },
+          "blocks": {}
+        },
+        "page-content": {
+          "type": "page-content",
+          "settings": {},
+          "blocks": {}
+        }
+      },
+      "block_order": [
+        "heading",
+        "page-content"
+      ],
+      "disabled": true,
+      "settings": {
+        "content_direction": "column",
+        "gap": 32,
+        "color_scheme": "",
+        "padding-block-start": 40,
+        "padding-block-end": 80
+      }
+    },
+    "section_nJ3AxD": {
+      "type": "section",
+      "blocks": {
+        "text_wfGeWy": {
+          "type": "text",
+          "name": "t:names.heading",
+          "settings": {
+            "text": "<h3>Frequently Asked Questions</h3>",
+            "width": "fit-content",
+            "max_width": "normal",
+            "alignment": "left",
+            "type_preset": "h2",
+            "font": "var(--font-body--family)",
+            "font_size": "1rem",
+            "enable_mobile_size": false,
+            "mobile_font_size": "1rem",
+            "line_height": "normal",
+            "letter_spacing": "normal",
+            "case": "none",
+            "wrap": "pretty",
+            "color": "var(--color-foreground)",
+            "background": false,
+            "background_color": "#00000026",
+            "corner_radius": 0,
+            "padding-block-start": 0,
+            "padding-block-end": 0,
+            "padding-inline-start": 0,
+            "padding-inline-end": 0,
+            "custom_mobile_padding": false,
+            "mobile-padding-block-start": 0,
+            "mobile-padding-block-end": 0,
+            "mobile-padding-inline-start": 0,
+            "mobile-padding-inline-end": 0
+          },
+          "blocks": {}
+        },
+        "accordion_nz4YYX": {
+          "type": "accordion",
+          "name": "t:names.accordion",
+          "settings": {
+            "icon": "plus",
+            "dividers": true,
+            "type_preset": "h3",
+            "inherit_color_scheme": true,
+            "color_scheme": "",
+            "border": "none",
+            "border_width": 1,
+            "border_opacity": 100,
+            "border_radius": 0,
+            "padding-block-start": 0,
+            "padding-block-end": 0,
+            "padding-inline-start": 0,
+            "padding-inline-end": 0
+          },
+          "blocks": {
+            "accordion_row_dmrjJb": {
+              "type": "_accordion-row",
+              "name": "t:names.accordion_row",
+              "settings": {
+                "heading": "Product",
+                "open_by_default": true,
+                "icon": "none",
+                "width": 20
+              },
+              "blocks": {
+                "accordion_row_dynamic_TMkpgz": {
+                  "type": "_accordion-row-dynamic",
+                  "name": "Accordion row (dynamic)",
+                  "settings": {
+                    "heading": "What types of cups do you offer?",
+                    "content": "<p>We carry 32 oz tumblers, 16 oz and 20 oz glass cups, 17 oz glass mugs, 40 oz plastic tumblers, and 40 oz glass tumblers. Each style is made with durable, non-toxic materials.</p>",
+                    "open_by_default": false,
+                    "icon": "none",
+                    "width": 20,
+                    "add_color_scheme": true,
+                    "color_scheme": ""
+                  },
+                  "blocks": {}
+                },
+                "accordion_row_dynamic_WfNMEM": {
+                  "type": "_accordion-row-dynamic",
+                  "name": "Accordion row (dynamic)",
+                  "settings": {
+                    "heading": "What are your cups made from?",
+                    "content": "<p>Glass options are made from lead-free borosilicate glass. Plastic tumblers are BPA-free and shatter-resistant. Designs are printed with UV-cured DTF for a permanent, glossy finish that won’t peel or fade.</p>",
+                    "open_by_default": false,
+                    "icon": "none",
+                    "width": 20,
+                    "add_color_scheme": true,
+                    "color_scheme": ""
+                  },
+                  "blocks": {}
+                },
+                "accordion_row_dynamic_bAJXY9": {
+                  "type": "_accordion-row-dynamic",
+                  "name": "Accordion row (dynamic)",
+                  "settings": {
+                    "heading": "Do all cups come with lids?",
+                    "content": "<p>Most styles include a lid. Options vary by product: bamboo lids (hand-wash only) or dishwasher-safe acrylic lids. Check the individual product listing for details.</p>",
+                    "open_by_default": false,
+                    "icon": "none",
+                    "width": 20,
+                    "add_color_scheme": true,
+                    "color_scheme": ""
+                  },
+                  "blocks": {}
+                }
+              },
+              "block_order": [
+                "accordion_row_dynamic_TMkpgz",
+                "accordion_row_dynamic_WfNMEM",
+                "accordion_row_dynamic_bAJXY9"
+              ]
+            },
+            "accordion_row_FqVWxV": {
+              "type": "_accordion-row",
+              "name": "t:names.accordion_row",
+              "settings": {
+                "heading": "Orders & Customization",
+                "open_by_default": false,
+                "icon": "none",
+                "width": 20
+              },
+              "blocks": {
+                "accordion_row_dynamic_MBdzWP": {
+                  "type": "_accordion-row-dynamic",
+                  "name": "Accordion row (dynamic)",
+                  "settings": {
+                    "heading": "Can I personalize any cup?",
+                    "content": "<p>Personalization is available on select styles. If you see a “personalize” option on the product page, you can add a name or design. For custom requests, email <a href=\"mailto:support@sipsiphooraydesign.com\" title=\"mailto:support@sipsiphooraydesign.com\">support@sipsiphooraydesign.com</a>.</p>",
+                    "open_by_default": false,
+                    "icon": "none",
+                    "width": 20,
+                    "add_color_scheme": true,
+                    "color_scheme": ""
+                  },
+                  "blocks": {}
+                },
+                "accordion_row_dynamic_CVjF88": {
+                  "type": "_accordion-row-dynamic",
+                  "name": "Accordion row (dynamic)",
+                  "settings": {
+                    "heading": "What if I need to change or cancel my order?",
+                    "content": "<p>Contact us within 12 hours of placing your order. After that, production begins and changes can’t be made.</p>",
+                    "open_by_default": false,
+                    "icon": "none",
+                    "width": 20,
+                    "add_color_scheme": true,
+                    "color_scheme": ""
+                  },
+                  "blocks": {}
+                },
+                "accordion_row_dynamic_q9dJr8": {
+                  "type": "_accordion-row-dynamic",
+                  "name": "Accordion row (dynamic)",
+                  "settings": {
+                    "heading": "Do you offer gift messages?",
+                    "content": "<p>Yes. You can add a note at checkout and we’ll include it in the package.</p>",
+                    "open_by_default": false,
+                    "icon": "none",
+                    "width": 20,
+                    "add_color_scheme": true,
+                    "color_scheme": ""
+                  },
+                  "blocks": {}
+                }
+              },
+              "block_order": [
+                "accordion_row_dynamic_MBdzWP",
+                "accordion_row_dynamic_CVjF88",
+                "accordion_row_dynamic_q9dJr8"
+              ]
+            },
+            "accordion_row_cW3ap3": {
+              "type": "_accordion-row",
+              "name": "t:names.accordion_row",
+              "settings": {
+                "heading": "Shipping & Delivery",
+                "open_by_default": false,
+                "icon": "none",
+                "width": 20
+              },
+              "blocks": {
+                "accordion_row_dynamic_4zBJLt": {
+                  "type": "_accordion-row-dynamic",
+                  "name": "Accordion row (dynamic)",
+                  "settings": {
+                    "heading": "Where do you ship from?",
+                    "content": "<p>All orders are handmade and shipped from Louisiana, USA.</p>",
+                    "open_by_default": false,
+                    "icon": "none",
+                    "width": 20,
+                    "add_color_scheme": true,
+                    "color_scheme": ""
+                  },
+                  "blocks": {}
+                },
+                "accordion_row_dynamic_AR37Nh": {
+                  "type": "_accordion-row-dynamic",
+                  "name": "Accordion row (dynamic)",
+                  "settings": {
+                    "heading": "Do you ship internationally?",
+                    "content": "<p>Yes. We ship worldwide via global post. Delivery takes 3 to 5 weeks, and buyers are responsible for any customs fees or duties.</p>",
+                    "open_by_default": false,
+                    "icon": "none",
+                    "width": 20,
+                    "add_color_scheme": true,
+                    "color_scheme": ""
+                  },
+                  "blocks": {}
+                },
+                "accordion_row_dynamic_FeLgBJ": {
+                  "type": "_accordion-row-dynamic",
+                  "name": "Accordion row (dynamic)",
+                  "settings": {
+                    "heading": "How long does shipping take in the US?",
+                    "content": "<p>Processing takes 1 to 3 business days, then standard shipping is 3 to 5 days. Holidays may cause slight delays.</p>",
+                    "open_by_default": false,
+                    "icon": "none",
+                    "width": 20,
+                    "add_color_scheme": true,
+                    "color_scheme": ""
+                  },
+                  "blocks": {}
+                }
+              },
+              "block_order": [
+                "accordion_row_dynamic_4zBJLt",
+                "accordion_row_dynamic_AR37Nh",
+                "accordion_row_dynamic_FeLgBJ"
+              ]
+            },
+            "accordion_row_gpwhte": {
+              "type": "_accordion-row",
+              "name": "t:names.accordion_row",
+              "settings": {
+                "heading": "Returns & Exchanges",
+                "open_by_default": false,
+                "icon": "none",
+                "width": 20
+              },
+              "blocks": {
+                "accordion_row_dynamic_a4yKqV": {
+                  "type": "_accordion-row-dynamic",
+                  "name": "Accordion row (dynamic)",
+                  "settings": {
+                    "heading": "What is your return policy?",
+                    "content": "<p>Non-personalized items can be returned within 7 days of delivery. Personalized items are final sale unless damaged or defective.</p>",
+                    "open_by_default": false,
+                    "icon": "none",
+                    "width": 20,
+                    "add_color_scheme": true,
+                    "color_scheme": ""
+                  },
+                  "blocks": {}
+                },
+                "accordion_row_dynamic_jnGVhV": {
+                  "type": "_accordion-row-dynamic",
+                  "name": "Accordion row (dynamic)",
+                  "settings": {
+                    "heading": "My order arrived damaged. What should I do?",
+                    "content": "<p>We’ll replace or refund any broken or defective items. Use our Return Portal or email <a href=\"mailto:support@sipsiphooraydesign.com\" title=\"mailto:support@sipsiphooraydesign.com\">support@sipsiphooraydesign.com</a> with photos.</p>",
+                    "open_by_default": false,
+                    "icon": "none",
+                    "width": 20,
+                    "add_color_scheme": true,
+                    "color_scheme": ""
+                  },
+                  "blocks": {}
+                },
+                "accordion_row_dynamic_pLfkb3": {
+                  "type": "_accordion-row-dynamic",
+                  "name": "Accordion row (dynamic)",
+                  "settings": {
+                    "heading": "How do I start a return?",
+                    "content": "<p>Visit our <a href=\"/policies/refund-policy\" title=\"Refund Policy\">Return Portal</a> to submit a request. Once your return is received, we’ll process your refund quickly.</p>",
+                    "open_by_default": false,
+                    "icon": "none",
+                    "width": 20,
+                    "add_color_scheme": true,
+                    "color_scheme": ""
+                  },
+                  "blocks": {}
+                }
+              },
+              "block_order": [
+                "accordion_row_dynamic_a4yKqV",
+                "accordion_row_dynamic_jnGVhV",
+                "accordion_row_dynamic_pLfkb3"
+              ]
+            },
+            "accordion_row_VbachH": {
+              "type": "_accordion-row",
+              "name": "t:names.accordion_row",
+              "settings": {
+                "heading": "Care Instructions",
+                "open_by_default": false,
+                "icon": "none",
+                "width": 20
+              },
+              "blocks": {
+                "accordion_row_dynamic_wtkYjQ": {
+                  "type": "_accordion-row-dynamic",
+                  "name": "Accordion row (dynamic)",
+                  "settings": {
+                    "heading": "How do I care for glass cups and tumblers?",
+                    "content": "<p>Hand wash with a soft sponge to keep the design vibrant. Non-personalized glass styles are dishwasher safe, but hand washing is still recommended for longevity.</p>",
+                    "open_by_default": false,
+                    "icon": "none",
+                    "width": 20,
+                    "add_color_scheme": true,
+                    "color_scheme": ""
+                  },
+                  "blocks": {}
+                },
+                "accordion_row_dynamic_6cMBAg": {
+                  "type": "_accordion-row-dynamic",
+                  "name": "Accordion row (dynamic)",
+                  "settings": {
+                    "heading": "How do I care for plastic tumblers?",
+                    "content": "<p>Hand wash with mild soap. Avoid abrasive scrubbers and high heat (like dishwashers) to prevent warping or fading.</p>",
+                    "open_by_default": false,
+                    "icon": "none",
+                    "width": 20,
+                    "add_color_scheme": true,
+                    "color_scheme": ""
+                  },
+                  "blocks": {}
+                },
+                "accordion_row_dynamic_qUcdR4": {
+                  "type": "_accordion-row-dynamic",
+                  "name": "Accordion row (dynamic)",
+                  "settings": {
+                    "heading": "How do I care for bamboo lids?",
+                    "content": "<p>Hand wash only and dry completely. Do not soak or leave the lid on for more than 24 hours to avoid moisture buildup.</p>",
+                    "open_by_default": false,
+                    "icon": "none",
+                    "width": 20,
+                    "add_color_scheme": true,
+                    "color_scheme": ""
+                  },
+                  "blocks": {}
+                }
+              },
+              "block_order": [
+                "accordion_row_dynamic_wtkYjQ",
+                "accordion_row_dynamic_6cMBAg",
+                "accordion_row_dynamic_qUcdR4"
+              ]
+            }
+          },
+          "block_order": [
+            "accordion_row_dmrjJb",
+            "accordion_row_FqVWxV",
+            "accordion_row_cW3ap3",
+            "accordion_row_gpwhte",
+            "accordion_row_VbachH"
+          ]
+        }
+      },
+      "block_order": [
+        "text_wfGeWy",
+        "accordion_nz4YYX"
+      ],
+      "custom_css": [
+        ".section--page-narrow {--page-width: calc(62rem + (var(--page-margin) * 2)) !important;}",
+        ".accordion summary {padding-block: var(--padding-lg);}",
+        ".details-content:has(accordion-custom) {padding-inline: var(--padding-md); padding-block-start: 0;}",
+        ".details-content .details__header {font-size: var(--font-h5--size); font-weight: var(--font-h5--weight);}",
+        ".details-content accordion-custom:first-child .details {border-top: 0;}",
+        ".details-content accordion-custom .details {border-bottom: 0;}"
+      ],
+      "name": "t:names.faq_section",
+      "settings": {
+        "content_direction": "column",
+        "vertical_on_mobile": true,
+        "reverse_on_mobile": false,
+        "horizontal_alignment": "flex-start",
+        "vertical_alignment": "center",
+        "align_baseline": false,
+        "horizontal_alignment_flex_direction_column": "flex-start",
+        "vertical_alignment_flex_direction_column": "center",
+        "gap": 32,
+        "enable_mobile_gap": false,
+        "mobile_gap": 12,
+        "section_width": "page-narrow",
+        "full_width_on_mobile": false,
+        "section_height": "",
+        "section_height_custom": 50,
+        "color_scheme": "",
+        "background_media": "none",
+        "video_position": "cover",
+        "background_image_position": "cover",
+        "border": "none",
+        "border_width": 1,
+        "border_opacity": 100,
+        "border_radius": 0,
+        "toggle_overlay": false,
+        "overlay_color": "#00000026",
+        "overlay_style": "solid",
+        "gradient_direction": "to top",
+        "padding-block-start": 48,
+        "padding-block-end": 48,
+        "custom_mobile_padding": false,
+        "mobile-padding-block-start": 0,
+        "mobile-padding-block-end": 0,
+        "mobile-padding-inline-start": 0,
+        "mobile-padding-inline-end": 0,
+        "css_class": "",
+        "add_section_id": false,
+        "section_id": ""
+      }
+    }
+  },
+  "order": [
+    "main",
+    "section_nJ3AxD"
+  ]
+}
