@@ -2507,6 +2507,14 @@
         "text_J9DqYz",
         "accordion_KAam6G"
       ],
+      "custom_css": [
+        ".section--page-narrow {--page-width: calc(62rem + (var(--page-margin) * 2)) !important;}",
+        ".accordion summary {padding-block: var(--padding-lg);}",
+        ".details-content:has(accordion-custom) {padding-inline: var(--padding-md); padding-block-start: 0;}",
+        ".details-content .details__header {font-size: var(--font-h5--size); font-weight: var(--font-h5--weight);}",
+        ".details-content accordion-custom:first-child .details {border-top: 0;}",
+        ".details-content accordion-custom .details {border-bottom: 0;}"
+      ],
       "name": "t:names.faq_section",
       "settings": {
         "content_direction": "column",

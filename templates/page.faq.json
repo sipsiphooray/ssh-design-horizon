@@ -406,12 +406,86 @@
                     "color_scheme": ""
                   },
                   "blocks": {}
+                },
+                "accordion_row_dynamic_gkHYad": {
+                  "type": "_accordion-row-dynamic",
+                  "name": "Accordion row (dynamic)",
+                  "settings": {
+                    "heading": "Can I use these cups for hot drinks?",
+                    "content": "<p>Glass cups and mugs are heat-resistant and safe for warm drinks. Plastic tumblers are better suited for cold or iced beverages.</p>",
+                    "open_by_default": false,
+                    "icon": "none",
+                    "width": 20,
+                    "add_color_scheme": true,
+                    "color_scheme": ""
+                  },
+                  "blocks": {}
                 }
               },
               "block_order": [
                 "accordion_row_dynamic_wtkYjQ",
                 "accordion_row_dynamic_6cMBAg",
-                "accordion_row_dynamic_qUcdR4"
+                "accordion_row_dynamic_qUcdR4",
+                "accordion_row_dynamic_gkHYad"
+              ]
+            },
+            "accordion_row_WP97eq": {
+              "type": "_accordion-row",
+              "name": "t:names.accordion_row",
+              "settings": {
+                "heading": "Promotions & Discounts",
+                "open_by_default": false,
+                "icon": "none",
+                "width": 20
+              },
+              "blocks": {
+                "accordion_row_dynamic_QnUBTz": {
+                  "type": "_accordion-row-dynamic",
+                  "name": "Accordion row (dynamic)",
+                  "settings": {
+                    "heading": "Can I combine my new customer discount with free shipping?",
+                    "content": "<p>Discounts can’t be combined. Use whichever gives you the better savings at checkout.</p>",
+                    "open_by_default": false,
+                    "icon": "none",
+                    "width": 20,
+                    "add_color_scheme": true,
+                    "color_scheme": ""
+                  },
+                  "blocks": {}
+                },
+                "accordion_row_dynamic_nBPAeh": {
+                  "type": "_accordion-row-dynamic",
+                  "name": "Accordion row (dynamic)",
+                  "settings": {
+                    "heading": "What qualifies for free shipping?",
+                    "content": "<p>Orders over $40 ship free within the US.</p>",
+                    "open_by_default": false,
+                    "icon": "none",
+                    "width": 20,
+                    "add_color_scheme": true,
+                    "color_scheme": ""
+                  },
+                  "blocks": {}
+                },
+                "accordion_row_dynamic_ynDCyf": {
+                  "type": "_accordion-row-dynamic",
+                  "name": "Accordion row (dynamic)",
+                  "settings": {
+                    "heading": "Do you run sales often?",
+                    "content": "<p>Yes. We launch fresh collections and run monthly promotions. Sign up for emails to stay updated.</p>",
+                    "open_by_default": false,
+                    "icon": "none",
+                    "width": 20,
+                    "add_color_scheme": true,
+                    "color_scheme": ""
+                  },
+                  "blocks": {}
+                }
+              },
+              "block_order": [
+                "accordion_row_dynamic_QnUBTz",
+                "accordion_row_dynamic_nBPAeh",
+                "accordion_row_dynamic_ynDCyf"
               ]
             }
           },
@@ -420,7 +494,8 @@
             "accordion_row_FqVWxV",
             "accordion_row_cW3ap3",
             "accordion_row_gpwhte",
-            "accordion_row_VbachH"
+            "accordion_row_VbachH",
+            "accordion_row_WP97eq"
           ]
         }
       },
