@@ -328,7 +328,7 @@
                 "overlay_style": "solid",
                 "gradient_direction": "to top",
                 "padding-block-start": 24,
-                "padding-block-end": 24,
+                "padding-block-end": 0,
                 "padding-inline-start": 0,
                 "padding-inline-end": 0,
                 "custom_mobile_padding": false,
@@ -397,8 +397,8 @@
                     "max_width": "normal",
                     "alignment": "left",
                     "type_preset": "custom",
-                    "font": "var(--font-subheading--family)",
-                    "font_size": "0.9375rem",
+                    "font": "var(--font-body--family)",
+                    "font_size": "1.125rem",
                     "enable_mobile_size": false,
                     "mobile_font_size": "1rem",
                     "line_height": "normal",
@@ -517,7 +517,7 @@
                 "overlay_style": "solid",
                 "gradient_direction": "to top",
                 "padding-block-start": 24,
-                "padding-block-end": 24,
+                "padding-block-end": 0,
                 "padding-inline-start": 0,
                 "padding-inline-end": 0,
                 "custom_mobile_padding": false,
@@ -586,8 +586,8 @@
                     "max_width": "normal",
                     "alignment": "left",
                     "type_preset": "custom",
-                    "font": "var(--font-subheading--family)",
-                    "font_size": "0.9375rem",
+                    "font": "var(--font-body--family)",
+                    "font_size": "1.125rem",
                     "enable_mobile_size": false,
                     "mobile_font_size": "1rem",
                     "line_height": "normal",
@@ -706,7 +706,7 @@
                 "overlay_style": "solid",
                 "gradient_direction": "to top",
                 "padding-block-start": 24,
-                "padding-block-end": 24,
+                "padding-block-end": 0,
                 "padding-inline-start": 0,
                 "padding-inline-end": 0,
                 "custom_mobile_padding": false,
@@ -775,8 +775,8 @@
                     "max_width": "normal",
                     "alignment": "left",
                     "type_preset": "custom",
-                    "font": "var(--font-subheading--family)",
-                    "font_size": "0.9375rem",
+                    "font": "var(--font-body--family)",
+                    "font_size": "1.125rem",
                     "enable_mobile_size": false,
                     "mobile_font_size": "1rem",
                     "line_height": "normal",
@@ -902,11 +902,97 @@
         "add_section_id": false,
         "section_id": ""
       }
+    },
+    "timeline_icons_gpBbdM": {
+      "type": "timeline-icons",
+      "blocks": {
+        "step_HA8aCb": {
+          "type": "step",
+          "settings": {
+            "icon": "heart",
+            "heading": "We partner with a cause",
+            "text": "<p>Each month, we connect with a new charity or family.</p>"
+          }
+        },
+        "step_U6p6Xq": {
+          "type": "step",
+          "settings": {
+            "icon": "map_pin",
+            "image_upload": "shopify://shop_images/give-icon_2x_f35416f1-ed1d-4420-b1cc-e92d6ac258de.png",
+            "heading": "You sip, we give",
+            "text": "<p>Every time you make a purchase, we set aside 10% of profits.</p>"
+          }
+        },
+        "step_YzRkbc": {
+          "type": "step",
+          "settings": {
+            "icon": "gift",
+            "image_upload": "shopify://shop_images/gift_2x_08791f2f-1269-4978-8b05-50f27615dca9.png",
+            "heading": "Your purchase creates change",
+            "text": "<p>We send 10% of profits to the chosen recipient each month.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "step_HA8aCb",
+        "step_U6p6Xq",
+        "step_YzRkbc"
+      ],
+      "name": "Timeline (icons)",
+      "settings": {
+        "heading": "See how your purchase makes a real impact, every day",
+        "subheading": "<p>With every sip, you’re not just treating yourself, you’re uplifting someone in need. Check out this month’s featured cause and join us in making a difference, one drink at a time. 🖤</p>",
+        "marker_size": 56,
+        "icon_size": 22,
+        "line_thickness": 8,
+        "line_color": "#fbe1ec",
+        "marker_background": "#f3eeea",
+        "marker_border_width": 0,
+        "marker_border_color": "#2f2f2f",
+        "content_direction": "column",
+        "vertical_on_mobile": true,
+        "reverse_on_mobile": false,
+        "horizontal_alignment": "flex-start",
+        "vertical_alignment": "center",
+        "align_baseline": false,
+        "horizontal_alignment_flex_direction_column": "flex-start",
+        "vertical_alignment_flex_direction_column": "center",
+        "gap": 12,
+        "enable_mobile_gap": false,
+        "mobile_gap": 12,
+        "section_width": "page-narrow",
+        "full_width_on_mobile": false,
+        "section_height": "",
+        "section_height_custom": 50,
+        "color_scheme": "",
+        "background_media": "none",
+        "video_position": "cover",
+        "background_image_position": "cover",
+        "border": "none",
+        "border_width": 1,
+        "border_opacity": 100,
+        "border_radius": 0,
+        "toggle_overlay": false,
+        "overlay_color": "#00000026",
+        "overlay_style": "solid",
+        "gradient_direction": "to top",
+        "padding-block-start": 32,
+        "padding-block-end": 80,
+        "custom_mobile_padding": false,
+        "mobile-padding-block-start": 0,
+        "mobile-padding-block-end": 0,
+        "mobile-padding-inline-start": 0,
+        "mobile-padding-inline-end": 0,
+        "css_class": "",
+        "add_section_id": false,
+        "section_id": ""
+      }
     }
   },
   "order": [
     "main",
     "section_BbX3RV",
-    "grid_section_BNnAFp"
+    "grid_section_BNnAFp",
+    "timeline_icons_gpBbdM"
   ]
 }
