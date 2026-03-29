@@ -511,7 +511,7 @@ details {
 }
 
 .cart-totals cart-note {
-    margin-top: calc(-1 * var(--margin-sm));
+    margin-top: calc(-1 * var(--margin-lg));
 }
 
 .cart-discount__label {

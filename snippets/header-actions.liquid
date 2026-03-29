@@ -202,15 +202,14 @@
                 </button>
               </div>
 
-              {% if settings.show_shipping_bar == true %}
-                {% render 'cart-shipping-bar' %}
-              {% endif %}
-
               <scroll-hint
                 class="cart-drawer__content"
                 aria-label="{{ 'accessibility.cart' | t }}"
                 style="--header-height: 60px;"
               >
+                {% if settings.show_shipping_bar == true %}
+                  {% render 'cart-shipping-bar' %}
+                {% endif %}
                 <scroll-hint
                   class="cart-drawer__items"
                 >
