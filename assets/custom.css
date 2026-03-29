@@ -164,13 +164,13 @@ summary,.menu-drawer__back-button {
     grid-template-columns: repeat(var(--menu-content-columns-desktop), 1fr);
 }
 
-.group-block .background-image-container img, .zoom-on-hover img {
+.zoom-on-hover img {
     transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter, -webkit-backdrop-filter;
     transition-timing-function: cubic-bezier(.4, 0, .2, 1);
     transition-duration: .3s;
 }
 
-.group-block:hover .background-image-container img, .group-block__link:hover~.group-block-content .zoom-on-hover img, .zoom-on-hover:hover img,
+.group-block__link:hover~.group-block-content .zoom-on-hover img, .zoom-on-hover:hover img,
 .featured-blog-posts-card__link:hover ~ .featured-blog-posts-card__inner .zoom-on-hover img {
     transform: scale(1.03);
 }
