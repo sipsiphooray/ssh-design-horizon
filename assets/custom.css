@@ -22,6 +22,7 @@ slideshow-controls.carousel-controls .icon-play {
     --letter-spacing--heading-tight: -0.05em !important;
     --drawer-width: 100vw !important;
     --submenu-animation-speed: 0s !important;
+    --menu-child-font-color: rgb(var(--color-foreground-rgb) / 1) !important;
 }
 
 
