@@ -640,6 +640,12 @@ body:has(.overlay.active) .sticky-add-to-cart__bar {
     display: none;
 }
 
+.accordion .text-block h2 {
+    font-family: var(--font-h3--family);
+    font-size: var(--font-h3--size);
+    line-height: var(--line-height--display-loose);
+}
+
 @media screen and (min-width: 60em) {
     :root {
         --section-height-large: 90svh !important;
