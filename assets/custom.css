@@ -492,7 +492,6 @@ details {
     display: flex;
     flex-direction: column;
     gap: var(--gap-md);
-    margin-bottom: var(--margin-md);
 }
 
 [data-shipping-protection] cart-quantity-selector-component {
