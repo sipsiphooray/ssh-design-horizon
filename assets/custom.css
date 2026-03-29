@@ -22,7 +22,6 @@ slideshow-controls.carousel-controls .icon-play {
     --letter-spacing--heading-tight: -0.05em !important;
     --drawer-width: 100vw !important;
     --submenu-animation-speed: 0s !important;
-    --menu-child-font-color: rgb(var(--color-foreground-rgb) / 1) !important;
 }
 
 
@@ -44,7 +43,7 @@ a.size-style.link:after {
     background: currentColor;
 }
 
-.menu-list__submenu-inner {
+.menu-list__submenu-inner,.menu-drawer__navigation {
     --menu-parent-font-size: var(--menu-font-sm--size) !important;
     --menu-parent-font-family: var(--font-subheading--family) !important;
     --menu-parent-font-weight: var(--font-subheading--weight) !important;
