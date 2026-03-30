@@ -683,6 +683,11 @@ body:has(.overlay.active) .sticky-add-to-cart__bar {
         padding-right: var(--gap-2xs);
         grid-area: rightA !important;
     }
+
+    header-actions:has(.xb-wishlist-header-auto-container) .account-button {
+        margin-inline-end: calc(var(--gap-sm) * -1);
+    }
+
     .header-logo {
         justify-content: flex-start !important;
         margin-inline: 0 !important;
