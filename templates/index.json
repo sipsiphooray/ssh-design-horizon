@@ -51,6 +51,14 @@
             "text": "Coasters",
             "link": "shopify://collections/coasters"
           }
+        },
+        "item_KKdwpd": {
+          "type": "item",
+          "settings": {
+            "image": "shopify://shop_images/apparel.png",
+            "text": "Apparels",
+            "link": "shopify://collections/apparel"
+          }
         }
       },
       "block_order": [
@@ -58,7 +66,8 @@
         "item_NTP6AR",
         "item_zdzAU7",
         "item_74XFCd",
-        "item_FRYFdQ"
+        "item_FRYFdQ",
+        "item_KKdwpd"
       ],
       "custom_css": [
         ".custom-section-background {display: none;}",
