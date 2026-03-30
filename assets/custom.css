@@ -681,6 +681,7 @@ body:has(.overlay.active) .sticky-add-to-cart__bar {
     }
     #header-component[data-menu-style=drawer] .header__columns .search-action {
         padding-right: var(--gap-2xs);
+        grid-area: rightA !important;
     }
     .header-logo {
         justify-content: flex-start !important;
