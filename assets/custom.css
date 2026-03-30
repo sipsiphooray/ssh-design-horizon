@@ -702,6 +702,11 @@ body:has(.overlay.active) .sticky-add-to-cart__bar {
     .menu-drawer-container .header__icon--summary,.menu-drawer__close-button {
         padding: 0 !important;
     }
+
+    shopify-account .account-button__icon {
+        width: auto !important;
+        height: var(--icon-size-sm) !important;
+    }
 }
 
 @media (max-width: 749px) {
