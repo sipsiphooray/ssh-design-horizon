@@ -110,7 +110,7 @@ a.size-style.link:after {
 }
 
 .menu-open > .menu-drawer__close-button {
-    display: block !important;
+    display: flex !important;
 }
 
 .menu-open > .header__icon--summary {
@@ -692,6 +692,15 @@ body:has(.overlay.active) .sticky-add-to-cart__bar {
         justify-content: flex-start !important;
         margin-inline: 0 !important;
         margin-inline-start: var(--page-margin) !important;
+    }
+
+    .header__icon--menu, .menu-drawer__close-button {
+        height: var(--button-size) !important;
+        width: var(--button-size) !important;
+    }
+
+    .menu-drawer-container .header__icon--summary,.menu-drawer__close-button {
+        padding: 0 !important;
     }
 }
 
