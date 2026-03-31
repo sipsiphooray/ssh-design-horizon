@@ -646,6 +646,14 @@ body:has(.overlay.active) .sticky-add-to-cart__bar {
     line-height: var(--line-height--display-loose);
 }
 
+.carousel-content slideshow-slides > .card {
+    scroll-snap-align: center;
+    view-timeline-name: var(--slideshow-timeline);
+    view-timeline-axis: inline;
+    content-visibility: auto;
+    contain-intrinsic-size: auto none;
+}
+
 @media screen and (min-width: 60em) {
     :root {
         --section-height-large: 90svh !important;
