@@ -81,6 +81,10 @@
 
   .carousel-content slideshow-slides > .card {
     flex: 0 0 auto;
+    view-timeline-name: var(--slideshow-timeline);
+    view-timeline-axis: inline;
+    content-visibility: auto;
+    contain-intrinsic-size: auto none;
     width: calc(
       (100% - (var(--carousel-gap, 8px) * (var(--carousel-mobile-columns, 2) - 1)) - var(--peek-next-slide-size, 0px)) /
         var(--carousel-mobile-columns, 2)
