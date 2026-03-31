@@ -17,7 +17,7 @@
           "settings": {
             "image": "shopify://shop_images/cup.png",
             "text": "Tumblers",
-            "link": "shopify://collections/32oz-40oz-tumblers"
+            "link": "shopify://collections/32oz-40oz-tumblers-remake"
           }
         },
         "item_NTP6AR": {
@@ -1386,10 +1386,10 @@
       "name": "t:names.collections_grid",
       "settings": {
         "collection_list": [
-          "st-patricks-day",
-          "coffee-crazy",
-          "grandma",
-          "new-sips"
+          "16oz-20oz-glass-cups",
+          "17oz-mugs",
+          "32oz-tumblers",
+          "40oz-plastic-tumblers-copy"
         ],
         "layout_type": "grid",
         "carousel_on_mobile": true,
