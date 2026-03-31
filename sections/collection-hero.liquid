@@ -463,6 +463,9 @@
     {% else %}
       --hero-min-height: var(--section-height-{{ section.settings.section_height }});
     {% endif %}
+    {% if section.settings.mobile_adapt_height != blank and section.settings.image_1_mobile != blank %}
+     --hero-mobile-image-height: {{ section.settings.image_1_mobile.aspect_ratio }};
+    {% endif %}
   "
   {% if request.visual_preview_mode %}
     data-shopify-visual-preview
@@ -552,6 +555,12 @@
   .hero {
     position: relative;
     min-height: calc(var(--hero-min-height) - var(--hero-height-offset));
+    
+    @media (max-width: 749px) {
+      &[style*="--hero-mobile-image-height"] {
+        min-height: calc(100vw / var(--hero-mobile-image-height));
+      }
+    }
   }
 
   .hero[data-shopify-visual-preview] {
@@ -1135,6 +1144,12 @@
         }
       ],
       "default": "medium"
+    },
+    {
+      "type": "checkbox",
+      "id": "mobile_adapt_height",
+      "label": "Adapt image height on mobile",
+      "default": false
     },
     {
       "type": "range",

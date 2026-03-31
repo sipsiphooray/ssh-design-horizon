@@ -152,7 +152,7 @@
       "custom_css": [
         ".hero:not(:has(.hero__media-grid)) {min-height: unset;}",
         "@media (min-width: 750px) {.h1 {--max-width--body-narrow: 11.75em; }}",
-        "@media (max-width: 749px) {{--section-height-medium: 20rem; } .hero__media-wrapper--desktop.hero__media-wrapper--mobile img {object-position: left; }}"
+        "@media (max-width: 749px) {.hero:not([style*=\"--hero-media-count-mobile: 1\"]) {--section-height-medium: 20rem; } .hero__media-wrapper--desktop.hero__media-wrapper--mobile img {object-position: left; }}"
       ],
       "name": "Collection Hero",
       "settings": {
@@ -176,6 +176,7 @@
         "gap": 16,
         "section_width": "page-width",
         "section_height": "medium",
+        "mobile_adapt_height": true,
         "section_height_custom": 50,
         "color_scheme": "scheme-738179cd-4e15-457b-be40-989a024001d6",
         "toggle_overlay": false,
