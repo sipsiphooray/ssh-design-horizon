@@ -663,12 +663,31 @@ body:has(.overlay.active) .sticky-add-to-cart__bar {
     contain-intrinsic-size: auto none;
 }
 
+/*
+ * Mega menu (desktop): widen + deepen the theme’s invisible ::after bridge on items with a submenu.
+ * Horizon keeps pointer on <li> via that flex ::after; extending width catches diagonal moves toward the panel.
+ * Negative margin-block on the submenu extends its hit area up without shifting visible content.
+ */
+@media screen and (min-width: 990px) {
+    .header-menu .menu-list__list-item:not([slot='overflow']):has(> .menu-list__submenu)::after {
+        flex-shrink: 0;
+        width: calc(100% + 2 * var(--gap-xl));
+        margin-inline: calc(-1 * var(--gap-xl));
+        height: calc(var(--header-padding) + var(--padding-lg) + var(--gap-md));
+        margin-bottom: calc(-1 * (var(--header-padding) + var(--padding-lg) + var(--gap-md)));
+    }
+
+    .header-menu .menu-list__list-item:not([slot='overflow']):has(> .menu-list__submenu) > .menu-list__submenu {
+        margin-block-start: calc(-1 * (var(--padding-lg) + var(--gap-md)));
+        padding-block-start: calc(var(--padding-lg) + var(--gap-md));
+    }
+}
+
 @media screen and (min-width: 60em) {
     :root {
         --section-height-large: 90svh !important;
     }
 }
-
 @media (min-width: 750px) {
     .product-card .layout-panel-flex>div:has(> [data-oke-star-rating]) {
         width: fit-content !important;
