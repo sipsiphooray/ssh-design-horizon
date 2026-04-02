@@ -1,6 +1,49 @@
 import { Component } from '@theme/component';
 import { ThemeEvents, PriceChangeEvent } from '@theme/events';
+import { onDocumentLoaded, onDocumentReady } from '@theme/utilities';
 
+/**
+ * @param {string} url
+ * @returns {string}
+ */
+function cssUrlValue(url) {
+  return `url(${JSON.stringify(url)})`;
+}
+
+/**
+ * @param {Element} menu
+ * @returns {string}
+ */
+function getFirstCardImageUrl(menu) {
+  const el = menu.querySelector('[data-card-image]');
+  if (!el) return '';
+  const url = el.getAttribute('data-card-image');
+  return url && url.trim() ? url.trim() : '';
+}
+
+/**
+ * @param {HTMLElement | null | undefined} canvas
+ * @param {string} url
+ */
+function setThumbnailCanvas(canvas, url) {
+  if (!canvas || !url) return;
+  canvas.style.setProperty('background-image', cssUrlValue(url));
+}
+
+function initMegaMenuThumbnails() {
+  document.querySelectorAll('.mega-menu').forEach((menu) => {
+    const canvas = /** @type {HTMLElement | null} */ (menu.querySelector('.thumbnail-hover-canvas'));
+    const url = getFirstCardImageUrl(menu);
+    setThumbnailCanvas(canvas, url);
+  });
+}
+
+initMegaMenuThumbnails();
+onDocumentReady(() => initMegaMenuThumbnails());
+onDocumentLoaded(() => initMegaMenuThumbnails());
+document.addEventListener(ThemeEvents.megaMenuHover, () => {
+  requestAnimationFrame(() => initMegaMenuThumbnails());
+});
 
 function scrollToHash() {
   const hash = window.location.hash; // "#faq"
@@ -31,38 +74,31 @@ scrollToHash();
 // Run on hash change
 window.addEventListener("hashchange", scrollToHash);
 
-
-// Set initial thumbnail from first [data-card-image] in each mega menu
-document.querySelectorAll('.mega-menu').forEach(menu => {
-  const firstImage = menu.querySelector('[data-card-image]');
-  const canvas = menu.querySelector('.thumbnail-hover-canvas');
-  if (firstImage && canvas) {
-    canvas.style.backgroundImage = `url('${firstImage.dataset.cardImage}')`;
-  }
-});
-
 // Handle hover updates
 document.addEventListener('mouseover', e => {
-  const card = e.target.closest('[data-card-image]');
+  const target = e.target;
+  if (!target) return;
+  const card = target.closest('[data-card-image]');
   if (!card) return;
   
   const menu = card.closest('.mega-menu');
   const canvas = menu?.querySelector('.thumbnail-hover-canvas');
-  if (canvas) {
-    canvas.style.backgroundImage = `url('${card.dataset.cardImage}')`;
+  const url = card.getAttribute('data-card-image');
+  if (canvas && url && url.trim()) {
+    setThumbnailCanvas(canvas, url.trim());
   }
 });
 
 // Reset to first image when leaving mega menu
 document.addEventListener('mouseout', e => {
-  const menu = e.target.closest('.mega-menu');
-  if (!menu || menu.contains(e.relatedTarget)) return;
+  const target = e.target;
+  if (!target) return;
+  const menu = target.closest('.mega-menu');
+  if (!menu || (e.relatedTarget && menu.contains(e.relatedTarget))) return;
   
-  const firstImage = menu.querySelector('[data-card-image]');
   const canvas = menu.querySelector('.thumbnail-hover-canvas');
-  if (firstImage && canvas) {
-    canvas.style.backgroundImage = `url('${firstImage.dataset.cardImage}')`;
-  }
+  const url = getFirstCardImageUrl(menu);
+  setThumbnailCanvas(canvas, url);
 });
 
 class VariantSelect extends Component {
