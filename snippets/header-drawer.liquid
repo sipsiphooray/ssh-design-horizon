@@ -363,7 +363,7 @@
                     >
                       <span class="menu-drawer__menu-item-text wrap-text">{{ link.title | escape }}</span>
                       <span class="svg-wrapper icon-caret icon-caret--forward">
-                        {{- 'icon-starburst.svg' | inline_asset_content -}}
+                        {{- 'icon-caret.svg' | inline_asset_content -}}
                       </span>
                     </summary>
                     <div
@@ -717,7 +717,7 @@
                     >
                       <span class="menu-drawer__menu-item-text wrap-text">{{ link.title | escape }}</span>
                       <span class="svg-wrapper icon-caret icon-caret--forward">
-                        {{- 'icon-starburst.svg' | inline_asset_content -}}
+                        {{- 'icon-caret.svg' | inline_asset_content -}}
                       </span>
                     </summary>
                     <div
@@ -777,7 +777,7 @@
                   <a
                     id="HeaderDrawer-{{ link.handle }}"
                     href="{{ link.url }}"
-                    class="menu-drawer__menu-item menu-drawer__menu-item--mainlist menu-drawer__animated-element focus-inset"
+                    class="menu-drawer__menu-item {% if block_settings.drawer_dividers %} menu-drawer__menu-container--divider{% endif %} menu-drawer__menu-item--mainlist menu-drawer__animated-element focus-inset"
                     {% if link.current %}
                       aria-current="page"
                     {% endif %}
@@ -874,7 +874,7 @@
                     {%- endif -%}
                   </div>
                   <span class="svg-wrapper icon-caret icon-caret--forward">
-                    {{- 'icon-starburst.svg' | inline_asset_content -}}
+                    {{- 'icon-caret.svg' | inline_asset_content -}}
                   </span>
                 </summary>
 
