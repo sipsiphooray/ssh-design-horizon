@@ -38,7 +38,7 @@
             "text_color": "#2b2b2b",
             "modal_border_radius": 0,
             "result_text": "<p>🎉 You won: <strong>[prize]</strong>!</p>",
-            "try_again_segment": "5",
+            "try_again_segment": "6",
             "try_again_message": "Oops! Better luck next time.",
             "email_placeholder": "Enter your email address",
             "input_border_color": "#2b2b2b",

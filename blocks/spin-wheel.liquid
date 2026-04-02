@@ -582,11 +582,21 @@
           if (progress < 1) {
             requestAnimationFrame(animate);
           } else {
-            this.currentRotation = this.currentRotation % (2 * Math.PI);
-            const segmentAngle = (2 * Math.PI) / this.segments.length;
-            const normalizedRotation = (2 * Math.PI - this.currentRotation) % (2 * Math.PI);
-            const winningIndex = Math.floor(normalizedRotation / segmentAngle) % this.segments.length;
-            
+            // Canvas: segment i spans local angles [i*seg, (i+1)*seg) clockwise from 3 o'clock.
+            // Pointer is fixed at the top = 3π/2 in the same angle system (0 = right, clockwise positive).
+            // After ctx.rotate(rotation), local angle φ appears at canvas angle φ + rotation.
+            // Under the pointer: φ + rotation ≡ 3π/2  →  φ = 3π/2 - rotation (mod 2π).
+            const TWO_PI = 2 * Math.PI;
+            let rotation = this.currentRotation % TWO_PI;
+            if (rotation < 0) rotation += TWO_PI;
+
+            const segmentAngle = TWO_PI / this.segments.length;
+            let phi = (1.5 * Math.PI - rotation) % TWO_PI;
+            if (phi < 0) phi += TWO_PI;
+
+            let winningIndex = Math.floor(phi / segmentAngle);
+            if (winningIndex >= this.segments.length) winningIndex = 0;
+
             this.prizeWon = this.segments[winningIndex].text;
             
             // Add email-active class to shrink canvas
