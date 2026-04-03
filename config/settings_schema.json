@@ -1779,6 +1779,20 @@
         "default": false
       },
       {
+        "type": "richtext",
+        "id": "cart_review_text",
+        "label": "Cart Review Text",
+        "default": "<p>Your order is protected for [price]</p>",
+        "visible_if": "{{ settings.cart_review == true }}"
+      },
+      {
+        "type": "text",
+        "id": "cart_review_name",
+        "label": "Cart Review Name",
+        "default": "John Doe",
+        "visible_if": "{{ settings.cart_review == true }}"
+      },
+      {
         "type": "header",
         "content": "Cart USP Texts"
       },

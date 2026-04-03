@@ -732,6 +732,33 @@ body:has(.overlay.active) .sticky-add-to-cart__bar {
     padding-block-start: var(--margin-sm) !important;
 }
 
+.cart-review {
+    text-align: center;
+    padding-block: var(--margin-sm);
+    border-block-start: 1px solid var(--color-border);
+    margin-block-start: var(--margin-sm);
+}
+
+.cart-review__name {
+    font-weight: bold;
+}
+
+.cart-review-row {
+    display: flex;
+    justify-content: center;
+    gap: var(--gap-xs);
+    line-height: 1em;
+    margin-top: var(--gap-xs);
+}
+
+.cart-review-row .cart-review__icon {
+    display: block;
+    flex-shrink: 0;
+    height: 0.8rem;
+    width: auto;
+    aspect-ratio: 122.88 / 116.87;
+}
+
 /*
  * Mega menu (desktop): widen + deepen the theme’s invisible ::after bridge on items with a submenu.
  * Horizon keeps pointer on <li> via that flex ::after; extending width catches diagonal moves toward the panel.
