@@ -760,6 +760,10 @@ body:has(.overlay.active) .sticky-add-to-cart__bar {
     fill: #fbe1ec;
 }
 
+.cart-items__title {
+    line-height: 1.2em;
+}
+
 /*
  * Mega menu (desktop): widen + deepen the theme’s invisible ::after bridge on items with a submenu.
  * Horizon keeps pointer on <li> via that flex ::after; extending width catches diagonal moves toward the panel.
