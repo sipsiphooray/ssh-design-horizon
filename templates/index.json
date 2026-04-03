@@ -175,7 +175,7 @@
               "name": "Moving line text",
               "settings": {
                 "text": "<h2><em>lucky</em> you. it’s your lucky season.</h2>",
-                "line_vector": "shopify://shop_images/spike-green_968dd24b-501c-49c2-9e04-1ca6b0abbb6b.png",
+                "line_vector": "shopify://shop_images/svgviewer-png-output_8_1.png",
                 "height": 18,
                 "mobile_height": 12,
                 "width": "fit-content",
@@ -1831,7 +1831,7 @@
                         "link": "",
                         "open_in_new_tab": false,
                         "padding-block-start": 0,
-                        "padding-block-end": 0,
+                        "padding-block-end": 1,
                         "padding-inline-start": 0,
                         "padding-inline-end": 0
                       },
@@ -2037,7 +2037,7 @@
                         "link": "",
                         "open_in_new_tab": false,
                         "padding-block-start": 0,
-                        "padding-block-end": 0,
+                        "padding-block-end": 1,
                         "padding-inline-start": 0,
                         "padding-inline-end": 0
                       },
@@ -2243,7 +2243,7 @@
                         "link": "",
                         "open_in_new_tab": false,
                         "padding-block-start": 0,
-                        "padding-block-end": 0,
+                        "padding-block-end": 1,
                         "padding-inline-start": 0,
                         "padding-inline-end": 0
                       },
@@ -2780,7 +2780,7 @@
               "name": "Moving line text",
               "settings": {
                 "text": "<h2>& as always,  <br/>made with <em>love.</em></h2>",
-                "line_vector": "shopify://shop_images/spike_c2e870c9-d58b-4321-af42-afd225c786d9.png",
+                "line_vector": "shopify://shop_images/pink-curve_862cbfce-ff0a-4697-9aa9-1f089baec353.png",
                 "height": 16,
                 "mobile_height": 16,
                 "width": "fit-content",
@@ -5484,7 +5484,7 @@
               "name": "Moving line text",
               "settings": {
                 "text": "<h2>Happy <em>Sippers</em></h2>",
-                "line_vector": "shopify://shop_images/spike_c2e870c9-d58b-4321-af42-afd225c786d9.png",
+                "line_vector": "shopify://shop_images/pink-curve_862cbfce-ff0a-4697-9aa9-1f089baec353.png",
                 "height": 16,
                 "mobile_height": 10,
                 "width": "fit-content",
