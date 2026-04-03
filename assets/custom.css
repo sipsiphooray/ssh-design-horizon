@@ -467,6 +467,7 @@ summary .svg-wrapper {
     font-size: var(--font-size--sm);
     text-decoration: underline;
     text-underline-offset: .2rem;
+    color: currentColor;
 }
 
 .shipping-summary .flex {
