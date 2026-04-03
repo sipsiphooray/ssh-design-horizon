@@ -705,7 +705,11 @@ body:has(.overlay.active) .sticky-add-to-cart__bar {
 }
 
 .cart-totals {
-    gap: var(--gap-sm) !important;
+    gap: var(--gap-xs) !important;
+}
+
+.cart-totals:not(:has(.cart-actions)) {
+    padding-block-start: var(--margin-sm) !important;
 }
 
 /*
