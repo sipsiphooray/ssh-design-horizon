@@ -364,6 +364,52 @@
   {% endif %}
 </div>
 
+{% assign usp_texts = 0 %}
+
+{% for item in (1..3) %}
+  {% liquid 
+    assign usp_text_name = 'cart_usp_' | append: item
+  %}
+
+  {% if settings[usp_text_name] != blank %}
+    {% assign usp_texts = usp_texts | plus: 1 %}
+  {% endif %}
+{% endfor %}
+
+{% if usp_texts > 0 %}
+  <ul class="cart-usp-list list-unstyled color-{{ settings.shipping_color_scheme }}">
+    {% for item in (1..3) %}
+      {% liquid 
+        assign usp_text_name = 'cart_usp_' | append: item
+        assign usp_image_name = 'cart_usp_img_' | append: item
+      %}
+
+      {% if settings[usp_text_name] != blank %}
+        <li>
+          <div class="flex-usp-cart">
+            {% if settings[usp_image_name] != blank %}
+              <div>
+                {{
+                  settings[usp_image_name]
+                  | image_url: width: 30
+                  | image_tag: alt: settings[usp_image_name].alt, loading: 'lazy', class: 'usp-cart__image'
+                }}
+              </div>
+            {% endif %}
+            {% if settings[usp_text_name] != blank %}
+              <div>
+                <p>
+                  {{ settings[usp_text_name] }}
+                </p>
+              </div>
+            {% endif %}
+          </div>
+        </li>
+      {% endif %}
+    {% endfor %}
+  </ul>
+{% endif %}
+
 {% stylesheet %}
   .cart-actions {
     display: flex;

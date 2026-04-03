@@ -11,7 +11,7 @@
     position: fixed;
     bottom: {{ block.settings.teaser_position_bottom }}px;
     right: {{ block.settings.teaser_position_right }}px;
-    z-index: 2147483647 !important; /* Max z-index */
+    z-index: calc(var(--layer-heightened) - 1) !important;
     cursor: pointer;
     transition: transform 0.3s ease;
     pointer-events: auto !important;

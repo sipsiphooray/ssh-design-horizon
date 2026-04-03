@@ -1773,6 +1773,40 @@
         "default": true
       },
       {
+        "type": "header",
+        "content": "Cart USP Texts"
+      },
+      {
+        "type": "text",
+        "id": "cart_usp_1",
+        "label": "Cart usp text 1"
+      },
+      {
+        "type": "image_picker",
+        "id": "cart_usp_img_1",
+        "label": "Cart usp image 1"
+      },
+      {
+        "type": "text",
+        "id": "cart_usp_2",
+        "label": "Cart usp text 2"
+      },
+      {
+        "type": "image_picker",
+        "id": "cart_usp_img_2",
+        "label": "Cart usp image 2"
+      },
+      {
+        "type": "text",
+        "id": "cart_usp_3",
+        "label": "Cart usp text 3"
+      },
+      {
+        "type": "image_picker",
+        "id": "cart_usp_img_3",
+        "label": "Cart usp image 3"
+      },
+      {
         "type": "checkbox",
         "id": "enable_shipping_protection",
         "label": "Enable shipping protection",
