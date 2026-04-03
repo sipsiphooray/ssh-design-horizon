@@ -743,6 +743,10 @@ body:has(.overlay.active) .sticky-add-to-cart__bar {
         width: auto !important;
         height: var(--icon-size-sm) !important;
     }
+
+    .menu-drawer__menu--childlist .menu-drawer__list-item--divider {
+        border: 0 !important;
+    }
 }
 
 @media (max-width: 749px) {
