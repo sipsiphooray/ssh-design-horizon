@@ -707,17 +707,17 @@ body:has(.overlay.active) .sticky-add-to-cart__bar {
 }
 
 @media (max-width: 989px) {
-    #header-component[data-menu-style=drawer] .header__columns {
+    /* #header-component[data-menu-style=drawer] .header__columns {
         --header-template-columns: 1fr max-content max-content max-content !important;
         grid-template-areas: "center rightA rightB left" !important;
-    }
+    } */
 
     .header__column--right, .header__column--right header-actions:has(.header-action-text) {
         gap: var(--gap-2xs) !important;
     }
     #header-component[data-menu-style=drawer] .header__columns .search-action {
         padding-right: var(--gap-2xs);
-        grid-area: rightA !important;
+        /* grid-area: rightA !important; */
     }
 
     header-actions:has(.xb-wishlist-header-auto-container) .account-button {
