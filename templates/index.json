@@ -863,7 +863,10 @@
         "gap": 0,
         "color_scheme": "scheme-1",
         "padding-block-start": 80,
-        "padding-block-end": 0
+        "padding-block-end": 0,
+        "custom_mobile_padding": true,
+        "mobile-padding-block-start": 48,
+        "mobile-padding-block-end": 0
       }
     },
     "product_list_GE3f6Y": {
@@ -1211,7 +1214,10 @@
         "gap": 0,
         "color_scheme": "scheme-1",
         "padding-block-start": 80,
-        "padding-block-end": 80
+        "padding-block-end": 80,
+        "custom_mobile_padding": true,
+        "mobile-padding-block-start": 48,
+        "mobile-padding-block-end": 48
       }
     },
     "collection_list_La4t3h": {
