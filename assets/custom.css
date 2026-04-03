@@ -895,8 +895,4 @@ body:has(.overlay.active) .sticky-add-to-cart__bar {
     html[scroll-lock] .menu-drawer__submenu {
         touch-action: pan-y;
     }
-
-    .blocks-drawer-items .image-block__image {
-        --ratio: 2 / 1 !important;
-    }
 }
