@@ -73,6 +73,13 @@
     "cart_usp_1": "QUICK SHIP",
     "cart_usp_2": "EASY RETURNS",
     "cart_usp_3": "BUY NOW, PAY LATER",
+    "upsell_heading": "Add More Fan Favorites",
+    "upsell_list": [
+      "autism-awareness-puzzle-piece-cup-with-lid-and-straw",
+      "autism-awareness-puzzle-piece-40oz-glass-or-plastic-tumbler-with-lid-and-straw",
+      "a-book-a-day-mental-health-40oz-glass-tumbler-with-lid-and-straw",
+      "balloon-dog-mardi-gras-clear-glass-mug-with-lid-straw"
+    ],
     "enable_shipping_protection": true,
     "shipping_protection_text": "<p>Your order is protected for [price]</p>",
     "protection_product": "shipping-protection",

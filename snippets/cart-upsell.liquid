@@ -1,0 +1,236 @@
+{%- doc -%}
+  Cart upsell: one column layout (heading + track). Multiple visible products use Horizon slideshow + dots; a single product uses a simple grid.
+{%- enddoc -%}
+
+{% liquid
+  assign upsell_visible_count = 0
+  for item in settings.upsell_list
+    assign cart_quantity = cart | item_count_for_variant: item.selected_or_first_available_variant.id
+    unless cart_quantity > 0 or item.available == false
+      assign upsell_visible_count = upsell_visible_count | plus: 1
+    endunless
+  endfor
+
+  assign timeline_scope = ''
+  for index in (1..upsell_visible_count)
+    assign index0 = index | minus: 1
+    assign scope = '--slide-index, ' | replace: 'index', index0
+    assign timeline_scope = timeline_scope | append: scope
+  endfor
+  assign timeline_scope = timeline_scope | strip | split: ',' | compact | join: ','
+-%}
+
+<cart-upsell class="cart-upsell">
+  {% if upsell_visible_count > 1 %}
+    <slideshow-component
+      class="cart-upsell__slideshow resource-list__carousel"
+      style="--slideshow-timeline: {{ timeline_scope }};--gutter-slide-width: 0px;--slide-width-max: 100%;"
+      initial-slide="0"
+    >
+      <div class="cart-upsell__heading-row">
+        {% if settings.upsell_heading != blank %}
+          <span class="upsell-heading h4 cart-upsell__heading-text">
+            {{ settings.upsell_heading }}
+          </span>
+        {% else %}
+          <span class="cart-upsell__heading-text cart-upsell__heading-text--empty" aria-hidden="true"></span>
+        {% endif %}
+        <div class="cart-upsell__heading-arrows">
+          {% render 'slideshow-arrow', action: 'previous', icon_style: 'chevron', icon_shape: 'none' %}
+          {% render 'slideshow-arrow', action: 'next', icon_style: 'chevron', icon_shape: 'none' %}
+        </div>
+      </div>
+
+      <slideshow-container ref="slideshowContainer">
+        <slideshow-slides ref="scroller" tabindex="-1" class="cart-upsell__slides">
+          {% assign slide_idx = 0 %}
+          {% for item in settings.upsell_list %}
+            {% assign cart_quantity = cart | item_count_for_variant: item.selected_or_first_available_variant.id %}
+            {% unless cart_quantity > 0 or item.available == false %}
+              {% capture slide_children %}
+                {% render 'upsell-card', product: item %}
+              {% endcapture %}
+              {% assign slide_uid = item.id | append: '-' | append: forloop.index %}
+              {% render 'slideshow-slide',
+                index: slide_idx,
+                children: slide_children,
+                class: 'cart-upsell__slide resource-list__slide',
+                slide_id: slide_uid
+              %}
+              {% assign slide_idx = slide_idx | plus: 1 %}
+            {% endunless %}
+          {% endfor %}
+        </slideshow-slides>
+      </slideshow-container>
+
+      {%- render 'slideshow-controls',
+        style: 'dots',
+        item_count: upsell_visible_count,
+        show_arrows: false,
+        arrows_on_media: false,
+        controls_on_media: false,
+        pagination_position: 'center',
+        class: 'cart-upsell__dots carousel-controls'
+      -%}
+    </slideshow-component>
+  {% elsif upsell_visible_count == 1 %}
+    <div class="cart-upsell__single">
+      {% if settings.upsell_heading != blank %}
+        <span class="upsell-heading h4 cart-upsell__heading-only">
+          {{ settings.upsell_heading }}
+        </span>
+      {% endif %}
+      <div class="cart-upsell__grid">
+        {% for item in settings.upsell_list %}
+          {% assign cart_quantity = cart | item_count_for_variant: item.selected_or_first_available_variant.id %}
+          {% unless cart_quantity > 0 or item.available == false %}
+            {% render 'upsell-card', product: item %}
+            {% break %}
+          {% endunless %}
+        {% endfor %}
+      </div>
+    </div>
+  {% endif %}
+</cart-upsell>
+
+{% stylesheet %}
+  .cart-upsell {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    gap: var(--gap-sm);
+    padding-block: var(--margin-sm);
+    border-block-start: 1px solid var(--color-border);
+  }
+
+  .cart-upsell__heading-row {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--gap-sm);
+    width: 100%;
+    margin-bottom: var(--gap-sm);
+  }
+
+  .cart-upsell__heading-text {
+    text-align: start;
+    margin: 0;
+    min-width: 0;
+    flex: 1;
+    text-transform: uppercase;
+    letter-spacing: 0.02em;
+    font-size: var(--font-size--sm);
+    line-height: 1.2;
+  }
+
+  .cart-upsell__heading-text--empty {
+    flex: 1;
+  }
+
+  .cart-upsell__heading-arrows {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    flex-shrink: 0;
+    gap: 0;
+  }
+
+  /* Undo .resource-list__carousel rule that spreads the next control away from prev */
+  .cart-upsell__heading-arrows .slideshow-control--next {
+    margin-inline-start: 0;
+  }
+
+  /*
+   * Horizon hides .resource-list__carousel .slideshow-control[disabled].
+   * Cart upsell: always show prev/next side by side; when disabled, only subdue.
+   */
+  .cart-upsell__slideshow.resource-list__carousel .cart-upsell__heading-arrows .slideshow-control[disabled] {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0.32;
+    color: rgb(var(--color-foreground-rgb) / var(--opacity-40));
+    cursor: not-allowed;
+  }
+
+  .cart-upsell__heading-row .slideshow-control {
+    mix-blend-mode: normal;
+    color: rgb(var(--color-foreground-rgb));
+    padding: 0 var(--padding-3xs);
+    min-width: auto;
+    min-height: unset;
+  }
+
+  .cart-upsell__heading-row .slideshow-control:not([disabled]) {
+    opacity: 1;
+  }
+
+  .cart-upsell__heading-row .slideshow-control .svg-wrapper,
+  .cart-upsell__heading-row .slideshow-control svg {
+    width: 1.1rem;
+    height: 1.1rem;
+  }
+
+  /*
+   * Horizon sets gap on .resource-list__carousel slideshow-slides via
+   * --resource-list-column-gap, but that variable is normally defined on .resource-list.
+   * Cart upsell is not inside .resource-list, so gap was missing between full-width slides.
+   */
+  .cart-upsell__slideshow.resource-list__carousel {
+    --resource-list-column-gap: var(--gap-sm);
+  }
+
+  .cart-upsell__slideshow {
+    width: 100%;
+  }
+
+  .cart-upsell__slideshow slideshow-container {
+    width: 100%;
+  }
+
+  .cart-upsell__slides {
+    width: 100%;
+    margin-block: 0;
+    padding-block: 0;
+  }
+
+  .cart-upsell__slideshow.resource-list__carousel .cart-upsell__slide.resource-list__slide {
+    --slide-width: 100%;
+    width: 100%;
+    min-width: 0;
+    scroll-snap-align: start;
+  }
+
+  .cart-upsell__dots {
+    justify-content: center;
+    margin-block-start: var(--gap-xs);
+    min-height: unset !important;
+  }
+
+  .cart-upsell__single {
+    display: flex;
+    flex-direction: column;
+    gap: var(--gap-sm);
+    width: 100%;
+  }
+
+  .cart-upsell__heading-only {
+    display: block;
+    text-align: start;
+    margin: 0;
+    text-transform: uppercase;
+    letter-spacing: 0.02em;
+    font-size: var(--font-size--sm);
+  }
+
+  .cart-upsell__grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    width: 100%;
+  }
+
+  cart-upsell:not(:has(product-card)) {
+    display: none;
+  }
+{% endstylesheet %}

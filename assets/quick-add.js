@@ -13,6 +13,11 @@ export class QuickAddComponent extends Component {
   /** @type {AbortController} */
   #cartUpdateAbortController = new AbortController();
 
+  /** Stable reference for document.removeEventListener (bind() breaks removal). */
+  #onVariantSelectedDocument = (/** @type {VariantSelectedEvent} */ event) => {
+    this.#updateQuickAddButtonState(event);
+  };
+
   get productPageUrl() {
     const productCard = /** @type {import('./product-card').ProductCard | null} */ (this.closest('product-card'));
     const hotspotProduct = /** @type {import('./product-hotspot').ProductHotspotComponent | null} */ (
@@ -52,7 +57,8 @@ export class QuickAddComponent extends Component {
     document.addEventListener(ThemeEvents.cartUpdate, this.#handleCartUpdate, {
       signal: this.#cartUpdateAbortController.signal,
     });
-    document.addEventListener(ThemeEvents.variantSelected, this.#updateQuickAddButtonState.bind(this));
+    document.addEventListener(ThemeEvents.variantSelected, this.#onVariantSelectedDocument);
+    this.#syncCartUpsellQuickAddButton();
   }
 
   disconnectedCallback() {
@@ -61,7 +67,7 @@ export class QuickAddComponent extends Component {
     mediaQueryLarge.removeEventListener('change', this.#closeQuickAddModal);
     this.#abortController?.abort();
     this.#cartUpdateAbortController.abort();
-    document.removeEventListener(ThemeEvents.variantSelected, this.#updateQuickAddButtonState.bind(this));
+    document.removeEventListener(ThemeEvents.variantSelected, this.#onVariantSelectedDocument);
   }
 
   /**
@@ -239,12 +245,26 @@ export class QuickAddComponent extends Component {
   }
 
   /**
+   * Cart drawer upsell: Add only when a single variant exists; never use the
+   * "one product option ⇒ Add" shortcut (that breaks Size-only products with many variants).
+   */
+  #syncCartUpsellQuickAddButton() {
+    if (this.dataset.cartUpsell !== 'true') return;
+    const variantCount = parseInt(String(this.dataset.variantCount ?? '0'), 10);
+    this.setAttribute('data-quick-add-button', variantCount > 1 ? 'choose' : 'add');
+  }
+
+  /**
    * Updates the quick-add button state based on whether a swatch is selected
    * @param {VariantSelectedEvent} event - The variant selected event
    */
   #updateQuickAddButtonState(event) {
     if (!(event.target instanceof HTMLElement)) return;
     if (event.target.closest('product-card') !== this.closest('product-card')) return;
+    if (this.dataset.cartUpsell === 'true') {
+      this.#syncCartUpsellQuickAddButton();
+      return;
+    }
     const productOptionsCount = this.dataset.productOptionsCount;
     const quickAddButton = productOptionsCount === '1' ? 'add' : 'choose';
     this.setAttribute('data-quick-add-button', quickAddButton);
