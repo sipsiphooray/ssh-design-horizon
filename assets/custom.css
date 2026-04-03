@@ -887,4 +887,12 @@ body:has(.overlay.active) .sticky-add-to-cart__bar {
         overflow: hidden;
         overscroll-behavior: none;
     }
+    html[scroll-lock] body {
+        touch-action: none;
+    }
+    html[scroll-lock] .menu-drawer,
+    html[scroll-lock] .menu-drawer__navigation,
+    html[scroll-lock] .menu-drawer__submenu {
+        touch-action: pan-y;
+    }
 }
