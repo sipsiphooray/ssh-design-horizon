@@ -740,7 +740,7 @@ body:has(.overlay.active) .sticky-add-to-cart__bar {
 }
 
 .cart-review__name {
-    font-weight: bold;
+    font-weight: 500;
 }
 
 .cart-review-row {
