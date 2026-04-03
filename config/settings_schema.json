@@ -1773,6 +1773,12 @@
         "default": true
       },
       {
+        "type": "checkbox",
+        "id": "cart_review",
+        "label": "Cart Review",
+        "default": false
+      },
+      {
         "type": "header",
         "content": "Cart USP Texts"
       },
