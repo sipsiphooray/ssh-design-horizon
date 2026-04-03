@@ -877,4 +877,14 @@ body:has(.overlay.active) .sticky-add-to-cart__bar {
     .quick-add-modal__content:has(.cs-menu.open) {
         padding-bottom: var(--padding-4xl) !important;
     }
+      /* iOS Safari: lock scroll when theme sets html[scroll-lock] (menu drawer, modals, etc.) */
+    html[scroll-lock] {
+        overflow: hidden;
+        height: 100%;
+        overscroll-behavior: none;
+    }
+    html[scroll-lock] body {
+        overflow: hidden;
+        overscroll-behavior: none;
+    }
 }
