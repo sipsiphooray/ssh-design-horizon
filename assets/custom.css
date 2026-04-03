@@ -721,7 +721,7 @@ body:has(.overlay.active) .sticky-add-to-cart__bar {
 .cart-drawer__summary {
     gap: var(--gap-sm) !important;
     padding-block-start: var(--padding-xs) !important;
-    padding-block-end: var(--padding-6xl) !important;
+    padding-block-end: var(--padding-5xl) !important;
 }
 
 .cart-totals {
@@ -815,6 +815,10 @@ body:has(.overlay.active) .sticky-add-to-cart__bar {
 
     .menu-drawer__menu--childlist .menu-drawer__list-item--divider {
         border: 0 !important;
+    }
+
+    .cart-drawer__summary {
+        padding-block-end: var(--padding-6xl) !important;
     }
 }
 
