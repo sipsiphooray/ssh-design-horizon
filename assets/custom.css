@@ -757,6 +757,7 @@ body:has(.overlay.active) .sticky-add-to-cart__bar {
     height: 0.8rem;
     width: auto;
     aspect-ratio: 122.88 / 116.87;
+    fill: #fbe1ec;
 }
 
 /*
