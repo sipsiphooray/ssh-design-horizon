@@ -133,7 +133,7 @@
     flex-direction: row;
     align-items: center;
     flex-shrink: 0;
-    gap: 0;
+    gap: var(--padding-3xs);
   }
 
   /* Undo .resource-list__carousel rule that spreads the next control away from prev */
@@ -142,18 +142,19 @@
   }
 
   /*
-   * Same box model for enabled + disabled: .button-unstyled is display:block while our
-   * disabled override was display:flex, and min-height:unset shrank controls — mismatched heights.
+   * Icon-sized control: min box matches the chevron SVG (not --minimum-touch-target).
    */
   .cart-upsell__heading-row .slideshow-control {
+    --cart-upsell-arrow-icon-size: 1.1rem;
+
     mix-blend-mode: normal;
     color: rgb(var(--color-foreground-rgb));
-    padding: 0 var(--padding-3xs);
+    padding: 0;
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    min-width: var(--minimum-touch-target);
-    min-height: var(--minimum-touch-target);
+    min-width: var(--cart-upsell-arrow-icon-size);
+    min-height: var(--cart-upsell-arrow-icon-size);
   }
 
   .cart-upsell__heading-row .slideshow-control:not([disabled]) {
@@ -161,10 +162,14 @@
   }
 
   /*
-   * Horizon hides .resource-list__carousel .slideshow-control[disabled].
-   * Cart upsell: always show prev/next side by side; when disabled, only subdue.
+   * Horizon: .resource-list__carousel .slideshow-control[disabled] { display: none } — higher
+   * specificity than .cart-upsell__heading-row .slideshow-control, so we must reset display here
+   * or disabled arrows vanish (regressed when flex was dropped from this block).
    */
   .cart-upsell__slideshow.resource-list__carousel .cart-upsell__heading-arrows .slideshow-control[disabled] {
+    display: inline-flex !important;
+    align-items: center;
+    justify-content: center;
     opacity: 0.32;
     color: rgb(var(--color-foreground-rgb) / var(--opacity-40));
     cursor: not-allowed;
@@ -172,8 +177,8 @@
 
   .cart-upsell__heading-row .slideshow-control .svg-wrapper,
   .cart-upsell__heading-row .slideshow-control svg {
-    width: 1.1rem;
-    height: 1.1rem;
+    width: var(--cart-upsell-arrow-icon-size);
+    height: var(--cart-upsell-arrow-icon-size);
   }
 
   /*
