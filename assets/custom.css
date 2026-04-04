@@ -109,12 +109,6 @@ a.size-style.link:after {
     height: var(--menu-drawer-height, calc(var(--drawer-height) - var(--header-group-height))) !important;
 }
 
-/* Sticky "scroll-up": .header[data-sticky-state='idle'] is opacity:0; keep bar visible while menu open. */
-#header-component:has(#Details-menu-drawer-container[open]) .header[data-sticky-state="idle"],
-#header-component:has(#Details-menu-drawer-container.menu-open) .header[data-sticky-state="idle"],
-#header-component:has(details.menu-drawer-container[open]) .header[data-sticky-state="idle"] {
-    opacity: 1 !important;
-}
 
 .menu-drawer__backdrop {
     display: none !important;
@@ -783,11 +777,11 @@ body:has(.overlay.active) .sticky-add-to-cart__bar {
     line-height: 1.2em;
 }
 .checkbox {
-    background: transparent;
-    border: 0;
-    border-radius: 0;
-    height: unset;
-    width: auto;
+    background: transparent !important;
+    border: 0 !important;
+    border-radius: 0 !important;
+    height: unset !important;
+    width: auto !important;
 }
 
 /*
