@@ -253,8 +253,8 @@ header-drawer .menu-drawer-container[open] .menu-drawer__animated-element {
 }
 
 .link-menu-thumbnail .thumbnail-block__image {
-    width: 2rem;
-    height: 2rem;
+    width: 2.5rem;
+    height: 2.5rem;
     display: block;
     object-fit: contain;
 }
