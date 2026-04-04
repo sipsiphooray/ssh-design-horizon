@@ -272,11 +272,14 @@
    * Add (single-variant) and Choose (multi-variant): primary button tokens (color scheme).
    * Choose has no add-to-cart-component in DOM — avoids theme [data-quick-add-button=choose] rule.
    */
+  /*
+   * quick-add.liquid .quick-add__button uses background: linear-gradient(var(--color-background)…)
+   * and color: var(--color-foreground). That leaves a gradient layer and can pair white label text
+   * with a light “card” foreground — same as white --color-primary-button-text → invisible.
+   * Reset background to a solid primary fill and drive label text with currentColor.
+   */
   .upsell-card--add-only .quick-add__button--add,
   .upsell-card--multi-variant .quick-add__button--choose {
-    --button-color: var(--color-primary-button-text);
-    --button-background-color: var(--color-primary-button-background);
-    --button-border-color: var(--color-primary-button-border);
     --button-border-width: var(--style-border-width-primary);
 
     display: flex !important;
@@ -294,9 +297,10 @@
     padding-inline: var(--button-padding-inline);
     border: none;
     border-radius: var(--style-border-radius-buttons-primary);
-    box-shadow: inset 0 0 0 var(--button-border-width) var(--button-border-color);
-    background-color: var(--button-background-color);
-    color: var(--button-color);
+    background: var(--color-primary-button-background);
+    background-image: none;
+    color: var(--color-primary-button-text);
+    box-shadow: inset 0 0 0 var(--button-border-width) var(--color-primary-button-border);
     backdrop-filter: none;
     -webkit-backdrop-filter: none;
     font-family: var(--button-font-family-primary);
@@ -306,15 +310,16 @@
     text-transform: var(--button-text-case-primary);
     transition: color var(--animation-speed) var(--animation-easing),
       box-shadow var(--animation-speed) var(--animation-easing),
-      background-color var(--animation-speed) var(--animation-easing);
+      background var(--animation-speed) var(--animation-easing);
   }
 
   .upsell-card--add-only .quick-add__button--add:hover,
   .upsell-card--multi-variant .quick-add__button--choose:hover {
     scale: 1;
-    --button-color: var(--color-primary-button-hover-text);
-    --button-background-color: var(--color-primary-button-hover-background);
-    --button-border-color: var(--color-primary-button-hover-border);
+    background: var(--color-primary-button-hover-background);
+    background-image: none;
+    color: var(--color-primary-button-hover-text);
+    box-shadow: inset 0 0 0 var(--button-border-width) var(--color-primary-button-hover-border);
   }
 
   .upsell-card--add-only .quick-add__button--add:active,
@@ -324,7 +329,8 @@
 
   .upsell-card--add-only .quick-add__button--add .add-to-cart-text,
   .upsell-card--multi-variant .quick-add__button--choose .add-to-cart-text {
-    background: transparent;
+    background: transparent !important;
+    background-image: none !important;
     border: none;
     border-radius: 0;
     height: auto;
@@ -332,6 +338,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    color: currentColor;
   }
 
   .upsell-card--add-only .quick-add__button--add .add-to-cart-text__content,
@@ -345,7 +352,7 @@
     filter: none;
     translate: 0 0;
     padding: 0;
-    color: inherit;
+    color: currentColor;
   }
 
   .upsell-card--add-only .quick-add__button--add .add-to-cart-icon,

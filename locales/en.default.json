@@ -184,8 +184,8 @@
       "one": "{{ count }} left - Get it By {{ date }}",
       "other": "{{ count }} left - Get it By {{ date }}"
     },
-    "inventory_low_stock_html": "Low stock - Get it By {{ date }}",
-    "inventory_in_stock_html": "In stock - Get it By {{ date }}",
+    "inventory_low_stock_html": "Low stock - Get it By <strong>{{ date }}</strong>",
+    "inventory_in_stock_html": "In stock - Get it By <strong>{{ date }}</strong>",
     "inventory_out_of_stock": "Out of stock",
     "item_count": {
       "one": "{{ count }} item",
