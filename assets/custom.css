@@ -109,6 +109,13 @@ a.size-style.link:after {
     height: var(--menu-drawer-height, calc(var(--drawer-height) - var(--header-group-height))) !important;
 }
 
+/* Sticky "scroll-up": .header[data-sticky-state='idle'] is opacity:0; keep bar visible while menu open. */
+#header-component:has(#Details-menu-drawer-container[open]) .header[data-sticky-state="idle"],
+#header-component:has(#Details-menu-drawer-container.menu-open) .header[data-sticky-state="idle"],
+#header-component:has(details.menu-drawer-container[open]) .header[data-sticky-state="idle"] {
+    opacity: 1 !important;
+}
+
 .menu-drawer__backdrop {
     display: none !important;
 }
