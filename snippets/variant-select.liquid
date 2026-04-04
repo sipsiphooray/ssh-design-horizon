@@ -68,7 +68,7 @@
             <div class="cs-option {% if product_option_value.selected %}selected{% endif %}"
                 role="option"
                 aria-selected="{% if product_option_value.selected %}true{% else %}false{% endif %}"
-                data-value="{{ product_option_value | escape }}{% if product_option_value.available == false %}{{ product_option_value | escape }} - {{ 'content.unavailable' | t }}{% endif %}"
+                data-value="{{ product_option_value | escape }}"
                 {% if product_option_value.available == false %}
                 data-unavailable
                 {% endif %}

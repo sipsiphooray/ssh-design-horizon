@@ -11,6 +11,10 @@ Assets is a flat directory, it may not contain subdirectories.
 
 Any images that are required in the code, including icons, may be stored within assets.  Icons can be used in `.liquid` files via the [inline_asset_content](mdc:https:/shopify.dev/docs/api/liquid/filters/inline_asset_content) Liquid filter.
 
+## `variant-select` (custom.js) and swatches
+
+`onOptionSelect` must call `syncDisplaySwatch(optionEl)` so `.cs-display .swatch-image` matches the selected `.cs-option`; updating only `.cs-display-text` leaves the old image or an empty swatch ring (especially in quick-add after variant change).
+
 ## Klaviyo Back in Stock + Horizon
 
 - Put `klaviyo-bis-trigger` only on the **main** PDP add-to-cart (`enable_klaviyo_bis: true` in `add-to-cart-button`, passed from `blocks/add-to-cart.liquid`). Quick-add / cards must **not** use that class or Klaviyo may bind the first match in the DOM to the wrong product.

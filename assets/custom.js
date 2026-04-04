@@ -395,13 +395,16 @@ class VariantSelect extends Component {
       const optionIndex = Array.from(this.select.options).indexOf(selectedOption);
       if (this.optionEls[optionIndex]) {
         this.optionEls[optionIndex].classList.add("selected");
+        this.syncDisplaySwatch(this.optionEls[optionIndex]);
       }
     } else {
       // Select first available option by default
       const firstAvailable = Array.from(this.select.options).find(opt => !opt.disabled);
       if (firstAvailable) {
         this.select.value = firstAvailable.value;
-        this.onOptionSelect(firstAvailable, this.optionEls[0]);
+        const idx = Array.from(this.select.options).indexOf(firstAvailable);
+        const el = this.optionEls[idx];
+        if (el) this.onOptionSelect(firstAvailable, el);
       }
     }
   }
@@ -411,6 +414,31 @@ class VariantSelect extends Component {
       return option.text.split(' - ')[0];
     }
     return option.text;
+  }
+
+  /**
+   * Mirror the selected row’s swatch into `.cs-display` so the closed control shows the right image
+   * (quick-add / variant morph only updates the native select + text otherwise).
+   * @param {Element} optionEl
+   */
+  syncDisplaySwatch(optionEl) {
+    if (!this.display || !this.displayText || !(optionEl instanceof HTMLElement)) return;
+
+    const source = optionEl.querySelector('.swatch-image');
+    const sourceImg = source?.querySelector('img');
+    let displaySwatch = this.display.querySelector('.swatch-image');
+
+    if (sourceImg && source) {
+      if (!displaySwatch) {
+        displaySwatch = document.createElement('span');
+        displaySwatch.className = 'swatch-image';
+        this.display.insertBefore(displaySwatch, this.displayText);
+      }
+      displaySwatch.replaceChildren();
+      displaySwatch.appendChild(/** @type {HTMLImageElement} */ (sourceImg.cloneNode(true)));
+    } else if (displaySwatch) {
+      displaySwatch.remove();
+    }
   }
 
   toggleMenu() {
@@ -440,7 +468,8 @@ class VariantSelect extends Component {
     if (this.displayText) {
       this.displayText.textContent = this.getDisplayText(option).trim();
     }
-    
+    this.syncDisplaySwatch(optionEl);
+
     // Update native select
     this.select.value = option.value;
     
