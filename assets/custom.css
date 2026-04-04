@@ -851,6 +851,25 @@ body:has(.overlay.active) .sticky-add-to-cart__bar {
         margin-block-start: calc(-1 * (var(--padding-lg) + var(--gap-md)));
         padding-block-start: calc(var(--padding-lg) + var(--gap-md));
     }
+
+    /*
+     * Mega menu: theme clip-path + translateY follow JS-measured --full-open-header-height / --submenu-height.
+     * When those lag or differ from real content height, the bottom of .menu-list__submenu-inner is clipped.
+     * Disable clipping and slide transform here so tall panels stay fully visible (inner still uses max-height + scroll).
+     */
+    .header-menu .menu-list__list-item:not([slot='overflow']) > .menu-list__submenu {
+        clip-path: none !important;
+        transition: none !important;
+        overflow: visible !important;
+    }
+
+    [data-submenu-overlap-bottom-row] .header-menu .menu-list__list-item:not([slot='overflow']) > .menu-list__submenu {
+        clip-path: none !important;
+    }
+
+    .header-menu .menu-list__submenu-inner {
+        transform: none !important;
+    }
 }
 
 @media screen and (min-width: 60em) {
