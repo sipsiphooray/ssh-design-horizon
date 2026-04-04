@@ -787,6 +787,10 @@ body:has(.overlay.active) .sticky-add-to-cart__bar {
 [id*="subscriptions_app_block"]:not(:has(.shopify_subscriptions_app_container)) {
     display: none !important;
 }
+.menu-drawer__utility-links {
+    margin-inline: 0 !important;
+    padding-inline: var(--padding-xl) !important;
+}
 
 /*
  * Mega menu (desktop): widen + deepen the theme’s invisible ::after bridge on items with a submenu.
