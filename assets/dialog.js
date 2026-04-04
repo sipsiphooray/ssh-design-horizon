@@ -175,29 +175,18 @@ export class DialogCloseEvent extends CustomEvent {
   static eventName = 'dialog:close';
 }
 
-/** iOS Safari: html overflow:hidden is not enough; freeze body like DialogComponent.showDialog. */
-let scrollLockSavedY = 0;
-
 document.addEventListener(
   'toggle',
   (event) => {
-    if (!(event.target instanceof HTMLDetailsElement)) return;
-    if (!event.target.hasAttribute('scroll-lock')) return;
-
-    const { open } = event.target;
-
-    if (open) {
-      scrollLockSavedY = window.scrollY;
-      document.documentElement.setAttribute('scroll-lock', '');
-      document.body.style.setProperty('width', '100%');
-      document.body.style.setProperty('position', 'fixed');
-      document.body.style.setProperty('top', `-${scrollLockSavedY}px`);
-    } else {
-      document.documentElement.removeAttribute('scroll-lock');
-      document.body.style.removeProperty('width');
-      document.body.style.removeProperty('position');
-      document.body.style.removeProperty('top');
-      window.scrollTo({ top: scrollLockSavedY, behavior: 'instant' });
+    if (event.target instanceof HTMLDetailsElement) {
+      if (event.target.hasAttribute('scroll-lock')) {
+        const { open } = event.target;
+        if (open) {
+          document.documentElement.setAttribute('scroll-lock', '');
+        } else {
+          document.documentElement.removeAttribute('scroll-lock');
+        }
+      }
     }
   },
   { capture: true }
