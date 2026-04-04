@@ -269,12 +269,15 @@
   }
 
   /*
-   * Add (single-variant) and Choose (multi-variant): same black bar, touch target, typography.
+   * Add (single-variant) and Choose (multi-variant): primary button tokens (color scheme).
    * Choose has no add-to-cart-component in DOM — avoids theme [data-quick-add-button=choose] rule.
    */
   .upsell-card--add-only .quick-add__button--add,
   .upsell-card--multi-variant .quick-add__button--choose {
-    --buttons-padding-block: 0.625rem;
+    --button-color: var(--color-primary-button-text);
+    --button-background-color: var(--color-primary-button-background);
+    --button-border-color: var(--color-primary-button-border);
+    --button-border-width: var(--style-border-width-primary);
 
     display: flex !important;
     width: auto;
@@ -287,27 +290,31 @@
     right: auto;
     bottom: auto;
     margin: 0;
-    padding-block: var(--buttons-padding-block);
-    padding-inline: var(--padding-md);
+    padding-block: var(--button-padding-block);
+    padding-inline: var(--button-padding-inline);
     border: none;
-    border-radius: 2px;
-    box-shadow: none;
-    background: #000000;
-    color: #ffffff;
+    border-radius: var(--style-border-radius-buttons-primary);
+    box-shadow: inset 0 0 0 var(--button-border-width) var(--button-border-color);
+    background-color: var(--button-background-color);
+    color: var(--button-color);
     backdrop-filter: none;
     -webkit-backdrop-filter: none;
-    font-family: var(--font-body--family);
-    font-weight: 700;
+    font-family: var(--button-font-family-primary);
+    font-weight: var(--font-paragraph--weight);
     font-size: var(--font-size--xs);
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
+    letter-spacing: var(--letter-spacing-sm);
+    text-transform: var(--button-text-case-primary);
+    transition: color var(--animation-speed) var(--animation-easing),
+      box-shadow var(--animation-speed) var(--animation-easing),
+      background-color var(--animation-speed) var(--animation-easing);
   }
 
   .upsell-card--add-only .quick-add__button--add:hover,
   .upsell-card--multi-variant .quick-add__button--choose:hover {
     scale: 1;
-    background: #1a1a1a;
-    color: #ffffff;
+    --button-color: var(--color-primary-button-hover-text);
+    --button-background-color: var(--color-primary-button-hover-background);
+    --button-border-color: var(--color-primary-button-hover-border);
   }
 
   .upsell-card--add-only .quick-add__button--add:active,
@@ -348,8 +355,8 @@
 
   .upsell-card--add-only .quick-add__button--add:focus-visible,
   .upsell-card--multi-variant .quick-add__button--choose:focus-visible {
-    outline: 2px solid #ffffff;
-    outline-offset: 2px;
+    outline: var(--focus-outline-width) solid var(--color-primary-button-text);
+    outline-offset: var(--focus-outline-offset);
   }
 
   @media (forced-colors: active) {
