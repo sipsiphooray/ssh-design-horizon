@@ -767,6 +767,13 @@ body:has(.overlay.active) .sticky-add-to-cart__bar {
 .cart-items__title {
     line-height: 1.2em;
 }
+.checkbox {
+    background: transparent;
+    border: 0;
+    border-radius: 0;
+    height: unset;
+    width: auto;
+}
 
 /*
  * Mega menu (desktop): widen + deepen the theme’s invisible ::after bridge on items with a submenu.
