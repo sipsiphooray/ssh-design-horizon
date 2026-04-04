@@ -567,7 +567,6 @@ cardObserver.observe(document.body, {
 
 // Listen for the variant update event and call the handler
 document.addEventListener(ThemeEvents.variantUpdate, (event) => {
-  console.log(event);
   
   // The target is the variant-picker element
   const variantPicker = event.target;
