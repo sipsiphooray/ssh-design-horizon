@@ -172,8 +172,15 @@
     min-width: 0;
     pointer-events: auto;
     width: auto;
-    max-width: min(100%, 12rem);
     z-index: 2;
+  }
+
+  .upsell-card--add-only .quick-add {
+    max-width: min(100%, 12rem);
+  }
+
+  .upsell-card--multi-variant .quick-add {
+    max-width: 100%;
   }
 
   .upsell-card .quick-add__button {
@@ -311,6 +318,7 @@
     transition: color var(--animation-speed) var(--animation-easing),
       box-shadow var(--animation-speed) var(--animation-easing),
       background var(--animation-speed) var(--animation-easing);
+    overflow: visible !important;
   }
 
   .upsell-card--add-only .quick-add__button--add:hover,
@@ -319,7 +327,7 @@
     background: var(--color-primary-button-hover-background);
     background-image: none;
     color: var(--color-primary-button-hover-text);
-    box-shadow: inset 0 0 0 var(--button-border-width) var(--color-primary-button-hover-border);
+    box-shadow: inset 0 0 0 var(--button-border-width) var(--color-primary-button-hover-border) !important;
   }
 
   .upsell-card--add-only .quick-add__button--add:active,
@@ -339,11 +347,34 @@
     align-items: center;
     justify-content: center;
     color: currentColor;
+    overflow: visible !important;
   }
 
   .upsell-card--add-only .quick-add__button--add .add-to-cart-text__content,
   .upsell-card--multi-variant .quick-add__button--choose .add-to-cart-text__content {
     grid-template-columns: 1fr;
+  }
+
+  /*
+   * Choose: quick-add defaults use grid 0fr + min-width:0 on the label stack, which clips
+   * the label in the cart row (no hover expand). Size to the full string.
+   */
+  .upsell-card--multi-variant .quick-add__button--choose {
+    width: max-content;
+    max-width: 100%;
+  }
+
+  .upsell-card--multi-variant .quick-add__button--choose .add-to-cart-text__content {
+    display: flex !important;
+    align-items: center;
+    justify-content: center;
+    grid-template-columns: unset !important;
+    overflow: visible;
+    min-width: 0;
+  }
+
+  .upsell-card--multi-variant .quick-add__button--choose .add-to-cart-text__content > span {
+    min-width: auto !important;
   }
 
   .upsell-card--add-only .quick-add__button--add .add-to-cart-text__content span span,
@@ -353,6 +384,7 @@
     translate: 0 0;
     padding: 0;
     color: currentColor;
+    white-space: nowrap;
   }
 
   .upsell-card--add-only .quick-add__button--add .add-to-cart-icon,
