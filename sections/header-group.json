@@ -17,7 +17,7 @@
         "announcement_BxgCk9": {
           "type": "_announcement",
           "settings": {
-            "text": "FREE SHIPPING OVER $40",
+            "text": "FREE US SHIPPING OVER $40",
             "link": "",
             "font": "var(--font-subheading--family)",
             "font_size": "0.875rem",
@@ -68,6 +68,7 @@
             "type_case_primary_link": "none",
             "drawer_shop_button_text": "Shop Best-Sellers",
             "drawer_shop_button_url": "shopify://collections/best-sellers-1",
+            "drawer_shop_button_text_below": "Free US Shipping on Orders $40+",
             "menu_style": "text",
             "featured_products_aspect_ratio": "4 / 5",
             "featured_collections_aspect_ratio": "16 / 9",

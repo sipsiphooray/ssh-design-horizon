@@ -15,6 +15,10 @@ Any images that are required in the code, including icons, may be stored within 
 
 `custom.js` patches `HTMLDialogElement.prototype` for scroll restore and sets `html[scroll-lock]` for dialogs. It must load **before** the user can open cart/quick-add, so in `snippets/scripts.liquid` it is included **immediately after** `dialog.js` with `fetchpriority="high"` (not at the end of the list with `low`).
 
+## `sections/curated-variant-list.liquid`
+
+Homepage-friendly grid of **variant** cards from a **metaobject** entry (not collection metafields). Schema uses `metaobject_type: curated_variant_list` (create that definition in Admin). Loop reads `section.settings.curated_list.product_variants.value`—field handle must match your metaobject list-of-variants field (default dummy handle `product_variants`). Optional **`collection`** setting supplies `closest.collection` for `_product-list-button` (View all) and RTE `closest.collection` in the header.
+
 ## Menu drawer layout variables (`custom.js` / `custom.css`)
 
 `syncMenuDrawerLayoutVars` should update **`--menu-drawer-top`** and **`--menu-drawer-height`** on `documentElement`, `body`, and `#Details-menu-drawer-container` only. **`custom.css`** applies `top` / `height` on `#Details-menu-drawer-container[open] > .menu-drawer` via `var(--menu-drawer-top)` and `var(--menu-drawer-height)`. Do **not** set inline `top` / `height` on `.menu-drawer` in JS (harder to override, noisy in DevTools, not Horizon-style).

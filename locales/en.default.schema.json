@@ -214,6 +214,8 @@
     "actions_display_style": "Icons are always used on mobile",
     "applies_on_image_only": "Applies to images only",
     "aspect_ratio_adjusted": "Adjusted in some layouts",
+    "curated_variant_list_collection": "Optional. Used for the “View all” link",
+    "curated_variant_list_metaobject": "Pick or add a metaobject entry, then choose the product variants you want in its Product variants field.",
     "carousel_hover_behavior_not_supported": "\"Carousel\" hover is not supported when \"Carousel\" type is selected at the section level",
     "carousel_layout_on_mobile": "Carousel is always used on mobile",
     "checkout_buttons": "Allows buyers to check out faster and can improve conversion. [Learn more](https://help.shopify.com/manual/online-store/dynamic-checkout)",
@@ -293,6 +295,7 @@
     "content_grid": "Content grid",
     "copyright": "Copyright",
     "count": "Count",
+    "curated_variant_list": "Curated variant list",
     "custom_section": "Custom section",
     "description": "Description",
     // Block name for informational content containers
@@ -830,6 +833,7 @@
     "cover_image": "Cover image",
     "cover_image_size": "Cover image size",
     "currency_code": "Currency code",
+    "curated_variant_metaobject": "Curated list (metaobject)",
     "custom_height": "Custom height",
     "custom_minimum_height": "Custom minimum height",
     // Checkbox to enable separate size settings for mobile devices
