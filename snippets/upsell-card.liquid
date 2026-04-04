@@ -360,6 +360,22 @@
     grid-template-columns: 1fr;
   }
 
+  /* Cart upsell Add uses icon_only_on_mobile; undo theme .is-visually-hidden-mobile so label shows */
+  @media screen and (max-width: 749px) {
+    .upsell-card--add-only .quick-add__button--add .add-to-cart-text__content.is-visually-hidden-mobile:not(:focus, :active) {
+      position: static !important;
+      overflow: visible !important;
+      width: auto !important;
+      height: auto !important;
+      margin: 0 !important;
+      padding: 0 !important;
+      border: 0 !important;
+      clip: auto !important;
+      clip-path: none;
+      word-wrap: normal !important;
+    }
+  }
+
   /*
    * Choose: quick-add defaults use grid 0fr + min-width:0 on the label stack, which clips
    * the label in the cart row (no hover expand). Size to the full string.
