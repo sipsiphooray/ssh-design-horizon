@@ -920,6 +920,25 @@
             </drawer-localization-component>
           {% endif %}
         {%- endif -%}
+        
+        {% if block_settings.drawer_shop_button_text != blank %}
+          <div class="drawer-shop-wrapper">
+            <a
+              class="button-secondary drawer-shop-button"
+              href="{{ block_settings.drawer_shop_button_url | default: routes.all_products_collection_url }}"
+            >
+              <span class="button-text">
+                {{ block_settings.drawer_shop_button_text }}
+              </span>
+              <span class="button--arrow">{{ 'icon-long-arrow.svg' | inline_asset_content }}</span>
+            </a>
+            {% if block_settings.drawer_shop_button_text_below != blank %}
+              <div class="drawer-shop-button-text-below text-center">
+                {{ block_settings.drawer_shop_button_text_below }}
+              </div>
+            {% endif %}
+          </div>
+        {% endif %}
       </div>
 
       {% liquid
@@ -986,6 +1005,18 @@
 {% stylesheet %}
   .header__icon--menu {
     position: initial;
+  }
+
+  .menu-drawer__localization + .drawer-shop-wrapper {
+    margin-top: var(--margin-md);
+  }
+
+  .drawer-shop-button {
+    width: 100%;
+  }
+
+  .drawer-shop-button-text-below {
+    margin-top: var(--margin-xs);
   }
 
   .menu-drawer-container .header__icon--summary {

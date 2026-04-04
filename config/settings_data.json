@@ -83,7 +83,7 @@
     "enable_shipping_protection": true,
     "shipping_protection_text": "<p>Your order is protected for [price]</p>",
     "protection_product": "shipping-protection",
-    "empty_cart_button_link": "shopify://collections",
+    "empty_cart_button_link": "shopify://collections/best-sellers-1",
     "shipping_threshold": 40,
     "progress_message": "You’re [money] away from free shipping",
     "success_message": "🎉 You’ve unlocked FREE SHIPPING!",
