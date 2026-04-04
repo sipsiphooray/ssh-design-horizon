@@ -792,6 +792,11 @@ body:has(.overlay.active) .sticky-add-to-cart__bar {
     padding-inline: var(--padding-xl) !important;
 }
 
+.menu-drawer__back-button > .svg-wrapper {
+    width: var(--icon-size-sm) !important;
+    height: var(--icon-size-sm) !important;
+}
+
 /*
  * Mega menu (desktop): widen + deepen the theme’s invisible ::after bridge on items with a submenu.
  * Horizon keeps pointer on <li> via that flex ::after; extending width catches diagonal moves toward the panel.
