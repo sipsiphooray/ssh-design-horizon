@@ -663,6 +663,75 @@ class ProductFormComponent extends Component {
   }
 
   /**
+   * Section HTML can include several `product-form-component` nodes (quick-add, upsells). Queries must target
+   * the main buy-buttons form for this product, not the first match in the document.
+   *
+   * @param {Document | ParentNode} doc
+   * @returns {ParentNode}
+   */
+  #getFetchedProductFormRoot(doc) {
+    const productId = this.dataset.productId;
+    if (!productId) return doc;
+    const id = typeof CSS !== 'undefined' && CSS.escape ? CSS.escape(String(productId)) : String(productId);
+    const mainForm = doc.querySelector(
+      `product-form-component[data-product-id="${id}"]:not(.quick-add__product-form-component)`
+    );
+    return mainForm ?? doc;
+  }
+
+  /**
+   * Klaviyo BIS mutates the add-to-cart button after load; morphing its children removes that markup.
+   * Fire hooks and best-effort global reinits (embed APIs vary by version).
+   */
+  #notifyKlaviyoBisAfterCartButtonMorph() {
+    const variantId = this.refs.variantId?.value ?? '';
+    const run = () => {
+      document.dispatchEvent(
+        new CustomEvent('variant:change', {
+          bubbles: true,
+          detail: { variantId },
+        })
+      );
+      document.dispatchEvent(
+        new CustomEvent('klaviyo-bis:dom-updated', {
+          bubbles: true,
+          detail: { variantId },
+        })
+      );
+
+      const w = /** @type {Record<string, unknown>} */ (/** @type {unknown} */ (window));
+      /**
+       * @param {unknown} obj
+       * @param {string} method
+       */
+      const tryCall = (obj, method) => {
+        if (obj != null && typeof obj === 'object' && method in obj) {
+          const fn = /** @type {Record<string, unknown>} */ (obj)[method];
+          if (typeof fn === 'function') {
+            try {
+              /** @type {(this: unknown) => void} */ (fn).call(obj);
+              return true;
+            } catch {
+              /* embed API varies */
+            }
+          }
+        }
+        return false;
+      };
+
+      for (const key of ['_klaviyo', '_klaviyoOnsite', 'KlaviyoOnsite', 'klaviyoOnsite', 'klaviyo', '__klaviyo']) {
+        const mod = w[key];
+        if (tryCall(mod, 'init')) break;
+        if (tryCall(mod, 'reload')) break;
+        if (tryCall(mod, 'refresh')) break;
+      }
+    };
+
+    queueMicrotask(() => requestAnimationFrame(run));
+    setTimeout(run, 200);
+  }
+
+  /**
    * @param {VariantUpdateEvent} event
    */
   #onVariantUpdate = async (event) => {
@@ -696,9 +765,14 @@ class ProductFormComponent extends Component {
       currentAddToCartButtonContainer.enable();
     }
 
-    const newAddToCartButton = event.detail.data.html.querySelector('product-form-component [ref="addToCartButton"]');
+    const fetchedRoot = this.#getFetchedProductFormRoot(event.detail.data.html);
+    const newAddToCartButton = fetchedRoot.querySelector('[ref="addToCartButton"]');
     if (newAddToCartButton && currentAddToCartButton) {
       morph(currentAddToCartButton, newAddToCartButton);
+    }
+
+    if (currentAddToCartButton?.classList.contains('klaviyo-bis-trigger')) {
+      this.#notifyKlaviyoBisAfterCartButtonMorph();
     }
 
     if (acceleratedCheckoutButtonContainer) {
@@ -732,31 +806,31 @@ class ProductFormComponent extends Component {
 
     // Update quantity selector's min/max/step attributes and cart quantity for the new variant
     const newQuantityInput = /** @type {HTMLInputElement | null} */ (
-      event.detail.data.html.querySelector('quantity-selector-component input[ref="quantityInput"]')
+      fetchedRoot.querySelector('quantity-selector-component input[ref="quantityInput"]')
     );
 
     if (quantitySelector?.updateConstraints && newQuantityInput) {
       quantitySelector.updateConstraints(newQuantityInput.min, newQuantityInput.max || null, newQuantityInput.step);
     }
 
-    const newQuantityRules = event.detail.data.html.querySelector('.quantity-rules');
+    const newQuantityRules = fetchedRoot.querySelector('.quantity-rules');
     const isQuantityRulesChanging = !!quantityRules !== !!newQuantityRules;
 
-    const newPricePerItem = event.detail.data.html.querySelector('price-per-item');
+    const newPricePerItem = fetchedRoot.querySelector('price-per-item');
     const isPricePerItemChanging = !!pricePerItem !== !!newPricePerItem;
 
     if ((isQuantityRulesChanging || isPricePerItemChanging) && quantitySelector) {
       // Store quantity value before morphing entire container
       const currentQuantityValue = quantitySelector.getValue?.();
 
-      const newProductFormButtons = event.detail.data.html.querySelector('.product-form-buttons');
+      const newProductFormButtons = fetchedRoot.querySelector('.product-form-buttons');
 
       if (productFormButtons && newProductFormButtons) {
         morph(productFormButtons, newProductFormButtons);
 
         // Get the NEW quantity selector after morphing and update its constraints
         const newQuantityInputElement = /** @type {HTMLInputElement | null} */ (
-          event.detail.data.html.querySelector('quantity-selector-component input[ref="quantityInput"]')
+          fetchedRoot.querySelector('quantity-selector-component input[ref="quantityInput"]')
         );
 
         if (this.refs.quantitySelector?.updateConstraints && newQuantityInputElement && currentQuantityValue) {
@@ -780,13 +854,13 @@ class ProductFormComponent extends Component {
       ];
 
       for (const [selector, currentElement, fallback] of morphTargets) {
-        this.#morphOrUpdateElement(currentElement, event.detail.data.html.querySelector(selector), fallback);
+        this.#morphOrUpdateElement(currentElement, fetchedRoot.querySelector(selector), fallback);
       }
     }
 
     // Morph volume pricing if it exists
     const currentVolumePricing = this.refs.volumePricing;
-    const newVolumePricing = event.detail.data.html.querySelector('volume-pricing');
+    const newVolumePricing = fetchedRoot.querySelector('volume-pricing');
     this.#morphOrUpdateElement(currentVolumePricing, newVolumePricing, this.refs.productFormButtons);
 
     const hasB2BFeatures =

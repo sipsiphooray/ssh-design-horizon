@@ -9,6 +9,7 @@
   @param {string} [class] - Additional CSS classes to apply to the button.
   @param {string} [id] - The ID attribute for the button.
   @param {string} [data_testid] - The data-testid attribute for testing.
+  @param {boolean} [enable_klaviyo_bis] - If true, adds `klaviyo-bis-trigger` (main PDP only; omit on quick-add so Klaviyo does not bind to the wrong button).
 {%- enddoc -%}
 
 {%- liquid
@@ -32,7 +33,7 @@
     name="add"
     ref="addToCartButton"
     on:click="/handleClick"
-    class="button klaviyo-bis-trigger {{ class }}"
+    class="button{% if enable_klaviyo_bis %} klaviyo-bis-trigger{% endif %} {{ class }}"
     {% if data_testid %}
       data-testid="{{ data_testid }}"
     {% endif %}
