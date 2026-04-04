@@ -734,9 +734,9 @@ body:has(.overlay.active) .sticky-add-to-cart__bar {
 
 .cart-review {
     text-align: center;
-    padding-block: var(--margin-sm);
-    border-block-start: 1px solid var(--color-border);
+    padding: var(--margin-sm);
     margin-block-start: var(--margin-sm);
+    background: #f9f9f9;
 }
 
 .cart-review__name {
@@ -757,7 +757,7 @@ body:has(.overlay.active) .sticky-add-to-cart__bar {
     height: 0.8rem;
     width: auto;
     aspect-ratio: 122.88 / 116.87;
-    fill: #fbe1ec;
+    fill: green;
 }
 
 .cart-items__title {
