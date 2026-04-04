@@ -1009,17 +1009,13 @@ body:has(.overlay.active) .sticky-add-to-cart__bar {
 }
 
 /*
- * Scroll lock (cart details, filters, etc.): global — was only inside max-width:749px,
- * so behavior was inconsistent. iOS Safari still needs body position:fixed (see dialog.js toggle).
+ * Scroll lock: custom.js sets html[scroll-lock] for dialog[scroll-lock] (theme only sets it for details).
+ * Do NOT add height/max-height/dvh on html — same-frame reflow with body fixed jumps the page to the top.
+ * Do NOT set overflow:hidden on body here — Horizon’s header is sticky inside body; overflow on body clips
+ * that stacking context and the site header disappears behind the cart drawer / modal.
+ * Horizon already uses body { position:fixed } while dialogs are open for scroll lock.
  */
 html[scroll-lock] {
     overflow: hidden !important;
-    height: 100%;
     overscroll-behavior: none;
-}
-
-html[scroll-lock] body {
-    overflow: hidden !important;
-    overscroll-behavior: none;
-    touch-action: none;
 }

@@ -45,6 +45,114 @@ document.addEventListener(ThemeEvents.megaMenuHover, () => {
   requestAnimationFrame(() => initMegaMenuThumbnails());
 });
 
+/**
+ * Horizon `dialog.js` only toggles `html[scroll-lock]` for `<details scroll-lock>`, not for
+ * `<dialog scroll-lock>` (quick-add, cart drawer, search). Safari/iOS then relies on `body` fixed
+ * alone, which often still scrolls. Sync `html[scroll-lock]` whenever any dialog or details lock
+ * is open; microtask after `toggle` fixes details closing while a dialog stays open.
+ */
+const SCROLL_LOCK_DIALOG_SELECTOR = 'dialog[scroll-lock]';
+/**
+ * Scroll Y parsed from `body.style.top` after `showModal` (Horizon sets `-${scrollY}px` before calling it).
+ * MutationObserver on `open` was unreliable; patching `HTMLDialogElement` guarantees capture + restore.
+ * @type {WeakMap<HTMLDialogElement, number>}
+ */
+const dialogLockedScrollY = new WeakMap();
+
+function isAnyScrollLockUiOpen() {
+  for (const el of document.querySelectorAll(SCROLL_LOCK_DIALOG_SELECTOR)) {
+    if (el instanceof HTMLDialogElement && el.open) return true;
+  }
+  for (const el of document.querySelectorAll('details[scroll-lock]')) {
+    if (el instanceof HTMLDetailsElement && el.open) return true;
+  }
+  return false;
+}
+
+function syncDocumentScrollLock() {
+  if (isAnyScrollLockUiOpen()) {
+    document.documentElement.setAttribute('scroll-lock', '');
+  } else {
+    document.documentElement.removeAttribute('scroll-lock');
+  }
+}
+
+/**
+ * @param {number} y
+ */
+function restoreWindowScrollAfterDialogClose(y) {
+  const apply = () => {
+    const x = window.scrollX;
+    window.scrollTo({ top: y, left: x, behavior: 'auto' });
+    const se = document.scrollingElement;
+    if (se instanceof HTMLElement) {
+      se.scrollTop = y;
+    }
+  };
+  apply();
+  queueMicrotask(apply);
+  requestAnimationFrame(() => {
+    apply();
+    requestAnimationFrame(() => {
+      apply();
+      setTimeout(apply, 0);
+      setTimeout(apply, 50);
+      setTimeout(apply, 120);
+    });
+  });
+}
+
+let htmlDialogScrollLockPatchApplied = false;
+
+function patchHtmlDialogForScrollLock() {
+  if (htmlDialogScrollLockPatchApplied) return;
+  if (typeof HTMLDialogElement === 'undefined') return;
+  htmlDialogScrollLockPatchApplied = true;
+
+  const proto = HTMLDialogElement.prototype;
+  const origShowModal = proto.showModal;
+  const origClose = proto.close;
+
+  proto.showModal = function showModalWithScrollCapture(...args) {
+    origShowModal.apply(this, args);
+    if (this.hasAttribute('scroll-lock')) {
+      const top = document.body.style.top;
+      const m = top?.match(/^-(\d+(?:\.\d+)?)px$/);
+      const numStr = m?.[1];
+      if (numStr) {
+        const y = Math.round(parseFloat(numStr));
+        if (Number.isFinite(y) && y >= 0) {
+          dialogLockedScrollY.set(this, y);
+        }
+      }
+    }
+    // Defer html[scroll-lock]: same-frame overflow/height on html fights body fixed+top and causes a jump to top.
+    requestAnimationFrame(() => {
+      syncDocumentScrollLock();
+    });
+  };
+
+  proto.close = function closeWithScrollRestore(...args) {
+    const hasLock = this.hasAttribute('scroll-lock');
+    const y = hasLock ? dialogLockedScrollY.get(this) : undefined;
+    origClose.apply(this, args);
+    if (hasLock) {
+      dialogLockedScrollY.delete(this);
+    }
+    syncDocumentScrollLock();
+    if (hasLock && y != null && y >= 0) {
+      restoreWindowScrollAfterDialogClose(y);
+    }
+  };
+}
+
+patchHtmlDialogForScrollLock();
+
+onDocumentReady(() => {
+  document.addEventListener('toggle', () => queueMicrotask(syncDocumentScrollLock), true);
+  syncDocumentScrollLock();
+});
+
 function scrollToHash() {
   const hash = window.location.hash; // "#faq"
   if (hash) {

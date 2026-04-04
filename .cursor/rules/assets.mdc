@@ -11,6 +11,14 @@ Assets is a flat directory, it may not contain subdirectories.
 
 Any images that are required in the code, including icons, may be stored within assets.  Icons can be used in `.liquid` files via the [inline_asset_content](mdc:https:/shopify.dev/docs/api/liquid/filters/inline_asset_content) Liquid filter.
 
+## `custom.js` load order
+
+`custom.js` patches `HTMLDialogElement.prototype` for scroll restore and sets `html[scroll-lock]` for dialogs. It must load **before** the user can open cart/quick-add, so in `snippets/scripts.liquid` it is included **immediately after** `dialog.js` with `fetchpriority="high"` (not at the end of the list with `low`).
+
+## `html[scroll-lock]` in `custom.css`
+
+Do not add `height` / `max-height` / `100dvh` / `-webkit-fill-available` on `html[scroll-lock]` with dialogs: Horizon applies `body { position:fixed; top:-Ypx }` in the same turn as `showModal()`; heavy html constraints in that frame reset document scroll and the viewport **jumps to the top before the drawer paints**. Keep `overflow: hidden` + `overscroll-behavior` on **html only** — do not set `overflow: hidden` on `body` under `html[scroll-lock]` or the sticky `header-component` is clipped and the header **disappears** when the cart drawer opens. `syncDocumentScrollLock()` after `showModal` is deferred one `requestAnimationFrame` for the same reason.
+
 ## `variant-select` (custom.js) and swatches
 
 `onOptionSelect` must call `syncDisplaySwatch(optionEl)` so `.cs-display .swatch-image` matches the selected `.cs-option`; updating only `.cs-display-text` leaves the old image or an empty swatch ring (especially in quick-add after variant change).
