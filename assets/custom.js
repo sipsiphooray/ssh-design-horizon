@@ -183,8 +183,9 @@ scrollToHash();
 window.addEventListener("hashchange", scrollToHash);
 
 /**
- * Menu drawer alignment: set `--menu-drawer-top` / `--menu-drawer-height` on html, body, and the
- * open `<details>` so `var(--menu-drawer-top)` always resolves (inheritance + same source as theme’s body vars).
+ * Menu drawer alignment: set `--menu-drawer-top` / `--menu-drawer-height` on html, body, and
+ * `#Details-menu-drawer-container` so `custom.css` can position `.menu-drawer` with `top`/`height`:
+ * `var(--menu-drawer-top)` and `var(--menu-drawer-height)` (no inline layout on the panel—Horizon-style).
  */
 const MENU_DRAWER_TOP_VAR = '--menu-drawer-top';
 const MENU_DRAWER_HEIGHT_VAR = '--menu-drawer-height';
@@ -199,21 +200,12 @@ function menuDrawerViewportHeight() {
   return window.visualViewport?.height ?? window.innerHeight;
 }
 
-/** Direct child `.menu-drawer` of main menu details (avoid `:scope` for older WebKit). */
+/** Open root menu `<details>` (hamburger drawer). */
 function getMenuDrawerDetails() {
   return (
     document.querySelector('#Details-menu-drawer-container[open]') ??
     document.querySelector('details.menu-drawer-container[open]')
   );
-}
-
-function getOpenMenuDrawerPanel() {
-  const details = getMenuDrawerDetails();
-  if (!details) return null;
-  for (const el of details.children) {
-    if (el instanceof HTMLElement && el.classList.contains('menu-drawer')) return el;
-  }
-  return null;
 }
 
 /**
@@ -309,23 +301,10 @@ function syncMenuDrawerLayoutVars() {
   const heightPx = `${height}px`;
 
   applyMenuDrawerVarsToRoots(topPx, heightPx);
-
-  const drawer = getOpenMenuDrawerPanel();
-  if (drawer) {
-    drawer.style.setProperty('top', topPx, 'important');
-    drawer.style.setProperty('height', heightPx, 'important');
-  }
 }
 
 function clearMenuDrawerLayoutVars() {
   clearMenuDrawerVarsFromRoots();
-  const drawer =
-    document.querySelector('#Details-menu-drawer-container .menu-drawer') ??
-    document.querySelector('details.menu-drawer-container .menu-drawer');
-  if (drawer instanceof HTMLElement) {
-    drawer.style.removeProperty('top');
-    drawer.style.removeProperty('height');
-  }
 }
 
 function onMenuDrawerOpenLayoutSync() {

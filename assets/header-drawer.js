@@ -14,6 +14,12 @@ import { onAnimationEnd, removeWillChangeOnAnimationEnd } from '@theme/utilities
 class HeaderDrawer extends Component {
   requiredRefs = ['details', 'menuDrawer'];
 
+  /** Submenu row: ignore summary "close" taps while slide-in transition/animation is still running. */
+  #submenuSlideAnimating = new WeakSet();
+
+  /** @type {WeakMap<HTMLDetailsElement, ReturnType<typeof setTimeout>>} */
+  #submenuSlideSafetyTimeouts = new WeakMap();
+
   connectedCallback() {
     super.connectedCallback();
 
@@ -72,6 +78,27 @@ class HeaderDrawer extends Component {
 
     if (!summary) return;
 
+    // Submenu rows: prevent native <details> toggle so we don't race rAF + menu-open against the
+    // browser default (a second tap while transitioning could close immediately). Programmatic open;
+    // tap again while open runs #close instead of toggle.
+    if (target && event && typeof event.preventDefault === 'function') {
+      event.preventDefault();
+      if (details.hasAttribute('open')) {
+        if (this.#submenuSlideAnimating.has(details)) return;
+        this.#close(details);
+        return;
+      }
+      details.setAttribute('open', '');
+      this.#submenuSlideAnimating.add(details);
+      const prevSafety = this.#submenuSlideSafetyTimeouts.get(details);
+      if (prevSafety != null) clearTimeout(prevSafety);
+      const safetyId = setTimeout(() => {
+        this.#submenuSlideAnimating.delete(details);
+        this.#submenuSlideSafetyTimeouts.delete(details);
+      }, 500);
+      this.#submenuSlideSafetyTimeouts.set(details, safetyId);
+    }
+
     summary.setAttribute('aria-expanded', 'true');
 
     this.preventInitialAccordionAnimations(details);
@@ -84,8 +111,33 @@ class HeaderDrawer extends Component {
 
       // Wait for the drawer animation to complete before trapping focus
       const drawer = details.querySelector('.menu-drawer, .menu-drawer__submenu');
-      onAnimationEnd(drawer || details, () => trapFocus(details), { subtree: false });
+      onAnimationEnd(drawer || details, () => {
+        if (target) {
+          const safety = this.#submenuSlideSafetyTimeouts.get(details);
+          if (safety != null) {
+            clearTimeout(safety);
+            this.#submenuSlideSafetyTimeouts.delete(details);
+          }
+          this.#submenuSlideAnimating.delete(details);
+        }
+        if (!details.hasAttribute('open')) return;
+        const trapContainer = this.#focusTrapTargetForCompletedOpen(details);
+        if (!trapContainer.hasAttribute('open')) return;
+        trapFocus(trapContainer);
+      }, { subtree: false });
     });
+  }
+
+  /**
+   * After any open animation ends: if the main drawer finished but a nested submenu is already
+   * open, trap there so a late callback does not replace focus behavior incorrectly.
+   * @param {HTMLDetailsElement} details
+   * @returns {HTMLDetailsElement}
+   */
+  #focusTrapTargetForCompletedOpen(details) {
+    if (details !== this.refs.details) return details;
+    const nested = this.querySelector('details.menu-drawer__menu-container.menu-open[open]');
+    return nested instanceof HTMLDetailsElement ? nested : details;
   }
 
   /**
@@ -112,6 +164,13 @@ class HeaderDrawer extends Component {
     const summary = details.querySelector('summary');
 
     if (!summary) return;
+
+    const safety = this.#submenuSlideSafetyTimeouts.get(details);
+    if (safety != null) {
+      clearTimeout(safety);
+      this.#submenuSlideSafetyTimeouts.delete(details);
+    }
+    this.#submenuSlideAnimating.delete(details);
 
     summary.setAttribute('aria-expanded', 'false');
     details.classList.remove('menu-open');

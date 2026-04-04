@@ -93,9 +93,8 @@ a.size-style.link:after {
 }
 
 /*
- * Menu drawer top/height: custom.js sets --menu-drawer-top / --menu-drawer-height on html, body, and
- * #Details-menu-drawer-container while open (so var() resolves like theme body vars).
- * #Details-menu-drawer-container + !important wins over header-drawer.liquid {% stylesheet %}.
+ * Menu drawer top/height: custom.js sets only --menu-drawer-top / --menu-drawer-height on html, body, and
+ * #Details-menu-drawer-container (no inline top/height on .menu-drawer). Panel position uses var() here.
  */
 [data-sticky-state="active"] #Details-menu-drawer-container.menu-open > .menu-drawer,
 [data-sticky-state="active"] #Details-menu-drawer-container[open] > .menu-drawer {
@@ -138,8 +137,44 @@ summary,.menu-drawer__back-button {
     -webkit-tap-highlight-color: transparent;
 }
 
-.menu-drawer-container .menu-drawer__animated-element {
-    animation: unset !important;
+/* Avoid animation:unset on .menu-drawer__animated-element — breaks header-drawer submenu timing. */
+
+/* Theme keyframes menu-drawer-nav-open use translateY; use unique names + higher specificity so bundled
+   header-drawer styles cannot override. Horizontal slide LTR = from inline-end (right). */
+@keyframes ssh-menu-drawer-nav-open-ltr {
+    0% {
+        visibility: hidden;
+        opacity: 0;
+        transform: translateX(0.75rem);
+    }
+
+    100% {
+        visibility: visible;
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+@keyframes ssh-menu-drawer-nav-open-rtl {
+    0% {
+        visibility: hidden;
+        opacity: 0;
+        transform: translateX(-0.75rem);
+    }
+
+    100% {
+        visibility: visible;
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+header-drawer .menu-drawer-container[open] .menu-drawer__animated-element {
+    animation-name: ssh-menu-drawer-nav-open-ltr;
+}
+
+:dir(rtl) header-drawer .menu-drawer-container[open] .menu-drawer__animated-element {
+    animation-name: ssh-menu-drawer-nav-open-rtl;
 }
 
 .menu-drawer svg {
@@ -795,6 +830,7 @@ body:has(.overlay.active) .sticky-add-to-cart__bar {
 .menu-drawer__back-button > .svg-wrapper {
     width: var(--icon-size-sm) !important;
     height: var(--icon-size-sm) !important;
+    margin-left: -0.4rem;
 }
 
 /*
