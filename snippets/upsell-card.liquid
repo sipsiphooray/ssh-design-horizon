@@ -227,7 +227,7 @@
     display: flex;
     flex-direction: column;
     align-items: stretch;
-    gap: var(--margin-3xs);
+    gap: var(--gap-xs);
   }
 
   .upsell-card .upsell-title {
@@ -305,10 +305,10 @@
     padding-inline: var(--button-padding-inline);
     border: none;
     border-radius: var(--style-border-radius-buttons-primary);
-    background: var(--color-primary-button-background);
+    background: var(--color-primary-button-text);
     background-image: none;
-    color: var(--color-primary-button-text);
-    box-shadow: inset 0 0 0 var(--button-border-width) var(--color-primary-button-border);
+    color: var(--color-primary-button-background);
+    box-shadow: inset 0 0 0 var(--button-border-width) var(--color-primary-button-border) !important;
     backdrop-filter: none;
     -webkit-backdrop-filter: none;
     font-family: var(--button-font-family-primary);
@@ -329,9 +329,9 @@
   .upsell-card--add-only .quick-add__button--add:hover,
   .upsell-card--multi-variant .quick-add__button--choose:hover {
     scale: 1;
-    background: var(--color-primary-button-hover-background);
+    background: var(--color-primary-button-hover-text);
     background-image: none;
-    color: var(--color-primary-button-hover-text);
+    color: var(--color-primary-button-hover-background);
     box-shadow: inset 0 0 0 var(--button-border-width) var(--color-primary-button-hover-border) !important;
   }
 
