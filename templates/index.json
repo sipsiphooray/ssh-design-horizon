@@ -1198,7 +1198,7 @@
       },
       "name": "t:names.featured_collection",
       "settings": {
-        "collection": "best-sellers",
+        "collection": "best-sellers-1",
         "layout_type": "grid",
         "carousel_on_mobile": true,
         "max_products": 4,
@@ -1541,13 +1541,13 @@
             "button_a68XY3": {
               "type": "button",
               "settings": {
-                "label": "Shop now",
+                "label": "Shop Best-Sellers",
                 "link": "shopify://collections/best-sellers",
                 "open_in_new_tab": false,
                 "style_class": "button-secondary",
                 "add_arrow": true,
-                "width": "custom",
-                "custom_width": 45,
+                "width": "fit-content",
+                "custom_width": 60,
                 "width_mobile": "fit-content",
                 "custom_width_mobile": 100
               },
