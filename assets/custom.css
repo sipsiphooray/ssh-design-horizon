@@ -822,7 +822,7 @@ body:has(.overlay.active) .sticky-add-to-cart__bar {
     }
 
     header-actions:has(.xb-wishlist-header-auto-container) .account-button {
-        margin-inline-end: calc(var(--gap-sm) * -1);
+        margin-inline-end: calc(var(--gap-xs) * -1);
     }
 
     .header-logo {
@@ -982,22 +982,30 @@ body:has(.overlay.active) .sticky-add-to-cart__bar {
     .quick-add-modal__content:has(.cs-menu.open) {
         padding-bottom: var(--padding-4xl) !important;
     }
-      /* iOS Safari: lock scroll when theme sets html[scroll-lock] (menu drawer, modals, etc.) */
-    html[scroll-lock] {
-        overflow: hidden;
-        height: 100%;
-        overscroll-behavior: none;
-    }
-    html[scroll-lock] body {
-        overflow: hidden;
-        overscroll-behavior: none;
-    }
-    html[scroll-lock] body {
-        touch-action: none;
-    }
-    html[scroll-lock] .menu-drawer,
-    html[scroll-lock] .menu-drawer__navigation,
-    html[scroll-lock] .menu-drawer__submenu {
-        touch-action: pan-y;
-    }
+}
+
+/*
+ * Scroll lock (menu drawer, cart details, filters, etc.): global — was only inside max-width:749px,
+ * so behavior was inconsistent. iOS Safari still needs body position:fixed (see dialog.js toggle).
+ */
+html[scroll-lock] {
+    overflow: hidden !important;
+    height: 100%;
+    overscroll-behavior: none;
+}
+
+html[scroll-lock] body {
+    overflow: hidden !important;
+    overscroll-behavior: none;
+    touch-action: none;
+}
+
+/* Drawer / submenu panels scroll internally; touch-action is not inherited. */
+html[scroll-lock] .menu-drawer,
+html[scroll-lock] .menu-drawer__navigation,
+html[scroll-lock] .menu-drawer__navigation-container,
+html[scroll-lock] .menu-drawer__inner-submenu,
+html[scroll-lock] .menu-drawer__submenu {
+    touch-action: pan-y;
+    -webkit-overflow-scrolling: touch;
 }
