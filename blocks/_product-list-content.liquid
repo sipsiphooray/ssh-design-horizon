@@ -1,8 +1,11 @@
 {%- capture children -%}
   {%- content_for 'blocks' -%}
 {%- endcapture -%}
+{% capture class %}
+  product-list-content
+{% endcapture %}
 
-{%- render 'group', children: children, settings: block.settings, shopify_attributes: block.shopify_attributes -%}
+{%- render 'group', children: children, class: class, settings: block.settings, shopify_attributes: block.shopify_attributes -%}
 
 {% schema %}
 {

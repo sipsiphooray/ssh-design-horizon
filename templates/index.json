@@ -563,7 +563,7 @@
           "settings": {
             "content_direction": "row",
             "vertical_on_mobile": false,
-            "horizontal_alignment": "space-between",
+            "horizontal_alignment": "center",
             "vertical_alignment": "center",
             "align_baseline": true,
             "horizontal_alignment_flex_direction_column": "center",
@@ -845,6 +845,9 @@
           ]
         }
       },
+      "custom_css": [
+        ".product-list-content:has(.link) .link {position: absolute !important; top: 50%; right: 0; transform: translateY(-50%);}"
+      ],
       "name": "t:names.curated_variant_list",
       "settings": {
         "curated_list": "new-sips",
@@ -880,7 +883,7 @@
           "settings": {
             "content_direction": "row",
             "vertical_on_mobile": false,
-            "horizontal_alignment": "space-between",
+            "horizontal_alignment": "center",
             "vertical_alignment": "center",
             "align_baseline": true,
             "horizontal_alignment_flex_direction_column": "center",
@@ -1162,6 +1165,9 @@
           ]
         }
       },
+      "custom_css": [
+        ".product-list-content:has(.link) .link {position: absolute !important; top: 50%; right: 0; transform: translateY(-50%);}"
+      ],
       "name": "t:names.curated_variant_list",
       "settings": {
         "curated_list": "best-sellers",
