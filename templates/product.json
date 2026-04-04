@@ -468,7 +468,7 @@
                 "subscription_policy_url": "",
                 "color_text_body": "#2b2b2b",
                 "dividers_color": "#f5f5f5",
-                "background_color": "#FFFFFF",
+                "background_color": "#ffffff",
                 "border_thickness": 1,
                 "border_radius": 0,
                 "product": "{{closest.product}}"
@@ -1192,7 +1192,7 @@
               "settings": {
                 "icon_position": "left",
                 "icon": "apple",
-                "image_upload": "shopify://shop_images/heart_2x_1e793947-a88b-4e5f-9f8c-9b3e26c65ef0.png",
+                "image_upload": "shopify://shop_images/handmade_2x_e3d4ec26-7dd4-4b7d-9061-9ecdbfd2a371.png",
                 "icon_width": 24,
                 "use_height": true,
                 "icon_height": 28,
