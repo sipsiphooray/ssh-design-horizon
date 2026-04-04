@@ -678,7 +678,7 @@ body:has(.overlay.active) .sticky-add-to-cart__bar {
     width: 100%;
     text-align: left;
     font-size: var(--font-size--2xs);
-    padding: var(--padding-xs) var(--cart-drawer-summary-padding);
+    padding: var(--padding-sm) var(--cart-drawer-summary-padding);
     position: absolute;
     bottom: 0;
     left: 0;
@@ -861,7 +861,7 @@ body:has(.overlay.active) .sticky-add-to-cart__bar {
     }
 
     .cart-drawer__summary {
-        padding-block-end: var(--padding-6xl) !important;
+        padding-block-end: var(--padding-5xl) !important;
     }
 }
 
