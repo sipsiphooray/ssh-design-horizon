@@ -74,6 +74,63 @@ scrollToHash();
 // Run on hash change
 window.addEventListener("hashchange", scrollToHash);
 
+/** Syncs .menu-drawer top/height with the real #header-group bottom when the mobile menu opens. */
+const MENU_DRAWER_TOP_VAR = '--menu-drawer-top';
+
+function syncMenuDrawerTopFromHeader() {
+  const headerGroup = document.querySelector('#header-group');
+  if (!headerGroup) {
+    clearMenuDrawerTop();
+    return;
+  }
+
+  // #header-group's own rect includes the sticky header's in-flow box (often far below the
+  // viewport when scrolled). Use each child's painted rect: header-component for the main
+  // header (sticky position), section wrapper for announcement bar, then take the lowest bottom.
+  let maxBottom = 0;
+  for (const child of headerGroup.children) {
+    if (!(child instanceof HTMLElement)) continue;
+    const headerComponent = child.querySelector('header-component');
+    const el = headerComponent instanceof HTMLElement ? headerComponent : child;
+    const r = el.getBoundingClientRect();
+    if (r.bottom <= 0) continue;
+    maxBottom = Math.max(maxBottom, r.bottom);
+  }
+
+  if (maxBottom <= 0) {
+    const hc = document.querySelector('#header-component');
+    maxBottom = Math.max(0, (hc ?? headerGroup).getBoundingClientRect().bottom);
+  }
+
+  document.documentElement.style.setProperty(MENU_DRAWER_TOP_VAR, `${maxBottom}px`);
+}
+
+function clearMenuDrawerTop() {
+  document.documentElement.style.removeProperty(MENU_DRAWER_TOP_VAR);
+}
+
+document.addEventListener(
+  'toggle',
+  (event) => {
+    const target = event.target;
+    if (!(target instanceof HTMLDetailsElement)) return;
+    if (!target.classList.contains('menu-drawer-container')) return;
+
+    if (target.open) {
+      requestAnimationFrame(() => {
+        requestAnimationFrame(() => {
+          syncMenuDrawerTopFromHeader();
+          window.addEventListener('resize', syncMenuDrawerTopFromHeader, { passive: true });
+        });
+      });
+    } else {
+      window.removeEventListener('resize', syncMenuDrawerTopFromHeader);
+      clearMenuDrawerTop();
+    }
+  },
+  false
+);
+
 // Handle hover updates
 document.addEventListener('mouseover', e => {
   const target = e.target;

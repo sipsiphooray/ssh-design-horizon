@@ -92,9 +92,11 @@ a.size-style.link:after {
     height: var(--icon-size-sm) !important;
 }
 
+/* --menu-drawer-top is set in custom.js when the drawer opens so the panel lines up with #header-group
+   after scroll-lock freezes the body (see dialog.js). Falls back to theme variables when closed. */
 [data-sticky-state="active"] .menu-drawer {
-    top: calc(var(--header-height) - 1px);
-    height: calc(var(--drawer-height) - var(--header-height));
+    top: var(--menu-drawer-top, calc(var(--header-height) - 1px)) !important;
+    height: calc(var(--drawer-height) - var(--menu-drawer-top, var(--header-height))) !important;
 }
 
 .menu-drawer__backdrop {
@@ -119,6 +121,8 @@ a.size-style.link:after {
 
 .menu-drawer {
     box-shadow: unset !important;
+    top: var(--menu-drawer-top, var(--header-group-height)) !important;
+    height: calc(var(--drawer-height) - var(--menu-drawer-top, var(--header-group-height))) !important;
 }
 
 summary,.menu-drawer__back-button {
