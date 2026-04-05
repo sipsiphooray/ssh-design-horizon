@@ -865,6 +865,16 @@ body:has(.overlay.active) .sticky-add-to-cart__bar {
     .header-menu .menu-list__submenu-inner {
         transition: opacity calc(var(--submenu-animation-speed, 0s) * 0.75) var(--animation-easing, ease) !important;
     }
+
+    /*
+     * header.liquid uses content-visibility:auto + contain-intrinsic-size:0px 500px on .menu-list__submenu.
+     * [data-active] forces visible, but moving the pointer onto .menu-list__submenu-inner can still hit a frame
+     * where the browser culled or mis-sized content vs clip-path. Keep desktop mega panels fully laid out.
+     */
+    .header-menu .menu-list__submenu {
+        content-visibility: visible !important;
+        contain-intrinsic-size: unset !important;
+    }
 }
 
 @media screen and (min-width: 60em) {
