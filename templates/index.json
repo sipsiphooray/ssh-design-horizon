@@ -4801,7 +4801,7 @@
       },
       "name": "t:names.carousel",
       "settings": {
-        "columns": 4,
+        "columns": 3,
         "mobile_columns": "1",
         "section_width": "page-narrow",
         "columns_gap": 16,
