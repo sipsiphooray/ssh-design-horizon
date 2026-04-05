@@ -1088,7 +1088,7 @@ body:has(.overlay.active) .sticky-add-to-cart__bar {
         left: calc(-1 * var(--gap-sm));
     }
 
-    .row-2 .group-block-content {
+    .row-2 > .group-block-content {
         --gap: 24px !important;
     }
 }
