@@ -1087,6 +1087,10 @@ body:has(.overlay.active) .sticky-add-to-cart__bar {
     .cart-usp-list:not(:has(img)) li:not(:first-child):after {
         left: calc(-1 * var(--gap-sm));
     }
+
+    .row-2 .group-block-content {
+        --gap: 24px !important;
+    }
 }
 
 /*
