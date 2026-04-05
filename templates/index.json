@@ -2709,7 +2709,7 @@
             "align_baseline": false,
             "horizontal_alignment_flex_direction_column": "flex-start",
             "custom_mobile_alignment": true,
-            "mobile_vertical_alignment": "center",
+            "mobile_vertical_alignment": "flex-start",
             "vertical_alignment_flex_direction_column": "center",
             "gap": 12,
             "enable_mobile_gap": false,
