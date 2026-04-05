@@ -1079,6 +1079,14 @@ body:has(.overlay.active) .sticky-add-to-cart__bar {
     .header__row .header-drawer {
         margin-inline-start: var(--gap-2xs);
     }
+
+    .cart-usp-list {
+        justify-content: center;
+    }
+
+    .cart-usp-list:not(:has(img)) li:not(:first-child):after {
+        left: calc(-1 * var(--gap-sm));
+    }
 }
 
 /*
