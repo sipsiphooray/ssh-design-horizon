@@ -851,6 +851,20 @@ body:has(.overlay.active) .sticky-add-to-cart__bar {
         margin-block-start: calc(-1 * (var(--padding-lg) + var(--gap-md)));
         padding-block-start: calc(var(--padding-lg) + var(--gap-md));
     }
+
+    /*
+     * Mid-open clipping: Horizon animates clip-path on the submenu while --full-open-header-height / --submenu-height
+     * can change in the same frame (or when switching items quickly). Interpolated clip rects cut off the inner panel.
+     * Snap clip-path immediately; keep theme geometry. Do not use clip-path:none (that broke layout before).
+     */
+    .header-menu .menu-list__list-item:not([slot='overflow']) > .menu-list__submenu,
+    .header-menu overflow-menu::part(overflow) {
+        transition: none !important;
+    }
+
+    .header-menu .menu-list__submenu-inner {
+        transition: opacity calc(var(--submenu-animation-speed, 0s) * 0.75) var(--animation-easing, ease) !important;
+    }
 }
 
 @media screen and (min-width: 60em) {
