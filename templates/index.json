@@ -2708,7 +2708,7 @@
             "vertical_alignment": "center",
             "align_baseline": false,
             "horizontal_alignment_flex_direction_column": "flex-start",
-            "custom_mobile_alignment": true,
+            "custom_mobile_alignment": false,
             "mobile_vertical_alignment": "flex-start",
             "vertical_alignment_flex_direction_column": "center",
             "gap": 12,
@@ -3231,8 +3231,9 @@
       ],
       "custom_css": [
         ".text-icon-block .text-block {line-height: 1.2em;}",
-        ".row-2 .group-block-content {flex-wrap: wrap;}",
-        ".row-2 .text-icon-block {width: calc(50% - var(--gap) / 2); flex: 1 auto;}"
+        ".row-2 > .group-block-content {flex-wrap: wrap;}",
+        ".row-2 .text-icon-block {width: calc(50% - var(--gap) / 2); flex: 1 auto;}",
+        "@media (max-width: 749px) {.row-2 .group-block-content {--gap: 24px !important;}}"
       ],
       "name": "& as always",
       "settings": {
