@@ -1051,6 +1051,10 @@ body:has(.overlay.active) .sticky-add-to-cart__bar {
     .quick-add-modal__content:has(.cs-menu.open) {
         padding-bottom: var(--padding-4xl) !important;
     }
+
+    .header__row .header-drawer {
+        margin-inline-start: var(--gap-2xs);
+    }
 }
 
 /*
