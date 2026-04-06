@@ -584,9 +584,10 @@
                   "settings": {
                     "icon_position": "left",
                     "icon": "truck",
+                    "image_upload": "shopify://shop_images/truck-ship.png",
                     "icon_width": 18,
-                    "use_height": false,
-                    "icon_height": 24,
+                    "use_height": true,
+                    "icon_height": 16,
                     "custom_mobile_height": false,
                     "mobile-height": 24,
                     "text": "<p>Free Shipping On Orders Over $40</p>",
