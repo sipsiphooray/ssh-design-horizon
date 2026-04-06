@@ -237,7 +237,7 @@
               "type": "custom-liquid",
               "name": "t:names.custom_liquid",
               "settings": {
-                "custom_liquid": "<div data-oke-badge data-oke-layout=\"small\" data-oke-color-scheme=\"custom\" data-oke-background-color=\"#FBE1EC\" data-oke-border-color=\"#FBE1EC\" data-oke-text-color=\"#2B2B2B\" data-oke-star-background-color=\"#FFFFFF\" data-oke-star-height-px=\"14\" data-oke-star-border-enabled=\"false\" data-oke-star-foreground-color=\"#FFCF2A\"></div>"
+                "custom_liquid": "<div data-oke-badge data-oke-layout=\"minimal\" data-oke-star-background-color=\"#FFFFFF\" data-oke-star-height-px=\"14\" data-oke-star-border-enabled=\"false\" data-oke-star-foreground-color=\"#FFCF2A\"></div>"
               },
               "blocks": {}
             }
