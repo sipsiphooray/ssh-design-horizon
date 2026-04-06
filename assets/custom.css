@@ -454,7 +454,7 @@ summary .svg-wrapper {
 }
 
 .product-details .shopify-app-block:has([data-oke-star-rating]) {
-    margin-top: calc(-1 * var(--gap-2xs));
+    margin-bottom: calc(-1 * var(--gap-lg));
 }
 
 #klaviyo-bis-button-container {
@@ -1090,6 +1090,10 @@ body:has(.overlay.active) .sticky-add-to-cart__bar {
 
     .row-2 > .group-block-content {
         --gap: 24px !important;
+    }
+
+    .product-details .shopify-app-block:has([data-oke-star-rating]) {
+        margin-bottom: calc(-1 * var(--gap-2xl));
     }
 }
 
