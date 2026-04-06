@@ -144,6 +144,12 @@
                   },
                   "blocks": {}
                 },
+                "okendo_star_rating_7P7JpH": {
+                  "type": "shopify://apps/okendo/blocks/star-rating/bb689e69-ea70-4661-8fb7-ad24a2e23c29",
+                  "settings": {
+                    "product": "{{closest.product}}"
+                  }
+                },
                 "text_xpVMaM": {
                   "type": "text",
                   "name": "t:names.title",
@@ -176,12 +182,6 @@
                     "mobile-padding-inline-end": 0
                   },
                   "blocks": {}
-                },
-                "okendo_star_rating_7P7JpH": {
-                  "type": "shopify://apps/okendo/blocks/star-rating/bb689e69-ea70-4661-8fb7-ad24a2e23c29",
-                  "settings": {
-                    "product": "{{closest.product}}"
-                  }
                 },
                 "price_tVjtKg": {
                   "type": "price",
@@ -217,8 +217,8 @@
               },
               "block_order": [
                 "custom_liquid_qE6bdP",
-                "text_xpVMaM",
                 "okendo_star_rating_7P7JpH",
+                "text_xpVMaM",
                 "price_tVjtKg",
                 "custom_liquid_7BVx6i"
               ]
