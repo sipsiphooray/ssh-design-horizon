@@ -1008,7 +1008,7 @@
           "type": "moving-line-text",
           "name": "Moving line text",
           "settings": {
-            "text": "<h3>These are <em>cute too:</em></h3>",
+            "text": "<h3>these are <em>cute too:</em></h3>",
             "line_vector": "shopify://shop_images/pink-curve_862cbfce-ff0a-4697-9aa9-1f089baec353.png",
             "height": 16,
             "mobile_height": 16,
