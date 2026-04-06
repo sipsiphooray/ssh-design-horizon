@@ -384,12 +384,11 @@ div:has(> .size-available-text) {
 }
 
 .product-card .oke-sr-count {
-    margin-left: var(--gap-2xs);
+    display: none;
 }
 
 .okeReviews[data-oke-container], div.okeReviews {
     line-height: 1 !important;
-    white-space: nowrap;
 }
 
 .variant-option__select-wrapper {
