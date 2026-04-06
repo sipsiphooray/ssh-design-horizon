@@ -82,6 +82,12 @@
             "padding-inline-end": 0
           },
           "blocks": {
+            "okendo_star_rating_47knzE": {
+              "type": "shopify://apps/okendo/blocks/star-rating/bb689e69-ea70-4661-8fb7-ad24a2e23c29",
+              "settings": {
+                "product": "{{closest.product}}"
+              }
+            },
             "group_icgrde": {
               "type": "group",
               "name": "Header",
@@ -143,12 +149,6 @@
                     "custom_liquid": "<style>\n.badges-product-details {\n    margin-bottom: var(--gap-2xs);\n    line-height: 1em;\n}\n</style>\n<div class=\"flex badges-product-details\">\n      {% if product.metafields.custom.product_badges.value != blank %}\n        {% for i in product.metafields.custom.product_badges.value %}\n          {% if i.label != blank %}\n            <div>\n                <div\n                class=\"\n                    product-badges__badge product-badges__badge--rectangle\n                    color-{{ settings.badge_sale_color_scheme }}\n                \"\n                    style=\"\n                        --badge-border-radius: {{ settings.badge_corner_radius }}px;\n                        --badge-font-family: var(--font-{{ settings.badge_font_family }}--family); --badge-font-weight: var(--font-{{ settings.badge_font_family }}--weight); --badge-text-transform: {{ settings.badge_text_transform }};\n                    {% if i.badge_background_color != blank %}\n                        --color-background: {{ i.badge_background_color }};\n                    {% endif %}\n                    {% if i.badge_text_color != blank %}\n                        --color-foreground: {{ i.badge_text_color }};\n                    {% endif %}\n                    \"\n                >\n                {{ i.label }}\n                </div>\n            </div>\n          {% endif %}\n        {% endfor %}\n      {% endif %}\n</div>"
                   },
                   "blocks": {}
-                },
-                "okendo_star_rating_7P7JpH": {
-                  "type": "shopify://apps/okendo/blocks/star-rating/bb689e69-ea70-4661-8fb7-ad24a2e23c29",
-                  "settings": {
-                    "product": "{{closest.product}}"
-                  }
                 },
                 "text_xpVMaM": {
                   "type": "text",
@@ -217,7 +217,6 @@
               },
               "block_order": [
                 "custom_liquid_qE6bdP",
-                "okendo_star_rating_7P7JpH",
                 "text_xpVMaM",
                 "price_tVjtKg",
                 "custom_liquid_7BVx6i"
@@ -968,6 +967,7 @@
             }
           },
           "block_order": [
+            "okendo_star_rating_47knzE",
             "group_icgrde",
             "ai_gen_block_426582e_ADbVqH",
             "variant_picker_R3rGDr",
