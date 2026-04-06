@@ -590,7 +590,7 @@
                     "icon_height": 16,
                     "custom_mobile_height": false,
                     "mobile-height": 24,
-                    "text": "<p>Free Shipping On Orders Over $40</p>",
+                    "text": "<p>Free US Shipping On Orders Over $40</p>",
                     "text_width": "fit-content",
                     "max_width": "normal",
                     "alignment": "left",
