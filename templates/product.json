@@ -2366,7 +2366,7 @@
         "overlay_style": "solid",
         "gradient_direction": "to top",
         "padding-block-start": 24,
-        "padding-block-end": 0
+        "padding-block-end": 72
       }
     },
     "section_qV8z8P": {
@@ -2433,7 +2433,7 @@
                 "open_by_default": false,
                 "icon": "none",
                 "width": 20,
-                "add_color_scheme": true,
+                "add_color_scheme": false,
                 "color_scheme": ""
               },
               "blocks": {}
@@ -2447,7 +2447,7 @@
                 "open_by_default": false,
                 "icon": "none",
                 "width": 20,
-                "add_color_scheme": true,
+                "add_color_scheme": false,
                 "color_scheme": ""
               },
               "blocks": {}
@@ -2461,7 +2461,7 @@
                 "open_by_default": false,
                 "icon": "none",
                 "width": 20,
-                "add_color_scheme": true,
+                "add_color_scheme": false,
                 "color_scheme": ""
               },
               "blocks": {}
@@ -2475,7 +2475,7 @@
                 "open_by_default": false,
                 "icon": "none",
                 "width": 20,
-                "add_color_scheme": true,
+                "add_color_scheme": false,
                 "color_scheme": ""
               },
               "blocks": {}
@@ -2489,7 +2489,7 @@
                 "open_by_default": false,
                 "icon": "none",
                 "width": 20,
-                "add_color_scheme": true,
+                "add_color_scheme": false,
                 "color_scheme": ""
               },
               "blocks": {}
@@ -2503,7 +2503,7 @@
                 "open_by_default": false,
                 "icon": "none",
                 "width": 20,
-                "add_color_scheme": true,
+                "add_color_scheme": false,
                 "color_scheme": ""
               },
               "blocks": {}
@@ -2548,7 +2548,7 @@
         "full_width_on_mobile": false,
         "section_height": "",
         "section_height_custom": 50,
-        "color_scheme": "",
+        "color_scheme": "scheme-2",
         "background_media": "none",
         "video_position": "cover",
         "background_image_position": "cover",
@@ -2560,10 +2560,10 @@
         "overlay_color": "#00000026",
         "overlay_style": "solid",
         "gradient_direction": "to top",
-        "padding-block-start": 48,
-        "padding-block-end": 48,
-        "custom_mobile_padding": true,
-        "mobile-padding-block-start": 24,
+        "padding-block-start": 72,
+        "padding-block-end": 72,
+        "custom_mobile_padding": false,
+        "mobile-padding-block-start": 32,
         "mobile-padding-block-end": 32,
         "mobile-padding-inline-start": 0,
         "mobile-padding-inline-end": 0,
