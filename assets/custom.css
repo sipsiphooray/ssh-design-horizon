@@ -838,7 +838,7 @@ body:has(.overlay.active) .sticky-add-to-cart__bar {
 }
 
 summary:hover {
-    color: var(--color-foreground-rgb) !important;
+    color: rgb(var(--color-foreground-rgb) / var(--opacity-subdued-text)) !important;
 }
 
 /*
