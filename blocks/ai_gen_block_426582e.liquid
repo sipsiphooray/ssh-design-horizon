@@ -74,7 +74,7 @@
         text-align: {% if block.settings.mobile_alignment == 'flex-start' %}left{% elsif block.settings.mobile_alignment == 'flex-end' %}right{% else %}center{% endif %};
       {% else %}
         /* Vertical alignment for side-by-side layout */
-        align-items: center;
+        align-items: flex-start;
       {% endif %}
     }
 
