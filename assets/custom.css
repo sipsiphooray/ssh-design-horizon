@@ -833,6 +833,10 @@ body:has(.overlay.active) .sticky-add-to-cart__bar {
     margin-left: -0.4rem;
 }
 
+.compare-at-price {
+    font-weight: 300;
+}
+
 /*
  * Mega menu (desktop): widen + deepen the theme’s invisible ::after bridge on items with a submenu.
  * Horizon keeps pointer on <li> via that flex ::after; extending width catches diagonal moves toward the panel.
