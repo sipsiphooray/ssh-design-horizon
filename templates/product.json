@@ -82,6 +82,12 @@
             "padding-inline-end": 0
           },
           "blocks": {
+            "okendo_star_rating_47knzE": {
+              "type": "shopify://apps/okendo/blocks/star-rating/bb689e69-ea70-4661-8fb7-ad24a2e23c29",
+              "settings": {
+                "product": "{{closest.product}}"
+              }
+            },
             "group_icgrde": {
               "type": "group",
               "name": "Header",
@@ -177,12 +183,6 @@
                   },
                   "blocks": {}
                 },
-                "okendo_star_rating_7P7JpH": {
-                  "type": "shopify://apps/okendo/blocks/star-rating/bb689e69-ea70-4661-8fb7-ad24a2e23c29",
-                  "settings": {
-                    "product": "{{closest.product}}"
-                  }
-                },
                 "price_tVjtKg": {
                   "type": "price",
                   "settings": {
@@ -218,7 +218,6 @@
               "block_order": [
                 "custom_liquid_qE6bdP",
                 "text_xpVMaM",
-                "okendo_star_rating_7P7JpH",
                 "price_tVjtKg",
                 "custom_liquid_7BVx6i"
               ]
@@ -590,7 +589,7 @@
                     "icon_height": 16,
                     "custom_mobile_height": false,
                     "mobile-height": 24,
-                    "text": "<p>Free Shipping On Orders Over $40</p>",
+                    "text": "<p>Free US Shipping On Orders Over $40</p>",
                     "text_width": "fit-content",
                     "max_width": "normal",
                     "alignment": "left",
@@ -968,6 +967,7 @@
             }
           },
           "block_order": [
+            "okendo_star_rating_47knzE",
             "group_icgrde",
             "ai_gen_block_426582e_ADbVqH",
             "variant_picker_R3rGDr",
