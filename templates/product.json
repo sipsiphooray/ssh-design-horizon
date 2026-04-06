@@ -583,7 +583,7 @@
                   "name": "Text Icon",
                   "settings": {
                     "icon_position": "left",
-                    "icon": "box",
+                    "icon": "truck",
                     "icon_width": 18,
                     "use_height": false,
                     "icon_height": 24,
