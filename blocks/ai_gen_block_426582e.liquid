@@ -78,6 +78,12 @@
       {% endif %}
     }
 
+    {% if block.settings.mobile_column_layout == false %}
+      .ai-icons-row__item-{{ ai_gen_id }} img {
+        margin-top: 2px;
+      }
+    {% endif %}
+
     {% if block.settings.enable_padding_inline_mobile %}
       .ai-icons-row-{{ ai_gen_id }} {
         padding-left: {{ block.settings.mobile_padding_left }}px;
