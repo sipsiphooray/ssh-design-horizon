@@ -13,15 +13,11 @@ Any images that are required in the code, including icons, may be stored within 
 
 ## `custom.js` load order
 
-`custom.js` patches `HTMLDialogElement.prototype` for scroll restore and sets `html[scroll-lock]` for dialogs. It must load **before** the user can open cart/quick-add, so in `snippets/scripts.liquid` it is included **immediately after** `dialog.js` with `fetchpriority="high"` (not at the end of the list with `low`).
+Include `custom.js` where the theme expects auxiliary scripts (see `snippets/scripts.liquid`). No special scroll-lock or dialog prototype patching requirement unless you add that behavior back.
 
 ## `sections/curated-variant-list.liquid`
 
 Homepage-friendly grid of **variant** cards from a **metaobject** entry (not collection metafields). Schema uses `metaobject_type: curated_variant_list` (create that definition in Admin). Loop reads `section.settings.curated_list.product_variants.value`—field handle must match your metaobject list-of-variants field (default dummy handle `product_variants`). Optional **`collection`** setting supplies `closest.collection` for `_product-list-button` (View all) and RTE `closest.collection` in the header.
-
-## Menu drawer layout variables (`custom.js` / `custom.css`)
-
-`syncMenuDrawerLayoutVars` should update **`--menu-drawer-top`** and **`--menu-drawer-height`** on `documentElement`, `body`, and `#Details-menu-drawer-container` only. **`custom.css`** applies `top` / `height` on `#Details-menu-drawer-container[open] > .menu-drawer` via `var(--menu-drawer-top)` and `var(--menu-drawer-height)`. Do **not** set inline `top` / `height` on `.menu-drawer` in JS (harder to override, noisy in DevTools, not Horizon-style). **`--menu-drawer-top` is unset until JS runs** (same in all browsers); CSS `var(--menu-drawer-top, …)` fallbacks apply if missing. **`--menu-drawer-top` does not control the main `#header-component` bar**—only the drawer panel. If **`measureMenuDrawerHeaderBottom()` returns 0** (Safari right after `body: fixed` before header repaints), use **`resolveMenuDrawerHeaderBottomPx`** to fall back to **`--header-height` first**, then **`--header-group-height`**, from computed style. **Do not split `.menu-drawer` `top`/`height` rules by `#header-component[data-sticky-state="active"]`**: IntersectionObserver can flip active/inactive during open; different fallbacks caused a visible **gap/jump** and fought **opacity** tweaks—use one open-drawer rule and **`opacity: 1 !important` on all `.header[data-sticky-state]`** while the menu drawer is open under scroll-lock.
 
 ## Menu drawer: do not unset `.menu-drawer__animated-element` animations
 
@@ -31,9 +27,7 @@ In `custom.css`, avoid `animation: unset !important` (or similar) on `.menu-draw
 
 ## `html[scroll-lock]` in `custom.css`
 
-Do not add `height` / `max-height` / `100dvh` / `-webkit-fill-available` on `html[scroll-lock]` with dialogs: Horizon applies `body { position:fixed; top:-Ypx }` in the same turn as `showModal()`; heavy html constraints in that frame reset document scroll and the viewport **jumps to the top before the drawer paints**. Keep `overflow: hidden` + `overscroll-behavior` on **html only** — do not set `overflow: hidden` on `body` under `html[scroll-lock]` or the sticky `header-component` is clipped and the header **disappears** when the cart drawer opens. `syncDocumentScrollLock()` after `showModal` is deferred one `requestAnimationFrame` for the same reason.
-
-**`<details scroll-lock>` (menu drawer):** `dialog.js` sets `html[scroll-lock]` on `document` **capture** in the same toggle turn. If that runs before `body { position: fixed; top: -Y }`, there is a frame where `html` is `overflow: hidden` but the document still scrolls—**sticky header can glitch** when opening the drawer on a scrolled page. Mitigation in `custom.js`: (1) a **`window` capture** `toggle` listener (`freezeDetailsBodyBeforeHtmlScrollLock`) applies the body freeze **before** `document` capture; (2) when opening, `syncDocumentScrollLock()` calls `syncDetailsBodyScrollLock()` **before** `setAttribute('scroll-lock')` on `html`. On close, remove `html[scroll-lock]` first, then release the body lock. (3) In that same freeze handler, call **`syncMenuDrawerLayoutVars()`** for the menu drawer so `--menu-drawer-top` / `--menu-drawer-height` are set in the first paint (triple-`rAF` deferral used to let the drawer animate with fallback vars then jump). (4) **`custom.css`**: `transition: none` on `.header[data-sticky-state]` while `html[scroll-lock]:has(#Details-menu-drawer-container[open])` so sticky state flicker does not animate opacity during open. (5) **Safari**: with body fixed, `scrollingElement.scrollTop` can read **0** so header JS sets `data-sticky-state="idle"` (theme uses **opacity:0**) until touch reflows — fix with **`syncScrollingElementTopForStickyHeader(y)`** in `custom.js` when applying details body lock, plus **`html[scroll-lock] .header[data-sticky-state='idle'] { opacity: 1 !important; }`** and **`#header-component { transform: translateZ(0) }`** under scroll-lock in `custom.css`.
+Keep `html[scroll-lock]` styling minimal: `overflow: hidden` + `overscroll-behavior` on **html** is fine. Avoid heavy `height` / `100dvh` on `html` in the same frame as `body { position:fixed }` (can jump scroll). Avoid `overflow: hidden` on **body** under scroll-lock if it clips the sticky header behind modals.
 
 ## `variant-select` (custom.js) and swatches
 

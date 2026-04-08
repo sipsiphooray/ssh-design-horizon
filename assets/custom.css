@@ -92,34 +92,6 @@ a.size-style.link:after {
     height: var(--icon-size-sm) !important;
 }
 
-/*
- * Menu drawer top/height: JS sets --menu-drawer-top / --menu-drawer-height. Single rule — do not branch on
- * #header-component[data-sticky-state]; IO can flip active/inactive during open and split rules used different
- * fallbacks (visible gap + top jump between frames).
- */
-#Details-menu-drawer-container.menu-open > .menu-drawer,
-#Details-menu-drawer-container[open] > .menu-drawer {
-    top: var(--menu-drawer-top, var(--header-group-height)) !important;
-    height: var(--menu-drawer-height, calc(var(--drawer-height) - var(--header-group-height))) !important;
-}
-
-/*
- * Menu drawer open: data-sticky-state can flicker (idle/active/inactive); theme uses opacity on .header — force
- * stable visible chrome and no transition tween while drawer is open.
- */
-html[scroll-lock]:has(#Details-menu-drawer-container[open]) .header[data-sticky-state],
-html[scroll-lock]:has(details.menu-drawer-container[open]) .header[data-sticky-state] {
-    opacity: 1 !important;
-    transition: none;
-}
-
-/*
- * Other scroll-lock (cart, search, etc.): Safari can leave scroll-up header on idle (theme opacity:0).
- */
-html[scroll-lock] .header[data-sticky-state='idle'] {
-    opacity: 1 !important;
-}
-
 .menu-drawer__backdrop {
     display: none !important;
 }
@@ -1121,12 +1093,9 @@ summary:hover {
 }
 
 /*
- * Scroll lock: custom.js sets html[scroll-lock] for dialog[scroll-lock] (theme only sets it for details).
- * Do NOT add height/max-height/dvh on html — same-frame reflow with body fixed jumps the page to the top.
- * Do NOT set overflow:hidden on body here — Horizon’s header is sticky inside body; overflow on body clips
- * that stacking context and the site header disappears behind the cart drawer / modal.
- * Horizon already uses body { position:fixed } while dialogs are open for scroll lock.
- * Safari: see rules above `.header[data-sticky-state='idle']` and `#header-component` translateZ when locked.
+ * Scroll lock: theme sets html[scroll-lock] for details[scroll-lock]; dialogs use body position:fixed.
+ * Do NOT add height/max-height/dvh on html — can jump scroll with body fixed in the same frame.
+ * Do NOT set overflow:hidden on body under scroll-lock — can clip sticky header behind drawers.
  */
 html[scroll-lock] {
     overflow: hidden !important;
