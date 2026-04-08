@@ -49,7 +49,8 @@ document.addEventListener(ThemeEvents.megaMenuHover, () => {
  * Horizon `dialog.js` only toggles `html[scroll-lock]` for `<details scroll-lock>`, not for
  * `<dialog scroll-lock>` (quick-add, cart drawer, search). Safari/iOS then relies on `body` fixed
  * alone, which often still scrolls. Sync `html[scroll-lock]` whenever any dialog or details lock
- * is open; microtask after `toggle` fixes details closing while a dialog stays open.
+ * is open. Toggle handler uses bubble phase + sync in the same turn so body fixed runs after
+ * dialog.js (capture) sets html[scroll-lock], avoiding a one-frame sticky header glitch.
  */
 const SCROLL_LOCK_DIALOG_SELECTOR = 'dialog[scroll-lock]';
 /**
@@ -204,7 +205,9 @@ function patchHtmlDialogForScrollLock() {
 patchHtmlDialogForScrollLock();
 
 onDocumentReady(() => {
-  document.addEventListener('toggle', () => queueMicrotask(syncDocumentScrollLock), true);
+  document.addEventListener('toggle', () => {
+    syncDocumentScrollLock();
+  });
   syncDocumentScrollLock();
 });
 
