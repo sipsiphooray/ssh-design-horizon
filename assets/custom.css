@@ -93,8 +93,8 @@ a.size-style.link:after {
 }
 
 /*
- * Menu drawer: custom.js sets --menu-drawer-top / --menu-drawer-height from measured header bottom.
- * Without this, theme defaults leave a gap under the sticky bar.
+ * Menu drawer: custom.js sets --menu-drawer-* and applies top/height on the panel with setProperty(…,'important')
+ * so it wins over snippets/header-drawer.liquid (often loads after this file).
  */
 [data-sticky-state="active"] #Details-menu-drawer-container.menu-open > .menu-drawer,
 [data-sticky-state="active"] #Details-menu-drawer-container[open] > .menu-drawer {

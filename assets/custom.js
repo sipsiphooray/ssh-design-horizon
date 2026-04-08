@@ -150,6 +150,14 @@ function measureMenuDrawerHeaderBottom() {
   return maxBottom;
 }
 
+function getRootMenuDrawerPanel() {
+  const details =
+    document.querySelector('#Details-menu-drawer-container') ??
+    document.querySelector('details.menu-drawer-container');
+  if (!(details instanceof HTMLElement)) return null;
+  return /** @type {HTMLElement | null} */ (details.querySelector(':scope > .menu-drawer'));
+}
+
 function applyMenuDrawerVarsToRoots(topPx, heightPx) {
   document.documentElement.style.setProperty(MENU_DRAWER_TOP_VAR, topPx);
   document.documentElement.style.setProperty(MENU_DRAWER_HEIGHT_VAR, heightPx);
@@ -164,6 +172,12 @@ function applyMenuDrawerVarsToRoots(topPx, heightPx) {
     details.style.setProperty(MENU_DRAWER_TOP_VAR, topPx);
     details.style.setProperty(MENU_DRAWER_HEIGHT_VAR, heightPx);
   }
+
+  const panel = getRootMenuDrawerPanel();
+  if (panel) {
+    panel.style.setProperty('top', topPx, 'important');
+    panel.style.setProperty('height', heightPx, 'important');
+  }
 }
 
 function clearMenuDrawerVarsFromRoots() {
@@ -176,6 +190,12 @@ function clearMenuDrawerVarsFromRoots() {
     document.querySelector('details.menu-drawer-container');
   details?.style.removeProperty(MENU_DRAWER_TOP_VAR);
   details?.style.removeProperty(MENU_DRAWER_HEIGHT_VAR);
+
+  const panel = getRootMenuDrawerPanel();
+  if (panel) {
+    panel.style.removeProperty('top');
+    panel.style.removeProperty('height');
+  }
 }
 
 function syncMenuDrawerLayoutVars() {
@@ -183,7 +203,7 @@ function syncMenuDrawerLayoutVars() {
   if (!detailsOpen) return;
 
   const bottomRaw = measureMenuDrawerHeaderBottom();
-  const bottom = Math.max(0, Math.floor(bottomRaw));
+  const bottom = Math.max(0, Math.round(bottomRaw));
   const vh = menuDrawerViewportHeight();
   const height = Math.max(0, Math.round(vh - bottom));
   const topPx = `${bottom}px`;
@@ -266,6 +286,7 @@ function handleMenuDrawerToggle(event) {
   if (!target.classList.contains('menu-drawer-container')) return;
 
   if (target.open) {
+    syncMenuDrawerLayoutVars();
     scheduleMenuDrawerLayoutSync();
   } else {
     onMenuDrawerCloseLayoutSync();

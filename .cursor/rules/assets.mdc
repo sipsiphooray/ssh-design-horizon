@@ -17,7 +17,7 @@ Include `custom.js` where the theme expects auxiliary scripts (see `snippets/scr
 
 ## Menu drawer layout (`custom.js` / `custom.css`)
 
-`syncMenuDrawerLayoutVars` sets **`--menu-drawer-top`** and **`--menu-drawer-height`** on `documentElement`, `body`, and `#Details-menu-drawer-container` from **`measureMenuDrawerHeaderBottom()`** so the drawer sits under the real header edge. **`custom.css`** maps those onto `#Details-menu-drawer-container[open] > .menu-drawer` (with a **`[data-sticky-state="active"]`** variant using `--header-height` fallbacks). Removing this pair brings back the **theme default gap** under the sticky bar.
+`syncMenuDrawerLayoutVars` sets **`--menu-drawer-top`** / **`--menu-drawer-height`** on roots and also **`top` / `height` on `#Details-menu-drawer-container > .menu-drawer` via `style.setProperty(..., 'important')`** so layout wins over **`snippets/header-drawer.liquid`** (bundled after `custom.css`). Call **`syncMenuDrawerLayoutVars()` once synchronously on `toggle`** plus deferred passes. **`custom.css`** duplicates vars as fallback.
 
 ## `sections/curated-variant-list.liquid`
 
