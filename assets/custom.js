@@ -88,6 +88,20 @@ let detailsBodyScrollLockActive = false;
 /** @type {number} */
 let detailsBodyScrollLockY = 0;
 
+/**
+ * Safari: with `body { position:fixed; top:-Y }`, `document.scrollingElement.scrollTop` can read 0 until
+ * a touch/scroll reflow. Header scroll-up JS then sets `data-sticky-state="idle"` (opacity:0). Keep the
+ * scroll root in sync with the frozen offset so sticky state stays correct.
+ * @param {number} y
+ */
+function syncScrollingElementTopForStickyHeader(y) {
+  if (!Number.isFinite(y) || y < 0) return;
+  const se = document.scrollingElement;
+  if (se instanceof HTMLElement) {
+    se.scrollTop = y;
+  }
+}
+
 function syncDetailsBodyScrollLock() {
   if (isAnyScrollLockDialogOpen()) {
     if (detailsBodyScrollLockActive) {
@@ -105,6 +119,7 @@ function syncDetailsBodyScrollLock() {
       document.body.style.width = '100%';
       document.body.style.position = 'fixed';
       document.body.style.top = `-${y}px`;
+      syncScrollingElementTopForStickyHeader(y);
     }
     return;
   }
@@ -154,6 +169,7 @@ function freezeDetailsBodyBeforeHtmlScrollLock(event) {
   document.body.style.width = '100%';
   document.body.style.position = 'fixed';
   document.body.style.top = `-${y}px`;
+  syncScrollingElementTopForStickyHeader(y);
 
   if (isMenuDrawerScrollLockDetails(event.target)) {
     syncMenuDrawerLayoutVars();
@@ -222,6 +238,15 @@ function patchHtmlDialogForScrollLock() {
     // Defer html[scroll-lock]: same-frame overflow/height on html fights body fixed+top and causes a jump to top.
     requestAnimationFrame(() => {
       syncDocumentScrollLock();
+      if (this.hasAttribute('scroll-lock')) {
+        const m = document.body.style.top?.match(/^-(\d+(?:\.\d+)?)px$/);
+        if (m) {
+          const parsed = Math.round(parseFloat(m[1]));
+          if (Number.isFinite(parsed) && parsed >= 0) {
+            syncScrollingElementTopForStickyHeader(parsed);
+          }
+        }
+      }
     });
   };
 

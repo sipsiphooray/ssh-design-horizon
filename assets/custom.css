@@ -117,6 +117,21 @@ html[scroll-lock]:has(details.menu-drawer-container[open]) .header[data-sticky-s
     transition: none;
 }
 
+/*
+ * Safari: body fixed + html overflow can make scrollingElement.scrollTop read 0 briefly; header scroll-up
+ * logic sets data-sticky-state="idle" (theme: opacity:0) until a drag reflows. Keep header chrome visible
+ * whenever scroll-lock is active (drawer, cart, filters, etc.).
+ */
+html[scroll-lock] .header[data-sticky-state='idle'] {
+    opacity: 1 !important;
+}
+
+/* WebKit: encourage a repaint of header over position:fixed body (invisible-until-interaction glitch). */
+html[scroll-lock] #header-component {
+    transform: translateZ(0);
+    -webkit-transform: translateZ(0);
+}
+
 .menu-drawer__backdrop {
     display: none !important;
 }
@@ -849,6 +864,10 @@ summary:hover {
     color: rgb(var(--color-foreground-rgb) / var(--opacity-subdued-text)) !important;
 }
 
+.oke-product-details-title {
+    margin-bottom: var(--gap-2xs);
+}
+
 /*
  * Mega menu (desktop): widen + deepen the theme’s invisible ::after bridge on items with a submenu.
  * Horizon keeps pointer on <li> via that flex ::after; extending width catches diagonal moves toward the panel.
@@ -1119,6 +1138,7 @@ summary:hover {
  * Do NOT set overflow:hidden on body here — Horizon’s header is sticky inside body; overflow on body clips
  * that stacking context and the site header disappears behind the cart drawer / modal.
  * Horizon already uses body { position:fixed } while dialogs are open for scroll lock.
+ * Safari: see rules above `.header[data-sticky-state='idle']` and `#header-component` translateZ when locked.
  */
 html[scroll-lock] {
     overflow: hidden !important;
