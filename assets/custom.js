@@ -59,14 +59,68 @@ const SCROLL_LOCK_DIALOG_SELECTOR = 'dialog[scroll-lock]';
  */
 const dialogLockedScrollY = new WeakMap();
 
-function isAnyScrollLockUiOpen() {
+function isAnyScrollLockDialogOpen() {
   for (const el of document.querySelectorAll(SCROLL_LOCK_DIALOG_SELECTOR)) {
     if (el instanceof HTMLDialogElement && el.open) return true;
   }
+  return false;
+}
+
+function isAnyDetailsScrollLockOpen() {
   for (const el of document.querySelectorAll('details[scroll-lock]')) {
     if (el instanceof HTMLDetailsElement && el.open) return true;
   }
   return false;
+}
+
+function isAnyScrollLockUiOpen() {
+  return isAnyScrollLockDialogOpen() || isAnyDetailsScrollLockOpen();
+}
+
+/**
+ * Menu drawer (and other details[scroll-lock]): Horizon only sets html[scroll-lock] in dialog.js.
+ * Safari/iOS still scrolls the page behind the drawer without body { position:fixed; top:-scrollY }
+ * (same pattern as DialogComponent). Dialogs own body while open — release our flag then re-apply
+ * after dialog close if a details lock is still open.
+ */
+let detailsBodyScrollLockActive = false;
+/** @type {number} */
+let detailsBodyScrollLockY = 0;
+
+function syncDetailsBodyScrollLock() {
+  if (isAnyScrollLockDialogOpen()) {
+    if (detailsBodyScrollLockActive) {
+      detailsBodyScrollLockActive = false;
+      detailsBodyScrollLockY = 0;
+    }
+    return;
+  }
+
+  if (isAnyDetailsScrollLockOpen()) {
+    if (!detailsBodyScrollLockActive) {
+      const y = window.scrollY;
+      detailsBodyScrollLockY = y;
+      detailsBodyScrollLockActive = true;
+      document.body.style.width = '100%';
+      document.body.style.position = 'fixed';
+      document.body.style.top = `-${y}px`;
+    }
+    return;
+  }
+
+  if (detailsBodyScrollLockActive) {
+    detailsBodyScrollLockActive = false;
+    const y = detailsBodyScrollLockY;
+    detailsBodyScrollLockY = 0;
+    document.body.style.width = '';
+    document.body.style.position = '';
+    document.body.style.top = '';
+    window.scrollTo({ top: y, left: window.scrollX, behavior: 'instant' });
+    const se = document.scrollingElement;
+    if (se instanceof HTMLElement) {
+      se.scrollTop = y;
+    }
+  }
 }
 
 function syncDocumentScrollLock() {
@@ -75,6 +129,7 @@ function syncDocumentScrollLock() {
   } else {
     document.documentElement.removeAttribute('scroll-lock');
   }
+  syncDetailsBodyScrollLock();
 }
 
 /**
