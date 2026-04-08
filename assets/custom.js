@@ -413,11 +413,43 @@ function clearMenuDrawerVarsFromRoots() {
   details?.style.removeProperty(MENU_DRAWER_HEIGHT_VAR);
 }
 
+/**
+ * When rects are wrong (e.g. Safari right after body:fixed / before header repaints),
+ * measureMenuDrawerHeaderBottom() can be 0 while --header-height is already valid on body.
+ * @param {number} measuredBottom
+ * @returns {number}
+ */
+function resolveMenuDrawerHeaderBottomPx(measuredBottom) {
+  if (measuredBottom > 0) return measuredBottom;
+
+  const readPx = (value) => {
+    const t = value?.trim() ?? '';
+    if (!t) return 0;
+    const n = parseFloat(t);
+    return Number.isFinite(n) && n > 0 ? n : 0;
+  };
+
+  const body = document.body;
+  const el = document.documentElement;
+  let fromVars = readPx(getComputedStyle(body).getPropertyValue('--header-group-height'));
+  if (fromVars <= 0) {
+    fromVars = readPx(getComputedStyle(body).getPropertyValue('--header-height'));
+  }
+  if (fromVars <= 0) {
+    fromVars = readPx(getComputedStyle(el).getPropertyValue('--header-group-height'));
+  }
+  if (fromVars <= 0) {
+    fromVars = readPx(getComputedStyle(el).getPropertyValue('--header-height'));
+  }
+
+  return fromVars > 0 ? fromVars : measuredBottom;
+}
+
 function syncMenuDrawerLayoutVars() {
   const detailsOpen = getMenuDrawerDetails();
   if (!detailsOpen) return;
 
-  const bottomRaw = measureMenuDrawerHeaderBottom();
+  const bottomRaw = resolveMenuDrawerHeaderBottomPx(measureMenuDrawerHeaderBottom());
   // Floor removes subpixel over-counting so the drawer tucks under the sticky bar after scroll.
   const bottom = Math.max(0, Math.floor(bottomRaw));
   const vh = menuDrawerViewportHeight();
