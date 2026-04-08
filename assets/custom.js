@@ -74,6 +74,206 @@ scrollToHash();
 // Run on hash change
 window.addEventListener("hashchange", scrollToHash);
 
+/**
+ * Menu drawer alignment: set `--menu-drawer-top` / `--menu-drawer-height` on html, body, and
+ * `#Details-menu-drawer-container` so `custom.css` positions `.menu-drawer` flush under the header.
+ */
+const MENU_DRAWER_TOP_VAR = '--menu-drawer-top';
+const MENU_DRAWER_HEIGHT_VAR = '--menu-drawer-height';
+
+let menuDrawerLayoutListenersActive = false;
+/** @type {ResizeObserver | null} */
+let menuDrawerHeaderResizeObserver = null;
+/** @type {MutationObserver | null} */
+let menuDrawerMenuOpenObserver = null;
+
+function menuDrawerViewportHeight() {
+  return window.visualViewport?.height ?? window.innerHeight;
+}
+
+/** Open root menu `<details>` (hamburger drawer). */
+function getMenuDrawerDetails() {
+  return (
+    document.querySelector('#Details-menu-drawer-container[open]') ??
+    document.querySelector('details.menu-drawer-container[open]')
+  );
+}
+
+/**
+ * Bottom edge of header chrome in viewport coordinates; prefer visible `.header__row` rects.
+ */
+function measureMenuDrawerHeaderBottom() {
+  const vv = window.visualViewport;
+  const vMax = vv?.height ?? window.innerHeight;
+  const headerGroup = document.querySelector('#header-group');
+  let maxBottom = 0;
+
+  if (headerGroup) {
+    for (const child of headerGroup.children) {
+      if (!(child instanceof HTMLElement)) continue;
+      const inner = child.querySelector('header-component');
+
+      if (inner instanceof HTMLElement) {
+        let innerBottom = 0;
+        const rows = inner.querySelectorAll('.header__row');
+        if (rows.length) {
+          rows.forEach((row) => {
+            if (!(row instanceof HTMLElement)) return;
+            const cs = getComputedStyle(row);
+            if (cs.display === 'none' || cs.visibility === 'hidden') return;
+            const r = row.getBoundingClientRect();
+            if (r.height < 1) return;
+            if (r.bottom <= 0 || r.top >= vMax) return;
+            innerBottom = Math.max(innerBottom, r.bottom);
+          });
+        }
+        if (innerBottom === 0) {
+          const r = inner.getBoundingClientRect();
+          if (r.bottom > 0 && r.top < vMax) innerBottom = r.bottom;
+        }
+        maxBottom = Math.max(maxBottom, innerBottom);
+      } else {
+        const r = child.getBoundingClientRect();
+        if (r.bottom <= 0 || r.top >= vMax) continue;
+        maxBottom = Math.max(maxBottom, r.bottom);
+      }
+    }
+  }
+
+  if (maxBottom <= 0) {
+    const hc = document.querySelector('#header-component');
+    if (hc instanceof HTMLElement) {
+      maxBottom = Math.max(0, hc.getBoundingClientRect().bottom);
+    }
+  }
+
+  return maxBottom;
+}
+
+function applyMenuDrawerVarsToRoots(topPx, heightPx) {
+  document.documentElement.style.setProperty(MENU_DRAWER_TOP_VAR, topPx);
+  document.documentElement.style.setProperty(MENU_DRAWER_HEIGHT_VAR, heightPx);
+  if (document.body) {
+    document.body.style.setProperty(MENU_DRAWER_TOP_VAR, topPx);
+    document.body.style.setProperty(MENU_DRAWER_HEIGHT_VAR, heightPx);
+  }
+  const details =
+    document.querySelector('#Details-menu-drawer-container') ??
+    document.querySelector('details.menu-drawer-container');
+  if (details instanceof HTMLElement) {
+    details.style.setProperty(MENU_DRAWER_TOP_VAR, topPx);
+    details.style.setProperty(MENU_DRAWER_HEIGHT_VAR, heightPx);
+  }
+}
+
+function clearMenuDrawerVarsFromRoots() {
+  document.documentElement.style.removeProperty(MENU_DRAWER_TOP_VAR);
+  document.documentElement.style.removeProperty(MENU_DRAWER_HEIGHT_VAR);
+  document.body?.style.removeProperty(MENU_DRAWER_TOP_VAR);
+  document.body?.style.removeProperty(MENU_DRAWER_HEIGHT_VAR);
+  const details =
+    document.querySelector('#Details-menu-drawer-container') ??
+    document.querySelector('details.menu-drawer-container');
+  details?.style.removeProperty(MENU_DRAWER_TOP_VAR);
+  details?.style.removeProperty(MENU_DRAWER_HEIGHT_VAR);
+}
+
+function syncMenuDrawerLayoutVars() {
+  const detailsOpen = getMenuDrawerDetails();
+  if (!detailsOpen) return;
+
+  const bottomRaw = measureMenuDrawerHeaderBottom();
+  const bottom = Math.max(0, Math.floor(bottomRaw));
+  const vh = menuDrawerViewportHeight();
+  const height = Math.max(0, Math.round(vh - bottom));
+  const topPx = `${bottom}px`;
+  const heightPx = `${height}px`;
+
+  applyMenuDrawerVarsToRoots(topPx, heightPx);
+}
+
+function clearMenuDrawerLayoutVars() {
+  clearMenuDrawerVarsFromRoots();
+}
+
+function onMenuDrawerOpenLayoutSync() {
+  syncMenuDrawerLayoutVars();
+
+  if (menuDrawerLayoutListenersActive) return;
+  menuDrawerLayoutListenersActive = true;
+
+  window.addEventListener('resize', syncMenuDrawerLayoutVars, { passive: true });
+  window.addEventListener('scroll', syncMenuDrawerLayoutVars, { passive: true, capture: true });
+  const vv = window.visualViewport;
+  if (vv) {
+    vv.addEventListener('resize', syncMenuDrawerLayoutVars, { passive: true });
+    vv.addEventListener('scroll', syncMenuDrawerLayoutVars, { passive: true });
+  }
+
+  const headerGroup = document.querySelector('#header-group');
+  if (headerGroup && typeof ResizeObserver !== 'undefined') {
+    menuDrawerHeaderResizeObserver = new ResizeObserver(() => syncMenuDrawerLayoutVars());
+    menuDrawerHeaderResizeObserver.observe(headerGroup);
+  }
+
+  const details = document.querySelector('#Details-menu-drawer-container');
+  if (details && typeof MutationObserver !== 'undefined' && !menuDrawerMenuOpenObserver) {
+    menuDrawerMenuOpenObserver = new MutationObserver(() => {
+      if (details.classList.contains('menu-open')) {
+        syncMenuDrawerLayoutVars();
+      }
+    });
+    menuDrawerMenuOpenObserver.observe(details, { attributes: true, attributeFilter: ['class'] });
+  }
+}
+
+function onMenuDrawerCloseLayoutSync() {
+  menuDrawerHeaderResizeObserver?.disconnect();
+  menuDrawerHeaderResizeObserver = null;
+  if (menuDrawerMenuOpenObserver) {
+    menuDrawerMenuOpenObserver.disconnect();
+    menuDrawerMenuOpenObserver = null;
+  }
+
+  if (menuDrawerLayoutListenersActive) {
+    menuDrawerLayoutListenersActive = false;
+    window.removeEventListener('resize', syncMenuDrawerLayoutVars);
+    window.removeEventListener('scroll', syncMenuDrawerLayoutVars, { capture: true });
+    const vv = window.visualViewport;
+    if (vv) {
+      vv.removeEventListener('resize', syncMenuDrawerLayoutVars);
+      vv.removeEventListener('scroll', syncMenuDrawerLayoutVars);
+    }
+  }
+  clearMenuDrawerLayoutVars();
+}
+
+function scheduleMenuDrawerLayoutSync() {
+  requestAnimationFrame(() => {
+    requestAnimationFrame(() => {
+      requestAnimationFrame(() => {
+        onMenuDrawerOpenLayoutSync();
+        queueMicrotask(syncMenuDrawerLayoutVars);
+        setTimeout(syncMenuDrawerLayoutVars, 0);
+      });
+    });
+  });
+}
+
+function handleMenuDrawerToggle(event) {
+  const target = event.target;
+  if (!(target instanceof HTMLDetailsElement)) return;
+  if (!target.classList.contains('menu-drawer-container')) return;
+
+  if (target.open) {
+    scheduleMenuDrawerLayoutSync();
+  } else {
+    onMenuDrawerCloseLayoutSync();
+  }
+}
+
+document.addEventListener('toggle', handleMenuDrawerToggle, true);
+
 // Handle hover updates
 document.addEventListener('mouseover', e => {
   const target = e.target;

@@ -13,7 +13,11 @@ Any images that are required in the code, including icons, may be stored within 
 
 ## `custom.js` load order
 
-Include `custom.js` where the theme expects auxiliary scripts (see `snippets/scripts.liquid`). No special scroll-lock or dialog prototype patching requirement unless you add that behavior back.
+Include `custom.js` where the theme expects auxiliary scripts (see `snippets/scripts.liquid`).
+
+## Menu drawer layout (`custom.js` / `custom.css`)
+
+`syncMenuDrawerLayoutVars` sets **`--menu-drawer-top`** and **`--menu-drawer-height`** on `documentElement`, `body`, and `#Details-menu-drawer-container` from **`measureMenuDrawerHeaderBottom()`** so the drawer sits under the real header edge. **`custom.css`** maps those onto `#Details-menu-drawer-container[open] > .menu-drawer` (with a **`[data-sticky-state="active"]`** variant using `--header-height` fallbacks). Removing this pair brings back the **theme default gap** under the sticky bar.
 
 ## `sections/curated-variant-list.liquid`
 

@@ -92,6 +92,22 @@ a.size-style.link:after {
     height: var(--icon-size-sm) !important;
 }
 
+/*
+ * Menu drawer: custom.js sets --menu-drawer-top / --menu-drawer-height from measured header bottom.
+ * Without this, theme defaults leave a gap under the sticky bar.
+ */
+[data-sticky-state="active"] #Details-menu-drawer-container.menu-open > .menu-drawer,
+[data-sticky-state="active"] #Details-menu-drawer-container[open] > .menu-drawer {
+    top: var(--menu-drawer-top, calc(var(--header-height) - 1px)) !important;
+    height: var(--menu-drawer-height, calc(var(--drawer-height) - var(--header-height))) !important;
+}
+
+#Details-menu-drawer-container.menu-open > .menu-drawer,
+#Details-menu-drawer-container[open] > .menu-drawer {
+    top: var(--menu-drawer-top, var(--header-group-height)) !important;
+    height: var(--menu-drawer-height, calc(var(--drawer-height) - var(--header-group-height))) !important;
+}
+
 .menu-drawer__backdrop {
     display: none !important;
 }
