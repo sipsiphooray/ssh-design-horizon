@@ -93,15 +93,10 @@ a.size-style.link:after {
 }
 
 /*
- * Menu drawer top/height: custom.js sets only --menu-drawer-top / --menu-drawer-height on html, body, and
- * #Details-menu-drawer-container (no inline top/height on .menu-drawer). Panel position uses var() here.
+ * Menu drawer top/height: JS sets --menu-drawer-top / --menu-drawer-height. Single rule — do not branch on
+ * #header-component[data-sticky-state]; IO can flip active/inactive during open and split rules used different
+ * fallbacks (visible gap + top jump between frames).
  */
-[data-sticky-state="active"] #Details-menu-drawer-container.menu-open > .menu-drawer,
-[data-sticky-state="active"] #Details-menu-drawer-container[open] > .menu-drawer {
-    top: var(--menu-drawer-top, calc(var(--header-height) - 1px)) !important;
-    height: var(--menu-drawer-height, calc(var(--drawer-height) - var(--header-height))) !important;
-}
-
 #Details-menu-drawer-container.menu-open > .menu-drawer,
 #Details-menu-drawer-container[open] > .menu-drawer {
     top: var(--menu-drawer-top, var(--header-group-height)) !important;
@@ -109,27 +104,20 @@ a.size-style.link:after {
 }
 
 /*
- * Menu drawer + scroll lock: body:fixed and html overflow change the sticky scrollport; IntersectionObserver
- * and scrollTop-driven logic can briefly flip data-sticky-state. Opacity transition on .header then reads as a glitch.
+ * Menu drawer open: data-sticky-state can flicker (idle/active/inactive); theme uses opacity on .header — force
+ * stable visible chrome and no transition tween while drawer is open.
  */
 html[scroll-lock]:has(#Details-menu-drawer-container[open]) .header[data-sticky-state],
 html[scroll-lock]:has(details.menu-drawer-container[open]) .header[data-sticky-state] {
+    opacity: 1 !important;
     transition: none;
 }
 
 /*
- * Safari: body fixed + html overflow can make scrollingElement.scrollTop read 0 briefly; header scroll-up
- * logic sets data-sticky-state="idle" (theme: opacity:0) until a drag reflows. Keep header chrome visible
- * whenever scroll-lock is active (drawer, cart, filters, etc.).
+ * Other scroll-lock (cart, search, etc.): Safari can leave scroll-up header on idle (theme opacity:0).
  */
 html[scroll-lock] .header[data-sticky-state='idle'] {
     opacity: 1 !important;
-}
-
-/* WebKit: encourage a repaint of header over position:fixed body (invisible-until-interaction glitch). */
-html[scroll-lock] #header-component {
-    transform: translateZ(0);
-    -webkit-transform: translateZ(0);
 }
 
 .menu-drawer__backdrop {

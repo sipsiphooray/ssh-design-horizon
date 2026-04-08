@@ -419,27 +419,29 @@ function clearMenuDrawerVarsFromRoots() {
  * @param {number} measuredBottom
  * @returns {number}
  */
+function readCssLengthPx(value) {
+  const t = value?.trim() ?? '';
+  if (!t) return 0;
+  const n = parseFloat(t);
+  return Number.isFinite(n) && n > 0 ? n : 0;
+}
+
 function resolveMenuDrawerHeaderBottomPx(measuredBottom) {
   if (measuredBottom > 0) return measuredBottom;
 
-  const readPx = (value) => {
-    const t = value?.trim() ?? '';
-    if (!t) return 0;
-    const n = parseFloat(t);
-    return Number.isFinite(n) && n > 0 ? n : 0;
-  };
-
   const body = document.body;
   const el = document.documentElement;
-  let fromVars = readPx(getComputedStyle(body).getPropertyValue('--header-group-height'));
+  // Prefer --header-height first: --header-group-height can match real chrome but height tracks the bar tighter
+  // when the group includes slack; using group first in fallback tended to push --menu-drawer-top down (gap).
+  let fromVars = readCssLengthPx(getComputedStyle(body).getPropertyValue('--header-height'));
   if (fromVars <= 0) {
-    fromVars = readPx(getComputedStyle(body).getPropertyValue('--header-height'));
+    fromVars = readCssLengthPx(getComputedStyle(body).getPropertyValue('--header-group-height'));
   }
   if (fromVars <= 0) {
-    fromVars = readPx(getComputedStyle(el).getPropertyValue('--header-group-height'));
+    fromVars = readCssLengthPx(getComputedStyle(el).getPropertyValue('--header-height'));
   }
   if (fromVars <= 0) {
-    fromVars = readPx(getComputedStyle(el).getPropertyValue('--header-height'));
+    fromVars = readCssLengthPx(getComputedStyle(el).getPropertyValue('--header-group-height'));
   }
 
   return fromVars > 0 ? fromVars : measuredBottom;
@@ -450,8 +452,7 @@ function syncMenuDrawerLayoutVars() {
   if (!detailsOpen) return;
 
   const bottomRaw = resolveMenuDrawerHeaderBottomPx(measureMenuDrawerHeaderBottom());
-  // Floor removes subpixel over-counting so the drawer tucks under the sticky bar after scroll.
-  const bottom = Math.max(0, Math.floor(bottomRaw));
+  const bottom = Math.max(0, Math.round(bottomRaw));
   const vh = menuDrawerViewportHeight();
   const height = Math.max(0, Math.round(vh - bottom));
   const topPx = `${bottom}px`;
