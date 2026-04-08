@@ -33,6 +33,8 @@ In `custom.css`, avoid `animation: unset !important` (or similar) on `.menu-draw
 
 Do not add `height` / `max-height` / `100dvh` / `-webkit-fill-available` on `html[scroll-lock]` with dialogs: Horizon applies `body { position:fixed; top:-Ypx }` in the same turn as `showModal()`; heavy html constraints in that frame reset document scroll and the viewport **jumps to the top before the drawer paints**. Keep `overflow: hidden` + `overscroll-behavior` on **html only** — do not set `overflow: hidden` on `body` under `html[scroll-lock]` or the sticky `header-component` is clipped and the header **disappears** when the cart drawer opens. `syncDocumentScrollLock()` after `showModal` is deferred one `requestAnimationFrame` for the same reason.
 
+**`<details scroll-lock>` (menu drawer):** `dialog.js` sets `html[scroll-lock]` on `document` **capture** in the same toggle turn. If that runs before `body { position: fixed; top: -Y }`, there is a frame where `html` is `overflow: hidden` but the document still scrolls—**sticky header can glitch** when opening the drawer on a scrolled page. Mitigation in `custom.js`: (1) a **`window` capture** `toggle` listener (`freezeDetailsBodyBeforeHtmlScrollLock`) applies the body freeze **before** `document` capture; (2) when opening, `syncDocumentScrollLock()` calls `syncDetailsBodyScrollLock()` **before** `setAttribute('scroll-lock')` on `html`. On close, remove `html[scroll-lock]` first, then release the body lock.
+
 ## `variant-select` (custom.js) and swatches
 
 `onOptionSelect` must call `syncDisplaySwatch(optionEl)` so `.cs-display .swatch-image` matches the selected `.cs-option`; updating only `.cs-display-text` leaves the old image or an empty swatch ring (especially in quick-add after variant change).

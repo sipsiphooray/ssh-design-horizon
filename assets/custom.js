@@ -124,13 +124,33 @@ function syncDetailsBodyScrollLock() {
   }
 }
 
+/**
+ * Runs in window capture before document capture (dialog.js). Freezing body before html[scroll-lock]
+ * avoids a frame where overflow:hidden is on html but the page isn’t fixed yet — sticky header glitch.
+ */
+function freezeDetailsBodyBeforeHtmlScrollLock(event) {
+  if (!(event.target instanceof HTMLDetailsElement)) return;
+  if (!event.target.hasAttribute('scroll-lock')) return;
+  if (!event.target.open) return;
+  if (isAnyScrollLockDialogOpen()) return;
+  if (detailsBodyScrollLockActive) return;
+
+  const y = window.scrollY;
+  detailsBodyScrollLockY = y;
+  detailsBodyScrollLockActive = true;
+  document.body.style.width = '100%';
+  document.body.style.position = 'fixed';
+  document.body.style.top = `-${y}px`;
+}
+
 function syncDocumentScrollLock() {
   if (isAnyScrollLockUiOpen()) {
+    syncDetailsBodyScrollLock();
     document.documentElement.setAttribute('scroll-lock', '');
   } else {
     document.documentElement.removeAttribute('scroll-lock');
+    syncDetailsBodyScrollLock();
   }
-  syncDetailsBodyScrollLock();
 }
 
 /**
@@ -205,6 +225,7 @@ function patchHtmlDialogForScrollLock() {
 patchHtmlDialogForScrollLock();
 
 onDocumentReady(() => {
+  window.addEventListener('toggle', freezeDetailsBodyBeforeHtmlScrollLock, true);
   document.addEventListener(
     'toggle',
     () => {
