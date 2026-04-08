@@ -108,6 +108,14 @@ a.size-style.link:after {
     height: var(--menu-drawer-height, calc(var(--drawer-height) - var(--header-group-height))) !important;
 }
 
+/*
+ * Menu drawer + scroll lock: body:fixed and html overflow change the sticky scrollport; IntersectionObserver
+ * and scrollTop-driven logic can briefly flip data-sticky-state. Opacity transition on .header then reads as a glitch.
+ */
+html[scroll-lock]:has(#Details-menu-drawer-container[open]) .header[data-sticky-state],
+html[scroll-lock]:has(details.menu-drawer-container[open]) .header[data-sticky-state] {
+    transition: none;
+}
 
 .menu-drawer__backdrop {
     display: none !important;

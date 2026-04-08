@@ -125,8 +125,21 @@ function syncDetailsBodyScrollLock() {
 }
 
 /**
+ * @param {HTMLDetailsElement} details
+ * @returns {boolean}
+ */
+function isMenuDrawerScrollLockDetails(details) {
+  return (
+    details.classList.contains('menu-drawer-container') ||
+    details.id === 'Details-menu-drawer-container'
+  );
+}
+
+/**
  * Runs in window capture before document capture (dialog.js). Freezing body before html[scroll-lock]
  * avoids a frame where overflow:hidden is on html but the page isn’t fixed yet — sticky header glitch.
+ * For the menu drawer, also sets --menu-drawer-top/height in the same turn (was triple-rAF delayed),
+ * so the panel does not jump mid open animation; see scheduleMenuDrawerLayoutSync.
  */
 function freezeDetailsBodyBeforeHtmlScrollLock(event) {
   if (!(event.target instanceof HTMLDetailsElement)) return;
@@ -141,6 +154,10 @@ function freezeDetailsBodyBeforeHtmlScrollLock(event) {
   document.body.style.width = '100%';
   document.body.style.position = 'fixed';
   document.body.style.top = `-${y}px`;
+
+  if (isMenuDrawerScrollLockDetails(event.target)) {
+    syncMenuDrawerLayoutVars();
+  }
 }
 
 function syncDocumentScrollLock() {
@@ -443,14 +460,10 @@ function onMenuDrawerCloseLayoutSync() {
 }
 
 function scheduleMenuDrawerLayoutSync() {
+  onMenuDrawerOpenLayoutSync();
   requestAnimationFrame(() => {
-    requestAnimationFrame(() => {
-      requestAnimationFrame(() => {
-        onMenuDrawerOpenLayoutSync();
-        queueMicrotask(syncMenuDrawerLayoutVars);
-        setTimeout(syncMenuDrawerLayoutVars, 0);
-      });
-    });
+    syncMenuDrawerLayoutVars();
+    queueMicrotask(syncMenuDrawerLayoutVars);
   });
 }
 
