@@ -113,6 +113,9 @@
                 <div
                     class="
                     resource-list
+                    {% if section.settings.layout_type == 'grid' %}
+                        resource-list--frequent-bundle
+                    {% endif %}
                     {% if section.settings.layout_type == 'carousel' %}
                         force-full-width
                     {% endif %}
@@ -128,7 +131,41 @@
                 >
                     {% case section.settings.layout_type %}
                     {% when 'grid' %}
-                        {{ list_items }}
+                        <div
+                            class="frequent-bundle"
+                            data-frequent-bundle
+                        >
+                            {% render 'frequent-bundle-strip',
+                              products: products,
+                              limit: section.settings.max_products,
+                              host_id: section.id
+                            %}
+                            <div class="frequent-bundle__toolbar">
+                                <button
+                                    type="button"
+                                    class="frequent-bundle__details-toggle"
+                                    data-frequent-details-toggle
+                                    aria-expanded="false"
+                                    aria-controls="frequent-details-panel-{{ section.id }}"
+                                >
+                                    <span class="frequent-bundle__details-toggle-text">
+                                        {{- 'content.view_details' | t -}}
+                                    </span>
+                                    <span class="frequent-bundle__caret svg-wrapper" aria-hidden="true">
+                                        {{- 'icon-caret.svg' | inline_asset_content -}}
+                                    </span>
+                                </button>
+                            </div>
+                            <div
+                                class="frequent-bundle__details"
+                                id="frequent-details-panel-{{ section.id }}"
+                                hidden
+                            >
+                                <div class="frequent-bundle__details-list">
+                                    {{ list_items }}
+                                </div>
+                            </div>
+                        </div>
                     {% when 'carousel' %}
                         {% render 'resource-list-carousel',
                         ref: 'resourceListCarousel',
@@ -168,25 +205,29 @@
                     <div class="total-frequent-price" hidden>
                         <span class="total-label-wrapper">
                             <span class="h4 total-label">{{ 'content.total' | t }}</span>
-                            <div class="total-price-display" data-price="0" data-symbol="{{ cart.currency.symbol }}"></div>
+                            <div class="total-price-display" data-price="0" data-symbol="{{ cart.currency.symbol }}">
+                                <span class="total-price-display__inner">
+                                    <s class="compare-at-price total-price-display__at" hidden></s>
+                                    <span class="price total-price-display__sale"></span>
+                                </span>
+                            </div>
                         </span>
                         <button type="button" class="button-secondary frequent-add-to-cart">
                             <span class="add-to-cart-text">
                                 <span
-                                aria-hidden="true"
-                                class="svg-wrapper add-to-cart-icon"
+                                    aria-hidden="true"
+                                    class="svg-wrapper add-to-cart-icon"
                                 >
                                     {{- 'icon-add-to-cart.svg' | inline_asset_content -}}
                                 </span>
-                            <span class="add-to-cart-text__content">
-                                <span>
+                                <span class="add-to-cart-text__content">
                                     <span>
-                                        {{- 'products.product.add_to_cart' | t -}}
+                                        <span>
+                                            {{- 'products.product.add_to_cart' | t -}}
+                                        </span>
                                     </span>
                                 </span>
                             </span>
-                            </span>
-                            {% comment %} checkmark burst markup {% endcomment %}
                             <span class="add-to-cart__added">
                                 <span class="svg-wrapper add-to-cart__added-icon">
                                     {{- 'icon-checkmark-burst.svg' | inline_asset_content -}}
@@ -260,7 +301,7 @@
 
         & > div:last-child {
             width: calc(25% - var(--gap-3xl) * 1 / 2);
-            align-self: center;
+            align-self: flex-end;
         }
     }
 }

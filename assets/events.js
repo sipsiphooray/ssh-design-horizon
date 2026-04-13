@@ -304,40 +304,72 @@ export class PriceChangeEvent extends Event {
     const prices = {};
     let total = 0;
 
-    // Find parent container from target - this is REQUIRED
+    // Resolve host via frequent bundle first (checkbox may not match compound class on <addon-products>)
     let parent = null;
     if (target && target instanceof Element) {
+      const bundle = target.closest('[data-frequent-bundle]');
+      if (bundle) {
+        parent =
+          bundle.closest('product-recommendations.frequently-bought-section') ||
+          bundle.closest('addon-products');
+      }
+    }
+    if (!parent && target && target instanceof Element) {
+      parent = target.closest(
+        'product-recommendations.frequently-bought-section, addon-products'
+      );
+    }
+    if (!parent && target && target instanceof Element) {
       parent = target.closest('.shopify-section, dialog, product-card');
     }
 
     // If no parent found, don't calculate anything
     if (!parent) {
       console.warn('PriceChangeEvent: No parent container found');
-      this.detail = { prices, total, parent: null };
+      this.detail = { prices, total, totalCompareAt: 0, parent: null, priceDisplayParent: null };
       return;
     }
 
-    // Find base price element within the parent
-    const basePriceEl = parent.querySelector('.total-price-display[data-price]');
-    if (basePriceEl && basePriceEl.dataset.price) {
+    // Main PDP price lives on the buy button (e.g. span.button--price.total-price-display) outside
+    // <addon-products>, so widen the query root for base price while keeping addon sums inside the block.
+    /** @type {Element} */
+    const addonHost = parent;
+    const priceDisplayParent =
+      addonHost instanceof HTMLElement && addonHost.matches('addon-products')
+        ? addonHost.closest('.product-details') ??
+          addonHost.closest('.shopify-section') ??
+          addonHost
+        : addonHost;
+
+    // Find base price element (main variant price on add-to-cart, or frequent-bought total row)
+    const basePriceEl = /** @type {HTMLElement | null} */ (
+      priceDisplayParent.querySelector('.total-price-display[data-price]')
+    );
+    let totalCompareAt = 0;
+    if (basePriceEl?.dataset.price) {
       const basePrice = Number(basePriceEl.dataset.price) || 0;
       prices['base_product'] = basePrice;
       total += basePrice;
+      totalCompareAt += basePrice;
     }
 
-    // Add prices from checked addons ONLY within the same parent
-    parent.querySelectorAll('.addon-card input[type="checkbox"]:checked').forEach(el => {
+    // Add prices from checked addons only within the addon block / frequent section
+    addonHost.querySelectorAll('.addon-card input[type="checkbox"]:checked').forEach(el => {
       const inputEl = /** @type {HTMLInputElement} */ (el);
       const name = inputEl.name || 'addon';
       const price = Number(inputEl.dataset.price || 0);
+      const compare = Number(inputEl.dataset.compareAt || 0);
       prices[name] = price;
       total += price;
+      totalCompareAt += compare > price ? compare : price;
     });
 
     this.detail = {
       prices,
       total,
-      parent
+      totalCompareAt,
+      parent,
+      priceDisplayParent,
     };
   }
 

@@ -151,6 +151,7 @@
     "cart_subtotal": "Subtotal",
     "cart_total": "Cart total",
     "total": "Total:",
+    "view_details": "View details",
     "frequent_no_chosen": "Choose items to buy together.",
     "checkout": "Check out",
     "minimum_note_html": "<strong>Note:</strong> A minimum order of {{ price }} is required for delivery",

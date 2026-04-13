@@ -278,7 +278,7 @@
               "type": "addon-products",
               "name": "Addon Products",
               "settings": {
-                "card_layout_type": "card-layout-addon",
+                "card_layout_type": "card-layout-addon-frequently",
                 "layout_type": "grid",
                 "carousel_on_mobile": false,
                 "max_products": 10,

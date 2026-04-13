@@ -1,0 +1,59 @@
+{%- doc -%}
+  Top thumbnail row for frequent-bundle; mirror checkboxes sync to addon-card inputs (JS).
+  @param {object} products - Iterable products (may be onboarding placeholders)
+  @param {number} limit - Max products
+  @param {string} host_id - Unique id fragment (e.g. section.id or block.id) for mirror input ids
+{%- enddoc -%}
+{% liquid
+  assign host_id = host_id | default: 'frequent-bundle'
+%}
+
+{% if products != blank and products.size > 0 %}
+  <div class="frequent-bundle__strip" data-frequent-strip>
+    {% for product in products limit: limit %}
+      {% if product.id == empty or product == blank %}
+        {% continue %}
+      {% endif %}
+      {% liquid
+        assign strip_variant = product.selected_or_first_available_variant
+        assign strip_image = strip_variant.featured_image | default: product.featured_image
+        assign strip_available = strip_variant.available
+        assign mirror_id = 'frequent-strip-mirror-' | append: host_id | append: '-' | append: product.id
+      %}
+      <div class="frequent-strip__cell-wrap{% if strip_available == false %} frequent-strip__cell-wrap--disabled{% endif %}">
+        <div class="checkbox frequent-strip__shell{% if strip_available == false %} checkbox--disabled{% endif %}">
+          <input
+            type="checkbox"
+            id="{{ mirror_id }}"
+            class="checkbox__input"
+            data-frequent-strip-mirror
+            data-product-id="{{ product.id }}"
+            {% unless strip_available %}
+              disabled
+            {% endunless %}
+          >
+          <label class="checkbox__label frequent-strip__thumb" for="{{ mirror_id }}">
+            {{- 'icon-checkmark.svg' | inline_asset_content -}}
+            <span class="checkbox__label-text visually-hidden">{{ product.title | escape }}</span>
+            {% if strip_image != blank %}
+              {{
+                strip_image
+                | image_url: width: 240
+                | image_tag:
+                  width: 120,
+                  height: 120,
+                  class: 'frequent-strip__img',
+                  loading: 'lazy',
+                  alt: ''
+              }}
+            {% else %}
+              <span class="frequent-strip__placeholder" aria-hidden="true">
+                {{ 'product' | placeholder_svg_tag: 'placeholder-svg' }}
+              </span>
+            {% endif %}
+          </label>
+        </div>
+      </div>
+    {% endfor %}
+  </div>
+{% endif %}

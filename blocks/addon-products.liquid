@@ -89,6 +89,9 @@
       <div
         class="
           resource-list
+          {% if block_settings.layout_type == 'grid' and block_settings.card_layout_type == 'card-layout-addon-frequently' %}
+            resource-list--frequent-bundle
+          {% endif %}
           {% if block_settings.carousel_on_mobile and block_settings.layout_type != 'carousel' %}
             hidden--mobile
           {% endif %}
@@ -100,7 +103,42 @@
       >
         {% case block_settings.layout_type %}
           {% when 'grid' %}
-            {{ list_items }}
+            {% if block_settings.card_layout_type == 'card-layout-addon-frequently' %}
+              <div class="frequent-bundle" data-frequent-bundle>
+                {% render 'frequent-bundle-strip',
+                  products: products,
+                  limit: block_settings.max_products,
+                  host_id: block.id
+                %}
+                <div class="frequent-bundle__toolbar">
+                  <button
+                    type="button"
+                    class="frequent-bundle__details-toggle"
+                    data-frequent-details-toggle
+                    aria-expanded="false"
+                    aria-controls="frequent-details-panel-{{ block.id }}"
+                  >
+                    <span class="frequent-bundle__details-toggle-text">
+                      {{- 'content.view_details' | t -}}
+                    </span>
+                    <span class="frequent-bundle__caret svg-wrapper" aria-hidden="true">
+                      {{- 'icon-caret.svg' | inline_asset_content -}}
+                    </span>
+                  </button>
+                </div>
+                <div
+                  class="frequent-bundle__details"
+                  id="frequent-details-panel-{{ block.id }}"
+                  hidden
+                >
+                  <div class="frequent-bundle__details-list">
+                    {{ list_items }}
+                  </div>
+                </div>
+              </div>
+            {% else %}
+              {{ list_items }}
+            {% endif %}
           {% when 'carousel' %}
             {% render 'resource-list-carousel',
               ref: 'resourceListCarousel',

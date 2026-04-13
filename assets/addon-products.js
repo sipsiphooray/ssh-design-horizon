@@ -2,6 +2,23 @@ import { convertMoneyToMinorUnits, formatMoney } from '@theme/money-formatting';
 import { ThemeEvents, PriceChangeEvent, CartAddEvent, CartErrorEvent, CartUpdateEvent, VariantUpdateEvent } from '@theme/events';
 
 /**
+ * @param {HTMLElement} bundle
+ */
+function syncFrequentStrip(bundle) {
+  const strip = bundle.querySelector('[data-frequent-strip]');
+  if (!strip) return;
+  strip.querySelectorAll('[data-frequent-strip-mirror]').forEach((mirror) => {
+    const id = mirror.dataset.productId;
+    if (!id) return;
+    const card = bundle.querySelector(`addon-card[data-product-id="${id}"]`);
+    const real = card?.querySelector('input.checkbox__input:not([data-frequent-strip-mirror])');
+    if (real && !mirror.disabled) {
+      mirror.checked = Boolean(real.checked);
+    }
+  });
+}
+
+/**
  * AddonCard Component - A lightweight component for addon products
  * Supports variant selection via dropdown when product has variants
  */
@@ -50,6 +67,9 @@ export class AddonCard extends HTMLElement {
 
     // Update frequently bought section display
     this.updateFrequentlyBoughtDisplay();
+
+    const bundle = this.closest('[data-frequent-bundle]');
+    if (bundle) syncFrequentStrip(bundle);
   }
 
   disconnectedCallback() {
@@ -91,31 +111,45 @@ export class AddonCard extends HTMLElement {
    * @param {Event} event
    */
   handlePriceChange(event) {
-    // Get the parent from the event detail
-    const parent = event.detail?.parent;
-    
-    // If no parent, don't update anything
-    if (!parent) return;
-    
-    // Find price element within the parent
-    const priceEl = parent.querySelector('.total-price-display[data-price]');
-    if (!priceEl) return;
+    // Prefer root that contains the main buy-button price (see PriceChangeEvent in events.js)
+    const root = event.detail?.priceDisplayParent ?? event.detail?.parent;
+
+    if (!root) return;
+
+    const priceWrap = root.querySelector('.total-price-display[data-price]');
+    if (!priceWrap) return;
 
     const total = event.detail.total;
-    const currency = priceEl.dataset.currency || window.Shopify?.currency?.active || 'USD';
+    const totalCompareAt = event.detail.totalCompareAt ?? total;
+    const currency = priceWrap.dataset.currency || window.Shopify?.currency?.active || 'USD';
     const moneyFormat = window.theme?.moneyFormat || '${{amount}}';
 
-    // Format using the imported utility. 
-    // Purposefully omitting the appended currency text per instructions.
-    priceEl.textContent = formatMoney(total, moneyFormat, currency);
+    const compareEl = priceWrap.querySelector('.total-price-display__at');
+    const saleEl = priceWrap.querySelector('.total-price-display__sale');
+    if (compareEl && saleEl) {
+      saleEl.textContent = formatMoney(total, moneyFormat, currency);
+      if (totalCompareAt > total) {
+        compareEl.textContent = formatMoney(totalCompareAt, moneyFormat, currency);
+        compareEl.hidden = false;
+      } else {
+        compareEl.textContent = '';
+        compareEl.hidden = true;
+      }
+      return;
+    }
+
+    priceWrap.textContent = formatMoney(total, moneyFormat, currency);
   }
 
   /**
    * Update frequently bought section display based on checked addons
    */
   updateFrequentlyBoughtDisplay() {
-    // Find the frequently bought section
-    const section = this.closest('.frequently-bought-section');
+    const bundle = this.closest('[data-frequent-bundle]');
+    const section =
+      bundle?.closest('addon-products') ||
+      bundle?.closest('.frequently-bought-section') ||
+      this.closest('.frequently-bought-section, addon-products');
     if (!section) return;
     
     // Find the total price element and no-chosen message
@@ -142,6 +176,8 @@ export class AddonCard extends HTMLElement {
         noChosenEl.removeAttribute('hidden');
       }
     }
+
+    if (bundle) syncFrequentStrip(bundle);
   }
 
   /**
@@ -163,6 +199,11 @@ export class AddonCard extends HTMLElement {
       this.checkbox.disabled = !isAvailable;
       this.checkbox.setAttribute('data-price', price);
       this.checkbox.setAttribute('data-variant-id', variantId);
+      if (selectedOption.dataset.comparePrice) {
+        this.checkbox.setAttribute('data-compare-at', selectedOption.dataset.comparePrice);
+      } else {
+        this.checkbox.removeAttribute('data-compare-at');
+      }
       
       // Uncheck if variant is unavailable and was checked
       if (!isAvailable && this.checkbox.checked) {
@@ -274,6 +315,11 @@ export class AddonCard extends HTMLElement {
       if (this.checkbox) {
         this.checkbox.disabled = !isAvailable;
         this.checkbox.value = this.currentVariantId;
+        if (selectedOption.dataset.comparePrice) {
+          this.checkbox.setAttribute('data-compare-at', selectedOption.dataset.comparePrice);
+        } else {
+          this.checkbox.removeAttribute('data-compare-at');
+        }
       }
     }
   }
@@ -299,14 +345,60 @@ if (!customElements.get('addon-card')) {
   customElements.define('addon-card', AddonCard);
 }
 
+document.addEventListener('change', (event) => {
+  const target = event.target;
+  if (!(target instanceof HTMLInputElement) || target.type !== 'checkbox') return;
+
+  if (target.matches('[data-frequent-strip-mirror]')) {
+    const bundle = target.closest('[data-frequent-bundle]');
+    const productId = target.dataset.productId;
+    if (!bundle || !productId) return;
+    const card = bundle.querySelector(`addon-card[data-product-id="${productId}"]`);
+    const real = card?.querySelector('input.checkbox__input:not([data-frequent-strip-mirror])');
+    if (!real || real.disabled) {
+      target.checked = Boolean(real?.checked);
+      return;
+    }
+    if (real.checked !== target.checked) {
+      real.checked = target.checked;
+      real.dispatchEvent(new Event('change', { bubbles: true }));
+    }
+    return;
+  }
+
+  const card = target.closest('addon-card');
+  const bundle = card?.closest('[data-frequent-bundle]');
+  if (bundle?.querySelector('[data-frequent-strip]')) {
+    syncFrequentStrip(bundle);
+  }
+});
+
 document.addEventListener('click', (event) => {
+  const toggle = event.target.closest('[data-frequent-details-toggle]');
+  if (toggle) {
+    const bundle = toggle.closest('[data-frequent-bundle]');
+    if (bundle) {
+      const open = bundle.classList.toggle('frequent-bundle--details-open');
+      const details = bundle.querySelector('.frequent-bundle__details');
+      if (details) {
+        if (open) {
+          details.removeAttribute('hidden');
+        } else {
+          details.setAttribute('hidden', '');
+        }
+      }
+      toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+    }
+    return;
+  }
+
   const button = event.target.closest('.frequent-add-to-cart');
   if (!button) return;
 
-  const frequentRow = button.closest('.frequent-row');
+  const frequentRow = button.closest('.frequent-row, addon-products');
   if (!frequentRow) return;
 
-  const checkedAddons = frequentRow.querySelectorAll('.checkbox__input:checked');
+  const checkedAddons = frequentRow.querySelectorAll('addon-card .checkbox__input:checked');
   if (checkedAddons.length === 0) return;
 
   const items = [];
