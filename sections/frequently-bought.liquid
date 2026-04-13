@@ -306,6 +306,50 @@
     }
 }
 
+@media screen and (max-width: 749px) {
+    .frequently-bought-section .frequent-bundle__strip {
+        --gap: 24px;
+        display: flex;
+        flex-direction: row;
+        flex-wrap: nowrap;
+        overflow-x: auto;
+        overflow-y: hidden;
+        -webkit-overflow-scrolling: touch;
+        overscroll-behavior-x: contain;
+        gap: var(--gap);
+        width: 100%;
+        max-width: 100%;
+        padding-bottom: var(--padding-2xs);
+    }
+
+    .frequently-bought-section .frequent-strip__cell-wrap {
+        flex: 0 0 auto;
+        min-width: 5rem;
+        width: auto;
+        max-width: none;
+    }
+
+    .frequently-bought-section .frequent-strip__shell {
+        flex-direction: row;
+        align-items: center;
+        height: auto;
+    }
+
+    .frequently-bought-section .frequent-strip__shell .checkbox__label.frequent-strip__thumb {
+        flex-direction: row;
+        align-items: center;
+        justify-content: flex-start;
+        gap: var(--gap-sm);
+        width: auto;
+    }
+
+    .frequently-bought-section .frequent-strip__img,
+    .frequently-bought-section .frequent-strip__placeholder {
+        width: auto;
+        max-width: 72px;
+    }
+}
+
 .total-frequent-price:not([hidden]) {
     display: flex;
     flex-direction: column;
