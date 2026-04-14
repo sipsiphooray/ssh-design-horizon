@@ -467,7 +467,7 @@
     flex: 1 1 0;
     min-width: 0;
     position: relative;
-    border: 1px solid rgb(var(--color-border-rgb) / var(--opacity-50));
+    border: 1px solid rgb(var(--color-foreground-rgb) / 1);
     border-radius: var(--border-radius-sm);
     background: var(--color-background);
     padding: var(--gap-sm);
@@ -487,13 +487,14 @@
   }
 
   .frequent-strip__cell-wrap:has(.checkbox__input:checked) {
-    border-color: rgb(var(--color-foreground-rgb) / 1);
+    border: 2px solid rgb(var(--color-foreground-rgb) / 1);
     box-shadow: 0 2px 8px rgba(var(--color-foreground-rgb) / 0.15);
   }
 
   .frequent-strip__cell-wrap--disabled {
     cursor: not-allowed;
     opacity: var(--opacity-60);
+    border-color: var(--input-disabled-background-color);
     background: var(--input-disabled-background-color);
     color: var(--input-disabled-text-color);
   }
