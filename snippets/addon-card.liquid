@@ -481,13 +481,15 @@
     right: calc(-0.5 * var(--gap));
     transform: translate(50%, -50%);
     line-height: 1;
-    font-size: var(--font-size--2xl);
-    color: rgb(var(--color-foreground-rgb) / var(--opacity-subdued-text));
+    font-size: var(--font-size--3xl);
+    color: rgb(var(--color-foreground-rgb) / 1);
     pointer-events: none;
+    font-weight: 500;
   }
 
   .frequent-strip__cell-wrap:has(.checkbox__input:checked) {
-    border: 2px solid rgb(var(--color-foreground-rgb) / 1);
+    border-color:rgb(var(--color-foreground-rgb) / 1);
+    outline: 2px solid rgb(var(--color-foreground-rgb) / 1);
     box-shadow: 0 2px 8px rgba(var(--color-foreground-rgb) / 0.15);
   }
 

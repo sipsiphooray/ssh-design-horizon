@@ -1,0 +1,254 @@
+{% liquid
+  assign block_settings = block.settings
+%}
+{% capture ship_display %}
+  {% render 'shipping-estimate-display',
+    min_days: block_settings.min_days,
+    max_days: block_settings.max_days,
+    display: block_settings.date_display
+  %}
+{% endcapture %}
+{% assign ship_display = ship_display | strip %}
+
+<div
+  class="product-shipping-callout spacing-style"
+  style="
+    {% render 'spacing-style', settings: block_settings %}
+    --product-shipping-callout-bg: {{ block_settings.background_color }};
+    --product-shipping-callout-fg: {{ block_settings.text_color }};
+    --product-shipping-callout-radius: {{ block_settings.corner_radius }}px;
+  "
+  {{ block.shopify_attributes }}
+>
+  <div class="product-shipping-callout__inner">
+    {% if block_settings.icon != blank or block_settings.heading != blank %}
+      <div class="product-shipping-callout__header">
+        {% if block_settings.icon != blank %}
+          <span class="product-shipping-callout__icon" aria-hidden="true">{{ block_settings.icon }}</span>
+        {% endif %}
+        {% if block_settings.heading != blank %}
+          <h3 class="product-shipping-callout__heading">{{ block_settings.heading | escape }}</h3>
+        {% endif %}
+      </div>
+    {% endif %}
+
+    {% if ship_display != blank %}
+      <p class="product-shipping-callout__lead cart-primary-typography">
+        {% if block_settings.intro != blank %}
+          {{ block_settings.intro | escape }}
+        {% endif %}
+        <strong class="product-shipping-callout__date">{{ ship_display | escape }}</strong>.
+      </p>
+    {% endif %}
+
+    {% if block_settings.body != blank %}
+      <div class="product-shipping-callout__body rte cart-primary-typography">
+        {{ block_settings.body }}
+      </div>
+    {% endif %}
+  </div>
+</div>
+
+{% stylesheet %}
+  .product-shipping-callout__inner {
+    padding: var(--padding-md) var(--padding-lg);
+    border-radius: var(--product-shipping-callout-radius, 12px);
+    background-color: var(--product-shipping-callout-bg);
+    color: var(--product-shipping-callout-fg);
+  }
+
+  .product-shipping-callout__header {
+    display: flex;
+    align-items: center;
+    gap: var(--padding-xs);
+    margin-block-end: var(--padding-xs);
+  }
+
+  .product-shipping-callout__icon {
+    font-size: 1.125rem;
+    line-height: 1;
+    flex-shrink: 0;
+  }
+
+  .product-shipping-callout__heading {
+    margin: 0;
+    font-size: var(--font-h5--size);
+    line-height: var(--font-h5--line-height);
+    color: inherit;
+  }
+
+  .product-shipping-callout__lead {
+    margin: 0;
+    font-size: var(--font-paragraph--size);
+    line-height: var(--font-paragraph--line-height);
+    color: inherit;
+  }
+
+  .product-shipping-callout__date {
+    font-weight: var(--font-h5--weight);
+    color: inherit;
+  }
+
+  .product-shipping-callout__body {
+    margin-block-start: var(--padding-xs);
+    font-size: var(--font-paragraph--size);
+    line-height: var(--font-paragraph--line-height);
+    color: inherit;
+  }
+
+  .product-shipping-callout__body a {
+    color: inherit;
+    text-decoration: underline;
+    text-underline-offset: 0.125em;
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "t:names.product_shipping_callout",
+  "tag": null,
+  "settings": [
+    {
+      "type": "text",
+      "id": "icon",
+      "label": "t:settings.product_shipping_callout_icon",
+      "default": "📦",
+      "info": "t:settings.product_shipping_callout_icon_info"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "t:settings.heading",
+      "default": "Ready-to-ship"
+    },
+    {
+      "type": "text",
+      "id": "intro",
+      "label": "t:settings.product_shipping_callout_intro",
+      "default": "Orders placed today are estimated to ship on",
+      "info": "t:settings.product_shipping_callout_intro_info"
+    },
+    {
+      "type": "richtext",
+      "id": "body",
+      "label": "t:settings.text"
+    },
+    {
+      "type": "header",
+      "content": "t:settings.product_shipping_callout_estimate_header"
+    },
+    {
+      "type": "paragraph",
+      "content": "t:settings.product_shipping_callout_estimate_info"
+    },
+    {
+      "type": "number",
+      "id": "min_days",
+      "label": "t:settings.product_shipping_callout_min_days",
+      "default": 1
+    },
+    {
+      "type": "number",
+      "id": "max_days",
+      "label": "t:settings.product_shipping_callout_max_days",
+      "default": 3
+    },
+    {
+      "type": "select",
+      "id": "date_display",
+      "label": "t:settings.product_shipping_callout_date_display",
+      "options": [
+        {
+          "value": "latest",
+          "label": "t:options.product_shipping_callout_date_latest"
+        },
+        {
+          "value": "earliest",
+          "label": "t:options.product_shipping_callout_date_earliest"
+        },
+        {
+          "value": "range",
+          "label": "t:options.product_shipping_callout_date_range"
+        }
+      ],
+      "default": "latest"
+    },
+    {
+      "type": "header",
+      "content": "t:content.appearance"
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "t:settings.background_color",
+      "default": "#E8F5E9"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "t:settings.product_shipping_callout_text_color",
+      "default": "#1B1B1B"
+    },
+    {
+      "type": "range",
+      "id": "corner_radius",
+      "label": "t:settings.border_radius",
+      "min": 0,
+      "max": 24,
+      "step": 1,
+      "unit": "px",
+      "default": 12
+    },
+    {
+      "type": "header",
+      "content": "t:content.padding"
+    },
+    {
+      "type": "range",
+      "id": "padding-block-start",
+      "label": "t:settings.top",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "padding-block-end",
+      "label": "t:settings.bottom",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "padding-inline-start",
+      "label": "t:settings.left",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "padding-inline-end",
+      "label": "t:settings.right",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "default": 0
+    }
+  ],
+  "presets": [
+    {
+      "name": "t:names.product_shipping_callout",
+      "category": "t:categories.product"
+    }
+  ]
+}
+{% endschema %}

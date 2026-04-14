@@ -1,0 +1,98 @@
+{%- doc -%}
+  Prints a shipping window string using the same business-day counting as `blocks/product-inventory.liquid`.
+
+  @param {number} min_days - Business days until range start
+  @param {number} max_days - Business days until range end
+  @param {string} [display] - `range`, `latest`, or `earliest` (defaults to `range` if blank)
+{%- enddoc -%}
+
+{% liquid
+  assign min_days = min_days | default: 1
+  assign max_days = max_days | default: 3
+  assign display = display | default: 'range'
+  assign now_ts = 'now' | date: '%s'
+
+  assign min_date = now_ts
+  assign counted = 0
+  for i in (1..60)
+    assign min_date = min_date | plus: 86400
+    assign weekday = min_date | date: '%w'
+    unless weekday == '0' or weekday == '6'
+      assign counted = counted | plus: 1
+    endunless
+    if counted == min_days
+      break
+    endif
+  endfor
+
+  assign max_date = now_ts
+  assign counted = 0
+  for i in (1..60)
+    assign max_date = max_date | plus: 86400
+    assign weekday = max_date | date: '%w'
+    unless weekday == '0' or weekday == '6'
+      assign counted = counted | plus: 1
+    endunless
+    if counted == max_days
+      break
+    endif
+  endfor
+%}
+
+{% if display == 'latest' %}
+  {{- max_date | date: '%B %-d, %Y' -}}
+{% elsif display == 'earliest' %}
+  {{- min_date | date: '%B %-d, %Y' -}}
+{% else %}
+  {% liquid
+    assign min_month = min_date | date: '%B'
+    assign max_month = max_date | date: '%B'
+    assign min_year = min_date | date: '%Y'
+    assign max_year = max_date | date: '%Y'
+  %}
+  {% if min_month == max_month and min_year == max_year %}
+    {% capture min_formatted -%}
+      {{- min_date | date: '%-d' -}}
+      {%- assign day = min_date | date: '%-d' -%}
+      {%- case day -%}
+        {%- when '1' or '21' or '31' -%}st
+        {%- when '2' or '22' -%}nd
+        {%- when '3' or '23' -%}rd
+        {%- else -%}th
+      {%- endcase -%}
+    {%- endcapture %}
+    {% capture max_formatted -%}
+      {{- max_date | date: '%-d' -}}
+      {%- assign day = max_date | date: '%-d' -%}
+      {%- case day -%}
+        {%- when '1' or '21' or '31' -%}st
+        {%- when '2' or '22' -%}nd
+        {%- when '3' or '23' -%}rd
+        {%- else -%}th
+      {%- endcase -%}
+    {%- endcapture %}
+    {{- min_month }} {{ min_formatted }} - {{ max_formatted -}}
+  {% else %}
+    {% capture min_formatted -%}
+      {{- min_date | date: '%B %-d' -}}
+      {%- assign day = min_date | date: '%-d' -%}
+      {%- case day -%}
+        {%- when '1' or '21' or '31' -%}st
+        {%- when '2' or '22' -%}nd
+        {%- when '3' or '23' -%}rd
+        {%- else -%}th
+      {%- endcase -%}
+    {%- endcapture %}
+    {% capture max_formatted -%}
+      {{- max_date | date: '%B %-d' -}}
+      {%- assign day = max_date | date: '%-d' -%}
+      {%- case day -%}
+        {%- when '1' or '21' or '31' -%}st
+        {%- when '2' or '22' -%}nd
+        {%- when '3' or '23' -%}rd
+        {%- else -%}th
+      {%- endcase -%}
+    {%- endcapture %}
+    {{- min_formatted -}} - {{- max_formatted -}}
+  {% endif %}
+{% endif %}
