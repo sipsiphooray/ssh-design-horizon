@@ -784,6 +784,7 @@ body:has(.overlay.active) .sticky-add-to-cart__bar {
     padding: var(--margin-sm);
     margin-block-start: var(--margin-sm);
     background: #f9f9f9;
+    font-size: var(--font-size--sm);
 }
 
 .cart-review__name {
@@ -842,6 +843,10 @@ summary:hover {
 
 .oke-product-details-title {
     margin-bottom: var(--gap-xs);
+}
+
+.cart__ctas .cart__checkout-button {
+    --height-buy-buttons: calc(var(--padding-md) * 2 + var(--icon-size-sm)) !important;
 }
 
 /*
@@ -1105,6 +1110,10 @@ summary:hover {
 
     .product-details .shopify-app-block:has([data-oke-star-rating]) {
         margin-bottom: calc(-1 * var(--gap-2xl));
+    }
+
+    .cart-totals__total-value {
+        font-size: var(--font-size--md);
     }
 }
 

@@ -1,0 +1,82 @@
+{%- doc -%}
+  Estimated cause/donation (cart page + cart drawer).
+
+  Shopify storefront Liquid does not expose variant cost (COGS). Use a variant metafield instead.
+
+  Variant metafield:
+  - `custom.donation_profit` (money): profit/contribution base per unit. Missing or 0 -> that line contributes 0.
+  - (optional fallback) `custom.donation_profit_cents` (integer): cents per unit.
+
+  Shop metafield:
+  - `custom.donation_rate_percent` (integer): e.g. `10` = 10%. Default 10 if unset.
+
+  Formula: ( sum of donation_profit_cents * line quantity ) * donation_rate_percent / 100
+{%- enddoc -%}
+
+{% unless cart.empty? %}
+  {% liquid
+    assign pct = shop.metafields.custom.donation_rate_percent.value | default: 10
+    if pct == blank
+      assign pct = 10
+    endif
+    assign total_profit_cents = 0
+    for item in cart.items
+      assign prof_cents = 0
+
+      assign prof_money = item.variant.metafields.custom.donation_profit.value
+      if prof_money != blank and prof_money.amount != blank
+        assign prof_cents = prof_money.amount | times: 100 | round
+      else
+        assign prof_cents = item.variant.metafields.custom.donation_profit_cents.value | default: 0
+        if prof_cents == blank
+          assign prof_cents = 0
+        endif
+      endif
+
+      assign line_profit_cents = prof_cents | times: item.quantity
+      assign total_profit_cents = total_profit_cents | plus: line_profit_cents
+    endfor
+    assign donation_cents = total_profit_cents | times: pct | divided_by: 100
+  %}
+
+  {% if total_profit_cents > 0 %}
+    <div class="cart-donation-estimate cart-primary-typography" role="note" aria-label="{{ 'content.cart_donation_estimate_label' | t }}">
+      <div class="cart-donation-estimate__row">
+        <span class="cart-donation-estimate__label">{{ 'content.cart_donation_estimate_label' | t }}</span>
+        <span class="cart-donation-estimate__value cart-secondary-typography">{{ donation_cents | money_without_trailing_zeros }}</span>
+      </div>
+      <p class="cart-donation-estimate__disclaimer">
+        <small>{{ 'content.cart_donation_estimate_disclaimer' | t }}</small>
+      </p>
+    </div>
+  {% endif %}
+{% endunless %}
+
+
+{% stylesheet %}
+  
+  .cart-donation-estimate {
+    display: flex;
+    flex-direction: column;
+    gap: var(--gap-3xs);
+    padding-block: var(--padding-sm);
+    font-size: var(--cart-font-size--sm, var(--font-size--sm));
+  }
+
+  .cart-donation-estimate__row {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: var(--gap-sm);
+  }
+
+  .cart-donation-estimate__disclaimer {
+    margin: 0;
+    color: rgb(var(--color-foreground-rgb) / var(--opacity-subdued-text));
+  }
+
+  .cart-donation-estimate__disclaimer small {
+    font-size: var(--font-size--2xs);
+    line-height: 1.4;
+  }
+{% endstylesheet %}

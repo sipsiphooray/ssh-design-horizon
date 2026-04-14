@@ -387,6 +387,7 @@
 </div>
 
 {% unless cart.empty? or force_empty %}
+  {% render 'cart-donation-estimate' %}
   {% if settings.cart_review == true %}
     <div class="cart-review">
       <div class="cart-review__inner">

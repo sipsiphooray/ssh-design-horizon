@@ -149,6 +149,8 @@
     "cart_estimated_total": "Estimated total",
     "cart_title": "Cart",
     "cart_subtotal": "Subtotal",
+    "cart_donation_estimate_label": "Estimated contribution",
+    "cart_donation_estimate_disclaimer": "Rough estimate, not a tax receipt. Amount may vary.",
     "cart_total": "Cart total",
     "total": "Total:",
     "view_details": "View details",
