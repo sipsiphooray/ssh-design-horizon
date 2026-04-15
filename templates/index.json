@@ -1680,10 +1680,10 @@
       ],
       "custom_css": [
         ".resource-card__media {--resource-card-aspect-ratio: 1.2 !important;}",
-        "@media (max-width: 749px) {.resource-card__media {--resource-card-aspect-ratio: 2 !important;}}"
+        "@media (max-width: 749px) {.resource-card__media {--resource-card-aspect-ratio: 2 !important; }}"
       ],
       "settings": {
-        "heading": "",
+        "heading": "<p>Shop The Look</p>",
         "image": "shopify://shop_images/Gemini_Generated_Image_dh2zz8dh2zz8dh2z_198ce27f-d912-4dfc-b9e8-83c93a34405c.png",
         "toggle_overlay": false,
         "overlay_color": "#00000026",
