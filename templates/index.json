@@ -1688,7 +1688,7 @@
         "aside_section_heading_font": "var(--font-heading--family)",
         "aside_section_heading_font_size": "2rem",
         "aside_section_heading_enable_mobile_size": true,
-        "aside_section_heading_mobile_font_size": "1rem",
+        "aside_section_heading_mobile_font_size": "1.5rem",
         "aside_section_heading_line_height": "normal",
         "aside_section_heading_letter_spacing": "normal",
         "aside_section_heading_case": "none",
