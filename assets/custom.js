@@ -797,3 +797,46 @@ export class ProtectionButtons extends Component {
 }
 
 customElements.define('protection-buttons', ProtectionButtons);
+
+/**
+ * Product hotspots (flat): clicking a left-column hotspot dot selects the matching
+ * right-column carousel slide (same section block id as `product-hotspot-component` data-id).
+ */
+function handleHotspotsFlatAsideCarouselClick(/** @type {MouseEvent} */ event) {
+  const trigger =
+    event.target instanceof Element ? event.target.closest('.hotspot-trigger') : null;
+  if (!trigger) return;
+
+  const sectionRoot = trigger.closest('[data-testid="product-hotspots-flat"]');
+  if (!sectionRoot) return;
+
+  const hotspot = trigger.closest('product-hotspot-component');
+  if (!hotspot || !sectionRoot.contains(hotspot)) return;
+
+  const blockId = hotspot.getAttribute('data-id');
+  if (!blockId) return;
+
+  const carousel = sectionRoot.querySelector('.section-product-hotspots-flat__aside-carousel');
+  if (!carousel) return;
+
+  const slideshow = carousel.querySelector('slideshow-component');
+  if (!slideshow || typeof slideshow.select !== 'function') return;
+
+  const slides = slideshow.querySelectorAll('slideshow-slides > slideshow-slide');
+  let targetIndex = -1;
+  slides.forEach((slide, i) => {
+    const item = slide.querySelector('[data-hotspot-block-id]');
+    if (item?.getAttribute('data-hotspot-block-id') === blockId) {
+      targetIndex = i;
+    }
+  });
+
+  if (targetIndex < 0) return;
+
+  void slideshow.select(targetIndex, event, { animate: true });
+}
+
+onDocumentReady(() => {
+  /* Capture: mobile hotspot handler calls stopPropagation; we still need to sync the aside carousel. */
+  document.addEventListener('click', handleHotspotsFlatAsideCarouselClick, true);
+});

@@ -31,7 +31,7 @@
       endif
     endif
   -%}
-  <div class="resource-list__item">
+  <div class="resource-list__item" data-hotspot-block-id="{{ block.id }}">
     {%- if card_product != blank -%}
       {%- render 'hotspots-flat-aside-product-card',
         resource: card_product,

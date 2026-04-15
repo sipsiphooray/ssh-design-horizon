@@ -23,3 +23,7 @@ Quick-add on aside cards is shown when the product is **available**; it is not g
 The product link is scoped to `resource-card__media` so price and quick-add stay clickable (no full-card overlay link).
 
 **Note:** `snippets/quick-add.liquid` and `assets/quick-add.js` are kept on theme defaults (no aside-specific form id suffix or JS fallbacks). If the same hotspot block renders quick-add in both aside and dialog, duplicate `id` attributes on product forms are possible; pinned variant URLs on `a.resource-card__link` still supply `?variant=` for the modal fetch.
+
+## Hotspot dot → aside carousel
+
+`snippets/hotspots-flat-aside-slide.liquid` sets `data-hotspot-block-id="{{ block.id }}"` on each `resource-list__item` (matches `product-hotspot-component` `data-id`). `assets/custom.js` listens for `click` in **capture** phase and calls `slideshow-component.select(index)` on the aside carousel so mobile `stopPropagation` on the trigger does not block sync.
