@@ -27,3 +27,7 @@ The product link is scoped to `resource-card__media` so price and quick-add stay
 ## Hotspot dot → aside carousel
 
 `snippets/hotspots-flat-aside-slide.liquid` sets `data-hotspot-block-id="{{ block.id }}"` on each `resource-list__item` (matches `product-hotspot-component` `data-id`). `assets/custom.js` listens for `click` in **capture** phase and calls `slideshow-component.select(index)` on the aside carousel so mobile `stopPropagation` on the trigger does not block sync.
+
+## Aside section heading (richtext)
+
+The section **Heading** richtext is rendered inside `aside.section-product-hotspots-flat__aside` as `div.section-product-hotspots-flat__aside-heading`. Typography matches the aside product title pattern: schema keys `aside_section_heading_*`, `{% render 'hotspots-aside-typography-style', scope: 'section_heading' %}`, and preset / `custom-typography` classes on the wrapper (default preset **h4**).

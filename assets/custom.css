@@ -849,6 +849,10 @@ summary:hover {
     --height-buy-buttons: calc(var(--padding-md) * 2 + var(--icon-size-sm)) !important;
 }
 
+.Shopvid__VideoBlock__ProductCard.--card-outside-video {
+    border: 0 !important;
+}
+
 /*
  * Mega menu (desktop): widen + deepen the theme’s invisible ::after bridge on items with a submenu.
  * Horizon keeps pointer on <li> via that flex ::after; extending width catches diagonal moves toward the panel.

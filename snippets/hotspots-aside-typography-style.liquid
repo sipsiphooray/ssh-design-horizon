@@ -1,7 +1,7 @@
 {%- doc -%}
-  Inline CSS variables for hotspots-flat aside card title or price (prefixed section settings).
+  Inline CSS variables for hotspots-flat aside section heading, card title, or price (prefixed section settings).
   @param section {object}
-  @param scope {string} title | price
+  @param scope {string} title | price | section_heading
 {%- enddoc -%}
 {% liquid
   assign s = section.settings
@@ -16,6 +16,17 @@
     assign text_wrap = s.aside_product_price_wrap
     assign enable_mobile_size = s.aside_product_price_enable_mobile_size
     assign mobile_font_size = s.aside_product_price_mobile_font_size
+  elsif scope == 'section_heading'
+    assign preset = s.aside_section_heading_type_preset | default: 'paragraph'
+    assign color = s.aside_section_heading_color
+    assign font = s.aside_section_heading_font
+    assign font_size = s.aside_section_heading_font_size
+    assign line_height = s.aside_section_heading_line_height
+    assign letter_spacing = s.aside_section_heading_letter_spacing
+    assign text_case = s.aside_section_heading_case
+    assign text_wrap = s.aside_section_heading_wrap
+    assign enable_mobile_size = s.aside_section_heading_enable_mobile_size
+    assign mobile_font_size = s.aside_section_heading_mobile_font_size
   else
     assign preset = s.aside_product_title_type_preset | default: 'paragraph'
     assign color = s.aside_product_title_color

@@ -1194,6 +1194,7 @@
     "product_hotspots_flat_aside_image_ratio": "Aside card image ratio",
     "product_hotspots_flat_aside_image_ratio_info": "Applies to product images in the right column (carousel or stack). Hotspot block images use their own setting when set.",
     "product_hotspots_flat_aside_title_typography": "Aside column — product title",
+    "product_hotspots_flat_aside_section_heading_typography": "Aside column — section heading",
     "product_hotspots_flat_aside_price_typography": "Aside column — price",
     "product_hotspots_flat_layout_spacing": "Spacing and column gap",
     "product_hotspots_flat_section_gap": "Section gap scale",
