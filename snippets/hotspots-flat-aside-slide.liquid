@@ -1,0 +1,51 @@
+{%- doc -%}
+  One aside card for product-hotspots-flat carousel/stack.
+  Renders hotspots-flat-aside-product-card (project-owned) so hotspot_image can override the product image without editing Horizon resource-card.
+  @param {object} block - Section block of type hotspot_flat
+  @param {object} [section] - Parent section (for image_ratio)
+{%- enddoc -%}
+{%- liquid
+  assign is_flat_hotspot = false
+  if block.type == 'hotspot_flat'
+    assign is_flat_hotspot = true
+  endif
+  assign aside_image_ratio = 'adapt'
+  if section != blank and section.settings.image_ratio != blank
+    assign aside_image_ratio = section.settings.image_ratio
+  endif
+  assign aside_title_preset = 'h5'
+  if section != blank
+    assign aside_title_preset = section.settings.aside_product_title_type_preset | default: 'h5'
+  endif
+  if aside_title_preset == blank or aside_title_preset == 'rte' or aside_title_preset == 'custom'
+    assign aside_title_preset = 'h5'
+  endif
+-%}
+{%- if is_flat_hotspot -%}
+  {%- liquid
+    assign card_product = block.settings.product
+    if card_product == blank
+      assign product_ref = block.settings['product']
+      if product_ref != blank
+        assign card_product = all_products[product_ref]
+      endif
+    endif
+  -%}
+  <div class="resource-list__item">
+    {%- if card_product != blank -%}
+      {%- render 'hotspots-flat-aside-product-card',
+        resource: card_product,
+        block: block,
+        section: section,
+        image_ratio: aside_image_ratio,
+        image_sizes: 'auto'
+      -%}
+    {%- else -%}
+      <div class="resource-card" data-resource-type="product">
+        <div class="resource-card__content">
+          <p class="resource-card__title {{ aside_title_preset }}">{{ 'placeholders.product_title' | t }}</p>
+        </div>
+      </div>
+    {%- endif -%}
+  </div>
+{%- endif -%}

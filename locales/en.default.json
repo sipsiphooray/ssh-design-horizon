@@ -155,6 +155,7 @@
     "total": "Total:",
     "view_details": "View details",
     "frequent_no_chosen": "Choose items to buy together.",
+    "product_hotspots_flat_empty_carousel": "Add hotspot blocks and pick a product for each to show the carousel here.",
     "checkout": "Check out",
     "minimum_note_html": "<strong>Note:</strong> A minimum order of {{ price }} is required for delivery",
     "shipping_protection_label": "Shipping Protection",
