@@ -783,7 +783,6 @@ body:has(.overlay.active) .sticky-add-to-cart__bar {
     text-align: center;
     padding: var(--margin-sm);
     margin-block-start: var(--margin-sm);
-    background: #f9f9f9;
     font-size: var(--font-size--sm);
 }
 

@@ -29,7 +29,7 @@
     >
       <div class="cart-upsell__heading-row">
         {% if settings.upsell_heading != blank %}
-          <span class="upsell-heading h4 cart-upsell__heading-text">
+          <span class="upsell-heading cart-upsell__heading-text">
             {{ settings.upsell_heading }}
           </span>
         {% else %}
@@ -100,7 +100,7 @@
     width: 100%;
     gap: var(--gap-sm);
     padding-block-start: var(--margin-sm);
-    margin-block-start: var(--margin-sm);
+    border-top: 1px solid var(--color-border);
   }
 
   .cart-upsell__heading-row {
