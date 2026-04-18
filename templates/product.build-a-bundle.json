@@ -279,7 +279,7 @@
               "type": "shopify://apps/sip-custom-options/blocks/custom_options/019d9e13-978a-7b91-b674-5550bbd06408",
               "settings": {
                 "product_form_id_prefix": "BuyButtons-ProductForm-",
-                "canvas_mount_selector": ".product-media",
+                "canvas_mount_selector": ".product-media-container .product-media",
                 "cart_bundled_sections": "",
                 "enable_nested_cart_json": true,
                 "info_modal_layout": "popup",
