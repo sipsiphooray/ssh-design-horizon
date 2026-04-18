@@ -159,6 +159,13 @@
           "border_radius": 0,
           "subscription_policy_url": ""
         }
+      },
+      "17893275446105650833": {
+        "type": "shopify://apps/sip-custom-options/blocks/canvas_embed/019d9e13-978a-7b91-b674-5550bbd06408",
+        "disabled": false,
+        "settings": {
+          "min_height": 360
+        }
       }
     },
     "color_schemes": {
