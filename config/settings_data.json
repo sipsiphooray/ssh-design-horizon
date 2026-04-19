@@ -201,7 +201,7 @@
           "variant_hover_text_color": "#2b2b2b",
           "variant_hover_border_color": "#b89b95",
           "selected_variant_background_color": "#b89b95",
-          "selected_variant_text_color": "#2b2b2b",
+          "selected_variant_text_color": "#ffffff",
           "selected_variant_border_color": "#b89b95",
           "selected_variant_hover_background_color": "#b89b95",
           "selected_variant_hover_text_color": "#2b2b2b",
