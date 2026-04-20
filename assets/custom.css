@@ -862,7 +862,7 @@ summary:hover {
 }
 
 .link-prop {
-    text-decoration: underline;
+    text-decoration: underline !important;
 }
 
 /*
