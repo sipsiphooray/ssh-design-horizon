@@ -852,6 +852,15 @@ summary:hover {
     border: 0 !important;
 }
 
+
+.menu-drawer__list-item .menu-drawer__menu-item > .svg-wrapper {
+    padding-inline-start: 0;
+}
+
+.menu-drawer__menu-item:has(.menu-drawer__menu-item-icon) .menu-drawer__menu-item-text {
+    font-size: var(--font-size--md);
+}
+
 /*
  * Mega menu (desktop): widen + deepen the theme’s invisible ::after bridge on items with a submenu.
  * Horizon keeps pointer on <li> via that flex ::after; extending width catches diagonal moves toward the panel.
@@ -963,6 +972,9 @@ summary:hover {
 
     .cart-drawer__summary {
         padding-block-end: var(--padding-5xl) !important;
+    }
+    .menu-drawer__menu-item {
+        padding: var(--padding-sm) 0;
     }
 }
 
@@ -1117,6 +1129,10 @@ summary:hover {
 
     .cart-totals__total-value {
         font-size: var(--font-size--md);
+    }
+
+    .media-gallery--carousel slideshow-arrows .slideshow-control {
+        padding-inline: var(--padding-xs);
     }
 }
 

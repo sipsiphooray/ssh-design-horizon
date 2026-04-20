@@ -788,6 +788,26 @@
               </li>
             {%- endfor -%}
           {% endif %}
+
+          {%- if shop.customer_accounts_enabled -%}
+            <li
+              class="menu-drawer__list-item menu-drawer__list-item--account"
+              style="--menu-drawer-animation-index: {{ linklist.links.size | plus: 1 }};"
+            >
+              <a
+                id="HeaderDrawer-account"
+                href="{{ routes.account_url }}"
+                class="menu-drawer__menu-item menu-drawer__menu-item--mainlist menu-drawer__menu-item--account menu-drawer__animated-element focus-inset"
+              >
+                <span class="svg-wrapper menu-drawer__menu-item-icon" aria-hidden="true">
+                  {{- 'icon-account.svg' | inline_asset_content -}}
+                </span>
+                <span class="menu-drawer__menu-item-text wrap-text">
+                  {{- 'content.account_title' | t -}}
+                </span>
+              </a>
+            </li>
+          {%- endif -%}
         </ul>
       </nav>
       <div
@@ -924,7 +944,7 @@
         {% if block_settings.drawer_shop_button_text != blank %}
           <div class="drawer-shop-wrapper">
             <a
-              class="button-secondary drawer-shop-button"
+              class="button drawer-shop-button"
               href="{{ block_settings.drawer_shop_button_url | default: routes.all_products_collection_url }}"
             >
               <span class="button-text">
@@ -1433,6 +1453,26 @@
   .menu-drawer__menu-item-text {
     overflow: hidden;
     text-overflow: ellipsis;
+  }
+
+  /* Account row: icon and label sit inline at the start, override the mainlist
+     space-between so the trailing edge stays empty (no caret). */
+  .menu-drawer__menu-item--account {
+    justify-content: flex-start;
+    gap: var(--gap-sm);
+  }
+
+  .menu-drawer__menu-item-icon {
+    display: inline-flex;
+    align-items: center;
+    flex-shrink: 0;
+    width: var(--icon-size-xs);
+    height: var(--icon-size-xs);
+  }
+
+  .menu-drawer__menu-item-icon svg {
+    width: 100%;
+    height: 100%;
   }
 
   /** Styles when the country selector is hidden */
