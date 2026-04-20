@@ -238,7 +238,9 @@
                               <div class="cart-items__property">
                                 <dt>{{ property.first }}:</dt>
                                 <dd>
-                                  {%- if property.last contains '/uploads/' -%}
+                                  {%- if property.first == 'Preview Image' and property.last contains '/uploads/' -%}
+                                    <a href="{{ property.last }}" class="link-prop">{{ 'actions.view' | t }}</a>
+                                  {%- elsif property.last contains '/uploads/' -%}
                                     <a href="{{ property.last }}">{{ property.last | split: '/' | last }}</a>
                                   {%- else -%}
                                     {{ property.last }}
