@@ -68,7 +68,7 @@
     "show_installments": false,
     "show_accelerated_checkout_buttons": false,
     "cart_review": true,
-    "cart_review_text": "<p>\"They shipped out so fast and the quality is great!\"</p>",
+    "cart_review_text": "<p><em>\"They shipped out so fast and the quality is great!\"</em></p>",
     "cart_review_name": "Chloe M.",
     "cart_usp_1": "QUICK SHIP",
     "cart_usp_2": "EASY RETURNS",
