@@ -1248,7 +1248,7 @@
             "border_opacity": 100,
             "border_radius": 0,
             "padding-block-start": 0,
-            "padding-block-end": 0,
+            "padding-block-end": 24,
             "padding-inline-start": 0,
             "padding-inline-end": 0,
             "custom_mobile_padding": false,
@@ -1257,7 +1257,54 @@
             "mobile-padding-inline-start": 0,
             "mobile-padding-inline-end": 0
           },
-          "blocks": {}
+          "blocks": {
+            "product_list_text_dm3ian": {
+              "type": "_product-list-text",
+              "name": "t:names.collection_title",
+              "settings": {
+                "text": "<h3>{{ closest.collection.title }}</h3>",
+                "width": "fit-content",
+                "max_width": "normal",
+                "alignment": "left",
+                "type_preset": "h2",
+                "font": "var(--font-body--family)",
+                "font_size": "1rem",
+                "enable_mobile_size": true,
+                "mobile_font_size": "2rem",
+                "line_height": "normal",
+                "letter_spacing": "normal",
+                "case": "none",
+                "wrap": "pretty",
+                "color": "var(--color-foreground)",
+                "background": false,
+                "background_color": "#00000026",
+                "corner_radius": 0,
+                "padding-block-start": 0,
+                "padding-block-end": 0,
+                "padding-inline-start": 0,
+                "padding-inline-end": 0
+              },
+              "blocks": {}
+            },
+            "product_list_button_tHCd3p": {
+              "type": "_product-list-button",
+              "name": "t:names.product_list_button",
+              "settings": {
+                "label": "View all",
+                "open_in_new_tab": false,
+                "style_class": "link",
+                "width": "fit-content",
+                "custom_width": 100,
+                "width_mobile": "fit-content",
+                "custom_width_mobile": 100
+              },
+              "blocks": {}
+            }
+          },
+          "block_order": [
+            "product_list_text_dm3ian",
+            "product_list_button_tHCd3p"
+          ]
         },
         "static-product-card": {
           "type": "_product-card",
@@ -1366,20 +1413,20 @@
                         "width": "fit-content",
                         "max_width": "normal",
                         "alignment": "left",
-                        "type_preset": "rte",
+                        "type_preset": "h3",
                         "font": "var(--font-body--family)",
                         "font_size": "1rem",
-                        "enable_mobile_size": false,
-                        "mobile_font_size": "1rem",
+                        "enable_mobile_size": true,
+                        "mobile_font_size": "1.125rem",
                         "line_height": "normal",
                         "letter_spacing": "normal",
                         "case": "none",
                         "wrap": "pretty",
-                        "color": "var(--color-foreground)",
+                        "color": "var(--color-foreground-heading)",
                         "background": false,
                         "background_color": "#00000026",
                         "corner_radius": 0,
-                        "padding-block-start": 4,
+                        "padding-block-start": 0,
                         "padding-block-end": 0,
                         "padding-inline-start": 0,
                         "padding-inline-end": 0
@@ -1474,10 +1521,10 @@
         "icons_shape": "circle",
         "section_width": "page-narrow",
         "horizontal_alignment": "flex-start",
-        "gap": 42,
+        "gap": 0,
         "color_scheme": "scheme-1",
         "padding-block-start": 32,
-        "padding-block-end": 72,
+        "padding-block-end": 42,
         "custom_mobile_padding": false,
         "mobile-padding-block-start": 0,
         "mobile-padding-block-end": 0
