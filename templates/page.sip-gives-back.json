@@ -1172,6 +1172,7 @@
         "image_C8m3Gy",
         "group_PpGfJT"
       ],
+      "disabled": true,
       "custom_css": [],
       "name": "Cause of the Month",
       "settings": {
@@ -1535,9 +1536,9 @@
           ]
         }
       },
-      "name": "t:names.products_carousel",
+      "name": "Cause of the Month w/ products",
       "settings": {
-        "collection": "",
+        "collection": "autism-awareness",
         "layout_type": "carousel",
         "carousel_on_mobile": false,
         "max_products": 6,
