@@ -1523,8 +1523,8 @@
         "horizontal_alignment": "flex-start",
         "gap": 0,
         "color_scheme": "scheme-1",
-        "padding-block-start": 32,
-        "padding-block-end": 42,
+        "padding-block-start": 58,
+        "padding-block-end": 32,
         "custom_mobile_padding": false,
         "mobile-padding-block-start": 0,
         "mobile-padding-block-end": 0
