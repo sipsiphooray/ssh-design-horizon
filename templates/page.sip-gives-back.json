@@ -1550,7 +1550,7 @@
         "icons_shape": "circle",
         "section_width": "page-narrow",
         "horizontal_alignment": "flex-start",
-        "gap": 28,
+        "gap": 42,
         "color_scheme": "scheme-2",
         "padding-block-start": 72,
         "padding-block-end": 72,
