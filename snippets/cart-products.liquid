@@ -138,7 +138,18 @@
                   role="cell"
                   headers="productImage"
                 >
-                  {% if item.image -%}
+                  {% liquid
+                    assign preview_image_url = item.properties['Preview Image']
+                    if preview_image_url == blank
+                      for p in item.properties
+                        if p.first == 'Preview Image' and p.last != blank
+                          assign preview_image_url = p.last
+                          break
+                        endif
+                      endfor
+                    endif
+                  %}
+                  {% if item.image or preview_image_url != blank -%}
                     {% liquid
                       assign ratio = 1
                       assign border_opacity = settings.cart_thumbnail_border_opacity | divided_by: 100.0
@@ -149,8 +160,18 @@
                       endif
                       if block_settings.image_ratio == 'portrait'
                         assign ratio = 0.8
-                      elsif block_settings.image_ratio == 'adapt'
+                      elsif block_settings.image_ratio == 'adapt' and item.image
                         assign ratio = item.image.aspect_ratio
+                      endif
+
+                      assign preview_src = ''
+                      if preview_image_url != blank
+                        assign preview_src = preview_image_url | strip
+                        if preview_src contains '?'
+                          assign preview_src = preview_src | append: '&width=180'
+                        else
+                          assign preview_src = preview_src | append: '?width=180'
+                        endif
                       endif
                     %}
                     <a
@@ -158,9 +179,21 @@
                       class="cart-items__media-container"
                       style="--ratio:{{ ratio }};"
                     >
-                      {%- liquid
-                        echo item.image | image_url: width: 250 | image_tag: class: 'cart-items__media-image border-style', style: border_override
-                      -%}
+                      {%- if preview_image_url != blank -%}
+                        <img
+                          src="{{ preview_src | escape }}"
+                          class="cart-items__media-image border-style"
+                          width="180"
+                          height="180"
+                          loading="lazy"
+                          alt="{{ item.product.title | escape }}"
+                          style="{{ border_override }}"
+                        >
+                      {%- else -%}
+                        {%- liquid
+                          echo item.image | image_url: width: 250 | image_tag: class: 'cart-items__media-image border-style', style: border_override, alt: item.product.title
+                        -%}
+                      {%- endif -%}
                     </a>
                   {%- endif %}
                 </td>
