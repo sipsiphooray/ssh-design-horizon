@@ -621,7 +621,7 @@
                     "body": "",
                     "min_days": 1,
                     "max_days": 5,
-                    "date_display": "latest",
+                    "date_display": "range",
                     "background_color": "#d3faa9",
                     "text_color": "#2b2b2b",
                     "corner_radius": 0,
