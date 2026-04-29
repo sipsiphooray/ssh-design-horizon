@@ -876,6 +876,7 @@ summary:hover {
     position: fixed;
     inset: 0;
     margin: auto;
+    top: 1.5rem;
 }
 
 @media screen and (min-width: 750px) {
