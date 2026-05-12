@@ -1369,10 +1369,10 @@
       "name": "t:names.collections_grid",
       "settings": {
         "collection_list": [
-          "16oz-20oz-glass-cups",
+          "book-lovers",
+          "summer-sippin",
           "17oz-mugs",
-          "32oz-tumblers",
-          "40oz-plastic-tumblers-copy"
+          "32oz-tumblers"
         ],
         "layout_type": "grid",
         "carousel_on_mobile": true,
