@@ -526,7 +526,7 @@
           "name": "t:names.icon",
           "settings": {
             "icon": "price_tag",
-            "image_upload": "shopify://shop_images/5_63408857-5a3e-4947-9793-c8d6206aee59.png",
+            "image_upload": "shopify://shop_images/nordstrom.png",
             "width": 24,
             "use_height": true,
             "height": 58,
