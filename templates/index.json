@@ -462,10 +462,10 @@
           "name": "t:names.icon",
           "settings": {
             "icon": "price_tag",
-            "image_upload": "shopify://shop_images/6_ed109635-d7c6-44f5-b471-9d0453dfe84f.png",
+            "image_upload": "shopify://shop_images/Layer_11_d1dd7096-5475-41bc-b999-d6d294f30096.png",
             "width": 78,
             "use_height": true,
-            "height": 110,
+            "height": 42,
             "custom_mobile_height": true,
             "mobile-height": 50,
             "link": "",
