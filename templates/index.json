@@ -9,10 +9,10 @@
  */
 {
   "sections": {
-    "scroll_navigation_EKMqeR": {
+    "scroll_navigation_QUDVVt": {
       "type": "scroll-navigation",
       "blocks": {
-        "item_XbNUBH": {
+        "item_hkcACg": {
           "type": "item",
           "settings": {
             "image": "shopify://shop_images/cup.png",
@@ -20,23 +20,25 @@
             "link": "shopify://collections/32oz-40oz-tumblers-remake"
           }
         },
-        "item_NTP6AR": {
+        "item_aXCCaa": {
           "type": "item",
+          "disabled": true,
           "settings": {
             "image": "shopify://shop_images/3_2.png",
             "text": "Silicone Bottoms",
             "link": "shopify://collections/silicone-bottoms"
           }
         },
-        "item_zdzAU7": {
+        "item_VhBpwW": {
           "type": "item",
+          "disabled": true,
           "settings": {
             "image": "shopify://shop_images/1_2.png",
             "text": "Candles",
             "link": "shopify://collections/candles"
           }
         },
-        "item_74XFCd": {
+        "item_Ft3WQ8": {
           "type": "item",
           "settings": {
             "image": "shopify://shop_images/4_2.png",
@@ -44,30 +46,30 @@
             "link": "shopify://collections/17oz-mugs"
           }
         },
-        "item_FRYFdQ": {
+        "item_a3ee8P": {
           "type": "item",
           "settings": {
             "image": "shopify://shop_images/coasters.png",
-            "text": "Coasters",
+            "text": "Mug Rugs",
             "link": "shopify://collections/coasters"
           }
         },
-        "item_KKdwpd": {
+        "item_MNbjqG": {
           "type": "item",
           "settings": {
             "image": "shopify://shop_images/apparel.png",
-            "text": "Apparels",
+            "text": "Sip Tees",
             "link": "shopify://collections/apparel"
           }
         }
       },
       "block_order": [
-        "item_XbNUBH",
-        "item_NTP6AR",
-        "item_zdzAU7",
-        "item_74XFCd",
-        "item_FRYFdQ",
-        "item_KKdwpd"
+        "item_hkcACg",
+        "item_aXCCaa",
+        "item_VhBpwW",
+        "item_Ft3WQ8",
+        "item_a3ee8P",
+        "item_MNbjqG"
       ],
       "custom_css": [
         ".custom-section-background {display: none;}",
@@ -102,11 +104,11 @@
         "overlay_color": "#f3eeea",
         "overlay_style": "gradient",
         "gradient_direction": "to bottom",
-        "padding-block-start": 16,
-        "padding-block-end": 16,
+        "padding-block-start": 8,
+        "padding-block-end": 8,
         "custom_mobile_padding": true,
-        "mobile-padding-block-start": 12,
-        "mobile-padding-block-end": 12,
+        "mobile-padding-block-start": 8,
+        "mobile-padding-block-end": 8,
         "mobile-padding-inline-start": 0,
         "mobile-padding-inline-end": 0,
         "css_class": "",
@@ -5000,7 +5002,7 @@
     }
   },
   "order": [
-    "scroll_navigation_EKMqeR",
+    "scroll_navigation_QUDVVt",
     "hero_jVaWmY",
     "marquee_rfcVf9",
     "grid_section_d8wkgr",
