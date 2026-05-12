@@ -446,10 +446,10 @@
           "name": "t:names.icon",
           "settings": {
             "icon": "price_tag",
-            "image_upload": "shopify://shop_images/9.png",
+            "image_upload": "shopify://shop_images/9_10c19c36-ba1b-40df-af80-8dbbabbbd3b2.png",
             "width": 160,
             "use_height": true,
-            "height": 144,
+            "height": 42,
             "custom_mobile_height": true,
             "mobile-height": 50,
             "link": "",
