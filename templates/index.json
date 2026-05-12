@@ -4833,6 +4833,7 @@
         "carousel_card_gjhh8j",
         "carousel_card_R4ceke"
       ],
+      "disabled": true,
       "custom_css": [
         ".divider__line {--color-border: rgb(43 43 43 / 0.1);}",
         "@media (min-width: 990px) {.resource-list__carousel {--peek-next-slide-size: 0rem; }}"
@@ -4988,7 +4989,6 @@
         "group_EWnWFw",
         "okendo_reviews_carousel_GNigiV"
       ],
-      "disabled": true,
       "name": "Okendo Carousel",
       "settings": {
         "content_direction": "column",
