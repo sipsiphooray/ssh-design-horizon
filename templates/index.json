@@ -1169,6 +1169,7 @@
           ]
         }
       },
+      "disabled": true,
       "custom_css": [
         ".product-list-content:has(.link) .link {position: absolute !important; top: 50%; right: 0; transform: translateY(-50%);}"
       ],
@@ -1388,10 +1389,10 @@
         "section_width": "page-width",
         "gap": 0,
         "color_scheme": "",
-        "padding-block-start": 0,
+        "padding-block-start": 32,
         "padding-block-end": 60,
         "custom_mobile_padding": true,
-        "mobile-padding-block-start": 0,
+        "mobile-padding-block-start": 32,
         "mobile-padding-block-end": 32
       }
     },
