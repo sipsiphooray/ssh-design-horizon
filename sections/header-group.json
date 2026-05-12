@@ -83,6 +83,7 @@
             "megamenu_item_4n6PBG": {
               "type": "_megamenu-item",
               "name": "Megamenu card",
+              "disabled": true,
               "settings": {
                 "assigned_to": "About us",
                 "zoom_on_hover": true,
@@ -114,7 +115,7 @@
               "name": "Megamenu card",
               "settings": {
                 "assigned_to": "About us",
-                "image": "shopify://shop_images/png_-_2026-04-04T033346.925.png",
+                "image": "shopify://shop_images/about_sip.png",
                 "zoom_on_hover": true,
                 "image_ratio": "adapt",
                 "height": "fit",
