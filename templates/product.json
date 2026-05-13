@@ -578,36 +578,21 @@
                 "css_class": "below-atc"
               },
               "blocks": {
-                "text_UWRqde": {
-                  "type": "text",
-                  "name": "t:names.text",
+                "free_shipping_message_cM4Nt9": {
+                  "type": "_free-shipping-message",
+                  "name": "Free shipping message",
                   "settings": {
-                    "text": "<p>Free US Shipping On Orders Over $40</p>",
-                    "width": "fit-content",
-                    "max_width": "normal",
-                    "alignment": "left",
-                    "type_preset": "custom",
-                    "font": "var(--font-body--family)",
-                    "font_size": "0.875rem",
-                    "enable_mobile_size": false,
-                    "mobile_font_size": "1rem",
-                    "line_height": "normal",
-                    "letter_spacing": "normal",
-                    "case": "none",
-                    "wrap": "pretty",
-                    "color": "var(--color-foreground)",
-                    "background": false,
-                    "background_color": "#00000026",
-                    "corner_radius": 0,
+                    "threshold_amount": 40,
+                    "before_success_text": "Free US Shipping On Orders Over $40",
+                    "success_text": "Free Shipping Unlocked!",
+                    "before_custom_color": false,
+                    "before_text_color": "#000000",
+                    "success_custom_color": false,
+                    "success_text_color": "#b89b95",
                     "padding-block-start": 0,
                     "padding-block-end": 0,
                     "padding-inline-start": 0,
-                    "padding-inline-end": 0,
-                    "custom_mobile_padding": false,
-                    "mobile-padding-block-start": 0,
-                    "mobile-padding-block-end": 0,
-                    "mobile-padding-inline-start": 0,
-                    "mobile-padding-inline-end": 0
+                    "padding-inline-end": 0
                   },
                   "blocks": {}
                 },
@@ -731,7 +716,7 @@
                 }
               },
               "block_order": [
-                "text_UWRqde",
+                "free_shipping_message_cM4Nt9",
                 "product_shipping_callout_UNKMw4",
                 "popup_link_yA8PQ7",
                 "payment_icons_e9f7YR"
@@ -941,7 +926,7 @@
               ]
             },
             "shopvid_mp_tiktok_block_QzJRyi": {
-              "type": "shopify://apps/shopvid/blocks/mp_tiktok_block/1216543a-6237-4445-a5f2-61991cd76022",
+              "type": "shopify://apps/ag-shoppable-video/blocks/mp_tiktok_block/1216543a-6237-4445-a5f2-61991cd76022",
               "settings": {
                 "mp_tiktok_feed_id": "1803-164740"
               }

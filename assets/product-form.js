@@ -1,6 +1,14 @@
 import { Component } from '@theme/component';
 import { fetchConfig, preloadImage, onAnimationEnd, yieldToMainThread } from '@theme/utilities';
-import { ThemeEvents, CartAddEvent, CartErrorEvent, CartUpdateEvent, VariantUpdateEvent } from '@theme/events';
+import {
+  ThemeEvents,
+  CartAddEvent,
+  CartErrorEvent,
+  CartUpdateEvent,
+  VariantUpdateEvent,
+  PriceChangeEvent,
+} from '@theme/events';
+import { formatMoney } from '@theme/money-formatting';
 import { cartPerformance } from '@theme/performance';
 import { morph } from '@theme/morph';
 
@@ -211,6 +219,9 @@ class ProductFormComponent extends Component {
 
     // Listen for cart updates to sync data-cart-quantity
     document.addEventListener(ThemeEvents.cartUpdate, this.#onCartUpdate, { signal });
+
+    document.addEventListener(ThemeEvents.quantitySelectorUpdate, this.#onQuantitySelectorUpdateForPrices, { signal });
+    requestAnimationFrame(() => this.#syncQuantityDependentPrices());
   }
 
   disconnectedCallback() {
@@ -276,7 +287,66 @@ class ProductFormComponent extends Component {
     } else {
       await this.#fetchAndUpdateCartQuantity();
     }
+    this.#syncQuantityDependentPrices();
   };
+
+  /**
+   * Keeps add-to-cart line total, main product-price block, and addon totals in sync with quantity.
+   * @param {Event} event
+   */
+  #onQuantitySelectorUpdateForPrices = (event) => {
+    if (event.type !== ThemeEvents.quantitySelectorUpdate) return;
+    const ce = /** @type {CustomEvent<{ quantity?: number; cartLine?: number }>} */ (event);
+    if (ce.detail?.cartLine != null) return;
+    if (!(event.target instanceof Node) || !this.contains(event.target)) return;
+    this.#syncQuantityDependentPrices();
+  };
+
+  /** Updates button + block prices from unit data attributes and current quantity; refreshes addon PriceChangeEvent. */
+  #syncQuantityDependentPrices() {
+    const priceEl = /** @type {HTMLElement | null} */ (this.querySelector('.total-price-display[data-price]'));
+    if (!priceEl) return;
+
+    const qty = Math.max(1, this.#getQuantity() || 1);
+    const unit = Number(priceEl.dataset.unitPrice || priceEl.dataset.price);
+    if (!Number.isFinite(unit) || unit < 0) return;
+
+    const unitCompare = Number(priceEl.dataset.unitCompareAt || 0);
+    const saleTotal = Math.round(unit * qty);
+    const compareTotal = unitCompare > unit ? Math.round(unitCompare * qty) : 0;
+
+    priceEl.dataset.price = String(saleTotal);
+
+    const currency = priceEl.dataset.currency || window.Shopify?.currency?.active || 'USD';
+    const moneyFormat =
+      /** @type {{ theme?: { moneyFormat?: string } }} */ (window).theme?.moneyFormat || '${{amount}}';
+    priceEl.textContent = formatMoney(saleTotal, moneyFormat, currency);
+
+    const section = this.closest('.shopify-section');
+    const productId = this.dataset.productId;
+    const pp =
+      section && productId
+        ? /** @type {HTMLElement | null} */ (section.querySelector(`product-price[data-product-id="${productId}"]`))
+        : null;
+
+    if (pp && !pp.querySelector('[ref="volumePricingNote"]')) {
+      const container = pp.querySelector('[ref="priceContainer"]');
+      const priceSpan = container?.querySelector('.price');
+      const compareSpan = container?.querySelector('.compare-at-price');
+      if (priceSpan) priceSpan.textContent = formatMoney(saleTotal, moneyFormat, currency);
+      if (compareSpan instanceof HTMLElement) {
+        if (compareTotal > saleTotal) {
+          compareSpan.textContent = formatMoney(compareTotal, moneyFormat, currency);
+          compareSpan.hidden = false;
+        } else {
+          compareSpan.textContent = '';
+          compareSpan.hidden = true;
+        }
+      }
+    }
+
+    document.dispatchEvent(new PriceChangeEvent(this));
+  }
 
   /** @param {Event} event */
   handleSubmit(event) {
@@ -866,10 +936,11 @@ class ProductFormComponent extends Component {
     const hasB2BFeatures =
       quantityRules || newQuantityRules || pricePerItem || newPricePerItem || currentVolumePricing || newVolumePricing;
 
-    if (!hasB2BFeatures) return;
+    if (hasB2BFeatures) {
+      await this.#fetchAndUpdateCartQuantity();
+    }
 
-    // Fetch and update cart quantity for the new variant
-    await this.#fetchAndUpdateCartQuantity();
+    this.#syncQuantityDependentPrices();
   };
 
   /** @param {import('./events').VariantSelectedEvent} _event */

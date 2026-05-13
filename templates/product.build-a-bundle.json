@@ -742,7 +742,7 @@
               ]
             },
             "shopvid_mp_tiktok_block_QzJRyi": {
-              "type": "shopify://apps/shopvid/blocks/mp_tiktok_block/1216543a-6237-4445-a5f2-61991cd76022",
+              "type": "shopify://apps/ag-shoppable-video/blocks/mp_tiktok_block/1216543a-6237-4445-a5f2-61991cd76022",
               "settings": {
                 "mp_tiktok_feed_id": "1803-164740"
               }

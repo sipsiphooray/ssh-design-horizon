@@ -1,5 +1,6 @@
 import { Component } from '@theme/component';
 import { ThemeEvents, PriceChangeEvent } from '@theme/events';
+import { formatMoney } from '@theme/money-formatting';
 import { onDocumentLoaded, onDocumentReady } from '@theme/utilities';
 
 /**
@@ -840,3 +841,137 @@ onDocumentReady(() => {
   /* Capture: mobile hotspot handler calls stopPropagation; we still need to sync the aside carousel. */
   document.addEventListener('click', handleHotspotsFlatAsideCarouselClick, true);
 });
+
+const FREE_SHIPPING_PLACEHOLDER = '__REMAINING__';
+
+/**
+ * PDP / product-details: compares variant line total (unit × qty) to a free-shipping threshold
+ * and swaps inline richtext messages. Updates on variant change and quantity change.
+ */
+class FreeShippingMessage extends HTMLElement {
+  /** @type {AbortController | undefined} */
+  #abort;
+
+  connectedCallback() {
+    this.#abort = new AbortController();
+    const { signal } = this.#abort;
+    const root = this.closest('.shopify-section, dialog');
+    root?.addEventListener(ThemeEvents.variantUpdate, this.#onVariantUpdate, { signal });
+    document.addEventListener(ThemeEvents.quantitySelectorUpdate, this.#onQuantityUpdate, { signal });
+    this.#render();
+  }
+
+  disconnectedCallback() {
+    this.#abort?.abort();
+  }
+
+  /** @returns {HTMLElement | null} */
+  #getProductForm() {
+    const details = this.closest('.product-details');
+    const el = details?.querySelector('product-form-component');
+    return /** @type {HTMLElement | null} */ (el ?? null);
+  }
+
+  #getQuantity() {
+    const form = this.#getProductForm();
+    const input = /** @type {HTMLInputElement | null} */ (form?.querySelector('input[name="quantity"]'));
+    const raw = input?.value;
+    const n = parseInt(String(raw), 10);
+    return Number.isFinite(n) && n > 0 ? n : 1;
+  }
+
+  /** Unit price in cents (variant). */
+  #getUnitCents() {
+    const fromDataset = parseInt(this.dataset.variantUnitCents || '', 10);
+    if (Number.isFinite(fromDataset) && fromDataset >= 0) return fromDataset;
+    const form = this.#getProductForm();
+    const unitEl = /** @type {HTMLElement | null} */ (
+      form?.querySelector('.total-price-display[data-unit-price]')
+    );
+    const fromButton = parseInt(unitEl?.dataset.unitPrice || '', 10);
+    return Number.isFinite(fromButton) && fromButton >= 0 ? fromButton : 0;
+  }
+
+  #getThresholdCents() {
+    const t = parseInt(this.dataset.thresholdCents || '0', 10);
+    return Number.isFinite(t) && t > 0 ? t : 0;
+  }
+
+  #readCopyJson() {
+    const script = this.querySelector('script[type="application/json"]');
+    if (!script?.textContent) return { beforeHtml: '', successHtml: '' };
+    try {
+      return /** @type {{ beforeHtml?: string; successHtml?: string }} */ (JSON.parse(script.textContent));
+    } catch {
+      return { beforeHtml: '', successHtml: '' };
+    }
+  }
+
+  /**
+   * @param {number} cents
+   */
+  #formatMoney(cents) {
+    const currency = window.Shopify?.currency?.active || 'USD';
+    const moneyFormat = /** @type {{ theme?: { moneyFormat?: string } }} */ (window).theme?.moneyFormat || '${{amount}}';
+    return formatMoney(cents, moneyFormat, currency);
+  }
+
+  #render() {
+    const content = this.querySelector('.free-shipping-message__content');
+    if (!(content instanceof HTMLElement)) return;
+
+    const threshold = this.#getThresholdCents();
+    const unit = this.#getUnitCents();
+    const qty = this.#getQuantity();
+    const line = unit * qty;
+    const { beforeHtml = '', successHtml = '' } = this.#readCopyJson();
+
+    /** @type {'before' | 'success'} */
+    let state = 'before';
+    let html = '';
+
+    if (threshold <= 0) {
+      html = successHtml || beforeHtml;
+      state = 'success';
+    } else if (line >= threshold) {
+      html = successHtml || beforeHtml;
+      state = 'success';
+    } else {
+      const remaining = threshold - line;
+      const remainingLabel = this.#formatMoney(remaining);
+      html = (beforeHtml || '').split(FREE_SHIPPING_PLACEHOLDER).join(remainingLabel);
+      state = 'before';
+    }
+
+    content.innerHTML = html;
+    content.dataset.shippingState = state;
+  }
+
+  /** @param {Event} event */
+  #onVariantUpdate = (event) => {
+    const ce = /** @type {CustomEvent} */ (event);
+    const productId = String(this.dataset.productId || '');
+    const dataPid = ce.detail?.data?.productId != null ? String(ce.detail.data.productId) : '';
+    if (productId && dataPid && productId !== dataPid) return;
+
+    const price = ce.detail?.resource?.price;
+    if (price != null) {
+      this.dataset.variantUnitCents = String(price);
+    }
+    this.#render();
+  };
+
+  /** @param {Event} event */
+  #onQuantityUpdate = (event) => {
+    const ce = /** @type {CustomEvent<{ cartLine?: number }>} */ (event);
+    if (ce.detail?.cartLine != null) return;
+    if (!(event.target instanceof Node)) return;
+    const details = this.closest('.product-details');
+    if (!details?.contains(event.target)) return;
+    this.#render();
+  };
+}
+
+if (!customElements.get('free-shipping-message')) {
+  customElements.define('free-shipping-message', FreeShippingMessage);
+}

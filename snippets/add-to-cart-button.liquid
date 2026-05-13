@@ -18,6 +18,7 @@
   if product.selected_or_first_available_variant.featured_media.preview_image == blank
     assign product_variant_media = product.featured_media.preview_image | image_url: width: 100
   endif
+  assign atc_variant = product.selected_or_first_available_variant
 -%}
 
 <add-to-cart-component
@@ -65,13 +66,17 @@
       </span>
       {% unless quick_add == true %}
         <span class="button-divider">•</span>
-        <span class="button--price total-price-display" data-price="{{ product.selected_or_first_available_variant.price }}" data-symbol="{{ cart.currency.symbol }}" 
-          {% comment %} data-currency="{{ localization.country.currency.iso_code }}" {% endcomment %}
+        <span
+          class="button--price total-price-display"
+          data-price="{{ atc_variant.price }}"
+          data-unit-price="{{ atc_variant.price }}"
+          data-unit-compare-at="{{ atc_variant.compare_at_price | default: 0 }}"
+          data-symbol="{{ cart.currency.symbol }}"
         >
           {% if settings.currency_code_enabled_product_pages %}
-            {{ product.selected_or_first_available_variant.price | money_with_currency | replace: '.00', '' }}
+            {{ atc_variant.price | money_with_currency | replace: '.00', '' }}
           {% else %}
-            {{ product.selected_or_first_available_variant.price | money_without_trailing_zeros }}
+            {{ atc_variant.price | money_without_trailing_zeros }}
           {% endif %}
         </span>
       {% endunless %}

@@ -341,9 +341,10 @@ export class PriceChangeEvent extends Event {
           addonHost
         : addonHost;
 
-    // Find base price element (main variant price on add-to-cart, or frequent-bought total row)
+    // Prefer buy-button price inside the same product form (avoids wrong match when multiple totals exist)
     const basePriceEl = /** @type {HTMLElement | null} */ (
-      priceDisplayParent.querySelector('.total-price-display[data-price]')
+      target?.closest('product-form-component')?.querySelector('.total-price-display[data-price]') ??
+        priceDisplayParent.querySelector('.total-price-display[data-price]')
     );
     let totalCompareAt = 0;
     if (basePriceEl?.dataset.price) {

@@ -131,7 +131,7 @@
                 "case": "none",
                 "wrap": "pretty",
                 "color": "var(--color-foreground)",
-                "text": "<h4>Why Choose Us</h4>",
+                "text": "",
                 "link": "/pages/about-us#why-choose-us",
                 "read_only": false,
                 "alignment": "left",
