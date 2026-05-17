@@ -243,7 +243,8 @@
       },
       "custom_css": [
         ".cart-bubble__background {background: #f0dfe7;}",
-        ".cart-bubble {color: var(--color-primary);}"
+        ".cart-bubble {color: var(--color-primary);}",
+        ".mega-menu__content-list {--menu-content-columns-desktop: 3 !important;}"
       ],
       "settings": {
         "logo_position": "left",
