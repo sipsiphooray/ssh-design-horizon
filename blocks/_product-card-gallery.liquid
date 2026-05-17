@@ -7,6 +7,7 @@
   @param {string} [discount_background] - The discount background color
   @param {string} [discount_color_text] - The discount text color
   @param {object} [product] - The product object
+  @param {object} [pinned_variant] - Explicit variant for gallery/link (curated rows); when blank, card-gallery resolves from collection metafield like product-card.
 {%- enddoc -%}
 
 
@@ -103,7 +104,7 @@
   {% endunless %}
 {% endcapture %}
 
-{% render 'card-gallery', children: children %}
+{% render 'card-gallery', children: children, pinned_variant: pinned_variant %}
 
 {% # Title and price for the zoomed out grid view %}
 <div class="product-grid-view-zoom-out--details">

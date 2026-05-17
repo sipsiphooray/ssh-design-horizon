@@ -7,6 +7,9 @@
   @param {object} children - The children of the product card
   @param {object} [block] - The block object
   @param {number} [product_card_gap] - The gap between the product card children (overrides block settings)
+  @param {object} [active_variant] - Pinned variant (curated-variant-list) when not using initial_variant from _product-card.
+  @param {object} [initial_variant] - Pre-resolved display variant from blocks/_product-card.liquid (skips duplicate metafield loop).
+  @param {string} [title_suffix] - Matched metafield needle for optional data-card-title-suffix (JS / debugging).
 {%- enddoc -%}
 
 {% assign block_settings = block.settings %}
@@ -34,21 +37,48 @@
   assign product_card_id = 'product-card-link-' | append: block.id | append: '-' | append: product.id
   assign product_card_gap_value = product_card_gap | default: block_settings.product_card_gap
 
-  # Logic to determine which variant URL to use (matching swatch selection logic)
   assign variant_to_link = product.selected_or_first_available_variant
 
-  if collection.metafields.custom.variants_to_render != blank and product.has_only_default_variant == false
-    assign map_variants = product.variants | where: 'option1', collection.metafields.custom.variants_to_render.value
-
-    if map_variants.size == 0
-      assign map_variants = product.variants | where: 'option2', collection.metafields.custom.variants_to_render.value
+  if initial_variant != blank
+    assign variant_to_link = initial_variant
+  elsif active_variant != blank
+    assign variant_to_link = active_variant
+  elsif product != blank and product.has_only_default_variant == false and collection != blank and collection.metafields.custom.variants_to_render != blank
+    assign vtr_meta = collection.metafields.custom.variants_to_render
+    assign vtr_val = vtr_meta.value
+    if vtr_val != blank
+      assign vtr_matched = blank
+      if vtr_meta.type contains 'list'
+        for token in vtr_val
+          assign needle = token.value | default: token
+          if needle == blank
+            continue
+          endif
+          for v in product.variants
+            if v.title contains needle
+              assign vtr_matched = v
+              break
+            endif
+          endfor
+          if vtr_matched != blank
+            break
+          endif
+        endfor
+      else
+        assign needle = vtr_val
+        if needle != blank
+          for v in product.variants
+            if v.title contains needle
+              assign vtr_matched = v
+              break
+            endif
+          endfor
+        endif
+      endif
+      if vtr_matched != blank
+        assign variant_to_link = vtr_matched
+      endif
     endif
-
-    if map_variants.size == 0
-      assign map_variants = product.variants | where: 'option3', collection.metafields.custom.variants_to_render.value
-    endif
-
-    assign variant_to_link = map_variants[0]
   endif
 
   if settings.transition_to_main_product
@@ -81,6 +111,12 @@
   {{ block.shopify_attributes }}
   {% if onboarding %}
     data-placeholder="true"
+  {% endif %}
+  {% if title_suffix != blank %}
+    data-card-title-suffix="{{ title_suffix | escape }}"
+  {% endif %}
+  {% if initial_variant != blank %}
+    data-card-initial-variant-id="{{ initial_variant.id }}"
   {% endif %}
 >
   <a
