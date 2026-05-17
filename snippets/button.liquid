@@ -29,7 +29,7 @@
   {%- endif -%}
   {{ block.shopify_attributes }}
 >
-  {{ block_settings.label }}
+  {{ block_settings.label }}{% if block_settings.add_arrow == true %}<span class="button--arrow">{{ 'icon-long-arrow.svg' | inline_asset_content }}</span>{% endif %}
 </a>
 
 {% stylesheet %}

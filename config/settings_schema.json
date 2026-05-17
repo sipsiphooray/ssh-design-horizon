@@ -405,6 +405,10 @@
             "label": "14px"
           },
           {
+            "value": "15",
+            "label": "15px"
+          },
+          {
             "value": "16",
             "label": "16px"
           },
@@ -1089,6 +1093,10 @@
             "label": "14px"
           },
           {
+            "value": "15",
+            "label": "15px"
+          },
+          {
             "value": "16",
             "label": "16px"
           },
@@ -1764,12 +1772,138 @@
         "info": "t:info.checkout_buttons",
         "default": true
       },
-
+      {
+        "type": "checkbox",
+        "id": "cart_review",
+        "label": "Cart Review",
+        "default": false
+      },
+      {
+        "type": "richtext",
+        "id": "cart_review_text",
+        "label": "Cart Review Text",
+        "default": "<p>Your order is protected for [price]</p>",
+        "visible_if": "{{ settings.cart_review == true }}"
+      },
+      {
+        "type": "text",
+        "id": "cart_review_name",
+        "label": "Cart Review Name",
+        "default": "John Doe",
+        "visible_if": "{{ settings.cart_review == true }}"
+      },
+      {
+        "type": "header",
+        "content": "Cart USP Texts"
+      },
+      {
+        "type": "text",
+        "id": "cart_usp_1",
+        "label": "Cart usp text 1"
+      },
+      {
+        "type": "image_picker",
+        "id": "cart_usp_img_1",
+        "label": "Cart usp image 1"
+      },
+      {
+        "type": "text",
+        "id": "cart_usp_2",
+        "label": "Cart usp text 2"
+      },
+      {
+        "type": "image_picker",
+        "id": "cart_usp_img_2",
+        "label": "Cart usp image 2"
+      },
+      {
+        "type": "text",
+        "id": "cart_usp_3",
+        "label": "Cart usp text 3"
+      },
+      {
+        "type": "image_picker",
+        "id": "cart_usp_img_3",
+        "label": "Cart usp image 3"
+      },
+      {
+        "type": "checkbox",
+        "id": "enable_cart_upsell",
+        "label": "Enable cart upsell",
+        "default": true
+      },
+      {
+        "type": "header",
+        "content": "Cart Upsell",
+      },
+      {
+        "type": "inline_richtext",
+        "id": "upsell_heading",
+        "label": "Upsell heading"
+      },
+      {
+        "type": "product_list",
+        "id": "upsell_list",
+        "label": "Product upsells"
+      },
+      {
+        "type": "checkbox",
+        "id": "enable_shipping_protection",
+        "label": "Enable shipping protection",
+        "default": false
+      },
+      {
+        "type": "richtext",
+        "id": "shipping_protection_text",
+        "label": "Shipping protection text",
+        "visible_if": "{{ settings.enable_shipping_protection == true }}"
+      },
+      {
+        "type": "product",
+        "id": "protection_product",
+        "label": "Protection Product"
+      },
       {
         "type": "url",
         "id": "empty_cart_button_link",
         "label": "t:settings.empty_cart_button_link",
         "default": "/collections/all"
+      },
+      {
+        "type": "checkbox",
+        "id": "show_shipping_bar",
+        "label": "Show Shipping bar",
+        "default": true
+      },
+      {
+        "type": "header",
+        "content": "Shipping bar settings",
+        "visible_if": "{{ settings.show_shipping_bar == true }}"
+      },
+      {
+        "type": "number",
+        "id": "shipping_threshold",
+        "label": "Shipping threshold",
+        "visible_if": "{{ settings.show_shipping_bar == true }}"
+      },
+      {
+        "type": "inline_richtext",
+        "id": "progress_message",
+        "label": "Progress message",
+        "visible_if": "{{ settings.show_shipping_bar == true }}"
+      },
+      {
+        "type": "inline_richtext",
+        "id": "success_message",
+        "label": "Success message",
+        "visible_if": "{{ settings.show_shipping_bar == true }}"
+      },
+      {
+        "type": "color_scheme",
+        "id": "shipping_color_scheme",
+        "label": "t:settings.color_scheme",
+        "default": "scheme-2",
+        "visible_if": "{{ settings.show_shipping_bar == true }}"
       },
       {
         "type": "header",

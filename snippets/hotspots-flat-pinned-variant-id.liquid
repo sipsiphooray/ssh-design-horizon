@@ -1,0 +1,61 @@
+{%- doc -%}
+  Returns variant id (digits only) when block.settings.hotspot_variant_name matches; otherwise empty.
+  Match order: title (exact, contains), option1–3 (exact), SKU (exact), variant id (numeric string).
+  @param {object} product
+  @param {object} block - hotspot_flat block
+{%- enddoc -%}
+{% liquid
+  assign out = ''
+  assign needle = block.settings.hotspot_variant_name | default: '' | strip
+  if product != blank and needle != ''
+    assign nd = needle | downcase
+    for variant in product.variants
+      assign vt = variant.title | strip | downcase
+      if vt == nd
+        assign out = variant.id
+        break
+      endif
+    endfor
+    if out == ''
+      for variant in product.variants
+        assign vt = variant.title | strip | downcase
+        if vt contains nd
+          assign out = variant.id
+          break
+        endif
+      endfor
+    endif
+    if out == ''
+      for variant in product.variants
+        assign o1 = variant.option1 | strip | downcase
+        assign o2 = variant.option2 | strip | downcase
+        assign o3 = variant.option3 | strip | downcase
+        if o1 == nd or o2 == nd or o3 == nd
+          assign out = variant.id
+          break
+        endif
+      endfor
+    endif
+    if out == ''
+      for variant in product.variants
+        if variant.sku != blank and variant.sku == needle
+          assign out = variant.id
+          break
+        endif
+      endfor
+    endif
+    if out == ''
+      assign id_candidate = needle | plus: 0
+      assign id_str = id_candidate | append: ''
+      if id_str == needle
+        for variant in product.variants
+          if variant.id == id_candidate
+            assign out = variant.id
+            break
+          endif
+        endfor
+      endif
+    endif
+  endif
+-%}
+{{- out -}}

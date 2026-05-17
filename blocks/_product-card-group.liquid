@@ -2,7 +2,7 @@
   {% content_for 'blocks' %}
 {% endcapture %}
 
-{% render 'group', children: children, settings: block.settings, shopify_attributes: block.shopify_attributes %}
+{% render 'group', children: children, settings: block.settings, shopify_attributes: block.shopify_attributes, class: 'product-card-group' %}
 
 {% schema %}
 {
@@ -23,6 +23,9 @@
     },
     {
       "type": "sku"
+    },
+    {
+      "type": "button"
     },
     {
       "type": "swatches"
@@ -176,6 +179,23 @@
       "step": 1,
       "unit": "px",
       "default": 12
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_mobile_gap",
+      "label": "Custom mobile gap",
+      "default": false
+    },
+    {
+      "type": "range",
+      "id": "mobile_gap",
+      "label": "Mobile gap",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "default": 12,
+      "visible_if": "{{ block.settings.enable_mobile_gap == true }}"
     },
     {
       "type": "header",

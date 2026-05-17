@@ -134,7 +134,9 @@ class HeaderComponent extends Component {
 
   #updateScrollState = () => {
     const stickyMode = this.getAttribute('sticky');
-    if (!this.#offscreen && stickyMode !== 'always') return;
+    const stuckIdleScrollUp =
+      stickyMode === 'scroll-up' && this.dataset.stickyState === 'idle';
+    if (!this.#offscreen && stickyMode !== 'always' && !stuckIdleScrollUp) return;
 
     const scrollTop = document.scrollingElement?.scrollTop ?? 0;
     const headerTop = this.getBoundingClientRect().top;

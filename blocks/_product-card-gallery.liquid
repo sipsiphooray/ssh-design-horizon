@@ -1,3 +1,16 @@
+{%- doc -%}
+  Displays product images in a carousel.
+  Settings allow for a full slideshow, showing only the first image, or showing the second image when hovering.
+  Note: When the product card itself is in a carousel layout, the card-gallery's carousel is disabled with JavaScript.
+  @param {boolean} [hide_quick_add] - Hide quick add
+  @param {string} [discount_label] - The discount label
+  @param {string} [discount_background] - The discount background color
+  @param {string} [discount_color_text] - The discount text color
+  @param {object} [product] - The product object
+  @param {object} [pinned_variant] - Explicit variant for gallery/link (curated rows); when blank, card-gallery resolves from collection metafield like product-card.
+{%- enddoc -%}
+
+
 {% assign product = closest.product %}
 
 {% capture children %}
@@ -9,7 +22,66 @@
         --badge-font-family: var(--font-{{ settings.badge_font_family }}--family); --badge-font-weight: var(--font-{{ settings.badge_font_family }}--weight); --badge-text-transform: {{ settings.badge_text_transform }};
       "
     >
-      {%- if product.available == false or product.compare_at_price > product.price -%}
+      {% if product.metafields.custom.product_badges.value != blank %}
+        {% for i in product.metafields.custom.product_badges.value %}
+          {% if i.label != blank %}
+            <div
+              class="
+                product-badges__badge product-badges__badge--rectangle
+                color-{{ settings.badge_sale_color_scheme }}
+              "
+                style="
+                  {% if i.badge_background_color != blank %}
+                    --color-background: {{ i.badge_background_color }};
+                  {% endif %}
+                  {% if i.badge_text_color != blank %}
+                    --color-foreground: {{ i.badge_text_color }};
+                  {% endif %}
+                "
+            >
+              {{ i.label }}
+            </div>
+          {% endif %}
+        {% endfor %}
+
+        {% if discount_label != blank %}
+          <div
+            class="
+              product-badges__badge product-badges__badge--rectangle
+              color-{{ settings.badge_sale_color_scheme }}
+            "
+            style="
+              {% if discount_background != blank %}
+                --color-background: {{ discount_background }};
+              {% endif %}
+              {% if discount_color_text != blank %}
+                --color-foreground: {{ discount_color_text }};
+              {% endif %}
+            "
+          >
+            {{ discount_label }}
+          </div>
+        {% endif %}
+      {% endif %}
+
+      {% if discount_label != blank and product.metafields.custom.product_badges.value == blank %}
+        <div
+          class="
+            product-badges__badge product-badges__badge--rectangle
+            color-{{ settings.badge_sale_color_scheme }}
+          "
+          style="
+            {% if discount_background != blank %}
+              --color-background: {{ discount_background }};
+            {% endif %}
+            {% if discount_color_text != blank %}
+              --color-foreground: {{ discount_color_text }};
+            {% endif %}
+          "
+        >
+          {{ discount_label }}
+        </div>
+      {%- elsif product.available == false or product.compare_at_price > product.price -%}
         <div
           class="
             product-badges__badge product-badges__badge--rectangle
@@ -22,15 +94,17 @@
             {{ 'content.product_badge_sale' | t }}
           {%- endif -%}
         </div>
-      {%- endif -%}
+      {% endif %}
     </div>
-    {%  if settings.quick_add or settings.mobile_quick_add %}
-      {% render 'quick-add', product: product, section_id: section.id %}
-    {% endif %}
+    {% unless hide_quick_add == true %}
+      {%  if settings.quick_add or settings.mobile_quick_add %}
+        {% render 'quick-add', product: product, section_id: section.id %}
+      {% endif %}
+    {% endunless %}
   {% endunless %}
 {% endcapture %}
 
-{% render 'card-gallery', children: children %}
+{% render 'card-gallery', children: children, pinned_variant: pinned_variant %}
 
 {% # Title and price for the zoomed out grid view %}
 <div class="product-grid-view-zoom-out--details">
@@ -220,7 +294,10 @@
   "presets": [
     {
       "name": "t:names.product_card_media",
-      "category": "t:categories.product"
+      "category": "t:categories.product",
+      "settings": {
+        "image_ratio": "square"
+      }
     }
   ]
 }

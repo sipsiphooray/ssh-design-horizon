@@ -69,7 +69,7 @@
       endif
     %}
     <div
-      class="account-button header-actions__action{% if display_style == 'text' %} account-button--text{% endif %} color-{{ settings.popover_color_scheme }}"
+      class="account-button mobile:hidden header-actions__action{% if display_style == 'text' %} account-button--text{% endif %} color-{{ settings.popover_color_scheme }}"
     >
       <shopify-account
         menu="{{ customer_account_menu }}"
@@ -210,6 +210,9 @@
                 <scroll-hint
                   class="cart-drawer__items"
                 >
+                  {% if settings.show_shipping_bar == true %}
+                    {% render 'cart-shipping-bar' %}
+                  {% endif %}
                   {% render 'cart-products', drawer_context: 'drawer' %}
                 </scroll-hint>
 

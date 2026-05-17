@@ -263,7 +263,7 @@
     height: var(--width-product-image-dialog);
     aspect-ratio: 1;
     padding: var(--padding-product-image-popover, var(--padding-xs));
-    object-fit: cover;
+    object-fit: contain;
     border-radius: var(--style-border-radius-popover);
   }
 
@@ -427,18 +427,6 @@
       transition-property: translate;
       transition-duration: var(--animation-speed);
       transition-timing-function: var(--ease-out-cubic);
-
-      &::before {
-        content: '';
-        position: absolute;
-        inset: -2px;
-        border-radius: calc(50px + 2px);
-        border: 2px solid transparent;
-        pointer-events: none;
-        transition-property: border-color;
-        transition-duration: 0s;
-        transition-timing-function: var(--ease-out-cubic);
-      }
 
       &:is(:hover, :focus, :focus-visible, :active) {
         translate: 0 0;

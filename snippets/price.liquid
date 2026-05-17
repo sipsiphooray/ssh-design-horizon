@@ -5,14 +5,47 @@
   @param {product} product_resource - The product to render
   @param {boolean} [show_unit_price] - Whether to show the unit price
   @param {boolean} [show_sale_price_first] - Whether to show the sale price first
+  @param {string} [badge] - Product badge
+  @param {object} [pricing_variant] - When set on product-card templates, use this variant for price (not product min/max range).
 {%- enddoc -%}
 
 {%- liquid
+  assign customer_tag_shop = shop.metafields.custom.customer_discounts.value
+  assign discount = blank
+
+  capture discount_label
+    render 'discount-label'
+  endcapture
+
+  assign discount_label = discount_label | strip
+
+  if customer_tag_shop.size > 0
+      for item in customer_tag_shop
+        if item.discount != blank
+          assign discount = item.discount
+          break
+        endif
+      endfor
+  endif
+
   assign show_unit_price = show_unit_price | default: false
   assign show_sale_price_first = show_sale_price_first | default: false
   assign selected_variant = product_resource.selected_or_first_available_variant
+  if pricing_variant != blank
+    assign selected_variant = pricing_variant
+  endif
   assign price = selected_variant.price
   assign compare_at_price = selected_variant.compare_at_price
+
+  if discount != blank
+    assign discount_percentage = discount | plus: 0
+    assign discount_multiplier = 100 | minus: discount_percentage
+
+    assign discounted_price = price | times: discount_multiplier | divided_by: 100
+
+    assign compare_at_price = price
+    assign price = discounted_price
+  endif
 
   assign show_compare_price = false
   if compare_at_price > price
@@ -36,9 +69,13 @@
   endif
 
   if is_product_card
-    assign price_min = product_resource.price_min
-    assign price_max = product_resource.price_max
-    assign has_volume_pricing = product_resource.quantity_price_breaks_configured? | default: false
+    if pricing_variant != blank
+      assign has_volume_pricing = false
+    else
+      assign price_min = product_resource.price_min
+      assign price_max = product_resource.price_max
+      assign has_volume_pricing = product_resource.quantity_price_breaks_configured? | default: false
+    endif
   else
     # Product page: only use selected variant's pricing
     if selected_variant.quantity_price_breaks.size > 0
@@ -62,13 +99,17 @@
   if use_currency
     assign price = price | money_with_currency
     assign compare_at_price = compare_at_price | money_with_currency
-    assign price_min = price_min | money_with_currency
-    assign price_max = price_max | money_with_currency
+    if price_min != null
+      assign price_min = price_min | money_with_currency
+      assign price_max = price_max | money_with_currency
+    endif
   else
     assign price = price | money
     assign compare_at_price = compare_at_price | money
-    assign price_min = price_min | money
-    assign price_max = price_max | money
+    if price_min != null
+      assign price_min = price_min | money
+      assign price_max = price_max | money
+    endif
   endif
 -%}
 
@@ -120,6 +161,7 @@
     -%}
     {% render 'unit-price', price: unit_price, measurement: selected_variant.unit_price_measurement %}
   {%- endif -%}
+  {{ badge }}
 </div>
 {%- if has_volume_pricing -%}
   <small ref="volumePricingNote" class="volume-pricing-note">{{ 'content.volume_pricing_available' | t }}</small>

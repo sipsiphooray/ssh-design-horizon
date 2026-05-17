@@ -288,3 +288,91 @@ export class FilterUpdateEvent extends Event {
     return [...this.detail.queryParams.entries()].filter(([key]) => key.startsWith('filter.')).length > 0;
   }
 }
+
+
+/**
+ * Event class for price changes based on checked .addon-card checkboxes
+ * @extends {Event}
+ */
+export class PriceChangeEvent extends Event {
+  /**
+   * @param {Element} [target] - The target element that triggered the event
+   */
+  constructor(target) {
+    super(PriceChangeEvent.eventName, { bubbles: true });
+    /** @type {Record<string, number>} */
+    const prices = {};
+    let total = 0;
+
+    // Resolve host via frequent bundle first (checkbox may not match compound class on <addon-products>)
+    let parent = null;
+    if (target && target instanceof Element) {
+      const bundle = target.closest('[data-frequent-bundle]');
+      if (bundle) {
+        parent =
+          bundle.closest('product-recommendations.frequently-bought-section') ||
+          bundle.closest('addon-products');
+      }
+    }
+    if (!parent && target && target instanceof Element) {
+      parent = target.closest(
+        'product-recommendations.frequently-bought-section, addon-products'
+      );
+    }
+    if (!parent && target && target instanceof Element) {
+      parent = target.closest('.shopify-section, dialog, product-card');
+    }
+
+    // If no parent found, don't calculate anything
+    if (!parent) {
+      console.warn('PriceChangeEvent: No parent container found');
+      this.detail = { prices, total, totalCompareAt: 0, parent: null, priceDisplayParent: null };
+      return;
+    }
+
+    // Main PDP price lives on the buy button (e.g. span.button--price.total-price-display) outside
+    // <addon-products>, so widen the query root for base price while keeping addon sums inside the block.
+    /** @type {Element} */
+    const addonHost = parent;
+    const priceDisplayParent =
+      addonHost instanceof HTMLElement && addonHost.matches('addon-products')
+        ? addonHost.closest('.product-details') ??
+          addonHost.closest('.shopify-section') ??
+          addonHost
+        : addonHost;
+
+    // Prefer buy-button price inside the same product form (avoids wrong match when multiple totals exist)
+    const basePriceEl = /** @type {HTMLElement | null} */ (
+      target?.closest('product-form-component')?.querySelector('.total-price-display[data-price]') ??
+        priceDisplayParent.querySelector('.total-price-display[data-price]')
+    );
+    let totalCompareAt = 0;
+    if (basePriceEl?.dataset.price) {
+      const basePrice = Number(basePriceEl.dataset.price) || 0;
+      prices['base_product'] = basePrice;
+      total += basePrice;
+      totalCompareAt += basePrice;
+    }
+
+    // Add prices from checked addons only within the addon block / frequent section
+    addonHost.querySelectorAll('.addon-card input[type="checkbox"]:checked').forEach(el => {
+      const inputEl = /** @type {HTMLInputElement} */ (el);
+      const name = inputEl.name || 'addon';
+      const price = Number(inputEl.dataset.price || 0);
+      const compare = Number(inputEl.dataset.compareAt || 0);
+      prices[name] = price;
+      total += price;
+      totalCompareAt += compare > price ? compare : price;
+    });
+
+    this.detail = {
+      prices,
+      total,
+      totalCompareAt,
+      parent,
+      priceDisplayParent,
+    };
+  }
+
+  static eventName = 'price:change';
+}

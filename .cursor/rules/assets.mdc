@@ -10,3 +10,34 @@ The assets directory contains any assets that need to be referenced within a `.l
 Assets is a flat directory, it may not contain subdirectories.
 
 Any images that are required in the code, including icons, may be stored within assets.  Icons can be used in `.liquid` files via the [inline_asset_content](mdc:https:/shopify.dev/docs/api/liquid/filters/inline_asset_content) Liquid filter.
+
+## `custom.js` load order
+
+Include `custom.js` where the theme expects auxiliary scripts (see `snippets/scripts.liquid`).
+
+## Menu drawer layout (`custom.js` / `custom.css`)
+
+`syncMenuDrawerLayoutVars` sets **`--menu-drawer-top`** / **`--menu-drawer-height`** on roots and also **`top` / `height` on `#Details-menu-drawer-container > .menu-drawer` via `style.setProperty(..., 'important')`** so layout wins over **`snippets/header-drawer.liquid`** (bundled after `custom.css`). Call **`syncMenuDrawerLayoutVars()` once synchronously on `toggle`** plus deferred passes. **`custom.css`** duplicates vars as fallback.
+
+## `sections/curated-variant-list.liquid`
+
+Homepage-friendly grid of **variant** cards from a **metaobject** entry (not collection metafields). Schema uses `metaobject_type: curated_variant_list` (create that definition in Admin). Loop reads `section.settings.curated_list.product_variants.value`—field handle must match your metaobject list-of-variants field (default dummy handle `product_variants`). Optional **`collection`** setting supplies `closest.collection` for `_product-list-button` (View all) and RTE `closest.collection` in the header.
+
+## Menu drawer: do not unset `.menu-drawer__animated-element` animations
+
+In `custom.css`, avoid `animation: unset !important` (or similar) on `.menu-drawer-container .menu-drawer__animated-element`. Horizon’s `header-drawer` uses `onAnimationEnd` on `.menu-drawer` / `.menu-drawer__submenu` after open; nested summaries also rely on `menu-drawer-nav-open` and `animation-fill-mode: backwards` from `snippets/header-drawer.liquid`. Removing those animations causes races when the user opens a nested item (e.g. `#Details-menu-drawer-menu-item-2`) immediately after load—submenus can look like they auto-close or “go back.” To speed the drawer, prefer theme timing tokens (e.g. `--drawer-animation-speed`) or scoped overrides that do not strip submenu/summary animations.
+
+**Submenu summary clicks:** `assets/header-drawer.js` `open()` for `header-drawer/open/submenu` uses `preventDefault()` and programmatic `open` so native `<details>` toggle does not race `requestAnimationFrame` + `menu-open`; a second tap while open calls `#close` instead of relying on the default toggle. While the submenu panel transition runs, `#submenuSlideAnimating` ignores extra summary clicks (double tap / duplicate click); back/close still call `#close` and clear that state. After open animations, if the root drawer’s callback runs but a nested `details.menu-drawer__menu-container` is already open, focus is trapped there via `#focusTrapTargetForCompletedOpen`. Stale `onAnimationEnd` open callbacks guard with `details.hasAttribute('open')` before `trapFocus`. Horizontal stagger is overridden in `custom.css` with `@keyframes ssh-menu-drawer-nav-open-ltr` (and `-rtl`) and `animation-name` on `header-drawer .menu-drawer-container[open] .menu-drawer__animated-element` so bundled `menu-drawer-nav-open` (translateY) does not win.
+
+## `html[scroll-lock]` in `custom.css`
+
+Keep `html[scroll-lock]` styling minimal: `overflow: hidden` + `overscroll-behavior` on **html** is fine. Avoid heavy `height` / `100dvh` on `html` in the same frame as `body { position:fixed }` (can jump scroll). Avoid `overflow: hidden` on **body** under scroll-lock if it clips the sticky header behind modals.
+
+## `variant-select` (custom.js) and swatches
+
+`onOptionSelect` must call `syncDisplaySwatch(optionEl)` so `.cs-display .swatch-image` matches the selected `.cs-option`; updating only `.cs-display-text` leaves the old image or an empty swatch ring (especially in quick-add after variant change).
+
+## Klaviyo Back in Stock + Horizon
+
+- Put `klaviyo-bis-trigger` only on the **main** PDP add-to-cart (`enable_klaviyo_bis: true` in `add-to-cart-button`, passed from `blocks/add-to-cart.liquid`). Quick-add / cards must **not** use that class or Klaviyo may bind the first match in the DOM to the wrong product.
+- Variant updates: `product-form.js` scopes section HTML to `#getFetchedProductFormRoot` and calls `#notifyKlaviyoBisAfterCartButtonMorph` after morphing the cart button.
