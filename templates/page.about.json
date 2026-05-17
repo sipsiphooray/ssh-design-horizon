@@ -69,6 +69,7 @@
       "blocks": {
         "text_FiGfjJ": {
           "type": "text",
+          "disabled": true,
           "settings": {
             "text": "<h1>Hello Sippers! This is our Story</h1>",
             "width": "fit-content",
@@ -106,7 +107,7 @@
       "name": "t:names.hero",
       "settings": {
         "media_type_1": "image",
-        "image_1": "shopify://shop_images/group-watches-the-eclipse.jpg",
+        "image_1": "shopify://shop_images/mobile_e0780ff2-06a9-4d42-b3f9-5a36edd6d6f2.png",
         "media_type_2": "image",
         "stack_media_on_mobile": false,
         "custom_mobile_media": false,
@@ -123,7 +124,7 @@
         "vertical_alignment_flex_direction_column": "flex-start",
         "gap": 16,
         "section_width": "page-width",
-        "section_height": "medium",
+        "section_height": "large",
         "section_height_custom": 50,
         "color_scheme": "scheme-5",
         "toggle_overlay": false,
@@ -136,10 +137,10 @@
         "padding-block-end": 40
       }
     },
-    "section_kQdJgj": {
+    "section_XfkVWC": {
       "type": "section",
       "blocks": {
-        "group_rCVWbM": {
+        "group_J6aRw6": {
           "type": "group",
           "settings": {
             "link": "",
@@ -150,7 +151,7 @@
             "horizontal_alignment": "flex-start",
             "vertical_alignment": "center",
             "align_baseline": false,
-            "horizontal_alignment_flex_direction_column": "flex-start",
+            "horizontal_alignment_flex_direction_column": "center",
             "custom_mobile_alignment": false,
             "mobile_vertical_alignment": "flex-start",
             "vertical_alignment_flex_direction_column": "center",
@@ -191,11 +192,11 @@
             "css_class": ""
           },
           "blocks": {
-            "text_zfbUdD": {
+            "text_xMtKiT": {
               "type": "text",
               "name": "t:names.heading",
               "settings": {
-                "text": "<h2>We Love What We Do</h2>",
+                "text": "<h2>Bringing whimsy back since 2023</h2>",
                 "width": "fit-content",
                 "max_width": "normal",
                 "alignment": "left",
@@ -224,13 +225,13 @@
               },
               "blocks": {}
             },
-            "text_yM8kD8": {
+            "text_9wCkMA": {
               "type": "text",
               "settings": {
-                "text": "<p>We believe everyday moments deserve to be celebrated; and something as simple as your favorite cup can turn the ordinary into something special. Each piece is designed with care and backed by purpose.</p><p>Through our <em>Pour It Forward</em> program, we donate a portion of every order to a new cause or family in need each month. So when you shop with us, you're not just treating yourself, you're helping someone else, too.</p><p>We’re deeply grateful for every order and pour our hearts into everything we make. If anything isn’t just right, we’re here to make it right, because you matter to us.</p>",
+                "text": "<p></p><p><strong>Sip-Sip Hooray® </strong>is a women-owned & operated drinkware company based in southern Louisiana, <strong>creating feel-good, quality-driven products </strong>since 2023. Our designs are created in-house, produced in small batches, and packed with care.</p><p></p><p>We believe <strong>everyday moments deserve to be celebrated</strong>; and something as simple as your favorite cup can turn the ordinary into something special. Each piece is designed with care and backed by purpose.</p><p>Through our <em><strong>Pour-it Forward</strong></em><strong>™ </strong>program, we donate a portion of every order to a new cause each month. So, when you shop with us, <strong>you're not just treating yourself, you're helping someone else, too.</strong></p><p>We’re deeply grateful for every order and pour our hearts into everything we make. If anything isn’t just right, we’re here to make it right, <strong>because you matter to us.</strong></p>",
                 "width": "100%",
                 "max_width": "none",
-                "alignment": "left",
+                "alignment": "center",
                 "type_preset": "rte",
                 "font": "var(--font-body--family)",
                 "font_size": "1rem",
@@ -258,12 +259,13 @@
             }
           },
           "block_order": [
-            "text_zfbUdD",
-            "text_yM8kD8"
+            "text_xMtKiT",
+            "text_9wCkMA"
           ]
         },
-        "image_dVPAA3": {
+        "image_dVXjHU": {
           "type": "image",
+          "disabled": true,
           "settings": {
             "image": "shopify://shop_images/sipgroup_3555b636-f210-4947-967a-a442552b344e.png",
             "link": "",
@@ -286,8 +288,8 @@
         }
       },
       "block_order": [
-        "group_rCVWbM",
-        "image_dVPAA3"
+        "group_J6aRw6",
+        "image_dVXjHU"
       ],
       "custom_css": [],
       "name": "We Love Whar We Do",
@@ -1027,7 +1029,7 @@
         "overlay_style": "solid",
         "gradient_direction": "to top",
         "padding-block-start": 0,
-        "padding-block-end": 80,
+        "padding-block-end": 32,
         "custom_mobile_padding": false,
         "mobile-padding-block-start": 0,
         "mobile-padding-block-end": 0,
@@ -1038,205 +1040,10 @@
         "section_id": "our-values"
       }
     },
-    "section_4BiNX3": {
-      "type": "section",
-      "blocks": {
-        "image_Y6FzWp": {
-          "type": "image",
-          "settings": {
-            "image": "shopify://shop_images/sipgroup_3555b636-f210-4947-967a-a442552b344e.png",
-            "link": "",
-            "image_ratio": "adapt",
-            "width": "fill",
-            "custom_width": 100,
-            "width_mobile": "fill",
-            "custom_width_mobile": 100,
-            "height": "fit",
-            "border": "none",
-            "border_width": 1,
-            "border_opacity": 100,
-            "border_radius": 0,
-            "padding-block-start": 0,
-            "padding-block-end": 0,
-            "padding-inline-start": 0,
-            "padding-inline-end": 0
-          },
-          "blocks": {}
-        },
-        "group_6qpPT7": {
-          "type": "group",
-          "settings": {
-            "link": "",
-            "open_in_new_tab": false,
-            "content_direction": "column",
-            "vertical_on_mobile": true,
-            "reverse_on_mobile": false,
-            "horizontal_alignment": "flex-start",
-            "vertical_alignment": "center",
-            "align_baseline": false,
-            "horizontal_alignment_flex_direction_column": "flex-start",
-            "custom_mobile_alignment": false,
-            "mobile_vertical_alignment": "flex-start",
-            "vertical_alignment_flex_direction_column": "center",
-            "gap": 12,
-            "enable_mobile_gap": false,
-            "mobile_gap": 12,
-            "width": "custom",
-            "custom_width": 100,
-            "width_mobile": "fill",
-            "custom_width_mobile": 100,
-            "height": "fit",
-            "custom_height": 100,
-            "inherit_color_scheme": true,
-            "color_scheme": "",
-            "background_media": "none",
-            "video_position": "cover",
-            "background_image_position": "cover",
-            "border": "none",
-            "border_width": 1,
-            "border_opacity": 100,
-            "border_radius": 0,
-            "enable_mobile_radius": false,
-            "mobile_border_radius": 0,
-            "placeholder": "",
-            "toggle_overlay": false,
-            "overlay_color": "#00000026",
-            "overlay_style": "solid",
-            "gradient_direction": "to top",
-            "padding-block-start": 0,
-            "padding-block-end": 0,
-            "padding-inline-start": 0,
-            "padding-inline-end": 0,
-            "custom_mobile_padding": false,
-            "mobile-padding-block-start": 0,
-            "mobile-padding-block-end": 0,
-            "mobile-padding-inline-start": 0,
-            "mobile-padding-inline-end": 0,
-            "css_class": ""
-          },
-          "blocks": {
-            "text_bj8jTY": {
-              "type": "text",
-              "name": "t:names.heading",
-              "settings": {
-                "text": "<h2>Our Mission</h2>",
-                "width": "fit-content",
-                "max_width": "normal",
-                "alignment": "left",
-                "type_preset": "h2",
-                "font": "var(--font-body--family)",
-                "font_size": "1rem",
-                "enable_mobile_size": false,
-                "mobile_font_size": "1rem",
-                "line_height": "normal",
-                "letter_spacing": "normal",
-                "case": "none",
-                "wrap": "pretty",
-                "color": "var(--color-foreground)",
-                "background": false,
-                "background_color": "#00000026",
-                "corner_radius": 0,
-                "padding-block-start": 0,
-                "padding-block-end": 0,
-                "padding-inline-start": 0,
-                "padding-inline-end": 0,
-                "custom_mobile_padding": false,
-                "mobile-padding-block-start": 0,
-                "mobile-padding-block-end": 0,
-                "mobile-padding-inline-start": 0,
-                "mobile-padding-inline-end": 0
-              },
-              "blocks": {}
-            },
-            "text_8YBFHM": {
-              "type": "text",
-              "settings": {
-                "text": "<p>Our mission is to bring a little extra joy to your daily hydration with beautifully designed, long-lasting drinkware that makes you smile with every sip. As an independent design studio, we are dedicated to blending fun, fresh styles with everyday functionality. We strive to create a brand where shopping for drinkware is an uplifting experience, empowering our customers to express their unique personalities while joining a community that cares deeply about giving back.</p>",
-                "width": "100%",
-                "max_width": "none",
-                "alignment": "left",
-                "type_preset": "rte",
-                "font": "var(--font-body--family)",
-                "font_size": "1rem",
-                "enable_mobile_size": false,
-                "mobile_font_size": "1rem",
-                "line_height": "normal",
-                "letter_spacing": "normal",
-                "case": "none",
-                "wrap": "pretty",
-                "color": "var(--color-foreground)",
-                "background": false,
-                "background_color": "#00000026",
-                "corner_radius": 0,
-                "padding-block-start": 0,
-                "padding-block-end": 0,
-                "padding-inline-start": 0,
-                "padding-inline-end": 0,
-                "custom_mobile_padding": false,
-                "mobile-padding-block-start": 0,
-                "mobile-padding-block-end": 0,
-                "mobile-padding-inline-start": 0,
-                "mobile-padding-inline-end": 0
-              },
-              "blocks": {}
-            }
-          },
-          "block_order": [
-            "text_bj8jTY",
-            "text_8YBFHM"
-          ]
-        }
-      },
-      "block_order": [
-        "image_Y6FzWp",
-        "group_6qpPT7"
-      ],
-      "custom_css": [],
-      "name": "Our Mission",
-      "settings": {
-        "content_direction": "row",
-        "vertical_on_mobile": true,
-        "reverse_on_mobile": false,
-        "horizontal_alignment": "flex-start",
-        "vertical_alignment": "center",
-        "align_baseline": false,
-        "horizontal_alignment_flex_direction_column": "flex-start",
-        "vertical_alignment_flex_direction_column": "center",
-        "gap": 42,
-        "enable_mobile_gap": false,
-        "mobile_gap": 12,
-        "section_width": "page-narrow",
-        "full_width_on_mobile": false,
-        "section_height": "",
-        "section_height_custom": 50,
-        "color_scheme": "scheme-738179cd-4e15-457b-be40-989a024001d6",
-        "background_media": "none",
-        "video_position": "cover",
-        "background_image_position": "cover",
-        "border": "none",
-        "border_width": 1,
-        "border_opacity": 100,
-        "border_radius": 0,
-        "toggle_overlay": false,
-        "overlay_color": "#00000026",
-        "overlay_style": "solid",
-        "gradient_direction": "to top",
-        "padding-block-start": 72,
-        "padding-block-end": 72,
-        "custom_mobile_padding": false,
-        "mobile-padding-block-start": 0,
-        "mobile-padding-block-end": 0,
-        "mobile-padding-inline-start": 0,
-        "mobile-padding-inline-end": 0,
-        "css_class": "",
-        "add_section_id": true,
-        "section_id": "our-mission"
-      }
-    },
-    "grid_section_MCGLLb": {
+    "grid_section_bN8hbk": {
       "type": "grid-section",
       "blocks": {
-        "carousel_card_6JXR8i": {
+        "carousel_card_D3cN3q": {
           "type": "_carousel-card",
           "name": "Carousel Item",
           "settings": {
@@ -1277,10 +1084,11 @@
             "css_class": ""
           },
           "blocks": {
-            "image_iihWDg": {
+            "image_cpmq6b": {
               "type": "image",
               "name": "t:names.image",
               "settings": {
+                "image": "shopify://shop_images/1_a7395d51-cf64-41ff-aa31-010d6f40981a.png",
                 "link": "",
                 "image_ratio": "adapt",
                 "width": "fill",
@@ -1299,7 +1107,7 @@
               },
               "blocks": {}
             },
-            "group_pMR87d": {
+            "group_q6DPmi": {
               "type": "group",
               "name": "t:names.group",
               "settings": {
@@ -1352,7 +1160,7 @@
                 "css_class": ""
               },
               "blocks": {
-                "text_JwaWmE": {
+                "text_i77GRD": {
                   "type": "text",
                   "name": "t:names.heading",
                   "settings": {
@@ -1385,7 +1193,7 @@
                   },
                   "blocks": {}
                 },
-                "text_UkezqH": {
+                "text_b7apkc": {
                   "type": "text",
                   "name": "t:names.text",
                   "settings": {
@@ -1420,17 +1228,17 @@
                 }
               },
               "block_order": [
-                "text_JwaWmE",
-                "text_UkezqH"
+                "text_i77GRD",
+                "text_b7apkc"
               ]
             }
           },
           "block_order": [
-            "image_iihWDg",
-            "group_pMR87d"
+            "image_cpmq6b",
+            "group_q6DPmi"
           ]
         },
-        "carousel_card_hFc8BA": {
+        "carousel_card_RJ7XpP": {
           "type": "_carousel-card",
           "name": "Carousel Item",
           "settings": {
@@ -1471,10 +1279,11 @@
             "css_class": ""
           },
           "blocks": {
-            "image_ffjjAD": {
+            "image_neWwpE": {
               "type": "image",
               "name": "t:names.image",
               "settings": {
+                "image": "shopify://shop_images/Red_and_Beige_Typography_Our_Team_Instagram_Post.png",
                 "link": "",
                 "image_ratio": "adapt",
                 "width": "fill",
@@ -1493,7 +1302,7 @@
               },
               "blocks": {}
             },
-            "group_Ugd7DU": {
+            "group_VTUR6Q": {
               "type": "group",
               "name": "t:names.group",
               "settings": {
@@ -1546,7 +1355,7 @@
                 "css_class": ""
               },
               "blocks": {
-                "text_FbJtMf": {
+                "text_DEpKWA": {
                   "type": "text",
                   "name": "t:names.heading",
                   "settings": {
@@ -1579,7 +1388,7 @@
                   },
                   "blocks": {}
                 },
-                "text_bkPi4b": {
+                "text_6db7Xm": {
                   "type": "text",
                   "name": "t:names.text",
                   "settings": {
@@ -1614,17 +1423,17 @@
                 }
               },
               "block_order": [
-                "text_FbJtMf",
-                "text_bkPi4b"
+                "text_DEpKWA",
+                "text_6db7Xm"
               ]
             }
           },
           "block_order": [
-            "image_ffjjAD",
-            "group_Ugd7DU"
+            "image_neWwpE",
+            "group_VTUR6Q"
           ]
         },
-        "carousel_card_cywHdf": {
+        "carousel_card_Yd8Ntz": {
           "type": "_carousel-card",
           "name": "Carousel Item",
           "settings": {
@@ -1665,10 +1474,11 @@
             "css_class": ""
           },
           "blocks": {
-            "image_dcCDPt": {
+            "image_LxRgH8": {
               "type": "image",
               "name": "t:names.image",
               "settings": {
+                "image": "shopify://shop_images/3_a0d94a09-ebcc-45a7-a2fe-88b1864f450f.png",
                 "link": "",
                 "image_ratio": "adapt",
                 "width": "fill",
@@ -1687,7 +1497,7 @@
               },
               "blocks": {}
             },
-            "group_VCQcJg": {
+            "group_63KAjJ": {
               "type": "group",
               "name": "t:names.group",
               "settings": {
@@ -1740,7 +1550,7 @@
                 "css_class": ""
               },
               "blocks": {
-                "text_TPYVHY": {
+                "text_rT3AR7": {
                   "type": "text",
                   "name": "t:names.heading",
                   "settings": {
@@ -1773,7 +1583,7 @@
                   },
                   "blocks": {}
                 },
-                "text_ENUJ38": {
+                "text_TXUDAM": {
                   "type": "text",
                   "name": "t:names.text",
                   "settings": {
@@ -1808,19 +1618,20 @@
                 }
               },
               "block_order": [
-                "text_TPYVHY",
-                "text_ENUJ38"
+                "text_rT3AR7",
+                "text_TXUDAM"
               ]
             }
           },
           "block_order": [
-            "image_dcCDPt",
-            "group_VCQcJg"
+            "image_LxRgH8",
+            "group_63KAjJ"
           ]
         },
-        "carousel_card_E4AQxM": {
+        "carousel_card_WAamJm": {
           "type": "_carousel-card",
           "name": "Carousel Item",
+          "disabled": true,
           "settings": {
             "content_direction": "column",
             "vertical_on_mobile": true,
@@ -1859,7 +1670,7 @@
             "css_class": ""
           },
           "blocks": {
-            "image_nXazQe": {
+            "image_VexB8B": {
               "type": "image",
               "name": "t:names.image",
               "settings": {
@@ -1881,7 +1692,7 @@
               },
               "blocks": {}
             },
-            "group_MXRkni": {
+            "group_CJFefw": {
               "type": "group",
               "name": "t:names.group",
               "settings": {
@@ -1934,7 +1745,7 @@
                 "css_class": ""
               },
               "blocks": {
-                "text_jAhJXW": {
+                "text_YUPpp6": {
                   "type": "text",
                   "name": "t:names.heading",
                   "settings": {
@@ -1967,7 +1778,7 @@
                   },
                   "blocks": {}
                 },
-                "text_Dq77x8": {
+                "text_HTcGad": {
                   "type": "text",
                   "name": "t:names.text",
                   "settings": {
@@ -2002,14 +1813,14 @@
                 }
               },
               "block_order": [
-                "text_jAhJXW",
-                "text_Dq77x8"
+                "text_YUPpp6",
+                "text_HTcGad"
               ]
             }
           },
           "block_order": [
-            "image_nXazQe",
-            "group_MXRkni"
+            "image_VexB8B",
+            "group_CJFefw"
           ]
         },
         "static-header": {
@@ -2053,7 +1864,7 @@
             "mobile-padding-inline-end": 0
           },
           "blocks": {
-            "product_list_text_bmp3iK": {
+            "product_list_text_aWtwkx": {
               "type": "_product-list-text",
               "name": "t:names.collection_title",
               "settings": {
@@ -2081,7 +1892,7 @@
               },
               "blocks": {}
             },
-            "text_LTdPN4": {
+            "text_bihxkj": {
               "type": "text",
               "name": "t:names.text",
               "settings": {
@@ -2116,28 +1927,28 @@
             }
           },
           "block_order": [
-            "product_list_text_bmp3iK",
-            "text_LTdPN4"
+            "product_list_text_aWtwkx",
+            "text_bihxkj"
           ]
         }
       },
       "block_order": [
-        "carousel_card_6JXR8i",
-        "carousel_card_hFc8BA",
-        "carousel_card_cywHdf",
-        "carousel_card_E4AQxM"
+        "carousel_card_D3cN3q",
+        "carousel_card_RJ7XpP",
+        "carousel_card_Yd8Ntz",
+        "carousel_card_WAamJm"
       ],
       "custom_css": [],
       "name": "Our Team",
       "settings": {
         "alignment": "left",
-        "layout_type": "grid",
+        "layout_type": "carousel",
         "carousel_on_mobile": false,
         "enable_dots": false,
         "hide_arrows": false,
         "autoplay": false,
         "autoplay_speed": 4,
-        "columns": 4,
+        "columns": 3,
         "peek_desktop": false,
         "mobile_columns": "2",
         "mobile_card_size": "60cqw",
@@ -2157,7 +1968,7 @@
         "overlay_style": "solid",
         "gradient_direction": "to top",
         "padding-block-start": 80,
-        "padding-block-end": 42,
+        "padding-block-end": 80,
         "custom_mobile_padding": false,
         "mobile-padding-block-start": 0,
         "mobile-padding-block-end": 0,
@@ -2191,6 +2002,7 @@
       "block_order": [
         "icon_HXVVWd"
       ],
+      "disabled": true,
       "name": "Divider Icon",
       "settings": {
         "content_direction": "column",
@@ -2834,6 +2646,7 @@
         "carousel_card_itYhtc",
         "carousel_card_rK7yBj"
       ],
+      "disabled": true,
       "custom_css": [],
       "name": "Sister Brands",
       "settings": {
@@ -2879,11 +2692,10 @@
   "order": [
     "main",
     "hero_XWjmjU",
-    "section_kQdJgj",
+    "section_XfkVWC",
     "section_bij3ch",
     "grid_section_cG9jgk",
-    "section_4BiNX3",
-    "grid_section_MCGLLb",
+    "grid_section_bN8hbk",
     "section_L7pi7y",
     "grid_section_PAEUxr"
   ]
