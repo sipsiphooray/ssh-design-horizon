@@ -1,25 +1,82 @@
 {%- doc -%}
-  This snippet is used to render a product card.
-  It is used in the product block, featured product block, and the product card block.
-  The product object is null or when placeholders are rendered.
+  Renders the Horizon product card stack (gallery + nested blocks).
 
-  @param {string} [render_text] - The render text
-  @param {object} [active_variant] - The variant object
   @param {string} [discount_label] - The discount label
   @param {string} [discount_background] - The discount background color
   @param {string} [discount_color_text] - The discount text color
+  @param {object} [active_variant] - Pinned variant (e.g. curated-variant-list). Drives card_initial_variant when set.
 {%- enddoc -%}
 
 {% liquid
   assign product = closest.product
+  assign card_initial_variant = blank
+  assign card_title_suffix = blank
+
+  if active_variant != blank
+    assign card_initial_variant = active_variant
+  elsif product != blank and product.has_only_default_variant == false and collection != blank and collection.metafields.custom.variants_to_render != blank
+    assign vtr_meta = collection.metafields.custom.variants_to_render
+    assign vtr_val = vtr_meta.value
+    if vtr_val != blank
+      assign vtr_matched = blank
+      assign matched_needle = blank
+      if vtr_meta.type contains 'list'
+        for token in vtr_val
+          assign needle = token.value | default: token
+          if needle == blank
+            continue
+          endif
+          for v in product.variants
+            if v.title contains needle
+              assign vtr_matched = v
+              assign matched_needle = needle
+              break
+            endif
+          endfor
+          if vtr_matched != blank
+            break
+          endif
+        endfor
+      else
+        assign needle = vtr_val
+        if needle != blank
+          for v in product.variants
+            if v.title contains needle
+              assign vtr_matched = v
+              assign matched_needle = needle
+              break
+            endif
+          endfor
+        endif
+      endif
+      if vtr_matched != blank
+        assign card_initial_variant = vtr_matched
+        assign card_title_suffix = matched_needle
+      endif
+    endif
+  endif
 -%}
 
 {% capture children %}
-  {% content_for 'block', type: '_product-card-gallery', id: 'product-card-gallery', discount_label: discount_label, discount_background: discount_background, discount_color_text: discount_color_text, product: product, active_variant: active_variant %}
+  {% content_for 'block',
+    type: '_product-card-gallery',
+    id: 'product-card-gallery',
+    discount_label: discount_label,
+    discount_background: discount_background,
+    discount_color_text: discount_color_text,
+    product: product,
+    pinned_variant: card_initial_variant
+  %}
   {% content_for 'blocks', closest.product: product %}
 {% endcapture %}
 
-{% render 'product-card', children: children, product: product, active_variant: active_variant, render_text: render_text %}
+{% render 'product-card',
+  children: children,
+  product: product,
+  active_variant: active_variant,
+  initial_variant: card_initial_variant,
+  title_suffix: card_title_suffix
+%}
 
 {% schema %}
 {

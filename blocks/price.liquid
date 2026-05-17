@@ -1,7 +1,53 @@
 {%- liquid
   assign block_settings = block.settings
   assign product_resource = closest.product
+  assign card_initial_variant = blank
+  assign p = product_resource
+
+  if active_variant != blank
+    assign card_initial_variant = active_variant
+  elsif p != blank and p.has_only_default_variant == false and collection != blank and collection.metafields.custom.variants_to_render != blank
+    assign vtr_meta = collection.metafields.custom.variants_to_render
+    assign vtr_val = vtr_meta.value
+    if vtr_val != blank
+      assign vtr_matched = blank
+      if vtr_meta.type contains 'list'
+        for token in vtr_val
+          assign needle = token.value | default: token
+          if needle == blank
+            continue
+          endif
+          for v in p.variants
+            if v.title contains needle
+              assign vtr_matched = v
+              break
+            endif
+          endfor
+          if vtr_matched != blank
+            break
+          endif
+        endfor
+      else
+        assign needle = vtr_val
+        if needle != blank
+          for v in p.variants
+            if v.title contains needle
+              assign vtr_matched = v
+              break
+            endif
+          endfor
+        endif
+      endif
+      if vtr_matched != blank
+        assign card_initial_variant = vtr_matched
+      endif
+    endif
+  endif
+
   assign selected_variant = product_resource.selected_or_first_available_variant
+  if card_initial_variant != blank
+    assign selected_variant = card_initial_variant
+  endif
 -%}
 
 {% liquid
@@ -90,7 +136,8 @@
     show_unit_price: true,
     product_resource: product_resource,
     badge: badge,
-    show_sale_price_first: block_settings.show_sale_price_first
+    show_sale_price_first: block_settings.show_sale_price_first,
+    pricing_variant: card_initial_variant
   %}
 
   {% if block_settings.show_tax_info %}

@@ -1,12 +1,15 @@
 {%- liquid
   assign block_settings = block.settings
-  for product_option in closest.product.options_with_values
-    assign swatch_count = product_option.values | map: 'swatch' | compact | size
+  assign product_has_swatches = false
+  unless section.type == 'curated-variant-list'
+    for product_option in closest.product.options_with_values
+      assign swatch_count = product_option.values | map: 'swatch' | compact | size
 
-    if swatch_count > 0
-      assign product_has_swatches = true
-    endif
-  endfor
+      if swatch_count > 0
+        assign product_has_swatches = true
+      endif
+    endfor
+  endunless
 -%}
 
 {% stylesheet %}

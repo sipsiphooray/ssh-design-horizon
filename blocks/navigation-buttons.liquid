@@ -7,7 +7,7 @@
         style="
             {% render 'spacing-style', settings: block_settings %}
         "
-        {{ block_settings.shopify_attributes }}
+        {{ block.shopify_attributes }}
     >
         {% for link in linklists[block_settings.link_list].links %}
             <div>

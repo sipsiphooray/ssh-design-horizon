@@ -3,10 +3,10 @@
   Settings allow for a full slideshow, showing only the first image, or showing the second image when hovering.
   Note: When the product card itself is in a carousel layout, the card-gallery's carousel is disabled with JavaScript.
 
-  @param {object} [active_variant] - The variant object
   @param [children] - Additional content rendered below the card gallery
   @param [section] - The section object the snippet is rendered in
   @param [block] - The block object the snippet is rendered in
+  @param {object} [pinned_variant] - Explicit variant (curated). When blank, resolves like product-card from collection `variants_to_render`.
 {%- enddoc -%}
 
 {% liquid
@@ -62,6 +62,46 @@
       assign media_fit = block_settings.constrain_to_viewport
     endif
   endif
+
+  assign gallery_resolved_variant = pinned_variant
+
+  if gallery_resolved_variant == blank and product != blank and product.has_only_default_variant == false and collection != blank and collection.metafields.custom.variants_to_render != blank
+    assign vtr_meta = collection.metafields.custom.variants_to_render
+    assign vtr_val = vtr_meta.value
+    if vtr_val != blank
+      assign vtr_matched = blank
+      if vtr_meta.type contains 'list'
+        for token in vtr_val
+          assign needle = token.value | default: token
+          if needle == blank
+            continue
+          endif
+          for v in product.variants
+            if v.title contains needle
+              assign vtr_matched = v
+              break
+            endif
+          endfor
+          if vtr_matched != blank
+            break
+          endif
+        endfor
+      else
+        assign needle = vtr_val
+        if needle != blank
+          for v in product.variants
+            if v.title contains needle
+              assign vtr_matched = v
+              break
+            endif
+          endfor
+        endif
+      endif
+      if vtr_matched != blank
+        assign gallery_resolved_variant = vtr_matched
+      endif
+    endif
+  endif
 %}
 
 <div
@@ -95,10 +135,10 @@
       assign other_media = product.media | reject: 'src', product.featured_media
       assign media_list_to_show = product.featured_media | concat: other_media
 
-      if active_variant.featured_media != blank and active_variant.featured_media.id != product.featured_media.id and variant_images
+      if gallery_resolved_variant != blank and gallery_resolved_variant.featured_media != blank and gallery_resolved_variant.featured_media.id != product.featured_media.id and variant_images
         # Match by ID instead of src, and query product.media to guarantee an object array
-        assign variant_media = product.media | where: 'id', active_variant.featured_media.id
-        assign other_media = product.media | reject: 'src', active_variant.featured_media
+        assign variant_media = product.media | where: 'id', gallery_resolved_variant.featured_media.id
+        assign other_media = product.media | reject: 'src', gallery_resolved_variant.featured_media
 
         # Concat requires an array, and 'where' automatically returns an array (so drop the [0])
         assign media_list_to_show =  variant_media | concat: other_media
@@ -170,7 +210,7 @@
     <a
       class="contents"
       ref="cardGalleryLink"
-      href="{{ active_variant.url | default: product.selected_or_first_available_variant.url }}"
+      href="{{ gallery_resolved_variant.url | default: product.selected_or_first_available_variant.url }}"
       aria-label="{{- product.title -}}"
     >
       {% render 'slideshow',
