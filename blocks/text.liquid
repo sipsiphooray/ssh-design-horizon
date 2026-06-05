@@ -1,6 +1,6 @@
 
 
-{% render 'text', block: block %}
+{% render 'text', block: block, class: block.settings.custom_class %}
 
 {% schema %}
 {
@@ -539,6 +539,16 @@
       "unit": "px",
       "default": 0,
       "visible_if": "{{ block.settings.custom_mobile_padding == true }}"
+    },
+    {
+      "type": "header",
+      "content": "Custom CSS"
+    },
+    {
+      "type": "text",
+      "id": "custom_class",
+      "label": "Custom class",
+      "info": "Add a CSS class (without the dot) to target this block from custom.css."
     }
   ],
   "presets": [

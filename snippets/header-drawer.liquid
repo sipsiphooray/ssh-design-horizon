@@ -772,15 +772,30 @@
   .menu-drawer-container .header__icon--summary {
     color: var(--color-foreground);
     display: flex;
+    flex-shrink: 0;
     justify-content: center;
     align-items: center;
-    padding: var(--padding-lg);
+    box-sizing: border-box;
+    width: var(--button-size);
+    min-width: var(--button-size);
+    height: var(--button-size);
+    min-height: var(--button-size);
+    padding: 0;
   }
 
   .header__icon--summary .header-drawer-icon {
+    display: flex;
+    flex-shrink: 0;
+    align-items: center;
+    justify-content: center;
     margin: auto;
-    width: var(--icon-size-xs);
-    height: var(--icon-size-xs);
+    width: var(--button-size);
+    height: var(--button-size);
+  }
+
+  .header__icon--summary .header-drawer-icon svg {
+    width: var(--icon-size-md);
+    height: var(--icon-size-md);
   }
 
   .menu-drawer__featured-content {

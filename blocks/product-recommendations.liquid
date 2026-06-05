@@ -116,6 +116,12 @@
       <div
         class="
           resource-list
+          {% if block_settings.layout_type == 'carousel' %}
+            force-full-width
+            {% if block_settings.carousel_contain_width %}
+              resource-list--carousel-contained
+            {% endif %}
+          {% endif %}
           {% if block_settings.carousel_on_mobile and block_settings.layout_type != 'carousel' %}
             hidden--mobile
           {% endif %}
@@ -258,6 +264,13 @@
       "visible_if": "{{ block.settings.layout_type == 'grid' }}"
     },
     {
+      "type": "checkbox",
+      "id": "carousel_contain_width",
+      "label": "t:settings.carousel_contain_width",
+      "default": false,
+      "visible_if": "{{ block.settings.layout_type == 'carousel' }}"
+    },
+    {
       "type": "range",
       "id": "max_products",
       "label": "t:settings.product_count",
@@ -313,6 +326,10 @@
         {
           "value": "chevron_large",
           "label": "t:options.chevron_large"
+        },
+        {
+          "value": "progress",
+          "label": "t:options.progress_bar"
         },
         {
           "value": "none",

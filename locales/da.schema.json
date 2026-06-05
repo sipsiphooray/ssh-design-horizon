@@ -1,3 +1,12 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin language editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
 {
   "names": {
     "404": "404",
@@ -904,6 +913,7 @@
     "mobile_layout": "Layout til mobil",
     "padding": "Udfyldning",
     "padding_desktop": "Udfyldning på computer",
+    "padding_mobile": "Mobile padding",
     "paragraph": "Afsnit",
     "policies": "Politikker",
     "popup": "Pop op-vindue",
@@ -1112,3 +1122,4 @@
     "text": "Tekst"
   }
 }
+

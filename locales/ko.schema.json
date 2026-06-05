@@ -1,3 +1,12 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin language editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
 {
   "names": {
     "404": "404",
@@ -904,6 +913,7 @@
     "mobile_layout": "모바일 레이아웃",
     "padding": "패딩",
     "padding_desktop": "데스크톱 패딩",
+    "padding_mobile": "Mobile padding",
     "paragraph": "단락",
     "policies": "정책",
     "popup": "팝업",
@@ -1112,3 +1122,4 @@
     "text": "텍스트"
   }
 }
+

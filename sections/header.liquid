@@ -483,8 +483,10 @@
       --closed-underlay-height: 100%;
     }
 
-    /** For transparent header, apply inherit to rows when menu is not hovered */
-    &:not([data-sticky-state='active']):not(:has(.menu-list__link:is(:hover, [aria-expanded='true']))) .header__row {
+    /** For transparent header, apply inherit to rows when menu is not hovered.
+        Flat submenus have no underlay panel, so they don't count as "hovered" here -
+        this keeps the nav in its transparent colors while a flat dropdown is open. */
+    &:not([data-sticky-state='active']):not(:has(.menu-list__link:not(.menu-list__link--flat):is(:hover, [aria-expanded='true']))) .header__row {
       --color-foreground: inherit;
       --color-foreground-rgb: inherit;
       --color-border: inherit;
@@ -494,8 +496,8 @@
     }
 
     /* Multiple selectors for performance: each simple :has() check is faster than one complex selector with multiple conditions */
-    &:has(.mega-menu__list:hover),
-    &:has(.menu-list__link:is(:hover, [aria-expanded='true'])),
+    &:has(.menu-list__submenu:not(.menu-list__submenu--flat) .mega-menu__list:hover),
+    &:has(.menu-list__link:not(.menu-list__link--flat):is(:hover, [aria-expanded='true'])),
     &:has(.menu-list__list-item[slot='overflow'] .menu-list__link:is(:hover, [aria-expanded='true'])) {
       --header-logo-display: unset;
       --header-logo-inverse-display: unset;
@@ -1371,6 +1373,10 @@
       "id": "section_width",
       "label": "t:settings.width",
       "options": [
+        {
+          "value": "narrow",
+          "label": "t:options.narrow"
+        },
         {
           "value": "page-width",
           "label": "t:options.page"

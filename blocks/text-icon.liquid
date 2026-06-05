@@ -54,13 +54,19 @@
       {% if block_settings.use_height != blank %}
           <div class="use-height-icon" style="--height: {{ block_settings.height }}px;{% if block_settings.custom_mobile_height == true %}--mobile-height: {{ block_settings.mobile-height }}px;{% endif %}">
       {% endif %}
-          {% render 'icon-or-image',
-              icon: block_settings.icon,
-              image_upload: block_settings.image_upload,
-              width: block_settings.icon_width,
-              class_name: icon_block_class,
-              attributes: block.shopify_attributes
-          %}
+          {% if block_settings.custom_svg != blank %}
+            <div class="{{ icon_block_class }} custom-svg-icon" style="width: {{ block_settings.icon_width }}px;">
+              {{ block_settings.custom_svg }}
+            </div>
+          {% else %}
+            {% render 'icon-or-image',
+                icon: block_settings.icon,
+                image_upload: block_settings.image_upload,
+                width: block_settings.icon_width,
+                class_name: icon_block_class,
+                attributes: block.shopify_attributes
+            %}
+          {% endif %}
       {% if block_settings.use_height != blank %}
           </div>
       {% endif %}
@@ -90,6 +96,29 @@
   .icon-block__media {
     height: auto;
   }
+
+  .custom-svg-icon svg {
+    width: 100%;
+    height: auto;
+    display: block;
+  }
+
+  .use-height-icon .custom-svg-icon {
+    width: auto !important;
+    height: var(--height) !important;
+  }
+
+  .use-height-icon .custom-svg-icon svg {
+    width: auto;
+    height: 100%;
+  }
+
+  @media screen and (max-width: 749px) {
+    .use-height-icon .custom-svg-icon {
+      height: var(--mobile-height, var(--height)) !important;
+    }
+  }
+
   @media screen and (max-width: 749px) {
     .text-icon-block .text-block {
       flex: 0 auto !important;
@@ -369,6 +398,12 @@
       "type": "image_picker",
       "id": "image_upload",
       "label": "t:settings.image_icon"
+    },
+    {
+      "type": "textarea",
+      "id": "custom_svg",
+      "label": "Custom SVG",
+      "info": "Paste full SVG code. Overrides icon and image when provided."
     },
     {
       "type": "range",

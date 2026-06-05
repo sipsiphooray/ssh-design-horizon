@@ -1,3 +1,12 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin language editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
 {
   "names": {
     "404": "404",
@@ -907,6 +916,7 @@
     "mobile_layout": "Diseño para móvil",
     "padding": "Relleno",
     "padding_desktop": "Relleno en escritorio",
+    "padding_mobile": "Mobile padding",
     "paragraph": "Párrafo",
     "policies": "Políticas",
     "popup": "Ventana emergente",
@@ -1112,3 +1122,4 @@
     "text": "Texto"
   }
 }
+

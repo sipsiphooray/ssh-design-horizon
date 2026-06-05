@@ -3,16 +3,22 @@
   class="section section--{{ section.settings.section_width }} color-{{ section.settings.color_scheme }}"
   {{ section.shopify_attributes }}
 >
-  <div
-    class="utilities utilities--blocks-{{ section.blocks.size }} spacing-style"
-    style="{% render 'spacing-style', settings: section.settings %} --border-width: {{ section.settings.divider_thickness }}px; --gap: {{ section.settings.gap }}px;"
-    data-testid="footer-utilities"
-  >
-    {% content_for 'blocks' %}
+  <div class="utilities-wrapper" style="--border-width: {{ section.settings.divider_thickness }}px;">
+    <div
+      class="utilities utilities--blocks-{{ section.blocks.size }} spacing-style"
+      style="{% render 'spacing-style', settings: section.settings %} --border-width: {{ section.settings.divider_thickness }}px; --gap: {{ section.settings.gap }}px;"
+      data-testid="footer-utilities"
+    >
+      {% content_for 'blocks' %}
+    </div>
   </div>
 </div>
 
 {% stylesheet %}
+  .utilities-wrapper {
+    border-top: var(--border-width) solid var(--color-border);
+  }
+
   .utilities {
     width: 100%;
     display: flex;
@@ -20,7 +26,6 @@
     align-items: center;
     gap: var(--gap);
     text-wrap: nowrap;
-    border-top: var(--border-width) solid var(--color-border);
     color: var(--color-foreground-muted);
 
     @media screen and (min-width: 750px) {
@@ -102,6 +107,10 @@
       "label": "t:settings.width",
       "options": [
         {
+          "value": "narrow",
+          "label": "t:options.narrow"
+        },
+        {
           "value": "page-width",
           "label": "t:options.page"
         },
@@ -172,6 +181,9 @@
     },
     {
       "type": "social-links"
+    },
+    {
+      "type": "payment-icons"
     }
   ],
   "presets": [

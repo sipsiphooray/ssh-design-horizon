@@ -102,6 +102,7 @@
     "mobile_width": "Mobile width",
     "padding": "Padding",
     "padding_desktop": "Desktop padding",
+    "padding_mobile": "Mobile padding",
     "paragraph": "Paragraph",
     // Footer component section header for legal policy links
     "policies": "Policies",
@@ -233,7 +234,8 @@
     "video_autoplay": "Videos will be muted by default",
     "video_external": "Use a YouTube or Vimeo URL",
     "pills_usage": "Used for applied filters, discount codes, and search suggestions",
-    "media_type_info": "Features are populated from your menu links"
+    "media_type_info": "Features are populated from your menu links",
+    "optional": "Optional"
   },
   "names": {
     "column": "Column",
@@ -267,6 +269,8 @@
     "cart_items": "Cart items",
     "cart_products": "Cart products",
     "cart_title": "Cart",
+    "collage": "Collage",
+    "collage_image": "Collage image",
     "collapsible_row": "Collapsible row",
     "collection": "Collection",
     "collection_card": "Collection card",
@@ -646,6 +650,8 @@
     "price_tag": "Price tag",
     "primary": "Primary",
     "primary_style": "Primary style",
+    // Carousel navigation option with progress bar and arrow buttons
+    "progress_bar": "Progress bar",
     "question_mark": "Question mark",
     "rectangle": "Rectangle",
     // Icon option for displaying a recycling symbol
@@ -799,6 +805,7 @@
     "card_image_height": "Product image height",
     "card_size": "Card size",
     "carousel_on_mobile": "Carousel on mobile",
+    "carousel_contain_width": "Contain carousel in section width (desktop)",
     "cart_count": "Cart count",
     "cart_items": "Cart items",
     "cart_related_products": "Related products",

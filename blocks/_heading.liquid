@@ -6,7 +6,7 @@
   @param {string} text
 {%- enddoc -%}
 
-{% render 'text', width: '100%', block: block, fallback_text: text %}
+{% render 'text', width: '100%', block: block, fallback_text: text, class: block.settings.custom_class %}
 
 {% # theme-check-disable %}
 {% schema %}
@@ -344,6 +344,16 @@
       "step": 1,
       "unit": "px",
       "default": 0
+    },
+    {
+      "type": "header",
+      "content": "Custom CSS"
+    },
+    {
+      "type": "text",
+      "id": "custom_class",
+      "label": "Custom class",
+      "info": "Add a CSS class (without the dot) to target this block from custom.css."
     }
   ]
 }

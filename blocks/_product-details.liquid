@@ -6,7 +6,13 @@
     {% if block_settings.sticky_details_desktop %} sticky-content--desktop{% endif %}
     {% if block_settings.height == 'fill' -%} full-height--desktop{% endif -%}
   "
-  style="--details-position: {{ block_settings.details_position }};"
+  style="
+    --details-position: {{ block_settings.details_position }};
+    --padding-block-start-mobile: {{ block_settings['padding-block-start-mobile'] }}px;
+    --padding-block-end-mobile: {{ block_settings['padding-block-end-mobile'] }}px;
+    --padding-inline-start-mobile: {{ block_settings['padding-inline-start-mobile'] }}px;
+    --padding-inline-end-mobile: {{ block_settings['padding-inline-end-mobile'] }}px;
+  "
   data-testid="product-information-details"
   {% if settings.transition_to_main_product %}
     data-view-transition-type="product-details"
@@ -28,10 +34,13 @@
 </div>
 
 {% stylesheet %}
-  /* Clear padding on mobile, if not full-width */
+  /* Apply custom mobile padding to the inner content block */
   @media screen and (max-width: 749px) {
-    .product-information.section--page-width .product-details > .group-block {
-      padding-inline: 0;
+    .product-details > .group-block {
+      padding-block-start: var(--padding-block-start-mobile, 0);
+      padding-block-end: var(--padding-block-end-mobile, 0);
+      padding-inline-start: var(--padding-inline-start-mobile, 0);
+      padding-inline-end: var(--padding-inline-end-mobile, 0);
     }
   }
 
@@ -427,6 +436,50 @@
       "step": 1,
       "unit": "px",
       "default": 0
+    },
+    {
+      "type": "header",
+      "content": "t:content.padding_mobile"
+    },
+    {
+      "type": "range",
+      "id": "padding-block-start-mobile",
+      "label": "t:settings.top",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "padding-block-end-mobile",
+      "label": "t:settings.bottom",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "padding-inline-start-mobile",
+      "label": "t:settings.left",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "padding-inline-end-mobile",
+      "label": "t:settings.right",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "default": 0
     }
   ],
   "presets": [
@@ -439,6 +492,10 @@
         "padding-block-end": 0,
         "padding-inline-start": 0,
         "padding-inline-end": 0,
+        "padding-block-start-mobile": 0,
+        "padding-block-end-mobile": 0,
+        "padding-inline-start-mobile": 0,
+        "padding-inline-end-mobile": 0,
         "gap": 12,
         "inherit_color_scheme": true,
         "color_scheme": "",

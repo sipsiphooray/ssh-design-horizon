@@ -65,10 +65,10 @@
     assign price_min = price_min | money_with_currency
     assign price_max = price_max | money_with_currency
   else
-    assign price = price | money
-    assign compare_at_price = compare_at_price | money
-    assign price_min = price_min | money
-    assign price_max = price_max | money
+    assign price = price | money_without_trailing_zeros
+    assign compare_at_price = compare_at_price | money_without_trailing_zeros
+    assign price_min = price_min | money_without_trailing_zeros
+    assign price_max = price_max | money_without_trailing_zeros
   endif
 -%}
 

@@ -1,3 +1,12 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin language editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
 {
   "names": {
     "404": "404",
@@ -908,6 +917,7 @@
     "mobile_width": "Mobiele breedte",
     "padding": "Padding",
     "padding_desktop": "Desktop-padding",
+    "padding_mobile": "Mobile padding",
     "paragraph": "Paragraaf",
     "policies": "Beleid",
     "popup": "Pop-up",
@@ -1112,3 +1122,4 @@
     "text": "Tekst"
   }
 }
+

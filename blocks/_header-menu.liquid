@@ -86,10 +86,20 @@
           on:pointerenter="/activate"
           on:pointerleave="/deactivate"
         >
+          {% liquid
+            assign has_nested_links = false
+            if link.links != blank
+              for child in link.links
+                if child.links != blank
+                  assign has_nested_links = true
+                endif
+              endfor
+            endif
+          %}
           <a
             href="{{ link.url }}"
             data-skip-node-update="true"
-            class="menu-list__link{% if link.active %} menu-list__link--active{% endif %}"
+            class="menu-list__link{% if link.active %} menu-list__link--active{% endif %}{% if link.links != blank and has_nested_links == false %} menu-list__link--flat{% endif %}"
             {%- if link.links != blank -%}
               aria-controls="submenu-{{ forloop.index }}"
               aria-haspopup="true"
@@ -100,10 +110,17 @@
             {% endif %}
             ref="menuitem"
           >
-            <span class="menu-list__link-title">{{- link.title -}}</span>
+            <span class="menu-list__link-inner">
+              <span class="menu-list__link-title">{{- link.title -}}</span>
+              {%- if link.links != blank -%}
+                <span class="svg-wrapper icon-caret">
+                  {{- 'icon-caret.svg' | inline_asset_content -}}
+                </span>
+              {%- endif -%}
+            </span>
           </a>
           {%- if link.links != blank -%}
-            <div class="menu-list__submenu{{ color_scheme_classes }}" ref="submenu[]">
+            <div class="menu-list__submenu{{ color_scheme_classes }}{% unless has_nested_links %} menu-list__submenu--flat color-{{ block_settings.color_scheme }}{% endunless %}" ref="submenu[]">
               <div
                 id="submenu-{{ forloop.index }}"
                 class="menu-list__submenu-inner"
@@ -143,7 +160,12 @@
         on:pointerleave="/deactivate"
       >
         <button role="listitem" class="menu-list__link button-unstyled">
-          <span class="menu-list__link-title">{{ 'actions.more' | t }}</span>
+          <span class="menu-list__link-inner">
+            <span class="menu-list__link-title">{{ 'actions.more' | t }}</span>
+            <span class="svg-wrapper icon-caret">
+              {{- 'icon-caret.svg' | inline_asset_content -}}
+            </span>
+          </span>
         </button>
       </li>
     {% endcapture %}
@@ -310,11 +332,24 @@
     }
   }
 
-  .menu-list__link-title {
+  .menu-list__link-inner {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--gap-2xs);
     padding-inline: calc(var(--gap-xl) / 2);
   }
-  [slot='overflow'] .menu-list__link-title {
+
+  .menu-list__link-title {
     padding-inline: 0;
+  }
+
+  [slot='overflow'] .menu-list__link-inner {
+    padding-inline: 0;
+  }
+
+  .menu-list__link-inner .icon-caret {
+    width: var(--icon-size-xs);
+    height: var(--icon-size-xs);
   }
 
   .menu-list__list-item:not([slot='overflow']) {
@@ -590,6 +625,8 @@
   .mega-menu__column {
     grid-column: span 1;
   }
+
+  /* Flat mega menu (no nested parent links) styling lives in assets/custom.css */
 
   .mega-menu__column--span-2 {
     grid-column: span 2;

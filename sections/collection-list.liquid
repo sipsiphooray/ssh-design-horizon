@@ -150,6 +150,13 @@
       "visible_if": "{{ section.settings.layout_type != 'carousel' }}"
     },
     {
+      "type": "checkbox",
+      "id": "carousel_contain_width",
+      "label": "t:settings.carousel_contain_width",
+      "default": false,
+      "visible_if": "{{ section.settings.layout_type == 'carousel' }}"
+    },
+    {
       "type": "range",
       "id": "columns",
       "label": "t:settings.columns",
@@ -263,6 +270,10 @@
           "label": "t:options.chevron_large"
         },
         {
+          "value": "progress",
+          "label": "t:options.progress_bar"
+        },
+        {
           "value": "none",
           "label": "t:options.none"
         }
@@ -300,6 +311,10 @@
       "id": "section_width",
       "label": "t:settings.width",
       "options": [
+        {
+          "value": "narrow",
+          "label": "t:options.narrow"
+        },
         {
           "value": "page-width",
           "label": "t:options.page"

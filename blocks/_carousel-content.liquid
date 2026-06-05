@@ -7,13 +7,14 @@
     assign color_scheme_class = 'color-' | append: block.settings.color_scheme
   endif
 
-  if section.settings.section_width == 'page-width'
-    assign slideshow_gutters = 'start end'
-    assign gutter_style = '--gutter-slide-width: var(--util-page-margin-offset);'
-  else
-    assign slideshow_gutters = null
-    assign gutter_style = '--gutter-slide-width: 0px;'
-  endif
+  case section.settings.section_width
+    when 'page-width', 'narrow'
+      assign slideshow_gutters = 'start end'
+      assign gutter_style = '--gutter-slide-width: var(--util-page-margin-offset);'
+    else
+      assign slideshow_gutters = null
+      assign gutter_style = '--gutter-slide-width: 0px;'
+  endcase
 
   assign show_arrows = false
   if icons_style != 'none'
