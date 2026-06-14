@@ -240,7 +240,7 @@
                 "show_installments": false,
                 "show_tax_info": false,
                 "show_badge": false,
-                "type_preset": "h6",
+                "type_preset": "",
                 "width": "100%",
                 "alignment": "left",
                 "font": "var(--font-body--family)",
