@@ -2778,7 +2778,7 @@
               "type": "_product-card-gallery",
               "static": true,
               "settings": {
-                "image_ratio": "portrait",
+                "image_ratio": "square",
                 "inherit_color_scheme": true,
                 "color_scheme": "",
                 "border": "none",
