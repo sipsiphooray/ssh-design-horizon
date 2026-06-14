@@ -2623,7 +2623,7 @@
               },
               "blocks": {}
             },
-            "product_card_group_yLiciW": {
+            "product_card_group_dQATn3": {
               "type": "_product-card-group",
               "name": "t:names.group",
               "settings": {
@@ -2633,7 +2633,7 @@
                 "vertical_alignment": "center",
                 "align_baseline": false,
                 "horizontal_alignment_flex_direction_column": "flex-start",
-                "vertical_alignment_flex_direction_column": "flex-start",
+                "vertical_alignment_flex_direction_column": "center",
                 "gap": 4,
                 "enable_mobile_gap": false,
                 "mobile_gap": 12,
@@ -2659,16 +2659,16 @@
                 "link": "",
                 "open_in_new_tab": false,
                 "padding-block-start": 0,
-                "padding-block-end": 0,
-                "padding-inline-start": 0,
-                "padding-inline-end": 0
+                "padding-block-end": 12,
+                "padding-inline-start": 12,
+                "padding-inline-end": 12
               },
               "blocks": {
-                "product_card_group_zDtnRM": {
+                "product_card_group_GVxePF": {
                   "type": "_product-card-group",
                   "name": "t:names.group",
                   "settings": {
-                    "content_direction": "row",
+                    "content_direction": "column",
                     "vertical_on_mobile": true,
                     "horizontal_alignment": "space-between",
                     "vertical_alignment": "flex-start",
@@ -2705,7 +2705,13 @@
                     "padding-inline-end": 0
                   },
                   "blocks": {
-                    "product_title_dCJgQk": {
+                    "okendo_star_rating_yYTNCa": {
+                      "type": "shopify://apps/okendo/blocks/star-rating/bb689e69-ea70-4661-8fb7-ad24a2e23c29",
+                      "settings": {
+                        "product": "{{closest.product}}"
+                      }
+                    },
+                    "product_title_M3tQcV": {
                       "type": "product-title",
                       "name": "t:names.product_title",
                       "settings": {
@@ -2732,19 +2738,22 @@
                       },
                       "blocks": {}
                     },
-                    "okendo_star_rating_eArxVt": {
-                      "type": "shopify://apps/okendo/blocks/star-rating/bb689e69-ea70-4661-8fb7-ad24a2e23c29",
+                    "custom_liquid_GLGxiN": {
+                      "type": "custom-liquid",
+                      "name": "t:names.custom_liquid",
                       "settings": {
-                        "product": "{{closest.product}}"
-                      }
+                        "custom_liquid": "{%- assign subline = closest.product.metafields.custom.subline.value -%}\n{%- if subline != blank -%}\n  <div\n    class=\"product-subline\"\n    style=\"display: flex; align-items: center; gap: var(--gap-xs); font-size: var(--font-size--sm);\"\n  >\n    {%- for item in subline -%}\n      {%- unless forloop.first -%}\n        <span aria-hidden=\"true\">&bull;</span>\n      {%- endunless -%}\n      <span>{{ item }}</span>\n    {%- endfor -%}\n  </div>\n{%- endif -%}"
+                      },
+                      "blocks": {}
                     }
                   },
                   "block_order": [
-                    "product_title_dCJgQk",
-                    "okendo_star_rating_eArxVt"
+                    "okendo_star_rating_yYTNCa",
+                    "product_title_M3tQcV",
+                    "custom_liquid_GLGxiN"
                   ]
                 },
-                "price_pMWXAX": {
+                "price_kz3RaX": {
                   "type": "price",
                   "name": "t:names.product_price",
                   "settings": {
@@ -2767,11 +2776,20 @@
                     "padding-inline-end": 0
                   },
                   "blocks": {}
+                },
+                "custom_liquid_jHq88R": {
+                  "type": "custom-liquid",
+                  "name": "sizes available",
+                  "settings": {
+                    "custom_liquid": "{% assign sizes_option = closest.product.options_by_name['Cup Style'] %}\n{% if sizes_option != blank %}\n<span class=\"size-available-text\">\n    {{ 'content.sizes_available' | t: number: sizes_option.values.size }}\n</span>\n{% endif %}"
+                  },
+                  "blocks": {}
                 }
               },
               "block_order": [
-                "product_card_group_zDtnRM",
-                "price_pMWXAX"
+                "product_card_group_GVxePF",
+                "price_kz3RaX",
+                "custom_liquid_jHq88R"
               ]
             },
             "product-card-gallery": {
@@ -2795,7 +2813,7 @@
           },
           "block_order": [
             "product_card_gallery_DNizbJ",
-            "product_card_group_yLiciW"
+            "product_card_group_dQATn3"
           ]
         }
       },
