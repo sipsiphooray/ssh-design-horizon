@@ -1314,17 +1314,17 @@
             "product_card_gap": 12,
             "inherit_color_scheme": true,
             "color_scheme": "",
-            "border": "none",
+            "border": "solid",
             "border_width": 1,
             "border_opacity": 100,
-            "border_radius": 0,
+            "border_radius": 16,
             "padding-block-start": 0,
             "padding-block-end": 0,
             "padding-inline-start": 0,
             "padding-inline-end": 0
           },
           "blocks": {
-            "product_card_group_neg4Jf": {
+            "product_card_group_DEcdHm": {
               "type": "_product-card-group",
               "name": "t:names.group",
               "settings": {
@@ -1334,7 +1334,7 @@
                 "vertical_alignment": "center",
                 "align_baseline": false,
                 "horizontal_alignment_flex_direction_column": "flex-start",
-                "vertical_alignment_flex_direction_column": "flex-start",
+                "vertical_alignment_flex_direction_column": "center",
                 "gap": 4,
                 "enable_mobile_gap": false,
                 "mobile_gap": 12,
@@ -1360,16 +1360,16 @@
                 "link": "",
                 "open_in_new_tab": false,
                 "padding-block-start": 0,
-                "padding-block-end": 0,
-                "padding-inline-start": 0,
-                "padding-inline-end": 0
+                "padding-block-end": 12,
+                "padding-inline-start": 12,
+                "padding-inline-end": 12
               },
               "blocks": {
-                "product_card_group_FhMTTK": {
+                "product_card_group_68E6F6": {
                   "type": "_product-card-group",
                   "name": "t:names.group",
                   "settings": {
-                    "content_direction": "row",
+                    "content_direction": "column",
                     "vertical_on_mobile": true,
                     "horizontal_alignment": "space-between",
                     "vertical_alignment": "flex-start",
@@ -1406,12 +1406,18 @@
                     "padding-inline-end": 0
                   },
                   "blocks": {
-                    "product_title_6JGz3G": {
+                    "okendo_star_rating_3Rmppx": {
+                      "type": "shopify://apps/okendo/blocks/star-rating/bb689e69-ea70-4661-8fb7-ad24a2e23c29",
+                      "settings": {
+                        "product": "{{closest.product}}"
+                      }
+                    },
+                    "product_title_Tz6nfw": {
                       "type": "product-title",
                       "name": "t:names.product_title",
                       "settings": {
                         "width": "100%",
-                        "max_width": "normal",
+                        "max_width": "none",
                         "alignment": "left",
                         "type_preset": "h3",
                         "font": "var(--font-body--family)",
@@ -1433,19 +1439,22 @@
                       },
                       "blocks": {}
                     },
-                    "okendo_star_rating_MkWaVR": {
-                      "type": "shopify://apps/okendo/blocks/star-rating/bb689e69-ea70-4661-8fb7-ad24a2e23c29",
+                    "custom_liquid_d6KCVj": {
+                      "type": "custom-liquid",
+                      "name": "t:names.custom_liquid",
                       "settings": {
-                        "product": "{{closest.product}}"
-                      }
+                        "custom_liquid": "{%- assign subline = closest.product.metafields.custom.subline.value -%}\n{%- if subline != blank -%}\n  <div\n    class=\"product-subline\"\n    style=\"display: flex; align-items: center; gap: var(--gap-xs); font-size: var(--font-size--sm);\"\n  >\n    {%- for item in subline -%}\n      {%- unless forloop.first -%}\n        <span aria-hidden=\"true\">&bull;</span>\n      {%- endunless -%}\n      <span>{{ item }}</span>\n    {%- endfor -%}\n  </div>\n{%- endif -%}"
+                      },
+                      "blocks": {}
                     }
                   },
                   "block_order": [
-                    "product_title_6JGz3G",
-                    "okendo_star_rating_MkWaVR"
+                    "okendo_star_rating_3Rmppx",
+                    "product_title_Tz6nfw",
+                    "custom_liquid_d6KCVj"
                   ]
                 },
-                "price_FeUKUJ": {
+                "price_Gaa9GH": {
                   "type": "price",
                   "name": "t:names.product_price",
                   "settings": {
@@ -1469,7 +1478,7 @@
                   },
                   "blocks": {}
                 },
-                "custom_liquid_c74F4X": {
+                "custom_liquid_gBjRCL": {
                   "type": "custom-liquid",
                   "name": "sizes available",
                   "settings": {
@@ -1479,9 +1488,9 @@
                 }
               },
               "block_order": [
-                "product_card_group_FhMTTK",
-                "price_FeUKUJ",
-                "custom_liquid_c74F4X"
+                "product_card_group_68E6F6",
+                "price_Gaa9GH",
+                "custom_liquid_gBjRCL"
               ]
             },
             "product-card-gallery": {
@@ -1489,6 +1498,8 @@
               "static": true,
               "settings": {
                 "image_ratio": "square",
+                "inherit_color_scheme": true,
+                "color_scheme": "",
                 "border": "none",
                 "border_width": 1,
                 "border_opacity": 100,
@@ -1502,7 +1513,7 @@
             }
           },
           "block_order": [
-            "product_card_group_neg4Jf"
+            "product_card_group_DEcdHm"
           ]
         }
       },
@@ -1738,6 +1749,7 @@
                             "horizontal_alignment_flex_direction_column": "flex-start",
                             "custom_mobile_alignment": false,
                             "mobile_vertical_alignment": "flex-start",
+                            "mobile_vertical_position": "center",
                             "vertical_alignment_flex_direction_column": "flex-start",
                             "gap": 12,
                             "enable_mobile_gap": false,
@@ -1846,6 +1858,7 @@
                             "horizontal_alignment_flex_direction_column": "flex-start",
                             "custom_mobile_alignment": false,
                             "mobile_vertical_alignment": "flex-start",
+                            "mobile_vertical_position": "center",
                             "vertical_alignment_flex_direction_column": "flex-start",
                             "gap": 12,
                             "enable_mobile_gap": false,
@@ -1954,6 +1967,7 @@
                             "horizontal_alignment_flex_direction_column": "flex-start",
                             "custom_mobile_alignment": false,
                             "mobile_vertical_alignment": "flex-start",
+                            "mobile_vertical_position": "center",
                             "vertical_alignment_flex_direction_column": "flex-start",
                             "gap": 12,
                             "enable_mobile_gap": false,
