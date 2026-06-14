@@ -132,7 +132,7 @@
                 "wrap": "pretty",
                 "color": "var(--color-foreground)",
                 "text": "",
-                "link": "/pages/about-us#why-choose-us",
+                "link": "shopify://pages/about-us",
                 "read_only": false,
                 "alignment": "left",
                 "show_alignment": true,

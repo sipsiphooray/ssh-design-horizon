@@ -183,6 +183,14 @@
                   },
                   "blocks": {}
                 },
+                "custom_liquid_7CG8xm": {
+                  "type": "custom-liquid",
+                  "name": "t:names.custom_liquid",
+                  "settings": {
+                    "custom_liquid": "{%- assign subline = closest.product.metafields.custom.subline.value -%}\n{%- if subline != blank -%}\n  <div\n    class=\"product-subline\"\n    style=\"display: flex; align-items: center; gap: var(--gap-xs); font-size: var(--font-size--sm);\"\n  >\n    {%- for item in subline -%}\n      {%- unless forloop.first -%}\n        <span aria-hidden=\"true\">&bull;</span>\n      {%- endunless -%}\n      <span>{{ item }}</span>\n    {%- endfor -%}\n  </div>\n{%- endif -%}"
+                  },
+                  "blocks": {}
+                },
                 "price_tVjtKg": {
                   "type": "price",
                   "settings": {
@@ -218,6 +226,7 @@
               "block_order": [
                 "custom_liquid_qE6bdP",
                 "text_xpVMaM",
+                "custom_liquid_7CG8xm",
                 "price_tVjtKg",
                 "custom_liquid_7BVx6i"
               ]
@@ -227,13 +236,13 @@
               "name": "Icons row",
               "settings": {
                 "icon_1": "shopify://shop_images/starburst-four-point-icon.svg",
-                "text_1": "<p>Premium, Durable Build</p>",
+                "text_1": "<p>Easy & Free 14 Day <a href=\"https://sipsiphooraydesign-3d828343.shipstationreturns.com/login\" target=\"_blank\" title=\"https://sipsiphooraydesign-3d828343.shipstationreturns.com/login\">Returns</a></p>",
                 "icon_2": "shopify://shop_images/starburst-four-point-icon.svg",
                 "text_2": "<p>Permanent UV Prints</p>",
                 "icon_3": "shopify://shop_images/starburst-four-point-icon.svg",
-                "text_3": "<p>Toxic & Lead-Free</p>",
+                "text_3": "<p>BPA Free</p>",
                 "icon_4": "shopify://shop_images/starburst-four-point-icon.svg",
-                "text_4": "<p>1K+ Happy Sippers</p>",
+                "text_4": "<p><a href=\"/pages/all-reviews\" title=\"All Reviews\">1K+</a> Happy Sippers</p>",
                 "desktop_columns": "2",
                 "alignment": "flex-start",
                 "icon_size": 15,
@@ -1190,6 +1199,7 @@
                 "horizontal_alignment_flex_direction_column": "center",
                 "custom_mobile_alignment": false,
                 "mobile_vertical_alignment": "flex-start",
+                "mobile_vertical_position": "center",
                 "vertical_alignment_flex_direction_column": "flex-start",
                 "gap": 8,
                 "enable_mobile_gap": false,
@@ -1311,6 +1321,7 @@
                 "horizontal_alignment_flex_direction_column": "center",
                 "custom_mobile_alignment": false,
                 "mobile_vertical_alignment": "flex-start",
+                "mobile_vertical_position": "center",
                 "vertical_alignment_flex_direction_column": "flex-start",
                 "gap": 8,
                 "enable_mobile_gap": false,
@@ -1432,6 +1443,7 @@
                 "horizontal_alignment_flex_direction_column": "center",
                 "custom_mobile_alignment": false,
                 "mobile_vertical_alignment": "flex-start",
+                "mobile_vertical_position": "center",
                 "vertical_alignment_flex_direction_column": "flex-start",
                 "gap": 8,
                 "enable_mobile_gap": false,
@@ -1553,6 +1565,7 @@
                 "horizontal_alignment_flex_direction_column": "center",
                 "custom_mobile_alignment": false,
                 "mobile_vertical_alignment": "flex-start",
+                "mobile_vertical_position": "center",
                 "vertical_alignment_flex_direction_column": "flex-start",
                 "gap": 8,
                 "enable_mobile_gap": false,
@@ -2597,6 +2610,8 @@
               "name": "t:names.product_card_media",
               "settings": {
                 "image_ratio": "square",
+                "inherit_color_scheme": true,
+                "color_scheme": "",
                 "border": "none",
                 "border_width": 1,
                 "border_opacity": 100,
@@ -2758,6 +2773,24 @@
                 "product_card_group_zDtnRM",
                 "price_pMWXAX"
               ]
+            },
+            "product-card-gallery": {
+              "type": "_product-card-gallery",
+              "static": true,
+              "settings": {
+                "image_ratio": "portrait",
+                "inherit_color_scheme": true,
+                "color_scheme": "",
+                "border": "none",
+                "border_width": 1,
+                "border_opacity": 100,
+                "border_radius": 0,
+                "padding-block-start": 0,
+                "padding-block-end": 0,
+                "padding-inline-start": 0,
+                "padding-inline-end": 0
+              },
+              "blocks": {}
             }
           },
           "block_order": [

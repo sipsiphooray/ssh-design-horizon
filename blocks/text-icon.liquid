@@ -48,6 +48,9 @@
     {% unless block_settings.vertical_on_mobile == true %}
     --flex-wrap-mobile: nowrap;
     {% endunless %}
+    {% if block_settings.custom_mobile_alignment == true %}
+    --vertical-alignment-mobile: {{ block_settings.mobile_vertical_position }};
+    {% endif %}
     "
   >
     {% capture icon %}
@@ -973,13 +976,12 @@
     {
       "type": "checkbox",
       "id": "custom_mobile_alignment",
-      "label": "Enable custom mobile alignment",
-      "visible_if": "{{ block.settings.vertical_on_mobile == true or block.settings.content_direction == 'column' }}"
+      "label": "Enable custom mobile alignment"
     },
     {
       "type": "select",
       "id": "mobile_vertical_alignment",
-      "label": "Mobile alignment",
+      "label": "Mobile horizontal alignment",
       "options": [
         {
           "value": "flex-start",
@@ -999,7 +1001,32 @@
         }
       ],
       "default": "flex-start",
-      "visible_if": "{{ block.settings.custom_mobile_alignment == true and block.settings.vertical_on_mobile == true or block.settings.content_direction == 'column' }}"
+      "visible_if": "{{ block.settings.custom_mobile_alignment == true }}"
+    },
+    {
+      "type": "select",
+      "id": "mobile_vertical_position",
+      "label": "Mobile vertical alignment",
+      "options": [
+        {
+          "value": "flex-start",
+          "label": "t:options.top"
+        },
+        {
+          "value": "center",
+          "label": "t:options.center"
+        },
+        {
+          "value": "flex-end",
+          "label": "t:options.bottom"
+        },
+        {
+          "value": "space-between",
+          "label": "t:options.space_between"
+        }
+      ],
+      "default": "center",
+      "visible_if": "{{ block.settings.custom_mobile_alignment == true }}"
     },
     {
       "type": "select",

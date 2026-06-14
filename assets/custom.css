@@ -1061,7 +1061,7 @@ summary:hover {
         padding: var(--padding-sm) 0;
     }
 }
- 
+
 @media (max-width: 749px) {
     :is(.carousel--mobile-full-width) > .resource-list__carousel, :is(.carousel--mobile-full-width) > .custom-section-content {
         grid-column: 1 / -1;
@@ -1115,6 +1115,16 @@ summary:hover {
 
     .mobile-column[style*="--horizontal-mobile-alignment"] {
         align-items: var(--horizontal-mobile-alignment) !important;
+    }
+
+    /* text-icon: custom mobile alignment when it stays a horizontal row on mobile.
+       Main axis (horizontal) = justify-content; cross axis (vertical) = align-items. */
+    .text-icon-block .layout-panel-flex--row:not(.mobile-column)[style*="--horizontal-mobile-alignment"] {
+        justify-content: var(--horizontal-mobile-alignment) !important;
+    }
+
+    .text-icon-block .layout-panel-flex--row:not(.mobile-column)[style*="--vertical-alignment-mobile"] {
+        align-items: var(--vertical-alignment-mobile) !important;
     }
 
     .mobile-column[style*="--horizontal-mobile-alignment: flex-start"] {
