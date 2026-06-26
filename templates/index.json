@@ -15,51 +15,51 @@
         "item_XbNUBH": {
           "type": "item",
           "settings": {
-            "image": "shopify://shop_images/cup.png",
+            "image": "shopify:\/\/shop_images\/cup.png",
             "text": "Tumblers",
-            "link": "shopify://collections/tumblers"
+            "link": "shopify:\/\/collections\/tumblers"
           }
         },
         "item_NTP6AR": {
           "type": "item",
           "disabled": true,
           "settings": {
-            "image": "shopify://shop_images/3_2.png",
+            "image": "shopify:\/\/shop_images\/3_2.png",
             "text": "Silicone Bottoms",
-            "link": "shopify://collections/silicone-bottoms"
+            "link": "shopify:\/\/collections\/silicone-bottoms"
           }
         },
         "item_zdzAU7": {
           "type": "item",
           "disabled": true,
           "settings": {
-            "image": "shopify://shop_images/1_2.png",
+            "image": "shopify:\/\/shop_images\/1_2.png",
             "text": "Candles",
-            "link": "shopify://collections/candles"
+            "link": "shopify:\/\/collections\/candles"
           }
         },
         "item_74XFCd": {
           "type": "item",
           "settings": {
-            "image": "shopify://shop_images/4_2.png",
+            "image": "shopify:\/\/shop_images\/4_2.png",
             "text": "Mugs",
-            "link": "shopify://collections/17oz-mugs"
+            "link": "shopify:\/\/collections\/17oz-mugs"
           }
         },
         "item_FRYFdQ": {
           "type": "item",
           "settings": {
-            "image": "shopify://shop_images/coasters.png",
+            "image": "shopify:\/\/shop_images\/coasters.png",
             "text": "Mug Rugs",
-            "link": "shopify://collections/coasters"
+            "link": "shopify:\/\/collections\/coasters"
           }
         },
         "item_KKdwpd": {
           "type": "item",
           "settings": {
-            "image": "shopify://shop_images/apparel.png",
+            "image": "shopify:\/\/shop_images\/apparel.png",
             "text": "Sip Tees",
-            "link": "shopify://collections/apparel"
+            "link": "shopify:\/\/collections\/apparel"
           }
         }
       },
@@ -176,8 +176,8 @@
               "type": "moving-line-text",
               "name": "Moving line text",
               "settings": {
-                "text": "<h2><em>bpa free</em> + ready for your beach bag.</h2>",
-                "line_vector": "shopify://shop_images/svgviewer-png-output_8_1.png",
+                "text": "<h2><em>bpa free<\/em> + ready for your beach bag.<\/h2>",
+                "line_vector": "shopify:\/\/shop_images\/svgviewer-png-output_8_1.png",
                 "height": 18,
                 "mobile_height": 15,
                 "width": "fit-content",
@@ -213,7 +213,7 @@
               "name": "t:names.button",
               "settings": {
                 "label": "Shop Summer",
-                "link": "shopify://collections/summer-sippin",
+                "link": "shopify:\/\/collections\/summer-sippin",
                 "open_in_new_tab": false,
                 "style_class": "button",
                 "add_arrow": false,
@@ -288,7 +288,7 @@
               "type": "image",
               "name": "t:names.image",
               "settings": {
-                "image": "shopify://shop_images/SIPSIP_HOORAY_WEB_BANNERS_2026_a338c910-f147-428d-b3cc-80dea93cde7e.png",
+                "image": "shopify:\/\/shop_images\/SIPSIP_HOORAY_WEB_BANNERS_2026_a338c910-f147-428d-b3cc-80dea93cde7e.png",
                 "link": "",
                 "image_ratio": "adapt",
                 "width": "fit-content",
@@ -324,14 +324,14 @@
       "name": "t:names.hero",
       "settings": {
         "media_type_1": "image",
-        "image_1": "shopify://shop_images/SIPSIP_HOORAY_WEB_BANNERS_2026_a338c910-f147-428d-b3cc-80dea93cde7e.png",
+        "image_1": "shopify:\/\/shop_images\/SIPSIP_HOORAY_WEB_BANNERS_2026_a338c910-f147-428d-b3cc-80dea93cde7e.png",
         "media_type_2": "image",
         "stack_media_on_mobile": false,
         "custom_mobile_media": true,
         "media_type_1_mobile": "image",
-        "image_1_mobile": "shopify://shop_images/CrazyBanner.png",
+        "image_1_mobile": "shopify:\/\/shop_images\/CrazyBanner.png",
         "media_type_2_mobile": "image",
-        "link": "shopify://collections/summer-sippin",
+        "link": "shopify:\/\/collections\/summer-sippin",
         "open_in_new_tab": false,
         "content_direction": "row",
         "vertical_on_mobile": true,
@@ -362,7 +362,7 @@
           "type": "text",
           "name": "t:names.heading",
           "settings": {
-            "text": "<h2>as seen in</h2>",
+            "text": "<h2>as seen in<\/h2>",
             "width": "100%",
             "max_width": "normal",
             "alignment": "center",
@@ -412,7 +412,7 @@
           "name": "t:names.heading",
           "disabled": true,
           "settings": {
-            "text": "<h2>as seen in</h2>",
+            "text": "<h2>as seen in<\/h2>",
             "width": "fit-content",
             "max_width": "normal",
             "alignment": "left",
@@ -446,7 +446,7 @@
           "name": "t:names.icon",
           "settings": {
             "icon": "price_tag",
-            "image_upload": "shopify://shop_images/9.png",
+            "image_upload": "shopify:\/\/shop_images\/9.png",
             "width": 160,
             "use_height": true,
             "height": 144,
@@ -462,7 +462,7 @@
           "name": "t:names.icon",
           "settings": {
             "icon": "price_tag",
-            "image_upload": "shopify://shop_images/6_ed109635-d7c6-44f5-b471-9d0453dfe84f.png",
+            "image_upload": "shopify:\/\/shop_images\/6_ed109635-d7c6-44f5-b471-9d0453dfe84f.png",
             "width": 78,
             "use_height": true,
             "height": 110,
@@ -478,7 +478,7 @@
           "name": "t:names.icon",
           "settings": {
             "icon": "price_tag",
-            "image_upload": "shopify://shop_images/4_11d5275c-1a52-46ad-835e-23f9564d4d6a.png",
+            "image_upload": "shopify:\/\/shop_images\/4_11d5275c-1a52-46ad-835e-23f9564d4d6a.png",
             "width": 24,
             "use_height": true,
             "height": 84,
@@ -494,7 +494,7 @@
           "name": "t:names.icon",
           "settings": {
             "icon": "price_tag",
-            "image_upload": "shopify://shop_images/5_63408857-5a3e-4947-9793-c8d6206aee59.png",
+            "image_upload": "shopify:\/\/shop_images\/5_63408857-5a3e-4947-9793-c8d6206aee59.png",
             "width": 24,
             "use_height": true,
             "height": 58,
@@ -570,7 +570,7 @@
               "type": "_product-list-text",
               "name": "t:names.collection_title",
               "settings": {
-                "text": "<h2>New Sips</h2>",
+                "text": "<h2>New Sips<\/h2>",
                 "width": "fit-content",
                 "max_width": "normal",
                 "alignment": "left",
@@ -742,7 +742,7 @@
                       "blocks": {}
                     },
                     "curated_ns_okendo": {
-                      "type": "shopify://apps/okendo/blocks/star-rating/bb689e69-ea70-4661-8fb7-ad24a2e23c29",
+                      "type": "shopify:\/\/apps\/okendo\/blocks\/star-rating\/bb689e69-ea70-4661-8fb7-ad24a2e23c29",
                       "settings": {
                         "product": "{{closest.product}}"
                       }
@@ -781,7 +781,7 @@
                   "type": "custom-liquid",
                   "name": "sizes available",
                   "settings": {
-                    "custom_liquid": "{% assign sizes_option = closest.product.options_by_name['Cup Style'] %}\n{% if sizes_option != blank %}\n<span class=\"size-available-text\">\n    {{ 'content.sizes_available' | t: number: sizes_option.values.size }}\n</span>\n{% endif %}"
+                    "custom_liquid": "{% assign sizes_option = closest.product.options_by_name['Cup Style'] %}\n{% if sizes_option != blank %}\n<span class=\"size-available-text\">\n    {{ 'content.sizes_available' | t: number: sizes_option.values.size }}\n<\/span>\n{% endif %}"
                   },
                   "blocks": {}
                 }
@@ -890,7 +890,7 @@
               "type": "_product-list-text",
               "name": "t:names.collection_title",
               "settings": {
-                "text": "<h2>Best Sellers</h2>",
+                "text": "<h2>Best Sellers<\/h2>",
                 "width": "fit-content",
                 "max_width": "normal",
                 "alignment": "left",
@@ -1062,7 +1062,7 @@
                       "blocks": {}
                     },
                     "okendo_star_rating_cbRwzp": {
-                      "type": "shopify://apps/okendo/blocks/star-rating/bb689e69-ea70-4661-8fb7-ad24a2e23c29",
+                      "type": "shopify:\/\/apps\/okendo\/blocks\/star-rating\/bb689e69-ea70-4661-8fb7-ad24a2e23c29",
                       "settings": {
                         "product": "{{closest.product}}"
                       }
@@ -1101,7 +1101,7 @@
                   "type": "custom-liquid",
                   "name": "sizes available",
                   "settings": {
-                    "custom_liquid": "{% assign sizes_option = closest.product.options_by_name['Cup Style'] %}\n{% if sizes_option != blank %}\n<span class=\"size-available-text\">\n    {{ 'content.sizes_available' | t: number: sizes_option.values.size }}\n</span>\n{% endif %}"
+                    "custom_liquid": "{% assign sizes_option = closest.product.options_by_name['Cup Style'] %}\n{% if sizes_option != blank %}\n<span class=\"size-available-text\">\n    {{ 'content.sizes_available' | t: number: sizes_option.values.size }}\n<\/span>\n{% endif %}"
                   },
                   "blocks": {}
                 }
@@ -1223,7 +1223,7 @@
               "type": "text",
               "name": "t:names.text",
               "settings": {
-                "text": "<h3>Shop by collection</h3>",
+                "text": "<h3>Shop by collection<\/h3>",
                 "width": "fit-content",
                 "max_width": "normal",
                 "alignment": "left",
@@ -1420,7 +1420,7 @@
               "type": "text",
               "name": "t:names.heading",
               "settings": {
-                "text": "<h2>hydrate with style</h2>",
+                "text": "<h2>hydrate with style<\/h2>",
                 "width": "fit-content",
                 "max_width": "normal",
                 "alignment": "left",
@@ -1452,7 +1452,7 @@
             "text_GFDrcB": {
               "type": "text",
               "settings": {
-                "text": "<p>Our most-loved picks, chosen by customers for their style, quality, and everyday appeal.</p>",
+                "text": "<p>Our most-loved picks, chosen by customers for their style, quality, and everyday appeal.<\/p>",
                 "width": "fit-content",
                 "max_width": "narrow",
                 "alignment": "left",
@@ -1485,7 +1485,7 @@
               "type": "button",
               "settings": {
                 "label": "Shop Best-Sellers",
-                "link": "shopify://collections/best-sellers",
+                "link": "shopify:\/\/collections\/best-sellers",
                 "open_in_new_tab": false,
                 "style_class": "button-secondary",
                 "add_arrow": true,
@@ -1557,7 +1557,7 @@
           },
           "blocks": {
             "shopvid_mp_tiktok_block_hygyjQ": {
-              "type": "shopify://apps/ag-shoppable-video/blocks/mp_tiktok_block/1216543a-6237-4445-a5f2-61991cd76022",
+              "type": "shopify:\/\/apps\/ag-shoppable-video\/blocks\/mp_tiktok_block\/1216543a-6237-4445-a5f2-61991cd76022",
               "settings": {
                 "mp_tiktok_feed_id": "0403-426722"
               }
@@ -1626,7 +1626,7 @@
           "settings": {
             "product": "32oz-jenna-bariatric-bestie-x-sip-sip-hooray-emotional-support-proffee",
             "hotspot_variant_name": "40oz Plastic With Plastic Lid",
-            "hotspot_image": "shopify://shop_images/cup.png",
+            "hotspot_image": "shopify:\/\/shop_images\/cup.png",
             "show_hotspot_on_mobile": true,
             "x-position": 25,
             "y-position": 77
@@ -1637,7 +1637,7 @@
           "settings": {
             "product": "32oz-jenna-bariatric-bestie-x-sip-sip-hooray-emotional-support-proffee",
             "hotspot_variant_name": "40oz Plastic With Plastic Lid",
-            "hotspot_image": "shopify://shop_images/cup.png",
+            "hotspot_image": "shopify:\/\/shop_images\/cup.png",
             "show_hotspot_on_mobile": true,
             "x-position": 60,
             "y-position": 57
@@ -1654,7 +1654,7 @@
         "@media (max-width: 749px) {.resource-card__media {--resource-card-aspect-ratio: 2 !important; }}"
       ],
       "settings": {
-        "heading": "<p>Shop The Look</p>",
+        "heading": "<p>Shop The Look<\/p>",
         "aside_section_heading_type_preset": "custom",
         "aside_section_heading_font": "var(--font-heading--family)",
         "aside_section_heading_font_size": "2rem",
@@ -1665,7 +1665,7 @@
         "aside_section_heading_case": "none",
         "aside_section_heading_wrap": "pretty",
         "aside_section_heading_color": "var(--color-foreground-heading)",
-        "image": "shopify://shop_images/Gemini_Generated_Image_dh2zz8dh2zz8dh2z_198ce27f-d912-4dfc-b9e8-83c93a34405c.png",
+        "image": "shopify:\/\/shop_images\/Gemini_Generated_Image_dh2zz8dh2zz8dh2z_198ce27f-d912-4dfc-b9e8-83c93a34405c.png",
         "toggle_overlay": false,
         "overlay_color": "#00000026",
         "overlay_style": "solid",
@@ -1784,14 +1784,14 @@
               "type": "ai_gen_block_426582e",
               "name": "Icons row",
               "settings": {
-                "icon_1": "shopify://shop_images/print_6ed7503d-150c-4344-8b7b-98b739728afc.png",
-                "text_1": "<p>Permanent <br/>UV Prints</p>",
-                "icon_2": "shopify://shop_images/svgviewer-png-output_22.png",
-                "text_2": "<p>Double-Wall<br/>Vacuum</p>",
-                "icon_3": "shopify://shop_images/svgviewer-png-output_23.png",
-                "text_3": "<p>Cupholder<br/>Compatible</p>",
-                "icon_4": "shopify://shop_images/svgviewer-png-output_25.png",
-                "text_4": "<p>Dishwasher<br/>Safe</p>",
+                "icon_1": "shopify:\/\/shop_images\/print_6ed7503d-150c-4344-8b7b-98b739728afc.png",
+                "text_1": "<p>Permanent <br\/>UV Prints<\/p>",
+                "icon_2": "shopify:\/\/shop_images\/svgviewer-png-output_22.png",
+                "text_2": "<p>Double-Wall<br\/>Vacuum<\/p>",
+                "icon_3": "shopify:\/\/shop_images\/svgviewer-png-output_23.png",
+                "text_3": "<p>Cupholder<br\/>Compatible<\/p>",
+                "icon_4": "shopify:\/\/shop_images\/svgviewer-png-output_25.png",
+                "text_4": "<p>Dishwasher<br\/>Safe<\/p>",
                 "desktop_columns": "4",
                 "alignment": "center",
                 "icon_size": 40,
@@ -1937,8 +1937,8 @@
               "type": "moving-line-text",
               "name": "Moving line text",
               "settings": {
-                "text": "<h2>& as always,  <br/>made with <em>love.</em></h2>",
-                "line_vector": "shopify://shop_images/pink-curve_862cbfce-ff0a-4697-9aa9-1f089baec353.png",
+                "text": "<h2>& as always,  <br\/>made with <em>love.<\/em><\/h2>",
+                "line_vector": "shopify:\/\/shop_images\/pink-curve_862cbfce-ff0a-4697-9aa9-1f089baec353.png",
                 "height": 16,
                 "mobile_height": 16,
                 "width": "fit-content",
@@ -1973,7 +1973,7 @@
               "type": "text",
               "name": "t:names.text",
               "settings": {
-                "text": "<p>At <strong>Sip-Sip Hooray®</strong>, we also know that looking cute and trendy doesn't have to break the bank. We take pride in affordability and we launch fresh collections every month to keep your style on point. Not to mention, you’ll love our customer service just as much as you love our designs!</p><p>We’re here for you seven days a week, and all orders ship within three business days. So go ahead, treat yourself to a cup (or two).</p>",
+                "text": "<p>At <strong>Sip-Sip Hooray®<\/strong>, we also know that looking cute and trendy doesn't have to break the bank. We take pride in affordability and we launch fresh collections every month to keep your style on point. Not to mention, you’ll love our customer service just as much as you love our designs!<\/p><p>We’re here for you seven days a week, and all orders ship within three business days. So go ahead, treat yourself to a cup (or two).<\/p>",
                 "width": "fit-content",
                 "max_width": "none",
                 "alignment": "left",
@@ -2061,13 +2061,13 @@
                   "settings": {
                     "icon_position": "left",
                     "icon": "apple",
-                    "image_upload": "shopify://shop_images/Frame_86_4.png",
+                    "image_upload": "shopify:\/\/shop_images\/Frame_86_4.png",
                     "icon_width": 36,
                     "use_height": true,
                     "icon_height": 42,
                     "custom_mobile_height": false,
                     "mobile-height": 24,
-                    "text": "<p>Handmade in Louisiana</p>",
+                    "text": "<p>Handmade in Louisiana<\/p>",
                     "text_width": "fit-content",
                     "max_width": "normal",
                     "alignment": "left",
@@ -2136,13 +2136,13 @@
                   "settings": {
                     "icon_position": "left",
                     "icon": "apple",
-                    "image_upload": "shopify://shop_images/Frame_86_7.png",
+                    "image_upload": "shopify:\/\/shop_images\/Frame_86_7.png",
                     "icon_width": 32,
                     "use_height": true,
                     "icon_height": 42,
                     "custom_mobile_height": false,
                     "mobile-height": 24,
-                    "text": "<p>Free US Shipping Over $40</p>",
+                    "text": "<p>Free US Shipping Over $40<\/p>",
                     "text_width": "fit-content",
                     "max_width": "normal",
                     "alignment": "left",
@@ -2211,13 +2211,13 @@
                   "settings": {
                     "icon_position": "left",
                     "icon": "apple",
-                    "image_upload": "shopify://shop_images/Frame_86_9.png",
+                    "image_upload": "shopify:\/\/shop_images\/Frame_86_9.png",
                     "icon_width": 24,
                     "use_height": true,
                     "icon_height": 42,
                     "custom_mobile_height": false,
                     "mobile-height": 24,
-                    "text": "<p>Support 7 Days A Week</p>",
+                    "text": "<p>Support 7 Days A Week<\/p>",
                     "text_width": "fit-content",
                     "max_width": "normal",
                     "alignment": "left",
@@ -2286,13 +2286,13 @@
                   "settings": {
                     "icon_position": "left",
                     "icon": "apple",
-                    "image_upload": "shopify://shop_images/Group_74.png",
+                    "image_upload": "shopify:\/\/shop_images\/Group_74.png",
                     "icon_width": 24,
                     "use_height": true,
                     "icon_height": 42,
                     "custom_mobile_height": false,
                     "mobile-height": 24,
-                    "text": "<p>Women Owned + Operated</p>",
+                    "text": "<p>Women Owned + Operated<\/p>",
                     "text_width": "fit-content",
                     "max_width": "normal",
                     "alignment": "left",
@@ -2367,7 +2367,7 @@
               "type": "button",
               "settings": {
                 "label": "About us",
-                "link": "shopify://pages/about-us",
+                "link": "shopify:\/\/pages\/about-us",
                 "open_in_new_tab": false,
                 "style_class": "button-secondary",
                 "add_arrow": true,
@@ -2391,7 +2391,7 @@
           "name": "t:names.image",
           "disabled": true,
           "settings": {
-            "image": "shopify://shop_images/png_-_2026-03-18T114634.368.png",
+            "image": "shopify:\/\/shop_images\/png_-_2026-03-18T114634.368.png",
             "link": "",
             "image_ratio": "adapt",
             "width": "fill",
@@ -2418,7 +2418,7 @@
       "custom_css": [
         ".text-icon-block .text-block {line-height: 1.2em;}",
         ".row-2 > .group-block-content {flex-wrap: wrap;}",
-        ".row-2 .text-icon-block {width: calc(50% - var(--gap) / 2); flex: 1 auto;}"
+        ".row-2 .text-icon-block {width: calc(50% - var(--gap) \/ 2); flex: 1 auto;}"
       ],
       "name": "& as always",
       "settings": {
@@ -2511,13 +2511,13 @@
               "settings": {
                 "icon_position": "left",
                 "icon": "apple",
-                "image_upload": "shopify://shop_images/wo_9ecdd447-51b1-4eb0-b6e5-7bfc475b13d7.png",
+                "image_upload": "shopify:\/\/shop_images\/wo_9ecdd447-51b1-4eb0-b6e5-7bfc475b13d7.png",
                 "icon_width": 24,
                 "use_height": true,
                 "icon_height": 32,
                 "custom_mobile_height": false,
                 "mobile-height": 24,
-                "text": "<p>Women Owned + Operated</p>",
+                "text": "<p>Women Owned + Operated<\/p>",
                 "text_width": "fit-content",
                 "max_width": "normal",
                 "alignment": "left",
@@ -2632,13 +2632,13 @@
               "settings": {
                 "icon_position": "left",
                 "icon": "apple",
-                "image_upload": "shopify://shop_images/support_81bc0fc2-ad44-4409-ba40-47a1c06fd115.png",
+                "image_upload": "shopify:\/\/shop_images\/support_81bc0fc2-ad44-4409-ba40-47a1c06fd115.png",
                 "icon_width": 24,
                 "use_height": true,
                 "icon_height": 32,
                 "custom_mobile_height": false,
                 "mobile-height": 24,
-                "text": "<p>Support 7 Days A Week</p>",
+                "text": "<p>Support 7 Days A Week<\/p>",
                 "text_width": "fit-content",
                 "max_width": "normal",
                 "alignment": "left",
@@ -2753,13 +2753,13 @@
               "settings": {
                 "icon_position": "left",
                 "icon": "apple",
-                "image_upload": "shopify://shop_images/love_3e19cf15-492c-4b81-a8e7-647f04cf491f.png",
+                "image_upload": "shopify:\/\/shop_images\/love_3e19cf15-492c-4b81-a8e7-647f04cf491f.png",
                 "icon_width": 24,
                 "use_height": true,
                 "icon_height": 32,
                 "custom_mobile_height": false,
                 "mobile-height": 24,
-                "text": "<p>Handmade in Louisiana</p>",
+                "text": "<p>Handmade in Louisiana<\/p>",
                 "text_width": "fit-content",
                 "max_width": "normal",
                 "alignment": "left",
@@ -2874,13 +2874,13 @@
               "settings": {
                 "icon_position": "left",
                 "icon": "apple",
-                "image_upload": "shopify://shop_images/truck.png",
+                "image_upload": "shopify:\/\/shop_images\/truck.png",
                 "icon_width": 24,
                 "use_height": true,
                 "icon_height": 32,
                 "custom_mobile_height": false,
                 "mobile-height": 24,
-                "text": "<p>Free Shipping Over $40</p>",
+                "text": "<p>Free Shipping Over $40<\/p>",
                 "text_width": "fit-content",
                 "max_width": "normal",
                 "alignment": "left",
@@ -2993,8 +2993,8 @@
               "type": "moving-line-text",
               "name": "Moving line text",
               "settings": {
-                "text": "<h2>& as always,  made with <em>love.</em></h2>",
-                "line_vector": "shopify://shop_images/pink-curve.png",
+                "text": "<h2>& as always,  made with <em>love.<\/em><\/h2>",
+                "line_vector": "shopify:\/\/shop_images\/pink-curve.png",
                 "height": 18,
                 "mobile_height": 16,
                 "width": "fit-content",
@@ -3029,7 +3029,7 @@
               "type": "text",
               "name": "t:names.text",
               "settings": {
-                "text": "<p>At <strong>Sip-Sip Hooray®</strong>, we also know that looking cute and trendy doesn't have to break the bank. We take pride in affordability and we launch fresh collections every month to keep your style on point. Not to mention, you’ll love our customer service just as much as you love our designs! We’re here for you seven days a week, and all orders ship within three business days. So go ahead, treat yourself to a cup (or two).</p>",
+                "text": "<p>At <strong>Sip-Sip Hooray®<\/strong>, we also know that looking cute and trendy doesn't have to break the bank. We take pride in affordability and we launch fresh collections every month to keep your style on point. Not to mention, you’ll love our customer service just as much as you love our designs! We’re here for you seven days a week, and all orders ship within three business days. So go ahead, treat yourself to a cup (or two).<\/p>",
                 "width": "100%",
                 "max_width": "none",
                 "alignment": "left",
@@ -3177,7 +3177,7 @@
               "type": "text",
               "name": "t:names.header",
               "settings": {
-                "text": "<p>Distinct By Design™</p>",
+                "text": "<p>Distinct By Design™<\/p>",
                 "width": "fit-content",
                 "max_width": "normal",
                 "alignment": "left",
@@ -3262,7 +3262,7 @@
                   "type": "image",
                   "name": "t:names.image",
                   "settings": {
-                    "image": "shopify://shop_images/Gemini_Generated_Image_bvf1ljbvf1ljbvf1.png",
+                    "image": "shopify:\/\/shop_images\/Gemini_Generated_Image_bvf1ljbvf1ljbvf1.png",
                     "link": "",
                     "image_ratio": "portrait",
                     "width": "fill",
@@ -3285,7 +3285,7 @@
                   "type": "text",
                   "name": "t:names.heading",
                   "settings": {
-                    "text": "<p>Lorem ipsum dolor sit amet</p>",
+                    "text": "<p>Lorem ipsum dolor sit amet<\/p>",
                     "width": "fit-content",
                     "max_width": "normal",
                     "alignment": "left",
@@ -3318,7 +3318,7 @@
                   "type": "text",
                   "name": "t:names.text",
                   "settings": {
-                    "text": "<p>Consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore.</p>",
+                    "text": "<p>Consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore.<\/p>",
                     "width": "100%",
                     "max_width": "none",
                     "alignment": "left",
@@ -3386,7 +3386,7 @@
                   "type": "image",
                   "name": "t:names.image",
                   "settings": {
-                    "image": "shopify://shop_images/Gemini_Generated_Image_bvf1ljbvf1ljbvf1.png",
+                    "image": "shopify:\/\/shop_images\/Gemini_Generated_Image_bvf1ljbvf1ljbvf1.png",
                     "link": "",
                     "image_ratio": "portrait",
                     "width": "fill",
@@ -3409,7 +3409,7 @@
                   "type": "text",
                   "name": "t:names.heading",
                   "settings": {
-                    "text": "<p>Lorem ipsum dolor sit amet</p>",
+                    "text": "<p>Lorem ipsum dolor sit amet<\/p>",
                     "width": "fit-content",
                     "max_width": "normal",
                     "alignment": "left",
@@ -3442,7 +3442,7 @@
                   "type": "text",
                   "name": "t:names.text",
                   "settings": {
-                    "text": "<p>Consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore.</p>",
+                    "text": "<p>Consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore.<\/p>",
                     "width": "100%",
                     "max_width": "none",
                     "alignment": "left",
@@ -3510,7 +3510,7 @@
                   "type": "image",
                   "name": "t:names.image",
                   "settings": {
-                    "image": "shopify://shop_images/Gemini_Generated_Image_bvf1ljbvf1ljbvf1.png",
+                    "image": "shopify:\/\/shop_images\/Gemini_Generated_Image_bvf1ljbvf1ljbvf1.png",
                     "link": "",
                     "image_ratio": "portrait",
                     "width": "fill",
@@ -3533,7 +3533,7 @@
                   "type": "text",
                   "name": "t:names.heading",
                   "settings": {
-                    "text": "<p>Lorem ipsum dolor sit amet</p>",
+                    "text": "<p>Lorem ipsum dolor sit amet<\/p>",
                     "width": "fit-content",
                     "max_width": "normal",
                     "alignment": "left",
@@ -3566,7 +3566,7 @@
                   "type": "text",
                   "name": "t:names.text",
                   "settings": {
-                    "text": "<p>Consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore.</p>",
+                    "text": "<p>Consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore.<\/p>",
                     "width": "100%",
                     "max_width": "none",
                     "alignment": "left",
@@ -3634,7 +3634,7 @@
                   "type": "image",
                   "name": "t:names.image",
                   "settings": {
-                    "image": "shopify://shop_images/Gemini_Generated_Image_bvf1ljbvf1ljbvf1.png",
+                    "image": "shopify:\/\/shop_images\/Gemini_Generated_Image_bvf1ljbvf1ljbvf1.png",
                     "link": "",
                     "image_ratio": "portrait",
                     "width": "fill",
@@ -3657,7 +3657,7 @@
                   "type": "text",
                   "name": "t:names.heading",
                   "settings": {
-                    "text": "<p>Lorem ipsum dolor sit amet</p>",
+                    "text": "<p>Lorem ipsum dolor sit amet<\/p>",
                     "width": "fit-content",
                     "max_width": "normal",
                     "alignment": "left",
@@ -3690,7 +3690,7 @@
                   "type": "text",
                   "name": "t:names.text",
                   "settings": {
-                    "text": "<p>Consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore.</p>",
+                    "text": "<p>Consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore.<\/p>",
                     "width": "100%",
                     "max_width": "none",
                     "alignment": "left",
@@ -3758,7 +3758,7 @@
                   "type": "image",
                   "name": "t:names.image",
                   "settings": {
-                    "image": "shopify://shop_images/Gemini_Generated_Image_bvf1ljbvf1ljbvf1.png",
+                    "image": "shopify:\/\/shop_images\/Gemini_Generated_Image_bvf1ljbvf1ljbvf1.png",
                     "link": "",
                     "image_ratio": "portrait",
                     "width": "fill",
@@ -3781,7 +3781,7 @@
                   "type": "text",
                   "name": "t:names.heading",
                   "settings": {
-                    "text": "<p>Lorem ipsum dolor sit amet</p>",
+                    "text": "<p>Lorem ipsum dolor sit amet<\/p>",
                     "width": "fit-content",
                     "max_width": "normal",
                     "alignment": "left",
@@ -3814,7 +3814,7 @@
                   "type": "text",
                   "name": "t:names.text",
                   "settings": {
-                    "text": "<p>Consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore.</p>",
+                    "text": "<p>Consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore.<\/p>",
                     "width": "100%",
                     "max_width": "none",
                     "alignment": "left",
@@ -3882,7 +3882,7 @@
                   "type": "image",
                   "name": "t:names.image",
                   "settings": {
-                    "image": "shopify://shop_images/Gemini_Generated_Image_bvf1ljbvf1ljbvf1.png",
+                    "image": "shopify:\/\/shop_images\/Gemini_Generated_Image_bvf1ljbvf1ljbvf1.png",
                     "link": "",
                     "image_ratio": "portrait",
                     "width": "fill",
@@ -3905,7 +3905,7 @@
                   "type": "text",
                   "name": "t:names.heading",
                   "settings": {
-                    "text": "<p>Lorem ipsum dolor sit amet</p>",
+                    "text": "<p>Lorem ipsum dolor sit amet<\/p>",
                     "width": "fit-content",
                     "max_width": "normal",
                     "alignment": "left",
@@ -3938,7 +3938,7 @@
                   "type": "text",
                   "name": "t:names.text",
                   "settings": {
-                    "text": "<p>Consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore.</p>",
+                    "text": "<p>Consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore.<\/p>",
                     "width": "100%",
                     "max_width": "none",
                     "alignment": "left",
@@ -3997,6 +3997,739 @@
         "icons_shape": "circle",
         "padding-block-start": 80,
         "padding-block-end": 80
+      }
+    },
+    "grid_section_7tzTqx": {
+      "type": "grid-section",
+      "blocks": {
+        "carousel_card_YVhk7A": {
+          "type": "_carousel-card",
+          "name": "Carousel Item",
+          "settings": {
+            "content_direction": "column",
+            "vertical_on_mobile": true,
+            "reverse_on_mobile": false,
+            "horizontal_alignment": "flex-start",
+            "vertical_alignment": "center",
+            "align_baseline": false,
+            "horizontal_alignment_flex_direction_column": "flex-start",
+            "custom_mobile_alignment": false,
+            "mobile_vertical_alignment": "flex-start",
+            "vertical_alignment_flex_direction_column": "flex-start",
+            "gap": 6,
+            "width": "fill",
+            "custom_width": 100,
+            "width_mobile": "fill",
+            "custom_width_mobile": 100,
+            "height": "fit",
+            "custom_height": 100,
+            "inherit_color_scheme": false,
+            "color_scheme": "",
+            "border": "none",
+            "border_width": 1,
+            "border_opacity": 100,
+            "border_radius": 12,
+            "enable_mobile_radius": false,
+            "mobile_border_radius": 0,
+            "padding-block-start": 24,
+            "padding-block-end": 24,
+            "padding-inline-start": 24,
+            "padding-inline-end": 24,
+            "custom_mobile_padding": false,
+            "mobile-padding-block-start": 0,
+            "mobile-padding-block-end": 0,
+            "mobile-padding-inline-start": 0,
+            "mobile-padding-inline-end": 0,
+            "css_class": ""
+          },
+          "blocks": {
+            "icon_BwffgP": {
+              "type": "icon",
+              "name": "t:names.icon",
+              "settings": {
+                "icon": "price_tag",
+                "image_upload": "shopify:\/\/shop_images\/Vector_48.png",
+                "width": 24,
+                "use_height": true,
+                "height": 24,
+                "custom_mobile_height": false,
+                "mobile-height": 24,
+                "link": "",
+                "open_in_new_tab": false
+              },
+              "blocks": {}
+            },
+            "custom_liquid_LwMDTT": {
+              "type": "custom-liquid",
+              "name": "Star Icons",
+              "settings": {
+                "custom_liquid": "<div class=\"oke-reviewContent-stars\">\n    <div class=\"oke-stars\">\n        <!---->\n        <div class=\"oke-stars-background\">\n            <svg height=\"12\" viewBox=\"0 0 79.22222222222221 14\" aria-hidden=\"true\" role=\"none\">\n                <use x=\"0\" href=\"#oke-star-empty\"><\/use>\n                <use x=\"16.155555555555555\" href=\"#oke-star-empty\"><\/use>\n                <use x=\"32.31111111111111\" href=\"#oke-star-empty\"><\/use>\n                <use x=\"48.46666666666667\" href=\"#oke-star-empty\"><\/use>\n                <use x=\"64.62222222222222\" href=\"#oke-star-empty\"><\/use>\n            <\/svg>\n        <\/div>\n        <div class=\"oke-stars-foreground\" style=\"width: 100%;\">\n            <svg height=\"12\" viewBox=\"0 0 79.22222222222221 14\" aria-hidden=\"true\" role=\"none\">\n                <use x=\"0\" href=\"#oke-star-filled\"><\/use>\n                <use x=\"16.155555555555555\" href=\"#oke-star-filled\"><\/use>\n                <use x=\"32.31111111111111\" href=\"#oke-star-filled\"><\/use>\n                <use x=\"48.46666666666667\" href=\"#oke-star-filled\"><\/use>\n                <use x=\"64.62222222222222\" href=\"#oke-star-filled\"><\/use>\n            <\/svg>\n        <\/div>\n    <\/div>\n<\/div>"
+              },
+              "blocks": {}
+            },
+            "text_F9De8P": {
+              "type": "text",
+              "name": "t:names.text",
+              "settings": {
+                "text": "<p><em>\"Obsessed with the sunflower & bee print 🐝added a little glass heart straw to mine.use it literally every single day for work!\"<\/em><\/p>",
+                "width": "fit-content",
+                "max_width": "normal",
+                "alignment": "left",
+                "type_preset": "rte",
+                "font": "var(--font-body--family)",
+                "font_size": "1rem",
+                "enable_mobile_size": false,
+                "mobile_font_size": "1rem",
+                "line_height": "normal",
+                "letter_spacing": "normal",
+                "case": "none",
+                "wrap": "pretty",
+                "color": "var(--color-foreground)",
+                "background": false,
+                "background_color": "#00000026",
+                "corner_radius": 0,
+                "padding-block-start": 0,
+                "padding-block-end": 0,
+                "padding-inline-start": 0,
+                "padding-inline-end": 0,
+                "custom_mobile_padding": false,
+                "mobile-padding-block-start": 0,
+                "mobile-padding-block-end": 0,
+                "mobile-padding-inline-start": 0,
+                "mobile-padding-inline-end": 0
+              },
+              "blocks": {}
+            },
+            "ai_gen_block_c3963ee_98cxni": {
+              "type": "ai_gen_block_c3963ee",
+              "settings": {
+                "customer_name": "Sarah M.",
+                "verified_text": "Verified Buyer",
+                "spacing": 8,
+                "padding": 0,
+                "border_radius": 0,
+                "background_color": "rgba(0,0,0,0)",
+                "name_font_size": 15,
+                "name_color": "#2b2b2b",
+                "name_font_weight": "600",
+                "icon_size": 14,
+                "icon_color": "#fbe1ec",
+                "badge_spacing": 6,
+                "badge_font_size": 14,
+                "badge_text_color": "#2b2b2b",
+                "badge_font_weight": "400"
+              },
+              "blocks": {}
+            },
+            "divider_TxKFYp": {
+              "type": "_divider",
+              "name": "t:names.divider",
+              "settings": {
+                "thickness": 1,
+                "corner_radius": "square",
+                "width_percent": 100,
+                "padding-block-start": 6,
+                "padding-block-end": 6
+              },
+              "blocks": {}
+            },
+            "ai_gen_block_f16862d_npGiWm": {
+              "type": "ai_gen_block_f16862d",
+              "settings": {
+                "product": "sunflower-with-bees-glass-tumbler",
+                "thumbnail_width": 40
+              },
+              "blocks": {}
+            }
+          },
+          "block_order": [
+            "icon_BwffgP",
+            "custom_liquid_LwMDTT",
+            "text_F9De8P",
+            "ai_gen_block_c3963ee_98cxni",
+            "divider_TxKFYp",
+            "ai_gen_block_f16862d_npGiWm"
+          ]
+        },
+        "carousel_card_ArnqrJ": {
+          "type": "_carousel-card",
+          "name": "Carousel Item",
+          "settings": {
+            "content_direction": "column",
+            "vertical_on_mobile": true,
+            "reverse_on_mobile": false,
+            "horizontal_alignment": "flex-start",
+            "vertical_alignment": "center",
+            "align_baseline": false,
+            "horizontal_alignment_flex_direction_column": "flex-start",
+            "custom_mobile_alignment": false,
+            "mobile_vertical_alignment": "flex-start",
+            "vertical_alignment_flex_direction_column": "flex-start",
+            "gap": 6,
+            "width": "fill",
+            "custom_width": 100,
+            "width_mobile": "fill",
+            "custom_width_mobile": 100,
+            "height": "fit",
+            "custom_height": 100,
+            "inherit_color_scheme": false,
+            "color_scheme": "",
+            "border": "none",
+            "border_width": 1,
+            "border_opacity": 100,
+            "border_radius": 12,
+            "enable_mobile_radius": false,
+            "mobile_border_radius": 0,
+            "padding-block-start": 24,
+            "padding-block-end": 24,
+            "padding-inline-start": 24,
+            "padding-inline-end": 24,
+            "custom_mobile_padding": false,
+            "mobile-padding-block-start": 0,
+            "mobile-padding-block-end": 0,
+            "mobile-padding-inline-start": 0,
+            "mobile-padding-inline-end": 0,
+            "css_class": ""
+          },
+          "blocks": {
+            "icon_FyLDXY": {
+              "type": "icon",
+              "name": "t:names.icon",
+              "settings": {
+                "icon": "price_tag",
+                "image_upload": "shopify:\/\/shop_images\/Vector_48.png",
+                "width": 24,
+                "use_height": true,
+                "height": 24,
+                "custom_mobile_height": false,
+                "mobile-height": 24,
+                "link": "",
+                "open_in_new_tab": false
+              },
+              "blocks": {}
+            },
+            "custom_liquid_GyRFqL": {
+              "type": "custom-liquid",
+              "name": "Star Icons",
+              "settings": {
+                "custom_liquid": "<div class=\"oke-reviewContent-stars\">\n    <div class=\"oke-stars\">\n        <!---->\n        <div class=\"oke-stars-background\">\n            <svg height=\"12\" viewBox=\"0 0 79.22222222222221 14\" aria-hidden=\"true\" role=\"none\">\n                <use x=\"0\" href=\"#oke-star-empty\"><\/use>\n                <use x=\"16.155555555555555\" href=\"#oke-star-empty\"><\/use>\n                <use x=\"32.31111111111111\" href=\"#oke-star-empty\"><\/use>\n                <use x=\"48.46666666666667\" href=\"#oke-star-empty\"><\/use>\n                <use x=\"64.62222222222222\" href=\"#oke-star-empty\"><\/use>\n            <\/svg>\n        <\/div>\n        <div class=\"oke-stars-foreground\" style=\"width: 100%;\">\n            <svg height=\"12\" viewBox=\"0 0 79.22222222222221 14\" aria-hidden=\"true\" role=\"none\">\n                <use x=\"0\" href=\"#oke-star-filled\"><\/use>\n                <use x=\"16.155555555555555\" href=\"#oke-star-filled\"><\/use>\n                <use x=\"32.31111111111111\" href=\"#oke-star-filled\"><\/use>\n                <use x=\"48.46666666666667\" href=\"#oke-star-filled\"><\/use>\n                <use x=\"64.62222222222222\" href=\"#oke-star-filled\"><\/use>\n            <\/svg>\n        <\/div>\n    <\/div>\n<\/div>"
+              },
+              "blocks": {}
+            },
+            "text_NEbyDn": {
+              "type": "text",
+              "name": "t:names.text",
+              "settings": {
+                "text": "<p><em>\"The lemon design is so cute in person! Grabbed a bamboo lid to go with it.Perfect for my morning iced coffee 🍋✨\"<\/em><\/p>",
+                "width": "fit-content",
+                "max_width": "normal",
+                "alignment": "left",
+                "type_preset": "rte",
+                "font": "var(--font-body--family)",
+                "font_size": "1rem",
+                "enable_mobile_size": false,
+                "mobile_font_size": "1rem",
+                "line_height": "normal",
+                "letter_spacing": "normal",
+                "case": "none",
+                "wrap": "pretty",
+                "color": "var(--color-foreground)",
+                "background": false,
+                "background_color": "#00000026",
+                "corner_radius": 0,
+                "padding-block-start": 0,
+                "padding-block-end": 0,
+                "padding-inline-start": 0,
+                "padding-inline-end": 0,
+                "custom_mobile_padding": false,
+                "mobile-padding-block-start": 0,
+                "mobile-padding-block-end": 0,
+                "mobile-padding-inline-start": 0,
+                "mobile-padding-inline-end": 0
+              },
+              "blocks": {}
+            },
+            "ai_gen_block_c3963ee_WEg8EU": {
+              "type": "ai_gen_block_c3963ee",
+              "settings": {
+                "customer_name": "Jessica T.",
+                "verified_text": "Verified Buyer",
+                "spacing": 8,
+                "padding": 0,
+                "border_radius": 0,
+                "background_color": "rgba(0,0,0,0)",
+                "name_font_size": 15,
+                "name_color": "#2b2b2b",
+                "name_font_weight": "600",
+                "icon_size": 14,
+                "icon_color": "#fbe1ec",
+                "badge_spacing": 6,
+                "badge_font_size": 14,
+                "badge_text_color": "#2b2b2b",
+                "badge_font_weight": "400"
+              },
+              "blocks": {}
+            },
+            "divider_AmWTeg": {
+              "type": "_divider",
+              "name": "t:names.divider",
+              "settings": {
+                "thickness": 1,
+                "corner_radius": "square",
+                "width_percent": 100,
+                "padding-block-start": 6,
+                "padding-block-end": 6
+              },
+              "blocks": {}
+            },
+            "ai_gen_block_f16862d_UqntkA": {
+              "type": "ai_gen_block_f16862d",
+              "settings": {
+                "product": "spring-lemons-glass-tumbler",
+                "thumbnail_width": 40
+              },
+              "blocks": {}
+            }
+          },
+          "block_order": [
+            "icon_FyLDXY",
+            "custom_liquid_GyRFqL",
+            "text_NEbyDn",
+            "ai_gen_block_c3963ee_WEg8EU",
+            "divider_AmWTeg",
+            "ai_gen_block_f16862d_UqntkA"
+          ]
+        },
+        "carousel_card_gjhh8j": {
+          "type": "_carousel-card",
+          "name": "Carousel Item",
+          "settings": {
+            "content_direction": "column",
+            "vertical_on_mobile": true,
+            "reverse_on_mobile": false,
+            "horizontal_alignment": "flex-start",
+            "vertical_alignment": "center",
+            "align_baseline": false,
+            "horizontal_alignment_flex_direction_column": "flex-start",
+            "custom_mobile_alignment": false,
+            "mobile_vertical_alignment": "flex-start",
+            "vertical_alignment_flex_direction_column": "flex-start",
+            "gap": 6,
+            "width": "fill",
+            "custom_width": 100,
+            "width_mobile": "fill",
+            "custom_width_mobile": 100,
+            "height": "fit",
+            "custom_height": 100,
+            "inherit_color_scheme": false,
+            "color_scheme": "",
+            "border": "none",
+            "border_width": 1,
+            "border_opacity": 100,
+            "border_radius": 12,
+            "enable_mobile_radius": false,
+            "mobile_border_radius": 0,
+            "padding-block-start": 24,
+            "padding-block-end": 24,
+            "padding-inline-start": 24,
+            "padding-inline-end": 24,
+            "custom_mobile_padding": false,
+            "mobile-padding-block-start": 0,
+            "mobile-padding-block-end": 0,
+            "mobile-padding-inline-start": 0,
+            "mobile-padding-inline-end": 0,
+            "css_class": ""
+          },
+          "blocks": {
+            "icon_UP4kNH": {
+              "type": "icon",
+              "name": "t:names.icon",
+              "settings": {
+                "icon": "price_tag",
+                "image_upload": "shopify:\/\/shop_images\/Vector_48.png",
+                "width": 24,
+                "use_height": true,
+                "height": 24,
+                "custom_mobile_height": false,
+                "mobile-height": 24,
+                "link": "",
+                "open_in_new_tab": false
+              },
+              "blocks": {}
+            },
+            "custom_liquid_7UcbTy": {
+              "type": "custom-liquid",
+              "name": "Star Icons",
+              "settings": {
+                "custom_liquid": "<div class=\"oke-reviewContent-stars\">\n    <div class=\"oke-stars\">\n        <!---->\n        <div class=\"oke-stars-background\">\n            <svg height=\"12\" viewBox=\"0 0 79.22222222222221 14\" aria-hidden=\"true\" role=\"none\">\n                <use x=\"0\" href=\"#oke-star-empty\"><\/use>\n                <use x=\"16.155555555555555\" href=\"#oke-star-empty\"><\/use>\n                <use x=\"32.31111111111111\" href=\"#oke-star-empty\"><\/use>\n                <use x=\"48.46666666666667\" href=\"#oke-star-empty\"><\/use>\n                <use x=\"64.62222222222222\" href=\"#oke-star-empty\"><\/use>\n            <\/svg>\n        <\/div>\n        <div class=\"oke-stars-foreground\" style=\"width: 100%;\">\n            <svg height=\"12\" viewBox=\"0 0 79.22222222222221 14\" aria-hidden=\"true\" role=\"none\">\n                <use x=\"0\" href=\"#oke-star-filled\"><\/use>\n                <use x=\"16.155555555555555\" href=\"#oke-star-filled\"><\/use>\n                <use x=\"32.31111111111111\" href=\"#oke-star-filled\"><\/use>\n                <use x=\"48.46666666666667\" href=\"#oke-star-filled\"><\/use>\n                <use x=\"64.62222222222222\" href=\"#oke-star-filled\"><\/use>\n            <\/svg>\n        <\/div>\n    <\/div>\n<\/div>"
+              },
+              "blocks": {}
+            },
+            "text_6FbT3y": {
+              "type": "text",
+              "name": "t:names.text",
+              "settings": {
+                "text": "<p><em>\"the funky chickens pattern makes me laugh every time lol, paired it with a bright pink acrylic lid. Holds a ton and does fine in the dishwasher!\"<\/em><\/p>",
+                "width": "fit-content",
+                "max_width": "normal",
+                "alignment": "left",
+                "type_preset": "rte",
+                "font": "var(--font-body--family)",
+                "font_size": "1rem",
+                "enable_mobile_size": false,
+                "mobile_font_size": "1rem",
+                "line_height": "normal",
+                "letter_spacing": "normal",
+                "case": "none",
+                "wrap": "pretty",
+                "color": "var(--color-foreground)",
+                "background": false,
+                "background_color": "#00000026",
+                "corner_radius": 0,
+                "padding-block-start": 0,
+                "padding-block-end": 0,
+                "padding-inline-start": 0,
+                "padding-inline-end": 0,
+                "custom_mobile_padding": false,
+                "mobile-padding-block-start": 0,
+                "mobile-padding-block-end": 0,
+                "mobile-padding-inline-start": 0,
+                "mobile-padding-inline-end": 0
+              },
+              "blocks": {}
+            },
+            "ai_gen_block_c3963ee_PJGbMi": {
+              "type": "ai_gen_block_c3963ee",
+              "settings": {
+                "customer_name": "Emily R.",
+                "verified_text": "Verified Buyer",
+                "spacing": 8,
+                "padding": 0,
+                "border_radius": 0,
+                "background_color": "rgba(0,0,0,0)",
+                "name_font_size": 15,
+                "name_color": "#2b2b2b",
+                "name_font_weight": "600",
+                "icon_size": 14,
+                "icon_color": "#fbe1ec",
+                "badge_spacing": 6,
+                "badge_font_size": 14,
+                "badge_text_color": "#2b2b2b",
+                "badge_font_weight": "400"
+              },
+              "blocks": {}
+            },
+            "divider_EJa8HP": {
+              "type": "_divider",
+              "name": "t:names.divider",
+              "settings": {
+                "thickness": 1,
+                "corner_radius": "square",
+                "width_percent": 100,
+                "padding-block-start": 6,
+                "padding-block-end": 6
+              },
+              "blocks": {}
+            },
+            "ai_gen_block_f16862d_VpdMpe": {
+              "type": "ai_gen_block_f16862d",
+              "settings": {
+                "product": "funky-chickens-glass-tumbler",
+                "thumbnail_width": 40
+              },
+              "blocks": {}
+            }
+          },
+          "block_order": [
+            "icon_UP4kNH",
+            "custom_liquid_7UcbTy",
+            "text_6FbT3y",
+            "ai_gen_block_c3963ee_PJGbMi",
+            "divider_EJa8HP",
+            "ai_gen_block_f16862d_VpdMpe"
+          ]
+        },
+        "carousel_card_R4ceke": {
+          "type": "_carousel-card",
+          "name": "Carousel Item",
+          "settings": {
+            "content_direction": "column",
+            "vertical_on_mobile": true,
+            "reverse_on_mobile": false,
+            "horizontal_alignment": "flex-start",
+            "vertical_alignment": "center",
+            "align_baseline": false,
+            "horizontal_alignment_flex_direction_column": "flex-start",
+            "custom_mobile_alignment": false,
+            "mobile_vertical_alignment": "flex-start",
+            "vertical_alignment_flex_direction_column": "flex-start",
+            "gap": 6,
+            "width": "fill",
+            "custom_width": 100,
+            "width_mobile": "fill",
+            "custom_width_mobile": 100,
+            "height": "fit",
+            "custom_height": 100,
+            "inherit_color_scheme": false,
+            "color_scheme": "",
+            "border": "none",
+            "border_width": 1,
+            "border_opacity": 100,
+            "border_radius": 12,
+            "enable_mobile_radius": false,
+            "mobile_border_radius": 0,
+            "padding-block-start": 24,
+            "padding-block-end": 24,
+            "padding-inline-start": 24,
+            "padding-inline-end": 24,
+            "custom_mobile_padding": false,
+            "mobile-padding-block-start": 0,
+            "mobile-padding-block-end": 0,
+            "mobile-padding-inline-start": 0,
+            "mobile-padding-inline-end": 0,
+            "css_class": ""
+          },
+          "blocks": {
+            "icon_w7E9Fh": {
+              "type": "icon",
+              "name": "t:names.icon",
+              "settings": {
+                "icon": "price_tag",
+                "image_upload": "shopify:\/\/shop_images\/Vector_48.png",
+                "width": 24,
+                "use_height": true,
+                "height": 24,
+                "custom_mobile_height": false,
+                "mobile-height": 24,
+                "link": "",
+                "open_in_new_tab": false
+              },
+              "blocks": {}
+            },
+            "custom_liquid_YjWQ96": {
+              "type": "custom-liquid",
+              "name": "Star Icons",
+              "settings": {
+                "custom_liquid": "<div class=\"oke-reviewContent-stars\">\n    <div class=\"oke-stars\">\n        <!---->\n        <div class=\"oke-stars-background\">\n            <svg height=\"12\" viewBox=\"0 0 79.22222222222221 14\" aria-hidden=\"true\" role=\"none\">\n                <use x=\"0\" href=\"#oke-star-empty\"><\/use>\n                <use x=\"16.155555555555555\" href=\"#oke-star-empty\"><\/use>\n                <use x=\"32.31111111111111\" href=\"#oke-star-empty\"><\/use>\n                <use x=\"48.46666666666667\" href=\"#oke-star-empty\"><\/use>\n                <use x=\"64.62222222222222\" href=\"#oke-star-empty\"><\/use>\n            <\/svg>\n        <\/div>\n        <div class=\"oke-stars-foreground\" style=\"width: 100%;\">\n            <svg height=\"12\" viewBox=\"0 0 79.22222222222221 14\" aria-hidden=\"true\" role=\"none\">\n                <use x=\"0\" href=\"#oke-star-filled\"><\/use>\n                <use x=\"16.155555555555555\" href=\"#oke-star-filled\"><\/use>\n                <use x=\"32.31111111111111\" href=\"#oke-star-filled\"><\/use>\n                <use x=\"48.46666666666667\" href=\"#oke-star-filled\"><\/use>\n                <use x=\"64.62222222222222\" href=\"#oke-star-filled\"><\/use>\n            <\/svg>\n        <\/div>\n    <\/div>\n<\/div>"
+              },
+              "blocks": {}
+            },
+            "text_NndxkJ": {
+              "type": "text",
+              "name": "t:names.text",
+              "settings": {
+                "text": "<p><em>\"Love the minimalist blue flowers 💙<br\/>Highly recommend getting the glitter boot for the bottom. Keeps it from clanking on my desk all day.\"<\/em><\/p>",
+                "width": "fit-content",
+                "max_width": "normal",
+                "alignment": "left",
+                "type_preset": "rte",
+                "font": "var(--font-body--family)",
+                "font_size": "1rem",
+                "enable_mobile_size": false,
+                "mobile_font_size": "1rem",
+                "line_height": "normal",
+                "letter_spacing": "normal",
+                "case": "none",
+                "wrap": "pretty",
+                "color": "var(--color-foreground)",
+                "background": false,
+                "background_color": "#00000026",
+                "corner_radius": 0,
+                "padding-block-start": 0,
+                "padding-block-end": 0,
+                "padding-inline-start": 0,
+                "padding-inline-end": 0,
+                "custom_mobile_padding": false,
+                "mobile-padding-block-start": 0,
+                "mobile-padding-block-end": 0,
+                "mobile-padding-inline-start": 0,
+                "mobile-padding-inline-end": 0
+              },
+              "blocks": {}
+            },
+            "ai_gen_block_c3963ee_eexifb": {
+              "type": "ai_gen_block_c3963ee",
+              "settings": {
+                "customer_name": "Lauren K.",
+                "verified_text": "Verified Buyer",
+                "spacing": 8,
+                "padding": 0,
+                "border_radius": 0,
+                "background_color": "rgba(0,0,0,0)",
+                "name_font_size": 15,
+                "name_color": "#2b2b2b",
+                "name_font_weight": "600",
+                "icon_size": 14,
+                "icon_color": "#fbe1ec",
+                "badge_spacing": 6,
+                "badge_font_size": 14,
+                "badge_text_color": "#2b2b2b",
+                "badge_font_weight": "400"
+              },
+              "blocks": {}
+            },
+            "divider_QxTeXi": {
+              "type": "_divider",
+              "name": "t:names.divider",
+              "settings": {
+                "thickness": 1,
+                "corner_radius": "square",
+                "width_percent": 100,
+                "padding-block-start": 6,
+                "padding-block-end": 6
+              },
+              "blocks": {}
+            },
+            "ai_gen_block_f16862d_MKfP96": {
+              "type": "ai_gen_block_f16862d",
+              "settings": {
+                "product": "minimalist-blue-flowers-glass-tumbler",
+                "thumbnail_width": 40
+              },
+              "blocks": {}
+            }
+          },
+          "block_order": [
+            "icon_w7E9Fh",
+            "custom_liquid_YjWQ96",
+            "text_NndxkJ",
+            "ai_gen_block_c3963ee_eexifb",
+            "divider_QxTeXi",
+            "ai_gen_block_f16862d_MKfP96"
+          ]
+        },
+        "static-header": {
+          "type": "_product-list-content",
+          "name": "t:names.header",
+          "static": true,
+          "settings": {
+            "content_direction": "row",
+            "vertical_on_mobile": true,
+            "horizontal_alignment": "center",
+            "vertical_alignment": "center",
+            "align_baseline": true,
+            "horizontal_alignment_flex_direction_column": "flex-start",
+            "custom_mobile_alignment": false,
+            "mobile_vertical_alignment": "flex-start",
+            "vertical_alignment_flex_direction_column": "flex-start",
+            "gap": 12,
+            "width": "fill",
+            "custom_width": 100,
+            "width_mobile": "fill",
+            "custom_width_mobile": 100,
+            "height": "fit",
+            "custom_height": 100,
+            "inherit_color_scheme": true,
+            "color_scheme": "",
+            "background_media": "none",
+            "video_position": "cover",
+            "background_image_position": "cover",
+            "border": "none",
+            "border_width": 1,
+            "border_opacity": 100,
+            "border_radius": 0,
+            "padding-block-start": 0,
+            "padding-block-end": 24,
+            "padding-inline-start": 0,
+            "padding-inline-end": 0,
+            "custom_mobile_padding": true,
+            "mobile-padding-block-start": 0,
+            "mobile-padding-block-end": 24,
+            "mobile-padding-inline-start": 24,
+            "mobile-padding-inline-end": 24
+          },
+          "blocks": {
+            "moving_line_text_YqWhe3": {
+              "type": "moving-line-text",
+              "name": "Moving line text",
+              "settings": {
+                "text": "<h2>Happy <em>Sippers<\/em><\/h2>",
+                "line_vector": "shopify:\/\/shop_images\/pink-curve_862cbfce-ff0a-4697-9aa9-1f089baec353.png",
+                "height": 16,
+                "mobile_height": 10,
+                "width": "fit-content",
+                "max_width": "normal",
+                "alignment": "left",
+                "type_preset": "h2",
+                "font": "var(--font-body--family)",
+                "font_size": "1rem",
+                "enable_mobile_size": true,
+                "mobile_font_size": "2rem",
+                "line_height": "normal",
+                "letter_spacing": "normal",
+                "case": "none",
+                "wrap": "pretty",
+                "color": "var(--color-foreground)",
+                "background": false,
+                "background_color": "#00000026",
+                "corner_radius": 0,
+                "padding-block-start": 0,
+                "padding-block-end": 0,
+                "padding-inline-start": 0,
+                "padding-inline-end": 0,
+                "custom_mobile_padding": false,
+                "mobile-padding-block-start": 0,
+                "mobile-padding-block-end": 0,
+                "mobile-padding-inline-start": 0,
+                "mobile-padding-inline-end": 0
+              },
+              "blocks": {}
+            }
+          },
+          "block_order": [
+            "moving_line_text_YqWhe3"
+          ]
+        }
+      },
+      "block_order": [
+        "carousel_card_YVhk7A",
+        "carousel_card_ArnqrJ",
+        "carousel_card_gjhh8j",
+        "carousel_card_R4ceke"
+      ],
+      "disabled": true,
+      "custom_css": [
+        ".divider__line {--color-border: rgb(43 43 43 \/ 0.1);}",
+        "@media (min-width: 990px) {.resource-list__carousel {--peek-next-slide-size: 0rem; }}"
+      ],
+      "name": "Testimonials",
+      "settings": {
+        "alignment": "left",
+        "layout_type": "carousel",
+        "carousel_on_mobile": false,
+        "enable_dots": false,
+        "hide_arrows": false,
+        "autoplay": false,
+        "autoplay_speed": 4,
+        "columns": 3,
+        "peek_desktop": false,
+        "mobile_columns": "2",
+        "mobile_card_size": "80%",
+        "columns_gap": 16,
+        "rows_gap": 8,
+        "icons_style": "chevron",
+        "icons_shape": "circle",
+        "section_width": "page-narrow",
+        "full_width_on_mobile": true,
+        "gap": 12,
+        "color_scheme": "scheme-738179cd-4e15-457b-be40-989a024001d6",
+        "background_media": "none",
+        "video_position": "cover",
+        "background_image_position": "cover",
+        "toggle_overlay": false,
+        "overlay_color": "#00000026",
+        "overlay_style": "solid",
+        "gradient_direction": "to top",
+        "padding-block-start": 80,
+        "padding-block-end": 80,
+        "custom_mobile_padding": false,
+        "mobile-padding-block-start": 0,
+        "mobile-padding-block-end": 0,
+        "mobile-padding-inline-start": 0,
+        "mobile-padding-inline-end": 0,
+        "css_class": "",
+        "add_section_id": false,
+        "section_id": ""
       }
     },
     "section_9Ndmx6": {
@@ -4059,8 +4792,8 @@
               "type": "moving-line-text",
               "name": "Moving line text",
               "settings": {
-                "text": "<h2>Happy <em>Sippers</em></h2>",
-                "line_vector": "shopify://shop_images/spike_c2e870c9-d58b-4321-af42-afd225c786d9.png",
+                "text": "<h2>Happy <em>Sippers<\/em><\/h2>",
+                "line_vector": "shopify:\/\/shop_images\/spike_c2e870c9-d58b-4321-af42-afd225c786d9.png",
                 "height": 16,
                 "mobile_height": 10,
                 "width": "fit-content",
@@ -4097,7 +4830,7 @@
           ]
         },
         "okendo_reviews_carousel_GNigiV": {
-          "type": "shopify://apps/okendo/blocks/reviews-carousel/bb689e69-ea70-4661-8fb7-ad24a2e23c29",
+          "type": "shopify:\/\/apps\/okendo\/blocks\/reviews-carousel\/bb689e69-ea70-4661-8fb7-ad24a2e23c29",
           "settings": {
             "show_heading": false,
             "heading": "",
@@ -4161,7 +4894,7 @@
           "type": "text",
           "name": "t:names.heading",
           "settings": {
-            "text": "<h3>follow us @sipsiphooraydesign</h3>",
+            "text": "<h3>follow us @sipsiphooraydesign<\/h3>",
             "width": "fit-content",
             "max_width": "normal",
             "alignment": "left",
@@ -4191,7 +4924,7 @@
           "blocks": {}
         },
         "instafeed_app_block_aB6eXR": {
-          "type": "shopify://apps/instafeed/blocks/app-block/c447db20-095d-4a10-9725-b5977662c9d5",
+          "type": "shopify:\/\/apps\/instafeed\/blocks\/app-block\/c447db20-095d-4a10-9725-b5977662c9d5",
           "settings": {
             "title": "",
             "title_color": "",
@@ -4257,6 +4990,7 @@
     "section_yyFjTc",
     "grid_section_dTiind",
     "carousel_feJ8mw",
+    "grid_section_7tzTqx",
     "section_9Ndmx6",
     "1772766653cc247ff6"
   ]
