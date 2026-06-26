@@ -1894,10 +1894,11 @@
                   },
                   "blocks": {
                     "curated_ns_okendo": {
-                      "type": "shopify://apps/okendo/blocks/star-rating/bb689e69-ea70-4661-8fb7-ad24a2e23c29",
+                      "type": "custom-liquid",
                       "settings": {
-                        "product": "{{closest.product}}"
-                      }
+                        "custom_liquid": "{%- assign _c = closest.product.metafields.reviews.rating_count -%}{%- assign _r = closest.product.metafields.reviews.rating.value.rating | default: 0 -%}{%- if _c and _c != blank and _c != 0 -%}{%- assign _pct = _r | times: 20.0 -%}<div class=\"oke-card-rating\" style=\"display:inline-flex;flex-direction:column;align-items:center;gap:2px;line-height:1;max-width:100%;\"><span style=\"position:relative;display:inline-block;font-size:14px;line-height:1;letter-spacing:1px;\"><span style=\"color:currentColor;opacity:.2;\">★★★★★</span><span style=\"position:absolute;inset:0;width:{{ _pct }}%;overflow:hidden;color:#f5a623;white-space:nowrap;\">★★★★★</span></span><span style=\"font-size:11px;font-weight:400;letter-spacing:.2px;opacity:.55;white-space:nowrap;\">{{ _c }} reviews</span></div>{%- endif -%}"
+                      },
+                      "name": "Card Rating"
                     },
                     "curated_ns_ptitle": {
                       "type": "product-title",
@@ -2423,10 +2424,11 @@
                   },
                   "blocks": {
                     "okendo_star_rating_gGpFFH": {
-                      "type": "shopify://apps/okendo/blocks/star-rating/bb689e69-ea70-4661-8fb7-ad24a2e23c29",
+                      "type": "custom-liquid",
                       "settings": {
-                        "product": "{{closest.product}}"
-                      }
+                        "custom_liquid": "{%- assign _c = closest.product.metafields.reviews.rating_count -%}{%- assign _r = closest.product.metafields.reviews.rating.value.rating | default: 0 -%}{%- if _c and _c != blank and _c != 0 -%}{%- assign _pct = _r | times: 20.0 -%}<div class=\"oke-card-rating\" style=\"display:inline-flex;flex-direction:column;align-items:center;gap:2px;line-height:1;max-width:100%;\"><span style=\"position:relative;display:inline-block;font-size:14px;line-height:1;letter-spacing:1px;\"><span style=\"color:currentColor;opacity:.2;\">★★★★★</span><span style=\"position:absolute;inset:0;width:{{ _pct }}%;overflow:hidden;color:#f5a623;white-space:nowrap;\">★★★★★</span></span><span style=\"font-size:11px;font-weight:400;letter-spacing:.2px;opacity:.55;white-space:nowrap;\">{{ _c }} reviews</span></div>{%- endif -%}"
+                      },
+                      "name": "Card Rating"
                     },
                     "product_title_iqgeUQ": {
                       "type": "product-title",
