@@ -100,6 +100,7 @@
     "quick_add": true,
     "mobile_quick_add": true,
     "product_card_carousel": false,
+    "empty_state_collection": "best-sellers-1",
     "product_corner_radius": 0,
     "card_corner_radius": 4,
     "show_variant_image": true,
@@ -120,18 +121,6 @@
       },
       "1232542678405107163": {
         "type": "shopify://apps/instafeed/blocks/head-block/c447db20-095d-4a10-9725-b5977662c9d5",
-        "disabled": false,
-        "settings": {}
-      },
-      "733389323033596483": {
-        "type": "shopify://apps/okendo/blocks/theme-settings/bb689e69-ea70-4661-8fb7-ad24a2e23c29",
-        "disabled": false,
-        "settings": {
-          "show_preview_data": false
-        }
-      },
-      "855628211100114053": {
-        "type": "shopify://apps/klaviyo-email-marketing-sms/blocks/klaviyo-onsite-embed/2632fe16-c075-4321-a88b-50b567f42507",
         "disabled": false,
         "settings": {}
       },
@@ -166,6 +155,31 @@
         "settings": {
           "min_height": 360
         }
+      },
+      "2200952712151285029": {
+        "type": "shopify://apps/microsoft-clarity/blocks/brandAgents_js/31c3d126-8116-4b4a-8ba1-baeda7c4aeea",
+        "disabled": false,
+        "settings": {}
+      },
+      "2567389343055140935": {
+        "type": "shopify://apps/microsoft-clarity/blocks/clarity_js/31c3d126-8116-4b4a-8ba1-baeda7c4aeea",
+        "disabled": false,
+        "settings": {}
+      },
+      "855628211100114053": {
+        "type": "shopify://apps/klaviyo-email-marketing-sms/blocks/klaviyo-onsite-embed/2632fe16-c075-4321-a88b-50b567f42507",
+        "disabled": true,
+        "settings": {}
+      },
+      "13768625480086291342": {
+        "type": "shopify://apps/forms/blocks/forms/8744a304-fcb1-4347-b211-bb6b4759a76a",
+        "disabled": false,
+        "settings": {}
+      },
+      "14060646107696862457": {
+        "type": "shopify://apps/judge-me-reviews/blocks/judgeme_core/61ccd3b1-a9f2-4160-9fe9-4fec8413e5d8",
+        "disabled": false,
+        "settings": {}
       }
     },
     "color_schemes": {

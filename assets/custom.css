@@ -798,6 +798,15 @@ body:has(.overlay.active) .sticky-add-to-cart__bar {
     margin-top: var(--gap-xs);
 }
 
+.cart-review-row .jdgm-stars {
+    font-size: 0.6rem;
+}
+
+.cart-review-row .jdgm-star {
+    padding: 0 !important;
+    margin: 0 !important;
+}
+
 .cart-review-row .cart-review__icon {
     display: block;
     flex-shrink: 0;
@@ -1239,3 +1248,28 @@ html[scroll-lock] {
     overflow: hidden !important;
     overscroll-behavior: none;
 }
+/* ── Variant size/color selector: make rules GLOBAL so the mobile quick-add
+   modal keeps the compact circle icons + hidden text labels. These were only
+   in an inline <style> sibling of <variant-picker> in variant-main-picker.liquid,
+   which quick-add.js drops on mobile (it copies only the <variant-picker>). Added 2026-07-08. */
+.variant-option--buttons .variant-option__button-label:has(.variant-option__icon-circle) {
+  border-radius: 50%;
+  width: 62px; height: 62px; min-width: 62px;
+  padding: 0; overflow: hidden;
+  display: inline-flex; align-items: center; justify-content: center;
+  border: 1px solid rgba(18,18,18,0.18);
+  transition: box-shadow .12s ease, border-color .12s ease;
+}
+.variant-option__icon-circle { width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; }
+.variant-option__color-circle { width: 100%; height: 100%; border-radius: 50%; }
+.variant-option__icon-circle img { width: 100%; height: 100%; object-fit: contain; padding: 6px; box-sizing: border-box; }
+.variant-option--buttons .variant-option__button-label:has(.variant-option__icon-circle):hover {
+  border-color: rgba(18,18,18,0.45);
+}
+.variant-option--buttons .variant-option__button-label:has(.variant-option__icon-circle):has(input:checked) {
+  background: transparent !important;
+  color: inherit !important;
+  border-color: rgb(18,18,18) !important;
+  box-shadow: 0 0 0 2px rgb(18,18,18);
+}
+.variant-option__sr { position: absolute !important; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0; }

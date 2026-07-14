@@ -455,28 +455,10 @@
         </div>
         <div class="cart-review-row">
           <div>
-            <div class="oke-reviewContent-stars">
-              <div class="oke-stars">
-                  <!---->
-                  <div class="oke-stars-background">
-                      <svg height="12" viewBox="0 0 79.22222222222221 14" aria-hidden="true" role="none">
-                          <use x="0" href="#oke-star-empty"></use>
-                          <use x="16.155555555555555" href="#oke-star-empty"></use>
-                          <use x="32.31111111111111" href="#oke-star-empty"></use>
-                          <use x="48.46666666666667" href="#oke-star-empty"></use>
-                          <use x="64.62222222222222" href="#oke-star-empty"></use>
-                      </svg>
-                  </div>
-                  <div class="oke-stars-foreground" style="width: 100%;">
-                      <svg height="12" viewBox="0 0 79.22222222222221 14" aria-hidden="true" role="none">
-                          <use x="0" href="#oke-star-filled"></use>
-                          <use x="16.155555555555555" href="#oke-star-filled"></use>
-                          <use x="32.31111111111111" href="#oke-star-filled"></use>
-                          <use x="48.46666666666667" href="#oke-star-filled"></use>
-                          <use x="64.62222222222222" href="#oke-star-filled"></use>
-                      </svg>
-                  </div>
-              </div>
+            <div class="jdgm-stars" role="img" aria-label="4.8 out of 5 stars">
+              {% for i in (1..5) %}
+                <span class="jdgm-star jdgm--on" aria-hidden="true"></span>
+              {% endfor %}
             </div>
           </div>
           <div>

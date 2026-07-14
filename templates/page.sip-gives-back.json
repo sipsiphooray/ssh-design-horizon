@@ -991,7 +991,7 @@
         "image_C8m3Gy": {
           "type": "image",
           "settings": {
-            "image": "shopify://shop_images/EFA_logo_purple2.png",
+            "image": "shopify://shop_images/GHF_main_blue-svg.webp",
             "link": "",
             "image_ratio": "adapt",
             "width": "custom",
@@ -1099,7 +1099,7 @@
               "type": "text",
               "name": "t:names.heading",
               "settings": {
-                "text": "<h2>March 2026</h2>",
+                "text": "<h2>JULY 2026</h2>",
                 "width": "fit-content",
                 "max_width": "normal",
                 "alignment": "left",
@@ -1131,7 +1131,7 @@
             "text_RzAQbb": {
               "type": "text",
               "settings": {
-                "text": "<p><strong>Pour It Forward: Endometriosis Foundation of America</strong></p><p>March is Endometriosis Awareness Month, and we’re donating 10% of our proceeds to the Endometriosis Foundation of America.</p><p>Endometriosis affects 1 in 10 women, yet many are still told their pain is “just a bad period.” It isn’t.<br/>This foundation supports research, education, and advocacy so more women get real answers and better care.</p><p>By shopping with us, you’re helping push for better answers, earlier diagnoses, and better care for women with endometriosis.</p><p>Thank you for helping us pour into something bigger. 💛</p>",
+                "text": "<p><strong>Pour It Forward: Glass Half Full <br/><br/></strong>Did you know  the planet is facing a global sand shortage? Sand is CRITICAL for rebuilding the barrier islands and sandbars that protect our coast during hurricanes and tropical storms, and encourages wildlife survival.</p><p>Enter: Glass Half Full. Established in 2020, GHF has recycled over 14 million pounds of glass across 3 states & they’ve created 4 islands used for coastal restoration research! <br/><br/>GHF collects and sorts glassware at their facilities, pulverizes it, and turns that glass into sand products.<br/><br/>10% of July’s profit’s will be donated to their organization, to support their incredible work across Mississippi, Alabama, and of course our home state Louisiana!</p><p>As always, <em>thank you</em> for helping us pour into <em>something bigger.</em> 💛 <br/><a href=\"https://glasshalffull.co/\" title=\"https://glasshalffull.co/\">Read more or donate directly here. </a></p>",
                 "width": "100%",
                 "max_width": "none",
                 "alignment": "left",
@@ -1225,13 +1225,13 @@
             "content_direction": "row",
             "vertical_on_mobile": true,
             "horizontal_alignment": "space-between",
-            "vertical_alignment": "flex-start",
+            "vertical_alignment": "center",
             "align_baseline": true,
             "horizontal_alignment_flex_direction_column": "flex-start",
-            "custom_mobile_alignment": false,
-            "mobile_vertical_alignment": "flex-start",
+            "custom_mobile_alignment": true,
+            "mobile_vertical_alignment": "center",
             "vertical_alignment_flex_direction_column": "center",
-            "gap": 42,
+            "gap": 0,
             "width": "fill",
             "custom_width": 100,
             "width_mobile": "fill",
@@ -1407,10 +1407,11 @@
                   },
                   "blocks": {
                     "okendo_star_rating_3Rmppx": {
-                      "type": "shopify://apps/okendo/blocks/star-rating/bb689e69-ea70-4661-8fb7-ad24a2e23c29",
+                      "type": "custom-liquid",
                       "settings": {
-                        "product": "{{closest.product}}"
-                      }
+                        "custom_liquid": "{%- comment -%} reviews now via Judge.me {%- endcomment -%}"
+                      },
+                      "blocks": {}
                     },
                     "product_title_Tz6nfw": {
                       "type": "product-title",
@@ -1517,9 +1518,10 @@
           ]
         }
       },
+      "disabled": true,
       "name": "Cause of the Month w/ products",
       "settings": {
-        "collection": "autism-awareness",
+        "collection": "mug-rugs",
         "layout_type": "carousel",
         "carousel_on_mobile": false,
         "max_products": 16,
@@ -1722,8 +1724,8 @@
                             "icon_width": 24,
                             "use_height": true,
                             "icon_height": 80,
-                            "custom_mobile_height": false,
-                            "mobile-height": 24,
+                            "custom_mobile_height": true,
+                            "mobile-height": 42,
                             "text": "<h3>Efficient Giving</h3><p>We prioritize organizations that allocate the majority of their funds-ideally over 80% directly to their cause rather than administrative costs.</p>",
                             "text_width": "fit-content",
                             "max_width": "normal",
@@ -1831,8 +1833,8 @@
                             "icon_width": 24,
                             "use_height": true,
                             "icon_height": 80,
-                            "custom_mobile_height": false,
-                            "mobile-height": 24,
+                            "custom_mobile_height": true,
+                            "mobile-height": 42,
                             "text": "<h3>Rigorous Vetting</h3><p>Our selection process includes researching financial transparency through trusted sources like Charity Navigator - and Charity Navigator and CharityWatch, reviewing annual reports, and assessing real-world impact.</p>",
                             "text_width": "fit-content",
                             "max_width": "normal",
@@ -1940,8 +1942,8 @@
                             "icon_width": 24,
                             "use_height": true,
                             "icon_height": 80,
-                            "custom_mobile_height": false,
-                            "mobile-height": 24,
+                            "custom_mobile_height": true,
+                            "mobile-height": 42,
                             "text": "<h3>Maximized Impact</h3><p>By doing this, we make sure that every dollar donated through our program goes where it's needed most-helping people, not padding overhead.</p>",
                             "text_width": "fit-content",
                             "max_width": "normal",

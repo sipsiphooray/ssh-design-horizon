@@ -188,7 +188,7 @@
                   "type": "custom-liquid",
                   "name": "t:names.custom_liquid",
                   "settings": {
-                    "custom_liquid": "{%- assign _h = closest.product.handle -%}{%- assign _isbundle = false -%}{%- if _h contains 'bundle' -%}{%- assign _isbundle = true -%}{%- endif -%}{%- if _h contains 'glass-tumbler' and _isbundle == false -%}<div class=\"product-subline\" style=\"display: flex; align-items: center; gap: var(--gap-xs); font-size: var(--font-size--sm);\"><span>Glass Cups, Mugs &amp; Tumblers, Lid + Straw</span></div>{%- else -%}{%- assign subline = closest.product.metafields.custom.subline.value -%}{%- if subline != blank -%}<div class=\"product-subline\" style=\"display: flex; align-items: center; gap: var(--gap-xs); font-size: var(--font-size--sm);\">{%- for item in subline -%}{%- unless forloop.first -%}<span aria-hidden=\"true\">&bull;</span>{%- endunless -%}<span>{{ item }}</span>{%- endfor -%}</div>{%- endif -%}{%- endif -%}"
+                    "custom_liquid": "{%- if closest.product.title contains 'Lid and Straw' -%}<div class=\"product-subline\" style=\"display: flex; align-items: center; gap: var(--gap-xs); font-size: var(--font-size--sm);\"><span>Glass Cups, Mugs &amp; Tumblers, Lid + Straw</span></div>{%- else -%}{%- assign subline = closest.product.metafields.custom.subline.value -%}{%- if subline != blank -%}<div class=\"product-subline\" style=\"display: flex; align-items: center; gap: var(--gap-xs); font-size: var(--font-size--sm);\">{%- for item in subline -%}{%- unless forloop.first -%}<span aria-hidden=\"true\">&bull;</span>{%- endunless -%}<span>{{ item }}</span>{%- endfor -%}</div>{%- endif -%}{%- endif -%}"
                   },
                   "blocks": {}
                 },
@@ -750,98 +750,6 @@
                 "padding-inline-end": 0
               },
               "blocks": {
-                "acc_row_1": {
-                  "type": "_accordion-row",
-                  "settings": {
-                    "heading": "What's Included",
-                    "open_by_default": false,
-                    "icon": "box",
-                    "width": 20
-                  },
-                  "blocks": {
-                    "text-1": {
-                      "type": "text",
-                      "settings": {
-                        "text": "<ul><li><strong>16oz Glass:</strong> Bamboo lid with silicone seal + glass straw + straw cleaner</li><li><strong>17oz Glass Mug:</strong> Bamboo lid with silicone seal + plastic straw</li><li><strong>32oz Glass:</strong> Bamboo lid with silicone seal + plastic straw</li><li><strong>40oz Glass:</strong> Bamboo lid with silicone seal + glass straw + plastic straw + straw cleaner</li><li><strong>40oz Plastic:</strong> Plastic dishwasher-safe lid + plastic straw</li></ul>",
-                        "width": "100%",
-                        "max_width": "normal",
-                        "alignment": "left",
-                        "type_preset": "rte",
-                        "font": "var(--font-body--family)",
-                        "font_size": "1rem",
-                        "enable_mobile_size": false,
-                        "mobile_font_size": "1rem",
-                        "line_height": "normal",
-                        "letter_spacing": "normal",
-                        "case": "none",
-                        "wrap": "pretty",
-                        "color": "var(--color-foreground)",
-                        "background": false,
-                        "background_color": "#00000026",
-                        "corner_radius": 0,
-                        "padding-block-start": 0,
-                        "padding-block-end": 0,
-                        "padding-inline-start": 0,
-                        "padding-inline-end": 0,
-                        "custom_mobile_padding": false,
-                        "mobile-padding-block-start": 0,
-                        "mobile-padding-block-end": 0,
-                        "mobile-padding-inline-start": 0,
-                        "mobile-padding-inline-end": 0
-                      },
-                      "blocks": {}
-                    }
-                  },
-                  "block_order": [
-                    "text-1"
-                  ]
-                },
-                "acc_row_2": {
-                  "type": "_accordion-row",
-                  "settings": {
-                    "heading": "Care Instructions",
-                    "open_by_default": false,
-                    "icon": "question_mark",
-                    "width": 20
-                  },
-                  "blocks": {
-                    "text-1": {
-                      "type": "text",
-                      "settings": {
-                        "text": "<p><strong>Bamboo lid care (for bamboo lid styles)</strong></p><ul><li><strong>No soaking. Hand wash only.</strong> Dry completely before putting it back on the cup.</li><li><strong>Do not leave the lid on for more than 24 hours</strong> at a time. Closed containers with no airflow can cause growth.</li><li><strong>We are not responsible for lids that develop mold or fuzzies</strong> due to improper care. Want low maintenance? Choose a plastic dishwasher-safe lid style.</li></ul><p><strong>Dishwasher guidance</strong></p><ul><li>Glass cups: Top rack is usually fine, but soaps, heat, and water hardness vary. Hand wash is safest.</li><li><strong>Do not dishwash plastic cups or tumblers.<br/></strong></li></ul><p><strong>No vent hole note</strong></p><ul><li>Our lids <strong>do not have vent holes.</strong> This does not affect suction as long as the cup is not overfilled.</li></ul><p><strong>Straw note (40oz glass)</strong></p><ul><li>The <strong>glass straw may not reach the very bottom</strong>, but it still sips perfectly. Every 40oz glass tumbler also includes a <strong>plastic straw that reaches the bottom</strong>.<br/></li></ul><p><strong>Why liquid creeps up the straw (easy fix)</strong></p><ul><li>If liquid rises when inserting the straw after securing the lid, it is <strong>air displacement</strong>. Insert the straw <strong>before </strong>sealing the lid to avoid it.</li></ul><p><strong>Plastic tumbler scuffing PSA</strong></p><ul><li>Acrylic and plastic can pick up light surface marks from static and friction during shipping or normal use. If you are sensitive to that look, choose glass. We do not accept returns or exchanges for slight shipping scuffs.</li></ul><p><strong>Need help choosing?<br/></strong>Message us and we will help you pick the best size and lid style for how you sip.</p>",
-                        "width": "100%",
-                        "max_width": "normal",
-                        "alignment": "left",
-                        "type_preset": "rte",
-                        "font": "var(--font-body--family)",
-                        "font_size": "1rem",
-                        "enable_mobile_size": false,
-                        "mobile_font_size": "1rem",
-                        "line_height": "normal",
-                        "letter_spacing": "normal",
-                        "case": "none",
-                        "wrap": "pretty",
-                        "color": "var(--color-foreground)",
-                        "background": false,
-                        "background_color": "#00000026",
-                        "corner_radius": 0,
-                        "padding-block-start": 0,
-                        "padding-block-end": 0,
-                        "padding-inline-start": 0,
-                        "padding-inline-end": 0,
-                        "custom_mobile_padding": false,
-                        "mobile-padding-block-start": 0,
-                        "mobile-padding-block-end": 0,
-                        "mobile-padding-inline-start": 0,
-                        "mobile-padding-inline-end": 0
-                      },
-                      "blocks": {}
-                    }
-                  },
-                  "block_order": [
-                    "text-1"
-                  ]
-                },
                 "acc_row_3": {
                   "type": "_accordion-row",
                   "settings": {
@@ -888,59 +796,10 @@
                   "block_order": [
                     "text-1"
                   ]
-                },
-                "acc_row_4": {
-                  "type": "_accordion-row",
-                  "settings": {
-                    "heading": "What Is UV Ink?",
-                    "open_by_default": false,
-                    "icon": "eye",
-                    "width": 20
-                  },
-                  "blocks": {
-                    "text-1": {
-                      "type": "text",
-                      "settings": {
-                        "text": "<p>UVDTF (Ultraviolet Direct-to-Film) printing is an advanced printing technology that allows high-resolution, full-color designs to be transferred onto various surfaces with exceptional durability. Unlike traditional printing methods, UVDTF printing utilizes ultraviolet (UV) light to cure specially formulated inks, creating vibrant and long-lasting prints.</p><p>The texture you feel on the cup is the top layer of UV ink called varnish. The varnish gives the designs their glossy appearance.</p><p><strong>Our UV prints are not stickers. </strong>Stickers are smaller, individually cut designs printed on various materials (vinyl, paper, or polyester) with an adhesive backing for easy peel-and-stick application. Stickers are remove-able, and do not last.</p>",
-                        "width": "100%",
-                        "max_width": "normal",
-                        "alignment": "left",
-                        "type_preset": "rte",
-                        "font": "var(--font-body--family)",
-                        "font_size": "1rem",
-                        "enable_mobile_size": false,
-                        "mobile_font_size": "1rem",
-                        "line_height": "normal",
-                        "letter_spacing": "normal",
-                        "case": "none",
-                        "wrap": "pretty",
-                        "color": "var(--color-foreground)",
-                        "background": false,
-                        "background_color": "#00000026",
-                        "corner_radius": 0,
-                        "padding-block-start": 0,
-                        "padding-block-end": 0,
-                        "padding-inline-start": 0,
-                        "padding-inline-end": 0,
-                        "custom_mobile_padding": false,
-                        "mobile-padding-block-start": 0,
-                        "mobile-padding-block-end": 0,
-                        "mobile-padding-inline-start": 0,
-                        "mobile-padding-inline-end": 0
-                      },
-                      "blocks": {}
-                    }
-                  },
-                  "block_order": [
-                    "text-1"
-                  ]
                 }
               },
               "block_order": [
-                "acc_row_1",
-                "acc_row_2",
-                "acc_row_3",
-                "acc_row_4"
+                "acc_row_3"
               ]
             },
             "shopvid_mp_tiktok_block_QzJRyi": {

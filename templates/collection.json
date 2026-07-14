@@ -62,7 +62,7 @@
             "mobile-padding-block-end": 0,
             "mobile-padding-inline-start": 0,
             "mobile-padding-inline-end": 0,
-            "css_class": ""
+            "css_class": "coll-hero-scrim"
           },
           "blocks": {
             "custom_liquid_qVVdVJ": {
@@ -76,7 +76,7 @@
             "text_AMqRpF": {
               "type": "text",
               "settings": {
-                "text": "<p>{{ closest.collection.title }}</p>",
+                "text": "<h1>{{ closest.collection.title }}</h1>",
                 "width": "fit-content",
                 "max_width": "narrow",
                 "alignment": "left",
@@ -109,7 +109,7 @@
               "type": "text",
               "name": "t:names.text",
               "settings": {
-                "text": "{{ closest.collection.metafields.custom.short_intro | metafield_tag }}",
+                "text": "{{ closest.collection.description }}",
                 "width": "fit-content",
                 "max_width": "normal",
                 "alignment": "left",
@@ -152,7 +152,8 @@
       "custom_css": [
         ".hero:not(:has(.hero__media-grid)) {min-height: unset;}",
         "@media (min-width: 750px) {.h1 {--max-width--body-narrow: 11.75em; }}",
-        "@media (max-width: 749px) {.hero:not([style*=\"--hero-media-count-mobile: 1\"]) {--section-height-medium: 20rem; } .hero__media-wrapper--desktop.hero__media-wrapper--mobile img {object-position: left; }}"
+        "@media (max-width: 749px) {.hero:not([style*=\"--hero-media-count-mobile: 1\"]) {--section-height-medium: 20rem; } .hero__media-wrapper--desktop.hero__media-wrapper--mobile img {object-position: left; }}",
+        ".coll-hero-scrim{background:rgba(255,255,255,.88);padding:16px 20px;border-radius:14px;max-width:600px;box-shadow:0 2px 12px rgba(0,0,0,.08)}"
       ],
       "name": "Collection Hero",
       "settings": {
@@ -175,12 +176,12 @@
         "vertical_alignment_flex_direction_column": "flex-start",
         "gap": 16,
         "section_width": "page-width",
-        "section_height": "medium",
+        "section_height": "small",
         "mobile_adapt_height": true,
         "section_height_custom": 50,
         "color_scheme": "scheme-738179cd-4e15-457b-be40-989a024001d6",
         "toggle_overlay": false,
-        "overlay_color": "#00000026",
+        "overlay_color": "#0000004D",
         "overlay_style": "gradient",
         "gradient_direction": "to top",
         "blurred_reflection": false,
@@ -314,12 +315,6 @@
                     "padding-inline-end": 0
                   },
                   "blocks": {
-                    "okendo_star_rating_yztVRt": {
-                      "type": "shopify://apps/okendo/blocks/star-rating/bb689e69-ea70-4661-8fb7-ad24a2e23c29",
-                      "settings": {
-                        "product": "{{closest.product}}"
-                      }
-                    },
                     "product_title_LTLVgj": {
                       "type": "product-title",
                       "name": "t:names.product_title",
@@ -351,13 +346,21 @@
                       "type": "custom-liquid",
                       "name": "t:names.custom_liquid",
                       "settings": {
-                        "custom_liquid": "{%- assign subline = closest.product.metafields.custom.subline.value -%}\n{%- if subline != blank -%}\n  <div\n    class=\"product-subline\"\n    style=\"display: flex; align-items: center; gap: var(--gap-xs); font-size: var(--font-size--sm);\"\n  >\n    {%- for item in subline -%}\n      {%- unless forloop.first -%}\n        <span aria-hidden=\"true\">&bull;</span>\n      {%- endunless -%}\n      <span>{{ item }}</span>\n    {%- endfor -%}\n  </div>\n{%- endif -%}"
+                        "custom_liquid": "{%- if closest.product.title contains 'Lid and Straw' -%}<div class=\"product-subline\" style=\"display: flex; align-items: center; gap: var(--gap-xs); font-size: var(--font-size--sm);\"><span>Glass Cups, Mugs &amp; Tumblers, Lid + Straw</span></div>{%- else -%}{%- assign subline = closest.product.metafields.custom.subline.value -%}{%- if subline != blank -%}<div class=\"product-subline\" style=\"display: flex; align-items: center; gap: var(--gap-xs); font-size: var(--font-size--sm);\">{%- for item in subline -%}{%- unless forloop.first -%}<span aria-hidden=\"true\">&bull;</span>{%- endunless -%}<span>{{ item }}</span>{%- endfor -%}</div>{%- endif -%}{%- endif -%}"
+                      },
+                      "blocks": {}
+                    },
+                    "col_reviews": {
+                      "type": "custom-liquid",
+                      "name": "Reviews",
+                      "settings": {
+                        "custom_liquid": "{%- assign _c = closest.product.metafields.reviews.rating_count -%}{%- assign _r = closest.product.metafields.reviews.rating.value.rating | default: 0 -%}{%- if _c and _c != blank and _c != 0 -%}{%- assign _pct = _r | times: 20.0 -%}<div class=\"card-rating\" style=\"display:inline-flex;align-items:center;gap:5px;\"><span style=\"position:relative;display:inline-block;font-size:14px;line-height:1;letter-spacing:1px;\"><span style=\"color:currentColor;opacity:.2;\">★★★★★</span><span style=\"position:absolute;inset:0;width:{{ _pct }}%;overflow:hidden;color:#f5a623;white-space:nowrap;\">★★★★★</span></span><span style=\"font-size:12px;opacity:.7;\">({{ _c }})</span></div>{%- endif -%}"
                       },
                       "blocks": {}
                     }
                   },
                   "block_order": [
-                    "okendo_star_rating_yztVRt",
+                    "col_reviews",
                     "product_title_LTLVgj",
                     "custom_liquid_gNLDTx"
                   ]
@@ -542,7 +545,8 @@
         "css_class": "",
         "add_section_id": false,
         "section_id": ""
-      }
+      },
+      "disabled": true
     }
   },
   "order": [

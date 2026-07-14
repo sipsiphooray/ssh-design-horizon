@@ -180,9 +180,9 @@
                   },
                   "blocks": {
                     "okendo_star_rating_nbkAGm": {
-                      "type": "shopify://apps/okendo/blocks/star-rating/bb689e69-ea70-4661-8fb7-ad24a2e23c29",
+                      "type": "custom-liquid",
                       "settings": {
-                        "product": "{{closest.product}}"
+                        "custom_liquid": "<div class='jdgm-widget jdgm-preview-badge' data-id='{{ closest.product.id }}'>{{ closest.product.metafields.judgeme.badge }}</div>"
                       }
                     },
                     "product_title_pjYkrF": {

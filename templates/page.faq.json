@@ -311,7 +311,7 @@
                   "name": "Accordion row (dynamic)",
                   "settings": {
                     "heading": "What is your return policy?",
-                    "content": "<p>Non-personalized items can be returned within 7 days of delivery. Personalized items are final sale unless damaged or defective.</p>",
+                    "content": "<p>Non-personalized items can be returned within 14 days of delivery, and returns are free since we cover the return shipping. Personalized items are final sale unless damaged or defective.</p>",
                     "open_by_default": false,
                     "icon": "none",
                     "width": 20,
@@ -325,7 +325,7 @@
                   "name": "Accordion row (dynamic)",
                   "settings": {
                     "heading": "My order arrived damaged. What should I do?",
-                    "content": "<p>We’ll replace or refund any broken or defective items. Use our Return Portal or email <a href=\"mailto:support@sipsiphooraydesign.com\" title=\"mailto:support@sipsiphooraydesign.com\">support@sipsiphooraydesign.com</a> with photos.</p>",
+                    "content": "<p>We’ll replace or refund any broken or defective items. Use our <a href=\"https://sipsiphooraydesign-3d828343.shipstationreturns.com/login\" title=\"Return Portal\">Return Portal</a> or email <a href=\"mailto:support@sipsiphooraydesign.com\" title=\"mailto:support@sipsiphooraydesign.com\">support@sipsiphooraydesign.com</a> with photos.</p>",
                     "open_by_default": false,
                     "icon": "none",
                     "width": 20,
@@ -339,7 +339,7 @@
                   "name": "Accordion row (dynamic)",
                   "settings": {
                     "heading": "How do I start a return?",
-                    "content": "<p>Visit our <a href=\"/policies/refund-policy\" title=\"Refund Policy\">Return Portal</a> to submit a request. Once your return is received, we’ll process your refund quickly.</p>",
+                    "content": "<p>Visit our <a href=\"https://sipsiphooraydesign-3d828343.shipstationreturns.com/login\" title=\"Return Portal\">Return Portal</a> to submit a request. Once your return is received, we’ll process your refund quickly.</p>",
                     "open_by_default": false,
                     "icon": "none",
                     "width": 20,
@@ -370,7 +370,7 @@
                   "name": "Accordion row (dynamic)",
                   "settings": {
                     "heading": "How do I care for glass cups and tumblers?",
-                    "content": "<p>Hand wash with a soft sponge to keep the design vibrant. Non-personalized glass styles are dishwasher safe, but hand washing is still recommended for longevity.</p>",
+                    "content": "<p>Hand wash with a soft sponge to keep the design vibrant. Non-personalized glass styles are top-rack dishwasher safe, but hand washing is safest for longevity.</p>",
                     "open_by_default": false,
                     "icon": "none",
                     "width": 20,

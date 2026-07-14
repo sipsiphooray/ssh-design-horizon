@@ -4944,3 +4944,21 @@ product-recommendations:has([data-has-recommendations='false']) {
     translate: 0px var(--atc-destination, 0px);
   }
 }
+
+/* Best Sellers header: stack title + View all, centered */
+[id$="curated_variant_list_H3Qzaz"] .product-list-content > .group-block-content{flex-direction:column !important;--flex-direction:column !important;align-items:center !important;gap:10px;}
+
+/* Product header: clean spacing + fix star-rating/price overlap */
+.product-header > .group-block-content{gap:8px !important;}
+.product-header [id$="okendo_star_rating_47knzE"],
+.product-header [data-oke-star-rating],
+.product-header .oke-sr{position:static !important;top:auto !important;margin:0 !important;transform:none !important;float:none !important;}
+.product-header product-price, .product-header .price{position:relative !important;z-index:1;margin-top:0 !important;}
+/* Okendo star block: no forced min-height so it collapses cleanly when a product has no reviews; overlap is handled by the position:static rule above + custom.css :has(.oke-sr--hidden){display:none}. */
+/* Mobile product-page layout fixes (2026-06-29) */
+@media screen and (max-width:749px){
+  /* stars -> subline -> price each on its own row; Horizon flips the group to row via --flex-direction on mobile */
+  .product-header > .group-block-content{flex-direction:column !important;--flex-direction:column !important;align-items:flex-start !important;}
+  /* keep quantity selector inline (left) with Add to cart (right) instead of wrapping it below */
+  .product-form-buttons > *:not(.quantity-selector-wrapper, .quantity-rules, .quantity-label, .volume-pricing){min-width:0 !important;}
+}

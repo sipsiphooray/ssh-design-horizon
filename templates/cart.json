@@ -7,7 +7,7 @@
  * made to this file may be overwritten.
  * ------------------------------------------------------------
  */
- {
+{
   "sections": {
     "cart-section": {
       "type": "main-cart",
@@ -78,6 +78,8 @@
             "vertical_alignment": "flex-end",
             "align_baseline": true,
             "horizontal_alignment_flex_direction_column": "flex-start",
+            "custom_mobile_alignment": false,
+            "mobile_vertical_alignment": "flex-start",
             "vertical_alignment_flex_direction_column": "center",
             "gap": 12,
             "width": "fill",
@@ -98,7 +100,12 @@
             "padding-block-start": 0,
             "padding-block-end": 0,
             "padding-inline-start": 0,
-            "padding-inline-end": 0
+            "padding-inline-end": 0,
+            "custom_mobile_padding": false,
+            "mobile-padding-block-start": 0,
+            "mobile-padding-block-end": 0,
+            "mobile-padding-inline-start": 0,
+            "mobile-padding-inline-end": 0
           },
           "blocks": {
             "product_list_text_fifeh4": {
@@ -112,6 +119,8 @@
                 "type_preset": "h4",
                 "font": "var(--font-body--family)",
                 "font_size": "",
+                "enable_mobile_size": false,
+                "mobile_font_size": "1rem",
                 "line_height": "normal",
                 "letter_spacing": "normal",
                 "case": "none",
@@ -170,6 +179,8 @@
               "name": "t:names.product_card_media",
               "settings": {
                 "image_ratio": "adapt",
+                "inherit_color_scheme": true,
+                "color_scheme": "",
                 "border": "none",
                 "border_width": 1,
                 "border_opacity": 100,
@@ -191,6 +202,8 @@
                 "type_preset": "rte",
                 "font": "var(--font-body--family)",
                 "font_size": "",
+                "enable_mobile_size": false,
+                "mobile_font_size": "1rem",
                 "line_height": "normal",
                 "letter_spacing": "normal",
                 "case": "none",
@@ -213,6 +226,7 @@
                 "show_sale_price_first": true,
                 "show_installments": false,
                 "show_tax_info": false,
+                "show_badge": false,
                 "type_preset": "h6",
                 "width": "100%",
                 "alignment": "left",
@@ -222,6 +236,24 @@
                 "letter_spacing": "normal",
                 "case": "none",
                 "color": "var(--color-foreground)",
+                "padding-block-start": 0,
+                "padding-block-end": 0,
+                "padding-inline-start": 0,
+                "padding-inline-end": 0
+              },
+              "blocks": {}
+            },
+            "product-card-gallery": {
+              "type": "_product-card-gallery",
+              "static": true,
+              "settings": {
+                "image_ratio": "portrait",
+                "inherit_color_scheme": true,
+                "color_scheme": "",
+                "border": "none",
+                "border_width": 1,
+                "border_opacity": 100,
+                "border_radius": 0,
                 "padding-block-start": 0,
                 "padding-block-end": 0,
                 "padding-inline-start": 0,
@@ -239,7 +271,7 @@
       },
       "name": "t:names.featured_collection",
       "settings": {
-        "collection": "all",
+        "collection": "mug-rugs-accessories",
         "layout_type": "grid",
         "carousel_on_mobile": false,
         "max_products": 4,
@@ -255,7 +287,10 @@
         "gap": 28,
         "color_scheme": "scheme-1",
         "padding-block-start": 48,
-        "padding-block-end": 48
+        "padding-block-end": 48,
+        "custom_mobile_padding": false,
+        "mobile-padding-block-start": 0,
+        "mobile-padding-block-end": 0
       }
     }
   },

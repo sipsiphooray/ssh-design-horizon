@@ -33,7 +33,8 @@
     {% endif %}
   >
     <form class="variant-picker__form">
-      {%- for product_option in product_resource.options_with_values -%}
+      {%- assign product_option_swatches = shop.metaobjects.product_option_swatches.values -%}
+  {%- for product_option in product_resource.options_with_values -%}
         {%- liquid
           assign swatch_count = product_option.values | map: 'swatch' | compact | size
           assign variant_style = block_settings.variant_style
@@ -76,9 +77,7 @@
           >
             <legend>
               {{ product_option.name | escape -}}
-              {%- if variant_style == 'swatch' -%}
-                <span class="variant-option__swatch-value">{{ product_option.selected_value }}</span>
-              {%- endif %}
+              <span class="variant-option__swatch-value">{{ product_option.selected_value }}</span>
             </legend>
             {%- for product_option_value in product_option.values -%}
               {% if product_option_value.size > longest_value and option_id_attribute %}
@@ -129,18 +128,44 @@
                     mode: 'unscaled'
                   %}
                 {% else %}
-                  {% if product_option_value.available == true %}
+                  {%- assign ov_swatch = product_option_swatches | where: 'assign_to', product_option_value -%}
+                  {%- assign ov_icon = blank -%}
+                  {%- assign ov_color = blank -%}
+                  {%- if ov_swatch.size > 0 and ov_swatch[0].icon_or_image != blank -%}
+                    {%- assign ov_icon = ov_swatch[0].icon_or_image -%}
+                  {%- else -%}
+                    {%- assign vkey = product_option_value.name | handleize -%}
+                    {%- assign cpairs = "black:#1c1c1c|black-glitter:#1c1c1c|white:#ffffff|ivory:#f4efe1|cream:#f3e9d2|oat:#dccfb8|clear:#e6edf2|hot-pink:#ef5aa0|hot-pink-glitter:#ef5aa0|pink:#f4a6c0|baby-pink:#f3c4d3|light-pink:#f8d3df|light-pink-glitter:#f8d3df|pink-peach:#f4b3a2|coral:#f2876f|baby-blue:#b3d4ea|blue:#5688cf|light-blue:#bfdcf1|bay:#6f9fb0|navy:#23335f|seafoam:#a6e0cd|mint-green:#a9dfbf|mint:#bfe8d8|neon-green:#57d857|forest-green:#2f6b40|forest:#2f6b40|lime:#9ccc3a|pear:#c3d96b|yellow:#f2ce55|orange:#ef9a55|orange-glitter:#ef9a55|lemon-wedge:#f5e07a|lemon-slice:#f5e07a|soft-lilac:#cbb8e0|lavender:#ccbce9|lavender-glitter:#ccbce9|violet:#8d6fc3|purple:#7a52b3|light-purple:#ccbce9|light-purple-glitter:#ccbce9|spooky-grape:#7a52b3|purple-grape:#7a52b3|coffee-brown:#8a5a3c|brown:#7a5230|chocolate-brown:#593923|red:#d64545|red-iridescent:#d64545|strawberry:#e6485a|watermelon:#f2607a|gold:#d4af37|gold-glitter:#d4af37|silver:#c7ccce|silver-glitter:#c7ccce|glow-in-the-dark:#d9f7c4" | split: '|' -%}
+                    {%- for cp in cpairs -%}
+                      {%- assign kv = cp | split: ':' -%}
+                      {%- if kv[0] == vkey -%}{%- assign ov_color = kv[1] -%}{%- break -%}{%- endif -%}
+                    {%- endfor -%}
+                    {%- if ov_color == blank and product_option_value.variant.featured_media != blank -%}
+                      {%- assign ov_icon = product_option_value.variant.featured_media -%}
+                    {%- endif -%}
+                  {%- endif -%}
+                  {%- if ov_icon != blank -%}
+                    <span class="variant-option__icon-circle" data-key="variant-option-pill">
+                      {{ ov_icon | image_url: width: 120 | image_tag: alt: product_option_value.name, widths: '60, 120', loading: 'lazy' }}
+                    </span>
+                    <span class="variant-option__button-label__text variant-option__sr" data-key="variant-option-text">{{- product_option_value | escape -}}</span>
+                  {%- elsif ov_color != blank -%}
+                    <span class="variant-option__icon-circle variant-option__color-circle" style="background: {{ ov_color }};" data-key="variant-option-pill"></span>
+                    <span class="variant-option__button-label__text variant-option__sr" data-key="variant-option-text">{{- product_option_value | escape -}}</span>
+                  {%- else -%}
+                    {% if product_option_value.available == true %}
+                      <span
+                        class="variant-option__button-label__pill"
+                        data-key="variant-option-pill"
+                      ></span>
+                    {% endif %}
                     <span
-                      class="variant-option__button-label__pill"
-                      data-key="variant-option-pill"
-                    ></span>
-                  {% endif %}
-                  <span
-                    class="variant-option__button-label__text"
-                    data-key="variant-option-text"
-                  >
-                    {{- product_option_value | escape -}}
-                  </span>
+                      class="variant-option__button-label__text"
+                      data-key="variant-option-text"
+                    >
+                      {{- product_option_value | escape -}}
+                    </span>
+                  {%- endif -%}
                 {% endif %}
                 {% render 'strikethrough-variant', product_option: product_option_value %}
               </label>
@@ -309,3 +334,29 @@
     justify-content: right;
   }
 {% endstylesheet %}
+
+{% style %}
+  .variant-option--buttons .variant-option__button-label:has(.variant-option__icon-circle) {
+    border-radius: 50%;
+    width: 62px; height: 62px; min-width: 62px;
+    padding: 0; overflow: hidden;
+    display: inline-flex; align-items: center; justify-content: center;
+  }
+  .variant-option__icon-circle { width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; }
+  .variant-option__color-circle { width: 100%; height: 100%; border-radius: 50%; }
+  .variant-option__icon-circle img { width: 100%; height: 100%; object-fit: contain; padding: 6px; box-sizing: border-box; }
+  .variant-option--buttons .variant-option__button-label:has(.variant-option__icon-circle) {
+    border: 1px solid rgba(18,18,18,0.18);
+    transition: box-shadow .12s ease, border-color .12s ease;
+  }
+  .variant-option--buttons .variant-option__button-label:has(.variant-option__icon-circle):hover {
+    border-color: rgba(18,18,18,0.45);
+  }
+  .variant-option--buttons .variant-option__button-label:has(.variant-option__icon-circle):has(input:checked) {
+    background: transparent !important;
+    color: inherit !important;
+    border-color: rgb(18,18,18) !important;
+    box-shadow: 0 0 0 2px rgb(18,18,18);
+  }
+  .variant-option__sr { position: absolute !important; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0; }
+{% endstyle %}

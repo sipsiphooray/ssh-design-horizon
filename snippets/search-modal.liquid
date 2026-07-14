@@ -103,6 +103,17 @@
         </div>
 
         <div class="predictive-search-form__content-wrapper">
+          {%- assign trending = shop.metafields.custom.trending_searches.value -%}
+          {%- if trending != blank and trending.size > 0 -%}
+            <div class="predictive-search-trending">
+              <p class="predictive-search-trending__title">Trending searches</p>
+              <div class="predictive-search-trending__chips">
+                {%- for term in trending -%}
+                  <a class="predictive-search-trending__chip" href="{{ routes.search_url }}?q={{ term | url_encode }}">{{ term }}</a>
+                {%- endfor -%}
+              </div>
+            </div>
+          {%- endif -%}
           <div
             class="predictive-search-form__content"
             tabindex="-1"
@@ -131,6 +142,20 @@
 </dialog-component>
 
 {% stylesheet %}
+  /* Trending searches chips (replaces Recently viewed) */
+  .predictive-search-trending { padding: var(--gap-sm) var(--gap-md) 0; }
+  .predictive-search-trending__title { font-size: var(--font-size--sm); font-weight: 600; margin: 0 0 var(--gap-xs); }
+  .predictive-search-trending__chips { display: flex; flex-wrap: wrap; gap: var(--gap-xs); }
+  .predictive-search-trending__chip {
+    display: inline-block; padding: 6px 14px; border-radius: 999px;
+    border: 1px solid rgb(var(--color-foreground-rgb) / 0.15);
+    font-size: var(--font-size--sm); text-decoration: none;
+    color: rgb(var(--color-foreground-rgb)); transition: background 0.15s ease;
+  }
+  .predictive-search-trending__chip:hover { background: rgb(var(--color-foreground-rgb) / 0.06); }
+  .recently-viewed-wrapper { display: none !important; }
+  .predictive-search-form__content-wrapper:has([data-search-results]) .predictive-search-trending { display: none; }
+
   /* Search modal style */
   .search-modal {
     --search-border-radius: var(--style-border-radius-popover);

@@ -36,7 +36,12 @@
     {% endif %}
 
     {{ content_for_header }}
-  </head>
+    <style>
+    /* Judge.me review stars -> gold */
+    .jdgm-star.jdgm--on,.jdgm-star.jdgm--half{color:#F5B301 !important}
+    .jdgm-star.jdgm--off{color:#F5B301 !important;opacity:.28 !important}
+  </style>
+</head>
 
   <body class="page-width-{{ settings.page_width }} card-hover-effect-{{ settings.card_hover_effect }}">
     {% render 'skip-to-content-link', href: '#MainContent', text: 'accessibility.skip_to_text' %}
@@ -132,5 +137,6 @@
     {% if settings.quick_add or settings.mobile_quick_add %}
       {% render 'quick-add-modal' %}
     {% endif %}
+  {% render 'breadcrumb-schema' %}
   </body>
 </html>

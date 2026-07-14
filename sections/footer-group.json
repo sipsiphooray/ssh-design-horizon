@@ -171,7 +171,7 @@
                 "unit": "pixel",
                 "percent_width": 100,
                 "pixel_height": 80,
-                "custom_mobile_size": false,
+                "custom_mobile_size": true,
                 "unit_mobile": "percent",
                 "percent_width_mobile": 100,
                 "pixel_height_mobile": 120,
@@ -238,7 +238,7 @@
               "type": "custom-liquid",
               "name": "t:names.custom_liquid",
               "settings": {
-                "custom_liquid": "<div data-oke-badge data-oke-layout=\"minimal\" data-oke-star-background-color=\"#FFFFFF\" data-oke-star-height-px=\"14\" data-oke-star-border-enabled=\"false\" data-oke-star-foreground-color=\"#FFCF2A\"></div>"
+                "custom_liquid": "<a href='/pages/all-reviews' style='display:inline-flex;align-items:center;gap:7px;text-decoration:none;color:inherit;font-weight:600;margin-top:2px'><span style='color:#F5B301;letter-spacing:2px;font-size:16px;line-height:1'>&#9733;&#9733;&#9733;&#9733;&#9733;</span><span style='font-size:14px'>{{ shop.metafields.judgeme.all_reviews_rating }} &middot; {{ shop.metafields.judgeme.all_reviews_count }} reviews</span></a>"
               },
               "blocks": {}
             }
