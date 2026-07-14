@@ -1,0 +1,255 @@
+{% liquid
+  assign width_value = '100%'
+  if block.settings.width == 'fit-content'
+    assign width_value = 'fit-content'
+  elsif block.settings.width == 'custom'
+    assign width_value = block.settings.custom_width | append: '%'
+  endif
+%}
+
+<div
+  class="numbered-list {{ block.settings.css_class }}{% if block.settings.custom_mobile_padding %} numbered-list--custom-mobile-padding{% endif %}"
+  style="
+    --numbered-list-gap: {{ block.settings.gap }}px;
+    --numbered-list-circle-bg: {{ block.settings.circle_background }};
+    --numbered-list-number-color: {{ block.settings.number_color }};
+    width: {{ width_value }};
+    --numbered-list-padding-block-start: {{ block.settings.padding-block-start }}px;
+    --numbered-list-padding-block-end: {{ block.settings.padding-block-end }}px;
+    --numbered-list-padding-inline-start: {{ block.settings.padding-inline-start }}px;
+    --numbered-list-padding-inline-end: {{ block.settings.padding-inline-end }}px;
+    {% if block.settings.custom_mobile_padding %}
+      --numbered-list-mobile-padding-block-start: {{ block.settings.mobile-padding-block-start }}px;
+      --numbered-list-mobile-padding-block-end: {{ block.settings.mobile-padding-block-end }}px;
+      --numbered-list-mobile-padding-inline-start: {{ block.settings.mobile-padding-inline-start }}px;
+      --numbered-list-mobile-padding-inline-end: {{ block.settings.mobile-padding-inline-end }}px;
+    {% endif %}
+  "
+  {{ block.shopify_attributes }}
+>
+  <ol class="numbered-list__items list-unstyled" role="list">
+    {% content_for 'blocks' %}
+  </ol>
+</div>
+
+{% stylesheet %}
+  .numbered-list {
+    padding-block-start: var(--numbered-list-padding-block-start);
+    padding-block-end: var(--numbered-list-padding-block-end);
+    padding-inline-start: var(--numbered-list-padding-inline-start);
+    padding-inline-end: var(--numbered-list-padding-inline-end);
+  }
+
+  .numbered-list__items {
+    display: flex;
+    flex-direction: column;
+    gap: var(--numbered-list-gap);
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    counter-reset: numbered-list-step;
+  }
+
+  @media (max-width: 749px) {
+    .numbered-list--custom-mobile-padding {
+      padding-block-start: var(--numbered-list-mobile-padding-block-start);
+      padding-block-end: var(--numbered-list-mobile-padding-block-end);
+      padding-inline-start: var(--numbered-list-mobile-padding-inline-start);
+      padding-inline-end: var(--numbered-list-mobile-padding-inline-end);
+    }
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "Numbered list",
+  "blocks": [
+    {
+      "type": "_number-item"
+    }
+  ],
+  "settings": [
+    {
+      "type": "header",
+      "content": "t:content.appearance"
+    },
+    {
+      "type": "color",
+      "id": "circle_background",
+      "label": "Circle background",
+      "default": "#f7c6d9"
+    },
+    {
+      "type": "color",
+      "id": "number_color",
+      "label": "Number color",
+      "default": "#c8477e"
+    },
+    {
+      "type": "range",
+      "id": "gap",
+      "label": "t:settings.gap",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "default": 16
+    },
+    {
+      "type": "header",
+      "content": "t:content.size"
+    },
+    {
+      "type": "select",
+      "id": "width",
+      "label": "t:settings.width",
+      "options": [
+        {
+          "value": "fit-content",
+          "label": "t:options.fit_content"
+        },
+        {
+          "value": "fill",
+          "label": "t:options.fill"
+        },
+        {
+          "value": "custom",
+          "label": "t:options.custom"
+        }
+      ],
+      "default": "fill"
+    },
+    {
+      "type": "range",
+      "id": "custom_width",
+      "label": "t:settings.custom_width",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "%",
+      "default": 100,
+      "visible_if": "{{ block.settings.width == 'custom' }}"
+    },
+    {
+      "type": "header",
+      "content": "t:content.padding"
+    },
+    {
+      "type": "range",
+      "id": "padding-block-start",
+      "label": "t:settings.top",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "padding-block-end",
+      "label": "t:settings.bottom",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "padding-inline-start",
+      "label": "t:settings.left",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "padding-inline-end",
+      "label": "t:settings.right",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "default": 0
+    },
+    {
+      "type": "checkbox",
+      "id": "custom_mobile_padding",
+      "label": "Custom Mobile Padding",
+      "default": false
+    },
+    {
+      "type": "range",
+      "id": "mobile-padding-block-start",
+      "label": "t:settings.top",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "default": 0,
+      "visible_if": "{{ block.settings.custom_mobile_padding == true }}"
+    },
+    {
+      "type": "range",
+      "id": "mobile-padding-block-end",
+      "label": "t:settings.bottom",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "default": 0,
+      "visible_if": "{{ block.settings.custom_mobile_padding == true }}"
+    },
+    {
+      "type": "range",
+      "id": "mobile-padding-inline-start",
+      "label": "t:settings.left",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "default": 0,
+      "visible_if": "{{ block.settings.custom_mobile_padding == true }}"
+    },
+    {
+      "type": "range",
+      "id": "mobile-padding-inline-end",
+      "label": "t:settings.right",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "default": 0,
+      "visible_if": "{{ block.settings.custom_mobile_padding == true }}"
+    },
+    {
+      "type": "text",
+      "id": "css_class",
+      "label": "CSS class",
+      "info": "optional"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Numbered list",
+      "category": "t:categories.layout",
+      "blocks": [
+        {
+          "type": "_number-item",
+          "settings": { "text": "Pick your cup size" }
+        },
+        {
+          "type": "_number-item",
+          "settings": { "text": "Choose your design" }
+        },
+        {
+          "type": "_number-item",
+          "settings": { "text": "Add accessories" }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

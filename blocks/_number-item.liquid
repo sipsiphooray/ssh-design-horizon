@@ -1,0 +1,49 @@
+<li class="numbered-item" {{ block.shopify_attributes }}>
+  <span class="numbered-item__circle" aria-hidden="true"></span>
+  <span class="numbered-item__text">{{ block.settings.text }}</span>
+</li>
+
+{% stylesheet %}
+  .numbered-item {
+    display: flex;
+    align-items: center;
+    gap: var(--numbered-list-item-gap, 0.75rem);
+    counter-increment: numbered-list-step;
+  }
+
+  .numbered-item__circle {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    width: 2rem;
+    height: 2rem;
+    border-radius: 50%;
+    background-color: var(--numbered-list-circle-bg);
+    color: var(--numbered-list-number-color);
+    font-weight: 600;
+    line-height: 1;
+  }
+
+  .numbered-item__circle::before {
+    content: counter(numbered-list-step);
+  }
+
+  .numbered-item__text {
+    min-width: 0;
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "Step",
+  "settings": [
+    {
+      "type": "text",
+      "id": "text",
+      "label": "Text",
+      "default": "Step"
+    }
+  ]
+}
+{% endschema %}
