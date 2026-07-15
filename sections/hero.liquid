@@ -458,6 +458,9 @@
     --blur-opacity: {{ section.settings.reflection_opacity | divided_by: 100.0 }};
     {% if section.settings.section_height == 'custom' %}
       --hero-min-height: {{ section.settings.section_height_custom }}svh;
+    {% elsif section.settings.section_height == 'fixed' %}
+      --hero-min-height: {{ section.settings.section_height_fixed_mobile }}px;
+      --hero-min-height-desktop: {{ section.settings.section_height_fixed_desktop }}px;
     {% elsif section.settings.section_height == "full-screen" %}
        --hero-min-height: 100svh;
     {% else %}
@@ -552,6 +555,11 @@
   .hero {
     position: relative;
     min-height: calc(var(--hero-min-height) - var(--hero-height-offset));
+
+    /* --hero-min-height-desktop is only set for the fixed height option. */
+    @media screen and (min-width: 750px) {
+      min-height: calc(var(--hero-min-height-desktop, var(--hero-min-height)) - var(--hero-height-offset));
+    }
   }
 
   .hero[data-shopify-visual-preview] {
@@ -1132,6 +1140,10 @@
         {
           "value": "custom",
           "label": "t:options.custom"
+        },
+        {
+          "value": "fixed",
+          "label": "t:options.fixed"
         }
       ],
       "default": "medium"
@@ -1146,6 +1158,28 @@
       "default": 50,
       "unit": "%",
       "visible_if": "{{ section.settings.section_height == 'custom' }}"
+    },
+    {
+      "type": "range",
+      "id": "section_height_fixed_desktop",
+      "label": "t:settings.desktop_height",
+      "min": 200,
+      "max": 1200,
+      "step": 10,
+      "default": 600,
+      "unit": "px",
+      "visible_if": "{{ section.settings.section_height == 'fixed' }}"
+    },
+    {
+      "type": "range",
+      "id": "section_height_fixed_mobile",
+      "label": "t:settings.mobile_height",
+      "min": 200,
+      "max": 1000,
+      "step": 10,
+      "default": 400,
+      "unit": "px",
+      "visible_if": "{{ section.settings.section_height == 'fixed' }}"
     },
     {
       "type": "header",
