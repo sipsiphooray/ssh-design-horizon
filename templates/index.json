@@ -2188,8 +2188,8 @@
                     "open_in_new_tab": false,
                     "style_class": "button",
                     "add_arrow": true,
-                    "width": "custom",
-                    "custom_width": 26,
+                    "width": "fit-content",
+                    "custom_width": 40,
                     "width_mobile": "custom",
                     "custom_width_mobile": 100
                   },
