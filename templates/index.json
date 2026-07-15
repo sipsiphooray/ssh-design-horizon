@@ -260,7 +260,7 @@
         "section_width": "page-width",
         "section_height": "fixed",
         "section_height_custom": 50,
-        "section_height_fixed_desktop": 490,
+        "section_height_fixed_desktop": 530,
         "section_height_fixed_mobile": 430,
         "color_scheme": "scheme-c84356fe-b285-4037-9eef-fc9b89d8f660",
         "toggle_overlay": true,
