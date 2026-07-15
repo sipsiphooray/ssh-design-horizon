@@ -235,8 +235,7 @@
         "group_tBRF89"
       ],
       "custom_css": [
-        ".hero__media {object-position: top center;}",
-        "@media (min-width: 60em) {.hero {--section-height-medium: 80svh; }}"
+        ".hero__media {object-position: top center;}"
       ],
       "name": "t:names.hero",
       "settings": {
