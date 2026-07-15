@@ -2339,7 +2339,7 @@
         "group_wFGzCH"
       ],
       "custom_css": [
-        ".section--page-narrow {--page-width: calc(60rem + (var(--page-margin) * 2)) !important;}",
+        ".section--page-narrow {--page-width: calc(65rem + (var(--page-margin) * 2)) !important;}",
         ".numbered-item {font-size: var(--font-size--md); font-weight: 500;}",
         ".overflow-none {overflow: unset !important;}"
       ],
