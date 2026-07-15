@@ -247,7 +247,7 @@
         "media_type_1_mobile": "image",
         "image_1_mobile": "shopify://shop_images/mobile_b81eca1e-f9f4-474d-98d1-b81c4f1ccc5c.png",
         "media_type_2_mobile": "image",
-        "link": "",
+        "link": "shopify://collections/new-sips-1",
         "open_in_new_tab": false,
         "content_direction": "column",
         "vertical_on_mobile": true,
