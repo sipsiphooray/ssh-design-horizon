@@ -217,6 +217,13 @@
         "type": "shopify://apps/uppromote-affiliate/blocks/core-script/64c32457-930d-4cb9-9641-e24c0d9cf1f4",
         "disabled": false,
         "settings": {}
+      },
+      "12304262821061709482": {
+        "type": "shopify://apps/sendlane-marketing-automation/blocks/sendlane-event-tracking-block/5a768830-d9c3-4d16-9e83-ae2a731c69be",
+        "disabled": false,
+        "settings": {
+          "event_id": "SVOZTMDoIiSLA"
+        }
       }
     },
     "color_schemes": {
