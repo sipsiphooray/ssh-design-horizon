@@ -985,6 +985,7 @@ summary:hover {
 
     .header-menu .menu-list__submenu-inner {
         transition: opacity calc(var(--submenu-animation-speed, 0s) * 0.75) var(--animation-easing, ease) !important;
+        max-height: fit-content !important;
     }
 
     /*
