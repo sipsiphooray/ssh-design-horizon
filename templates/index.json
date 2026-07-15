@@ -218,7 +218,7 @@
                 "style_class": "button",
                 "add_arrow": true,
                 "width": "custom",
-                "custom_width": 26,
+                "custom_width": 24,
                 "width_mobile": "fit-content",
                 "custom_width_mobile": 17
               },
@@ -2188,8 +2188,8 @@
                     "open_in_new_tab": false,
                     "style_class": "button",
                     "add_arrow": true,
-                    "width": "fit-content",
-                    "custom_width": 100,
+                    "width": "custom",
+                    "custom_width": 26,
                     "width_mobile": "custom",
                     "custom_width_mobile": 100
                   },
