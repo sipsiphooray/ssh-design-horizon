@@ -470,19 +470,13 @@
                 "text_LtTDHn"
               ]
             },
-            "subscriptions_app_block_fDThWR": {
-              "type": "shopify://apps/subscriptions/blocks/app-block/a3bfe9ec-96f8-4508-a003-df608a36d2ad",
+            "custom_liquid_Qykf4E": {
+              "type": "custom-liquid",
+              "name": "t:names.custom_liquid",
               "settings": {
-                "widget_style": "card",
-                "widget_style_card_selector": "radio_button",
-                "subscription_policy_url": "",
-                "color_text_body": "#2b2b2b",
-                "dividers_color": "#f5f5f5",
-                "background_color": "#ffffff",
-                "border_thickness": 1,
-                "border_radius": 0,
-                "product": "{{closest.product}}"
-              }
+                "custom_liquid": "{% if closest.product.selling_plan_groups != blank %}\n  <div class=\"subscriptions_app_embed_block\"></div>\n{% endif %}"
+              },
+              "blocks": {}
             },
             "product_inventory_CGNRga": {
               "type": "product-inventory",
@@ -955,7 +949,7 @@
             "ai_gen_block_426582e_ADbVqH",
             "variant_picker_R3rGDr",
             "addon_products_LmHTx7",
-            "subscriptions_app_block_fDThWR",
+            "custom_liquid_Qykf4E",
             "product_inventory_CGNRga",
             "buy_buttons_eYQEYi",
             "group_Yfptbh",
