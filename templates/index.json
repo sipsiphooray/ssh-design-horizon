@@ -1001,8 +1001,8 @@
           "static": true,
           "settings": {
             "product_card_gap": 12,
-            "inherit_color_scheme": true,
-            "color_scheme": "",
+            "inherit_color_scheme": false,
+            "color_scheme": "scheme-761f80f0-0e3a-4090-9168-95d4d4a71356",
             "border": "solid",
             "border_width": 1,
             "border_opacity": 100,
