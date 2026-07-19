@@ -1002,7 +1002,7 @@
           "settings": {
             "product_card_gap": 12,
             "inherit_color_scheme": false,
-            "color_scheme": "scheme-761f80f0-0e3a-4090-9168-95d4d4a71356",
+            "color_scheme": "scheme-f18682b5-ff46-4cd5-99b9-4dc3b72d643b",
             "border": "solid",
             "border_width": 1,
             "border_opacity": 100,
@@ -1710,7 +1710,7 @@
           "settings": {
             "product_card_gap": 12,
             "inherit_color_scheme": false,
-            "color_scheme": "scheme-738179cd-4e15-457b-be40-989a024001d6",
+            "color_scheme": "scheme-f18682b5-ff46-4cd5-99b9-4dc3b72d643b",
             "border": "solid",
             "border_width": 1,
             "border_opacity": 100,
@@ -2487,8 +2487,8 @@
             "horizontal_alignment": "center",
             "vertical_alignment": "flex-start",
             "collection_card_gap": 12,
-            "inherit_color_scheme": true,
-            "color_scheme": "",
+            "inherit_color_scheme": false,
+            "color_scheme": "scheme-f18682b5-ff46-4cd5-99b9-4dc3b72d643b",
             "border": "solid",
             "border_width": 1,
             "border_opacity": 100,
