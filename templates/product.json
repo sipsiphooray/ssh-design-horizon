@@ -470,19 +470,13 @@
                 "text_LtTDHn"
               ]
             },
-            "subscriptions_app_block_fDThWR": {
-              "type": "shopify://apps/subscriptions/blocks/app-block/a3bfe9ec-96f8-4508-a003-df608a36d2ad",
+            "custom_liquid_Qykf4E": {
+              "type": "custom-liquid",
+              "name": "t:names.custom_liquid",
               "settings": {
-                "widget_style": "card",
-                "widget_style_card_selector": "radio_button",
-                "subscription_policy_url": "",
-                "color_text_body": "#2b2b2b",
-                "dividers_color": "#f5f5f5",
-                "background_color": "#ffffff",
-                "border_thickness": 1,
-                "border_radius": 0,
-                "product": "{{closest.product}}"
-              }
+                "custom_liquid": "{% if closest.product.selling_plan_groups != blank %}\n  <div class=\"subscriptions_app_embed_block\"></div>\n{% endif %}"
+              },
+              "blocks": {}
             },
             "product_inventory_CGNRga": {
               "type": "product-inventory",
@@ -955,7 +949,7 @@
             "ai_gen_block_426582e_ADbVqH",
             "variant_picker_R3rGDr",
             "addon_products_LmHTx7",
-            "subscriptions_app_block_fDThWR",
+            "custom_liquid_Qykf4E",
             "product_inventory_CGNRga",
             "buy_buttons_eYQEYi",
             "group_Yfptbh",
@@ -2612,8 +2606,8 @@
           "static": true,
           "settings": {
             "product_card_gap": 12,
-            "inherit_color_scheme": true,
-            "color_scheme": "",
+            "inherit_color_scheme": false,
+            "color_scheme": "scheme-f18682b5-ff46-4cd5-99b9-4dc3b72d643b",
             "border": "solid",
             "border_width": 1,
             "border_opacity": 100,
@@ -2726,8 +2720,9 @@
                   "blocks": {
                     "okendo_star_rating_yYTNCa": {
                       "type": "custom-liquid",
+                      "name": "Reviews",
                       "settings": {
-                        "custom_liquid": "<div class='jdgm-widget jdgm-preview-badge' data-id='{{ closest.product.id }}'>{{ closest.product.metafields.judgeme.badge }}</div>"
+                        "custom_liquid": "{%- assign _c = closest.product.metafields.reviews.rating_count -%}{%- assign _r = closest.product.metafields.reviews.rating.value.rating | default: 0 -%}{%- if _c and _c != blank and _c != 0 -%}{%- assign _pct = _r | times: 20.0 -%}<div class=\"card-rating\" style=\"display:inline-flex;align-items:center;gap:5px;\"><span style=\"position:relative;display:inline-block;font-size:14px;line-height:1;letter-spacing:1px;\"><span style=\"color:currentColor;opacity:.2;\">★★★★★</span><span style=\"position:absolute;inset:0;width:{{ _pct }}%;overflow:hidden;color:#f5a623;white-space:nowrap;\">★★★★★</span></span><span style=\"font-size:12px;opacity:.7;\">({{ _c }})</span></div>{%- endif -%}"
                       },
                       "blocks": {}
                     },
@@ -2742,7 +2737,7 @@
                         "font": "var(--font-body--family)",
                         "font_size": "1rem",
                         "enable_mobile_size": true,
-                        "mobile_font_size": "1.125rem",
+                        "mobile_font_size": "1rem",
                         "line_height": "normal",
                         "letter_spacing": "normal",
                         "case": "none",
@@ -2762,7 +2757,7 @@
                       "type": "custom-liquid",
                       "name": "t:names.custom_liquid",
                       "settings": {
-                        "custom_liquid": "{%- assign subline = closest.product.metafields.custom.subline.value -%}\n{%- if subline != blank -%}\n  <div\n    class=\"product-subline\"\n    style=\"display: flex; align-items: center; gap: var(--gap-xs); font-size: var(--font-size--sm);\"\n  >\n    {%- for item in subline -%}\n      {%- unless forloop.first -%}\n        <span aria-hidden=\"true\">&bull;</span>\n      {%- endunless -%}\n      <span>{{ item }}</span>\n    {%- endfor -%}\n  </div>\n{%- endif -%}"
+                        "custom_liquid": "<style>\n    .product-subline {\n      display: flex;\n      align-items: center;\n      gap: var(--gap-xs);\n      font-size: var(--font-size--xs);\n      flex-wrap: wrap;\n    }\n    @media (max-width: 749px) {\n        .product-subline {\n            gap: var(--gap-2xs) !important;\n        }\n    }\n</style>\n    \n    {%- assign subline = closest.product.metafields.custom.subline.value -%}\n    \n    {%- if closest.product.title contains 'Lid and Straw'\n       or subline contains 'Lid + Straw' -%}\n        <div class=\"product-subline\">\n            <span>Glass Cups, Mugs &amp; Tumblers, Lid + Straw</span>\n        </div>\n    {%- else -%}\n        {%- if subline != blank -%}\n            <div class=\"product-subline\">\n                {%- for item in subline -%}\n                    {%- unless forloop.first -%}<span aria-hidden=\"true\">&bull;</span>{%- endunless -%}\n                    <span>{{ item }}</span>\n                {%- endfor -%}\n            </div>\n        {%- endif -%}\n    {%- endif -%}"
                       },
                       "blocks": {}
                     }

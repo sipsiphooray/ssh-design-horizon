@@ -1001,8 +1001,8 @@
           "static": true,
           "settings": {
             "product_card_gap": 12,
-            "inherit_color_scheme": true,
-            "color_scheme": "",
+            "inherit_color_scheme": false,
+            "color_scheme": "scheme-f18682b5-ff46-4cd5-99b9-4dc3b72d643b",
             "border": "solid",
             "border_width": 1,
             "border_opacity": 100,
@@ -1064,7 +1064,7 @@
                     "vertical_alignment": "flex-start",
                     "align_baseline": false,
                     "horizontal_alignment_flex_direction_column": "flex-start",
-                    "vertical_alignment_flex_direction_column": "center",
+                    "vertical_alignment_flex_direction_column": "flex-start",
                     "gap": 8,
                     "enable_mobile_gap": false,
                     "mobile_gap": 12,
@@ -1114,7 +1114,7 @@
                         "font": "var(--font-body--family)",
                         "font_size": "1rem",
                         "enable_mobile_size": true,
-                        "mobile_font_size": "1.125rem",
+                        "mobile_font_size": "1rem",
                         "line_height": "normal",
                         "letter_spacing": "normal",
                         "case": "none",
@@ -1134,7 +1134,7 @@
                       "type": "custom-liquid",
                       "name": "t:names.custom_liquid",
                       "settings": {
-                        "custom_liquid": "{%- if closest.product.title contains 'Lid and Straw' -%}<div class=\"product-subline\" style=\"display: flex; align-items: center; gap: var(--gap-xs); font-size: var(--font-size--sm);\"><span>Glass Cups, Mugs &amp; Tumblers, Lid + Straw</span></div>{%- else -%}{%- assign subline = closest.product.metafields.custom.subline.value -%}{%- if subline != blank -%}<div class=\"product-subline\" style=\"display: flex; align-items: center; gap: var(--gap-xs); font-size: var(--font-size--sm);\">{%- for item in subline -%}{%- unless forloop.first -%}<span aria-hidden=\"true\">&bull;</span>{%- endunless -%}<span>{{ item }}</span>{%- endfor -%}</div>{%- endif -%}{%- endif -%}"
+                        "custom_liquid": "<style>\n    .product-subline {\n      display: flex;\n      align-items: center;\n      gap: var(--gap-xs);\n      font-size: var(--font-size--xs);\n      flex-wrap: wrap;\n    }\n    @media (max-width: 749px) {\n        .product-subline {\n            gap: var(--gap-2xs) !important;\n        }\n    }\n</style>\n    \n    {%- assign subline = closest.product.metafields.custom.subline.value -%}\n    \n    {%- if closest.product.title contains 'Lid and Straw'\n       or subline contains 'Lid + Straw' -%}\n        <div class=\"product-subline\">\n            <span>Glass Cups, Mugs &amp; Tumblers, Lid + Straw</span>\n        </div>\n    {%- else -%}\n        {%- if subline != blank -%}\n            <div class=\"product-subline\">\n                {%- for item in subline -%}\n                    {%- unless forloop.first -%}<span aria-hidden=\"true\">&bull;</span>{%- endunless -%}\n                    <span>{{ item }}</span>\n                {%- endfor -%}\n            </div>\n        {%- endif -%}\n    {%- endif -%}"
                       },
                       "blocks": {}
                     }
@@ -1168,20 +1168,11 @@
                     "padding-inline-end": 0
                   },
                   "blocks": {}
-                },
-                "custom_liquid_Q4cHJh": {
-                  "type": "custom-liquid",
-                  "name": "sizes available",
-                  "settings": {
-                    "custom_liquid": "{% assign sizes_option = closest.product.options_by_name['Cup Style'] %}\n{% if sizes_option != blank %}\n<span class=\"size-available-text\">\n    {{ 'content.sizes_available' | t: number: sizes_option.values.size }}\n</span>\n{% endif %}"
-                  },
-                  "blocks": {}
                 }
               },
               "block_order": [
                 "product_card_group_XTKVhD",
-                "price_wqVU6B",
-                "custom_liquid_Q4cHJh"
+                "price_wqVU6B"
               ]
             },
             "product-card-gallery": {
@@ -1709,8 +1700,8 @@
           "static": true,
           "settings": {
             "product_card_gap": 12,
-            "inherit_color_scheme": true,
-            "color_scheme": "",
+            "inherit_color_scheme": false,
+            "color_scheme": "scheme-f18682b5-ff46-4cd5-99b9-4dc3b72d643b",
             "border": "solid",
             "border_width": 1,
             "border_opacity": 100,
@@ -1822,7 +1813,7 @@
                         "font": "var(--font-body--family)",
                         "font_size": "1rem",
                         "enable_mobile_size": true,
-                        "mobile_font_size": "1.125rem",
+                        "mobile_font_size": "1rem",
                         "line_height": "normal",
                         "letter_spacing": "normal",
                         "case": "none",
@@ -1842,7 +1833,7 @@
                       "type": "custom-liquid",
                       "name": "t:names.custom_liquid",
                       "settings": {
-                        "custom_liquid": "{%- if closest.product.title contains 'Lid and Straw' -%}<div class=\"product-subline\" style=\"display: flex; align-items: center; gap: var(--gap-xs); font-size: var(--font-size--sm);\"><span>Glass Cups, Mugs &amp; Tumblers, Lid + Straw</span></div>{%- else -%}{%- assign subline = closest.product.metafields.custom.subline.value -%}{%- if subline != blank -%}<div class=\"product-subline\" style=\"display: flex; align-items: center; gap: var(--gap-xs); font-size: var(--font-size--sm);\">{%- for item in subline -%}{%- unless forloop.first -%}<span aria-hidden=\"true\">&bull;</span>{%- endunless -%}<span>{{ item }}</span>{%- endfor -%}</div>{%- endif -%}{%- endif -%}"
+                        "custom_liquid": "<style>\n    .product-subline {\n      display: flex;\n      align-items: center;\n      gap: var(--gap-xs);\n      font-size: var(--font-size--xs);\n      flex-wrap: wrap;\n    }\n    @media (max-width: 749px) {\n        .product-subline {\n            gap: var(--gap-2xs) !important;\n        }\n    }\n</style>\n    \n    {%- assign subline = closest.product.metafields.custom.subline.value -%}\n    \n    {%- if closest.product.title contains 'Lid and Straw'\n       or subline contains 'Lid + Straw' -%}\n        <div class=\"product-subline\">\n            <span>Glass Cups, Mugs &amp; Tumblers, Lid + Straw</span>\n        </div>\n    {%- else -%}\n        {%- if subline != blank -%}\n            <div class=\"product-subline\">\n                {%- for item in subline -%}\n                    {%- unless forloop.first -%}<span aria-hidden=\"true\">&bull;</span>{%- endunless -%}\n                    <span>{{ item }}</span>\n                {%- endfor -%}\n            </div>\n        {%- endif -%}\n    {%- endif -%}"
                       },
                       "blocks": {}
                     }
@@ -1876,20 +1867,11 @@
                     "padding-inline-end": 0
                   },
                   "blocks": {}
-                },
-                "curated_ns_sizes": {
-                  "type": "custom-liquid",
-                  "name": "sizes available",
-                  "settings": {
-                    "custom_liquid": "{% assign sizes_option = closest.product.options_by_name['Cup Style'] %}\n{% if sizes_option != blank %}\n<span class=\"size-available-text\">\n    {{ 'content.sizes_available' | t: number: sizes_option.values.size }}\n</span>\n{% endif %}"
-                  },
-                  "blocks": {}
                 }
               },
               "block_order": [
                 "curated_ns_title_row",
-                "curated_ns_price",
-                "curated_ns_sizes"
+                "curated_ns_price"
               ]
             },
             "product-card-gallery": {
@@ -2487,8 +2469,8 @@
             "horizontal_alignment": "center",
             "vertical_alignment": "flex-start",
             "collection_card_gap": 12,
-            "inherit_color_scheme": true,
-            "color_scheme": "",
+            "inherit_color_scheme": false,
+            "color_scheme": "scheme-f18682b5-ff46-4cd5-99b9-4dc3b72d643b",
             "border": "solid",
             "border_width": 1,
             "border_opacity": 100,

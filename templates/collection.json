@@ -153,7 +153,7 @@
         ".hero:not(:has(.hero__media-grid)) {min-height: unset;}",
         "@media (min-width: 750px) {.h1 {--max-width--body-narrow: 11.75em; }}",
         "@media (max-width: 749px) {.hero:not([style*=\"--hero-media-count-mobile: 1\"]) {--section-height-medium: 20rem; } .hero__media-wrapper--desktop.hero__media-wrapper--mobile img {object-position: left; }}",
-        ".coll-hero-scrim{background:rgba(255,255,255,.88);padding:16px 20px;border-radius:14px;max-width:600px;box-shadow:0 2px 12px rgba(0,0,0,.08)}"
+        ".coll-hero-scrim {background: rgba(255, 255, 255, 0.88); padding: 16px 20px; border-radius: 14px; max-width: 600px; box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);}"
       ],
       "name": "Collection Hero",
       "settings": {
@@ -181,7 +181,7 @@
         "section_height_custom": 50,
         "color_scheme": "scheme-738179cd-4e15-457b-be40-989a024001d6",
         "toggle_overlay": false,
-        "overlay_color": "#0000004D",
+        "overlay_color": "#0000004d",
         "overlay_style": "gradient",
         "gradient_direction": "to top",
         "blurred_reflection": false,
@@ -221,8 +221,8 @@
           "static": true,
           "settings": {
             "product_card_gap": 12,
-            "inherit_color_scheme": true,
-            "color_scheme": "",
+            "inherit_color_scheme": false,
+            "color_scheme": "scheme-f18682b5-ff46-4cd5-99b9-4dc3b72d643b",
             "border": "solid",
             "border_width": 1,
             "border_opacity": 100,
@@ -233,7 +233,7 @@
             "padding-inline-end": 0
           },
           "blocks": {
-            "product_card_group_JmGg4f": {
+            "product_card_group_VRbyP6": {
               "type": "_product-card-group",
               "name": "t:names.group",
               "settings": {
@@ -274,7 +274,7 @@
                 "padding-inline-end": 12
               },
               "blocks": {
-                "product_card_group_tGfhFq": {
+                "product_card_group_PwN93m": {
                   "type": "_product-card-group",
                   "name": "t:names.group",
                   "settings": {
@@ -284,7 +284,7 @@
                     "vertical_alignment": "flex-start",
                     "align_baseline": false,
                     "horizontal_alignment_flex_direction_column": "flex-start",
-                    "vertical_alignment_flex_direction_column": "center",
+                    "vertical_alignment_flex_direction_column": "flex-start",
                     "gap": 8,
                     "enable_mobile_gap": false,
                     "mobile_gap": 12,
@@ -315,7 +315,15 @@
                     "padding-inline-end": 0
                   },
                   "blocks": {
-                    "product_title_LTLVgj": {
+                    "custom_liquid_jxirNQ": {
+                      "type": "custom-liquid",
+                      "name": "Reviews",
+                      "settings": {
+                        "custom_liquid": "{%- assign _c = closest.product.metafields.reviews.rating_count -%}{%- assign _r = closest.product.metafields.reviews.rating.value.rating | default: 0 -%}{%- if _c and _c != blank and _c != 0 -%}{%- assign _pct = _r | times: 20.0 -%}<div class=\"card-rating\" style=\"display:inline-flex;align-items:center;gap:5px;\"><span style=\"position:relative;display:inline-block;font-size:14px;line-height:1;letter-spacing:1px;\"><span style=\"color:currentColor;opacity:.2;\">★★★★★</span><span style=\"position:absolute;inset:0;width:{{ _pct }}%;overflow:hidden;color:#f5a623;white-space:nowrap;\">★★★★★</span></span><span style=\"font-size:12px;opacity:.7;\">({{ _c }})</span></div>{%- endif -%}"
+                      },
+                      "blocks": {}
+                    },
+                    "product_title_8yDxFj": {
                       "type": "product-title",
                       "name": "t:names.product_title",
                       "settings": {
@@ -326,7 +334,7 @@
                         "font": "var(--font-body--family)",
                         "font_size": "1rem",
                         "enable_mobile_size": true,
-                        "mobile_font_size": "1.125rem",
+                        "mobile_font_size": "1rem",
                         "line_height": "normal",
                         "letter_spacing": "normal",
                         "case": "none",
@@ -342,30 +350,22 @@
                       },
                       "blocks": {}
                     },
-                    "custom_liquid_gNLDTx": {
+                    "custom_liquid_bN7DxP": {
                       "type": "custom-liquid",
                       "name": "t:names.custom_liquid",
                       "settings": {
-                        "custom_liquid": "{%- if closest.product.title contains 'Lid and Straw' -%}<div class=\"product-subline\" style=\"display: flex; align-items: center; gap: var(--gap-xs); font-size: var(--font-size--sm);\"><span>Glass Cups, Mugs &amp; Tumblers, Lid + Straw</span></div>{%- else -%}{%- assign subline = closest.product.metafields.custom.subline.value -%}{%- if subline != blank -%}<div class=\"product-subline\" style=\"display: flex; align-items: center; gap: var(--gap-xs); font-size: var(--font-size--sm);\">{%- for item in subline -%}{%- unless forloop.first -%}<span aria-hidden=\"true\">&bull;</span>{%- endunless -%}<span>{{ item }}</span>{%- endfor -%}</div>{%- endif -%}{%- endif -%}"
-                      },
-                      "blocks": {}
-                    },
-                    "col_reviews": {
-                      "type": "custom-liquid",
-                      "name": "Reviews",
-                      "settings": {
-                        "custom_liquid": "{%- assign _c = closest.product.metafields.reviews.rating_count -%}{%- assign _r = closest.product.metafields.reviews.rating.value.rating | default: 0 -%}{%- if _c and _c != blank and _c != 0 -%}{%- assign _pct = _r | times: 20.0 -%}<div class=\"card-rating\" style=\"display:inline-flex;align-items:center;gap:5px;\"><span style=\"position:relative;display:inline-block;font-size:14px;line-height:1;letter-spacing:1px;\"><span style=\"color:currentColor;opacity:.2;\">★★★★★</span><span style=\"position:absolute;inset:0;width:{{ _pct }}%;overflow:hidden;color:#f5a623;white-space:nowrap;\">★★★★★</span></span><span style=\"font-size:12px;opacity:.7;\">({{ _c }})</span></div>{%- endif -%}"
+                        "custom_liquid": "<style>\n    .product-subline {\n      display: flex;\n      align-items: center;\n      gap: var(--gap-xs);\n      font-size: var(--font-size--xs);\n      flex-wrap: wrap;\n    }\n    @media (max-width: 749px) {\n        .product-subline {\n            gap: var(--gap-2xs) !important;\n        }\n    }\n</style>\n    \n    {%- assign subline = closest.product.metafields.custom.subline.value -%}\n    \n    {%- if closest.product.title contains 'Lid and Straw'\n       or subline contains 'Lid + Straw' -%}\n        <div class=\"product-subline\">\n            <span>Glass Cups, Mugs &amp; Tumblers, Lid + Straw</span>\n        </div>\n    {%- else -%}\n        {%- if subline != blank -%}\n            <div class=\"product-subline\">\n                {%- for item in subline -%}\n                    {%- unless forloop.first -%}<span aria-hidden=\"true\">&bull;</span>{%- endunless -%}\n                    <span>{{ item }}</span>\n                {%- endfor -%}\n            </div>\n        {%- endif -%}\n    {%- endif -%}"
                       },
                       "blocks": {}
                     }
                   },
                   "block_order": [
-                    "col_reviews",
-                    "product_title_LTLVgj",
-                    "custom_liquid_gNLDTx"
+                    "custom_liquid_jxirNQ",
+                    "product_title_8yDxFj",
+                    "custom_liquid_bN7DxP"
                   ]
                 },
-                "price_jVfDBJ": {
+                "price_UYVkHd": {
                   "type": "price",
                   "name": "t:names.product_price",
                   "settings": {
@@ -388,35 +388,11 @@
                     "padding-inline-end": 0
                   },
                   "blocks": {}
-                },
-                "swatches_Q9wqdk": {
-                  "type": "swatches",
-                  "name": "t:names.swatches",
-                  "settings": {
-                    "product_swatches_alignment": "flex-start",
-                    "product_swatches_alignment_mobile": "flex-start",
-                    "hide_padding": false,
-                    "product_swatches_padding_top": 4,
-                    "product_swatches_padding_bottom": 0,
-                    "product_swatches_padding_left": 0,
-                    "product_swatches_padding_right": 0
-                  },
-                  "blocks": {}
-                },
-                "custom_liquid_pVmwnW": {
-                  "type": "custom-liquid",
-                  "name": "sizes available",
-                  "settings": {
-                    "custom_liquid": "{% assign sizes_option = closest.product.options_by_name['Cup Style'] %}\n{% if sizes_option != blank %}\n<span class=\"size-available-text\">\n    {{ 'content.sizes_available' | t: number: sizes_option.values.size }}\n</span>\n{% endif %}"
-                  },
-                  "blocks": {}
                 }
               },
               "block_order": [
-                "product_card_group_tGfhFq",
-                "price_jVfDBJ",
-                "swatches_Q9wqdk",
-                "custom_liquid_pVmwnW"
+                "product_card_group_PwN93m",
+                "price_UYVkHd"
               ]
             },
             "product-card-gallery": {
@@ -439,7 +415,7 @@
             }
           },
           "block_order": [
-            "product_card_group_JmGg4f"
+            "product_card_group_VRbyP6"
           ]
         }
       },
@@ -503,6 +479,7 @@
       "block_order": [
         "text_LfAEhr"
       ],
+      "disabled": true,
       "custom_css": [
         ":has(.layout-panel-flex::empty) {display: none;}"
       ],
@@ -545,8 +522,7 @@
         "css_class": "",
         "add_section_id": false,
         "section_id": ""
-      },
-      "disabled": true
+      }
     }
   },
   "order": [
