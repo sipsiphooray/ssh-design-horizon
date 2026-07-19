@@ -97,7 +97,7 @@
             "padding-inline-end": 0
           },
           "blocks": {
-            "product_card_group_9drHtk": {
+            "product_card_group_VAL3WH": {
               "type": "_product-card-group",
               "name": "t:names.group",
               "settings": {
@@ -138,7 +138,7 @@
                 "padding-inline-end": 12
               },
               "blocks": {
-                "product_card_group_rywmcc": {
+                "product_card_group_6zUMX4": {
                   "type": "_product-card-group",
                   "name": "t:names.group",
                   "settings": {
@@ -179,7 +179,7 @@
                     "padding-inline-end": 0
                   },
                   "blocks": {
-                    "custom_liquid_EGfiEV": {
+                    "custom_liquid_ajqBUT": {
                       "type": "custom-liquid",
                       "name": "Reviews",
                       "settings": {
@@ -187,7 +187,7 @@
                       },
                       "blocks": {}
                     },
-                    "product_title_j6cH48": {
+                    "product_title_EF6kPr": {
                       "type": "product-title",
                       "name": "t:names.product_title",
                       "settings": {
@@ -198,7 +198,7 @@
                         "font": "var(--font-body--family)",
                         "font_size": "1rem",
                         "enable_mobile_size": true,
-                        "mobile_font_size": "1.125rem",
+                        "mobile_font_size": "1rem",
                         "line_height": "normal",
                         "letter_spacing": "normal",
                         "case": "none",
@@ -214,22 +214,22 @@
                       },
                       "blocks": {}
                     },
-                    "custom_liquid_VGHMVf": {
+                    "custom_liquid_JQ8xtK": {
                       "type": "custom-liquid",
                       "name": "t:names.custom_liquid",
                       "settings": {
-                        "custom_liquid": "{%- assign subline = closest.product.metafields.custom.subline.value -%}\n\n{%- if closest.product.title contains 'Lid and Straw'\n   or subline contains 'Lid + Straw' -%}\n    <div class=\"product-subline\" style=\"display: flex; align-items: center; gap: var(--gap-xs); font-size: var(--font-size--xs);\">\n        <span>Glass Cups, Mugs &amp; Tumblers, Lid + Straw</span>\n    </div>\n{%- else -%}\n    {%- if subline != blank -%}\n        <div class=\"product-subline\" style=\"display: flex; align-items: center; gap: var(--gap-xs); font-size: var(--font-size--xs);\">\n            {%- for item in subline -%}\n                {%- unless forloop.first -%}<span aria-hidden=\"true\">&bull;</span>{%- endunless -%}\n                <span>{{ item }}</span>\n            {%- endfor -%}\n        </div>\n    {%- endif -%}\n{%- endif -%}"
+                        "custom_liquid": "<style>\n    .product-subline {\n      display: flex;\n      align-items: center;\n      gap: var(--gap-xs);\n      font-size: var(--font-size--xs);\n      flex-wrap: wrap;\n    }\n    @media (max-width: 749px) {\n        .product-subline {\n            gap: var(--gap-2xs) !important;\n            line-height: 1em;\n        }\n    }\n</style>\n    \n    {%- assign subline = closest.product.metafields.custom.subline.value -%}\n    \n    {%- if closest.product.title contains 'Lid and Straw'\n       or subline contains 'Lid + Straw' -%}\n        <div class=\"product-subline\">\n            <span>Glass Cups, Mugs &amp; Tumblers, Lid + Straw</span>\n        </div>\n    {%- else -%}\n        {%- if subline != blank -%}\n            <div class=\"product-subline\">\n                {%- for item in subline -%}\n                    {%- unless forloop.first -%}<span aria-hidden=\"true\">&bull;</span>{%- endunless -%}\n                    <span>{{ item }}</span>\n                {%- endfor -%}\n            </div>\n        {%- endif -%}\n    {%- endif -%}"
                       },
                       "blocks": {}
                     }
                   },
                   "block_order": [
-                    "custom_liquid_EGfiEV",
-                    "product_title_j6cH48",
-                    "custom_liquid_VGHMVf"
+                    "custom_liquid_ajqBUT",
+                    "product_title_EF6kPr",
+                    "custom_liquid_JQ8xtK"
                   ]
                 },
-                "price_KRUT9n": {
+                "price_KATewU": {
                   "type": "price",
                   "name": "t:names.product_price",
                   "settings": {
@@ -252,20 +252,11 @@
                     "padding-inline-end": 0
                   },
                   "blocks": {}
-                },
-                "custom_liquid_a3YHxz": {
-                  "type": "custom-liquid",
-                  "name": "sizes available",
-                  "settings": {
-                    "custom_liquid": "{% assign sizes_option = closest.product.options_by_name['Cup Style'] %}\n{% if sizes_option != blank %}\n<span class=\"size-available-text\">\n    {{ 'content.sizes_available' | t: number: sizes_option.values.size }}\n</span>\n{% endif %}"
-                  },
-                  "blocks": {}
                 }
               },
               "block_order": [
-                "product_card_group_rywmcc",
-                "price_KRUT9n",
-                "custom_liquid_a3YHxz"
+                "product_card_group_6zUMX4",
+                "price_KATewU"
               ]
             },
             "product-card-gallery": {
@@ -288,7 +279,7 @@
             }
           },
           "block_order": [
-            "product_card_group_9drHtk"
+            "product_card_group_VAL3WH"
           ]
         }
       },
