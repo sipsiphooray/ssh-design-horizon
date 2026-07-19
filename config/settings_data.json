@@ -213,11 +213,6 @@
         "disabled": false,
         "settings": {}
       },
-      "9005256451184024879": {
-        "type": "shopify://apps/uppromote-affiliate/blocks/customer-referral/64c32457-930d-4cb9-9641-e24c0d9cf1f4",
-        "disabled": false,
-        "settings": {}
-      },
       "12304262821061709482": {
         "type": "shopify://apps/sendlane-marketing-automation/blocks/sendlane-event-tracking-block/5a768830-d9c3-4d16-9e83-ae2a731c69be",
         "disabled": true,
@@ -227,6 +222,11 @@
       },
       "14060646107696862457": {
         "type": "shopify://apps/judge-me-reviews/blocks/judgeme_core/61ccd3b1-a9f2-4160-9fe9-4fec8413e5d8",
+        "disabled": true,
+        "settings": {}
+      },
+      "9005256451184024879": {
+        "type": "shopify://apps/uppromote-affiliate/blocks/customer-referral/64c32457-930d-4cb9-9641-e24c0d9cf1f4",
         "disabled": true,
         "settings": {}
       }
