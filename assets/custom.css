@@ -190,16 +190,8 @@ slideshow-controls.carousel-controls .icon-play {
     font-size: var(--font-h4--size);
 }
 
-.jdgm-horizon-widget {
-    width: 100%;
-}
-
 .tax-note, #shopify-installments, shopify-installments {
     font-size: var(--font-size--xs) !important;
-}
-
-.jdgm-rev__author-wrapper, .jdgm-rev__title {
-    font-weight: 600;
 }
 
 .accordion .details__header {
