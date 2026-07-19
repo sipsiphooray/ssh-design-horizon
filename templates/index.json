@@ -1168,20 +1168,11 @@
                     "padding-inline-end": 0
                   },
                   "blocks": {}
-                },
-                "custom_liquid_Q4cHJh": {
-                  "type": "custom-liquid",
-                  "name": "sizes available",
-                  "settings": {
-                    "custom_liquid": "{% assign sizes_option = closest.product.options_by_name['Cup Style'] %}\n{% if sizes_option != blank %}\n<span class=\"size-available-text\">\n    {{ 'content.sizes_available' | t: number: sizes_option.values.size }}\n</span>\n{% endif %}"
-                  },
-                  "blocks": {}
                 }
               },
               "block_order": [
                 "product_card_group_XTKVhD",
-                "price_wqVU6B",
-                "custom_liquid_Q4cHJh"
+                "price_wqVU6B"
               ]
             },
             "product-card-gallery": {
@@ -1876,20 +1867,11 @@
                     "padding-inline-end": 0
                   },
                   "blocks": {}
-                },
-                "curated_ns_sizes": {
-                  "type": "custom-liquid",
-                  "name": "sizes available",
-                  "settings": {
-                    "custom_liquid": "{% assign sizes_option = closest.product.options_by_name['Cup Style'] %}\n{% if sizes_option != blank %}\n<span class=\"size-available-text\">\n    {{ 'content.sizes_available' | t: number: sizes_option.values.size }}\n</span>\n{% endif %}"
-                  },
-                  "blocks": {}
                 }
               },
               "block_order": [
                 "curated_ns_title_row",
-                "curated_ns_price",
-                "curated_ns_sizes"
+                "curated_ns_price"
               ]
             },
             "product-card-gallery": {
