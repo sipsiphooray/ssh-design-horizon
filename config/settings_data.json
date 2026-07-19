@@ -187,11 +187,6 @@
         "disabled": false,
         "settings": {}
       },
-      "14020781649437803805": {
-        "type": "shopify://apps/ag-shoppable-video/blocks/app_embed/1216543a-6237-4445-a5f2-61991cd76022",
-        "disabled": false,
-        "settings": {}
-      },
       "6159598353363395418": {
         "type": "shopify://apps/google-youtube/blocks/store_widget/14ec7bd0-ac77-49a9-9417-90752398bdff",
         "disabled": false,
@@ -229,6 +224,11 @@
         "settings": {
           "event_id": "SVOZTMDoIiSLA"
         }
+      },
+      "14020781649437803805": {
+        "type": "shopify://apps/ag-shoppable-video/blocks/app_embed/1216543a-6237-4445-a5f2-61991cd76022",
+        "disabled": true,
+        "settings": {}
       }
     },
     "color_schemes": {
