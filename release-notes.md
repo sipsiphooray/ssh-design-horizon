@@ -1,12 +1,17 @@
-# Release Notes - Version 3.5.1
+# Release Notes - Version 4.1.3
 
-Various fixes to translation strings and better support for "Split showcase" section on small screens.
+This release ships multiple bug fixes and performance improvements.
 
 ## What's Changed
 
 ### Fixes and improvements
 
-* [Accessibility] Fixed header logo alt text bug caused by translation strings
-* [Performance] Color swatch rendering improvement for combined listing products
-* [Split Showcase] Stop content overlap when blocks wrap on mobile
-* [Collections] Added missing translations strings for price filtering components
+* Replace English-only section and block names with translated strings
+* Disable page view transitions in all Android web views to address reported errors
+* [Header] Open header submenus when hovering from below
+* [Filters] Color overrides apply to both horizontal and vertical filters
+* [Product page] Improve sold-out variant styling for readability
+* [Quick-add] Products with selling plans always link to product pages
+* [Search] Fix search result tracking parameters for Analytics reports
+* [Spacer] Prevent mobile pixel spacers from collapsing in columns
+* [Performance] Multiple updates to improve CSS bundle sizes
