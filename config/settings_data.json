@@ -119,11 +119,6 @@
         "disabled": false,
         "settings": {}
       },
-      "1232542678405107163": {
-        "type": "shopify://apps/instafeed/blocks/head-block/c447db20-095d-4a10-9725-b5977662c9d5",
-        "disabled": false,
-        "settings": {}
-      },
       "12342438634123318931": {
         "type": "shopify://apps/xb-wishlist/blocks/xo-wishlist/cc07f1e9-907b-431d-99f8-4fce3efa75f1",
         "disabled": false,
@@ -208,11 +203,6 @@
           "mobile_bottom_margin": 46
         }
       },
-      "3138269044488530766": {
-        "type": "shopify://apps/uppromote-affiliate/blocks/core-script/64c32457-930d-4cb9-9641-e24c0d9cf1f4",
-        "disabled": false,
-        "settings": {}
-      },
       "12304262821061709482": {
         "type": "shopify://apps/sendlane-marketing-automation/blocks/sendlane-event-tracking-block/5a768830-d9c3-4d16-9e83-ae2a731c69be",
         "disabled": true,
@@ -227,6 +217,16 @@
       },
       "9005256451184024879": {
         "type": "shopify://apps/uppromote-affiliate/blocks/customer-referral/64c32457-930d-4cb9-9641-e24c0d9cf1f4",
+        "disabled": true,
+        "settings": {}
+      },
+      "3138269044488530766": {
+        "type": "shopify://apps/uppromote-affiliate/blocks/core-script/64c32457-930d-4cb9-9641-e24c0d9cf1f4",
+        "disabled": true,
+        "settings": {}
+      },
+      "1232542678405107163": {
+        "type": "shopify://apps/instafeed/blocks/head-block/c447db20-095d-4a10-9725-b5977662c9d5",
         "disabled": true,
         "settings": {}
       }
