@@ -388,20 +388,11 @@
                     "padding-inline-end": 0
                   },
                   "blocks": {}
-                },
-                "custom_liquid_fhNjdf": {
-                  "type": "custom-liquid",
-                  "name": "sizes available",
-                  "settings": {
-                    "custom_liquid": "{% assign sizes_option = closest.product.options_by_name['Cup Style'] %}\n{% if sizes_option != blank %}\n<span class=\"size-available-text\">\n    {{ 'content.sizes_available' | t: number: sizes_option.values.size }}\n</span>\n{% endif %}"
-                  },
-                  "blocks": {}
                 }
               },
               "block_order": [
                 "product_card_group_PwN93m",
-                "price_UYVkHd",
-                "custom_liquid_fhNjdf"
+                "price_UYVkHd"
               ]
             },
             "product-card-gallery": {
