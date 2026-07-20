@@ -1,48 +1,11 @@
-{% liquid
-  if closest.collection == blank
-    assign text = 'placeholders.collection_title' | t
-    assign collection_title = '<p>' | append: text | append: '</p>'
-  else
-    assign collection_title = '<p>' | append: closest.collection.title | append: '</p>'
-  endif
-%}
-
-<div
-  class="collection-title-row"
-  style="--width: {{ block.settings.width }};"
->
-  <div class="collection-title-row__text">
-    {% render 'text', fallback_text: collection_title, block: block %}
-  </div>
-  <span class="svg-wrapper icon-arrow collection-title-row__icon" aria-hidden="true">
-    {{- 'icon-title-arrow.svg' | inline_asset_content -}}
-  </span>
-</div>
-
-{% stylesheet %}
-  .collection-title-row {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: var(--gap-sm);
-    width: var(--width);
-    max-width: 100%;
-    padding-inline: var(--gap-2xs);
-  }
-
-  .collection-title-row__text {
-    flex: 1 1 auto;
-    min-width: 0;
-  }
-
-  .collection-title-row__text .text-block {
-    width: 100%;
-  }
-
-  .collection-title-row__icon {
-    flex: 0 0 auto;
-  }
-{% endstylesheet %}
+{% if closest.collection == blank %}
+  {% assign text = 'placeholders.collection_title' | t %}
+  {% assign collection_title = '<p>' | append: text | append: '</p>' %}
+  {% render 'text', fallback_text: collection_title, block: block %}
+{% elsif closest.collection != blank %}
+  {% assign collection_title = '<p>' | append: closest.collection.title | append: '</p>' %}
+  {% render 'text', fallback_text: collection_title, block: block %}
+{% endif %}
 
 {% schema %}
 {
