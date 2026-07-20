@@ -1285,3 +1285,8 @@ html[scroll-lock] {
     --color-primary-button-hover-text: #759d6f;
     --color-primary-button-hover-border: #759d6f;
 }
+
+.menu-list__link-inner .icon-caret {
+    width: var(--icon-size-xs) !important;
+    height: var(--icon-size-xs) !important;
+}
