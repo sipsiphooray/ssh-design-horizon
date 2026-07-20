@@ -59,7 +59,6 @@
       "settings": {
         "content_direction": "column",
         "gap": 32,
-        "color_scheme": "",
         "padding-block-start": 40,
         "padding-block-end": 80
       }
@@ -107,8 +106,6 @@
             "icon": "plus",
             "dividers": true,
             "type_preset": "h3",
-            "inherit_color_scheme": true,
-            "color_scheme": "",
             "border": "none",
             "border_width": 1,
             "border_opacity": 100,
@@ -137,9 +134,7 @@
                     "content": "<p>We carry 32 oz tumblers, 16 oz and 20 oz glass cups, 17 oz glass mugs, 40 oz plastic tumblers, and 40 oz glass tumblers. Each style is made with durable, non-toxic materials.</p>",
                     "open_by_default": false,
                     "icon": "none",
-                    "width": 20,
-                    "add_color_scheme": true,
-                    "color_scheme": ""
+                    "width": 20
                   },
                   "blocks": {}
                 },
@@ -151,9 +146,7 @@
                     "content": "<p>Glass options are made from lead-free borosilicate glass. Plastic tumblers are BPA-free and shatter-resistant. Designs are printed with UV-cured DTF for a permanent, glossy finish that won’t peel or fade.</p>",
                     "open_by_default": false,
                     "icon": "none",
-                    "width": 20,
-                    "add_color_scheme": true,
-                    "color_scheme": ""
+                    "width": 20
                   },
                   "blocks": {}
                 },
@@ -165,9 +158,7 @@
                     "content": "<p>Most styles include a lid. Options vary by product: bamboo lids (hand-wash only) or dishwasher-safe acrylic lids. Check the individual product listing for details.</p>",
                     "open_by_default": false,
                     "icon": "none",
-                    "width": 20,
-                    "add_color_scheme": true,
-                    "color_scheme": ""
+                    "width": 20
                   },
                   "blocks": {}
                 }
@@ -196,9 +187,7 @@
                     "content": "<p>Personalization is available on select styles. If you see a “personalize” option on the product page, you can add a name or design. For custom requests, email <a href=\"mailto:support@sipsiphooraydesign.com\" title=\"mailto:support@sipsiphooraydesign.com\">support@sipsiphooraydesign.com</a>.</p>",
                     "open_by_default": false,
                     "icon": "none",
-                    "width": 20,
-                    "add_color_scheme": true,
-                    "color_scheme": ""
+                    "width": 20
                   },
                   "blocks": {}
                 },
@@ -210,9 +199,7 @@
                     "content": "<p>Contact us within 12 hours of placing your order. After that, production begins and changes can’t be made.</p>",
                     "open_by_default": false,
                     "icon": "none",
-                    "width": 20,
-                    "add_color_scheme": true,
-                    "color_scheme": ""
+                    "width": 20
                   },
                   "blocks": {}
                 },
@@ -224,9 +211,7 @@
                     "content": "<p>Yes. You can add a note at checkout and we’ll include it in the package.</p>",
                     "open_by_default": false,
                     "icon": "none",
-                    "width": 20,
-                    "add_color_scheme": true,
-                    "color_scheme": ""
+                    "width": 20
                   },
                   "blocks": {}
                 }
@@ -255,9 +240,7 @@
                     "content": "<p>All orders are handmade and shipped from Louisiana, USA.</p>",
                     "open_by_default": false,
                     "icon": "none",
-                    "width": 20,
-                    "add_color_scheme": true,
-                    "color_scheme": ""
+                    "width": 20
                   },
                   "blocks": {}
                 },
@@ -269,9 +252,7 @@
                     "content": "<p>Yes. We ship worldwide via global post. Delivery takes 3 to 5 weeks, and buyers are responsible for any customs fees or duties.</p>",
                     "open_by_default": false,
                     "icon": "none",
-                    "width": 20,
-                    "add_color_scheme": true,
-                    "color_scheme": ""
+                    "width": 20
                   },
                   "blocks": {}
                 },
@@ -283,9 +264,7 @@
                     "content": "<p>Processing takes 1 to 3 business days, then standard shipping is 3 to 5 days. Holidays may cause slight delays.</p>",
                     "open_by_default": false,
                     "icon": "none",
-                    "width": 20,
-                    "add_color_scheme": true,
-                    "color_scheme": ""
+                    "width": 20
                   },
                   "blocks": {}
                 }
@@ -314,9 +293,7 @@
                     "content": "<p>Non-personalized items can be returned within 14 days of delivery, and returns are free since we cover the return shipping. Personalized items are final sale unless damaged or defective.</p>",
                     "open_by_default": false,
                     "icon": "none",
-                    "width": 20,
-                    "add_color_scheme": true,
-                    "color_scheme": ""
+                    "width": 20
                   },
                   "blocks": {}
                 },
@@ -328,9 +305,7 @@
                     "content": "<p>We’ll replace or refund any broken or defective items. Use our <a href=\"https://sipsiphooraydesign-3d828343.shipstationreturns.com/login\" title=\"Return Portal\">Return Portal</a> or email <a href=\"mailto:support@sipsiphooraydesign.com\" title=\"mailto:support@sipsiphooraydesign.com\">support@sipsiphooraydesign.com</a> with photos.</p>",
                     "open_by_default": false,
                     "icon": "none",
-                    "width": 20,
-                    "add_color_scheme": true,
-                    "color_scheme": ""
+                    "width": 20
                   },
                   "blocks": {}
                 },
@@ -342,9 +317,7 @@
                     "content": "<p>Visit our <a href=\"https://sipsiphooraydesign-3d828343.shipstationreturns.com/login\" title=\"Return Portal\">Return Portal</a> to submit a request. Once your return is received, we’ll process your refund quickly.</p>",
                     "open_by_default": false,
                     "icon": "none",
-                    "width": 20,
-                    "add_color_scheme": true,
-                    "color_scheme": ""
+                    "width": 20
                   },
                   "blocks": {}
                 }
@@ -373,9 +346,7 @@
                     "content": "<p>Hand wash with a soft sponge to keep the design vibrant. Non-personalized glass styles are top-rack dishwasher safe, but hand washing is safest for longevity.</p>",
                     "open_by_default": false,
                     "icon": "none",
-                    "width": 20,
-                    "add_color_scheme": true,
-                    "color_scheme": ""
+                    "width": 20
                   },
                   "blocks": {}
                 },
@@ -387,9 +358,7 @@
                     "content": "<p>Hand wash with mild soap. Avoid abrasive scrubbers and high heat (like dishwashers) to prevent warping or fading.</p>",
                     "open_by_default": false,
                     "icon": "none",
-                    "width": 20,
-                    "add_color_scheme": true,
-                    "color_scheme": ""
+                    "width": 20
                   },
                   "blocks": {}
                 },
@@ -401,9 +370,7 @@
                     "content": "<p>Hand wash only and dry completely. Do not soak or leave the lid on for more than 24 hours to avoid moisture buildup.</p>",
                     "open_by_default": false,
                     "icon": "none",
-                    "width": 20,
-                    "add_color_scheme": true,
-                    "color_scheme": ""
+                    "width": 20
                   },
                   "blocks": {}
                 },
@@ -415,9 +382,7 @@
                     "content": "<p>Glass cups and mugs are heat-resistant and safe for warm drinks. Plastic tumblers are better suited for cold or iced beverages.</p>",
                     "open_by_default": false,
                     "icon": "none",
-                    "width": 20,
-                    "add_color_scheme": true,
-                    "color_scheme": ""
+                    "width": 20
                   },
                   "blocks": {}
                 }
@@ -447,9 +412,7 @@
                     "content": "<p>Discounts can’t be combined. Use whichever gives you the better savings at checkout.</p>",
                     "open_by_default": false,
                     "icon": "none",
-                    "width": 20,
-                    "add_color_scheme": true,
-                    "color_scheme": ""
+                    "width": 20
                   },
                   "blocks": {}
                 },
@@ -461,9 +424,7 @@
                     "content": "<p>Orders over $40 ship free within the US.</p>",
                     "open_by_default": false,
                     "icon": "none",
-                    "width": 20,
-                    "add_color_scheme": true,
-                    "color_scheme": ""
+                    "width": 20
                   },
                   "blocks": {}
                 },
@@ -475,9 +436,7 @@
                     "content": "<p>Yes. We launch fresh collections and run monthly promotions. Sign up for emails to stay updated.</p>",
                     "open_by_default": false,
                     "icon": "none",
-                    "width": 20,
-                    "add_color_scheme": true,
-                    "color_scheme": ""
+                    "width": 20
                   },
                   "blocks": {}
                 }
@@ -528,7 +487,6 @@
         "full_width_on_mobile": false,
         "section_height": "",
         "section_height_custom": 50,
-        "color_scheme": "",
         "background_media": "none",
         "video_position": "cover",
         "background_image_position": "cover",

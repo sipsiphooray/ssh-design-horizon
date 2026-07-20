@@ -14,7 +14,6 @@
       "name": "t:names.custom_liquid",
       "settings": {
         "custom_liquid": "{% render 'breadcrumbs' %}",
-        "color_scheme": "",
         "section_width": "page-narrow",
         "padding-block-start": 12,
         "padding-block-end": 0,
@@ -67,8 +66,6 @@
             "details_position": "flex-start",
             "gap": 28,
             "sticky_details_desktop": true,
-            "inherit_color_scheme": true,
-            "color_scheme": "scheme-1",
             "background_media": "none",
             "video_position": "cover",
             "background_image_position": "cover",
@@ -107,8 +104,6 @@
                 "custom_width_mobile": 100,
                 "height": "fit",
                 "custom_height": 100,
-                "inherit_color_scheme": true,
-                "color_scheme": "",
                 "background_media": "none",
                 "video_position": "cover",
                 "background_image_position": "cover",
@@ -140,7 +135,7 @@
                   "name": "Badges",
                   "disabled": true,
                   "settings": {
-                    "custom_liquid": "<style>\n.badges-product-details {\n    margin-bottom: var(--gap-2xs);\n    line-height: 1em;\n}\n</style>\n<div class=\"flex badges-product-details\">\n      {% if product.metafields.custom.product_badges.value != blank %}\n        {% for i in product.metafields.custom.product_badges.value %}\n          {% if i.label != blank %}\n            <div>\n                <div\n                class=\"\n                    product-badges__badge product-badges__badge--rectangle\n                    color-{{ settings.badge_sale_color_scheme }}\n                \"\n                    style=\"\n                        --badge-border-radius: {{ settings.badge_corner_radius }}px;\n                        --badge-font-family: var(--font-{{ settings.badge_font_family }}--family); --badge-font-weight: var(--font-{{ settings.badge_font_family }}--weight); --badge-text-transform: {{ settings.badge_text_transform }};\n                    {% if i.badge_background_color != blank %}\n                        --color-background: {{ i.badge_background_color }};\n                    {% endif %}\n                    {% if i.badge_text_color != blank %}\n                        --color-foreground: {{ i.badge_text_color }};\n                    {% endif %}\n                    \"\n                >\n                {{ i.label }}\n                </div>\n            </div>\n          {% endif %}\n        {% endfor %}\n      {% endif %}\n</div>"
+                    "custom_liquid": "<style>\n.badges-product-details {\n    margin-bottom: var(--gap-2xs);\n    line-height: 1em;\n}\n</style>\n<div class=\"flex badges-product-details\">\n      {% if product.metafields.custom.product_badges.value != blank %}\n        {% for i in product.metafields.custom.product_badges.value %}\n          {% if i.label != blank %}\n            <div>\n                <div\n                class=\"\n                    product-badges__badge product-badges__badge--rectangle\n                    color-custom-badge-sale\n                \"\n                    style=\"\n                        --badge-border-radius: {{ settings.badge_corner_radius }}px;\n                        --badge-font-family: var(--font-{{ settings.badge_font_family }}--family); --badge-font-weight: var(--font-{{ settings.badge_font_family }}--weight); --badge-text-transform: {{ settings.badge_text_transform }};\n                    {% if i.badge_background_color != blank %}\n                        --color-background: {{ i.badge_background_color }};\n                    {% endif %}\n                    {% if i.badge_text_color != blank %}\n                        --color-foreground: {{ i.badge_text_color }};\n                    {% endif %}\n                    \"\n                >\n                {{ i.label }}\n                </div>\n            </div>\n          {% endif %}\n        {% endfor %}\n      {% endif %}\n</div>"
                   },
                   "blocks": {}
                 },
@@ -304,8 +299,6 @@
                 "border_radius": 0,
                 "enable_mobile_radius": false,
                 "mobile_border_radius": 0,
-                "inherit_color_scheme": true,
-                "color_scheme": "",
                 "padding-block-start": 0,
                 "padding-block-end": 0,
                 "padding-inline-start": 0,
@@ -349,8 +342,6 @@
                   "static": true,
                   "settings": {
                     "product_card_gap": 12,
-                    "inherit_color_scheme": true,
-                    "color_scheme": "",
                     "checkbox_label": "Add to cart",
                     "border": "none",
                     "border_width": 1,
@@ -409,8 +400,6 @@
                         "custom_width_mobile": 100,
                         "height": "fit",
                         "custom_height": 100,
-                        "inherit_color_scheme": true,
-                        "color_scheme": "",
                         "background_media": "none",
                         "video_position": "cover",
                         "background_image_position": "cover",
@@ -561,8 +550,6 @@
                 "custom_width_mobile": 100,
                 "height": "fit",
                 "custom_height": 100,
-                "inherit_color_scheme": true,
-                "color_scheme": "",
                 "background_media": "none",
                 "video_position": "cover",
                 "background_image_position": "cover",
@@ -601,7 +588,7 @@
                     "max_days": 5,
                     "date_display": "range",
                     "background_color": "#d3faa9",
-                    "text_color": "#2b2b2b",
+                    "text_color": "{{ settings.color_palette.foreground }}",
                     "corner_radius": 0,
                     "padding-block-start": 0,
                     "padding-block-end": 0,
@@ -738,8 +725,6 @@
                 "icon": "plus",
                 "dividers": true,
                 "type_preset": "",
-                "inherit_color_scheme": true,
-                "color_scheme": "",
                 "border": "none",
                 "border_width": 1,
                 "border_opacity": 100,
@@ -839,7 +824,6 @@
         "limit_details_width": true,
         "gap": 24,
         "enable_sticky_add_to_cart": true,
-        "color_scheme": "",
         "padding-block-start": 12,
         "padding-block-end": 52
       }
@@ -888,8 +872,6 @@
           "static": true,
           "settings": {
             "product_card_gap": 4,
-            "inherit_color_scheme": true,
-            "color_scheme": "",
             "checkbox_label": "Add to cart",
             "border": "none",
             "border_width": 1,
@@ -980,7 +962,6 @@
         "icons_shape": "circle",
         "section_width": "page-narrow",
         "gap": 28,
-        "color_scheme": "scheme-1",
         "padding-block-start": 24,
         "padding-block-end": 24
       }
@@ -1009,8 +990,6 @@
             "custom_width_mobile": 100,
             "height": "fit",
             "custom_height": 100,
-            "inherit_color_scheme": true,
-            "color_scheme": "",
             "border": "none",
             "border_width": 1,
             "border_opacity": 100,
@@ -1077,8 +1056,6 @@
                 "custom_width_mobile": 100,
                 "height": "24",
                 "custom_height": 100,
-                "inherit_color_scheme": true,
-                "color_scheme": "",
                 "background_media": "none",
                 "video_position": "cover",
                 "background_image_position": "cover",
@@ -1131,8 +1108,6 @@
             "custom_width_mobile": 100,
             "height": "fit",
             "custom_height": 100,
-            "inherit_color_scheme": true,
-            "color_scheme": "",
             "border": "none",
             "border_width": 1,
             "border_opacity": 100,
@@ -1199,8 +1174,6 @@
                 "custom_width_mobile": 100,
                 "height": "24",
                 "custom_height": 100,
-                "inherit_color_scheme": true,
-                "color_scheme": "",
                 "background_media": "none",
                 "video_position": "cover",
                 "background_image_position": "cover",
@@ -1253,8 +1226,6 @@
             "custom_width_mobile": 100,
             "height": "fit",
             "custom_height": 100,
-            "inherit_color_scheme": true,
-            "color_scheme": "",
             "border": "none",
             "border_width": 1,
             "border_opacity": 100,
@@ -1321,8 +1292,6 @@
                 "custom_width_mobile": 100,
                 "height": "24",
                 "custom_height": 100,
-                "inherit_color_scheme": true,
-                "color_scheme": "",
                 "background_media": "none",
                 "video_position": "cover",
                 "background_image_position": "cover",
@@ -1375,8 +1344,6 @@
             "custom_width_mobile": 100,
             "height": "fit",
             "custom_height": 100,
-            "inherit_color_scheme": true,
-            "color_scheme": "",
             "border": "none",
             "border_width": 1,
             "border_opacity": 100,
@@ -1443,8 +1410,6 @@
                 "custom_width_mobile": 100,
                 "height": "24",
                 "custom_height": 100,
-                "inherit_color_scheme": true,
-                "color_scheme": "",
                 "background_media": "none",
                 "video_position": "cover",
                 "background_image_position": "cover",
@@ -1498,8 +1463,6 @@
             "custom_width_mobile": 100,
             "height": "fit",
             "custom_height": 100,
-            "inherit_color_scheme": true,
-            "color_scheme": "",
             "background_media": "none",
             "video_position": "cover",
             "background_image_position": "cover",
@@ -1553,7 +1516,6 @@
         "section_width": "page-narrow",
         "full_width_on_mobile": false,
         "gap": 0,
-        "color_scheme": "scheme-738179cd-4e15-457b-be40-989a024001d6",
         "background_media": "none",
         "video_position": "cover",
         "background_image_position": "cover",
@@ -1570,7 +1532,8 @@
         "mobile-padding-inline-end": 0,
         "css_class": "",
         "add_section_id": false,
-        "section_id": ""
+        "section_id": "",
+        "background_color": "{{ settings.color_palette.color5 }}"
       }
     },
     "section_P8A676": {
@@ -1624,8 +1587,6 @@
             "custom_width_mobile": 100,
             "height": "fit",
             "custom_height": 100,
-            "inherit_color_scheme": true,
-            "color_scheme": "",
             "background_media": "none",
             "video_position": "cover",
             "background_image_position": "cover",
@@ -1750,7 +1711,6 @@
         "full_width_on_mobile": false,
         "section_height": "",
         "section_height_custom": 50,
-        "color_scheme": "",
         "background_media": "none",
         "video_position": "cover",
         "background_image_position": "cover",
@@ -1801,8 +1761,6 @@
             "custom_width_mobile": 100,
             "height": "fit",
             "custom_height": 100,
-            "inherit_color_scheme": true,
-            "color_scheme": "",
             "background_media": "none",
             "video_position": "cover",
             "background_image_position": "cover",
@@ -1951,7 +1909,6 @@
         "full_width_on_mobile": false,
         "section_height": "",
         "section_height_custom": 50,
-        "color_scheme": "",
         "background_media": "none",
         "video_position": "cover",
         "background_image_position": "cover",
@@ -2025,8 +1982,6 @@
             "custom_width_mobile": 100,
             "height": "fit",
             "custom_height": 100,
-            "inherit_color_scheme": true,
-            "color_scheme": "",
             "background_media": "none",
             "video_position": "cover",
             "background_image_position": "cover",
@@ -2152,7 +2107,6 @@
         "full_width_on_mobile": false,
         "section_height": "",
         "section_height_custom": 50,
-        "color_scheme": "",
         "background_media": "none",
         "video_position": "cover",
         "background_image_position": "cover",
@@ -2210,7 +2164,6 @@
         "section_width": "page-narrow",
         "section_height": "",
         "section_height_custom": 50,
-        "color_scheme": "",
         "background_media": "none",
         "video_position": "cover",
         "background_image_position": "cover",
@@ -2269,8 +2222,6 @@
             "icon": "plus",
             "dividers": true,
             "type_preset": "",
-            "inherit_color_scheme": true,
-            "color_scheme": "",
             "border": "none",
             "border_width": 1,
             "border_opacity": 100,
@@ -2289,9 +2240,7 @@
                 "content": "<p>Our cups and straws are made from 100% non-toxic, lead-free borosilicate glass, a very long-lasting and sturdy material. Our lids are made from sustainably sourced, reusable bamboo.</p>",
                 "open_by_default": false,
                 "icon": "none",
-                "width": 20,
-                "add_color_scheme": false,
-                "color_scheme": ""
+                "width": 20
               },
               "blocks": {}
             },
@@ -2303,9 +2252,7 @@
                 "content": "<p>No, our cups are NOT made with stickers! We use UVDTF prints which are permanent, ultra-durable, and cured with UV light for a glossy, high-quality finish. The slight texture you feel is a protective varnish layer. They won't peel, fade, or rub off.</p>",
                 "open_by_default": false,
                 "icon": "none",
-                "width": 20,
-                "add_color_scheme": false,
-                "color_scheme": ""
+                "width": 20
               },
               "blocks": {}
             },
@@ -2317,9 +2264,7 @@
                 "content": "<p>Because bamboo is a natural, porous material, it needs specific care. Hand wash only (no soaking), and ensure it is dried completely before sealing it back on your cup. Do not leave your lid sealed on your cup for more than 24 hours at a time, as trapped moisture without airflow can cause mold growth. (Note: Check out our acrylic lids for a dishwasher-safe, low-maintenance option!)</p>",
                 "open_by_default": false,
                 "icon": "none",
-                "width": 20,
-                "add_color_scheme": false,
-                "color_scheme": ""
+                "width": 20
               },
               "blocks": {}
             },
@@ -2331,9 +2276,7 @@
                 "content": "<p>Please allow 1-3 business days (Monday-Friday) for us to process and create your order. We ship with USPS and UPS from Louisiana, USA. Standard domestic shipping usually takes 3-5 days to deliver.</p>",
                 "open_by_default": false,
                 "icon": "none",
-                "width": 20,
-                "add_color_scheme": false,
-                "color_scheme": ""
+                "width": 20
               },
               "blocks": {}
             },
@@ -2345,9 +2288,7 @@
                 "content": "<p>Yes, we ship everywhere in the United States and internationally! We use Global Post for international orders, which usually takes 3-5 weeks to deliver. <em>(Please note: International buyers are responsible for any applicable customs fees, duties, and taxes).</em></p>",
                 "open_by_default": false,
                 "icon": "none",
-                "width": 20,
-                "add_color_scheme": false,
-                "color_scheme": ""
+                "width": 20
               },
               "blocks": {}
             },
@@ -2359,9 +2300,7 @@
                 "content": "<p>We accept returns on non-used, non-personalized items within 7 days of delivery. We are also happy to replace or refund any items that arrive broken in transit or appear to be defective. If you need to cancel or swap an item on a new order, please reach out within 12 hours of placing the order!</p>",
                 "open_by_default": false,
                 "icon": "none",
-                "width": 20,
-                "add_color_scheme": false,
-                "color_scheme": ""
+                "width": 20
               },
               "blocks": {}
             }
@@ -2405,7 +2344,6 @@
         "full_width_on_mobile": false,
         "section_height": "",
         "section_height_custom": 50,
-        "color_scheme": "scheme-2",
         "background_media": "none",
         "video_position": "cover",
         "background_image_position": "cover",
@@ -2426,7 +2364,8 @@
         "mobile-padding-inline-end": 0,
         "css_class": "",
         "add_section_id": false,
-        "section_id": ""
+        "section_id": "",
+        "background_color": "{{ settings.color_palette.color2 }}"
       }
     },
     "product_recommendations_qggXJq": {
@@ -2471,8 +2410,6 @@
           "static": true,
           "settings": {
             "product_card_gap": 12,
-            "inherit_color_scheme": false,
-            "color_scheme": "scheme-f18682b5-ff46-4cd5-99b9-4dc3b72d643b",
             "border": "solid",
             "border_width": 1,
             "border_opacity": 100,
@@ -2480,7 +2417,8 @@
             "padding-block-start": 0,
             "padding-block-end": 0,
             "padding-inline-start": 0,
-            "padding-inline-end": 0
+            "padding-inline-end": 0,
+            "background_color": "{{ settings.color_palette.color4 }}"
           },
           "blocks": {
             "product_card_gallery_DNizbJ": {
@@ -2488,8 +2426,6 @@
               "name": "t:names.product_card_media",
               "settings": {
                 "image_ratio": "square",
-                "inherit_color_scheme": true,
-                "color_scheme": "",
                 "border": "none",
                 "border_width": 1,
                 "border_opacity": 100,
@@ -2521,8 +2457,6 @@
                 "custom_width_mobile": 100,
                 "height": "fit",
                 "custom_height": 100,
-                "inherit_color_scheme": true,
-                "color_scheme": "",
                 "background_media": "none",
                 "video_position": "cover",
                 "background_image_position": "cover",
@@ -2562,8 +2496,6 @@
                     "custom_width_mobile": 100,
                     "height": "fit",
                     "custom_height": 100,
-                    "inherit_color_scheme": true,
-                    "color_scheme": "",
                     "background_media": "none",
                     "video_position": "cover",
                     "background_image_position": "cover",
@@ -2677,8 +2609,6 @@
               "static": true,
               "settings": {
                 "image_ratio": "square",
-                "inherit_color_scheme": true,
-                "color_scheme": "",
                 "border": "none",
                 "border_width": 1,
                 "border_opacity": 100,
@@ -2716,7 +2646,6 @@
         "icons_shape": "circle",
         "section_width": "full-width",
         "gap": 28,
-        "color_scheme": "scheme-1",
         "padding-block-start": 48,
         "padding-block-end": 48
       }

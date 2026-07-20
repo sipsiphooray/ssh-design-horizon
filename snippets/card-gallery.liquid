@@ -63,9 +63,11 @@
   endif
 %}
 
+{% if block_settings.background_color != blank %}{% render 'contrast-override', background_color: block_settings.background_color, section_id: block.id %}{% endif %}
+
 <div
   ref="cardGallery"
-  class="card-gallery card-gallery-{{ block.id }} spacing-style border-style{% if has_badges %} card-gallery--badge-{{ badge_position }}{% endif %}{% if block_settings.inherit_color_scheme == false %} color-{{ block_settings.color_scheme }}{% endif %}"
+  class="card-gallery card-gallery-{{ block.id }} spacing-style border-style{% if has_badges %} card-gallery--badge-{{ badge_position }}{% endif %}{% if block_settings.background_color != blank %} color-custom-{{ block.id }}{% endif %}"
   style="
     {% render 'border-override', settings: block_settings %}
     {% render 'spacing-style', settings: block_settings %}
