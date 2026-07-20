@@ -1,0 +1,353 @@
+{%- doc -%}
+  Price + quick-add row for product-hotspots-flat (aside cards + hotspot dialog).
+  Optional block.settings.hotspot_variant_name matches variant.title (case-insensitive), then substring match.
+  @param {object} product
+  @param {object} block - hotspot_flat block
+  @param {object} section
+  @param {string} variant_context - aside | dialog
+  @param {object} [active_variant] - Pre-resolved pin variant (same pattern as main-collection / product-card)
+  @param {boolean} [pin_lookup_completed] - When true, skip inner pin lookup (callers already ran hotspots-flat-pinned-variant-id)
+  @param {boolean} [show_quick_add] - default true
+  @param {string} [price_column_class] - Extra classes on the price cell (e.g. aside typography)
+  @param {string} [price_column_style] - Inline style for the price cell
+{%- enddoc -%}
+{% liquid
+  assign show_quick_add = show_quick_add | default: true
+  assign pin_lookup_completed = pin_lookup_completed | default: false
+  assign pass_active_variant = active_variant
+
+  unless pin_lookup_completed
+    if pass_active_variant == blank
+      capture pinned_variant_id_str
+        render 'hotspots-flat-pinned-variant-id', product: product, block: block
+      endcapture
+      assign pinned_variant_id_str = pinned_variant_id_str | strip
+      if pinned_variant_id_str != '' and product != blank
+        assign pinned_numeric_id = pinned_variant_id_str | plus: 0
+        assign pinned_matches = product.variants | where: 'id', pinned_numeric_id
+        assign pass_active_variant = pinned_matches.first
+      endif
+    endif
+  endunless
+
+  if pass_active_variant == blank
+    assign pass_active_variant = false
+  endif
+
+  assign variant_for_price = product.selected_or_first_available_variant
+  if pass_active_variant != false
+    assign variant_for_price = pass_active_variant
+  endif
+
+  assign use_currency = false
+  if settings.currency_code_enabled_product_cards
+    assign use_currency = true
+  endif
+
+  assign cart_upsell_mode = true
+  if pass_active_variant != false
+    assign cart_upsell_mode = false
+  endif
+
+  assign dialog_price_class = 'h6'
+  if variant_context == 'dialog' and section != blank
+    assign dialog_price_class = section.settings.product_price_preset | default: 'h6'
+    if dialog_price_class == blank or dialog_price_class == 'rte'
+      assign dialog_price_class = 'h6'
+    endif
+  endif
+
+  assign price_column_class = price_column_class | default: '' | strip
+%}
+{%- if product == blank or variant_for_price == blank -%}
+{%- else -%}
+  <div
+    class="hotspots-flat-price-row hotspots-flat-price-row--{{ variant_context }}"
+    data-variant-id="{{ variant_for_price.id }}"
+    data-variant-count="{{ product.variants.size }}"
+  >
+    <div
+      class="hotspots-flat-price-row__price {% if variant_context == 'dialog' %}{{ dialog_price_class }}{% endif %}{% if price_column_class != blank %} {{ price_column_class }}{% endif %}"
+      {% if price_column_style != blank %}
+        style="{{ price_column_style }}"
+      {% endif %}
+    >
+      <div ref="priceContainer">
+        {%- if variant_for_price.compare_at_price > variant_for_price.price -%}
+          <span role="group">
+            <span class="visually-hidden">{{ 'content.price_regular' | t }}&nbsp;</span>
+            <span class="compare-at-price">
+              {%- if use_currency -%}
+                {{- variant_for_price.compare_at_price | money_with_currency -}}
+              {%- else -%}
+                {{- variant_for_price.compare_at_price | money -}}
+              {%- endif -%}
+            </span>
+          </span>
+        {%- endif -%}
+        <span role="group">
+          <span class="visually-hidden">{{ 'content.price_sale' | t }}&nbsp;</span>
+          <span class="price">
+            {%- if use_currency -%}
+              {{- variant_for_price.price | money_with_currency -}}
+            {%- else -%}
+              {{- variant_for_price.price | money -}}
+            {%- endif -%}
+          </span>
+        </span>
+      </div>
+      {%- if variant_for_price.unit_price_measurement and variant_for_price.unit_price -%}
+        {%- liquid
+          if use_currency
+            assign unit_price_money = variant_for_price.unit_price | money_with_currency
+          else
+            assign unit_price_money = variant_for_price.unit_price | money
+          endif
+        -%}
+        {% render 'unit-price', price: unit_price_money, measurement: variant_for_price.unit_price_measurement %}
+      {%- endif -%}
+    </div>
+    {%- if show_quick_add and product.available -%}
+      <div class="hotspots-flat-price-row__action">
+        {% comment %}
+          Match cart upsell (snippets/upsell-card.liquid): use theme quick-add color scheme, not section scheme;
+          visibility tokens are set in CSS on __action so quick-add behaves like upsell-card__content.
+        {% endcomment %}
+        {% if pass_active_variant != false %}
+          {% render 'quick-add',
+            product: product,
+            section_id: section.id,
+            block: block,
+            active_variant: pass_active_variant,
+            cart_upsell: false
+          %}
+        {% else %}
+          {% render 'quick-add',
+            product: product,
+            section_id: section.id,
+            block: block,
+            cart_upsell: cart_upsell_mode
+          %}
+        {% endif %}
+      </div>
+    {%- endif -%}
+  </div>
+{%- endif -%}
+
+{% stylesheet %}
+  .hotspots-flat-price-row {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--gap-sm);
+    width: 100%;
+    min-width: 0;
+  }
+
+  .hotspots-flat-price-row__price {
+    flex: 1;
+    min-width: 0;
+    font-size: var(--font-size--sm) !important;
+  }
+
+  .hotspots-flat-price-row__price [ref='priceContainer'] {
+    margin-top: 0;
+  }
+
+  .hotspots-flat-price-row__action {
+    flex-shrink: 0;
+    /* Same as .upsell-card .product-card__content inline style — drives quick-add snippet defaults */
+    --quick-add-display: flex;
+    --quick-add-mobile-display: flex;
+    --quick-add-mobile-opacity: 1;
+  }
+
+  /*
+   * Inline quick-add (same idea as cart upsell): reset overlay positioning and always show control.
+   * When cart_upsell is false + active_variant, both buttons exist in DOM; base.css hides one via
+   * [data-quick-add-button]. Do NOT set display:flex !important on both — that overrides the hide rule.
+   */
+  .hotspots-flat-price-row .quick-add {
+    position: relative;
+    inset: auto;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    flex-wrap: nowrap;
+    min-height: var(--minimum-touch-target);
+    min-width: 0;
+    pointer-events: auto;
+    width: auto;
+    z-index: 2;
+  }
+
+  .hotspots-flat-price-row quick-add-component[data-quick-add-button='add'] {
+    max-width: min(100%, 12rem);
+  }
+
+  .hotspots-flat-price-row quick-add-component[data-quick-add-button='choose'] {
+    max-width: 100%;
+  }
+
+  .hotspots-flat-price-row .quick-add__product-form-component,
+  .hotspots-flat-price-row .quick-add__product-form-component .shopify-product-form {
+    height: auto;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    width: 100%;
+  }
+
+  .hotspots-flat-price-row quick-add-component[data-quick-add-button='choose'] add-to-cart-component {
+    display: none !important;
+  }
+
+  .hotspots-flat-price-row quick-add-component[data-quick-add-button='add'] .quick-add__button--choose {
+    display: none !important;
+  }
+
+  .hotspots-flat-price-row quick-add-component[data-quick-add-button='add'] .quick-add__button--add,
+  .hotspots-flat-price-row quick-add-component[data-quick-add-button='choose'] .quick-add__button--choose {
+    --button-border-width: var(--style-border-width-primary);
+
+    display: flex !important;
+    width: auto;
+    min-width: 5.5rem;
+    max-width: 100%;
+    height: auto;
+    min-height: unset;
+    justify-content: center;
+    align-items: center;
+    right: auto;
+    bottom: auto;
+    margin: 0;
+    padding-block: var(--padding-xs);
+    padding-inline: var(--button-padding-inline);
+    border: none;
+    border-radius: var(--style-border-radius-buttons-primary);
+    background: var(--color-primary-button-text);
+    background-image: none;
+    color: var(--color-primary-button-background);
+    box-shadow: inset 0 0 0 var(--button-border-width) var(--color-primary-button-border) !important;
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+    font-family: var(--button-font-family-primary);
+    font-weight: var(--font-paragraph--weight);
+    font-size: var(--font-size--xs);
+    letter-spacing: var(--letter-spacing-sm);
+    text-transform: var(--button-text-case-primary);
+    overflow: visible !important;
+    transition: color var(--animation-speed) var(--animation-easing),
+      box-shadow var(--animation-speed) var(--animation-easing),
+      background var(--animation-speed) var(--animation-easing);
+  }
+
+  .hotspots-flat-price-row quick-add-component[data-quick-add-button='add'] .quick-add__button--add:hover,
+  .hotspots-flat-price-row quick-add-component[data-quick-add-button='choose'] .quick-add__button--choose:hover {
+    scale: 1;
+    background: var(--color-primary-button-hover-text);
+    background-image: none;
+    color: var(--color-primary-button-hover-background);
+    box-shadow: inset 0 0 0 var(--button-border-width) var(--color-primary-button-hover-border) !important;
+  }
+
+  .hotspots-flat-price-row quick-add-component[data-quick-add-button='add'] .quick-add__button--add:active,
+  .hotspots-flat-price-row quick-add-component[data-quick-add-button='choose'] .quick-add__button--choose:active {
+    scale: 0.99;
+  }
+
+  .hotspots-flat-price-row quick-add-component[data-quick-add-button='add'] .quick-add__button--add .add-to-cart-text,
+  .hotspots-flat-price-row quick-add-component[data-quick-add-button='choose'] .quick-add__button--choose .add-to-cart-text {
+    background: transparent !important;
+    background-image: none !important;
+    border: none;
+    border-radius: 0;
+    height: auto;
+    min-height: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: currentColor;
+    overflow: visible !important;
+  }
+
+  .hotspots-flat-price-row quick-add-component[data-quick-add-button='add'] .quick-add__button--add .add-to-cart-text__content,
+  .hotspots-flat-price-row quick-add-component[data-quick-add-button='choose'] .quick-add__button--choose .add-to-cart-text__content {
+    grid-template-columns: 1fr;
+  }
+
+  @media screen and (max-width: 749px) {
+    .hotspots-flat-price-row
+      quick-add-component[data-quick-add-button='add']
+      .quick-add__button--add
+      .add-to-cart-text__content.is-visually-hidden-mobile:not(:focus, :active) {
+      position: static !important;
+      overflow: visible !important;
+      width: auto !important;
+      height: auto !important;
+      margin: 0 !important;
+      padding: 0 !important;
+      border: 0 !important;
+      clip: auto !important;
+      clip-path: none;
+      word-wrap: normal !important;
+    }
+  }
+
+  .hotspots-flat-price-row quick-add-component[data-quick-add-button='choose'] .quick-add__button--choose {
+    width: max-content;
+    max-width: 100%;
+  }
+
+  .hotspots-flat-price-row quick-add-component[data-quick-add-button='choose'] .quick-add__button--choose .add-to-cart-text__content {
+    display: flex !important;
+    align-items: center;
+    justify-content: center;
+    grid-template-columns: unset !important;
+    overflow: visible;
+    min-width: 0;
+  }
+
+  .hotspots-flat-price-row quick-add-component[data-quick-add-button='choose'] .quick-add__button--choose .add-to-cart-text__content > span {
+    min-width: auto !important;
+  }
+
+  .hotspots-flat-price-row quick-add-component[data-quick-add-button='add'] .quick-add__button--add .add-to-cart-text__content span span,
+  .hotspots-flat-price-row quick-add-component[data-quick-add-button='choose'] .quick-add__button--choose .add-to-cart-text__content span span {
+    opacity: 1;
+    filter: none;
+    translate: 0 0;
+    padding: 0;
+    color: currentColor;
+    white-space: nowrap;
+  }
+
+  .hotspots-flat-price-row quick-add-component[data-quick-add-button='add'] .quick-add__button--add .add-to-cart-icon,
+  .hotspots-flat-price-row quick-add-component[data-quick-add-button='choose'] .quick-add__button--choose .add-to-cart-icon {
+    display: none;
+  }
+
+  .hotspots-flat-price-row quick-add-component[data-quick-add-button='add'] .quick-add__button--add:focus-visible,
+  .hotspots-flat-price-row quick-add-component[data-quick-add-button='choose'] .quick-add__button--choose:focus-visible {
+    outline: var(--focus-outline-width) solid var(--color-primary-button-text);
+    outline-offset: var(--focus-outline-offset);
+  }
+
+  @media (forced-colors: active) {
+    .hotspots-flat-price-row quick-add-component[data-quick-add-button='add'] .quick-add__button--add,
+    .hotspots-flat-price-row quick-add-component[data-quick-add-button='choose'] .quick-add__button--choose {
+      background: ButtonText;
+      color: ButtonFace;
+      forced-color-adjust: none;
+    }
+  }
+
+  .hotspots-flat-price-row--dialog {
+    margin-top: var(--padding-3xs);
+  }
+
+  .hotspot-dialog__product-info .hotspots-flat-price-row--dialog {
+    padding-inline-end: var(--padding-sm);
+  }
+{% endstylesheet %}

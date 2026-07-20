@@ -1,0 +1,106 @@
+{%- doc -%}
+  Flat product hotspot UI for product-hotspots-flat (section-defined block; not a theme block).
+  @param {object} block - Section block of type hotspot_flat
+  @param {object} section - Parent section (pass explicitly for theme-check)
+{%- enddoc -%}
+{% liquid
+  assign hotspot_product = block.settings.product
+  assign placeholder_product_title = 'placeholders.product_title' | t
+  assign hotspot_product_title = hotspot_product.title | default: placeholder_product_title
+%}
+{% liquid
+  assign hotspot_pin_variant = blank
+  assign hotspot_pin_needle = block.settings.hotspot_variant_name | default: '' | strip
+  if hotspot_pin_needle != '' and hotspot_product != blank
+    capture hotspot_pinned_id_str
+      render 'hotspots-flat-pinned-variant-id', product: hotspot_product, block: block
+    endcapture
+    assign hotspot_pinned_id_str = hotspot_pinned_id_str | strip
+    if hotspot_pinned_id_str != '' and hotspot_product != blank
+      assign hotspot_pin_numeric_id = hotspot_pinned_id_str | plus: 0
+      assign hotspot_pin_matches = hotspot_product.variants | where: 'id', hotspot_pin_numeric_id
+      assign hotspot_pin_variant = hotspot_pin_matches.first
+    endif
+  endif
+
+  assign hotspot_product_page_url = ''
+  if hotspot_product != blank
+    assign variant_to_link = hotspot_product.selected_or_first_available_variant
+    if hotspot_pin_variant != blank
+      assign variant_to_link = hotspot_pin_variant
+    endif
+    assign hotspot_product_page_url = variant_to_link.url
+  endif
+%}
+
+<product-hotspot-component
+  class="
+    hotspot
+    {% unless block.settings.show_hotspot_on_mobile %}hotspot--hide-mobile-dot{% endunless %}
+    {% if hotspot_product == blank and request.design_mode == false %} hotspot--hidden-touch hidden--mobile{% endif %}
+  "
+  style="
+    left: calc({{ block.settings['x-position'] }}% - var(--button-size) / 2);
+    top: calc({{ block.settings['y-position'] }}% - var(--button-size) / 2);
+    --hotspot-bg: {{ section.settings.hotspot_color }};
+    --hotspot-bullseye: {{ section.settings.bullseye_color }};
+  "
+  data-product-url="{% if hotspot_product != blank %}{{ hotspot_product_page_url }}{% endif %}"
+  data-product-title="{% if hotspot_product != blank %}{{ hotspot_product.title | escape }}{% endif %}"
+  data-id="{{ block.id }}"
+  {{ block.shopify_attributes }}
+>
+  <button
+    class="hotspot-trigger"
+    aria-label="{{ 'accessibility.open_hotspot' | t }}"
+    ref="trigger"
+    on:click="/handleHotspotClick"
+    style="anchor-name: --hotspot-trigger-{{ block.id }};"
+  ></button>
+  <dialog
+    class="hotspot-dialog"
+    ref="dialog"
+  >
+    {% if hotspot_product != blank %}
+      <a
+        href="{{ hotspot_product_page_url }}"
+        class="hotspot-dialog__link"
+        aria-label="{{ hotspot_product.title | escape }}"
+        ref="productLink"
+      >
+      </a>
+    {% endif %}
+    <div class="hotspot-dialog__product">
+      {% if block.settings.hotspot_image != blank %}
+        {% render 'image', image: block.settings.hotspot_image, class: 'hotspot-dialog__product-image' %}
+      {% elsif hotspot_product.featured_image != blank %}
+        {% render 'image', image: hotspot_product.featured_image, class: 'hotspot-dialog__product-image' %}
+      {% else %}
+        {{ 'product-apparel-1' | placeholder_svg_tag: 'hotspot-dialog__placeholder-product-image' }}
+      {% endif %}
+      <div class="hotspot-dialog__product-content">
+        <div class="hotspot-dialog__product-info">
+          <span class="hotspot-dialog__product-title h6">
+            {{ hotspot_product_title }}
+          </span>
+          {% if hotspot_product != blank %}
+            {% render 'hotspots-flat-product-actions',
+              product: hotspot_product,
+              block: block,
+              section: section,
+              variant_context: 'dialog',
+              active_variant: hotspot_pin_variant,
+              pin_lookup_completed: true,
+              show_quick_add: hotspot_product.available
+            %}
+            {% unless hotspot_product.available %}
+              <div class="hotspot-dialog__sold-out-badge">
+                {{ 'content.product_badge_sold_out' | t }}
+              </div>
+            {% endunless %}
+          {% endif %}
+        </div>
+      </div>
+    </div>
+  </dialog>
+</product-hotspot-component>
