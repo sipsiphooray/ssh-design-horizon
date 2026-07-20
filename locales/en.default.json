@@ -69,6 +69,8 @@
   "actions": {
     // Quick add button on product cards, shortened version of add to cart
     "add": "Add",
+    // Link to view a cart line item's uploaded preview image
+    "view": "View",
     "add_to_cart": "Add to cart",
     // Success message shown after adding item to cart
     "added": "Added",
