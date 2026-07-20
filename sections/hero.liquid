@@ -509,13 +509,15 @@
     style="{% render 'spacing-style', settings: section.settings %}"
   >
     {%- if section.settings.link != blank -%}
-      <a
-        href="{{ section.settings.link }}"
-        class="hero__link"
-        {% if section.settings.open_in_new_tab %}
-          target="_blank" rel="noopener"
-        {% endif %}
-      ></a>
+      {%- unless request.design_mode -%}
+        <a
+          href="{{ section.settings.link }}"
+          class="hero__link"
+          {% if section.settings.open_in_new_tab %}
+            target="_blank" rel="noopener"
+          {% endif %}
+        ></a>
+      {%- endunless -%}
     {%- endif -%}
     <div
       class="hero__media-grid"
@@ -584,6 +586,10 @@
     @media screen and (min-width: 750px) {
       align-items: var(--vertical-alignment);
     }
+  }
+
+  .hero__content-wrapper.page-narrow {
+    grid-column: 2 / 3;
   }
 
   .hero__content-wrapper.page-width {
@@ -1100,6 +1106,10 @@
         {
           "value": "narrow",
           "label": "t:options.narrow"
+        },
+        {
+          "value": "page-narrow",
+          "label": "Narrow"
         },
         {
           "value": "page-width",

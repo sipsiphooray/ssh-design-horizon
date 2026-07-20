@@ -83,6 +83,13 @@ export const MORPH_OPTIONS = {
       }
     }
 
+    // Store patch: preserve runtime-applied inline styles on specific elements matched by id.
+    const PRESERVED_STYLE_IDS = ['account-popover'];
+    if (oldNode.id && oldNode.id === newNode.id && PRESERVED_STYLE_IDS.includes(oldNode.id)) {
+      const oldStyle = oldNode.getAttribute('style');
+      if (oldStyle) newNode.setAttribute('style', oldStyle);
+    }
+
     // Preserve temporary view transition name
     if (oldNode instanceof HTMLElement && newNode instanceof HTMLElement && oldNode.style.viewTransitionName) {
       newNode.style.viewTransitionName = oldNode.style.viewTransitionName;

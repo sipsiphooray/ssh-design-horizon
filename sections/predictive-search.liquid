@@ -7,6 +7,7 @@
     class="predictive-search-dropdown"
     role="listbox"
     aria-label="{{ 'content.search_results_label' | t }}"
+    aria-expanded="true"
     data-transition-container
     style="--color-shadow: rgb(var(--color-foreground-rgb) / var(--opacity-10-25));"
   >
@@ -27,6 +28,7 @@
       <div
         class="visually-hidden"
         role="status"
+        aria-live="polite"
       >
         {%- if predictive_search.performed and search_results_count > 0 -%}
           {{ 'accessibility.search_results_count' | t: count: search_results_count, query: predictive_search.terms }}
