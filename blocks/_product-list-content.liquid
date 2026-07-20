@@ -143,6 +143,37 @@
       "visible_if": "{{ block.settings.content_direction != 'row' }}"
     },
     {
+      "type": "checkbox",
+      "id": "custom_mobile_alignment",
+      "label": "Enable custom mobile alignment",
+      "visible_if": "{{ block.settings.vertical_on_mobile == true or block.settings.content_direction == 'column' }}"
+    },
+    {
+      "type": "select",
+      "id": "mobile_vertical_alignment",
+      "label": "Mobile alignment",
+      "options": [
+        {
+          "value": "flex-start",
+          "label": "t:options.left"
+        },
+        {
+          "value": "center",
+          "label": "t:options.center"
+        },
+        {
+          "value": "flex-end",
+          "label": "t:options.right"
+        },
+        {
+          "value": "space-between",
+          "label": "t:options.space_between"
+        }
+      ],
+      "default": "flex-start",
+      "visible_if": "{{ block.settings.custom_mobile_alignment == true and block.settings.vertical_on_mobile == true or block.settings.content_direction == 'column' }}"
+    },
+    {
       "type": "select",
       "id": "vertical_alignment_flex_direction_column",
       "label": "t:settings.position",
