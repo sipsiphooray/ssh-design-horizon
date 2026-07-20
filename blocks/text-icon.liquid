@@ -57,7 +57,7 @@
   >
     {% capture icon %}
       {% if block_settings.use_height != blank %}
-          <div class="use-height-icon" style="--height: {{ block_settings.height }}px;{% if block_settings.custom_mobile_height == true %}--mobile-height: {{ block_settings.mobile-height }}px;{% endif %}">
+          <div class="use-height-icon" style="--height: {{ block_settings.icon_height }}px;{% if block_settings.custom_mobile_height == true %}--mobile-height: {{ block_settings.mobile-height }}px;{% endif %}">
       {% endif %}
           {% if block_settings.custom_svg != blank %}
             <div class="{{ icon_block_class }} custom-svg-icon" style="width: {{ block_settings.icon_width }}px;">
@@ -428,7 +428,7 @@
     },
     {
       "type": "range",
-      "id": "height",
+      "id": "icon_height",
       "label": "Height",
       "min": 8,
       "max": 200,
