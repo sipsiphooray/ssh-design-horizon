@@ -240,7 +240,8 @@
       "color7": "#eef1ea",
       "color8": "#759d6f",
       "color9": "#5c745c",
-      "color10": "#b89b95"
+      "color10": "#b89b95",
+      "color11": "#f1dbe6"
     },
     "palette_primary_button_border": "{{ settings.color_palette.foreground }}",
     "palette_input_border": "{{ settings.color_palette.color3 }}",

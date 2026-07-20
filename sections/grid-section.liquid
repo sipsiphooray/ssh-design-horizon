@@ -33,6 +33,14 @@
 
 {% render 'contrast-override', background_color: section.settings.background_color, section_id: section.id %}
 
+{%- comment -%}
+  v4 moved .resource-list--grid column CSS out of always-loaded base.css into this
+  opt-in snippet. grid-section relies on that class, so render it here — on pages with
+  no product-list/recommendations section the grid would otherwise collapse to 1 column.
+  {% stylesheet %} blocks dedupe, so rendering it from many places is safe.
+{%- endcomment -%}
+{% render 'resource-list-styles' %}
+
 <div class="section-background{% if section.settings.background_color != blank %} color-custom-{{ section.id }}{% endif %}"></div>
 
 <div
@@ -444,8 +452,8 @@
       "label": "t:settings.width",
       "options": [
         {
-          "value": "narrow",
-          "label": "t:options.narrow"
+          "value": "page-narrow",
+          "label": "Narrow"
         },
         {
           "value": "page-width",
@@ -464,7 +472,7 @@
       "id": "full_width_on_mobile",
       "label": "t:settings.full_width_on_mobile",
       "default": false,
-      "visible_if": "{{ section.settings.section_width == 'page-width' }}"
+      "visible_if": "{{ section.settings.section_width == 'page-width' or section.settings.section_width == 'page-narrow' }}"
     },
     {
       "type": "range",

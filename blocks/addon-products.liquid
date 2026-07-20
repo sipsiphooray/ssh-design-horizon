@@ -21,6 +21,13 @@
   endcase
 %}
 
+{%- comment -%}
+  v4 moved .resource-list--grid column CSS out of base.css into this opt-in snippet.
+  Render it so the grid never collapses to 1 column when no product-list is on the page.
+  {% stylesheet %} blocks dedupe, so this is safe.
+{%- endcomment -%}
+{% render 'resource-list-styles' %}
+
 {% comment %}
   [data-section-id] {section.id} - used to fetch the product recommendations from the Section Rendering API
 {% endcomment %}
