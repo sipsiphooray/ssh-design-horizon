@@ -1,8 +1,29 @@
+{%- doc -%}
+  Displays product images in a carousel.
+  Settings allow for a full slideshow, showing only the first image, or showing the second image when hovering.
+  Note: When the product card itself is in a carousel layout, the card-gallery's carousel is disabled with JavaScript.
+
+  @param {boolean} [hide_quick_add] - Hide quick add
+  @param {string} [discount_label] - The discount label
+  @param {string} [discount_background] - The discount background color
+  @param {string} [discount_color_text] - The discount text color
+  @param {object} [product] - The product object
+  @param {object} [pinned_variant] - Explicit variant for gallery/link (curated rows); when blank, card-gallery resolves from collection metafield like product-card.
+{%- enddoc -%}
+
 {% assign product = closest.product %}
+
+{% liquid
+  assign custom_badges = product.metafields.custom.product_badges.value
+  assign has_any_badge = false
+  if custom_badges != blank or discount_label != blank or product.available == false or product.compare_at_price > product.price
+    assign has_any_badge = true
+  endif
+%}
 
 {% capture children %}
   {% unless product == blank %}
-    {%- if product.available == false or product.compare_at_price > product.price -%}
+    {%- if has_any_badge -%}
       <div
         class="product-badges product-badges--{{ settings.badge_position }}"
         style="
@@ -10,27 +31,65 @@
             --badge-font-family: var(--font-{{ settings.badge_font_family }}--family); --badge-font-weight: var(--font-{{ settings.badge_font_family }}--weight); --badge-text-transform: {{ settings.badge_text_transform }};
         "
       >
-        <div
-          class="
-            product-badges__badge product-badges__badge--rectangle
-            {% if product.available == false %} color-custom-badge-sold-out{% elsif product.compare_at_price > product.price %} color-custom-badge-sale{% endif %}
-          "
-        >
-          {%- if product.available == false -%}
-            {{ 'content.product_badge_sold_out' | t }}
-          {%- elsif product.compare_at_price > product.price -%}
-            {{ 'content.product_badge_sale' | t }}
-          {%- endif -%}
-        </div>
+        {% if custom_badges != blank %}
+          {% for i in custom_badges %}
+            {% if i.label != blank %}
+              <div
+                class="product-badges__badge product-badges__badge--rectangle color-custom-badge-sale"
+                style="
+                  {% if i.badge_background_color != blank %}
+                    --color-background: {{ i.badge_background_color }};
+                  {% endif %}
+                  {% if i.badge_text_color != blank %}
+                    --color-foreground: {{ i.badge_text_color }};
+                  {% endif %}
+                "
+              >
+                {{ i.label }}
+              </div>
+            {% endif %}
+          {% endfor %}
+        {% endif %}
+
+        {% if discount_label != blank %}
+          <div
+            class="product-badges__badge product-badges__badge--rectangle color-custom-badge-sale"
+            style="
+              {% if discount_background != blank %}
+                --color-background: {{ discount_background }};
+              {% endif %}
+              {% if discount_color_text != blank %}
+                --color-foreground: {{ discount_color_text }};
+              {% endif %}
+            "
+          >
+            {{ discount_label }}
+          </div>
+        {% elsif custom_badges == blank %}
+          <div
+            class="
+              product-badges__badge product-badges__badge--rectangle
+              {% if product.available == false %} color-custom-badge-sold-out{% elsif product.compare_at_price > product.price %} color-custom-badge-sale{% endif %}
+            "
+          >
+            {%- if product.available == false -%}
+              {{ 'content.product_badge_sold_out' | t }}
+            {%- elsif product.compare_at_price > product.price -%}
+              {{ 'content.product_badge_sale' | t }}
+            {%- endif -%}
+          </div>
+        {% endif %}
       </div>
     {%- endif -%}
-    {% if product.available and settings.quick_add or settings.mobile_quick_add %}
-      {% render 'quick-add', product: product, section_id: section.id %}
-    {% endif %}
+    {% unless hide_quick_add == true %}
+      {% if product.available and settings.quick_add or settings.mobile_quick_add %}
+        {% render 'quick-add', product: product, section_id: section.id %}
+      {% endif %}
+    {% endunless %}
   {% endunless %}
 {% endcapture %}
 
-{% render 'card-gallery', children: children %}
+{% render 'card-gallery', children: children, pinned_variant: pinned_variant %}
 
 {% # Title and price for the zoomed out grid view %}
 <div class="product-grid-view-zoom-out--details">
@@ -195,7 +254,10 @@
   "presets": [
     {
       "name": "t:names.product_card_media",
-      "category": "t:categories.product"
+      "category": "t:categories.product",
+      "settings": {
+        "image_ratio": "square"
+      }
     }
   ]
 }

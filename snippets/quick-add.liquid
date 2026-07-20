@@ -3,15 +3,22 @@
 
   @param {object} product - The product object
   @param {string} section_id - The section ID
+  @param {object} [active_variant] - The variant object
   @param {object} [block] - The block object
+  @param {boolean} [cart_upsell] - When true: renders only Add (single variant) or only Choose (multi); no dual-button DOM in the drawer
 {%- enddoc -%}
 
 {% liquid
+  assign cart_upsell = cart_upsell | default: false
   assign product_form_id = 'QuickAdd-ProductForm-' | append: product.id | append: '-' | append: block.id
   assign add_to_cart_text = 'actions.add' | t
   assign choose_options_text = 'actions.choose' | t
   # Logic to determine which variant to use (matching swatch selection logic from product-card)
   assign variant = product.selected_or_first_available_variant
+
+  if active_variant != blank
+    assign variant = active_variant
+  endif
 
   assign uses_selling_plans = false
   if product.requires_selling_plan or product.selling_plan_groups.size > 0
@@ -49,10 +56,34 @@
     assign render_choose = true
   endif
 
+  # Cart drawer upsell / active-variant cards: render a single control so base.css rules like
+  # [data-quick-add-button='choose'] add-to-cart-component { display: none } never apply
+  # (there is no add-to-cart-component beside Choose).
+  if cart_upsell
+    if product.variants.size > 1
+      assign initial_button = 'choose'
+      assign render_add = false
+      assign render_choose = true
+    else
+      assign initial_button = 'add'
+      assign render_add = true
+      assign render_choose = false
+    endif
+  elsif active_variant != blank
+    assign initial_button = 'add'
+    assign render_add = true
+    assign render_choose = false
+  endif
+
   if uses_selling_plans
     assign initial_button = 'choose'
     assign render_add = false
     assign render_choose = true
+  endif
+
+  assign cart_upsell_choose_only = false
+  if cart_upsell and render_choose and render_add == false
+    assign cart_upsell_choose_only = true
   endif
 %}
 
@@ -86,6 +117,10 @@
   data-product-options-count="{{ product.options.size }}"
   data-uses-selling-plans="{{ uses_selling_plans }}"
   data-renders-both-buttons="{% if render_add and render_choose %}true{% endif %}"
+  {% if cart_upsell %}
+    data-cart-upsell="true"
+    data-variant-count="{{ product.variants.size }}"
+  {% endif %}
 >
   {% if render_add %}
     <product-form-component
@@ -118,6 +153,7 @@
         >
         {% render 'add-to-cart-button',
           add_to_cart_text: add_to_cart_text,
+          quick_add: true,
           class: 'quick-add__button quick-add__button--add add-to-cart-button',
           can_add_to_cart: can_add_to_cart,
           product: product
@@ -128,7 +164,7 @@
 
   {% if render_choose %}
     <button
-      class="button quick-add__button quick-add__button--choose add-to-cart-button"
+      class="button quick-add__button quick-add__button--choose add-to-cart-button{% if cart_upsell_choose_only %} upsell-card__choose-button{% endif %}"
       {% comment %} type="submit" is the default, so we explicitly set it to "button" to prevent the ProductFormComponent.handleSubmit from being triggered {% endcomment %}
       type="button"
       name="add"
@@ -138,7 +174,7 @@
         aria-hidden="true"
         class="svg-wrapper add-to-cart-icon"
       >
-        {{- 'icon-add-to-cart.svg' | inline_asset_content -}}
+        {{- 'icon-plus.svg' | inline_asset_content -}}
       </span>
       {{- choose_options_text -}}
     </button>

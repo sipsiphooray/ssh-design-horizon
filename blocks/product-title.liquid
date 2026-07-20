@@ -3,11 +3,70 @@
   {% assign product_title = '<p role="heading" aria-level="3">' | append: text | append: '</p>' %}
   {% render 'text', fallback_text: product_title, block: block %}
 {% else %}
-  {% assign product_title = '<p role="heading" aria-level="3">' | append: closest.product.title | append: '</p>' %}
+  {% liquid
+    assign card_initial_variant = blank
+    assign card_title_suffix = blank
+    assign p = closest.product
+
+    if active_variant != blank
+      assign card_initial_variant = active_variant
+    elsif p != blank and p.has_only_default_variant == false and collection != blank and collection.metafields.custom.variants_to_render != blank
+      assign vtr_meta = collection.metafields.custom.variants_to_render
+      assign vtr_val = vtr_meta.value
+      if vtr_val != blank
+        assign vtr_matched = blank
+        assign matched_needle = blank
+        if vtr_meta.type contains 'list'
+          for token in vtr_val
+            assign needle = token.value | default: token
+            if needle == blank
+              continue
+            endif
+            for v in p.variants
+              if v.title contains needle
+                assign vtr_matched = v
+                assign matched_needle = needle
+                break
+              endif
+            endfor
+            if vtr_matched != blank
+              break
+            endif
+          endfor
+        else
+          assign needle = vtr_val
+          if needle != blank
+            for v in p.variants
+              if v.title contains needle
+                assign vtr_matched = v
+                assign matched_needle = needle
+                break
+              endif
+            endfor
+          endif
+        endif
+        if vtr_matched != blank
+          assign card_initial_variant = vtr_matched
+          assign card_title_suffix = matched_needle
+        endif
+      endif
+    endif
+
+    if card_title_suffix != blank
+      assign title_display = p.title | append: ' - ' | append: card_title_suffix | escape
+    else
+      assign title_display = p.title | escape
+    endif
+    assign product_title = '<p role="heading" aria-level="3">' | append: title_display | append: '</p>'
+    assign title_href = p.url
+    if card_initial_variant != blank
+      assign title_href = card_initial_variant.url
+    endif
+  %}
   <a
     class="contents user-select-text"
     ref="productTitleLink"
-    href="{{ closest.product.url }}"
+    href="{{ title_href }}"
   >
     {% render 'text', fallback_text: product_title, block: block %}
   </a>
@@ -165,6 +224,10 @@
           "label": "14px"
         },
         {
+          "value": "0.9375rem",
+          "label": "15px"
+        },
+        {
           "value": "1rem",
           "label": "16px"
         },
@@ -247,6 +310,10 @@
         {
           "value": "0.875rem",
           "label": "14px"
+        },
+        {
+          "value": "0.9375rem",
+          "label": "15px"
         },
         {
           "value": "1rem",
