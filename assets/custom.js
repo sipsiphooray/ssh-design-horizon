@@ -58,9 +58,13 @@ function scrollToHash() {
         offset = stickyHeader.clientHeight;
       }
 
-      const targetPosition = target.getBoundingClientRect().top + window.pageYOffset - offset;
+      // v4 desktop (>=990px) scrolls .page-wrapper, not the window
+      const scroller = (window.matchMedia('(min-width: 990px)').matches && document.querySelector('.page-wrapper'))
+        || document.scrollingElement
+        || document.documentElement;
+      const targetPosition = target.getBoundingClientRect().top + scroller.scrollTop - offset;
 
-      window.scrollTo({
+      scroller.scrollTo({
         top: targetPosition,
         behavior: "smooth"
       });
