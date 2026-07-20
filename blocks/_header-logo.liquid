@@ -93,6 +93,9 @@
     align-items: center;
     text-decoration: none;
 
+    /* Make sure the logo visually hugs the left edge of the column when it is the first item in the left column */
+    margin-inline: calc(-1 * var(--padding-inline-start));
+
     &[data-hidden-on-home-page] {
       display: none;
 
@@ -176,6 +179,26 @@
       "type": "range",
       "id": "padding-block-end",
       "label": "t:settings.bottom",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "padding-inline-start",
+      "label": "t:settings.left",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "padding-inline-end",
+      "label": "t:settings.right",
       "min": 0,
       "max": 100,
       "step": 1,

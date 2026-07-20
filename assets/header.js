@@ -173,7 +173,13 @@ class HeaderComponent extends Component {
 
   #updateScrollState = () => {
     const stickyMode = this.getAttribute('sticky');
-    if (!this.#offscreen && stickyMode !== 'always') return;
+    // In `scroll-up` mode the IntersectionObserver can set #offscreen back to false while the
+    // header is still hidden (`data-sticky-state="idle"`). Without this exception the early
+    // return keeps the header invisible after scrolling back up.
+    // See .cursor/references/header-sticky-scroll-up.md
+    const stuckIdleScrollUp =
+      stickyMode === 'scroll-up' && this.dataset.stickyState === 'idle';
+    if (!this.#offscreen && stickyMode !== 'always' && !stuckIdleScrollUp) return;
 
     const scrollTop = getScrollTop();
     const headerTop = this.getBoundingClientRect().top;
