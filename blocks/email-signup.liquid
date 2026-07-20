@@ -22,7 +22,13 @@
       {{ block_settings.heading | escape }}
     </div>
   {% endif %}
+  {% assign form_id = block.id | prepend: 'EmailSignup-' %}
   {%- form 'customer', class: 'email-signup__form spacing-style' %}
+    <input
+      name="contact[id]"
+      type="hidden"
+      value="{{ form_id }}"
+    >
     {% comment %} --- Input group classes --- {% endcomment %}
     {%- liquid
       assign input_group_classes = 'email-signup__input-group'
@@ -64,11 +70,11 @@
         autocomplete="email"
         placeholder="{{ 'blocks.email_signup.placeholder' | t }}"
         required
-        {% if form.errors and form.id == blank %}
+        {% if form.errors and form.id == form_id %}
           autofocus
           aria-invalid="true"
           aria-describedby="Email-signup__message-error-{{ block.id }}"
-        {% elsif form.posted_successfully? and form.id == blank %}
+        {% elsif form.posted_successfully? and form.id == form_id %}
           aria-describedby="Email-signup__message-success-{{ block.id }}"
         {% endif %}
       >
@@ -94,7 +100,7 @@
       </button>
     </div>
 
-    {%- if form.errors and form.id == blank -%}
+    {%- if form.errors and form.id == form_id -%}
       <div
         id="Email-signup__message-error-{{ block.id }}"
         class="email-signup__message"
@@ -114,7 +120,7 @@
       </div>
     {%- endif -%}
 
-    {%- if form.posted_successfully? and form.id == blank -%}
+    {%- if form.posted_successfully? and form.id == form_id -%}
       <div
         id="Email-signup__message-success-{{ block.id }}"
         class="email-signup__message"
