@@ -266,7 +266,33 @@
                               <div class="cart-items__property">
                                 <dt>{{ property.first }}:</dt>
                                 <dd>
-                                  {%- if property.last contains '/uploads/' -%}
+                                  {%- if property.first == 'Preview Image' and property.last contains '/uploads/' -%}
+                                    <dialog-component>
+                                      <button type="button" on:click="/showDialog" class="button-unstyled link-prop">{{ 'actions.view' | t }}</button>
+                                      <dialog
+                                        ref="dialog"
+                                        class="dialog-modal preview-image-modal"
+                                        scroll-lock
+                                      >
+                                        <button
+                                          type="button"
+                                          ref="closeButton"
+                                          on:click="/closeDialog"
+                                          class="button button-unstyled close-button preview-image-modal__close"
+                                          aria-label="{{ 'accessibility.close_dialog' | t }}"
+                                        >
+                                          {{- 'icon-close.svg' | inline_asset_content -}}
+                                        </button>
+                                        <div class="preview-image-modal__content">
+                                          <img
+                                            src="{{ property.last | escape }}"
+                                            alt="{{ item.product.title | escape }}"
+                                            loading="lazy"
+                                          >
+                                        </div>
+                                      </dialog>
+                                    </dialog-component>
+                                  {%- elsif property.last contains '/uploads/' -%}
                                     <a href="{{ property.last }}">{{ property.last | split: '/' | last }}</a>
                                   {%- else -%}
                                     {{ property.last }}
@@ -464,6 +490,8 @@
   {% endif %}
 {% endunless %}
 
+=======
+>>>>>>> upstream/main
 {% stylesheet %}
   .cart-items {
     --cart-item-media-width-min: 2.5rem;
