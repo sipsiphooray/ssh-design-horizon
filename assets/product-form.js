@@ -4,6 +4,10 @@ import { cartPerformance } from '@theme/performance';
 import { morph } from '@theme/morph';
 import { CartLinesUpdateEvent, CartErrorEvent, ProductSelectEvent, StandardEvents } from '@shopify/events';
 import { resolveVariantId } from '@theme/variant-resolution';
+// Store customizations: legacy theme events consumed by custom.js / addon-products.js / cart-upsell.js,
+// buy-button price sync, and addon (parent_id) cart submissions.
+import { ThemeEvents, PriceChangeEvent, VariantUpdateEvent, CartAddEvent } from '@theme/events';
+import { formatMoney } from '@theme/money-formatting';
 
 // Error message display duration - gives users time to read the message
 const ERROR_MESSAGE_DISPLAY_DURATION = 10000;
@@ -238,6 +242,10 @@ class ProductFormComponent extends Component {
 
     // Listen for cart updates to sync data-cart-quantity
     document.addEventListener(StandardEvents.cartLinesUpdate, this.#onCartUpdate, { signal });
+
+    // Store customization: keep buy-button line total and product price in sync with quantity
+    document.addEventListener(ThemeEvents.quantitySelectorUpdate, this.#onQuantitySelectorUpdateForPrices, { signal });
+    requestAnimationFrame(() => this.#syncQuantityDependentPrices());
   }
 
   disconnectedCallback() {
@@ -314,6 +322,7 @@ class ProductFormComponent extends Component {
         } else {
           this.#refreshCart().then((cart) => this.#updateCartQuantity(cart));
         }
+        this.#syncQuantityDependentPrices();
       })
       .catch((error) => {
         if (error?.name !== 'AbortError') console.warn('[product-form] Event promise rejected:', error);
@@ -417,7 +426,8 @@ class ProductFormComponent extends Component {
       }
     }
 
-    const formData = new FormData(form);
+    // Store customization: use let so the addon logic below can rebuild the payload
+    let formData = new FormData(form);
 
     if (overrideVariantId) {
       formData.set('id', overrideVariantId);
@@ -425,6 +435,69 @@ class ProductFormComponent extends Component {
     if (overrideQuantity !== undefined) {
       formData.set('quantity', overrideQuantity.toString());
     }
+
+    // --- Store customization: ADDON LOGIC WITH PARENT_ID START ---
+    const mainVariantId = /** @type {string} */ (formData.get('id')?.toString() || '');
+    const mainQuantity = formData.get('quantity')?.toString() || this.dataset.quantityDefault || '1';
+    let totalQuantityAdded = Number(mainQuantity) || 1;
+
+    /** @type {Array<{id: string, quantity: number, parent_id: string, properties: Record<string, string>}>} */
+    const addonItems = [];
+    for (const [key, value] of formData.entries()) {
+      // Find our checkbox addons
+      if (key.startsWith('addon-') && value) {
+        addonItems.push({
+          id: value.toString(),
+          quantity: 1, // Default addon quantity
+          parent_id: mainVariantId,
+          properties: {
+            _parentProduct: mainVariantId,
+          },
+        });
+      }
+    }
+
+    // If addons are checked, reconstruct formData into Shopify's multi-item array format
+    if (addonItems.length > 0) {
+      const itemsFormData = new FormData();
+      totalQuantityAdded += addonItems.length;
+
+      // 1. Add main product as items[0]
+      itemsFormData.append('items[0][id]', mainVariantId);
+      itemsFormData.append('items[0][quantity]', mainQuantity);
+
+      // Extract and attach properties to main product if they exist
+      for (const [key, value] of formData.entries()) {
+        const propMatch = key.match(/^properties\[(.+)]$/);
+        if (propMatch && propMatch[1]) {
+          itemsFormData.append(`items[0][properties][${propMatch[1]}]`, value.toString());
+        }
+      }
+
+      // 2. Add selected addon items with parent linking as items[1], items[2], etc.
+      addonItems.forEach((addon, index) => {
+        itemsFormData.append(`items[${index + 1}][id]`, addon.id);
+        itemsFormData.append(`items[${index + 1}][quantity]`, addon.quantity.toString());
+
+        if (addon.parent_id) {
+          itemsFormData.append(`items[${index + 1}][parent_id]`, addon.parent_id);
+        }
+
+        Object.entries(addon.properties).forEach(([propKey, propValue]) => {
+          itemsFormData.append(`items[${index + 1}][properties][${propKey}]`, propValue.toString());
+        });
+      });
+
+      // 3. Copy other necessary form data (sections) while ignoring old ids/quantities
+      for (const [key, value] of formData.entries()) {
+        if (key !== 'id' && key !== 'quantity' && !key.startsWith('properties[') && !key.startsWith('addon-')) {
+          itemsFormData.append(key, value);
+        }
+      }
+
+      formData = itemsFormData; // Override original formData
+    }
+    // --- Store customization: ADDON LOGIC WITH PARENT_ID END ---
 
     const cartItemsComponents = document.querySelectorAll('cart-items-component');
     let cartItemComponentsSectionIds = [];
@@ -435,7 +508,7 @@ class ProductFormComponent extends Component {
       formData.append('sections', cartItemComponentsSectionIds.join(','));
     });
 
-    const itemCount = Number(formData.get('quantity')) || Number(this.dataset.quantityDefault);
+    const itemCount = totalQuantityAdded;
     const deferredEventPromise = CartLinesUpdateEvent.createPromise();
 
     this.dispatchEvent(
@@ -444,9 +517,13 @@ class ProductFormComponent extends Component {
         context: 'product',
         lines: [
           {
-            merchandiseId: /** @type {string} */ (formData.get('id')),
-            quantity: itemCount,
+            merchandiseId: mainVariantId,
+            quantity: Number(mainQuantity) || 1,
           },
+          ...addonItems.map((addon) => ({
+            merchandiseId: addon.id,
+            quantity: addon.quantity,
+          })),
         ],
         promise: deferredEventPromise.promise,
       })
@@ -492,6 +569,18 @@ class ProductFormComponent extends Component {
             )
             .catch(deferredEventPromise.reject);
 
+          // Store customization: legacy cart:update event for pre-v4 listeners.
+          // When we add more than the maximum amount of items to the cart, we still dispatch it
+          // because our back-end still adds the max allowed amount to the cart.
+          this.dispatchEvent(
+            new CartAddEvent({}, this.id, {
+              didError: true,
+              source: 'product-form-component',
+              itemCount: totalQuantityAdded,
+              productId: this.dataset.productId,
+            })
+          );
+
           if (!addToCartTextError) return;
           addToCartTextError.classList.remove('hidden');
 
@@ -517,7 +606,9 @@ class ProductFormComponent extends Component {
 
           return;
         } else {
-          const id = formData.get('id');
+          // Store customization: formData may have been rebuilt into items[] format (addons),
+          // so read the id captured before reconstruction.
+          const id = mainVariantId;
 
           if (addToCartTextError) {
             addToCartTextError.classList.add('hidden');
@@ -559,6 +650,17 @@ class ProductFormComponent extends Component {
               if (this.#getVariantIdInput()) {
                 this.#updateCartQuantity(ajaxCart);
               }
+
+              // Store customization: legacy cart:update event for pre-v4 listeners
+              // (cart-upsell.js, custom.js protection buttons, addon-products.js).
+              this.dispatchEvent(
+                new CartAddEvent({}, id.toString(), {
+                  source: 'product-form-component',
+                  itemCount: totalQuantityAdded,
+                  productId: this.dataset.productId,
+                  sections: response.sections,
+                })
+              );
 
               return ajaxCart;
             })
@@ -708,6 +810,16 @@ class ProductFormComponent extends Component {
           },
         });
         this.#updateCartQuantity(cart);
+
+        // Store customization: legacy cart:update event for pre-v4 listeners
+        this.dispatchEvent(
+          new CartAddEvent({}, this.id, {
+            source: 'product-form-component',
+            itemCount: totalQuantity,
+            productId: this.dataset.productId,
+            sections: response.sections,
+          })
+        );
       })
       .catch((error) => {
         console.error(error);
@@ -769,12 +881,147 @@ class ProductFormComponent extends Component {
   }
 
   /**
+   * Store customization: keeps add-to-cart line total, main product-price block, and addon totals in
+   * sync with quantity.
+   * @param {Event} event
+   */
+  #onQuantitySelectorUpdateForPrices = (event) => {
+    if (event.type !== ThemeEvents.quantitySelectorUpdate) return;
+    const ce = /** @type {CustomEvent<{ quantity?: number; cartLine?: number }>} */ (event);
+    if (ce.detail?.cartLine != null) return;
+    if (!(event.target instanceof Node) || !this.contains(event.target)) return;
+    this.#syncQuantityDependentPrices();
+  };
+
+  /**
+   * Store customization: updates button + block prices from unit data attributes and current
+   * quantity; refreshes addon PriceChangeEvent.
+   */
+  #syncQuantityDependentPrices() {
+    const priceEl = /** @type {HTMLElement | null} */ (this.querySelector('.total-price-display[data-price]'));
+    if (!priceEl) return;
+
+    const qty = Math.max(1, this.#getQuantity() || 1);
+    const unit = Number(priceEl.dataset.unitPrice || priceEl.dataset.price);
+    if (!Number.isFinite(unit) || unit < 0) return;
+
+    const unitCompare = Number(priceEl.dataset.unitCompareAt || 0);
+    const saleTotal = Math.round(unit * qty);
+    const compareTotal = unitCompare > unit ? Math.round(unitCompare * qty) : 0;
+
+    priceEl.dataset.price = String(saleTotal);
+
+    const currency = priceEl.dataset.currency || window.Shopify?.currency?.active || 'USD';
+    const moneyFormat = /** @type {{ theme?: { moneyFormat?: string } }} */ (window).theme?.moneyFormat || '${{amount}}';
+    priceEl.textContent = formatMoney(saleTotal, moneyFormat, currency);
+
+    const section = this.closest('.shopify-section');
+    const productId = this.dataset.productId;
+    const pp =
+      section && productId
+        ? /** @type {HTMLElement | null} */ (section.querySelector(`product-price[data-product-id="${productId}"]`))
+        : null;
+
+    if (pp && !pp.querySelector('[ref="volumePricingNote"]')) {
+      const container = pp.querySelector('[ref="priceContainer"]');
+      const priceSpan = container?.querySelector('.price');
+      const compareSpan = container?.querySelector('.compare-at-price');
+      if (priceSpan) priceSpan.textContent = formatMoney(saleTotal, moneyFormat, currency);
+      if (compareSpan instanceof HTMLElement) {
+        if (compareTotal > saleTotal) {
+          compareSpan.textContent = formatMoney(compareTotal, moneyFormat, currency);
+          compareSpan.hidden = false;
+        } else {
+          compareSpan.textContent = '';
+          compareSpan.hidden = true;
+        }
+      }
+    }
+
+    document.dispatchEvent(new PriceChangeEvent(this));
+  }
+
+  /**
+   * Store customization: section HTML can include several `product-form-component` nodes
+   * (quick-add, upsells). Queries must target the main buy-buttons form for this product, not the
+   * first match in the document.
+   *
+   * @param {Document | ParentNode} doc
+   * @returns {ParentNode}
+   */
+  #getFetchedProductFormRoot(doc) {
+    const productId = this.dataset.productId;
+    if (!productId) return doc;
+    const id = typeof CSS !== 'undefined' && CSS.escape ? CSS.escape(String(productId)) : String(productId);
+    const mainForm = doc.querySelector(
+      `product-form-component[data-product-id="${id}"]:not(.quick-add__product-form-component)`
+    );
+    return mainForm ?? doc;
+  }
+
+  /**
+   * Store customization: Klaviyo BIS mutates the add-to-cart button after load; morphing its
+   * children removes that markup. Fire hooks and best-effort global reinits (embed APIs vary by
+   * version).
+   */
+  #notifyKlaviyoBisAfterCartButtonMorph() {
+    const variantId = this.refs.variantId?.value ?? '';
+    const run = () => {
+      document.dispatchEvent(
+        new CustomEvent('variant:change', {
+          bubbles: true,
+          detail: { variantId },
+        })
+      );
+      document.dispatchEvent(
+        new CustomEvent('klaviyo-bis:dom-updated', {
+          bubbles: true,
+          detail: { variantId },
+        })
+      );
+
+      const w = /** @type {Record<string, unknown>} */ (/** @type {unknown} */ (window));
+      /**
+       * @param {unknown} obj
+       * @param {string} method
+       */
+      const tryCall = (obj, method) => {
+        if (obj != null && typeof obj === 'object' && method in obj) {
+          const fn = /** @type {Record<string, unknown>} */ (obj)[method];
+          if (typeof fn === 'function') {
+            try {
+              /** @type {(this: unknown) => void} */ (fn).call(obj);
+              return true;
+            } catch {
+              /* embed API varies */
+            }
+          }
+        }
+        return false;
+      };
+
+      for (const key of ['_klaviyo', '_klaviyoOnsite', 'KlaviyoOnsite', 'klaviyoOnsite', 'klaviyo', '__klaviyo']) {
+        const mod = w[key];
+        if (tryCall(mod, 'init')) break;
+        if (tryCall(mod, 'reload')) break;
+        if (tryCall(mod, 'refresh')) break;
+      }
+    };
+
+    queueMicrotask(() => requestAnimationFrame(run));
+    setTimeout(run, 200);
+  }
+
+  /**
    * @param {ProductSelectEvent} event
    */
   #onProductSelect = async (event) => {
     // Skip events from product-cards when this form is at the section level
     const sourceCard = /** @type {Element | null} */ (event.target)?.closest('product-card');
     if (sourceCard && !sourceCard.contains(this)) return;
+
+    // Store customization: ignore variant selections that originate inside an addon card
+    if (event.target instanceof Element && event.target.closest('.addon-card')) return;
 
     // Track generation to prevent a stale (aborted) call from clearing the flag
     // while a newer variant selection is still pending.
@@ -814,9 +1061,16 @@ class ProductFormComponent extends Component {
         currentAddToCartButtonContainer.enable();
       }
 
-      const newAddToCartButton = html.querySelector('product-form-component [ref="addToCartButton"]');
+      // Store customization: scope fetched-HTML queries to this product's main form (section HTML
+      // can contain quick-add / upsell product-form-components for other products).
+      const fetchedRoot = this.#getFetchedProductFormRoot(html);
+      const newAddToCartButton = fetchedRoot.querySelector('[ref="addToCartButton"]');
       if (newAddToCartButton && currentAddToCartButton) {
         morph(currentAddToCartButton, newAddToCartButton);
+      }
+
+      if (currentAddToCartButton?.classList.contains('klaviyo-bis-trigger')) {
+        this.#notifyKlaviyoBisAfterCartButtonMorph();
       }
 
       if (acceleratedCheckoutButtonContainer) {
@@ -850,7 +1104,7 @@ class ProductFormComponent extends Component {
 
       // Update quantity selector's min/max/step attributes and cart quantity for the new variant
       const newQuantityInput = /** @type {HTMLInputElement | null} */ (
-        html.querySelector('quantity-selector-component input[ref="quantityInput"]')
+        fetchedRoot.querySelector('quantity-selector-component input[ref="quantityInput"]')
       );
 
       if (quantitySelector?.updateConstraints && newQuantityInput) {
@@ -859,24 +1113,24 @@ class ProductFormComponent extends Component {
         this.dataset.quantityDefault = newQuantityInput.min || '1';
       }
 
-      const newQuantityRules = html.querySelector('.quantity-rules');
+      const newQuantityRules = fetchedRoot.querySelector('.quantity-rules');
       const isQuantityRulesChanging = !!quantityRules !== !!newQuantityRules;
 
-      const newPricePerItem = html.querySelector('price-per-item');
+      const newPricePerItem = fetchedRoot.querySelector('price-per-item');
       const isPricePerItemChanging = !!pricePerItem !== !!newPricePerItem;
 
       if ((isQuantityRulesChanging || isPricePerItemChanging) && quantitySelector) {
         // Store quantity value before morphing entire container
         const currentQuantityValue = quantitySelector.getValue?.();
 
-        const newProductFormButtons = html.querySelector('.product-form-buttons');
+        const newProductFormButtons = fetchedRoot.querySelector('.product-form-buttons');
 
         if (productFormButtons && newProductFormButtons) {
           morph(productFormButtons, newProductFormButtons);
 
           // Get the NEW quantity selector after morphing and update its constraints
           const newQuantityInputElement = /** @type {HTMLInputElement | null} */ (
-            html.querySelector('quantity-selector-component input[ref="quantityInput"]')
+            fetchedRoot.querySelector('quantity-selector-component input[ref="quantityInput"]')
           );
 
           if (this.refs.quantitySelector?.updateConstraints && newQuantityInputElement && currentQuantityValue) {
@@ -902,13 +1156,13 @@ class ProductFormComponent extends Component {
         ];
 
         for (const [selector, currentElement, fallback] of morphTargets) {
-          this.#morphOrUpdateElement(currentElement, html.querySelector(selector), fallback);
+          this.#morphOrUpdateElement(currentElement, fetchedRoot.querySelector(selector), fallback);
         }
       }
 
       // Morph volume pricing if it exists
       const currentVolumePricing = this.refs.volumePricing;
-      const newVolumePricing = html.querySelector('volume-pricing');
+      const newVolumePricing = fetchedRoot.querySelector('volume-pricing');
       this.#morphOrUpdateElement(currentVolumePricing, newVolumePricing, this.refs.productFormButtons);
 
       const hasB2BFeatures =
@@ -919,10 +1173,24 @@ class ProductFormComponent extends Component {
         currentVolumePricing ||
         newVolumePricing;
 
-      if (!hasB2BFeatures) return;
+      if (hasB2BFeatures) {
+        // Fetch and update cart quantity for the new variant
+        this.#refreshCart().then((cart) => this.#updateCartQuantity(cart));
+      }
 
-      // Fetch and update cart quantity for the new variant
-      this.#refreshCart().then((cart) => this.#updateCartQuantity(cart));
+      // Store customization: re-sync quantity-dependent prices after the buy button was morphed
+      this.#syncQuantityDependentPrices();
+
+      // Store customization: re-dispatch the legacy variant:update event for pre-v4 listeners
+      // (custom.js free-shipping message, addon price sync, xb-product-variant attributes).
+      const legacyEventTarget = event.target instanceof Element ? event.target : this;
+      legacyEventTarget.dispatchEvent(
+        new VariantUpdateEvent(resource ?? null, this.id ?? '', {
+          html,
+          productId: this.dataset.productId,
+          newProduct,
+        })
+      );
     } finally {
       // Only clear the flag if no newer variant selection has started
       if (generation === this.#variantChangeGeneration) {

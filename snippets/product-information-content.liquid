@@ -71,6 +71,9 @@
   case settings.content_width
     when 'narrow'
       assign content_width = 'narrow'
+    when 'page-narrow'
+      # Store customization: 78rem page width, styled by .section--page-narrow in assets/custom.css
+      assign content_width = 'page-narrow'
     when 'content-center-aligned'
       assign content_width = 'page-width'
     when 'content-full-width'

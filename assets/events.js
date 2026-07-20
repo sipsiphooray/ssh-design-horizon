@@ -14,6 +14,16 @@ export class ThemeEvents {
   static megaMenuHover = 'megaMenu:hover';
   /** @static @constant {string} Event triggered when a zoom dialog media is selected */
   static zoomMediaSelected = 'zoom-media:selected';
+
+  /* --- Legacy (pre-v4) event names kept for store customizations (custom.js, addon-products.js, cart-upsell.js) --- */
+  /** @static @constant {string} Event triggered when a variant is selected */
+  static variantSelected = 'variant:selected';
+  /** @static @constant {string} Event triggered when a variant is changed */
+  static variantUpdate = 'variant:update';
+  /** @static @constant {string} Event triggered when the cart items or quantities are updated */
+  static cartUpdate = 'cart:update';
+  /** @static @constant {string} Event triggered when a cart update fails */
+  static cartError = 'cart:error';
 }
 
 /**
@@ -100,4 +110,222 @@ export class MegaMenuHoverEvent extends Event {
   constructor() {
     super(ThemeEvents.megaMenuHover, { bubbles: true });
   }
+}
+
+/* ------------------------------------------------------------------ */
+/* Legacy (pre-v4) event classes retained for store customizations     */
+/* (custom.js, addon-products.js, cart-upsell.js and related snippets) */
+/* ------------------------------------------------------------------ */
+
+/**
+ * Event fired when a variant is selected
+ * @extends {Event}
+ */
+export class VariantSelectedEvent extends Event {
+  /**
+   * Creates a new VariantSelectedEvent
+   * @param {Object} resource - The new variant object
+   * @param {string} resource.id - The option value id
+   */
+  constructor(resource) {
+    super(ThemeEvents.variantSelected, { bubbles: true });
+    this.detail = {
+      resource,
+    };
+  }
+}
+
+/**
+ * Event fired after a variant is updated
+ * @extends {Event}
+ */
+export class VariantUpdateEvent extends Event {
+  /**
+   * Creates a new VariantUpdateEvent
+   * @param {Object} resource - The new variant object
+   * @param {string} sourceId - The id of the element the action was triggered from
+   * @param {Object} data - Additional event data
+   * @param {Document | Element} [data.html] - The new document fragment for the variant
+   * @param {string} [data.productId] - The product ID of the updated variant
+   * @param {Object} [data.newProduct] - If a new product was loaded as part of the variant update (combined listing)
+   */
+  constructor(resource, sourceId, data) {
+    super(ThemeEvents.variantUpdate, { bubbles: true });
+    this.detail = {
+      resource: resource || null,
+      sourceId,
+      data: {
+        html: data.html,
+        productId: data.productId,
+        newProduct: data.newProduct,
+      },
+    };
+  }
+}
+
+/**
+ * Event class for cart additions
+ * @extends {Event}
+ */
+export class CartAddEvent extends Event {
+  /**
+   * Creates a new CartAddEvent
+   * @param {Object} [resource] - The new cart object
+   * @param {string} [sourceId] - The id of the element the action was triggered from
+   * @param {Object} [data] - Additional event data
+   * @param {boolean} [data.didError] - Whether the cart operation failed
+   * @param {string} [data.source] - The source of the cart update
+   * @param {string} [data.productId] - The id of the product card that was updated
+   * @param {number} [data.itemCount] - The number of items in the cart
+   * @param {string} [data.variantId] - The id of the product variant that was added
+   * @param {Record<string, string>} [data.sections] - The sections affected by the cart operation
+   */
+  constructor(resource, sourceId, data) {
+    super(CartAddEvent.eventName, { bubbles: true });
+    this.detail = {
+      resource,
+      sourceId,
+      data: {
+        ...data,
+      },
+    };
+  }
+
+  static eventName = ThemeEvents.cartUpdate;
+}
+
+/**
+ * Event class for cart updates
+ * @extends {Event}
+ */
+export class CartUpdateEvent extends Event {
+  /**
+   * Creates a new CartUpdateEvent
+   * @param {Object} resource - The new cart object
+   * @param {string} sourceId - The id of the element the action was triggered from
+   * @param {Object} [data] - Additional event data
+   * @param {boolean} [data.didError] - Whether the cart operation failed
+   * @param {string} [data.source] - The source of the cart update
+   * @param {string} [data.productId] - The id of the product card that was updated
+   * @param {number} [data.itemCount] - The number of items in the cart
+   * @param {string} [data.variantId] - The id of the product variant that was updated
+   * @param {Record<string, string>} [data.sections] - The sections affected by the cart operation
+   */
+  constructor(resource, sourceId, data) {
+    super(ThemeEvents.cartUpdate, { bubbles: true });
+    this.detail = {
+      resource,
+      sourceId,
+      data: {
+        ...data,
+      },
+    };
+  }
+}
+
+/**
+ * Event class for cart errors
+ * @extends {Event}
+ */
+export class CartErrorEvent extends Event {
+  /**
+   * Creates a new CartErrorEvent
+   * @param {string} sourceId - The id of the element the action was triggered from
+   * @param {string} message - A message from the server response
+   * @param {Object} [description] - Description from the server response
+   * @param {Object} [errors] - Errors from the server response
+   */
+  constructor(sourceId, message, description, errors) {
+    super(ThemeEvents.cartError, { bubbles: true });
+    this.detail = {
+      sourceId,
+      data: {
+        message,
+        errors,
+        description,
+      },
+    };
+  }
+}
+
+/**
+ * Event class for price changes based on checked .addon-card checkboxes
+ * @extends {Event}
+ */
+export class PriceChangeEvent extends Event {
+  /**
+   * @param {Element} [target] - The target element that triggered the event
+   */
+  constructor(target) {
+    super(PriceChangeEvent.eventName, { bubbles: true });
+    /** @type {Record<string, number>} */
+    const prices = {};
+    let total = 0;
+
+    // Resolve host via frequent bundle first (checkbox may not match compound class on <addon-products>)
+    let parent = null;
+    if (target && target instanceof Element) {
+      const bundle = target.closest('[data-frequent-bundle]');
+      if (bundle) {
+        parent =
+          bundle.closest('product-recommendations.frequently-bought-section') || bundle.closest('addon-products');
+      }
+    }
+    if (!parent && target && target instanceof Element) {
+      parent = target.closest('product-recommendations.frequently-bought-section, addon-products');
+    }
+    if (!parent && target && target instanceof Element) {
+      parent = target.closest('.shopify-section, dialog, product-card');
+    }
+
+    // If no parent found, don't calculate anything
+    if (!parent) {
+      console.warn('PriceChangeEvent: No parent container found');
+      this.detail = { prices, total, totalCompareAt: 0, parent: null, priceDisplayParent: null };
+      return;
+    }
+
+    // Main PDP price lives on the buy button (e.g. span.button--price.total-price-display) outside
+    // <addon-products>, so widen the query root for base price while keeping addon sums inside the block.
+    /** @type {Element} */
+    const addonHost = parent;
+    const priceDisplayParent =
+      addonHost instanceof HTMLElement && addonHost.matches('addon-products')
+        ? addonHost.closest('.product-details') ?? addonHost.closest('.shopify-section') ?? addonHost
+        : addonHost;
+
+    // Prefer buy-button price inside the same product form (avoids wrong match when multiple totals exist)
+    const basePriceEl = /** @type {HTMLElement | null} */ (
+      target?.closest('product-form-component')?.querySelector('.total-price-display[data-price]') ??
+        priceDisplayParent.querySelector('.total-price-display[data-price]')
+    );
+    let totalCompareAt = 0;
+    if (basePriceEl?.dataset.price) {
+      const basePrice = Number(basePriceEl.dataset.price) || 0;
+      prices['base_product'] = basePrice;
+      total += basePrice;
+      totalCompareAt += basePrice;
+    }
+
+    // Add prices from checked addons only within the addon block / frequent section
+    addonHost.querySelectorAll('.addon-card input[type="checkbox"]:checked').forEach((el) => {
+      const inputEl = /** @type {HTMLInputElement} */ (el);
+      const name = inputEl.name || 'addon';
+      const price = Number(inputEl.dataset.price || 0);
+      const compare = Number(inputEl.dataset.compareAt || 0);
+      prices[name] = price;
+      total += price;
+      totalCompareAt += compare > price ? compare : price;
+    });
+
+    this.detail = {
+      prices,
+      total,
+      totalCompareAt,
+      parent,
+      priceDisplayParent,
+    };
+  }
+
+  static eventName = 'price:change';
 }
