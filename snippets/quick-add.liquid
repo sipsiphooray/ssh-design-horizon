@@ -156,6 +156,7 @@
           quick_add: true,
           class: 'quick-add__button quick-add__button--add add-to-cart-button',
           can_add_to_cart: can_add_to_cart,
+          icon_only_on_mobile: true,
           product: product
         %}
       {%- endform -%}
@@ -170,13 +171,23 @@
       name="add"
       on:click="quick-add-component/handleClick"
     >
-      <span
-        aria-hidden="true"
-        class="svg-wrapper add-to-cart-icon"
-      >
-        {{- 'icon-plus.svg' | inline_asset_content -}}
+      <span class="add-to-cart-text">
+        {% comment %} split the icon and the text with a grid transition {% endcomment %}
+        <span
+          aria-hidden="true"
+          class="svg-wrapper add-to-cart-icon"
+        >
+          {{- 'icon-plus.svg' | inline_asset_content -}}
+        </span>
+        <span class="add-to-cart-text__content{% unless cart_upsell_choose_only %} is-visually-hidden-mobile{% endunless %}">
+          <span>
+            {% comment %} double-nested span bakes the padding into the collapsing text {% endcomment %}
+            <span>
+              {{- choose_options_text -}}
+            </span>
+          </span>
+        </span>
       </span>
-      {{- choose_options_text -}}
     </button>
   {% endif %}
 </quick-add-component>

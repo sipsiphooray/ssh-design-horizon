@@ -5,6 +5,7 @@
   @param {string} add_to_cart_text - The text to display on the button.
   @param {boolean} [quick_add] - Quick add
   @param {object} product - The product object to be added to the cart.
+  @param {boolean} [icon_only_on_mobile] - If `true`, only the icon is shown on mobile devices (label collapses).
   @param {string} [class] - Additional CSS classes to apply to the button.
   @param {string} [id] - The ID attribute for the button.
   @param {string} [data_testid] - The data-testid attribute for testing.
@@ -41,35 +42,44 @@
       disabled
     {% endunless %}
   >
-    {% if can_add_to_cart %}
-      <span
-        aria-hidden="true"
-        class="svg-wrapper add-to-cart-icon"
-      >
-        {% if quick_add == true %}
-          {{- 'icon-plus.svg' | inline_asset_content -}}
-        {% else %}
-          {{- 'icon-add-to-cart.svg' | inline_asset_content -}}
-        {% endif %}
+    <span class="add-to-cart-text">
+      {% if can_add_to_cart %}
+        <span
+          aria-hidden="true"
+          class="svg-wrapper add-to-cart-icon"
+        >
+          {% if quick_add == true %}
+            {{- 'icon-plus.svg' | inline_asset_content -}}
+          {% else %}
+            {{- 'icon-add-to-cart.svg' | inline_asset_content -}}
+          {% endif %}
+        </span>
+      {% endif %}
+      <span class="add-to-cart-text__content{% if icon_only_on_mobile %} is-visually-hidden-mobile{% endif %}">
+        <span>
+          {% comment %} double-nested span bakes the padding into the collapsing text {% endcomment %}
+          <span>
+            {{- add_to_cart_text | default: default_add_to_cart_text -}}
+          </span>
+        </span>
       </span>
-    {% endif %}
-    {{- add_to_cart_text | default: default_add_to_cart_text -}}
-    {% unless quick_add == true %}
-      <span class="button-divider">&bull;</span>
-      <span
-        class="button--price total-price-display"
-        data-price="{{ atc_variant.price }}"
-        data-unit-price="{{ atc_variant.price }}"
-        data-unit-compare-at="{{ atc_variant.compare_at_price | default: 0 }}"
-        data-symbol="{{ cart.currency.symbol }}"
-      >
-        {%- if settings.currency_code_enabled_product_pages -%}
-          {{ atc_variant.price | money_with_currency | replace: '.00', '' }}
-        {%- else -%}
-          {{ atc_variant.price | money_without_trailing_zeros }}
-        {%- endif -%}
-      </span>
-    {% endunless %}
+      {% unless quick_add == true %}
+        <span class="button-divider">&bull;</span>
+        <span
+          class="button--price total-price-display"
+          data-price="{{ atc_variant.price }}"
+          data-unit-price="{{ atc_variant.price }}"
+          data-unit-compare-at="{{ atc_variant.compare_at_price | default: 0 }}"
+          data-symbol="{{ cart.currency.symbol }}"
+        >
+          {%- if settings.currency_code_enabled_product_pages -%}
+            {{ atc_variant.price | money_with_currency | replace: '.00', '' }}
+          {%- else -%}
+            {{ atc_variant.price | money_without_trailing_zeros }}
+          {%- endif -%}
+        </span>
+      {% endunless %}
+    </span>
     {% comment %} checkmark burst markup {% endcomment %}
     <span class="add-to-cart__added">
       <span class="svg-wrapper add-to-cart__added-icon">
