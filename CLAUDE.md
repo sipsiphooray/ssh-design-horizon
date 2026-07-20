@@ -5,6 +5,17 @@ Upstream: `chrisdavery/horizon-base` (shared Horizon fork, remote `upstream`).
 
 ## Upstream merge rules
 
+- **Old frontend wins.** When merging upstream, the pre-merge (fork) frontend
+  appearance and behavior are the source of truth. Preserve them. Only adopt
+  upstream/v4's version of a file or feature when it is a genuine equivalent of
+  the fork's customization (same behavior via a new v4 API) — never drop a fork
+  customization just because upstream rewrote the file. When unsure, keep the
+  old behavior and adapt it to the new API.
+- Reference for "what the fork looked like": the branch tip immediately BEFORE
+  the merge commit (e.g. `git show <mergecommit>^1:<file>`), diffed against
+  pristine upstream of the same base version to isolate true fork intent.
+
+
 - **Disregard upstream `assets/custom.css` changes related to the quick-add
   component.** This store has its own hard quick-add overrides in
   `assets/custom.css` (`.quick-add__button` icon-circle → hover-pill styles);
