@@ -2,8 +2,14 @@
   {%- content_for 'blocks' -%}
 {%- endcapture -%}
 
+{%- comment -%}
+  Store customization: emit the `product-list-content` class on the header wrapper.
+  Section custom_css targets `.product-list-content:has(.link) .link` to vertically
+  centre the "View all" link/arrow. v4's rewrite dropped this class; restore it.
+{%- endcomment -%}
 {%- render 'group',
   children: children,
+  class: 'product-list-content',
   settings: block.settings,
   shopify_attributes: block.shopify_attributes,
   background_color: block.settings.background_color,
