@@ -11,7 +11,7 @@
 {%- enddoc -%}
 
 {%- liquid
-  assign icon_name = 'arrow'
+  assign icon_name = 'caret'
   assign style = icon_style | default: 'arrow'
   assign shape = icon_shape | default: 'none'
 
@@ -33,9 +33,11 @@
     button button-unstyled button-unstyled--transparent
     {% if action == 'previous' %} flip-x{% endif %}
   "
-  {% # theme-check-disable %}
-  aria-label="{{ 'accessibility.slideshow_' | append: action | t }}"
-  {% # theme-check-enable %}
+  {% if action == 'previous' %}
+    aria-label="{{ 'accessibility.slideshow_previous' | t }}"
+  {% else %}
+    aria-label="{{ 'accessibility.slideshow_next' | t }}"
+  {% endif %}
   on:click="/{{ action }}"
   ref="{{ action }}"
 >

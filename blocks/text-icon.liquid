@@ -6,6 +6,8 @@
   {% content_for 'blocks' %}
 {% endcapture %}
 
+{% render 'contrast-override', background_color: block_settings.background_color, section_id: block.id %}
+
 <div
   class="
     group-block
@@ -13,20 +15,20 @@
     group-block--width-fill
     spacing-style
     size-style
-    border-style
     text-icon-block
     {% if block_settings.reverse_on_mobile == true %}mobile-group-column-reverse{% endif %}
-    {% if block_settings.inherit_color_scheme == false %} color-{{ block_settings.color_scheme }}{% endif %}
+    {% if block_settings.background_color != blank %} color-custom-{{ block.id }}{% endif %}
   "
   style="
     {% render 'spacing-style', settings: block_settings %}
-    {% render 'size-style', settings: block_settings %}
-    {% render 'border-override', settings: block_settings %}
+    --size-style-width: 100%;
+    --size-style-height: auto;
+    --size-style-width-mobile: 100%;
   "
   {{ block.shopify_attributes }}
   data-testid="group-block"
 >
-  {%- if block_settings.link != blank -%}
+  {%- if settings.link != blank -%}
     <a
       href="{{ block_settings.link }}"
       class="group-block__link"
@@ -42,7 +44,7 @@
       {% if request.design_mode %}group-block-content--design-mode{% endif %}
       layout-panel-flex
       layout-panel-flex--{{ block_settings.content_direction | default: 'column' }}
-      {% if block_settings.vertical_on_mobile or block_settings.content_direction == 'column' %} mobile-column{% endif %}
+      {% if block_settings.vertical_on_mobile %} mobile-column{% endif %}
     "
     style="{% render 'layout-panel-style', settings: block_settings %}
     {% unless block_settings.vertical_on_mobile == true %}
@@ -55,15 +57,21 @@
   >
     {% capture icon %}
       {% if block_settings.use_height != blank %}
-          <div class="use-height-icon" style="--height: {{ block_settings.icon_height }}px;{% if block_settings.custom_mobile_height == true %}--mobile-height: {{ block_settings.mobile-height }}px;{% endif %}">
+          <div class="use-height-icon" style="--height: {{ block_settings.height }}px;{% if block_settings.custom_mobile_height == true %}--mobile-height: {{ block_settings.mobile-height }}px;{% endif %}">
       {% endif %}
-          {% render 'icon-or-image',
-              icon: block_settings.icon,
-              image_upload: block_settings.image_upload,
-              width: block_settings.icon_width,
-              class_name: icon_block_class,
-              attributes: block.shopify_attributes
-          %}
+          {% if block_settings.custom_svg != blank %}
+            <div class="{{ icon_block_class }} custom-svg-icon" style="width: {{ block_settings.icon_width }}px;">
+              {{ block_settings.custom_svg }}
+            </div>
+          {% else %}
+            {% render 'icon-or-image',
+                icon: block_settings.icon,
+                image_upload: block_settings.image_upload,
+                width: block_settings.icon_width,
+                class_name: icon_block_class,
+                attributes: block.shopify_attributes
+            %}
+          {% endif %}
       {% if block_settings.use_height != blank %}
           </div>
       {% endif %}
@@ -84,11 +92,6 @@
 </div>
 
 {% stylesheet %}
-  .text-icon-block .text-block {
-    padding: 0 !important;
-    height: auto;
-  }
-
   .icon-block {
     display: flex;
     fill: currentcolor;
@@ -98,6 +101,29 @@
   .icon-block__media {
     height: auto;
   }
+
+  .custom-svg-icon svg {
+    width: 100%;
+    height: auto;
+    display: block;
+  }
+
+  .use-height-icon .custom-svg-icon {
+    width: auto !important;
+    height: var(--height) !important;
+  }
+
+  .use-height-icon .custom-svg-icon svg {
+    width: auto;
+    height: 100%;
+  }
+
+  @media screen and (max-width: 749px) {
+    .use-height-icon .custom-svg-icon {
+      height: var(--mobile-height, var(--height)) !important;
+    }
+  }
+
   @media screen and (max-width: 749px) {
     .text-icon-block .text-block {
       flex: 0 auto !important;
@@ -379,6 +405,12 @@
       "label": "t:settings.image_icon"
     },
     {
+      "type": "textarea",
+      "id": "custom_svg",
+      "label": "Custom SVG",
+      "info": "Paste full SVG code. Overrides icon and image when provided."
+    },
+    {
       "type": "range",
       "id": "icon_width",
       "label": "t:settings.width",
@@ -396,7 +428,7 @@
     },
     {
       "type": "range",
-      "id": "icon_height",
+      "id": "height",
       "label": "Height",
       "min": 8,
       "max": 200,
@@ -578,10 +610,6 @@
           "label": "14px"
         },
         {
-          "value": "0.9375rem",
-          "label": "15px"
-        },
-        {
           "value": "1rem",
           "label": "16px"
         },
@@ -676,10 +704,6 @@
         {
           "value": "0.875rem",
           "label": "14px"
-        },
-        {
-          "value": "0.9375rem",
-          "label": "15px"
         },
         {
           "value": "1rem",
@@ -842,7 +866,7 @@
           "label": "t:options.heading"
         },
         {
-          "value": "var(--color-primary)",
+          "value": "var(--color-accent)",
           "label": "t:options.link"
         }
       ],
@@ -1085,114 +1109,14 @@
       "content": "t:content.size"
     },
     {
-      "type": "select",
-      "id": "width",
-      "label": "t:settings.width",
-      "options": [
-        {
-          "value": "fit-content",
-          "label": "t:options.fit_content"
-        },
-        {
-          "value": "fill",
-          "label": "t:options.fill"
-        },
-        {
-          "value": "custom",
-          "label": "t:options.custom"
-        }
-      ],
-      "default": "fill"
-    },
-    {
-      "type": "range",
-      "id": "custom_width",
-      "label": "t:settings.custom_width",
-      "min": 0,
-      "max": 100,
-      "step": 1,
-      "unit": "%",
-      "default": 100,
-      "visible_if": "{{ block.settings.width == 'custom' }}"
-    },
-    {
-      "type": "select",
-      "id": "width_mobile",
-      "label": "t:settings.width_mobile",
-      "options": [
-        {
-          "value": "fit-content",
-          "label": "t:options.fit_content"
-        },
-        {
-          "value": "fill",
-          "label": "t:options.fill"
-        },
-        {
-          "value": "custom",
-          "label": "t:options.custom"
-        }
-      ],
-      "default": "fill"
-    },
-    {
-      "type": "range",
-      "id": "custom_width_mobile",
-      "label": "t:settings.custom_width",
-      "min": 0,
-      "max": 100,
-      "step": 1,
-      "unit": "%",
-      "default": 100,
-      "visible_if": "{{ block.settings.width_mobile == 'custom' }}"
-    },
-    {
-      "type": "select",
-      "id": "height",
-      "label": "t:settings.height",
-      "options": [
-        {
-          "value": "fit",
-          "label": "t:options.fit_content"
-        },
-        {
-          "value": "fill",
-          "label": "t:options.fill"
-        },
-        {
-          "value": "custom",
-          "label": "t:options.custom"
-        }
-      ],
-      "default": "fit"
-    },
-    {
-      "type": "range",
-      "id": "custom_height",
-      "label": "t:settings.custom_height",
-      "min": 0,
-      "max": 100,
-      "step": 1,
-      "unit": "%",
-      "default": 100,
-      "visible_if": "{{ block.settings.height == 'custom' }}"
-    },
-    {
       "type": "header",
       "content": "t:content.appearance"
     },
     {
-      "type": "checkbox",
-      "id": "inherit_color_scheme",
-      "label": "t:settings.inherit_color_scheme",
-      "default": true
-    },
-    {
-      "type": "color_scheme",
-      "id": "color_scheme",
-      "label": "t:settings.color_scheme",
-      "default": "scheme-1",
-      "visible_if": "{{ block.settings.inherit_color_scheme == false }}"
+      "type": "color",
+      "id": "background_color",
+      "label": "t:settings.background_color",
+      "placeholder": "t:settings.default"
     },
     {
       "type": "select",
@@ -1259,71 +1183,6 @@
       ],
       "default": "cover",
       "visible_if": "{{ block.settings.background_media == 'image' }}"
-    },
-    {
-      "type": "select",
-      "id": "border",
-      "label": "t:settings.borders",
-      "options": [
-        {
-          "value": "none",
-          "label": "t:options.none"
-        },
-        {
-          "value": "solid",
-          "label": "t:options.solid"
-        }
-      ],
-      "default": "none"
-    },
-    {
-      "type": "range",
-      "id": "border_width",
-      "min": 0,
-      "max": 10,
-      "step": 0.5,
-      "unit": "px",
-      "label": "t:settings.border_width",
-      "default": 1,
-      "visible_if": "{{ block.settings.border != 'none' }}"
-    },
-    {
-      "type": "range",
-      "id": "border_opacity",
-      "min": 0,
-      "max": 100,
-      "step": 1,
-      "unit": "%",
-      "label": "t:settings.border_opacity",
-      "default": 100,
-      "visible_if": "{{ block.settings.border != 'none' }}"
-    },
-    {
-      "type": "range",
-      "id": "border_radius",
-      "label": "t:settings.border_radius",
-      "min": 0,
-      "max": 100,
-      "step": 1,
-      "unit": "px",
-      "default": 0
-    },
-    {
-      "type": "checkbox",
-      "id": "enable_mobile_radius",
-      "label": "Custom mobile radius",
-      "default": false
-    },
-    {
-      "type": "range",
-      "id": "mobile_border_radius",
-      "label": "Mobile corner radius",
-      "min": 0,
-      "max": 100,
-      "step": 1,
-      "unit": "px",
-      "default": 0,
-      "visible_if": "{{ block.settings.enable_mobile_radius == true }}"
     },
     {
       "type": "text",

@@ -9,6 +9,8 @@
   {% break %}
 {% endif %}
 
+{% render 'contrast-override', background_color: block.settings.background_color, section_id: block.id %}
+
 <accordion-custom
   {% if block.settings.open_by_default %}
     open-by-default-on-desktop
@@ -17,8 +19,8 @@
 >
   <details
     class="details
-      {% if block.settings.add_color_scheme == true %}
-        colored-accordion color-{{ block.settings.color_scheme }}
+      {% if block.settings.background_color != blank %}
+        colored-accordion color-custom-{{ block.id }}
       {% endif %}
     "
     data-testid="accordion-details"
@@ -340,17 +342,10 @@
       "default": 20
     },
     {
-      "type": "checkbox",
-      "id": "add_color_scheme",
-      "label": "Add Color scheme",
-      "default": true
-    },
-    {
-      "type": "color_scheme",
-      "id": "color_scheme",
-      "label": "t:settings.color_scheme",
-      "default": "scheme-1",
-      "visible_if": "{{ block.settings.add_color_scheme == true }}"
+      "type": "color",
+      "id": "background_color",
+      "label": "t:settings.background_color",
+      "placeholder": "t:settings.default"
     }
   ],
   "presets": [

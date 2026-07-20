@@ -1,15 +1,12 @@
 {%- liquid
   assign block_settings = block.settings
-  assign product_has_swatches = false
-  unless section.type == 'curated-variant-list'
-    for product_option in closest.product.options_with_values
-      assign swatch_count = product_option.values | map: 'swatch' | compact | size
+  for product_option in closest.product.options_with_values
+    assign swatch_count = product_option.values | map: 'swatch' | compact | size
 
-      if swatch_count > 0
-        assign product_has_swatches = true
-      endif
-    endfor
-  endunless
+    if swatch_count > 0
+      assign product_has_swatches = true
+    endif
+  endfor
 -%}
 
 {% stylesheet %}
@@ -157,4 +154,3 @@
   ]
 }
 {% endschema %}
-{% # theme-check-enable %}

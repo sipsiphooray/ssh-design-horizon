@@ -10,7 +10,6 @@
   @param {number} [content_aspect_ratio] - Aspect ratio for content images.
   @param {number} [image_border_radius] - Border radius for content images.
   @param {object} [section] - The section object.
-  @param {object} list_items_array - The megamenu items.
 
   @example
   {% render 'mega-menu-list', parent_link: link, id: 'MegaMenuList-1', grid_columns_count: 6, menu_content_type: 'featured_products' %}
@@ -71,8 +70,6 @@
       assign menu_content_type = 'text'
     endif
   endif
-
-  assign megamenu_thumbnails = shop.metaobjects['megamenu_thumbnails'].values
 %}
 <ul
   data-menu-list-id="{{ id }}"
@@ -146,14 +143,6 @@
           {% endif %}
         >
           {% for childLink in link.links %}
-            {% assign thumbnail = megamenu_thumbnails | where: 'assigned_to', childLink.title %}
-            {% liquid
-              assign media_width_desktop = '100vw'
-              assign media_width_mobile = '100vw'
-              assign sizes = 'auto, (min-width: 750px) ' | append: media_width_desktop | append: ', ' | append: media_width_mobile
-              assign widths = '240, 352, 832, 1200, 1600, 1920, 2560, 3840'
-            %}
-
             {% assign break_after_modulo = forloop.index | modulo: links_before_wrap %}
             <li
               {% if break_after_modulo == 0 and should_break_columns %}
@@ -162,27 +151,8 @@
             >
               <a
                 href="{{ childLink.url }}"
-                class="mega-menu__link {% if thumbnail[0] != blank %}link-menu-thumbnail{% endif %}"
-                {% if thumbnail[0].card_image != blank %}data-card-image="{{ thumbnail[0].card_image | image_url: width: 300 }}"{% endif %}
+                class="mega-menu__link"
               >
-                {% if thumbnail[0].thumbnail_color != blank %}
-                  <span class="image-thumbnail-link">
-                    <span class="thumbnail-block__image" style="--bgcolor: {{ thumbnail[0].thumbnail_color }};"></span>
-                  </span>
-                {% elsif thumbnail[0].thumbnail_image != blank %}
-                  <span class="image-thumbnail-link">
-                      {{
-                      thumbnail[0].thumbnail_image
-                      | image_url: width: 89
-                      | image_tag:
-                          width: thumbnail[0].thumbnail_image.width,
-                          widths: widths,
-                          height: thumbnail[0].thumbnail_image.height,
-                          class: 'thumbnail-block__image',
-                          sizes: sizes
-                      }}
-                  </span>
-                {% endif %}
                 <span class="wrap-text">{{- childLink.title -}}</span>
               </a>
             </li>
@@ -274,46 +244,6 @@
     assign max_featured_collections_tablet = 1
     assign max_menu_columns_tablet = max_menu_columns_tablet | minus: max_collection_columns_tablet
   endif
-
-  if menu_content_type == 'mega_blocks'
-    # desktop breakpoint
-    assign min_featured_block_columns = 1 | times: 2
-    assign temp_column_count = column_count | plus: min_featured_block_columns
-
-    if temp_column_count > max_menu_columns
-      assign max_block_columns = 2
-    else
-      assign max_block_columns = max_menu_columns | minus: column_count
-    endif
-
-    if column_count > 0
-      if list_items_array.size == 1
-        if parent_link.links == blank
-          assign max_featured_blocks = 5
-        else
-          assign max_featured_blocks = 1
-        endif
-      else
-        if parent_link.links == blank
-          assign max_featured_blocks = 5
-        else
-          assign max_featured_blocks = max_block_columns
-        endif
-      endif
-    else
-      if parent_link.links == blank
-        assign max_featured_blocks = 5
-      else
-        assign max_featured_blocks = list_items_array.size
-      endif
-    endif
-    assign max_menu_columns = max_menu_columns | minus: max_block_columns
-
-    # tablet breakpoint
-    assign max_block_columns_tablet = 2
-    assign max_featured_blocks_tablet = 1
-    assign max_menu_columns_tablet = max_menu_columns_tablet | minus: max_block_columns_tablet
-  endif
 %}
 
 {% style %}
@@ -332,13 +262,8 @@
       --menu-columns-desktop: {{ grid_columns_count_collection_images }};
       --menu-columns-tablet: {{ max_menu_columns_tablet }};
     {% else %}
-      {% if thumbnail.size > 0 %}
-        --menu-columns-desktop: {{ max_menu_columns | minus: 2 }};
-        --menu-columns-tablet: {{ max_menu_columns_tablet | minus: 2 }};
-      {% else %}
-        --menu-columns-desktop: {{ max_menu_columns }};
-        --menu-columns-tablet: {{ max_menu_columns_tablet }};
-      {% endif %}
+      --menu-columns-desktop: {{ max_menu_columns }};
+      --menu-columns-tablet: {{ max_menu_columns_tablet }};
     {% endif %}
   }
 {% endstyle %}
@@ -370,7 +295,8 @@
                   resource_type: 'product',
                   image_hover: true,
                   image_aspect_ratio: content_aspect_ratio,
-                  image_sizes: image_sizes
+                  image_sizes: image_sizes,
+                  product_view_context: 'dialog'
                 %}
               </li>
             {% endfor %}
@@ -417,29 +343,4 @@
         {% endfor %}
       </ul>
     </span>
-  {% when 'mega_blocks' %}
-    <span
-      class="mega-menu__content"
-      style="--menu-content-columns-desktop: {{ max_block_columns }}; --menu-content-columns-tablet: {{ max_block_columns_tablet }}; --resource-card-corner-radius: {{ image_border_radius }}px;"
-    >
-      <ul
-        class="mega-menu__content-list mega-menu__content-list--blocks list-unstyled"
-        style="--menu-content-columns-desktop: {{ max_featured_blocks }}; --menu-content-columns-tablet: {{ max_featured_blocks_tablet }};"
-      >
-        {% for item in list_items_array %}
-          <li class="mega-menu__content-list-item">
-            {{ item }}
-          </li>
-        {% endfor %}
-      </ul>
-    </span>
-  {% else %}
-    {% if thumbnail.size > 0 %}
-    <span
-      class="mega-thumbnail-hover mega-menu__content"
-      style="--menu-content-columns-desktop: 2; --menu-content-columns-tablet: 1; --resource-card-corner-radius: {{ image_border_radius }}px;"
-    >
-      <div class="thumbnail-hover-canvas"></div>
-    </span>
-    {% endif %}
 {% endcase %}

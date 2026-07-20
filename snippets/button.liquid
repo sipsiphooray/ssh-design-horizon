@@ -9,6 +9,7 @@
 {%- enddoc -%}
 
 {% assign block_settings = block.settings %}
+{% render 'button-custom-styles', block_settings: block_settings, block_id: block.id %}
 
 <a
   {% if link == blank %}
@@ -29,17 +30,5 @@
   {%- endif -%}
   {{ block.shopify_attributes }}
 >
-  {{ block_settings.label }}{% if block_settings.add_arrow == true %}<span class="button--arrow">{{ 'icon-long-arrow.svg' | inline_asset_content }}</span>{% endif %}
+  {{ block_settings.label }}
 </a>
-
-{% stylesheet %}
-  .link {
-    text-decoration: none;
-    text-decoration-color: currentcolor;
-
-    &:hover {
-      color: var(--color-primary-hover);
-      text-decoration-color: transparent;
-    }
-  }
-{% endstylesheet %}

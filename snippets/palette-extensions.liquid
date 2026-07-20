@@ -1,0 +1,11 @@
+{% doc %}
+  v4's color-palette.liquid defines no accent variable. Static CSS
+  ({% stylesheet %} blocks, assets/*.css) cannot read theme settings, so the
+  palette accent slot (color1) is exposed here as --color-accent.
+{% enddoc %}
+{% style %}
+  :root {
+    --color-accent: {{ settings.color_palette.color1 }};
+    --color-accent-rgb: {{ settings.color_palette.color1.rgb }};
+  }
+{% endstyle %}

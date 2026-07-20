@@ -1,98 +1,3 @@
-{% assign min_days = block.settings.min_days %}
-{% assign max_days = block.settings.max_days %}
-
-{% assign now_ts = 'now' | date: "%s" %}
-
-{% assign min_date = now_ts %}
-{% assign counted = 0 %}
-{% for i in (1..60) %}
-  {% assign min_date = min_date | plus: 86400 %}
-  {% assign weekday = min_date | date: "%w" %}
-  {% unless weekday == '0' or weekday == '6' %}
-    {% assign counted = counted | plus: 1 %}
-  {% endunless %}
-  {% if counted == min_days %}
-    {% break %}
-  {% endif %}
-{% endfor %}
-
-{% assign max_date = now_ts %}
-{% assign counted = 0 %}
-{% for i in (1..60) %}
-  {% assign max_date = max_date | plus: 86400 %}
-  {% assign weekday = max_date | date: "%w" %}
-  {% unless weekday == '0' or weekday == '6' %}
-    {% assign counted = counted | plus: 1 %}
-  {% endunless %}
-  {% if counted == max_days %}
-    {% break %}
-  {% endif %}
-{% endfor %}
-
-{% comment %}Check if both dates are in the same month and year{% endcomment %}
-{% assign min_month = min_date | date: "%B" %}
-{% assign max_month = max_date | date: "%B" %}
-{% assign min_year = min_date | date: "%Y" %}
-{% assign max_year = max_date | date: "%Y" %}
-
-{% if min_month == max_month and min_year == max_year %}
-  {% comment %}Same month - only show month once{% endcomment %}
-  {% capture min_formatted -%}
-    {{- min_date | date: "%-d" -}}
-    {%- assign day = min_date | date: "%-d" -%}
-    {%- case day -%}
-      {%- when '1' or '21' or '31' -%}st
-      {%- when '2' or '22' -%}nd
-      {%- when '3' or '23' -%}rd
-      {%- else -%}th
-    {%- endcase -%}
-  {%- endcapture %}
-
-  {% capture max_formatted -%}
-    {{- max_date | date: "%-d" -}}
-    {%- assign day = max_date | date: "%-d" -%}
-    {%- case day -%}
-      {%- when '1' or '21' or '31' -%}st
-      {%- when '2' or '22' -%}nd
-      {%- when '3' or '23' -%}rd
-      {%- else -%}th
-    {%- endcase -%}
-  {%- endcapture %}
-
-  {% capture date -%}
-    {{- min_month }} {{ min_formatted }} - {{ max_formatted -}}
-  {%- endcapture %}
-
-{% else %}
-  {% comment %}Different months - show full format for both{% endcomment %}
-  {% capture min_formatted -%}
-    {{- min_date | date: "%B %-d" -}}
-    {%- assign day = min_date | date: "%-d" -%}
-    {%- case day -%}
-      {%- when '1' or '21' or '31' -%}st
-      {%- when '2' or '22' -%}nd
-      {%- when '3' or '23' -%}rd
-      {%- else -%}th
-    {%- endcase -%}
-  {%- endcapture %}
-
-  {% capture max_formatted -%}
-    {{- max_date | date: "%B %-d" -}}
-    {%- assign day = max_date | date: "%-d" -%}
-    {%- case day -%}
-      {%- when '1' or '21' or '31' -%}st
-      {%- when '2' or '22' -%}nd
-      {%- when '3' or '23' -%}rd
-      {%- else -%}th
-    {%- endcase -%}
-  {%- endcapture %}
-
-  {% capture date -%}
-    {{- min_formatted -}} - {{- max_formatted -}}
-  {%- endcapture %}
-
-{% endif %}
-
 {%- liquid
   assign block_settings = block.settings
   assign variant = closest.product.selected_or_first_available_variant
@@ -109,16 +14,16 @@
         assign status = 'low'
         assign show_quantity = block_settings.show_inventory_quantity
         if show_quantity == false
-          assign translation_key = 'content.inventory_low_stock_html'
+          assign translation_key = 'content.inventory_low_stock'
         endif
       else
         assign status = 'in_stock'
-        assign translation_key = 'content.inventory_in_stock_html'
+        assign translation_key = 'content.inventory_in_stock'
       endif
     else
       if inventory_policy == 'continue'
         assign status = 'in_stock'
-        assign translation_key = 'content.inventory_in_stock_html'
+        assign translation_key = 'content.inventory_in_stock'
       else
         assign status = 'out_of_stock'
         assign translation_key = 'content.inventory_out_of_stock'
@@ -135,9 +40,17 @@
   endif
 -%}
 
+{% if block_settings.text_color != blank %}
+  {% style %}
+    .product-inventory-{{ block.id }} {
+      color: {{ block_settings.text_color }};
+    }
+  {% endstyle %}
+{% endif %}
+
 <product-inventory
   class="
-    product-inventory spacing-style
+    product-inventory product-inventory-{{ block.id }} spacing-style
     {% if block_settings.type_preset != '' %}{{ block_settings.type_preset }}{% endif%}
   "
   style="{% render 'spacing-style', settings: block_settings %}"
@@ -159,9 +72,9 @@
       aria-label="{{ 'accessibility.inventory_status' | t }}"
     >
       {%- if show_quantity -%}
-        {{ 'content.inventory_low_stock_show_count_html' | t: count: inventory_quantity, date: date }}
+        {{ 'content.inventory_low_stock_show_count' | t: count: inventory_quantity }}
       {%- else -%}
-        {{- translation_key | t: date: date -}}
+        {{- translation_key | t -}}
       {%- endif -%}
     </span>
   </span>
@@ -205,18 +118,6 @@
   "tag": null,
   "settings": [
     {
-      "type": "number",
-      "id": "min_days",
-      "label": "Shipping Minimum Days",
-      "default": 1
-    },
-    {
-      "type": "number",
-      "id": "max_days",
-      "label": "Shipping Maximum Days",
-      "default": 3
-    },
-    {
       "type": "paragraph",
       "content": "t:content.resource_reference_product_inventory"
     },
@@ -234,6 +135,16 @@
       "id": "show_inventory_quantity",
       "label": "t:settings.show_inventory_quantity",
       "default": true
+    },
+    {
+      "type": "header",
+      "content": "t:content.appearance"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "t:settings.text_color",
+      "placeholder": "t:settings.default"
     },
     {
       "type": "header",
