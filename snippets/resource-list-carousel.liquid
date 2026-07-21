@@ -16,7 +16,10 @@
   assign carousel_class = 'resource-list__carousel'
 
   case settings.section_width
-    when 'page-width', 'narrow'
+    when 'page-width', 'narrow', 'page-narrow'
+      # 'page-narrow' is the store's custom width value; treat it like page-width so
+      # full-width mobile carousels keep a first/last-item gutter (page-margin gap)
+      # instead of jamming cards against the screen edges.
       assign slideshow_gutters = 'start end'
       assign gutter_style = '--gutter-slide-width: var(--util-page-margin-offset);'
     else

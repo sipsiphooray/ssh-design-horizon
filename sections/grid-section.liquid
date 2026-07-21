@@ -92,35 +92,50 @@
       assign list_items_array = list_items | strip | remove_last: '<!--@list/split-->' | split: '<!--@list/split-->'
     %}
 
+    {% if section.settings.layout_type == 'grid' %}
+      <div
+        class="
+          resource-list
+          carousel-list
+          {% if section.settings.carousel_on_mobile %}
+            hidden--mobile
+          {% endif %}
+          {{ classes }}
+        "
+        style="{{ styles }}"
+        data-testid="carousel-list-grid"
+      >
+        {{ list_items }}
+      </div>
+    {% endif %}
+  </div>
+
+  {% if section.settings.layout_type == 'carousel' %}
+    {%- comment -%}
+      Carousel layout: render as a DIRECT child of .section (outside
+      .custom-section-content) with force-full-width so the slider spans full width
+      like collection-list's. The gutter (--gutter-slide-width) insets the first/last
+      slide to the page margin, so it's full-bleed WITH a first/last gap, not jammed.
+    {%- endcomment -%}
     <div
       class="
         resource-list
         carousel-list
         {% if section.settings.peek_desktop == true %}carousel--peek{% endif %}
-        {% if section.settings.carousel_on_mobile and section.settings.layout_type != 'carousel' %}
-          hidden--mobile
-        {% endif %}
+        force-full-width
         {{ classes }}
       "
       style="{{ styles }}"
-      {% if section.settings.layout_type == 'grid' %}
-        data-testid="carousel-list-grid"
-      {% endif %}
     >
-      {% case section.settings.layout_type %}
-        {% when 'grid' %}
-          {{ list_items }}
-        {% when 'carousel' %}
-          {% render 'resource-list-carousel',
-            ref: 'Carousel',
-            slides: list_items_array,
-            slide_count: max_items,
-            settings: section.settings,
-            slide_width_max: '450px'
-          %}
-      {% endcase %}
+      {% render 'resource-list-carousel',
+        ref: 'Carousel',
+        slides: list_items_array,
+        slide_count: max_items,
+        settings: section.settings,
+        slide_width_max: '450px'
+      %}
     </div>
-  </div>
+  {% endif %}
 
   {% if section.settings.layout_type != 'carousel' and section.settings.carousel_on_mobile %}
     {% liquid
