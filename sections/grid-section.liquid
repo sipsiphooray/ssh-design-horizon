@@ -120,35 +120,42 @@
           %}
       {% endcase %}
     </div>
-
-    {% if section.settings.layout_type != 'carousel' and section.settings.carousel_on_mobile %}
-      {% liquid
-        assign mobile_carousel_gap = section.settings.columns_gap
-      %}
-      <div
-        class="
-          resource-list
-          hidden--desktop
-          resource-list__carousel
-          force-full-width
-        "
-        style="
-          --resource-list-column-gap-desktop: {{ mobile_carousel_gap }}px;
-          --column-count: {{ section.settings.columns }};
-          --column-count-mobile: 1;
-          --mobile-card-size: {{ section.settings.mobile_card_size }};
-        "
-      >
-        {% render 'resource-list-carousel',
-          ref: 'CarouselMobile',
-          slides: list_items_array,
-          slide_count: max_items,
-          settings: section.settings,
-          slide_width_max: '450px'
-        %}
-      </div>
-    {% endif %}
   </div>
+
+  {% if section.settings.layout_type != 'carousel' and section.settings.carousel_on_mobile %}
+    {% liquid
+      assign mobile_carousel_gap = section.settings.columns_gap
+    %}
+    {%- comment -%}
+      Edge-to-edge mobile carousel: this must be a DIRECT child of .section so the
+      `.section > .force-full-width { grid-column: 1 / -1 }` rule fires (same as
+      collection-list via the resource-list snippet). Nesting it inside
+      .custom-section-content defeats the direct-child selector, so it never went
+      full-bleed. Header/content stay inside .custom-section-content (page margins).
+    {%- endcomment -%}
+    <div
+      class="
+        resource-list
+        hidden--desktop
+        resource-list__carousel
+        force-full-width
+      "
+      style="
+        --resource-list-column-gap-desktop: {{ mobile_carousel_gap }}px;
+        --column-count: {{ section.settings.columns }};
+        --column-count-mobile: 1;
+        --mobile-card-size: {{ section.settings.mobile_card_size }};
+      "
+    >
+      {% render 'resource-list-carousel',
+        ref: 'CarouselMobile',
+        slides: list_items_array,
+        slide_count: max_items,
+        settings: section.settings,
+        slide_width_max: '450px'
+      %}
+    </div>
+  {% endif %}
 </div>
 
 {% stylesheet %}
