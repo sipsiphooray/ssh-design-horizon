@@ -91,6 +91,7 @@
         "section_height": "",
         "section_height_custom": 50,
         "background_media": "none",
+        "background_color": "",
         "video_position": "cover",
         "background_image_position": "cover",
         "toggle_overlay": false,
@@ -100,6 +101,7 @@
         "border": "none",
         "border_width": 1,
         "border_opacity": 100,
+        "border_color": "",
         "border_radius": 0,
         "padding-block-start": 0,
         "padding-block-end": 0
@@ -134,11 +136,13 @@
             "height": "fit",
             "custom_height": 100,
             "background_media": "none",
+            "background_color": "",
             "video_position": "cover",
             "background_image_position": "cover",
             "border": "none",
             "border_width": 1,
             "border_opacity": 100,
+            "border_color": "",
             "border_radius": 0,
             "enable_mobile_radius": false,
             "mobile_border_radius": 0,
@@ -165,6 +169,7 @@
               "settings": {
                 "inverse": false,
                 "font": "heading",
+                "text_color": "",
                 "unit": "pixel",
                 "percent_width": 100,
                 "pixel_height": 80,
@@ -196,6 +201,7 @@
                 "letter_spacing": "normal",
                 "case": "none",
                 "wrap": "pretty",
+                "text_color": "",
                 "background": false,
                 "background_color": "#00000026",
                 "corner_radius": 0,
@@ -207,13 +213,15 @@
                 "mobile-padding-block-start": 0,
                 "mobile-padding-block-end": 0,
                 "mobile-padding-inline-start": 0,
-                "mobile-padding-inline-end": 0
+                "mobile-padding-inline-end": 0,
+                "custom_class": ""
               },
               "blocks": {}
             },
             "social_links_XxBzPp": {
               "type": "social-links",
               "settings": {
+                "icon_color": "",
                 "facebook_url": "https://www.facebook.com/sipsiphooraydesign/",
                 "instagram_url": "https://www.instagram.com/sipsiphooraydesign/",
                 "youtube_url": "",
@@ -272,11 +280,13 @@
             "height": "fit",
             "custom_height": 100,
             "background_media": "none",
+            "background_color": "",
             "video_position": "cover",
             "background_image_position": "cover",
             "border": "none",
             "border_width": 1,
             "border_opacity": 100,
+            "border_color": "",
             "border_radius": 0,
             "enable_mobile_radius": false,
             "mobile_border_radius": 0,
@@ -307,6 +317,8 @@
                 "show_as_accordion": true,
                 "accordion_icon": "plus",
                 "accordion_dividers": true,
+                "background_color": "",
+                "text_color": "",
                 "heading_preset": "h3",
                 "link_preset": "paragraph",
                 "padding-block-start": 0,
@@ -326,6 +338,8 @@
                 "show_as_accordion": true,
                 "accordion_icon": "plus",
                 "accordion_dividers": true,
+                "background_color": "",
+                "text_color": "",
                 "heading_preset": "h3",
                 "link_preset": "paragraph",
                 "padding-block-start": 0,
@@ -367,11 +381,13 @@
             "height": "fit",
             "custom_height": 100,
             "background_media": "none",
+            "background_color": "",
             "video_position": "cover",
             "background_image_position": "cover",
             "border": "none",
             "border_width": 1,
             "border_opacity": 100,
+            "border_color": "",
             "border_radius": 0,
             "enable_mobile_radius": false,
             "mobile_border_radius": 0,
@@ -392,6 +408,12 @@
             "css_class": ""
           },
           "blocks": {
+            "sendlane_marketing_automation_sendlane_forms_block_MBz7Vt": {
+              "type": "shopify://apps/sendlane-marketing-automation/blocks/sendlane-forms-block/5a768830-d9c3-4d16-9e83-ae2a731c69be",
+              "settings": {
+                "form_key": "eyJkb21haW4iOiJzaXBzaXBob29yYXlkZXNpZ24iLCJmb3JtX2lkIjoiMjdkMmU5ZTItNzBkMi00OTJjLWJiOTUtM2E4NzZhYzVjZWNkIn0"
+              }
+            },
             "text_pF6rVi": {
               "type": "text",
               "name": "Heading",
@@ -409,6 +431,7 @@
                 "letter_spacing": "tight",
                 "case": "none",
                 "wrap": "pretty",
+                "text_color": "",
                 "background": false,
                 "background_color": "#00000026",
                 "corner_radius": 0,
@@ -420,7 +443,8 @@
                 "mobile-padding-block-start": 0,
                 "mobile-padding-block-end": 0,
                 "mobile-padding-inline-start": 0,
-                "mobile-padding-inline-end": 0
+                "mobile-padding-inline-end": 0,
+                "custom_class": ""
               },
               "blocks": {}
             },
@@ -441,6 +465,7 @@
                 "letter_spacing": "normal",
                 "case": "none",
                 "wrap": "pretty",
+                "text_color": "",
                 "background": false,
                 "background_color": "#00000026",
                 "corner_radius": 0,
@@ -452,7 +477,8 @@
                 "mobile-padding-block-start": 0,
                 "mobile-padding-block-end": 0,
                 "mobile-padding-inline-start": 0,
-                "mobile-padding-inline-end": 0
+                "mobile-padding-inline-end": 0,
+                "custom_class": ""
               },
               "blocks": {}
             },
@@ -463,12 +489,21 @@
                 "width": "fill",
                 "custom_width": 100,
                 "heading": "",
+                "heading_text_color": "",
                 "heading_preset": "h3",
                 "border_style": "underline",
+                "input_style": "default",
                 "border_width": 1,
                 "border_radius": 100,
+                "input_background_color": "",
+                "input_text_color": "",
+                "input_border_color": "",
                 "input_type_preset": "paragraph",
                 "style_class": "button",
+                "custom_button_background": "{{ settings.color_palette.foreground }}",
+                "custom_button_text": "{{ settings.color_palette.background }}",
+                "custom_button_border": "{{ settings.color_palette.background }}",
+                "link_text_color": "",
                 "display_type": "text",
                 "label": "Sign up",
                 "integrated_button": false,
@@ -482,6 +517,7 @@
             }
           },
           "block_order": [
+            "sendlane_marketing_automation_sendlane_forms_block_MBz7Vt",
             "text_pF6rVi",
             "text_HafH7P",
             "email_signup_dNywti"
@@ -515,6 +551,7 @@
           "type": "footer-copyright",
           "settings": {
             "show_powered_by": false,
+            "text_color": "",
             "font_size": "0.75rem",
             "case": "none"
           },
@@ -523,6 +560,7 @@
         "policy_list": {
           "type": "footer-policy-list",
           "settings": {
+            "text_color": "",
             "font_size": "0.75rem",
             "case": "none"
           },
@@ -555,6 +593,7 @@
         "gap": 24,
         "background_color": "{{ settings.color_palette.foreground }}",
         "divider_thickness": 1,
+        "divider_color": "",
         "padding-block-start": 12,
         "padding-block-end": 16
       }
