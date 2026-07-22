@@ -888,6 +888,10 @@ summary:hover {
     top: 1.5rem;
 }
 
+.theme-drawer__header {
+    padding: var(--padding-xs) var(--theme-drawer-padding) !important;
+}
+
 @media screen and (min-width: 750px) {
     .preview-image-modal {
         width: var(--quick-add-modal-width);
@@ -1254,15 +1258,17 @@ html[scroll-lock] {
    in an inline <style> sibling of <variant-picker> in variant-main-picker.liquid,
    which quick-add.js drops on mobile (it copies only the <variant-picker>). Added 2026-07-08. */
 .variant-option--buttons .variant-option__button-label:has(.variant-option__icon-circle) {
-  border-radius: 50%;
-  width: 62px; height: 62px; min-width: 62px;
+  border-radius: var(--variant-picker-swatch-radius);
+  width: var(--variant-picker-swatch-width); height: var(--variant-picker-swatch-height); min-width: var(--variant-picker-swatch-width);
   padding: 0; overflow: hidden;
-  display: inline-flex; align-items: center; justify-content: center;
-  border: 1px solid rgb(var(--color-foreground-rgb) / 0.18);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: var(--variant-picker-border-width) solid rgb(var(--color-foreground-rgb) / 0.18);
   transition: box-shadow .12s ease, border-color .12s ease;
 }
 .variant-option__icon-circle { width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; }
-.variant-option__color-circle { width: 100%; height: 100%; border-radius: 50%; }
+.variant-option__color-circle { width: 100%; height: 100%; border-radius: var(--variant-picker-swatch-radius); }
 .variant-option__icon-circle img { width: 100%; height: 100%; object-fit: contain; padding: 6px; box-sizing: border-box; }
 .variant-option--buttons .variant-option__button-label:has(.variant-option__icon-circle):hover {
   border-color: rgb(var(--color-foreground-rgb) / 0.45);
@@ -1275,16 +1281,9 @@ html[scroll-lock] {
 }
 .variant-option__sr { position: absolute !important; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0; }
 
-/* Homepage hero (hero_7rtg4W) green button — carried over from the retired
-   scheme-c84356fe color scheme; v4 buttons are otherwise palette-global. */
-[id$="__hero_7rtg4W"] .button {
-    --color-primary-button-background: #759d6f;
-    --color-primary-button-text: #ffffff;
-    --color-primary-button-border: #759d6f;
-    --color-primary-button-hover-background: #ffffff;
-    --color-primary-button-hover-text: #759d6f;
-    --color-primary-button-hover-border: #759d6f;
-}
+/* Homepage hero green button now set via the theme system: the button block uses
+   style_class "button-custom" with palette refs (color8 green / background white)
+   for base + hover colors in templates/index.json. No CSS override needed. */
 
 .menu-list__link-inner .icon-caret {
     width: var(--icon-size-xs) !important;
