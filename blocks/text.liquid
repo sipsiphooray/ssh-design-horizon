@@ -1,6 +1,6 @@
 
 
-{% render 'text', block: block %}
+{% render 'text', block: block, class: block.settings.custom_class %}
 
 {% schema %}
 {
@@ -406,29 +406,14 @@
       "visible_if": "{{ block.settings.type_preset == 'custom' }}"
     },
     {
-      "type": "select",
-      "id": "color",
-      "label": "t:settings.color",
-      "options": [
-        {
-          "value": "var(--color-foreground)",
-          "label": "t:options.text"
-        },
-        {
-          "value": "var(--color-foreground-heading)",
-          "label": "t:options.heading"
-        },
-        {
-          "value": "var(--color-primary)",
-          "label": "t:options.link"
-        }
-      ],
-      "default": "var(--color-foreground)",
-      "visible_if": "{{ block.settings.type_preset != 'rte' }}"
-    },
-    {
       "type": "header",
       "content": "t:content.appearance"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "t:settings.text_color",
+      "placeholder": "t:settings.default"
     },
     {
       "type": "checkbox",
@@ -547,6 +532,16 @@
       "unit": "px",
       "default": 0,
       "visible_if": "{{ block.settings.custom_mobile_padding == true }}"
+    },
+    {
+      "type": "header",
+      "content": "Custom CSS"
+    },
+    {
+      "type": "text",
+      "id": "custom_class",
+      "label": "Custom class",
+      "info": "Add a CSS class (without the dot) to target this block from custom.css."
     }
   ],
   "presets": [

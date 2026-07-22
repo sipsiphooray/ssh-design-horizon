@@ -31,7 +31,17 @@
   endcase
 %}
 
-<div class="section-background color-{{ section.settings.color_scheme }}"></div>
+{% render 'contrast-override', background_color: section.settings.background_color, section_id: section.id %}
+
+{%- comment -%}
+  v4 moved .resource-list--grid column CSS out of always-loaded base.css into this
+  opt-in snippet. grid-section relies on that class, so render it here — on pages with
+  no product-list/recommendations section the grid would otherwise collapse to 1 column.
+  {% stylesheet %} blocks dedupe, so rendering it from many places is safe.
+{%- endcomment -%}
+{% render 'resource-list-styles' %}
+
+<div class="section-background{% if section.settings.background_color != blank %} color-custom-{{ section.id }}{% endif %}"></div>
 
 <div
   {% if section.settings.add_section_id == true and section.settings.section_id != blank %}
@@ -41,7 +51,7 @@
     section
     {% if section.settings.full_width_on_mobile %}carousel--mobile-full-width{% endif %}
     section--{{ section.settings.section_width }}
-    color-{{ section.settings.color_scheme }}
+    {% if section.settings.background_color != blank %}color-custom-{{ section.id }}{% endif %}
     section-resource-list
     spacing-style
     gap-style
@@ -82,63 +92,86 @@
       assign list_items_array = list_items | strip | remove_last: '<!--@list/split-->' | split: '<!--@list/split-->'
     %}
 
+    {% if section.settings.layout_type == 'grid' %}
+      <div
+        class="
+          resource-list
+          carousel-list
+          {% if section.settings.carousel_on_mobile %}
+            hidden--mobile
+          {% endif %}
+          {{ classes }}
+        "
+        style="{{ styles }}"
+        data-testid="carousel-list-grid"
+      >
+        {{ list_items }}
+      </div>
+    {% endif %}
+  </div>
+
+  {% if section.settings.layout_type == 'carousel' %}
+    {%- comment -%}
+      Carousel layout: render as a DIRECT child of .section (outside
+      .custom-section-content) with force-full-width so the slider spans full width
+      like collection-list's. The gutter (--gutter-slide-width) insets the first/last
+      slide to the page margin, so it's full-bleed WITH a first/last gap, not jammed.
+    {%- endcomment -%}
     <div
       class="
         resource-list
         carousel-list
         {% if section.settings.peek_desktop == true %}carousel--peek{% endif %}
-        {% if section.settings.carousel_on_mobile and section.settings.layout_type != 'carousel' %}
-          hidden--mobile
-        {% endif %}
+        {% if section.settings.section_width == 'page-narrow' %}carousel--narrow-contained{% endif %}
+        force-full-width
         {{ classes }}
       "
       style="{{ styles }}"
-      {% if section.settings.layout_type == 'grid' %}
-        data-testid="carousel-list-grid"
-      {% endif %}
     >
-      {% case section.settings.layout_type %}
-        {% when 'grid' %}
-          {{ list_items }}
-        {% when 'carousel' %}
-          {% render 'resource-list-carousel',
-            ref: 'Carousel',
-            slides: list_items_array,
-            slide_count: max_items,
-            settings: section.settings,
-            slide_width_max: '450px'
-          %}
-      {% endcase %}
-    </div>
-
-    {% if section.settings.layout_type != 'carousel' and section.settings.carousel_on_mobile %}
-      {% liquid
-        assign mobile_carousel_gap = section.settings.columns_gap
+      {% render 'resource-list-carousel',
+        ref: 'Carousel',
+        slides: list_items_array,
+        slide_count: max_items,
+        settings: section.settings,
+        slide_width_max: '450px'
       %}
-      <div
-        class="
-          resource-list
-          hidden--desktop
-          resource-list__carousel
-          force-full-width
-        "
-        style="
-          --resource-list-column-gap-desktop: {{ mobile_carousel_gap }}px;
-          --column-count: {{ section.settings.columns }};
-          --column-count-mobile: 1;
-          --mobile-card-size: {{ section.settings.mobile_card_size }};
-        "
-      >
-        {% render 'resource-list-carousel',
-          ref: 'CarouselMobile',
-          slides: list_items_array,
-          slide_count: max_items,
-          settings: section.settings,
-          slide_width_max: '450px'
-        %}
-      </div>
-    {% endif %}
-  </div>
+    </div>
+  {% endif %}
+
+  {% if section.settings.layout_type != 'carousel' and section.settings.carousel_on_mobile %}
+    {% liquid
+      assign mobile_carousel_gap = section.settings.columns_gap
+    %}
+    {%- comment -%}
+      Edge-to-edge mobile carousel: this must be a DIRECT child of .section so the
+      `.section > .force-full-width { grid-column: 1 / -1 }` rule fires (same as
+      collection-list via the resource-list snippet). Nesting it inside
+      .custom-section-content defeats the direct-child selector, so it never went
+      full-bleed. Header/content stay inside .custom-section-content (page margins).
+    {%- endcomment -%}
+    <div
+      class="
+        resource-list
+        hidden--desktop
+        resource-list__carousel
+        force-full-width
+      "
+      style="
+        --resource-list-column-gap-desktop: {{ mobile_carousel_gap }}px;
+        --column-count: {{ section.settings.columns }};
+        --column-count-mobile: 1;
+        --mobile-card-size: {{ section.settings.mobile_card_size }};
+      "
+    >
+      {% render 'resource-list-carousel',
+        ref: 'CarouselMobile',
+        slides: list_items_array,
+        slide_count: max_items,
+        settings: section.settings,
+        slide_width_max: '450px'
+      %}
+    </div>
+  {% endif %}
 </div>
 
 {% stylesheet %}
@@ -158,6 +191,30 @@
     --peek-next-slide-size: 0rem !important;
   }
 
+  /* Section width = Narrow + desktop carousel: the carousel is force-full-width so it goes
+     edge-to-edge, which ignores the narrow content width (narrow appeared to do nothing).
+     On desktop only, pull it back into the section's content column (2) — which is the narrow
+     width — and drop the page-margin first/last gutter so slides sit flush in that column.
+     Mobile keeps the full-bleed .carousel-list rule (< 990) untouched. */
+  @media (min-width: 990px) {
+    .section > .carousel--narrow-contained.force-full-width {
+      grid-column: 2;
+    }
+    .carousel--narrow-contained .resource-list__carousel-wrap {
+      --gutter-slide-width: 0px !important;
+    }
+    .carousel--narrow-contained slideshow-slides[gutters*='start'] {
+      padding-inline-start: 0;
+      scroll-padding-inline-start: 0;
+    }
+    .carousel--narrow-contained slideshow-slides[gutters*='end'] {
+      padding-inline-end: 0;
+    }
+    .carousel--narrow-contained slideshow-arrows {
+      padding-inline: 0;
+    }
+  }
+
   .carousel-list {
 
     &.carousel--peek {
@@ -171,7 +228,7 @@
     }
 
     @media (min-width: 990px) {
-      .slideshow-control--next {
+      .slideshow-control--next:not(.slideshow-control--progress-arrow) {
         margin-inline-start: auto;
         margin-inline-end: calc(-1 * calc(var(--gutter-slide-width, 0) * 2  + var(--gap-sm))) !important;
       }
@@ -179,7 +236,7 @@
         padding-inline: 0;
         scroll-padding-inline-start: 0;
       }
-      .slideshow-control--previous {
+      .slideshow-control--previous:not(.slideshow-control--progress-arrow) {
         margin-inline-end: auto !important;
         margin-inline-start: calc(-1 * calc(var(--gutter-slide-width, 0) * 2  + var(--gap-sm))) !important;
       }
@@ -396,6 +453,10 @@
           "label": "t:options.chevron_large"
         },
         {
+          "value": "progress",
+          "label": "t:options.progress_bar"
+        },
+        {
           "value": "none",
           "label": "t:options.none"
         }
@@ -471,10 +532,10 @@
       "default": 12
     },
     {
-      "type": "color_scheme",
-      "id": "color_scheme",
-      "label": "t:settings.color_scheme",
-      "default": "scheme-1"
+      "type": "color",
+      "id": "background_color",
+      "label": "t:settings.background_color",
+      "placeholder": "t:settings.default"
     },
     {
       "type": "select",
@@ -699,7 +760,6 @@
         "icons_shape": "circle",
         "section_width": "page-width",
         "gap": 12,
-        "color_scheme": "",
         "padding-block-start": 48,
         "padding-block-end": 48
       },
@@ -715,7 +775,7 @@
             "vertical_alignment": "flex-end",
             "align_baseline": true,
             "horizontal_alignment_flex_direction_column": "flex-start",
-            "vertical_alignment_flex_direction_column": "flex-start",
+            "vertical_alignment_flex_direction_column": "center",
             "gap": 12,
             "width": "fill",
             "custom_width": 100,
@@ -723,8 +783,6 @@
             "custom_width_mobile": 100,
             "height": "fit",
             "custom_height": 100,
-            "inherit_color_scheme": true,
-            "color_scheme": "",
             "background_media": "none",
             "video_position": "cover",
             "background_image_position": "cover",

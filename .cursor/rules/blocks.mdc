@@ -114,15 +114,6 @@ Static blocks are theme blocks that are rendered directly in Liquid templates by
 - Useful for consistent layout elements that should always be present
 - Can be mixed with dynamic block areas using `{% content_for 'blocks' %}`
 
-## Theme editor copy (schema `paragraph`, `info`, labels)
-
-Keep merchant-facing schema copy **short** so the theme editor sidebar stays scannable.
-
-- **`paragraph` / `info` / `label`:** Prefer **one sentence**; keep **under ~180 characters** when practical. If more detail is needed, use a `header` + short `paragraph` and/or an **`info`** string on the **specific setting**—avoid one long intro paragraph.
-- **Do not repeat** what the setting label, unit, or default already communicates.
-- **`inline_richtext` defaults:** Only **inline** HTML (`strong`, `em`, `br`, `a`, etc.). Never block tags like `<p>` or `<div>`—Shopify rejects them for `inline_richtext`.
-- **Formulas, placeholders, currency caveats:** one short `info` on the relevant setting, no em dashes, not a wall of text in `paragraph`.
-
 ## Schema Configuration
 
 See [schemas.mdc](mdc:.cursor/rules/schemas.mdc) for rules on schemas

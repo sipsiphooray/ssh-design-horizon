@@ -1,0 +1,67 @@
+{%- doc -%}
+  Collage image tile
+
+  @param {object} block - The block object
+{%- enddoc -%}
+
+<div class="collage-tile" {{ block.shopify_attributes }}>
+  {%- if block.settings.url != blank -%}
+    <a href="{{ block.settings.url }}">
+  {%- endif -%}
+
+    {% render 'image',
+      image: block.settings.image,
+      class: 'collage-tile__image'
+    %}
+
+    {%- if block.settings.image_overlay != blank -%}
+      <div
+        class="collage-tile__overlay"
+        style="background: {{ block.settings.image_overlay }};"
+      ></div>
+    {%- endif -%}
+
+  {%- if block.settings.url != blank -%}
+    </a>
+  {%- endif -%}
+</div>
+
+{% schema %}
+{
+  "name": "t:names.collage_image",
+  "tag": null,
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "t:settings.image"
+    },
+    {
+      "type": "url",
+      "id": "url",
+      "label": "t:settings.link",
+      "info": "t:info.optional"
+    },
+    {
+      "type": "color",
+      "id": "image_overlay",
+      "label": "Image overlay",
+      "alpha": true,
+      "default": "#00000000"
+    }
+  ],
+  "presets": [
+    {
+      "name": "t:names.collage_image"
+    }
+  ]
+}
+{% endschema %}
+
+{% stylesheet %}
+  .collage-tile__overlay {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+  }
+{% endstylesheet %}

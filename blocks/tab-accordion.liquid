@@ -10,8 +10,9 @@
 ></script>
 
 {% assign block_settings = block.settings %}
+{% if block_settings.background_color != blank %}{% render 'contrast-override', background_color: block_settings.background_color, section_id: block.id %}{% endif %}
 <tab-accordion
-  class="accordion accordion--{{ block.id }} accordion--{{ block_settings.icon }} border-style spacing-style{% if block_settings.inherit_color_scheme == false %} color-{{ block_settings.color_scheme }}{% endif %}{% if block_settings.dividers %} accordion--dividers{% endif %}"
+  class="accordion accordion--{{ block.id }} accordion--{{ block_settings.icon }} border-style spacing-style{% if block_settings.background_color != blank %} color-custom-{{ block.id }}{% endif %}{% if block_settings.dividers %} accordion--dividers{% endif %}"
   style="
     --summary-font-family: var(--font-{{ block_settings.type_preset }}--family);
     --summary-font-style: var(--font-{{ block_settings.type_preset }}--style);
@@ -315,17 +316,10 @@
       "info": "t:info.edit_presets_in_theme_settings"
     },
     {
-      "type": "checkbox",
-      "id": "inherit_color_scheme",
-      "label": "t:settings.inherit_color_scheme",
-      "default": true
-    },
-    {
-      "type": "color_scheme",
-      "id": "color_scheme",
-      "label": "t:settings.color_scheme",
-      "default": "scheme-1",
-      "visible_if": "{{ block.settings.inherit_color_scheme == false }}"
+      "type": "color",
+      "id": "background_color",
+      "label": "t:settings.background_color",
+      "placeholder": "t:settings.default"
     },
     {
       "type": "header",

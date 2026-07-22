@@ -111,20 +111,24 @@ class HeaderDrawer extends Component {
 
       // Wait for the drawer animation to complete before trapping focus
       const drawer = details.querySelector('.menu-drawer, .menu-drawer__submenu');
-      onAnimationEnd(drawer || details, () => {
-        if (target) {
-          const safety = this.#submenuSlideSafetyTimeouts.get(details);
-          if (safety != null) {
-            clearTimeout(safety);
-            this.#submenuSlideSafetyTimeouts.delete(details);
+      onAnimationEnd(
+        drawer || details,
+        () => {
+          if (target) {
+            const safety = this.#submenuSlideSafetyTimeouts.get(details);
+            if (safety != null) {
+              clearTimeout(safety);
+              this.#submenuSlideSafetyTimeouts.delete(details);
+            }
+            this.#submenuSlideAnimating.delete(details);
           }
-          this.#submenuSlideAnimating.delete(details);
-        }
-        if (!details.hasAttribute('open')) return;
-        const trapContainer = this.#focusTrapTargetForCompletedOpen(details);
-        if (!trapContainer.hasAttribute('open')) return;
-        trapFocus(trapContainer);
-      }, { subtree: false });
+          if (!details.hasAttribute('open')) return;
+          const trapContainer = this.#focusTrapTargetForCompletedOpen(details);
+          if (!trapContainer.hasAttribute('open')) return;
+          trapFocus(trapContainer);
+        },
+        { subtree: false }
+      );
     });
   }
 

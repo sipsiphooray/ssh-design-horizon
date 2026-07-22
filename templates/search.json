@@ -23,7 +23,6 @@
             "letter_spacing": "normal",
             "case": "none",
             "wrap": "pretty",
-            "color": "",
             "text": "",
             "read_only": true,
             "alignment": "left",
@@ -40,16 +39,13 @@
           "static": true,
           "settings": {
             "width": "custom",
-            "custom_width": 50,
-            "inherit_color_scheme": true,
-            "color_scheme": ""
+            "custom_width": 50
           },
           "blocks": {}
         }
       },
       "settings": {
         "alignment": "flex-start",
-        "color_scheme": "scheme-1",
         "padding-block-start": 40,
         "padding-block-end": 0
       }
@@ -69,8 +65,6 @@
             "show_filter_label": false,
             "enable_sorting": true,
             "enable_grid_density": true,
-            "inherit_color_scheme": true,
-            "color_scheme": "",
             "padding-block-start": 8,
             "padding-block-end": 8,
             "padding-inline-start": 0,
@@ -85,8 +79,7 @@
           "static": true,
           "settings": {
             "product_card_gap": 12,
-            "inherit_color_scheme": false,
-            "color_scheme": "scheme-f18682b5-ff46-4cd5-99b9-4dc3b72d643b",
+            "background_color": "{{ settings.color_palette.color4 }}",
             "border": "solid",
             "border_width": 1,
             "border_opacity": 100,
@@ -117,19 +110,17 @@
                 "custom_width_mobile": 100,
                 "height": "fit",
                 "custom_height": 100,
-                "inherit_color_scheme": true,
-                "color_scheme": "",
                 "background_media": "none",
                 "video_position": "cover",
                 "background_image_position": "cover",
-                "border": "none",
-                "border_width": 1,
-                "border_opacity": 100,
-                "border_radius": 0,
                 "toggle_overlay": false,
                 "overlay_color": "#00000026",
                 "overlay_style": "solid",
                 "gradient_direction": "to top",
+                "border": "none",
+                "border_width": 1,
+                "border_opacity": 100,
+                "border_radius": 0,
                 "link": "",
                 "open_in_new_tab": false,
                 "padding-block-start": 0,
@@ -158,19 +149,17 @@
                     "custom_width_mobile": 100,
                     "height": "fit",
                     "custom_height": 100,
-                    "inherit_color_scheme": true,
-                    "color_scheme": "",
                     "background_media": "none",
                     "video_position": "cover",
                     "background_image_position": "cover",
-                    "border": "none",
-                    "border_width": 1,
-                    "border_opacity": 100,
-                    "border_radius": 0,
                     "toggle_overlay": false,
                     "overlay_color": "#00000026",
                     "overlay_style": "solid",
                     "gradient_direction": "to top",
+                    "border": "none",
+                    "border_width": 1,
+                    "border_opacity": 100,
+                    "border_radius": 0,
                     "link": "",
                     "open_in_new_tab": false,
                     "padding-block-start": 0,
@@ -179,13 +168,9 @@
                     "padding-inline-end": 0
                   },
                   "blocks": {
-                    "custom_liquid_ajqBUT": {
-                      "type": "custom-liquid",
-                      "name": "Reviews",
-                      "settings": {
-                        "custom_liquid": "{%- assign _c = closest.product.metafields.reviews.rating_count -%}{%- assign _r = closest.product.metafields.reviews.rating.value.rating | default: 0 -%}{%- if _c and _c != blank and _c != 0 -%}{%- assign _pct = _r | times: 20.0 -%}<div class=\"card-rating\" style=\"display:inline-flex;align-items:center;gap:5px;\"><span style=\"position:relative;display:inline-block;font-size:14px;line-height:1;letter-spacing:1px;\"><span style=\"color:currentColor;opacity:.2;\">★★★★★</span><span style=\"position:absolute;inset:0;width:{{ _pct }}%;overflow:hidden;color:#f5a623;white-space:nowrap;\">★★★★★</span></span><span style=\"font-size:12px;opacity:.7;\">({{ _c }})</span></div>{%- endif -%}"
-                      },
-                      "blocks": {}
+                    "judge_me_reviews_preview_badge_7SM48H": {
+                      "type": "shopify://apps/judge-me-reviews/blocks/preview_badge/61ccd3b1-a9f2-4160-9fe9-4fec8413e5d8",
+                      "settings": {}
                     },
                     "product_title_EF6kPr": {
                       "type": "product-title",
@@ -203,7 +188,6 @@
                         "letter_spacing": "normal",
                         "case": "none",
                         "wrap": "pretty",
-                        "color": "var(--color-foreground-heading)",
                         "background": false,
                         "background_color": "#00000026",
                         "corner_radius": 0,
@@ -224,7 +208,7 @@
                     }
                   },
                   "block_order": [
-                    "custom_liquid_ajqBUT",
+                    "judge_me_reviews_preview_badge_7SM48H",
                     "product_title_EF6kPr",
                     "custom_liquid_JQ8xtK"
                   ]
@@ -245,7 +229,6 @@
                     "line_height": "normal",
                     "letter_spacing": "normal",
                     "case": "none",
-                    "color": "var(--color-foreground)",
                     "padding-block-start": 0,
                     "padding-block-end": 0,
                     "padding-inline-start": 0,
@@ -264,8 +247,6 @@
               "static": true,
               "settings": {
                 "image_ratio": "square",
-                "inherit_color_scheme": true,
-                "color_scheme": "",
                 "border": "none",
                 "border_width": 1,
                 "border_opacity": 100,
@@ -295,7 +276,6 @@
         "columns_gap_vertical": 24,
         "padding-inline-start": 0,
         "padding-inline-end": 0,
-        "color_scheme": "scheme-1",
         "padding-block-start": 40,
         "padding-block-end": 40
       }

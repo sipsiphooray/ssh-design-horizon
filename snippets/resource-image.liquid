@@ -23,7 +23,6 @@
   @example
   {% render 'resource-image',
       content_type: 'collections',
-      image_source: blank,
       parent_block_id: block.id,
       block_settings: block.settings,
       section_settings: section.settings,
@@ -50,15 +49,9 @@
     assign image_resource = image_source
   elsif content_type == 'collections'
     assign collection = closest.collection
-
-    if block_settings.custom_image != blank
-      assign image_resource = block_settings.custom_image
-    else
-      assign image_resource = collection.image
-
-      if image_resource == blank
-        assign image_resource = collection.products.first.featured_image
-      endif
+    assign image_resource = collection.image
+    if image_resource == blank
+      assign image_resource = collection.products.first.featured_image
     endif
   else
     assign image_resource = image_source
@@ -117,6 +110,10 @@
   assign content_index = block_parts.last | default: 0
   assign variant = content_index | modulo: placeholder_variants | plus: 1
   assign placeholder_name = placeholder_prefix | append: variant
+
+  if block_settings.background_color != blank
+    render 'contrast-override', background_color: block_settings.background_color, section_id: parent_block_id
+  endif
 %}
 
 {% comment %} Apply aspect ratio to parent component {% endcomment %}
@@ -135,7 +132,6 @@
 {% if image_resource != blank %}
   <div
     class="
-      image-block
       resource-image
       {% if content_type == 'articles' %}
         featured-blog-posts-card__image
@@ -143,7 +139,7 @@
         collection-card__image
       {% endif %}
       spacing-style border-style
-      {% if block_settings.inherit_color_scheme == false %} color-{{ block_settings.color_scheme }}{% endif %}
+      {% if block_settings.background_color != blank %} color-custom-{{ parent_block_id }}{% endif %}
     "
     style="
       {%- render 'spacing-style', settings: block_settings -%}
@@ -158,13 +154,12 @@
     {{
       image_resource
       | image_url: width: 3840
-      | image_tag: widths: widths, class: 'image-block__image', sizes: sizes, loading: loading
+      | image_tag: widths: widths, class: 'resource-image__image', sizes: sizes, loading: loading
     }}
   </div>
 {% else %}
   <div
     class="
-      image-block
       resource-image resource-image--placeholder
       {% if content_type == 'articles' %}
         featured-blog-posts-card__image featured-blog-posts-card__image--placeholder
@@ -172,7 +167,7 @@
         collection-card__image collection-card__image--placeholder
       {% endif %}
       spacing-style border-style
-      {% if block_settings.inherit_color_scheme == false %} color-{{ block_settings.color_scheme }}{% endif %}
+      {% if block_settings.background_color != blank %} color-custom-{{ parent_block_id }}{% endif %}
     "
     style="
       {%- render 'spacing-style', settings: block_settings -%}
@@ -184,7 +179,7 @@
       {% render 'overlay', settings: block_settings %}
     {%- endif -%}
 
-    <div class="image-block__image">
+    <div class="resource-image__image">
       {% if content_type == 'articles' %}
         {{ placeholder_name | placeholder_svg_tag: 'blog-placeholder-svg' }}
       {% else %}
@@ -207,8 +202,9 @@
     aspect-ratio: var(--ratio);
   }
 
-  .resource-image .image-block__image {
+  .resource-image__image {
     object-fit: cover;
+    aspect-ratio: var(--ratio);
     width: 100%;
     height: 100%;
   }

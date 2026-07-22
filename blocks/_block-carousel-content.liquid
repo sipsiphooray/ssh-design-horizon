@@ -2,9 +2,9 @@
   assign slide_count = block.blocks.size
   assign icons_style = block.settings.icons_style
 
-  assign color_scheme_class = ''
-  if block.settings.inherit_color_scheme == false
-    assign color_scheme_class = 'color-' | append: block.settings.color_scheme
+  assign background_color_class = ''
+  if block.settings.background_color != blank
+    assign background_color_class = 'color-custom-' | append: block.id
   endif
 
   assign slideshow_gutters = null
@@ -33,7 +33,7 @@
   {% render 'border-override', settings: block.settings %}
 {% endcapture %}
 
-{% assign slideshow_class = 'carousel-content block-carousel-content spacing-style ' | append: color_scheme_class %}
+{% assign slideshow_class = 'carousel-content block-carousel-content spacing-style ' | append: background_color_class %}
 
 {% capture controls %}
   {%- render 'slideshow-controls',
@@ -47,6 +47,8 @@
     class: 'carousel-controls',
   -%}
 {% endcapture %}
+
+{% if block.settings.background_color != blank %}{% render 'contrast-override', background_color: block.settings.background_color, section_id: block.id %}{% endif %}
 
 <div
   class="force-full-width"
@@ -213,17 +215,10 @@
       "visible_if": "{{ section.settings.icons_style != 'none' }}"
     },
     {
-      "type": "checkbox",
-      "id": "inherit_color_scheme",
-      "label": "t:settings.inherit_color_scheme",
-      "default": true
-    },
-    {
-      "type": "color_scheme",
-      "id": "color_scheme",
-      "label": "t:settings.color_scheme",
-      "default": "scheme-1",
-      "visible_if": "{{ block.settings.inherit_color_scheme == false }}"
+      "type": "color",
+      "id": "background_color",
+      "label": "t:settings.background_color",
+      "placeholder": "t:settings.default"
     },
     {
       "type": "select",

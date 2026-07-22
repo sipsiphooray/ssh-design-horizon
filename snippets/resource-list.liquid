@@ -32,6 +32,7 @@
   - bento_gap: Gap for bento layout in pixels
   - mobile_card_size: Mobile card size for carousel
   - carousel_on_mobile: Boolean for mobile carousel fallback
+  - carousel_contain_width: When layout_type is carousel, keep slider inside section width on desktop only (mobile stays full bleed)
 {%- enddoc -%}
 
 {% liquid
@@ -49,6 +50,7 @@
   endunless
 
   assign layout_type = settings.layout_type | default: 'grid'
+  assign carousel_contain_width = settings.carousel_contain_width | default: false
   assign columns = settings.columns | default: 3
   assign mobile_columns = settings.mobile_columns | default: 2
   assign columns_gap = settings.columns_gap | default: 16
@@ -95,11 +97,16 @@
   assign resource_list_styles = resource_list_styles | strip
 %}
 
+{% render 'resource-list-styles' %}
+
 <div
   class="
     resource-list
     {% if settings.layout_type == 'carousel' %}
       force-full-width
+      {% if carousel_contain_width %}
+        resource-list--carousel-contained
+      {% endif %}
     {% endif %}
     {% if settings.carousel_on_mobile and settings.layout_type != 'carousel' %}
       hidden--mobile

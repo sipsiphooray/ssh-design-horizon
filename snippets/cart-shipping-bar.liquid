@@ -1,7 +1,16 @@
 {% assign threshold = settings.shipping_threshold | times: 100 %}
 
 <shipping-bar>
-    <div class="shipping-bar-inner color-{{ settings.shipping_color_scheme }}">
+    <div
+        class="shipping-bar-inner"
+        {% if settings.shipping_bar_background_color != blank %}
+            style="
+                --color-background: {{ settings.shipping_bar_background_color }};
+                --color-background-rgb: {{ settings.shipping_bar_background_color.rgb }};
+                background-color: {{ settings.shipping_bar_background_color }};
+            "
+        {% endif %}
+    >
         <div class="border-style shipping-bar-spacer spacing-style
         size-style"
         style="

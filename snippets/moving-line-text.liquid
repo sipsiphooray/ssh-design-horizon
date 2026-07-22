@@ -57,6 +57,15 @@
   style="
     {% render 'spacing-padding', settings: block_settings %}
     {% render 'typography-style', settings: block_settings %}
+    {%- comment -%}
+      v4's typography-style applies a fluid clamp() to custom font sizes >= 3rem,
+      which shrinks the marquee text below its selected size on sub-1400px viewports.
+      Re-declare --font-size with the literal value so the moving line renders at the
+      exact chosen size (matching pre-v4 behavior). Later declaration wins the cascade.
+    {%- endcomment -%}
+    {%- if block_settings.type_preset == 'custom' and block_settings.font_size != blank -%}
+      --font-size: {{ block_settings.font_size }};
+    {%- endif -%}
     --width: {{ text_width }};
     --max-width: var(--max-width--{{ type }}-{{ block_settings.max_width }});
     {% if text_width == "100%" %}

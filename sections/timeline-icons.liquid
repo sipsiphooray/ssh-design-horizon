@@ -62,7 +62,12 @@
   </div>
 {% endcapture %}
 
-{% render 'section', section: section, children: children %}
+{% render 'section',
+  section: section,
+  children: children,
+  section_id: section.id,
+  background_color: section.settings.background_color
+%}
 
 {% stylesheet %}
   .timeline-icons {
@@ -518,10 +523,10 @@
       "content": "t:content.appearance"
     },
     {
-      "type": "color_scheme",
-      "id": "color_scheme",
-      "label": "t:settings.color_scheme",
-      "default": "scheme-1"
+      "type": "color",
+      "id": "background_color",
+      "label": "t:settings.background_color",
+      "placeholder": "t:settings.default"
     },
     {
       "type": "select",

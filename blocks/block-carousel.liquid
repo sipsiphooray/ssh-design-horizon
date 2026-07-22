@@ -1,10 +1,12 @@
 {% assign block_settings = block.settings %}
 
+{% if block_settings.background_color != blank %}{% render 'contrast-override', background_color: block_settings.background_color, section_id: block.id %}{% endif %}
 <div class="block-carousel
     group-block
     group-block--height-{{ block_settings.height }}
     group-block--width-{{ block_settings.width }}
     size-style
+    {% if block_settings.background_color != blank %} color-custom-{{ block.id }}{% endif %}
   "
   style="{% render 'size-style', settings: block_settings %}"
   {{ block.shopify_attributes }}>
@@ -184,10 +186,10 @@
         "visible_if": "{{ block.settings.toggle_overlay and block.settings.overlay_style == 'gradient' }}"
       },
       {
-        "type": "color_scheme",
-        "id": "color_scheme",
-        "label": "t:settings.color_scheme",
-        "default": "scheme-1"
+        "type": "color",
+        "id": "background_color",
+        "label": "t:settings.background_color",
+        "placeholder": "t:settings.default"
       },
       {
         "type": "header",
@@ -395,8 +397,6 @@
             "name": "t:names.carousel_content",
             "static": true,
             "settings": {
-              "inherit_color_scheme": true,
-              "color_scheme": "",
               "position": "top",
               "border": "none",
               "border_width": 1,

@@ -7,6 +7,7 @@
 
 {% liquid
   assign block_settings = block.settings
+  assign effective_submenu_color = block_settings.background_color | default: settings.page_background_color
 %}
 
 {% capture list_items %}
@@ -21,15 +22,24 @@
       data-hydration-key="header-drawer-mobile"
       {{ block.shopify_attributes }}
     >
-      {% render 'header-drawer', linklist: block_settings.menu, data_header_drawer_type: 'mobile-drawer',
+      {% render 'header-drawer',
+        linklist: block_settings.menu,
+        data_header_drawer_type: 'mobile-drawer',
+        block: block,
+        section: section,
         list_items_array: list_items
-       %}
+      %}
     </div>
 
   {% when 'navigation_bar' %}
     {% if block_settings.navigation_bar == true %}
+      {% render 'contrast-override',
+        background_color: block_settings.background_color_navigation_bar,
+        text_color: block_settings.text_color_navigation_bar,
+        section_id: block.id
+      %}
       <div
-        class="menu-list menu-list--mobile{% if transparent == blank %} color-{{ block_settings.color_scheme_navigation_bar }}{% endif %}"
+        class="menu-list menu-list--mobile{% if transparent == blank %} color-custom-{{ block.id }}{% endif %}"
         style="--menu-horizontal-gap: 15px; --mobile-nav-margin: auto;"
         data-hydration-key="header-menu-mobile-navigation-bar"
       >
@@ -61,18 +71,21 @@
       assign block_settings = block.settings
       assign menu_content_type = block_settings.menu_style | default: 'text'
       assign image_border_radius = block_settings.image_border_radius
-      assign color_scheme_classes = ''
-      assign color_scheme_setting_id = 'color_scheme_' | append: section.settings.menu_row
-      assign current_color_scheme = block_settings.color_scheme
-      assign parent_color_scheme = section.settings[color_scheme_setting_id]
 
-      if parent_color_scheme.id != current_color_scheme.id
-        assign color_scheme_classes = ' color-' | append: current_color_scheme
+      render 'contrast-override', background_color: block_settings.background_color, text_color: block_settings.text_color, section_id: block.id
+
+      assign background_color_classes = ''
+      assign background_color_setting_id = 'background_color_' | append: section.settings.menu_row
+      assign current_background_color = block_settings.background_color | default: settings.page_background_color
+      assign parent_background_color = section.settings[background_color_setting_id] | default: settings.page_background_color
+
+      if parent_background_color != current_background_color or block_settings.text_color != blank
+        assign background_color_classes = ' color-custom-' | append: block.id
       endif
 
       # Check if header and menu colors match. This is used to apply different padding styles in css
-      if parent_color_scheme.settings.background.rgb == current_color_scheme.settings.background.rgb
-        assign color_scheme_classes = color_scheme_classes | append: ' color-scheme-matches-parent'
+      if parent_background_color.rgb == current_background_color.rgb
+        assign background_color_classes = background_color_classes | append: ' background-matches-parent'
       endif
 
       if block_settings.menu_style == 'featured_collections'
@@ -84,7 +97,6 @@
 
     {% capture children %}
       {% for link in block_settings.menu.links %}
-
         {% capture parent_link_name %}
             <!--@list/{{ link.title | handleize }}-->
         {% endcapture %}
@@ -104,8 +116,10 @@
           {% endfor %}
         {% endcapture %}
 
-
         {% liquid
+          # Reset per link so a previous link's 'mega_blocks' assignment doesn't leak forward
+          assign menu_content_type = block_settings.menu_style | default: 'text'
+
           if filtered_items_array != blank
             assign final_items_array = filtered_items_array | strip | remove_last: parent_link_name | split: parent_link_name
           endif
@@ -122,10 +136,20 @@
           on:pointerenter="/activate"
           on:pointerleave="/deactivate"
         >
+          {% liquid
+            assign has_nested_links = false
+            if link.links != blank
+              for child in link.links
+                if child.links != blank
+                  assign has_nested_links = true
+                endif
+              endfor
+            endif
+          %}
           <a
             href="{{ link.url }}"
             data-skip-node-update="true"
-            class="menu-list__link{% if link.active %} menu-list__link--active{% endif %}"
+            class="menu-list__link{% if link.active %} menu-list__link--active{% endif %}{% if link.links != blank and has_nested_links == false %}{% unless final_items_array.size > 0 %} menu-list__link--flat{% endunless %}{% endif %}"
             {%- if link.links != blank or final_items_array.size > 0 -%}
               aria-controls="submenu-{{ forloop.index }}"
               aria-haspopup="true"
@@ -136,15 +160,17 @@
             {% endif %}
             ref="menuitem"
           >
-            <span class="menu-list__link-title">{{- link.title -}}</span>
-            {%- if link.links != blank or final_items_array.size > 0 -%}
-              <span class="svg-wrapper icon-caret">
-                {{- 'icon-caret.svg' | inline_asset_content -}}
-              </span>
-            {% endif %}
+            <span class="menu-list__link-inner">
+              <span class="menu-list__link-title">{{- link.title -}}</span>
+              {%- if link.links != blank or final_items_array.size > 0 -%}
+                <span class="svg-wrapper icon-caret">
+                  {{- 'icon-caret.svg' | inline_asset_content -}}
+                </span>
+              {%- endif -%}
+            </span>
           </a>
           {%- if link.links != blank or final_items_array.size > 0 -%}
-            <div class="menu-list__submenu{{ color_scheme_classes }}" ref="submenu[]">
+            <div class="menu-list__submenu{{ background_color_classes }}{% unless has_nested_links or final_items_array.size > 0 %} menu-list__submenu--flat{% endunless %}" ref="submenu[]">
               <div
                 id="submenu-{{ forloop.index }}"
                 class="menu-list__submenu-inner"
@@ -184,8 +210,19 @@
         on:pointerenter="/activate"
         on:pointerleave="/deactivate"
       >
-        <button role="listitem" class="menu-list__link button-unstyled">
-          <span class="menu-list__link-title">{{ 'actions.more' | t }}</span>
+        <button
+          role="listitem"
+          class="menu-list__link button-unstyled"
+          aria-haspopup="true"
+          aria-expanded="false"
+          ref="menuitem"
+        >
+          <span class="menu-list__link-inner">
+            <span class="menu-list__link-title">{{ 'actions.more' | t }}</span>
+            <span class="svg-wrapper icon-caret">
+              {{- 'icon-caret.svg' | inline_asset_content -}}
+            </span>
+          </span>
         </button>
       </li>
     {% endcapture %}
@@ -200,9 +237,9 @@
         <nav
           class="menu-list"
           aria-label="{{ 'accessibility.header_navigation_label' | t }}"
-          style="{% render 'menu-font-styles', settings: block_settings %}"
+          style="{% render 'menu-font-styles', settings: block_settings, menu_type: 'mega_menu' %}"
         >
-          {% assign class = 'overflow-menu' | append: color_scheme_classes %}
+          {% assign class = 'overflow-menu' | append: background_color_classes %}
           {% render 'overflow-list',
             class: class,
             ref: 'overflowMenu',
@@ -224,7 +261,7 @@
 
 {% style %}
   .header__underlay {
-    --color-submenu: rgb({{ block_settings.color_scheme.settings.background.rgba }});
+    --color-submenu: rgb({{effective_submenu_color.rgb}});
   }
 {% endstyle %}
 {% stylesheet %}
@@ -328,6 +365,20 @@
     height: 100%;
     margin-block: 0;
 
+    &::after {
+      content: '';
+      position: absolute;
+      display: none;
+      top: var(--header-padding);
+      height: var(--box-height);
+      left: 0;
+      right: 0;
+    }
+
+    &[data-safety-box='true']::after {
+      display: block;
+    }
+
     &:hover,
     &:focus {
       color: var(--menu-top-level-font-color);
@@ -338,17 +389,30 @@
     }
   }
 
-  .menu-list__link-title {
+  .menu-list__link-inner {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--gap-2xs);
     padding-inline: calc(var(--gap-xl) / 2);
   }
-  [slot='overflow'] .menu-list__link-title {
+
+  .menu-list__link-title {
     padding-inline: 0;
+  }
+
+  [slot='overflow'] .menu-list__link-inner {
+    padding-inline: 0;
+  }
+
+  .menu-list__link-inner .icon-caret {
+    width: var(--icon-size-xs);
+    height: var(--icon-size-xs);
   }
 
   .menu-list__list-item:not([slot='overflow']) {
     flex-direction: column;
   }
-  .menu-list__list-item:not([slot='overflow'])::after {
+  .menu-list__list-item[slot='more']:has(.menu-list__link[aria-expanded='true'])::after {
     content: '';
     width: 100%;
     height: var(--header-padding);
@@ -374,7 +438,7 @@
   /* stylelint-disable-next-line selector-max-specificity */
   .menu-list:not(:has(.menu-list__list-item:hover)) .menu-list__link--active,
   .menu-list .menu-list__list-item:where(:hover, :focus-within) .menu-list__link,
-  .menu-list .menu-list__list-item[slot='overflow'] .menu-list__link[aria-expanded='true'] {
+  .menu-list .menu-list__list-item:is([slot='more'], [slot='overflow']) .menu-list__link[aria-expanded='true'] {
     color: var(--menu-top-level-font-color);
   }
 
@@ -387,7 +451,8 @@
   }
 
   .overflow-menu {
-    background-color: transparent;
+    /* stylelint-disable-next-line declaration-no-important */
+    background-color: transparent !important;
     padding: var(--focus-outline-size);
     margin: calc(-1 * var(--focus-outline-size));
   }
@@ -402,8 +467,8 @@
   }
 
   .header__row[style*='--border-bottom-width: 0px'] {
-    .menu-list__submenu.color-scheme-matches-parent,
-    .overflow-menu.color-scheme-matches-parent::part(overflow) {
+    .menu-list__submenu.background-matches-parent,
+    .overflow-menu.background-matches-parent::part(overflow) {
       --submenu-padding-block-start: 0px;
     }
   }
@@ -619,6 +684,8 @@
     grid-column: span 1;
   }
 
+  /* Flat mega menu (no nested parent links) styling lives in assets/custom.css */
+
   .mega-menu__column--span-2 {
     grid-column: span 2;
   }
@@ -707,6 +774,11 @@
     /* preserves the inherited grid layout when this submenu wrapper is used */
     display: contents;
   }
+
+  /* Hide product cards in collapsed submenus from the IntersectionObserver that fires product view events */
+  .menu-list__list-item:not(:has([aria-expanded='true'])) > .menu-list__submenu product-component {
+    display: none;
+  }
 {% endstylesheet %}
 
 {% schema %}
@@ -726,10 +798,24 @@
       "default": "main-menu"
     },
     {
-      "type": "color_scheme",
-      "id": "color_scheme",
-      "label": "t:settings.color_scheme",
-      "default": "primary"
+      "type": "header",
+      "content": "t:content.appearance"
+    },
+    {
+      "type": "paragraph",
+      "content": "t:content.menu_appearance_paragraph"
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "t:settings.background_color",
+      "default": "{{ settings.color_palette.background }}"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "t:settings.text_color",
+      "placeholder": "t:settings.default"
     },
     {
       "type": "header",
@@ -937,10 +1023,17 @@
       "label": "t:settings.navigation_bar"
     },
     {
-      "type": "color_scheme",
-      "id": "color_scheme_navigation_bar",
-      "label": "t:settings.navigation_bar_color_scheme",
-      "default": "primary",
+      "type": "color",
+      "id": "background_color_navigation_bar",
+      "label": "t:settings.navigation_bar_background_color",
+      "default": "{{ settings.color_palette.background }}",
+      "visible_if": "{{ block.settings.navigation_bar }}"
+    },
+    {
+      "type": "color",
+      "id": "text_color_navigation_bar",
+      "label": "t:settings.navigation_bar_text_color",
+      "placeholder": "t:settings.default",
       "visible_if": "{{ block.settings.navigation_bar }}"
     },
     {

@@ -58,9 +58,13 @@ function scrollToHash() {
         offset = stickyHeader.clientHeight;
       }
 
-      const targetPosition = target.getBoundingClientRect().top + window.pageYOffset - offset;
+      // v4 desktop (>=990px) scrolls .page-wrapper, not the window
+      const scroller = (window.matchMedia('(min-width: 990px)').matches && document.querySelector('.page-wrapper'))
+        || document.scrollingElement
+        || document.documentElement;
+      const targetPosition = target.getBoundingClientRect().top + scroller.scrollTop - offset;
 
-      window.scrollTo({
+      scroller.scrollTo({
         top: targetPosition,
         behavior: "smooth"
       });
@@ -203,6 +207,20 @@ function syncMenuDrawerLayoutVars() {
   const detailsOpen = getMenuDrawerDetails();
   if (!detailsOpen) return;
 
+  // v4 hides the scroll-up sticky header (data-sticky-state='idle') once scrolled down: it loses
+  // position:sticky and scrolls off, so measureMenuDrawerHeaderBottom() returns 0 and the drawer
+  // sits at the very top with no space for the header. Force Horizon's native 'active' state FIRST
+  // (restores sticky + opacity) so the header is pinned when we measure it. This runs on open and
+  // on every scroll/resize while the drawer is open, so the header stays put throughout.
+  const headerComponent = document.querySelector('#header-component');
+  if (
+    headerComponent instanceof HTMLElement &&
+    headerComponent.getAttribute('sticky') &&
+    headerComponent.dataset.stickyState !== 'active'
+  ) {
+    headerComponent.dataset.stickyState = 'active';
+  }
+
   const bottomRaw = measureMenuDrawerHeaderBottom();
   const bottom = Math.max(0, Math.round(bottomRaw));
   const vh = menuDrawerViewportHeight();
@@ -267,6 +285,31 @@ function onMenuDrawerCloseLayoutSync() {
     }
   }
   clearMenuDrawerLayoutVars();
+
+  // The header was force-pinned/visible while the drawer was open (custom.css `.header { opacity:1 }`,
+  // keyed on `.menu-open`). On close that lock drops and header.js (scroll-up sticky) transiently
+  // sets data-sticky-state='idle' (opacity:0) before settling — a flash. A fixed-time release just
+  // moves the flash to when the timer fires. Instead HOLD the header opaque (transition off so no
+  // fade) and release on the FIRST genuine scroll, where header.js's show/hide is meaningful — so the
+  // header never spontaneously fades on close, only in response to a real scroll.
+  const headerComponent = document.querySelector('#header-component');
+  if (headerComponent instanceof HTMLElement) {
+    // Clear any hold left by a previous close so listeners don't stack.
+    if (typeof headerComponent._sshReleaseHeaderHold === 'function') headerComponent._sshReleaseHeaderHold();
+    headerComponent.style.setProperty('transition', 'none', 'important');
+    headerComponent.style.setProperty('opacity', '1', 'important');
+    const release = () => {
+      headerComponent.style.removeProperty('transition');
+      headerComponent.style.removeProperty('opacity');
+      window.removeEventListener('scroll', release, true);
+      headerComponent._sshReleaseHeaderHold = null;
+    };
+    headerComponent._sshReleaseHeaderHold = release;
+    // Defer arming so the close's own scroll-unlock reflow doesn't immediately trip it.
+    requestAnimationFrame(() =>
+      requestAnimationFrame(() => window.addEventListener('scroll', release, { capture: true, passive: true }))
+    );
+  }
 }
 
 function scheduleMenuDrawerLayoutSync() {

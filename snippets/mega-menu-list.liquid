@@ -10,7 +10,7 @@
   @param {number} [content_aspect_ratio] - Aspect ratio for content images.
   @param {number} [image_border_radius] - Border radius for content images.
   @param {object} [section] - The section object.
-  @param {object} list_items_array - The megamenu items.
+  @param {object} [list_items_array] - The megamenu items.
 
   @example
   {% render 'mega-menu-list', parent_link: link, id: 'MegaMenuList-1', grid_columns_count: 6, menu_content_type: 'featured_products' %}
@@ -370,7 +370,8 @@
                   resource_type: 'product',
                   image_hover: true,
                   image_aspect_ratio: content_aspect_ratio,
-                  image_sizes: image_sizes
+                  image_sizes: image_sizes,
+                  product_view_context: 'dialog'
                 %}
               </li>
             {% endfor %}

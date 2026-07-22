@@ -47,19 +47,17 @@
           "static": true,
           "settings": {
             "extend_summary": true,
-            "inherit_color_scheme": false,
-            "color_scheme": "scheme-2",
             "border": "none",
             "border_width": 1,
             "border_opacity": 100,
-            "border_radius": 0
+            "border_radius": 0,
+            "background_color": "{{ settings.color_palette.color7 }}"
           },
           "blocks": {}
         }
       },
       "settings": {
         "section_width": "page-width",
-        "color_scheme": "",
         "padding-block-start": 24,
         "padding-block-end": 0
       }
@@ -88,8 +86,6 @@
             "custom_width_mobile": 100,
             "height": "fit",
             "custom_height": 100,
-            "inherit_color_scheme": true,
-            "color_scheme": "",
             "background_media": "none",
             "video_position": "cover",
             "background_image_position": "cover",
@@ -112,7 +108,7 @@
               "type": "_product-list-text",
               "name": "t:names.collection_title",
               "settings": {
-                "text": "<h3>You may also like</h3>",
+                "text": "<h2>You may also like</h2>",
                 "width": "fit-content",
                 "max_width": "normal",
                 "alignment": "left",
@@ -125,7 +121,6 @@
                 "letter_spacing": "normal",
                 "case": "none",
                 "wrap": "pretty",
-                "color": "var(--color-foreground)",
                 "background": false,
                 "background_color": "#00000026",
                 "corner_radius": 0,
@@ -142,7 +137,7 @@
               "settings": {
                 "label": "View all",
                 "open_in_new_tab": false,
-                "style_class": "link",
+                "style_class": "button-unstyled",
                 "width": "fit-content",
                 "custom_width": 100,
                 "width_mobile": "fit-content",
@@ -162,8 +157,6 @@
           "static": true,
           "settings": {
             "product_card_gap": 4,
-            "inherit_color_scheme": true,
-            "color_scheme": "",
             "border": "none",
             "border_width": 1,
             "border_opacity": 100,
@@ -179,8 +172,6 @@
               "name": "t:names.product_card_media",
               "settings": {
                 "image_ratio": "adapt",
-                "inherit_color_scheme": true,
-                "color_scheme": "",
                 "border": "none",
                 "border_width": 1,
                 "border_opacity": 100,
@@ -199,7 +190,7 @@
                 "width": "100%",
                 "max_width": "normal",
                 "alignment": "left",
-                "type_preset": "rte",
+                "type_preset": "paragraph",
                 "font": "var(--font-body--family)",
                 "font_size": "",
                 "enable_mobile_size": false,
@@ -208,7 +199,6 @@
                 "letter_spacing": "normal",
                 "case": "none",
                 "wrap": "pretty",
-                "color": "var(--color-foreground)",
                 "background": false,
                 "background_color": "#00000026",
                 "corner_radius": 0,
@@ -235,7 +225,6 @@
                 "line_height": "normal",
                 "letter_spacing": "normal",
                 "case": "none",
-                "color": "var(--color-foreground)",
                 "padding-block-start": 0,
                 "padding-block-end": 0,
                 "padding-inline-start": 0,
@@ -248,8 +237,6 @@
               "static": true,
               "settings": {
                 "image_ratio": "portrait",
-                "inherit_color_scheme": true,
-                "color_scheme": "",
                 "border": "none",
                 "border_width": 1,
                 "border_opacity": 100,
@@ -285,7 +272,6 @@
         "section_width": "page-width",
         "horizontal_alignment": "flex-start",
         "gap": 28,
-        "color_scheme": "scheme-1",
         "padding-block-start": 48,
         "padding-block-end": 48,
         "custom_mobile_padding": false,

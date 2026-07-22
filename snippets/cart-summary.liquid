@@ -5,6 +5,9 @@
   @param {string} [section_id] - The section ID for cart discount component.
 {%- enddoc -%}
 
+{% render 'text-component-shimmer-styles' %}
+{% render 'cart-typography-styles' %}
+
 <div class="cart-totals">
   {% # We need to keep this node in place to allow morphing to work properly # %}
   <div class="cart-totals__original-container cart-primary-typography">
@@ -64,9 +67,8 @@
           endif
         %}
 
-        <accordion-custom class="cart-discount">
+        {% capture cart_discount_accordion_children %}
           <details
-            class="details"
             {% if disclosure_expanded %}
               open
             {% endif %}
@@ -106,6 +108,7 @@
                         size="8"
                         placeholder="{{ 'content.discount_code' | t }}"
                         required
+                        data-skip-node-update
                       >
                       <button
                         type="submit"
@@ -161,7 +164,8 @@
               </div>
             </div>
           </details>
-        </accordion-custom>
+        {% endcapture %}
+        {% render 'accordion-custom-component', children: cart_discount_accordion_children, class: 'cart-discount' %}
       {% endif %}
     </div>
   {% endif %}
@@ -209,15 +213,8 @@
     ></script>
 
     <cart-note style="display: flex;">
-      <accordion-custom
-        class="cart-note"
-        {% if settings.cart_note_open_by_default %}
-          open-by-default-on-desktop
-          open-by-default-on-mobile
-        {% endif %}
-      >
+      {% capture cart_note_accordion_children %}
         <details
-          class="details"
           {% if settings.cart_note_open_by_default %}
             open
           {% endif %}
@@ -241,10 +238,17 @@
               id="cart-note"
               class="cart-note__instructions"
               name="note"
+              data-skip-node-update
             >{{ cart.note }}</textarea>
           </div>
         </details>
-      </accordion-custom>
+      {% endcapture %}
+      {% render 'accordion-custom-component',
+        children: cart_note_accordion_children,
+        class: 'cart-note',
+        open_by_default_on_desktop: settings.cart_note_open_by_default,
+        open_by_default_on_mobile: settings.cart_note_open_by_default
+      %}
     </cart-note>
   {% endif %}
 </div>
@@ -262,7 +266,6 @@
       assign protection_price = protection_product.price | money_without_trailing_zeros
       assign has_protection = true
 
-
       if protection_product
         assign in_cart = cart | item_count_for_variant: protection_product.selected_or_first_available_variant.id
         assign in_cart_key = cart.items | where: 'id', protection_product.selected_or_first_available_variant.id
@@ -274,83 +277,83 @@
     endif
   %}
 
-    {% if has_protection == true %}
-      <protection-buttons class="protection--buttons">
-        <div>
-          {% if settings.shipping_protection_text != blank %}
-            <details class="shipping-protection-text">
-                <summary class="shipping-summary">
-                  <div class="flex align-items-center">
-                    <div>
-                      {{ 'content.shipping_protection_label' | t }}
-                    </div>
-                    <div>
-                      {{ 'icon-notice.svg' | inline_asset_content }}
-                    </div>
-                  </div>
-                </summary>
-                <div class="shipping-content">
-                  {{ settings.shipping_protection_text | replace: '[price]', protection_price }}
+  {% if has_protection == true %}
+    <protection-buttons class="protection--buttons">
+      <div>
+        {% if settings.shipping_protection_text != blank %}
+          <details class="shipping-protection-text">
+            <summary class="shipping-summary">
+              <div class="flex align-items-center">
+                <div>
+                  {{ 'content.shipping_protection_label' | t }}
                 </div>
-            </details>
-          {% endif %}
-          <button
-            type="button"
-            data-protection-id="{{ protection_product.selected_or_first_available_variant.id }}"
-            {% if in_cart > 0 %}
-              data-in-cart="{{ in_cart_key[0].key }}"
-            {% endif %}
-            class="protection__checkout-button cart__checkout-button button"
-            {% if cart == empty or cart.total_price == 0 or empty_cart == true %}
-              disabled
-            {% endif %}
-            form="cart-form"
-          >
-            <span class="button--text">
-              {{ 'content.protection_checkout' | t: price: protection_price }}
-            </span>
-            <span class="loading-button--icon">
-              {{ 'icon-loading.svg' | inline_asset_content }}
-            </span>
-          </button>
-        </div>
-        <div>
-          <button
-            type="button"
-            class="normal__checkout-button"
-            {% if in_cart > 0 %}
-              data-in-cart="{{ in_cart_key[0].variant_id }}"
-            {% endif %}
-            {% if cart == empty or cart.total_price == 0 or empty_cart == true %}
-              disabled
-            {% endif %}
-            form="cart-form"
-          >
-            <span class="button--text">
-              {{ 'content.checkout_no_protection' | t }}
-            </span>
-            <span class="loading-button--icon">
-              {{ 'icon-loading.svg' | inline_asset_content }}
-            </span>
-          </button>
-        </div>
-      </protection-buttons>
-    {% else %}
+                <div>
+                  {{ 'icon-notice.svg' | inline_asset_content }}
+                </div>
+              </div>
+            </summary>
+            <div class="shipping-content">
+              {{ settings.shipping_protection_text | replace: '[price]', protection_price }}
+            </div>
+          </details>
+        {% endif %}
         <button
-          type="submit"
-          id="checkout"
-          class="cart__checkout-button button"
-          name="checkout"
-          {% if cart == empty or cart.total_price == 0 %}
+          type="button"
+          data-protection-id="{{ protection_product.selected_or_first_available_variant.id }}"
+          {% if in_cart > 0 %}
+            data-in-cart="{{ in_cart_key[0].key }}"
+          {% endif %}
+          class="protection__checkout-button cart__checkout-button button"
+          {% if cart == empty or cart.total_price == 0 or empty_cart == true %}
             disabled
           {% endif %}
           form="cart-form"
         >
-          <span class="button-text">
-            {{ 'content.checkout' | t }} • {{ cart.total_price | money_without_trailing_zeros }}
+          <span class="button--text">
+            {{ 'content.protection_checkout' | t: price: protection_price }}
+          </span>
+          <span class="loading-button--icon">
+            {{ 'icon-loading.svg' | inline_asset_content }}
           </span>
         </button>
-    {% endif %}
+      </div>
+      <div>
+        <button
+          type="button"
+          class="normal__checkout-button"
+          {% if in_cart > 0 %}
+            data-in-cart="{{ in_cart_key[0].variant_id }}"
+          {% endif %}
+          {% if cart == empty or cart.total_price == 0 or empty_cart == true %}
+            disabled
+          {% endif %}
+          form="cart-form"
+        >
+          <span class="button--text">
+            {{ 'content.checkout_no_protection' | t }}
+          </span>
+          <span class="loading-button--icon">
+            {{ 'icon-loading.svg' | inline_asset_content }}
+          </span>
+        </button>
+      </div>
+    </protection-buttons>
+  {% else %}
+    <button
+      type="submit"
+      id="checkout"
+      class="cart__checkout-button button"
+      name="checkout"
+      {% if cart == empty or cart.total_price == 0 %}
+        disabled
+      {% endif %}
+      form="cart-form"
+    >
+      <span class="button-text">
+        {{ 'content.checkout' | t }} • {{ cart.total_price | money_without_trailing_zeros }}
+      </span>
+    </button>
+  {% endif %}
 
   {% if additional_checkout_buttons and settings.show_accelerated_checkout_buttons %}
     <div
@@ -367,7 +370,7 @@
 {% assign usp_texts = 0 %}
 
 {% for item in (1..3) %}
-  {% liquid 
+  {% liquid
     assign usp_text_name = 'cart_usp_' | append: item
   %}
 
@@ -377,9 +380,9 @@
 {% endfor %}
 
 {% if usp_texts > 0 %}
-  <ul class="cart-usp-list list-unstyled color-{{ settings.shipping_color_scheme }}">
+  <ul class="cart-usp-list list-unstyled">
     {% for item in (1..3) %}
-      {% liquid 
+      {% liquid
         assign usp_text_name = 'cart_usp_' | append: item
         assign usp_image_name = 'cart_usp_img_' | append: item
       %}
@@ -415,18 +418,18 @@
     display: flex;
     flex-direction: column;
     gap: 0;
-    border-block: 1px solid var(--color-border);
+    border-block: 1px solid rgb(var(--color-foreground-rgb) / var(--opacity-10-25));
     padding-block: 0;
     margin-block-start: var(--margin-3xs);
   }
 
   .cart-actions__divider {
-    border-block-start: 1px solid var(--color-border);
+    border-block-start: 1px solid rgb(var(--color-foreground-rgb) / var(--opacity-10-25));
   }
 
   .cart-totals:not(:has(.cart-actions)) {
     margin-block-start: var(--margin-3xs);
-    border-block-start: 1px solid var(--color-border);
+    border-block-start: 1px solid rgb(var(--color-foreground-rgb) / var(--opacity-10-25));
     padding-block-start: var(--margin-xl);
   }
 
@@ -437,7 +440,17 @@
   }
 
   .cart-totals__tax-note {
-    color: rgb(var(--color-foreground-rgb) / var(--opacity-subdued-text));
+    color: var(--color-foreground-subdued);
+  }
+
+  .cart-totals__tax-note a {
+    color: var(--color-foreground-subdued);
+    text-decoration-line: underline;
+    text-decoration-color: currentColor;
+
+    &:hover {
+      text-decoration-color: transparent;
+    }
   }
 
   .cart-totals__tax-note small {
@@ -553,7 +566,7 @@
   }
 
   .cart-note__summary:hover {
-    color: rgb(var(--color-foreground-rgb) / var(--opacity-subdued-text));
+    color: rgb(var(--color-rgb, var(--color-foreground-rgb)) / var(--opacity-subdued-text));
   }
 
   .cart-note__label {
@@ -599,7 +612,7 @@
   }
 
   .cart-drawer__summary .cart-totals:not(:has(.cart-totals__original-container:empty)) {
-    border-block-start: var(--style-border-width) solid var(--color-border);
+    border-block-start: var(--style-border-width) solid rgb(var(--color-foreground-rgb) / var(--opacity-10-25));
     padding-block-start: var(--padding-2xl);
   }
 
@@ -714,7 +727,7 @@
   }
 
   .cart-discount__summary:hover {
-    color: rgb(var(--color-foreground-rgb) / var(--opacity-subdued-text));
+    color: rgb(var(--color-rgb, var(--color-foreground-rgb)) / var(--opacity-subdued-text));
   }
 
   .cart-discount__label {
