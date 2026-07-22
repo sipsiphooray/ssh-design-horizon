@@ -79,10 +79,13 @@
     "cart_usp_3": "BUY NOW, PAY LATER",
     "upsell_heading": "Add more Fan Favorites",
     "upsell_list": [
-      "autism-awareness-puzzle-piece-cup-with-lid-and-straw",
-      "autism-awareness-puzzle-piece-40oz-glass-or-plastic-tumbler-with-lid-and-straw",
-      "a-book-a-day-mental-health-40oz-glass-tumbler-with-lid-and-straw",
-      "balloon-dog-mardi-gras-clear-glass-mug-with-lid-straw"
+      "40oz-blue-winter-glass-tumbler-gift-bundle",
+      "40oz-cozy-red-christmas-glass-tumbler-gift-bundle",
+      "40oz-nostalgic-christmas-glass-tumbler-gift-bundle",
+      "40oz-pink-whimsical-glass-tumbler-holiday-gift-bundle",
+      "frosted-cozy-hanukkah-cup-gift-bundle",
+      "frosted-christmas-doodles-gift-bundle",
+      "luckey-geese-bundle"
     ],
     "enable_shipping_protection": true,
     "shipping_protection_text": "<p>Your order is protected for [price]</p>",
