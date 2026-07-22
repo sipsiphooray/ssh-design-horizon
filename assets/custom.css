@@ -22,6 +22,7 @@ slideshow-controls.carousel-controls .icon-play {
     --letter-spacing--heading-tight: -0.05em !important;
     --drawer-width: 100vw !important;
     --submenu-animation-speed: 0s !important;
+    --badge-rectangle-padding-inline: 10px !important;
 }
 
 
@@ -87,6 +88,14 @@ a.size-style.link:after {
     display: block;
 }
 
+.product-card .jdgm-star.jdgm-star {
+    font-size: var(--font-size--2xs) !important;
+}
+
+.jdgm-prev-badge__text {
+    font-size: var(--font-size--xs) !important;
+}
+
 /* Mobile: stack the buy buttons vertically when the quantity selector is present and
    "always stack" is OFF. The base flex is row-oriented (flex: 1 1 185px); in a column
    that 185px basis becomes HEIGHT and balloons the items (the "wide weird gap"), so reset
@@ -103,6 +112,10 @@ a.size-style.link:after {
     .product-form-buttons:not(.product-form-buttons--stacked):has(.quantity-selector-wrapper) > .quantity-selector-wrapper {
         align-self: flex-start;
         width: auto;
+    }
+    :root {
+        --variant-picker-swatch-width: 48px !important;
+        --variant-picker-swatch-height: 48px !important;
     }
 }
 
@@ -1319,15 +1332,7 @@ html[scroll-lock] {
   background-position: center;
 }
 
-/* Homepage hero green button now set via the theme system: the button block uses
-   style_class "button-custom" with palette refs (color8 green / background white)
-   for base + hover colors in templates/index.json. No CSS override needed. */
-
 .menu-list__link-inner .icon-caret {
     width: var(--icon-size-xs) !important;
     height: var(--icon-size-xs) !important;
 }
-
-/* Judge.me review stars -> gold (moved from layout/theme.liquid) */
-.jdgm-star.jdgm--on,.jdgm-star.jdgm--half{color:#F5B301 !important}
-.jdgm-star.jdgm--off{color:#F5B301 !important;opacity:.28 !important}

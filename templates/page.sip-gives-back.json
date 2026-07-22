@@ -1366,13 +1366,9 @@
                     "padding-inline-end": 0
                   },
                   "blocks": {
-                    "okendo_star_rating_3Rmppx": {
-                      "type": "custom-liquid",
-                      "name": "Reviews",
-                      "settings": {
-                        "custom_liquid": "{%- assign _c = closest.product.metafields.reviews.rating_count -%}{%- assign _r = closest.product.metafields.reviews.rating.value.rating | default: 0 -%}{%- if _c and _c != blank and _c != 0 -%}{%- assign _pct = _r | times: 20.0 -%}<div class=\"card-rating\" style=\"display:inline-flex;align-items:center;gap:5px;\"><span style=\"position:relative;display:inline-block;font-size:14px;line-height:1;letter-spacing:1px;\"><span style=\"color:currentColor;opacity:.2;\">★★★★★</span><span style=\"position:absolute;inset:0;width:{{ _pct }}%;overflow:hidden;color:#f5a623;white-space:nowrap;\">★★★★★</span></span><span style=\"font-size:12px;opacity:.7;\">({{ _c }})</span></div>{%- endif -%}"
-                      },
-                      "blocks": {}
+                    "judge_me_reviews_preview_badge_0opBwj": {
+                      "type": "shopify://apps/judge-me-reviews/blocks/preview_badge/61ccd3b1-a9f2-4160-9fe9-4fec8413e5d8",
+                      "settings": {}
                     },
                     "product_title_Tz6nfw": {
                       "type": "product-title",
@@ -1410,7 +1406,7 @@
                     }
                   },
                   "block_order": [
-                    "okendo_star_rating_3Rmppx",
+                    "judge_me_reviews_preview_badge_0opBwj",
                     "product_title_Tz6nfw",
                     "custom_liquid_d6KCVj"
                   ]
