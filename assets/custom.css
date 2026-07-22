@@ -118,8 +118,8 @@ a.size-style.link:after {
         width: auto;
     }
     :root {
-        --variant-picker-swatch-width: 48px !important;
-        --variant-picker-swatch-height: 48px !important;
+        --variant-picker-swatch-width: 54px !important;
+        --variant-picker-swatch-height: 54px !important;
     }
 }
 
