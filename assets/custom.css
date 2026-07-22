@@ -117,10 +117,6 @@ a.size-style.link:after {
         align-self: flex-start;
         width: auto;
     }
-    :root {
-        --variant-picker-swatch-width: 54px !important;
-        --variant-picker-swatch-height: 54px !important;
-    }
 }
 
 .header-actions__action:not(.account-button) svg {
