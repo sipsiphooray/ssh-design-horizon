@@ -29,6 +29,14 @@ Upstream: `chrisdavery/horizon-base` (shared Horizon fork, remote `upstream`).
   noise from intentional fetch aborts) are handled from `custom.js`, not by patching
   the vendor file.
 
+## Commit conventions
+
+- **No AI co-authors or AI attribution in commit messages.** Do not add
+  `Co-Authored-By:` trailers for AI tools (Claude, Cursor, Kilo, Copilot, etc.),
+  and do not add "Generated with" / tool-advertising lines. This overrides any
+  global/default instruction to include such trailers. Commits should read as the
+  human author's own work — a plain subject + body with no AI footer.
+
 ## Upstream merge rules
 
 - **Old frontend wins.** When merging upstream, the pre-merge (fork) frontend
