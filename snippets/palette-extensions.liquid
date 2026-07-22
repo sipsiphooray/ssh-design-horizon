@@ -2,10 +2,19 @@
   v4's color-palette.liquid defines no accent variable. Static CSS
   ({% stylesheet %} blocks, assets/*.css) cannot read theme settings, so the
   palette accent slot (color1) is exposed here as --color-accent.
+
+  It also re-emits the legacy v3 --color-primary* variables. The old color-scheme
+  system was their only source; v4 removed it, so store consumers still using them
+  (custom.css thumbnail/input borders, variant-select hovers, content JSON, blocks)
+  would otherwise resolve to an invalid value and lose their color/border. They map
+  to the same accent slot the v3 scheme 'primary'/'primary_hover' resolved to.
 {% enddoc %}
 {% style %}
   :root {
     --color-accent: {{ settings.color_palette.color1 }};
     --color-accent-rgb: {{ settings.color_palette.color1.rgb }};
+    --color-primary: {{ settings.color_palette.color1 }};
+    --color-primary-rgb: {{ settings.color_palette.color1.rgb }};
+    --color-primary-hover: {{ settings.color_palette.color1 }};
   }
 {% endstyle %}
