@@ -283,6 +283,28 @@
   defer="defer"
 ></script>
 
+{%- comment -%}
+  Store custom scripts — restore loads the upstream merge dropped when it overwrote
+  this file. custom.js: menu-drawer positioning, custom variant dropdown, hash scroll,
+  etc. addon-products.js: frequent-bundle details toggle + addon cart. Without these
+  loads the modules never run, so their behaviors silently break.
+{%- endcomment -%}
+<script
+  src="{{ 'custom.js' | asset_url }}"
+  type="module"
+  fetchpriority="low"
+></script>
+<script
+  src="{{ 'addon-products.js' | asset_url }}"
+  type="module"
+  fetchpriority="low"
+></script>
+<script
+  src="{{ 'product-title-truncation.js' | asset_url }}"
+  type="module"
+  fetchpriority="low"
+></script>
+
 <script>
   const Theme = {
     translations: {

@@ -65,7 +65,7 @@ a.size-style.link:after {
     margin-bottom: var(--gap-sm);
 }
 
-.button,.button-secondary {
+.button,.button-secondary,.button-custom {
     font-size: var(--font-size--md);
     font-weight: var(--font-accent--weight);
 }
@@ -76,7 +76,7 @@ a.size-style.link:after {
     object-fit: contain;
 }
 
-.button:has(.button--arrow),.button-secondary:has(.button--arrow) {
+.button:has(.button--arrow),.button-secondary:has(.button--arrow),.button-custom:has(.button--arrow) {
     display: flex;
     align-items: center;
     gap: var(--gap-xs);
@@ -85,6 +85,25 @@ a.size-style.link:after {
 
 .button--arrow svg {
     display: block;
+}
+
+/* Mobile: stack the buy buttons vertically when the quantity selector is present and
+   "always stack" is OFF. The base flex is row-oriented (flex: 1 1 185px); in a column
+   that 185px basis becomes HEIGHT and balloons the items (the "wide weird gap"), so reset
+   children to flex: 0 0 auto. align-items: stretch keeps the buttons full width, while the
+   quantity selector stays at its natural width (align-self: flex-start). */
+@media screen and (max-width: 749px) {
+    .product-form-buttons:not(.product-form-buttons--stacked):has(.quantity-selector-wrapper) {
+        flex-direction: column;
+        align-items: stretch;
+    }
+    .product-form-buttons:not(.product-form-buttons--stacked):has(.quantity-selector-wrapper) > * {
+        flex: 0 0 auto;
+    }
+    .product-form-buttons:not(.product-form-buttons--stacked):has(.quantity-selector-wrapper) > .quantity-selector-wrapper {
+        align-self: flex-start;
+        width: auto;
+    }
 }
 
 .header-actions__action:not(.account-button) svg {
@@ -306,9 +325,39 @@ header-drawer .menu-drawer-container[open] .menu-drawer__animated-element {
     height: var(--icon-size-xs);
 }
 
-.menu-list__link .icon-starburst,
-.menu-list__link .icon-caret {
-    margin-left: calc(-1 * var(--gap-2xs));
+/* Menu-drawer borders were light (#dfdfdf = color3) in v3 (scheme border). v4's
+   --color-border resolves to the dark foreground. Override the divider border color
+   directly (both list-item and menu-container dividers) with the light palette slot. */
+.menu-drawer__list-item--divider,
+.menu-drawer__menu-container--divider {
+    border-block-end-color: var(--color-border-light) !important;
+}
+
+/* When the mobile menu drawer is open, pin the header at the top and visible — the same as the
+   un-scrolled state. After scrolling, v4 hides it (.header-section loses position:sticky and
+   .header goes opacity:0 at data-sticky-state='idle'). IMPORTANT: the open drawer locks page
+   scroll (html { overflow:hidden }), and position:sticky needs a scrolling ancestor — so sticky
+   does nothing here. Use position:fixed, which pins to the viewport unconditionally. Keyed on
+   .menu-open (set by the drawer JS) via body:has(), so it matches wherever the drawer lives. */
+body:has(#Details-menu-drawer-container.menu-open) .header-section {
+    position: fixed !important;
+    top: 0 !important;
+    left: 0 !important;
+    right: 0 !important;
+    z-index: var(--layer-menu-drawer);
+    opacity: 1 !important;
+}
+body:has(#Details-menu-drawer-container.menu-open) .header {
+    opacity: 1 !important;
+}
+
+/* Sticky add-to-cart bundle badge: block-level with content-width on mobile
+   (scoped to the sticky-add-to-cart component only). */
+@media screen and (max-width: 749px) {
+    sticky-add-to-cart .tc-bundle-badge {
+        display: block;
+        max-width: fit-content;
+    }
 }
 .menu-drawer__navigation {
     --menu-top-level-font-size: var(--menu-font-xl--size) !important;
@@ -1264,11 +1313,10 @@ html[scroll-lock] {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  border: var(--variant-picker-border-width) solid rgb(var(--color-foreground-rgb) / 0.18);
   transition: box-shadow .12s ease, border-color .12s ease;
 }
+
 .variant-option__icon-circle { width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; }
-.variant-option__color-circle { width: 100%; height: 100%; border-radius: var(--variant-picker-swatch-radius); }
 .variant-option__icon-circle img { width: 100%; height: 100%; object-fit: contain; padding: 6px; box-sizing: border-box; }
 .variant-option--buttons .variant-option__button-label:has(.variant-option__icon-circle):hover {
   border-color: rgb(var(--color-foreground-rgb) / 0.45);

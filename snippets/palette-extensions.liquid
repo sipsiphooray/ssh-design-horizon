@@ -17,5 +17,8 @@
     --color-primary-rgb: {{ settings.color_palette.color1.rgb }};
     --color-primary-hover: {{ settings.color_palette.color1 }};
     --color-primary-active: {{ settings.color_palette.color1 }};
+    /* Light border slot (color3). v4's --color-border resolves to the dark
+       foreground; store borders (e.g. menu-drawer dividers) were light in v3. */
+    --color-border-light: {{ settings.color_palette.color3 }};
   }
 {% endstyle %}

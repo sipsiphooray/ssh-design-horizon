@@ -207,6 +207,20 @@ function syncMenuDrawerLayoutVars() {
   const detailsOpen = getMenuDrawerDetails();
   if (!detailsOpen) return;
 
+  // v4 hides the scroll-up sticky header (data-sticky-state='idle') once scrolled down: it loses
+  // position:sticky and scrolls off, so measureMenuDrawerHeaderBottom() returns 0 and the drawer
+  // sits at the very top with no space for the header. Force Horizon's native 'active' state FIRST
+  // (restores sticky + opacity) so the header is pinned when we measure it. This runs on open and
+  // on every scroll/resize while the drawer is open, so the header stays put throughout.
+  const headerComponent = document.querySelector('#header-component');
+  if (
+    headerComponent instanceof HTMLElement &&
+    headerComponent.getAttribute('sticky') &&
+    headerComponent.dataset.stickyState !== 'active'
+  ) {
+    headerComponent.dataset.stickyState = 'active';
+  }
+
   const bottomRaw = measureMenuDrawerHeaderBottom();
   const bottom = Math.max(0, Math.round(bottomRaw));
   const vh = menuDrawerViewportHeight();
@@ -271,6 +285,16 @@ function onMenuDrawerCloseLayoutSync() {
     }
   }
   clearMenuDrawerLayoutVars();
+
+  // The header was force-pinned/visible while the drawer was open (custom.css). As it settles back
+  // to its scroll-driven state on close, Horizon's `.header { transition: opacity }` animates a
+  // brief fade/flash. Suppress that transition for the close+settle window so the change is instant,
+  // then restore it so normal scroll-up fades still work.
+  const headerComponent = document.querySelector('#header-component');
+  if (headerComponent instanceof HTMLElement) {
+    headerComponent.style.setProperty('transition', 'none', 'important');
+    setTimeout(() => headerComponent.style.removeProperty('transition'), 300);
+  }
 }
 
 function scheduleMenuDrawerLayoutSync() {

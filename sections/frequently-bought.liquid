@@ -44,6 +44,7 @@
   data-intent="{{ section.settings.recommendation_type }}"
   data-testid="product-recommendations-section"
   data-recommendations-performed="{{ recommendations.performed }}"
+  data-hydration-key="product-recommendations-{{ section.id }}"
   {{ section.shopify_attributes }}
 >
   <div class="section-background{% if section.settings.background_color != blank %} color-custom-{{ section.id }}{% endif %}"></div>
