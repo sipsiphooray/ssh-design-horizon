@@ -408,11 +408,13 @@
             "css_class": ""
           },
           "blocks": {
-            "sendlane_marketing_automation_sendlane_forms_block_MBz7Vt": {
-              "type": "shopify://apps/sendlane-marketing-automation/blocks/sendlane-forms-block/5a768830-d9c3-4d16-9e83-ae2a731c69be",
+            "custom_liquid_fm87zL": {
+              "type": "custom-liquid",
+              "name": "t:names.custom_liquid",
               "settings": {
-                "form_key": "eyJkb21haW4iOiJzaXBzaXBob29yYXlkZXNpZ24iLCJmb3JtX2lkIjoiMjdkMmU5ZTItNzBkMi00OTJjLWJiOTUtM2E4NzZhYzVjZWNkIn0"
-              }
+                "custom_liquid": "<div class=\"sendlane-form\" data-form-key=\"eyJkb21haW4iOiJzaXBzaXBob29yYXlkZXNpZ24iLCJmb3JtX2lkIjoiMjdkMmU5ZTItNzBkMi00OTJjLWJiOTUtM2E4NzZhYzVjZWNkIn0=\"></div>"
+              },
+              "blocks": {}
             },
             "text_pF6rVi": {
               "type": "text",
@@ -517,7 +519,7 @@
             }
           },
           "block_order": [
-            "sendlane_marketing_automation_sendlane_forms_block_MBz7Vt",
+            "custom_liquid_fm87zL",
             "text_pF6rVi",
             "text_HafH7P",
             "email_signup_dNywti"
