@@ -463,6 +463,17 @@ document.addEventListener('click', (event) => {
           sections: data.sections
         })
       );
+
+      // The raw fetch above bypasses Shopify.actions, so unlike the product form nothing calls
+      // openCart — the drawer content refreshes (via CartAddEvent) but never opens. Open it
+      // explicitly, mirroring standard-actions-override.js's openCart handler (fall back to the
+      // cart page when there is no drawer, e.g. cart type = page).
+      const cartDrawer = document.querySelector('theme-drawer#cart-drawer');
+      if (cartDrawer && typeof cartDrawer.open === 'function') {
+        cartDrawer.open();
+      } else if (window.Shopify?.actions?.openCart) {
+        window.Shopify.actions.openCart();
+      }
     })
     .catch(error => console.error('Failed to add to cart:', error));
 });
