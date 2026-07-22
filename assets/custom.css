@@ -96,6 +96,10 @@ a.size-style.link:after {
     font-size: var(--font-size--xs) !important;
 }
 
+.jdgm-horizon-widget:has(.jdgm-prev-badge[data-average-rating='0.00']) {
+    display: none !important;
+}
+
 /* Mobile: stack the buy buttons vertically when the quantity selector is present and
    "always stack" is OFF. The base flex is row-oriented (flex: 1 1 185px); in a column
    that 185px basis becomes HEIGHT and balloons the items (the "wide weird gap"), so reset

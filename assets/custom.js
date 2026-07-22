@@ -286,14 +286,29 @@ function onMenuDrawerCloseLayoutSync() {
   }
   clearMenuDrawerLayoutVars();
 
-  // The header was force-pinned/visible while the drawer was open (custom.css). As it settles back
-  // to its scroll-driven state on close, Horizon's `.header { transition: opacity }` animates a
-  // brief fade/flash. Suppress that transition for the close+settle window so the change is instant,
-  // then restore it so normal scroll-up fades still work.
+  // The header was force-pinned/visible while the drawer was open (custom.css `.header { opacity:1 }`,
+  // keyed on `.menu-open`). On close that lock drops and header.js (scroll-up sticky) transiently
+  // sets data-sticky-state='idle' (opacity:0) before settling — a flash. A fixed-time release just
+  // moves the flash to when the timer fires. Instead HOLD the header opaque (transition off so no
+  // fade) and release on the FIRST genuine scroll, where header.js's show/hide is meaningful — so the
+  // header never spontaneously fades on close, only in response to a real scroll.
   const headerComponent = document.querySelector('#header-component');
   if (headerComponent instanceof HTMLElement) {
+    // Clear any hold left by a previous close so listeners don't stack.
+    if (typeof headerComponent._sshReleaseHeaderHold === 'function') headerComponent._sshReleaseHeaderHold();
     headerComponent.style.setProperty('transition', 'none', 'important');
-    setTimeout(() => headerComponent.style.removeProperty('transition'), 300);
+    headerComponent.style.setProperty('opacity', '1', 'important');
+    const release = () => {
+      headerComponent.style.removeProperty('transition');
+      headerComponent.style.removeProperty('opacity');
+      window.removeEventListener('scroll', release, true);
+      headerComponent._sshReleaseHeaderHold = null;
+    };
+    headerComponent._sshReleaseHeaderHold = release;
+    // Defer arming so the close's own scroll-unlock reflow doesn't immediately trip it.
+    requestAnimationFrame(() =>
+      requestAnimationFrame(() => window.addEventListener('scroll', release, { capture: true, passive: true }))
+    );
   }
 }
 
