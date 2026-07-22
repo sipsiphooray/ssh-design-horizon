@@ -1,5 +1,6 @@
 import { convertMoneyToMinorUnits, formatMoney } from '@theme/money-formatting';
 import { ThemeEvents, PriceChangeEvent, CartAddEvent, CartErrorEvent, CartUpdateEvent, VariantUpdateEvent } from '@theme/events';
+import { CartLinesUpdateEvent } from '@shopify/events';
 
 /**
  * @param {HTMLElement} bundle
@@ -401,6 +402,7 @@ document.addEventListener('click', (event) => {
   const checkedAddons = frequentRow.querySelectorAll('addon-card .checkbox__input:checked');
   if (checkedAddons.length === 0) return;
 
+  /** @type {Array<{ id: number, quantity: number }>} */
   const items = [];
   checkedAddons.forEach(addon => {
     items.push({
@@ -431,6 +433,22 @@ document.addEventListener('click', (event) => {
     }, 800);
   }
 
+  // Adapt to Horizon's cart flow: the cart-items morph AND the drawer auto-open are both driven by
+  // the @shopify/events CartLinesUpdateEvent. createPromise() makes the deferred; we then DISPATCH
+  // the event (with action 'add' — that's what cart-drawer's auto-open checks) carrying the promise.
+  // Horizon's listeners (cart-items-component, cart-drawer) await that promise and act when we
+  // resolve it with the fresh cart + rendered sections. Our raw fetch only mutates the cart
+  // server-side, so we drive the event ourselves — mirroring product-form.js — not cart-drawer.js.
+  const cartLinesUpdate = CartLinesUpdateEvent.createPromise();
+  document.dispatchEvent(
+    new CartLinesUpdateEvent({
+      action: 'add',
+      context: 'product',
+      lines: items.map((item) => ({ merchandiseId: item.id, quantity: item.quantity })),
+      promise: cartLinesUpdate.promise
+    })
+  );
+
   fetch(Theme.routes.cart_add_url, {
     method: 'POST',
     headers: {
@@ -440,10 +458,11 @@ document.addEventListener('click', (event) => {
     body: JSON.stringify(payload)
   })
     .then(response => response.json())
-    .then(data => {
+    .then(async data => {
       if (data.status) {
         // Error case
         console.error('Error adding to cart:', data);
+        cartLinesUpdate.reject(new Error(data.message || 'Add to cart failed'));
         return;
       }
 
@@ -455,7 +474,7 @@ document.addEventListener('click', (event) => {
         }
       });
 
-      // Dispatch CartAddEvent with sections (matching product-form.js)
+      // Legacy cart:update event for pre-v4 listeners (cart-upsell.js, custom.js, addon states).
       document.dispatchEvent(
         new CartAddEvent({}, 'frequently-bought', {
           source: 'frequently-bought',
@@ -464,16 +483,30 @@ document.addEventListener('click', (event) => {
         })
       );
 
-      // The raw fetch above bypasses Shopify.actions, so unlike the product form nothing calls
-      // openCart — the drawer content refreshes (via CartAddEvent) but never opens. Open it
-      // explicitly, mirroring standard-actions-override.js's openCart handler (fall back to the
-      // cart page when there is no drawer, e.g. cart type = page).
-      const cartDrawer = document.querySelector('theme-drawer#cart-drawer');
-      if (cartDrawer && typeof cartDrawer.open === 'function') {
-        cartDrawer.open();
-      } else if (window.Shopify?.actions?.openCart) {
-        window.Shopify.actions.openCart();
-      }
+      // Fetch the fresh cart so the CartLinesUpdateEvent can diff it (drives action 'add' -> auto-open).
+      const ajaxCart = await fetch(`${Theme.routes.cart_url}.json`, {
+        headers: { Accept: 'application/json' },
+        credentials: 'same-origin'
+      })
+        .then(response => (response.ok ? response.json() : null))
+        .catch(() => null);
+
+      // Resolving dispatches the section morph (cart-items-component) + drawer auto-open through
+      // Horizon's own listeners — the drawer opens with the new items already rendered.
+      cartLinesUpdate.resolve({
+        cart: ajaxCart ? CartLinesUpdateEvent.createCartFromAjaxResponse(ajaxCart) : null,
+        detail: {
+          items,
+          itemCount: items.length,
+          source: 'frequently-bought',
+          sourceId: 'frequently-bought',
+          sections: data.sections,
+          didError: false
+        }
+      });
     })
-    .catch(error => console.error('Failed to add to cart:', error));
+    .catch(error => {
+      console.error('Failed to add to cart:', error);
+      cartLinesUpdate.reject(error);
+    });
 });

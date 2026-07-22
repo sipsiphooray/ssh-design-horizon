@@ -426,7 +426,7 @@
       }
 
       .card-layout-addon-frequently .addon-variant-wrapper {
-          max-width: fit-content;
+          max-width: 10rem;
       }
     }
 
@@ -502,7 +502,7 @@
     }
 
     .addon-variant-wrapper .cs-option {
-      padding: var(--padding-xs);
+      padding: var(--padding-sm);
       font-size: var(--font-size--sm);
       line-height: 1.2;
       cursor: pointer;
@@ -562,7 +562,7 @@
         font-size: var(--font-size--xs);
     }
     .addon-variant-wrapper .custom-select {
-        padding: var(--gap-sm) calc(var(--gap-xs) + var(--icon-size-xs)) var(--gap-sm) var(--gap-2xs);
+        padding: var(--gap-sm) calc(var(--gap-xs) + var(--icon-size-xs)) var(--gap-sm) var(--gap-md);
     }
   }
 
@@ -829,10 +829,17 @@
     box-shadow: none !important;
   }
 
+  /* Sold-out addon in the bundle details: dim the product visuals to signal unavailable, but keep
+     the variant select fully opaque + usable so the shopper can switch to an in-stock variant.
+     (opacity on the whole card would dim the select too — child opacity can't exceed its parent's.) */
   .frequent-bundle__details .addon-card.card-layout-addon-frequently:has(.checkbox__input:disabled) {
     cursor: not-allowed;
-    opacity: var(--opacity-60);
     color: var(--input-disabled-text-color);
+  }
+  .frequent-bundle__details .addon-card.card-layout-addon-frequently:has(.checkbox__input:disabled) .addon-flex > div:first-child,
+  .frequent-bundle__details .addon-card.card-layout-addon-frequently:has(.checkbox__input:disabled) .addon-image-wrapper,
+  .frequent-bundle__details .addon-card.card-layout-addon-frequently:has(.checkbox__input:disabled) .addon-flex > div:last-child > *:not(.addon-variant-wrapper) {
+    opacity: var(--opacity-60);
   }
 
   .frequent-bundle__details .addon-card .addon-card__content {

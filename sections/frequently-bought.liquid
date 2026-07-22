@@ -330,8 +330,15 @@
         -webkit-overflow-scrolling: touch;
         overscroll-behavior-x: contain;
         gap: var(--gap);
-        width: 100%;
-        max-width: 100%;
+        /* Full-bleed edge-to-edge scroller with a page-margin gutter before the first cell and
+           after the last (mirrors the grid-section mobile carousel). The strip is nested, not a
+           direct .section child, so force-full-width can't grid-break it — pull out to the full
+           viewport with negative inline margins, then pad the scroll ends back to the page margin. */
+        width: 100vw;
+        max-width: 100vw;
+        margin-inline: calc(50% - 50vw);
+        padding-inline: var(--page-margin);
+        scroll-padding-inline: var(--page-margin);
         padding-bottom: var(--padding-sm);
     }
 
