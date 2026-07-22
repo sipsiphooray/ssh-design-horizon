@@ -183,34 +183,60 @@
             {{ children }}
             
             {% if has_variants %}
-              <div class="addon-variant-wrapper">
-                <select 
+              {%- comment -%}
+                Reuse the store's custom-select component (same markup as variant-select.liquid,
+                driven by custom.js's <variant-select>). The native <select> is kept (hidden) and
+                still carries the addon-variant-selector class + option data-attrs, so
+                addon-products.js's change handler (image/price/variant swap) keeps working:
+                clicking a .cs-option makes custom.js set select.value and dispatch a native change.
+                The .cs-option order MUST match the <option> order — both loop product.variants.
+              {%- endcomment -%}
+              {%- assign cs_id = 'addon-select-' | append: block.id -%}
+              <variant-select class="custom-select-wrapper addon-variant-wrapper">
+                <select
                   class="addon-variant-selector"
                   data-product-id="{{ product.id }}"
-                  id="select-{{ block.id }}"
+                  id="{{ cs_id }}"
+                  hidden
                 >
                   {% for variant in product.variants %}
-                    {% assign variant_image = variant.featured_image | default: product.featured_image %}
-                    <option 
+                    {% assign v_image = variant.featured_image | default: product.featured_image %}
+                    <option
                       value="{{ variant.id }}"
                       {% if variant.id == selected_variant.id %}selected{% endif %}
                       data-available="{{ variant.available }}"
                       data-price="{{ variant.price }}"
-                      {% if variant_image %}
-                        data-image-url="{{ variant_image | image_url: width: 500 }}"
-                      {% endif %}
-                      {% if variant.compare_at_price and variant.compare_at_price > variant.price %}
-                        data-compare-price="{{ variant.compare_at_price }}"
-                      {% endif %}
+                      {% if v_image %}data-image-url="{{ v_image | image_url: width: 500 }}"{% endif %}
+                      {% if variant.compare_at_price and variant.compare_at_price > variant.price %}data-compare-price="{{ variant.compare_at_price }}"{% endif %}
                     >
-                      {{ variant.title }}
-                      {% unless variant.available %}
-                        - {{ 'products.product.sold_out' | t }}
-                      {% endunless %}
+                      {{ variant.title }}{% unless variant.available %} - {{ 'products.product.sold_out' | t }}{% endunless %}
                     </option>
                   {% endfor %}
                 </select>
-              </div>
+
+                <div class="custom-select" role="combobox" aria-expanded="false" aria-controls="{{ cs_id }}-menu">
+                  <div class="cs-display" aria-hidden="true">
+                    <span class="cs-display-text">{{ selected_variant.title }}</span>
+                  </div>
+                  <div class="cs-menu" id="{{ cs_id }}-menu" role="listbox">
+                    {% for variant in product.variants %}
+                      <div
+                        class="cs-option{% if variant.id == selected_variant.id %} selected{% endif %}"
+                        role="option"
+                        aria-selected="{% if variant.id == selected_variant.id %}true{% else %}false{% endif %}"
+                        data-value="{{ variant.id }}"
+                        {% unless variant.available %}data-unavailable{% endunless %}
+                      >
+                        {{ variant.title }}{% unless variant.available %} - {{ 'products.product.sold_out' | t }}{% endunless %}
+                      </div>
+                    {% endfor %}
+                  </div>
+                </div>
+
+                <svg aria-hidden="true" focusable="false" class="icon icon-caret" viewBox="0 0 10 6">
+                  {%- render 'icon', icon: 'caret' -%}
+                </svg>
+              </variant-select>
             {% endif %}
             
             <span class="sold-out-addon" {% if selected_variant.available == true %} hidden{% endif %}>
@@ -231,7 +257,10 @@
         border: 1.5px solid var(--color-border);
         background: var(--color-background);
         cursor: pointer;
-    } 
+        /* Whole card is tappable; kill the grey mobile tap flash. Inherited, so it
+           also covers the inner __content and nested elements. */
+        -webkit-tap-highlight-color: transparent;
+    }
 
     .card-layout-addon-frequently {
       border-radius: 12px !important;
@@ -405,31 +434,121 @@
         display: none;
     }
     
-    /* Styles for variant selector */
+    /* Addon variant dropdown — self-contained custom-select. The store's shared .custom-select
+       CSS (variant-select.liquid) only ships when the MAIN picker uses dropdowns; these
+       products use swatches, so that snippet never renders and its styles aren't bundled.
+       These addon cards are AJAX-fetched under product-recommendations, so we style the
+       dropdown from THIS snippet's stylesheet (always present with addon cards). Markup +
+       open/close behaviour come from custom.js's <variant-select>. */
     .addon-variant-wrapper {
+      position: relative;
+      display: block;
       margin-top: var(--gap-2xs);
-      max-width: 8rem;
+      max-width: 12rem;
+      width: 100%;
     }
-    
-    .addon-variant-selector {
-        width: 100%;
-        padding: var(--gap-2xs) var(--gap-xs);
-        font-size: var(--font-size--sm);
-        border: 1px solid rgb(var(--color-border-rgb) / 0.2);
-        border-radius: var(--border-radius-sm);
-        background: var(--color-background);
-        cursor: pointer;
-        transition: all 0.2s ease;
+
+    .addon-variant-wrapper .custom-select {
+      position: relative;
+      box-sizing: border-box;
+      width: 100%;
+      padding: var(--padding-xs) calc(var(--padding-xs) + var(--icon-size-xs)) var(--padding-xs) var(--padding-xs);
+      border: 1px solid rgb(var(--color-border-rgb) / 0.2);
+      border-radius: var(--border-radius-sm);
+      background: var(--color-background);
+      font-size: var(--font-size--sm);
+      line-height: 1.2;
+      cursor: pointer;
     }
-    
-    .addon-variant-selector:hover {
-        border-color: rgb(var(--color-border-rgb) / 0.5);
+
+    .addon-variant-wrapper .custom-select:hover {
+      border-color: rgb(var(--color-border-rgb) / 0.5);
     }
-    
-    .addon-variant-selector:focus {
-        outline: none;
-        border-color: rgb(var(--color-foreground-rgb) / 0.5);
-        box-shadow: 0 0 0 2px rgb(var(--color-foreground-rgb) / 0.1);
+
+    .addon-variant-wrapper .cs-display {
+      display: flex;
+      align-items: center;
+      min-width: 0;
+      gap: var(--gap-2xs);
+      color: var(--color-foreground);
+    }
+
+    .addon-variant-wrapper .cs-display-text {
+      min-width: 0;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .addon-variant-wrapper .cs-menu {
+      position: absolute;
+      left: 0;
+      right: 0;
+      top: calc(100% + var(--gap-3xs));
+      z-index: 3;
+      display: none;
+      max-height: 260px;
+      overflow-y: auto;
+      padding-block: var(--gap-3xs);
+      border: 1px solid rgb(var(--color-border-rgb) / 0.2);
+      border-radius: var(--border-radius-sm);
+      background: var(--color-background);
+      box-shadow: 0 4px 12px rgb(var(--color-foreground-rgb) / 0.12);
+      scrollbar-width: thin;
+    }
+
+    .addon-variant-wrapper .cs-menu.open {
+      display: block;
+    }
+
+    .addon-variant-wrapper .cs-option {
+      padding: var(--padding-xs);
+      font-size: var(--font-size--sm);
+      line-height: 1.2;
+      cursor: pointer;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .addon-variant-wrapper .cs-option:hover {
+      background: rgb(var(--color-foreground-rgb) / 0.06);
+    }
+
+    .addon-variant-wrapper .cs-option.selected {
+      background: rgb(var(--color-foreground-rgb) / 0.1);
+    }
+
+    .addon-variant-wrapper .cs-option[data-unavailable] {
+      opacity: var(--opacity-60);
+      cursor: not-allowed;
+    }
+
+    .addon-variant-wrapper .icon-caret {
+      position: absolute;
+      top: 50%;
+      right: var(--gap-xs);
+      transform: translateY(-50%);
+      width: var(--icon-size-xs);
+      height: var(--icon-size-xs);
+      pointer-events: none;
+    }
+
+    /* The dropdown is absolutely positioned inside .addon-card__content, which carries an inline
+       `overflow: hidden` (Horizon's border-override clips children to the card radius). That clips
+       the popover. While the menu is open, let the content box overflow so the popover shows
+       (needs !important to beat the inline style). Border-radius clipping only matters visually
+       during the brief open state; in the frequently-bought details the card border is none anyway. */
+    .addon-card__content:has(.cs-menu.open) {
+      overflow: visible !important;
+    }
+
+    /* Once unclipped, the popover still needs to paint above the FOLLOWING card (later in the DOM).
+       Elevate the card + its list item while its menu is open so the popover wins the stacking order. */
+    .addon-card:has(.addon-variant-wrapper .cs-menu.open),
+    .resource-list__item:has(.addon-variant-wrapper .cs-menu.open) {
+      position: relative;
+      z-index: 20;
     }
 
   @media screen and (max-width: 749px) {
@@ -438,9 +557,12 @@
         min-width: 65px;
     }
     
-    .addon-variant-selector {
+    .addon-variant-wrapper .custom-select,
+    .addon-variant-wrapper .cs-option {
         font-size: var(--font-size--xs);
-        padding: var(--gap-3xs) var(--gap-2xs);
+    }
+    .addon-variant-wrapper .custom-select {
+        padding: var(--gap-3xs) calc(var(--gap-xs) + var(--icon-size-xs)) var(--gap-3xs) var(--gap-2xs);
     }
   }
 

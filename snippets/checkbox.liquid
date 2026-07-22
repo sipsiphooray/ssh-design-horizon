@@ -13,6 +13,7 @@
   @param {string} [inputRef] - input ref attribute for use with component framework
   @param {string} [labelRef] - label ref attribute for use with component framework
   @param {boolean} [autofocus] - whether the input should be autofocused
+  @param {string} [attributes] - Extra HTML attributes for the input (e.g. addon-card's data-price / data-variant-id). Fork customization — upstream's checkbox has no such param; the v4 merge dropped it, which zeroed the frequently-bought total.
 {%- enddoc -%}
 
 {% render 'checkbox-styles' %}
@@ -46,6 +47,7 @@
     {% if autofocus %}
       autofocus
     {% endif %}
+    {{ attributes }}
   >
   <label
     class="checkbox__label"

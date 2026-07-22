@@ -1,5 +1,16 @@
 {% assign block_settings = block.settings %}
 
+{% liquid
+  # Store customization: an autoplay + loop video is a silent background clip, so hide the
+  # native control bar (Horizon's video block never exposes disable_controls). video.liquid
+  # still renders its minimal play/pause hint, so users can pause. Vendor-file edit — keep on
+  # upstream merges.
+  assign hide_video_controls = false
+  if block_settings.video_autoplay and block_settings.video_loop
+    assign hide_video_controls = true
+  endif
+%}
+
 {% capture video_style %}
   {%  render 'spacing-style', settings: block_settings %}
   {% render 'border-override', settings: block_settings %}
@@ -14,6 +25,7 @@
     video_loop: block_settings.video_loop,
     video_style: video_style,
     video_preview_image: block_settings.video.preview_image,
+    disable_controls: hide_video_controls,
     additional_attributes: block.shopify_attributes
   %}
 {% else %}
@@ -25,6 +37,7 @@
     video_style: video_style,
     video_alt: block_settings.alt,
     video_preview_image: block_settings.cover_image,
+    disable_controls: hide_video_controls,
     additional_attributes: block.shopify_attributes
   %}
 {% endif %}

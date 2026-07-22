@@ -102,8 +102,42 @@
               {% if product_option_value.size > longest_value and option_id_attribute %}
                 {% assign longest_value = product_option_value.size %}
               {% endif %}
+              {%- liquid
+                # Store custom swatch resolution (buttons style only). These products carry no
+                # native Shopify swatch, so resolve an icon/colour ourselves:
+                #   1. product_option_swatches metaobject (icon_or_image) — preferred source
+                #   2. a curated colour-name -> hex fallback map (ov_color)
+                #   3. the variant's featured image
+                # The result renders into Horizon's native .swatch element, so size/shape/border
+                # come from the Swatches theme settings (--variant-picker-swatch-*) — no custom CSS.
+                assign ov_icon = blank
+                assign ov_color = blank
+                if variant_style != 'swatch'
+                  assign ov_swatch = product_option_swatches | where: 'assign_to', product_option_value
+                  if ov_swatch.size > 0 and ov_swatch[0].icon_or_image != blank
+                    assign ov_icon = ov_swatch[0].icon_or_image
+                  else
+                    assign vkey = product_option_value.name | handleize
+                    assign cpairs = "black:#1c1c1c|black-glitter:#1c1c1c|white:#ffffff|ivory:#f4efe1|cream:#f3e9d2|oat:#dccfb8|clear:#e6edf2|hot-pink:#ef5aa0|hot-pink-glitter:#ef5aa0|pink:#f4a6c0|baby-pink:#f3c4d3|light-pink:#f8d3df|light-pink-glitter:#f8d3df|pink-peach:#f4b3a2|coral:#f2876f|baby-blue:#b3d4ea|blue:#5688cf|light-blue:#bfdcf1|bay:#6f9fb0|navy:#23335f|seafoam:#a6e0cd|mint-green:#a9dfbf|mint:#bfe8d8|neon-green:#57d857|forest-green:#2f6b40|forest:#2f6b40|lime:#9ccc3a|pear:#c3d96b|yellow:#f2ce55|orange:#ef9a55|orange-glitter:#ef9a55|lemon-wedge:#f5e07a|lemon-slice:#f5e07a|soft-lilac:#cbb8e0|lavender:#ccbce9|lavender-glitter:#ccbce9|violet:#8d6fc3|purple:#7a52b3|light-purple:#ccbce9|light-purple-glitter:#ccbce9|spooky-grape:#7a52b3|purple-grape:#7a52b3|coffee-brown:#8a5a3c|brown:#7a5230|chocolate-brown:#593923|red:#d64545|red-iridescent:#d64545|strawberry:#e6485a|watermelon:#f2607a|gold:#d4af37|gold-glitter:#d4af37|silver:#c7ccce|silver-glitter:#c7ccce|glow-in-the-dark:#d9f7c4" | split: '|'
+                    for cp in cpairs
+                      assign kv = cp | split: ':'
+                      if kv[0] == vkey
+                        assign ov_color = kv[1]
+                        break
+                      endif
+                    endfor
+                    if ov_color == blank and product_option_value.variant.featured_media != blank
+                      assign ov_icon = product_option_value.variant.featured_media
+                    endif
+                  endif
+                endif
+                assign has_ov_swatch = false
+                if ov_icon != blank or ov_color != blank
+                  assign has_ov_swatch = true
+                endif
+              -%}
               <label
-                class="variant-option__button-label{% if variant_style == 'swatch' %} variant-option__button-label--has-swatch{% endif %}"
+                class="variant-option__button-label{% if variant_style == 'swatch' or has_ov_swatch %} variant-option__button-label--has-swatch{% endif %}"
               >
                 <input
                   type="radio"
@@ -147,45 +181,34 @@
                     variant_image: featured_media,
                     mode: 'unscaled'
                   %}
-                {% else %}
-                  {%- assign ov_swatch = product_option_swatches | where: 'assign_to', product_option_value -%}
-                  {%- assign ov_icon = blank -%}
-                  {%- assign ov_color = blank -%}
-                  {%- if ov_swatch.size > 0 and ov_swatch[0].icon_or_image != blank -%}
-                    {%- assign ov_icon = ov_swatch[0].icon_or_image -%}
-                  {%- else -%}
-                    {%- assign vkey = product_option_value.name | handleize -%}
-                    {%- assign cpairs = "black:#1c1c1c|black-glitter:#1c1c1c|white:#ffffff|ivory:#f4efe1|cream:#f3e9d2|oat:#dccfb8|clear:#e6edf2|hot-pink:#ef5aa0|hot-pink-glitter:#ef5aa0|pink:#f4a6c0|baby-pink:#f3c4d3|light-pink:#f8d3df|light-pink-glitter:#f8d3df|pink-peach:#f4b3a2|coral:#f2876f|baby-blue:#b3d4ea|blue:#5688cf|light-blue:#bfdcf1|bay:#6f9fb0|navy:#23335f|seafoam:#a6e0cd|mint-green:#a9dfbf|mint:#bfe8d8|neon-green:#57d857|forest-green:#2f6b40|forest:#2f6b40|lime:#9ccc3a|pear:#c3d96b|yellow:#f2ce55|orange:#ef9a55|orange-glitter:#ef9a55|lemon-wedge:#f5e07a|lemon-slice:#f5e07a|soft-lilac:#cbb8e0|lavender:#ccbce9|lavender-glitter:#ccbce9|violet:#8d6fc3|purple:#7a52b3|light-purple:#ccbce9|light-purple-glitter:#ccbce9|spooky-grape:#7a52b3|purple-grape:#7a52b3|coffee-brown:#8a5a3c|brown:#7a5230|chocolate-brown:#593923|red:#d64545|red-iridescent:#d64545|strawberry:#e6485a|watermelon:#f2607a|gold:#d4af37|gold-glitter:#d4af37|silver:#c7ccce|silver-glitter:#c7ccce|glow-in-the-dark:#d9f7c4" | split: '|' -%}
-                    {%- for cp in cpairs -%}
-                      {%- assign kv = cp | split: ':' -%}
-                      {%- if kv[0] == vkey -%}{%- assign ov_color = kv[1] -%}{%- break -%}{%- endif -%}
-                    {%- endfor -%}
-                    {%- if ov_color == blank and product_option_value.variant.featured_media != blank -%}
-                      {%- assign ov_icon = product_option_value.variant.featured_media -%}
-                    {%- endif -%}
-                  {%- endif -%}
+                {% elsif has_ov_swatch %}
                   {%- if ov_icon != blank -%}
-                    <span class="variant-option__icon-circle" data-key="variant-option-pill">
-                      {{ ov_icon | image_url: width: 120 | image_tag: alt: product_option_value.name, widths: '60, 120', loading: 'lazy' }}
-                    </span>
-                    <span class="variant-option__button-label__text variant-option__sr" data-key="variant-option-text">{{- product_option_value | escape -}}</span>
-                  {%- elsif ov_color != blank -%}
-                    <span class="variant-option__icon-circle variant-option__color-circle" style="background: {{ ov_color }};" data-key="variant-option-pill"></span>
-                    <span class="variant-option__button-label__text variant-option__sr" data-key="variant-option-text">{{- product_option_value | escape -}}</span>
-                  {%- else -%}
-                    {% if product_option_value.available == true %}
-                      <span
-                        class="variant-option__button-label__pill"
-                        data-key="variant-option-pill"
-                      ></span>
-                    {% endif %}
                     <span
-                      class="variant-option__button-label__text"
-                      data-key="variant-option-text"
-                    >
-                      {{- product_option_value | escape -}}
-                    </span>
+                      class="swatch swatch--unscaled swatch--image-contain"
+                      style="--swatch-background: url({{ ov_icon | image_url: width: 120 }});"
+                      data-key="variant-option-pill"
+                    ></span>
+                  {%- else -%}
+                    <span
+                      class="swatch swatch--unscaled"
+                      style="--swatch-background: {{ ov_color }};"
+                      data-key="variant-option-pill"
+                    ></span>
                   {%- endif -%}
+                  <span class="visually-hidden" data-key="variant-option-text">{{- product_option_value | escape -}}</span>
+                {% else %}
+                  {% if product_option_value.available == true %}
+                    <span
+                      class="variant-option__button-label__pill"
+                      data-key="variant-option-pill"
+                    ></span>
+                  {% endif %}
+                  <span
+                    class="variant-option__button-label__text"
+                    data-key="variant-option-text"
+                  >
+                    {{- product_option_value | escape -}}
+                  </span>
                 {% endif %}
                 {% render 'strikethrough-variant', product_option: product_option_value %}
               </label>

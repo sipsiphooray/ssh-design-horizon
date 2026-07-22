@@ -5,6 +5,20 @@ Upstream: `chrisdavery/horizon-base` (shared Horizon fork, remote `upstream`).
 
 ## Customization discipline (adapt to Horizon, don't fork it)
 
+> **These principles apply to ALL customization work — including anything done with an
+> AI assistant (Claude, Cursor, Kilo, Copilot, etc.). Any AI making changes to this theme
+> MUST follow them.** Before writing a single line of custom CSS/JS/markup, CHECK HORIZON
+> FIRST, in this order:
+> 1. Is there a **theme setting** (`config/settings_schema.json`, or a section/block schema)
+>    that already does this? Use it / expose it — don't hardcode.
+> 2. Is there a **Horizon CSS variable / design token** for the value (font, icon, spacing,
+>    colour, swatch, radius)? Reference it — never a raw `px`/`hex`.
+> 3. Is there a **native Horizon component / class / API** (color_palette, `button-custom`,
+>    swatch settings, `contrast-override`, etc.)? Reuse it instead of inventing a bespoke class.
+> Only when all three genuinely have no answer do you write custom code — and it goes in
+> `custom.css` / `custom.js` (never a Horizon vendor file). Inventing a custom class with
+> hardcoded `px`/`hex` when a Horizon setting/variable exists is a defect, not a shortcut.
+
 - **Adapt to Horizon's architecture and native APIs first.** Prefer Shopify/Horizon
   systems over bespoke code: the v4 `color_palette` + `contrast-override`, the
   `button-custom` style_class + palette refs, variant swatch settings

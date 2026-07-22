@@ -122,6 +122,7 @@
         resource-list
         carousel-list
         {% if section.settings.peek_desktop == true %}carousel--peek{% endif %}
+        {% if section.settings.section_width == 'page-narrow' %}carousel--narrow-contained{% endif %}
         force-full-width
         {{ classes }}
       "
@@ -188,6 +189,30 @@
 
   [data-testid="carousel-list-grid"] {
     --peek-next-slide-size: 0rem !important;
+  }
+
+  /* Section width = Narrow + desktop carousel: the carousel is force-full-width so it goes
+     edge-to-edge, which ignores the narrow content width (narrow appeared to do nothing).
+     On desktop only, pull it back into the section's content column (2) — which is the narrow
+     width — and drop the page-margin first/last gutter so slides sit flush in that column.
+     Mobile keeps the full-bleed .carousel-list rule (< 990) untouched. */
+  @media (min-width: 990px) {
+    .section > .carousel--narrow-contained.force-full-width {
+      grid-column: 2;
+    }
+    .carousel--narrow-contained .resource-list__carousel-wrap {
+      --gutter-slide-width: 0px !important;
+    }
+    .carousel--narrow-contained slideshow-slides[gutters*='start'] {
+      padding-inline-start: 0;
+      scroll-padding-inline-start: 0;
+    }
+    .carousel--narrow-contained slideshow-slides[gutters*='end'] {
+      padding-inline-end: 0;
+    }
+    .carousel--narrow-contained slideshow-arrows {
+      padding-inline: 0;
+    }
   }
 
   .carousel-list {

@@ -1302,32 +1302,22 @@ html[scroll-lock] {
     overflow: hidden !important;
     overscroll-behavior: none;
 }
-/* ── Variant size/color selector: make rules GLOBAL so the mobile quick-add
-   modal keeps the compact circle icons + hidden text labels. These were only
-   in an inline <style> sibling of <variant-picker> in variant-main-picker.liquid,
-   which quick-add.js drops on mobile (it copies only the <variant-picker>). Added 2026-07-08. */
-.variant-option--buttons .variant-option__button-label:has(.variant-option__icon-circle) {
-  border-radius: var(--variant-picker-swatch-radius);
-  width: var(--variant-picker-swatch-width); height: var(--variant-picker-swatch-height); min-width: var(--variant-picker-swatch-width);
-  padding: 0; overflow: hidden;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  transition: box-shadow .12s ease, border-color .12s ease;
-}
+/* Variant swatches: variant-main-picker.liquid resolves the store's option-value
+   icon/colour (product_option_swatches metaobject -> colour-name map -> variant image) and
+   renders it into Horizon's native .swatch element with the native
+   .variant-option__button-label--has-swatch label. Size/shape/border therefore come from
+   the Swatches theme settings (--variant-picker-swatch-*) and the native swatch styles —
+   no bespoke .variant-option__icon-circle class. Old implementation: see git history.
 
-.variant-option__icon-circle { width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; }
-.variant-option__icon-circle img { width: 100%; height: 100%; object-fit: contain; padding: 6px; box-sizing: border-box; }
-.variant-option--buttons .variant-option__button-label:has(.variant-option__icon-circle):hover {
-  border-color: rgb(var(--color-foreground-rgb) / 0.45);
+   Only override: native .swatch fills its box (background-size = swatch size), which crops
+   line-art product images. Horizon offers no 'contain' swatch variant, so image swatches
+   get this modifier to show the whole graphic inside the circle. Solid-colour swatches are
+   untouched (they should fill). */
+.swatch.swatch--image-contain {
+  background-size: calc(var(--variant-picker-swatch-width) / 1.2);
+  background-repeat: no-repeat;
+  background-position: center;
 }
-.variant-option--buttons .variant-option__button-label:has(.variant-option__icon-circle):has(input:checked) {
-  background: transparent !important;
-  color: inherit !important;
-  border-color: var(--color-foreground) !important;
-  box-shadow: 0 0 0 2px var(--color-foreground);
-}
-.variant-option__sr { position: absolute !important; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0; }
 
 /* Homepage hero green button now set via the theme system: the button block uses
    style_class "button-custom" with palette refs (color8 green / background white)
