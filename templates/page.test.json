@@ -61,15 +61,17 @@
     "1784829361f1123387": {
       "type": "_blocks",
       "blocks": {
-        "sendlane_marketing_automation_sendlane_forms_block_U9Fn7h": {
-          "type": "shopify://apps/sendlane-marketing-automation/blocks/sendlane-forms-block/5a768830-d9c3-4d16-9e83-ae2a731c69be",
+        "custom_liquid_iqUgyk": {
+          "type": "custom-liquid",
+          "name": "t:names.custom_liquid",
           "settings": {
-            "form_key": "eyJkb21haW4iOiJzaXBzaXBob29yYXlkZXNpZ24iLCJmb3JtX2lkIjoiYzNhNWE0YTYtODgzZi00MTI2LTg5OTUtZmZlNDNlYzAzYzUxIn0"
-          }
+            "custom_liquid": "<div class=\"sendlane-form\" data-form-key=\"eyJkb21haW4iOiJzaXBzaXBob29yYXlkZXNpZ24iLCJmb3JtX2lkIjoiYzNhNWE0YTYtODgzZi00MTI2LTg5OTUtZmZlNDNlYzAzYzUxIn0=\"></div>"
+          },
+          "blocks": {}
         }
       },
       "block_order": [
-        "sendlane_marketing_automation_sendlane_forms_block_U9Fn7h"
+        "custom_liquid_iqUgyk"
       ],
       "settings": {
         "content_direction": "column",
