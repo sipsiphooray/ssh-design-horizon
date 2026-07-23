@@ -29,6 +29,7 @@
             "letter_spacing": "normal",
             "case": "none",
             "wrap": "pretty",
+            "text_color": "",
             "background": false,
             "background_color": "#00000026",
             "corner_radius": 0,
@@ -40,41 +41,68 @@
             "mobile-padding-block-start": 0,
             "mobile-padding-block-end": 0,
             "mobile-padding-inline-start": 0,
-            "mobile-padding-inline-end": 0
+            "mobile-padding-inline-end": 0,
+            "custom_class": ""
           },
           "blocks": {}
-        },
-        "forms_inline_g4XW3M": {
-          "type": "shopify://apps/forms/blocks/inline/8744a304-fcb1-4347-b211-bb6b4759a76a",
-          "settings": {
-            "form_id": "1054733",
-            "text_color": "#202020",
-            "button_background_color": "#202020",
-            "button_label_color": "#ffffff",
-            "links_color": "#1878b9",
-            "errors_color": "#e02229",
-            "text_alignment": "center",
-            "form_alignment": "center",
-            "padding_top": 0,
-            "padding_bottom": 24,
-            "padding_right": 0,
-            "padding_left": 0
-          }
         }
       },
       "block_order": [
-        "heading",
-        "forms_inline_g4XW3M"
+        "heading"
       ],
       "settings": {
         "content_direction": "column",
         "gap": 32,
+        "background_color": "",
         "padding-block-start": 40,
         "padding-block-end": 80
+      }
+    },
+    "1784829361f1123387": {
+      "type": "_blocks",
+      "blocks": {
+        "sendlane_marketing_automation_sendlane_forms_block_U9Fn7h": {
+          "type": "shopify://apps/sendlane-marketing-automation/blocks/sendlane-forms-block/5a768830-d9c3-4d16-9e83-ae2a731c69be",
+          "settings": {
+            "form_key": "eyJkb21haW4iOiJzaXBzaXBob29yYXlkZXNpZ24iLCJmb3JtX2lkIjoiYzNhNWE0YTYtODgzZi00MTI2LTg5OTUtZmZlNDNlYzAzYzUxIn0"
+          }
+        }
+      },
+      "block_order": [
+        "sendlane_marketing_automation_sendlane_forms_block_U9Fn7h"
+      ],
+      "settings": {
+        "content_direction": "column",
+        "vertical_on_mobile": true,
+        "horizontal_alignment": "flex-start",
+        "vertical_alignment": "center",
+        "align_baseline": false,
+        "horizontal_alignment_flex_direction_column": "flex-start",
+        "vertical_alignment_flex_direction_column": "center",
+        "gap": 12,
+        "section_width": "page-width",
+        "section_height": "",
+        "section_height_custom": 50,
+        "background_media": "none",
+        "background_color": "",
+        "video_position": "cover",
+        "background_image_position": "cover",
+        "toggle_overlay": false,
+        "overlay_color": "#00000026",
+        "overlay_style": "solid",
+        "gradient_direction": "to top",
+        "border": "none",
+        "border_width": 1,
+        "border_opacity": 100,
+        "border_color": "",
+        "border_radius": 0,
+        "padding-block-start": 0,
+        "padding-block-end": 0
       }
     }
   },
   "order": [
-    "main"
+    "main",
+    "1784829361f1123387"
   ]
 }
