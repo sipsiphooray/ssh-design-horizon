@@ -6,7 +6,7 @@
   @param [children] - Additional content rendered below the card gallery
   @param [section] - The section object the snippet is rendered in
   @param [block] - The block object the snippet is rendered in
-  @param {object} [pinned_variant] - Explicit variant (curated). When blank, resolves like product-card from collection `variants_to_render`.
+  @param {object} [pinned_variant] - Explicit variant (curated-variant-list). Overrides the gallery link and leading media.
 {%- enddoc -%}
 
 {% liquid
@@ -64,44 +64,6 @@
   endif
 
   assign gallery_resolved_variant = pinned_variant
-
-  if gallery_resolved_variant == blank and product != blank and product.has_only_default_variant == false and collection != blank and collection.metafields.custom.variants_to_render != blank
-    assign vtr_meta = collection.metafields.custom.variants_to_render
-    assign vtr_val = vtr_meta.value
-    if vtr_val != blank
-      assign vtr_matched = blank
-      if vtr_meta.type contains 'list'
-        for token in vtr_val
-          assign needle = token.value | default: token
-          if needle == blank
-            continue
-          endif
-          for v in product.variants
-            if v.title contains needle
-              assign vtr_matched = v
-              break
-            endif
-          endfor
-          if vtr_matched != blank
-            break
-          endif
-        endfor
-      else
-        assign needle = vtr_val
-        if needle != blank
-          for v in product.variants
-            if v.title contains needle
-              assign vtr_matched = v
-              break
-            endif
-          endfor
-        endif
-      endif
-      if vtr_matched != blank
-        assign gallery_resolved_variant = vtr_matched
-      endif
-    endif
-  endif
 %}
 
 {% if block_settings.background_color != blank %}{% render 'contrast-override', background_color: block_settings.background_color, section_id: block.id %}{% endif %}

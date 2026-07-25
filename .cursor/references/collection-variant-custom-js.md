@@ -1,7 +1,17 @@
-# Collection product cards: manual variant UI + custom.js
+# Collection product cards: variant display
 
-- **Collection grid** does not depend on Horizon `blocks/swatches.liquid`. Merchants add **manual** controls in Liquid/markup.
-- **`assets/custom.js`** should **mirror** theme card behavior from `assets/product-card.js` (and related `variant-picker` flows): same conventions for slide / `slide-id`, `variant:update`, and section-rendering updates where the theme already does so.
-- **Liquid** still resolves **initial** variant (e.g. `collection.metafields.custom.variants_to_render` with title-contains + list-order tie-break). JS handles interaction after first paint.
-- **`blocks/_product-card.liquid`** pre-assigns **`card_initial_variant`** and **`card_title_suffix`** for the gallery and `{% render 'product-card' %}` (`initial_variant`, `title_suffix` → optional `data-card-*` on `<product-card>`). Shopify **`{% content_for 'blocks' %}` does not accept custom keys** (only `closest.*` / `context.*`), so **`blocks/product-title.liquid`** and **`blocks/price.liquid`** **repeat the same resolve** (including **`active_variant`** when present for nested blocks).
-- **Implementation note:** keep that resolve in sync with `_product_card`, [snippets/product-card.liquid](snippets/product-card.liquid) (when `initial_variant` is blank), and [snippets/card-gallery.liquid](snippets/card-gallery.liquid) via `pinned_variant`.
+- **Collection grids now rely on Shopify's native "variants as collection items"** — a
+  variant assigned to a collection surfaces through the product drop
+  (`selected_or_first_available_variant`) with no theme-side resolution. The old
+  `collection.metafields.custom.variants_to_render` resolve (title-contains + list-order
+  tie-break, duplicated across `blocks/_product-card.liquid`, `blocks/product-title.liquid`,
+  `blocks/price.liquid`, `snippets/product-card.liquid`, `snippets/card-gallery.liquid`)
+  has been removed; cards use upstream Horizon behavior.
+- **Curated variant list** (`sections/curated-variant-list.liquid`) still pins an explicit
+  variant via static `content_for 'block'` params: `active_variant` →
+  `blocks/_product-card.liquid` → `pinned_variant` on the gallery and `active_variant` on
+  `snippets/product-card.liquid` (link + view-transition image). Shopify's
+  `{% content_for 'blocks' %}` does not accept custom keys, so nested dynamic blocks
+  (`product-title`, `price`) only honor `active_variant` when rendered with it directly.
+- **`assets/custom.js`** card behavior mirrors `assets/product-card.js` conventions
+  (`variant:update`, section rendering) for interaction after first paint.
