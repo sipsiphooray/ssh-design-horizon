@@ -527,10 +527,11 @@ summary .svg-wrapper {
 }
 
 .product-card .quick-add__button {
-    /* position: absolute;
-    left: 50%;
-    right: unset !important;
-    transform: translate(-50%); */
+    /* Vendor add-to-cart-button-styles sets .add-to-cart-button { position: relative } after
+       quick-add-styles' .quick-add__button { position: absolute } (equal specificity), which
+       un-anchors the Choose-shape button (multi-variant products) from the gallery's bottom-right
+       overlay. Scoped to .product-card so inline quick-adds (upsell-card, hotspots) keep flow. */
+    position: absolute;
     outline: none;
     border: 0 !important;
     box-shadow: none !important;
