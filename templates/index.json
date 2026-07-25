@@ -2123,7 +2123,7 @@
                   "name": "t:names.button",
                   "settings": {
                     "label": "Build Yours",
-                    "link": "shopify://products/build-your-own",
+                    "link": "shopify://collections/curated-bundles",
                     "open_in_new_tab": false,
                     "style_class": "button",
                     "add_arrow": true,
