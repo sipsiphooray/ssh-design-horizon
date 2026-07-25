@@ -151,9 +151,8 @@
             "custom_liquid_K467mf": {
               "type": "custom-liquid",
               "name": "Badges Bottom",
-              "disabled": true,
               "settings": {
-                "custom_liquid": "<div class=\"hero-badges\">\n  <span class=\"hero-badges__item\">🎋 Bamboo lid + straw</span>\n  <span class=\"hero-badges__item\">☀️ Heat-resistant glass</span>\n  <span class=\"hero-badges__item\">🚗 Fits your cupholder</span>\n</div>\n\n<style>\n  .hero-badges {\n    display: flex;\n    flex-wrap: wrap;\n    gap: 8px;\n  }\n  .hero-badges__item {\n    display: inline-flex;\n    align-items: center;\n    gap: 6px;\n    background: rgba(255, 255, 255, 0.65);\n    color: #5b3f47;\n    font-size: var(--font-size--2xs);\n    font-weight: 600;\n    padding: 8px 14px;\n    border-radius: 999px;\n    white-space: nowrap;\n  }\n</style>"
+                "custom_liquid": "<div class=\"hero-badges\">\n  <span class=\"hero-badges__item\">🎀 Silicone bottom cover</span>\n  <span class=\"hero-badges__item\">☕ Matching coaster</span>\n  <span class=\"hero-badges__item\">🎁 Gift-ready packaging</span>\n</div>\n\n<style>\n  .hero-badges {\n    display: flex;\n    flex-wrap: wrap;\n    gap: 8px;\n  }\n  .hero-badges__item {\n    display: inline-flex;\n    align-items: center;\n    gap: 6px;\n    background: rgba(255, 255, 255, 0.65);\n    color: #5b3f47;\n    font-size: var(--font-size--2xs);\n    font-weight: 600;\n    padding: 8px 14px;\n    border-radius: 999px;\n    white-space: nowrap;\n  }\n</style>"
               },
               "blocks": {}
             }
