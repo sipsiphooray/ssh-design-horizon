@@ -152,7 +152,7 @@
               "type": "custom-liquid",
               "name": "Badges Bottom",
               "settings": {
-                "custom_liquid": "<div class=\"hero-badges\">\n  <span class=\"hero-badges__item\">🎀 Silicone bottom cover</span>\n  <span class=\"hero-badges__item\">☕ Matching coaster</span>\n  <span class=\"hero-badges__item\">🎁 Gift-ready packaging</span>\n</div>\n\n<style>\n  .hero-badges {\n    display: flex;\n    flex-wrap: wrap;\n    gap: 8px;\n  }\n  .hero-badges__item {\n    display: inline-flex;\n    align-items: center;\n    gap: 6px;\n    background: rgba(255, 255, 255, 0.65);\n    color: #5b3f47;\n    font-size: var(--font-size--2xs);\n    font-weight: 600;\n    padding: 8px 14px;\n    border-radius: 999px;\n    white-space: nowrap;\n  }\n</style>"
+                "custom_liquid": "<div style=\"display:flex;flex-wrap:wrap;align-items:center;gap:14px;font-size:11.5px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:#7a5760\">\n  <span>Silicone bottom cover</span>\n  <span style=\"width:4px;height:4px;border-radius:50%;background:#b0838f\"></span>\n  <span>Matching coaster</span>\n  <span style=\"width:4px;height:4px;border-radius:50%;background:#b0838f\"></span>\n  <span>Gift-ready packaging</span>\n</div>\n\n<style>\n.ssh-hero-features {\n  display: flex;\n  flex-wrap: wrap;\n  align-items: center;\n  gap: 14px;\n  font-size: var(--font-size--2xs);\n  font-weight: 600;\n  letter-spacing: .14em;\n  text-transform: uppercase;\n  color: #7a5760;\n}\n.ssh-hero-features i {\n  width: 4px;\n  height: 4px;\n  border-radius: 50%;\n  background: #b0838f;\n}\n</style>"
               },
               "blocks": {}
             }
