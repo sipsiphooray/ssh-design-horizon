@@ -2213,7 +2213,7 @@
             "height": "fit",
             "custom_height": 100,
             "background_media": "none",
-            "background_color": "{{ settings.color_palette.color6 }}",
+            "background_color": "",
             "video_position": "cover",
             "background_image_position": "cover",
             "border": "none",
@@ -2252,7 +2252,7 @@
               "type": "image",
               "name": "t:names.image",
               "settings": {
-                "image": "shopify://shop_images/BLANK.CN16ZLS.png",
+                "image": "shopify://shop_images/build-your-own-card.png",
                 "link": "",
                 "image_ratio": "adapt",
                 "width": "fill",

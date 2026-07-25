@@ -398,6 +398,13 @@
           "block_order": [
             "product_card_group_VRbyP6"
           ]
+        },
+        "collection-promo-card": {
+          "type": "_collection-promo-card",
+          "static": true,
+          "disabled": true,
+          "settings": {},
+          "blocks": {}
         }
       },
       "settings": {

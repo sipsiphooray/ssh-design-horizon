@@ -66,6 +66,25 @@
 
       {% paginate collection.products by products_per_page %}
         {% capture children %}
+          {%- comment -%}
+            Promo card: statically-rendered private block, shown as the first grid
+            cell on page 1 only (does not repeat on infinite-scroll / paginated
+            pages). Merchants design it via its own settings + nested blocks, and
+            can hide it from the theme editor. When hidden/disabled the block
+            outputs nothing, so we capture first and only emit the grid cell when
+            it produced markup — otherwise a disabled block leaves an empty cell.
+          {%- endcomment -%}
+          {% if paginate.current_page == 1 %}
+            {%- capture promo_card -%}
+              {% content_for 'block', type: '_collection-promo-card', id: 'collection-promo-card' %}
+            {%- endcapture -%}
+            {%- assign promo_card = promo_card | strip -%}
+            {%- if promo_card != blank -%}
+              <li class="product-grid__item product-grid__item--promo" data-page="{{ paginate.current_page }}">
+                {{ promo_card }}
+              </li>
+            {%- endif -%}
+          {% endif %}
           {% for product in collection.products %}
             {% liquid
               if shop.metafields.custom.customer_discounts.value != blank

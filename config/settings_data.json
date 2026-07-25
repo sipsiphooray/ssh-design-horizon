@@ -244,14 +244,15 @@
       "color1": "#2b2b2b",
       "color2": "#fbe1ec",
       "color3": "#dfdfdf",
-      "color4": "#FDF5F9",
+      "color4": "#fdf5f9",
       "color5": "#f9f9f9",
       "color6": "#f3eeea",
       "color7": "#eef1ea",
       "color8": "#759d6f",
       "color9": "#5c745c",
       "color10": "#b89b95",
-      "color11": "#f1dbe6"
+      "color11": "#f1dbe6",
+      "color12": "#D64D90"
     }
   },
   "presets": {
