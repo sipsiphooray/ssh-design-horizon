@@ -2191,7 +2191,7 @@
           "type": "group",
           "name": "t:names.group",
           "settings": {
-            "link": "shopify://products/build-your-own",
+            "link": "shopify://collections/curated-bundles",
             "open_in_new_tab": false,
             "content_direction": "column",
             "vertical_on_mobile": true,
@@ -3351,6 +3351,9 @@
             "show_sample_reviews": true,
             "reviews_selection": "all",
             "products": [],
+            "filter_pinned": false,
+            "filter_featured": false,
+            "filter_custom_tags": "",
             "star_rating": "5_star",
             "show_review_media": true,
             "display_order": "media_first",
