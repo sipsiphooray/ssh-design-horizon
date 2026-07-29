@@ -931,6 +931,7 @@ summary:hover {
 
 .link-prop {
     text-decoration: underline !important;
+    cursor: pointer;
 }
 
 .preview-image-modal {
