@@ -2183,8 +2183,18 @@
     "17726425831d4fe2dc": {
       "type": "_blocks",
       "blocks": {
+        "judge_me_reviews_review_widget_kNE8R4": {
+          "type": "shopify://apps/judge-me-reviews/blocks/review_widget/61ccd3b1-a9f2-4160-9fe9-4fec8413e5d8",
+          "settings": {
+            "review_data": "sample_data",
+            "max_width": 1200,
+            "show_shop_reviews": false,
+            "empty_state": "empty_widget"
+          }
+        },
         "reviews_hscroll": {
           "type": "custom-liquid",
+          "disabled": true,
           "settings": {
             "custom_liquid": "{%- comment -%} reviews now via Judge.me {%- endcomment -%}"
           },
@@ -2192,6 +2202,7 @@
         },
         "okendo_reviews_widget_hjT93e": {
           "type": "custom-liquid",
+          "disabled": true,
           "settings": {
             "custom_liquid": "<div style='clear:both'></div>\n<div class='jdgm-widget jdgm-review-widget' data-id='{{ closest.product.id }}' data-product-title='{{ closest.product.title | escape }}'>{{ closest.product.metafields.judgeme.widget }}</div>"
           },
@@ -2199,6 +2210,7 @@
         }
       },
       "block_order": [
+        "judge_me_reviews_review_widget_kNE8R4",
         "reviews_hscroll",
         "okendo_reviews_widget_hjT93e"
       ],
