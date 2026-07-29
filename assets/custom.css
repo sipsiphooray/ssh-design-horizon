@@ -780,14 +780,11 @@ body:has(.overlay.active) .sticky-add-to-cart__bar {
 .cart-usp-list {
     display: flex;
     gap: var(--gap-lg);
-    justify-content: space-between;
+    justify-content: center;
     width: 100%;
     text-align: left;
     font-size: var(--font-size--2xs);
-    padding: var(--padding-sm) var(--cart-drawer-summary-padding);
-    position: absolute;
-    bottom: 0;
-    left: 0;
+    padding: var(--padding-sm) 0 0;
 }
 
 .cart-usp-list li {
@@ -805,7 +802,7 @@ body:has(.overlay.active) .sticky-add-to-cart__bar {
     position: absolute;
     top: 50%;
     transform: translateY(-50%);
-    left: calc(-1 * 1.1rem);
+    left: -0.7rem;
     line-height: 1em;
 }
 
@@ -831,7 +828,6 @@ body:has(.overlay.active) .sticky-add-to-cart__bar {
 .cart-drawer__summary {
     gap: var(--gap-sm) !important;
     padding-block-start: var(--padding-xs) !important;
-    padding-block-end: var(--padding-5xl) !important;
 }
 
 .cart-totals {
@@ -953,6 +949,10 @@ summary:hover {
 
 .theme-drawer__header {
     padding: var(--padding-xs) var(--theme-drawer-padding) !important;
+}
+
+body:has(.page-wrapper--drawer-open) #shopify-chat {
+    display: none;
 }
 
 @media screen and (min-width: 750px) {
@@ -1131,9 +1131,6 @@ summary:hover {
         border: 0 !important;
     }
 
-    .cart-drawer__summary {
-        padding-block-end: var(--padding-5xl) !important;
-    }
     .menu-drawer__menu-item {
         padding: var(--padding-sm) 0;
     }
