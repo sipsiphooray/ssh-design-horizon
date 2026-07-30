@@ -1018,3 +1018,63 @@ class FreeShippingMessage extends HTMLElement {
 if (!customElements.get('free-shipping-message')) {
   customElements.define('free-shipping-message', FreeShippingMessage);
 }
+
+/**
+ * Product title suffix: append the selected vessel format to the PDP <h1>.
+ *
+ * The parent product covers several formats, so the bare title stays generic. On load (selected
+ * or first available variant) and on every variant change, the value of the "Cup Style" / "Size"
+ * option is appended so the visible heading matches what the shopper actually selected.
+ *
+ * The base title is stashed on the element, so repeated updates never stack suffixes.
+ */
+const TITLE_SUFFIX_OPTION_NAMES = ['cup style', 'size'];
+
+/** @param {Element} scope @returns {string} */
+function getSelectedFormatLabel(scope) {
+  const matchesName = (/** @type {string | undefined} */ name) =>
+    Boolean(name) && TITLE_SUFFIX_OPTION_NAMES.includes(name.trim().toLowerCase());
+
+  for (const input of scope.querySelectorAll('input[type="radio"][data-option-name]')) {
+    if (input instanceof HTMLInputElement && input.checked && matchesName(input.dataset.optionName)) {
+      return input.value.trim();
+    }
+  }
+
+  for (const select of scope.querySelectorAll('select')) {
+    if (!(select instanceof HTMLSelectElement)) continue;
+    const option = select.selectedOptions[0];
+    if (option instanceof HTMLOptionElement && matchesName(option.dataset.optionName)) {
+      return option.value.trim();
+    }
+  }
+
+  return '';
+}
+
+function updateProductTitleSuffix() {
+  const heading = document.querySelector('.product-title h1');
+  if (!(heading instanceof HTMLElement)) return;
+
+  const details = heading.closest('.shopify-section') ?? document;
+  const picker = details.querySelector('variant-picker, swatches-variant-picker-component') ?? details;
+
+  if (heading.dataset.baseTitle == null) {
+    heading.dataset.baseTitle = heading.textContent?.trim() ?? '';
+  }
+
+  const base = heading.dataset.baseTitle;
+  const label = getSelectedFormatLabel(picker);
+  const next = label ? `${base} - ${label}` : base;
+
+  if (heading.textContent !== next) heading.textContent = next;
+}
+
+onDocumentReady(() => {
+  updateProductTitleSuffix();
+  // The picker re-renders through the Section Rendering API; wait a frame so the morphed
+  // markup (and the freshly checked input) is in place before reading the selection.
+  document.addEventListener(ThemeEvents.variantUpdate, () => {
+    requestAnimationFrame(updateProductTitleSuffix);
+  });
+});
