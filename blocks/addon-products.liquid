@@ -19,6 +19,11 @@
     when 'carousel'
       assign classes = 'resource-list--carousel'
   endcase
+
+  assign is_frequent_bundle = false
+  if block_settings.card_layout_type == 'card-layout-addon-frequently'
+    assign is_frequent_bundle = true
+  endif
 %}
 
 {%- comment -%}
@@ -37,6 +42,9 @@
   class="addon-products"
   data-section-id="{{ section.id }}"
   data-product-id="{{ closest.product.id }}"
+  {% if is_frequent_bundle %}
+    data-standalone
+  {% endif %}
   {% if request.visual_preview_mode %}
     data-shopify-editor-preview
   {% endif %}
@@ -77,6 +85,7 @@
               type: '_addon-card',
               id: 'static-addon-card',
               card_layout_type: block_settings.card_layout_type,
+              standalone: is_frequent_bundle,
               closest.product: product
             %}
           </div>
@@ -111,33 +120,41 @@
       >
         {% case block_settings.layout_type %}
           {% when 'grid' %}
-            {% if block_settings.card_layout_type == 'card-layout-addon-frequently' %}
+            {% if is_frequent_bundle %}
               <div class="frequent-bundle" data-frequent-bundle>
                 {% render 'frequent-bundle-strip',
                   products: products,
                   limit: block_settings.max_products,
                   host_id: block.id
                 %}
-                <div class="frequent-bundle__toolbar">
-                  <button
-                    type="button"
-                    class="frequent-bundle__details-toggle"
-                    data-frequent-details-toggle
-                    aria-expanded="false"
-                    aria-controls="frequent-details-panel-{{ block.id }}"
-                  >
-                    <span class="frequent-bundle__details-toggle-text">
-                      {{- 'content.view_details' | t -}}
+                <div class="total-frequent-price addon-bundle__footer" hidden>
+                  <span class="addon-bundle__total">
+                    <span class="addon-bundle__total-label">{{ 'content.total' | t }}</span>
+                    <span class="addon-bundle-total">
+                      <span class="total-price-display__inner">
+                        <s class="compare-at-price total-price-display__at" hidden></s>
+                        <span class="price total-price-display__sale"></span>
+                      </span>
                     </span>
-                    <span class="frequent-bundle__caret svg-wrapper" aria-hidden="true">
-                      {{- 'icon-caret.svg' | inline_asset_content -}}
+                  </span>
+                  <button type="button" class="button frequent-add-to-cart addon-bundle__atc">
+                    <span class="add-to-cart-text">
+                      <span class="add-to-cart-text__content">
+                        <span>
+                          <span>{{- 'content.add_selected_to_cart' | t -}}</span>
+                        </span>
+                      </span>
+                    </span>
+                    <span class="add-to-cart__added">
+                      <span class="svg-wrapper add-to-cart__added-icon">
+                        {{- 'icon-checkmark-burst.svg' | inline_asset_content -}}
+                      </span>
                     </span>
                   </button>
                 </div>
                 <div
                   class="frequent-bundle__details"
                   id="frequent-details-panel-{{ block.id }}"
-                  hidden
                 >
                   <div class="frequent-bundle__details-list">
                     {{ list_items }}
@@ -203,6 +220,257 @@
 
   .addon-products-wrapper:has(addon-products[data-shopify-editor-preview]) {
     width: 100vw;
+  }
+
+  /* Standalone frequently-bought bundle — all rules scoped to .addon-products (the block);
+     the frequently-bought SECTION (.frequently-bought-section) keeps its own look. */
+
+  /* Strip is a horizontal slider bounded by the block, like Horizon's resource-list carousels:
+     cells keep a fixed size and overflow scrolls instead of spilling past the parent's edge. */
+  .addon-products .frequent-bundle__strip {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    overscroll-behavior-x: contain;
+    scrollbar-width: none;
+    min-width: 0;
+    padding-block-end: var(--padding-2xs);
+
+    /* Run to the block's edges: cancel its inline padding with negative margins (the block
+       exposes them as --padding-inline-*), then pad the scroll ends back so the first and
+       last cell still clear the edge when parked. */
+    width: auto;
+    max-width: none;
+    margin-inline-start: calc(-1 * var(--padding-inline-start, 0px));
+    margin-inline-end: calc(-1 * var(--padding-inline-end, 0px));
+    padding-inline-start: var(--padding-inline-start, 0px);
+    padding-inline-end: var(--padding-inline-end, 0px);
+    scroll-padding-inline-start: var(--padding-inline-start, 0px);
+  }
+
+  .addon-products .frequent-bundle__strip::-webkit-scrollbar {
+    display: none;
+  }
+
+  .addon-products .frequent-strip__cell-wrap {
+    flex: 0 0 auto;
+    width: auto;
+    max-width: none;
+    scroll-snap-align: start;
+  }
+
+  .addon-products .frequent-bundle__details .addon-card .addon-flex {
+    align-items: flex-start;
+  }
+
+  /* Smaller "+" between cells; the shared 3xl size crowds these compact thumbs. */
+  .addon-products .frequent-strip__cell-wrap:not(:last-child)::after {
+    font-size: var(--font-size--lg);
+  }
+
+  @media screen and (min-width: 750px) {
+    /* Desktop keeps a fixed 4-up grid: cells shrink to fit rather than scrolling. */
+    .addon-products .frequent-bundle__strip {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      column-gap: var(--gap);
+      row-gap: var(--gap);
+      overflow-x: visible;
+      width: 100%;
+      max-width: 100%;
+      margin-inline: 0;
+      padding-inline: 0;
+    }
+
+    .addon-products .frequent-strip__cell-wrap {
+      flex: initial;
+      width: auto;
+      min-width: 0;
+    }
+
+    /* A row-end "+" would sit in the gap outside the grid, so drop it on every 4th cell. */
+    .addon-products .frequent-strip__cell-wrap:nth-child(4n)::after {
+      content: none;
+    }
+
+    .addon-products .frequent-strip__img,
+    .addon-products .frequent-strip__placeholder {
+      width: 100%;
+      max-width: 72px;
+    }
+
+    .addon-products .frequent-strip__shell {
+      --checkbox-size: 16px;
+    }
+
+    .addon-products .frequent-strip__shell .checkbox__label.frequent-strip__thumb {
+      gap: var(--gap-xs);
+    }
+  }
+
+  /* Strip thumbs: let the image shrink inside its box instead of overflowing past the
+     checkbox (base rule pins flex-shrink: 0, which pushes 72px images out of narrow cells). */
+  .addon-products .frequent-strip__img,
+  .addon-products .frequent-strip__placeholder {
+    flex: 0 1 auto;
+    min-width: 0;
+    width: 72px;
+    max-width: 72px;
+  }
+
+  /* Cells stay visually flat when checked; the checkbox alone signals selection. */
+  .addon-products .frequent-strip__cell-wrap:has(.checkbox__input:checked) {
+    border-color: rgb(var(--color-foreground-rgb) / 1);
+    box-shadow: none;
+  }
+
+  /* Details rows: the strip on top already shows each product image; drop the row thumbnails. */
+  .addon-products .frequent-bundle__details .addon-image-wrapper {
+    display: none;
+  }
+
+  /* Compact checkboxes for the details rows of this block only. */
+  .addon-products .frequent-bundle__details .addon-card {
+    --checkbox-size: 14px;
+    --checkbox-border-radius: 3px;
+  }
+
+  .addon-products .frequent-bundle__details .addon-card .checkbox__label {
+    min-width: auto;
+  }
+
+  /* Title and price sit inline on one row; variant select and sold-out note wrap below. */
+  .addon-products .frequent-bundle__details .addon-flex > div:last-child {
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: baseline;
+    justify-content: space-between;
+    column-gap: var(--gap-sm);
+  }
+
+  /* The title link is `display: contents`, so its inner text-block is the real flex item. The
+     price sits inside a product-card-group wrapper carrying --size-style-width: 100%, which
+     would claim the whole line; size both to their content instead. */
+  .addon-products .frequent-bundle__details .addon-flex > div:last-child > .contents > .text-block,
+  .addon-products .frequent-bundle__details .addon-flex > div:last-child > .contents > .text-block > *,
+  .addon-products .frequent-bundle__details .addon-flex > div:last-child > .product-card-group,
+  .addon-products .frequent-bundle__details .addon-flex > div:last-child > product-price {
+    width: auto;
+  }
+
+  /* flex-basis 0, not auto: a wrapping flex line is laid out from each item's UNSHRUNK base
+     size, so a long title would claim the whole line and push the price onto the next one
+     before any shrinking happens. Zero basis keeps title and price on one line. */
+  .addon-products .frequent-bundle__details .addon-flex > div:last-child > .contents > .text-block {
+    flex: 1 1 0;
+    min-width: 0;
+  }
+
+  .addon-products .frequent-bundle__details .addon-flex > div:last-child > .product-card-group,
+  .addon-products .frequent-bundle__details .addon-flex > div:last-child > product-price {
+    flex: 0 0 auto;
+    text-align: right;
+  }
+
+  /* Titles wrap in full; keeping title and price on one row matters more than one-line titles. */
+  .addon-products .frequent-bundle__details .addon-flex > div:last-child > .contents > .text-block > * {
+    white-space: normal;
+    overflow: visible;
+    text-overflow: clip;
+  }
+
+  /* Flat list: no divider between rows. */
+  .addon-products .frequent-bundle__details-list > .resource-list__item {
+    border-block-end: none;
+  }
+
+  .addon-products .frequent-bundle__details .addon-variant-wrapper,
+  .addon-products .frequent-bundle__details .sold-out-addon {
+    flex: 1 0 100%;
+  }
+
+  /* Footer: total + own add-to-cart, bottom right of the always-visible details list. */
+  .addon-products .total-frequent-price.addon-bundle__footer {
+    width: 100%;
+    max-width: none;
+  }
+
+  .addon-products .total-frequent-price.addon-bundle__footer:not([hidden]) {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: var(--gap-xs);
+  }
+
+  .addon-bundle__total {
+    display: inline-flex;
+    align-items: baseline;
+    gap: var(--gap-2xs);
+    font-size: var(--font-size--md);
+  }
+
+  .addon-bundle__total-label {
+    font-size: var(--font-size--sm);
+  }
+
+  .addon-bundle__total-label,
+  .addon-products .addon-bundle-total {
+    font-weight: bold;
+  }
+
+  .addon-products .frequent-add-to-cart.addon-bundle__atc {
+    position: relative;
+    width: fit-content;
+    min-height: auto;
+    padding-block: calc(var(--padding-xs) * 1.1);
+    padding-inline: calc(var(--padding-lg) * 1.1);
+    font-size: calc(var(--font-size--sm) * 1.1);
+    font-weight: var(--font-body--weight);
+  }
+
+  /* Added + in-progress states reuse Horizon's add-to-cart animation (the slide keyframes and
+     .checkmark-burst base styles ship with the main buy button); only sizing is scoped here. */
+  .addon-products .addon-bundle__atc .add-to-cart__added-icon {
+    width: var(--icon-size-lg);
+    height: var(--icon-size-lg);
+  }
+
+  .addon-products .addon-bundle__atc[data-added='true'] {
+    color: transparent;
+  }
+
+  .addon-products .addon-bundle__atc[data-added='true'] .checkmark-burst {
+    opacity: 1;
+  }
+
+  .addon-products .addon-bundle__atc[data-loading='true'] {
+    opacity: var(--opacity-60);
+    pointer-events: none;
+    cursor: progress;
+  }
+
+  @media screen and (max-width: 749px) {
+    /* The shared mobile rule wraps cells into a 3-up grid, which pushes the row-end "+" (offset
+       into the gap) past the block's edge. Stay a single nowrap scrolling row instead. */
+    .addon-products .frequent-bundle__strip {
+      --gap: 24px;
+      display: flex;
+      grid-template-columns: none;
+    }
+
+    /* Narrow rows: stack title over price and let the title wrap in full. */
+    .addon-products .frequent-bundle__details .addon-flex > div:last-child {
+      flex-direction: column;
+      align-items: stretch;
+      justify-content: flex-start;
+    }
+
+    .addon-products .frequent-bundle__details .addon-flex > div:last-child > .product-card-group,
+    .addon-products .frequent-bundle__details .addon-flex > div:last-child > product-price {
+      text-align: left;
+    }
+
   }
 {% endstylesheet %}
 

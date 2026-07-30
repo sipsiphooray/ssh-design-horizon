@@ -69,6 +69,12 @@ export class AddonCard extends HTMLElement {
     // Update frequently bought section display
     this.updateFrequentlyBoughtDisplay();
 
+    // Cards that render pre-checked (standalone bundle) must seed the total; nothing has
+    // toggled yet, so no PriceChangeEvent would otherwise fire and the total stays empty.
+    if (this.checkbox?.checked) {
+      document.dispatchEvent(new PriceChangeEvent(this.checkbox));
+    }
+
     const bundle = this.closest('[data-frequent-bundle]');
     if (bundle) syncFrequentStrip(bundle);
   }
@@ -116,6 +122,29 @@ export class AddonCard extends HTMLElement {
     const root = event.detail?.priceDisplayParent ?? event.detail?.parent;
 
     if (!root) return;
+
+    // Standalone addon bundle: addons-only total rendered inside the block; never the buy button.
+    if (root instanceof Element && root.matches?.('addon-products[data-standalone]')) {
+      const totalEl = root.querySelector('.addon-bundle-total');
+      if (!totalEl) return;
+      const currency = window.Shopify?.currency?.active || 'USD';
+      const moneyFormat = window.theme?.moneyFormat || '${{amount}}';
+      const total = event.detail.total ?? 0;
+      const totalCompareAt = event.detail.totalCompareAt ?? total;
+      const saleEl = totalEl.querySelector('.total-price-display__sale');
+      const compareEl = totalEl.querySelector('.total-price-display__at');
+      if (saleEl) saleEl.textContent = formatMoney(total, moneyFormat, currency);
+      if (compareEl) {
+        if (totalCompareAt > total) {
+          compareEl.textContent = formatMoney(totalCompareAt, moneyFormat, currency);
+          compareEl.hidden = false;
+        } else {
+          compareEl.textContent = '';
+          compareEl.hidden = true;
+        }
+      }
+      return;
+    }
 
     const priceWrap = root.querySelector('.total-price-display[data-price]');
     if (!priceWrap) return;
@@ -425,13 +454,18 @@ document.addEventListener('click', (event) => {
     sections: sections.join(',')
   };
 
-  // Trigger animations on the frequent button itself
-  if (button.dataset.added !== 'true') {
+  // In-progress state; the added checkmark fires once the cart actually accepts the items.
+  button.dataset.loading = 'true';
+
+  /** @param {boolean} succeeded */
+  const settleButton = (succeeded) => {
+    button.removeAttribute('data-loading');
+    if (!succeeded || button.dataset.added === 'true') return;
     button.dataset.added = 'true';
     setTimeout(() => {
       button.removeAttribute('data-added');
     }, 800);
-  }
+  };
 
   // Adapt to Horizon's cart flow: the cart-items morph AND the drawer auto-open are both driven by
   // the @shopify/events CartLinesUpdateEvent. createPromise() makes the deferred; we then DISPATCH
@@ -462,9 +496,12 @@ document.addEventListener('click', (event) => {
       if (data.status) {
         // Error case
         console.error('Error adding to cart:', data);
+        settleButton(false);
         cartLinesUpdate.reject(new Error(data.message || 'Add to cart failed'));
         return;
       }
+
+      settleButton(true);
 
       // Trigger animations on existing add-to-cart components
       const allAddToCartContainers = document.querySelectorAll('add-to-cart-component');
@@ -507,6 +544,7 @@ document.addEventListener('click', (event) => {
     })
     .catch(error => {
       console.error('Failed to add to cart:', error);
+      settleButton(false);
       cartLinesUpdate.reject(error);
     });
 });

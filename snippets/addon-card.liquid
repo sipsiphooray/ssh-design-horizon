@@ -9,6 +9,7 @@
   @param {object} children - The children of the addon card
   @param {object} [block] - The block object
   @param {number} [product_card_gap] - The gap between the addon card children (overrides block settings)
+  @param {boolean} [standalone] - Detach the checkbox from the main product form (block adds addons via its own button)
 {%- enddoc -%}
 
 {% assign block_settings = block.settings %}
@@ -132,9 +133,17 @@
                 assign property_name = 'addon-' | append: block.id
                 assign element_id = 'addon-' | append: product.id | append: '-' | append: block.id
                 assign product_form_id = 'BuyButtons-ProductForm-' | append: section.id
+                if standalone
+                    assign product_form_id = blank
+                endif
                 assign disabled = false
                 if selected_variant.available == false
                     assign disabled = true
+                endif
+                # Standalone bundle opts everything in by default; shoppers uncheck what they don't want.
+                assign is_checked = false
+                if standalone and disabled == false
+                    assign is_checked = true
                 endif
             %}
             {% capture attributes %}
@@ -150,7 +159,7 @@
                 value: selected_variant.id,
                 label: block_settings.checkbox_label,
                 id: element_id,
-                checked: false,
+                checked: is_checked,
                 events: '',
                 disabled: disabled,
                 required: false,

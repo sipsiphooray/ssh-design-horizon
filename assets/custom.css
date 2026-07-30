@@ -1303,6 +1303,10 @@ body:has(.page-wrapper--drawer-open) #shopify-chat {
     .media-gallery--carousel slideshow-arrows .slideshow-control {
         padding-inline: var(--padding-xs);
     }
+
+    .product-title > * {
+        text-wrap: unset;
+    }
 }
 
 @media (max-width: 360px) {

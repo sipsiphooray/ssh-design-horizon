@@ -262,9 +262,14 @@ export class PriceChangeEvent extends Event {
     const prices = {};
     let total = 0;
 
+    // Standalone addon bundle (addon-products[data-standalone]): self-contained. Its totals stay
+    // inside the block (own total + add-to-cart) and never touch the main buy-button price.
+    const standaloneHost =
+      target && target instanceof Element ? target.closest('addon-products[data-standalone]') : null;
+
     // Resolve host via frequent bundle first (checkbox may not match compound class on <addon-products>)
-    let parent = null;
-    if (target && target instanceof Element) {
+    let parent = standaloneHost;
+    if (!parent && target && target instanceof Element) {
       const bundle = target.closest('[data-frequent-bundle]');
       if (bundle) {
         parent =
@@ -287,18 +292,22 @@ export class PriceChangeEvent extends Event {
 
     // Main PDP price lives on the buy button (e.g. span.button--price.total-price-display) outside
     // <addon-products>, so widen the query root for base price while keeping addon sums inside the block.
+    // Standalone bundles never widen: their total is addons-only and renders inside the block.
     /** @type {Element} */
     const addonHost = parent;
-    const priceDisplayParent =
-      addonHost instanceof HTMLElement && addonHost.matches('addon-products')
+    const priceDisplayParent = standaloneHost
+      ? standaloneHost
+      : addonHost instanceof HTMLElement && addonHost.matches('addon-products')
         ? addonHost.closest('.product-details') ?? addonHost.closest('.shopify-section') ?? addonHost
         : addonHost;
 
     // Prefer buy-button price inside the same product form (avoids wrong match when multiple totals exist)
-    const basePriceEl = /** @type {HTMLElement | null} */ (
-      target?.closest('product-form-component')?.querySelector('.total-price-display[data-price]') ??
-        priceDisplayParent.querySelector('.total-price-display[data-price]')
-    );
+    const basePriceEl = standaloneHost
+      ? null
+      : /** @type {HTMLElement | null} */ (
+          target?.closest('product-form-component')?.querySelector('.total-price-display[data-price]') ??
+            priceDisplayParent.querySelector('.total-price-display[data-price]')
+        );
     let totalCompareAt = 0;
     if (basePriceEl?.dataset.price) {
       const basePrice = Number(basePriceEl.dataset.price) || 0;
@@ -307,9 +316,11 @@ export class PriceChangeEvent extends Event {
       totalCompareAt += basePrice;
     }
 
-    // Add prices from checked addons only within the addon block / frequent section
+    // Add prices from checked addons only within the addon block / frequent section. Addons inside a
+    // standalone bundle belong to that bundle's own total, so wider hosts skip them.
     addonHost.querySelectorAll('.addon-card input[type="checkbox"]:checked').forEach((el) => {
       const inputEl = /** @type {HTMLInputElement} */ (el);
+      if (!standaloneHost && inputEl.closest('addon-products[data-standalone]')) return;
       const name = inputEl.name || 'addon';
       const price = Number(inputEl.dataset.price || 0);
       const compare = Number(inputEl.dataset.compareAt || 0);

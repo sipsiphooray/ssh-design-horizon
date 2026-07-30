@@ -5,6 +5,7 @@
   @param {string} [card_layout_type] - Card layout type
   @param {string} [render_text] - The render text
   @param {object} [active_variant] - The variant object
+  @param {boolean} [standalone] - Detach the checkbox from the main product form (host adds addons via its own button)
 {%- enddoc -%}
 
 {% liquid
@@ -15,12 +16,13 @@
   {% content_for 'blocks', closest.product: product %}
 {% endcapture %}
 
-{% render 'addon-card', 
-  card_layout_type: card_layout_type, 
-  children: children, 
-  product: product, 
-  active_variant: active_variant, 
-  render_text: render_text 
+{% render 'addon-card',
+  card_layout_type: card_layout_type,
+  children: children,
+  product: product,
+  active_variant: active_variant,
+  render_text: render_text,
+  standalone: standalone
 %}
 
 {% schema %}

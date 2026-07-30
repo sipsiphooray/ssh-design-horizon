@@ -316,7 +316,8 @@
     "product_custom_property_character_count": "{{ used_chars }}/{{ max_chars }} characters used",
     "view_details": "View details",
     "total": "Total:",
-    "frequent_no_chosen": "Choose items to buy together."
+    "frequent_no_chosen": "Choose items to buy together.",
+    "add_selected_to_cart": "Add selected to cart"
   },
   "fields": {
     "separator": "to"
