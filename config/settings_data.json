@@ -235,7 +235,7 @@
         "disabled": false,
         "settings": {
           "selector_collection": ".product-card__link",
-          "selector_cart_item": ".cart-items__table-row"
+          "selector_cart_item": ""
         }
       }
     },
