@@ -87,6 +87,12 @@
                 assign swatch_image = linked_variant.product.featured_image
               endif
 
+              # Single-variant products gain nothing from ?variant=; link to the clean product URL.
+              assign item_url = linked_variant.url
+              if linked_variant.product.has_only_default_variant
+                assign item_url = linked_variant.product.url
+              endif
+
               assign is_active = false
               if linked_variant.product.id == product_resource.id
                 assign is_active = true
@@ -99,7 +105,7 @@
                   variant-option__button-label sibling-swatches__item
                   {% if show_swatches %}variant-option__button-label--has-swatch{% endif %}
                 "
-                href="{{ linked_variant.url }}"
+                href="{{ item_url }}"
                 data-sibling-swatch
                 data-label="{{ item_label | escape }}"
                 {% if is_active %}
