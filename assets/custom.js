@@ -1078,3 +1078,40 @@ onDocumentReady(() => {
     requestAnimationFrame(updateProductTitleSuffix);
   });
 });
+
+
+/**
+ * Sibling swatches: preview the hovered item's label in the option row.
+ *
+ * The row's right-hand text shows the active item by default (the swatch whose linked variant
+ * belongs to this product). Hovering a sibling swatch previews its label so the shopper can read
+ * what they are about to navigate to; leaving the row restores the active one.
+ *
+ * Delegated, so swatches re-rendered through the Section Rendering API keep working.
+ */
+function setSiblingSwatchLabel(/** @type {Element} */ swatch, /** @type {boolean} */ preview) {
+  const option = swatch.closest('.sibling-swatches__option');
+  const output = option?.querySelector('[data-sibling-swatch-value]');
+  if (!(output instanceof HTMLElement)) return;
+
+  const label = preview ? swatch.getAttribute('data-label') : output.dataset.defaultValue;
+  output.textContent = label ?? '';
+}
+
+for (const [type, preview] of /** @type {const} */ ([
+  ['pointerenter', true],
+  ['pointerleave', false],
+  ['focusin', true],
+  ['focusout', false],
+])) {
+  document.addEventListener(
+    type,
+    (event) => {
+      const target = event.target;
+      if (!(target instanceof Element)) return;
+      const swatch = target.closest('[data-sibling-swatch]');
+      if (swatch) setSiblingSwatchLabel(swatch, preview);
+    },
+    true
+  );
+}

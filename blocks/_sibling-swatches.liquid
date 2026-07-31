@@ -1,0 +1,426 @@
+{%- doc -%}
+  Renders sibling-product swatches from the product's `custom.options_set` metaobject list.
+
+  Each option set carries a label and a list of items; every item links to a variant that may
+  live on a different product, so the swatches navigate (anchors) instead of selecting an option
+  on this product. Markup reuses the variant picker's own classes so size, shape, border and
+  spacing come from the theme's Swatches settings — the only bespoke rules are the ones the
+  native picker expresses through `:has(:checked)`, which has no equivalent without a radio.
+
+  @example
+  {% content_for 'block', type: '_sibling-swatches', id: 'sibling-swatches' %}
+{%- enddoc -%}
+
+{% liquid
+  assign product_resource = closest.product
+  assign options_sets = product_resource.metafields.custom.options_set.value
+  assign block_settings = block.settings
+
+  # Custom colours only apply to the text-button style; image swatches signal selection with an
+  # outline, so they take their colours from the theme's Swatches settings either way.
+  assign show_swatches = true
+  if block_settings.variant_style == 'buttons'
+    assign show_swatches = false
+  endif
+
+  assign has_custom_variant_buttons = false
+  if block_settings.variant_style == 'buttons'
+    if block_settings.variant_style_class == 'custom' or block_settings.selected_variant_style_class == 'custom'
+      assign has_custom_variant_buttons = true
+    endif
+  endif
+%}
+
+{% if options_sets != blank %}
+  {% render 'variant-picker-styles' %}
+  {% if has_custom_variant_buttons %}
+    {% render 'variant-button-custom-styles', block_settings: block_settings, block_id: block.id %}
+  {% endif %}
+
+  <div
+    class="sibling-swatches variant-picker spacing-style variant-picker--{{ block_settings.alignment }}{% if has_custom_variant_buttons %} variant-picker--custom-{{ block.id }}{% endif %}"
+    style="
+      {% render 'spacing-style', settings: block_settings %}
+      {% if block_settings.option_label_text_color != blank %}
+        --variant-option-label-color: rgba({{ block_settings.option_label_text_color.rgba }});
+        --variant-option-label-color-subdued: rgba({{ block_settings.option_label_text_color.rgb }} / var(--opacity-subdued-text));
+      {% endif %}
+    "
+    {{ block.shopify_attributes }}
+  >
+    {%- for set in options_sets -%}
+      {%- liquid
+        assign items = set.items.value
+        assign set_label = set.label.value
+
+        # Active item is the one whose linked variant belongs to the product being viewed.
+        assign active_label = ''
+        for item in items
+          assign linked_variant = item.variant.value
+          if linked_variant != blank and linked_variant.product.id == product_resource.id
+            assign active_label = item.label.value
+            break
+          endif
+        endfor
+      -%}
+
+      {%- if items != blank -%}
+        <fieldset class="variant-option variant-option--buttons sibling-swatches__option">
+          <legend>
+            {{- set_label -}}
+            <span
+              class="variant-option__swatch-value"
+              data-sibling-swatch-value
+              data-default-value="{{ active_label | escape }}"
+            >
+              {{- active_label -}}
+            </span>
+          </legend>
+
+          {%- for item in items -%}
+            {%- liquid
+              assign linked_variant = item.variant.value
+              assign item_label = item.label.value
+
+              assign swatch_image = linked_variant.featured_image
+              if swatch_image == blank
+                assign swatch_image = linked_variant.product.featured_image
+              endif
+
+              assign is_active = false
+              if linked_variant.product.id == product_resource.id
+                assign is_active = true
+              endif
+            -%}
+
+            {%- if linked_variant != blank -%}
+              <a
+                class="
+                  variant-option__button-label sibling-swatches__item
+                  {% if show_swatches %}variant-option__button-label--has-swatch{% endif %}
+                "
+                href="{{ linked_variant.url }}"
+                data-sibling-swatch
+                data-label="{{ item_label | escape }}"
+                {% if is_active %}
+                  aria-current="true"
+                {% endif %}
+              >
+                {%- if show_swatches -%}
+                  {%- if swatch_image != blank -%}
+                    <span
+                      class="swatch swatch--unscaled swatch--image-contain"
+                      style="--swatch-background: url({{ swatch_image | image_url: width: 120 }});"
+                      data-key="variant-option-pill"
+                    ></span>
+                  {%- else -%}
+                    <span class="swatch swatch--unscaled swatch--unavailable" data-key="variant-option-pill"></span>
+                  {%- endif -%}
+                  <span class="visually-hidden" data-key="variant-option-text">{{ item_label }}</span>
+                {%- else -%}
+                  <span class="variant-option__button-label__text" data-key="variant-option-text">
+                    {{- item_label -}}
+                  </span>
+                {%- endif -%}
+              </a>
+            {%- endif -%}
+          {%- endfor -%}
+        </fieldset>
+      {%- endif -%}
+    {%- endfor -%}
+  </div>
+{% endif %}
+
+{% stylesheet %}
+  /* The theme rounds swatch items with `.variant-option--buttons label:has(.swatch)`, which only
+     matches labels — these are anchors, so they fell back to the square button radius and the
+     selected outline no longer followed the swatch. Same rule, same token, for anchors. */
+  .sibling-swatches .variant-option--buttons a:has(.swatch) {
+    border-radius: var(--variant-picker-swatch-radius);
+  }
+
+  .sibling-swatches__option:not(:last-child) {
+    margin-block-end: var(--margin-md);
+  }
+
+  .sibling-swatches__item {
+    text-decoration: none;
+    color: inherit;
+  }
+
+  /* The native picker draws its selected state through :has(:checked); these are anchors with no
+     radio, so bridge the same state to aria-current using the theme's own tokens. Swatches take
+     the selected outline, text buttons take the selected fill, matching the picker each way. */
+  .sibling-swatches__item.variant-option__button-label--has-swatch[aria-current='true'] {
+    --focus-outline: var(--focus-outline-width) solid var(--color-selected-variant-border);
+
+    outline: var(--focus-outline);
+    outline-offset: var(--focus-outline-offset);
+  }
+
+  .sibling-swatches__item:not(.variant-option__button-label--has-swatch)[aria-current='true'] {
+    --variant-picker-stroke-color: var(--color-selected-variant-border);
+
+    background-color: var(--color-selected-variant-background);
+    border-color: var(--color-selected-variant-border);
+    color: var(--color-selected-variant-text);
+  }
+
+  .sibling-swatches__item:not(.variant-option__button-label--has-swatch)[aria-current='true']:hover {
+    background-color: var(--color-selected-variant-hover-background);
+    border-color: var(--color-selected-variant-hover-border);
+    color: var(--color-selected-variant-hover-text);
+  }
+
+  @supports not (background-color: rgb(from red 150 g b / alpha)) {
+    /* Safari < 16.4 ignores border-radius on outline; same workaround the picker uses. */
+    .sibling-swatches__item.variant-option__button-label--has-swatch[aria-current='true'] {
+      outline: none;
+      position: relative;
+      overflow: visible;
+    }
+
+    .sibling-swatches__item.variant-option__button-label--has-swatch[aria-current='true']::after {
+      content: '';
+      position: absolute;
+      inset: calc(-1 * var(--focus-outline-offset));
+      border: var(--focus-outline);
+      border-radius: var(--focus-outline-radius, 50%);
+      background-color: transparent;
+      display: inherit;
+    }
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "Sibling swatches",
+  "tag": null,
+  "settings": [
+    {
+      "type": "paragraph",
+      "content": "Shows swatches from the product's Options set metafield. Hidden when the metafield is empty."
+    },
+    {
+      "type": "header",
+      "content": "t:content.type"
+    },
+    {
+      "type": "select",
+      "id": "variant_style",
+      "label": "t:settings.style",
+      "options": [
+        {
+          "value": "swatches",
+          "label": "t:settings.swatches"
+        },
+        {
+          "value": "buttons",
+          "label": "t:options.buttons"
+        }
+      ],
+      "default": "swatches"
+    },
+    {
+      "type": "header",
+      "content": "t:content.appearance"
+    },
+    {
+      "type": "color",
+      "id": "option_label_text_color",
+      "label": "t:settings.text_color",
+      "placeholder": "t:settings.default",
+      "alpha": true
+    },
+    {
+      "type": "select",
+      "id": "variant_style_class",
+      "label": "t:settings.variant_button_style",
+      "options": [
+        {
+          "value": "default",
+          "label": "t:options.default"
+        },
+        {
+          "value": "custom",
+          "label": "t:options.custom"
+        }
+      ],
+      "default": "default",
+      "info": "t:info.edit_variants_in_theme_settings",
+      "visible_if": "{{ block.settings.variant_style == 'buttons' }}"
+    },
+    {
+      "type": "color",
+      "id": "custom_variant_background",
+      "label": "t:settings.background",
+      "default": "{{ settings.color_palette.background }}",
+      "alpha": true,
+      "visible_if": "{{ block.settings.variant_style == 'buttons' and block.settings.variant_style_class == 'custom' }}"
+    },
+    {
+      "type": "color",
+      "id": "custom_variant_text",
+      "label": "t:settings.text",
+      "default": "{{ settings.color_palette.foreground }}",
+      "alpha": true,
+      "visible_if": "{{ block.settings.variant_style == 'buttons' and block.settings.variant_style_class == 'custom' }}"
+    },
+    {
+      "type": "color",
+      "id": "custom_variant_border",
+      "label": "t:settings.borders",
+      "default": "{{ settings.color_palette.foreground }}",
+      "alpha": true,
+      "visible_if": "{{ block.settings.variant_style == 'buttons' and block.settings.variant_style_class == 'custom' }}"
+    },
+    {
+      "type": "select",
+      "id": "selected_variant_style_class",
+      "label": "t:settings.selected_variant_button_style",
+      "options": [
+        {
+          "value": "default",
+          "label": "t:options.default"
+        },
+        {
+          "value": "custom",
+          "label": "t:options.custom"
+        }
+      ],
+      "default": "default",
+      "visible_if": "{{ block.settings.variant_style == 'buttons' }}"
+    },
+    {
+      "type": "color",
+      "id": "custom_selected_variant_background",
+      "label": "t:settings.background",
+      "default": "{{ settings.color_palette.foreground }}",
+      "alpha": true,
+      "visible_if": "{{ block.settings.variant_style == 'buttons' and block.settings.selected_variant_style_class == 'custom' }}"
+    },
+    {
+      "type": "color",
+      "id": "custom_selected_variant_text",
+      "label": "t:settings.text",
+      "default": "{{ settings.color_palette.background }}",
+      "alpha": true,
+      "visible_if": "{{ block.settings.variant_style == 'buttons' and block.settings.selected_variant_style_class == 'custom' }}"
+    },
+    {
+      "type": "color",
+      "id": "custom_selected_variant_border",
+      "label": "t:settings.borders",
+      "default": "{{ settings.color_palette.foreground }}",
+      "alpha": true,
+      "visible_if": "{{ block.settings.variant_style == 'buttons' and block.settings.selected_variant_style_class == 'custom' }}"
+    },
+    {
+      "type": "text_alignment",
+      "id": "alignment",
+      "label": "t:settings.alignment",
+      "default": "left"
+    },
+    {
+      "type": "header",
+      "content": "t:content.padding"
+    },
+    {
+      "type": "range",
+      "id": "padding-block-start",
+      "label": "t:settings.top",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "padding-block-end",
+      "label": "t:settings.bottom",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "padding-inline-start",
+      "label": "t:settings.left",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "padding-inline-end",
+      "label": "t:settings.right",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "default": 0
+    },
+    {
+      "type": "checkbox",
+      "id": "custom_mobile_padding",
+      "label": "Custom Mobile Padding",
+      "default": false
+    },
+    {
+      "type": "range",
+      "id": "mobile-padding-block-start",
+      "label": "t:settings.top",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "default": 0,
+      "visible_if": "{{ block.settings.custom_mobile_padding == true }}"
+    },
+    {
+      "type": "range",
+      "id": "mobile-padding-block-end",
+      "label": "t:settings.bottom",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "default": 0,
+      "visible_if": "{{ block.settings.custom_mobile_padding == true }}"
+    },
+    {
+      "type": "range",
+      "id": "mobile-padding-inline-start",
+      "label": "t:settings.left",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "default": 0,
+      "visible_if": "{{ block.settings.custom_mobile_padding == true }}"
+    },
+    {
+      "type": "range",
+      "id": "mobile-padding-inline-end",
+      "label": "t:settings.right",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "default": 0,
+      "visible_if": "{{ block.settings.custom_mobile_padding == true }}"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Sibling swatches",
+      "category": "t:categories.product"
+    }
+  ]
+}
+{% endschema %}
