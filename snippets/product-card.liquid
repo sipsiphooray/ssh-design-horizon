@@ -9,6 +9,8 @@
   @param {number} [product_card_gap] - The gap between the product card children (overrides block settings)
   @param {string} [product_view_context] - The context in which the product card is being rendered. Used for standard events.
   @param {object} [active_variant] - Pinned variant (curated-variant-list). Overrides the card link / transition variant.
+  @param {boolean} [show_quick_add] - Render quick-add under .product-card__content. Store customization: it used to live inside _product-card-gallery. Opt-in so the featured-product card, which never had one, is unaffected.
+  @param {string} [section_id] - Section ID forwarded to quick-add (snippets cannot read `section` directly).
 {%- enddoc -%}
 
 {% assign block_settings = block.settings %}
@@ -125,6 +127,14 @@
     "
   >
     {{ children }}
+    {%- comment -%}
+      Store customization: quick-add was rendered inside _product-card-gallery; it now sits here as
+      the last child so it overlays the whole card. .product-card__content is already
+      position: relative, so the absolute positioning carries over unchanged.
+    {%- endcomment -%}
+    {% if show_quick_add and has_quick_add or show_quick_add and has_mobile_quick_add %}
+      {% render 'quick-add', product: product, section_id: section_id %}
+    {% endif %}
   </div>
 </product-card>
 
