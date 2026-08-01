@@ -102,7 +102,7 @@
             "padding-inline-end": 0
           },
           "blocks": {
-            "product_card_group_YxTt3q": {
+            "product_card_group_QYg4MW": {
               "type": "_product-card-group",
               "name": "t:names.group",
               "settings": {
@@ -143,7 +143,7 @@
                 "padding-inline-end": 12
               },
               "blocks": {
-                "product_card_group_q6ANzi": {
+                "product_card_group_Rm3AGw": {
                   "type": "_product-card-group",
                   "name": "t:names.group",
                   "settings": {
@@ -154,7 +154,7 @@
                     "align_baseline": false,
                     "horizontal_alignment_flex_direction_column": "flex-start",
                     "vertical_alignment_flex_direction_column": "flex-start",
-                    "gap": 8,
+                    "gap": 2,
                     "enable_mobile_gap": false,
                     "mobile_gap": 12,
                     "width": "fill",
@@ -184,11 +184,11 @@
                     "padding-inline-end": 0
                   },
                   "blocks": {
-                    "judge_me_reviews_preview_badge_eHBqxw": {
+                    "judge_me_reviews_preview_badge_xnHxEf": {
                       "type": "shopify://apps/judge-me-reviews/blocks/preview_badge/61ccd3b1-a9f2-4160-9fe9-4fec8413e5d8",
                       "settings": {}
                     },
-                    "product_title_7ba3kc": {
+                    "product_title_xxffY7": {
                       "type": "product-title",
                       "name": "t:names.product_title",
                       "settings": {
@@ -215,22 +215,22 @@
                       },
                       "blocks": {}
                     },
-                    "custom_liquid_erMb3N": {
+                    "custom_liquid_hcCGiX": {
                       "type": "custom-liquid",
                       "name": "t:names.custom_liquid",
                       "settings": {
-                        "custom_liquid": "<style>\n    .product-subline {\n      display: flex;\n      align-items: center;\n      gap: var(--gap-xs);\n      font-size: var(--font-size--xs);\n      flex-wrap: wrap;\n    }\n    @media (max-width: 749px) {\n        .product-subline {\n            gap: var(--gap-2xs) !important;\n        }\n    }\n</style>\n    \n    {%- assign subline = closest.product.metafields.custom.subline.value -%}\n    \n    {%- if closest.product.title contains 'Lid and Straw'\n       or subline contains 'Lid + Straw' -%}\n        <div class=\"product-subline\">\n            <span>Glass Cups, Mugs &amp; Tumblers, Lid + Straw</span>\n        </div>\n    {%- else -%}\n        {%- if subline != blank -%}\n            <div class=\"product-subline\">\n                {%- for item in subline -%}\n                    {%- unless forloop.first -%}<span aria-hidden=\"true\">&bull;</span>{%- endunless -%}\n                    <span>{{ item }}</span>\n                {%- endfor -%}\n            </div>\n        {%- endif -%}\n    {%- endif -%}"
+                        "custom_liquid": "<style>\n    .product-subline {\n      display: flex;\n      align-items: center;\n      gap: var(--gap-xs);\n      font-size: var(--font-size--xs);\n      line-height: 1.2em;\n      flex-wrap: wrap;\n    }\n    @media (max-width: 749px) {\n        .product-subline {\n            gap: var(--gap-2xs) !important;\n        }\n    }\n</style>\n    \n    {%- assign subline = closest.product.metafields.custom.subline.value -%}\n    \n    {%- if closest.product.title contains 'Lid and Straw'\n       or subline contains 'Lid + Straw' -%}\n        <div class=\"product-subline\">\n            <span>Glass Cups, Mugs &amp; Tumblers, Lid + Straw</span>\n        </div>\n    {%- else -%}\n        {%- if subline != blank -%}\n            <div class=\"product-subline\">\n                {%- for item in subline -%}\n                    {%- unless forloop.first -%}<span aria-hidden=\"true\">&bull;</span>{%- endunless -%}\n                    <span>{{ item }}</span>\n                {%- endfor -%}\n            </div>\n        {%- endif -%}\n    {%- endif -%}"
                       },
                       "blocks": {}
                     }
                   },
                   "block_order": [
-                    "judge_me_reviews_preview_badge_eHBqxw",
-                    "product_title_7ba3kc",
-                    "custom_liquid_erMb3N"
+                    "judge_me_reviews_preview_badge_xnHxEf",
+                    "product_title_xxffY7",
+                    "custom_liquid_hcCGiX"
                   ]
                 },
-                "price_9VBBTE": {
+                "price_C3UJY3": {
                   "type": "price",
                   "name": "t:names.product_price",
                   "settings": {
@@ -238,11 +238,11 @@
                     "show_installments": false,
                     "show_tax_info": false,
                     "show_badge": false,
-                    "type_preset": "",
+                    "type_preset": "custom",
                     "width": "100%",
                     "alignment": "left",
                     "font": "var(--font-body--family)",
-                    "font_size": "1rem",
+                    "font_size": "0.875rem",
                     "line_height": "normal",
                     "letter_spacing": "normal",
                     "case": "none",
@@ -256,8 +256,8 @@
                 }
               },
               "block_order": [
-                "product_card_group_q6ANzi",
-                "price_9VBBTE"
+                "product_card_group_Rm3AGw",
+                "price_C3UJY3"
               ]
             },
             "product-card-gallery": {
@@ -280,7 +280,7 @@
             }
           },
           "block_order": [
-            "product_card_group_YxTt3q"
+            "product_card_group_QYg4MW"
           ]
         }
       },

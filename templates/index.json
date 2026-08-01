@@ -1025,7 +1025,7 @@
                     "align_baseline": false,
                     "horizontal_alignment_flex_direction_column": "flex-start",
                     "vertical_alignment_flex_direction_column": "flex-start",
-                    "gap": 8,
+                    "gap": 2,
                     "enable_mobile_gap": false,
                     "mobile_gap": 12,
                     "width": "fill",
@@ -1090,7 +1090,7 @@
                       "type": "custom-liquid",
                       "name": "t:names.custom_liquid",
                       "settings": {
-                        "custom_liquid": "<style>\n    .product-subline {\n      display: flex;\n      align-items: center;\n      gap: var(--gap-xs);\n      font-size: var(--font-size--xs);\n      flex-wrap: wrap;\n    }\n    @media (max-width: 749px) {\n        .product-subline {\n            gap: var(--gap-2xs) !important;\n        }\n    }\n</style>\n    \n    {%- assign subline = closest.product.metafields.custom.subline.value -%}\n    \n    {%- if closest.product.title contains 'Lid and Straw'\n       or subline contains 'Lid + Straw' -%}\n        <div class=\"product-subline\">\n            <span>Glass Cups, Mugs &amp; Tumblers, Lid + Straw</span>\n        </div>\n    {%- else -%}\n        {%- if subline != blank -%}\n            <div class=\"product-subline\">\n                {%- for item in subline -%}\n                    {%- unless forloop.first -%}<span aria-hidden=\"true\">&bull;</span>{%- endunless -%}\n                    <span>{{ item }}</span>\n                {%- endfor -%}\n            </div>\n        {%- endif -%}\n    {%- endif -%}"
+                        "custom_liquid": "<style>\n    .product-subline {\n      display: flex;\n      align-items: center;\n      gap: var(--gap-xs);\n      font-size: var(--font-size--xs);\n      line-height: 1.2em;\n      flex-wrap: wrap;\n    }\n    @media (max-width: 749px) {\n        .product-subline {\n            gap: var(--gap-2xs) !important;\n        }\n    }\n</style>\n    \n    {%- assign subline = closest.product.metafields.custom.subline.value -%}\n    \n    {%- if closest.product.title contains 'Lid and Straw'\n       or subline contains 'Lid + Straw' -%}\n        <div class=\"product-subline\">\n            <span>Glass Cups, Mugs &amp; Tumblers, Lid + Straw</span>\n        </div>\n    {%- else -%}\n        {%- if subline != blank -%}\n            <div class=\"product-subline\">\n                {%- for item in subline -%}\n                    {%- unless forloop.first -%}<span aria-hidden=\"true\">&bull;</span>{%- endunless -%}\n                    <span>{{ item }}</span>\n                {%- endfor -%}\n            </div>\n        {%- endif -%}\n    {%- endif -%}"
                       },
                       "blocks": {}
                     }
@@ -1109,11 +1109,11 @@
                     "show_installments": false,
                     "show_tax_info": false,
                     "show_badge": false,
-                    "type_preset": "",
+                    "type_preset": "custom",
                     "width": "100%",
                     "alignment": "left",
                     "font": "var(--font-body--family)",
-                    "font_size": "1rem",
+                    "font_size": "0.875rem",
                     "line_height": "normal",
                     "letter_spacing": "normal",
                     "case": "none",
@@ -1672,7 +1672,7 @@
             "padding-inline-end": 0
           },
           "blocks": {
-            "curated_ns_card_group": {
+            "product_card_group_LaMYjN": {
               "type": "_product-card-group",
               "name": "t:names.group",
               "settings": {
@@ -1713,7 +1713,7 @@
                 "padding-inline-end": 12
               },
               "blocks": {
-                "curated_ns_title_row": {
+                "product_card_group_XRkjEb": {
                   "type": "_product-card-group",
                   "name": "t:names.group",
                   "settings": {
@@ -1723,8 +1723,8 @@
                     "vertical_alignment": "flex-start",
                     "align_baseline": false,
                     "horizontal_alignment_flex_direction_column": "flex-start",
-                    "vertical_alignment_flex_direction_column": "center",
-                    "gap": 8,
+                    "vertical_alignment_flex_direction_column": "flex-start",
+                    "gap": 2,
                     "enable_mobile_gap": false,
                     "mobile_gap": 12,
                     "width": "fill",
@@ -1754,11 +1754,11 @@
                     "padding-inline-end": 0
                   },
                   "blocks": {
-                    "judge_me_reviews_preview_badge_pkYeGd": {
+                    "judge_me_reviews_preview_badge_EgWXpa": {
                       "type": "shopify://apps/judge-me-reviews/blocks/preview_badge/61ccd3b1-a9f2-4160-9fe9-4fec8413e5d8",
                       "settings": {}
                     },
-                    "curated_ns_ptitle": {
+                    "product_title_nwTTXC": {
                       "type": "product-title",
                       "name": "t:names.product_title",
                       "settings": {
@@ -1785,22 +1785,22 @@
                       },
                       "blocks": {}
                     },
-                    "custom_liquid_V6pg9m": {
+                    "custom_liquid_JqwVLL": {
                       "type": "custom-liquid",
                       "name": "t:names.custom_liquid",
                       "settings": {
-                        "custom_liquid": "<style>\n    .product-subline {\n      display: flex;\n      align-items: center;\n      gap: var(--gap-xs);\n      font-size: var(--font-size--xs);\n      flex-wrap: wrap;\n    }\n    @media (max-width: 749px) {\n        .product-subline {\n            gap: var(--gap-2xs) !important;\n        }\n    }\n</style>\n    \n    {%- assign subline = closest.product.metafields.custom.subline.value -%}\n    \n    {%- if closest.product.title contains 'Lid and Straw'\n       or subline contains 'Lid + Straw' -%}\n        <div class=\"product-subline\">\n            <span>Glass Cups, Mugs &amp; Tumblers, Lid + Straw</span>\n        </div>\n    {%- else -%}\n        {%- if subline != blank -%}\n            <div class=\"product-subline\">\n                {%- for item in subline -%}\n                    {%- unless forloop.first -%}<span aria-hidden=\"true\">&bull;</span>{%- endunless -%}\n                    <span>{{ item }}</span>\n                {%- endfor -%}\n            </div>\n        {%- endif -%}\n    {%- endif -%}"
+                        "custom_liquid": "<style>\n    .product-subline {\n      display: flex;\n      align-items: center;\n      gap: var(--gap-xs);\n      font-size: var(--font-size--xs);\n      line-height: 1.2em;\n      flex-wrap: wrap;\n    }\n    @media (max-width: 749px) {\n        .product-subline {\n            gap: var(--gap-2xs) !important;\n        }\n    }\n</style>\n    \n    {%- assign subline = closest.product.metafields.custom.subline.value -%}\n    \n    {%- if closest.product.title contains 'Lid and Straw'\n       or subline contains 'Lid + Straw' -%}\n        <div class=\"product-subline\">\n            <span>Glass Cups, Mugs &amp; Tumblers, Lid + Straw</span>\n        </div>\n    {%- else -%}\n        {%- if subline != blank -%}\n            <div class=\"product-subline\">\n                {%- for item in subline -%}\n                    {%- unless forloop.first -%}<span aria-hidden=\"true\">&bull;</span>{%- endunless -%}\n                    <span>{{ item }}</span>\n                {%- endfor -%}\n            </div>\n        {%- endif -%}\n    {%- endif -%}"
                       },
                       "blocks": {}
                     }
                   },
                   "block_order": [
-                    "judge_me_reviews_preview_badge_pkYeGd",
-                    "curated_ns_ptitle",
-                    "custom_liquid_V6pg9m"
+                    "judge_me_reviews_preview_badge_EgWXpa",
+                    "product_title_nwTTXC",
+                    "custom_liquid_JqwVLL"
                   ]
                 },
-                "curated_ns_price": {
+                "price_yqRHNX": {
                   "type": "price",
                   "name": "t:names.product_price",
                   "settings": {
@@ -1808,11 +1808,11 @@
                     "show_installments": false,
                     "show_tax_info": false,
                     "show_badge": false,
-                    "type_preset": "",
+                    "type_preset": "custom",
                     "width": "100%",
                     "alignment": "left",
                     "font": "var(--font-body--family)",
-                    "font_size": "1rem",
+                    "font_size": "0.875rem",
                     "line_height": "normal",
                     "letter_spacing": "normal",
                     "case": "none",
@@ -1826,8 +1826,8 @@
                 }
               },
               "block_order": [
-                "curated_ns_title_row",
-                "curated_ns_price"
+                "product_card_group_XRkjEb",
+                "price_yqRHNX"
               ]
             },
             "product-card-gallery": {
@@ -1850,7 +1850,7 @@
             }
           },
           "block_order": [
-            "curated_ns_card_group"
+            "product_card_group_LaMYjN"
           ]
         }
       },
@@ -2244,7 +2244,7 @@
               "type": "custom-liquid",
               "name": "Badge",
               "settings": {
-                "custom_liquid": "<div class=\"discount-badge\">\n  <span class=\"discount-badge__amount\">10%</span>\n  <span class=\"discount-badge__label\">OFF</span>\n</div>\n\n<style>\n  .discount-badge {\n    position: absolute;\n    top: -26px;\n    right: -20px;\n    width: 110px;\n    height: 110px;\n    border-radius: 50%;\n    background: rgb(247, 184, 206);\n    transform: rotate(9deg);\n    display: flex;\n    flex-direction: column;\n    align-items: center;\n    justify-content: center;\n    gap: 2px;\n    box-shadow: 0 0 0 5px #ffffff;\n  }\n  .discount-badge__amount {\n    font-size: 32px;\n    font-weight: 800;\n    color: #ffffff;\n    line-height: 1;\n  }\n  .discount-badge__label {\n    font-size: 14px;\n    font-weight: 700;\n    letter-spacing: 0.16em;\n    color: #ffffff;\n  }\n\n  @media (max-width: 749px) {\n    .discount-badge {\n      top: -16px;\n      right: 1rem;\n      width: 72px;\n      height: 72px;\n      gap: 1px;\n      box-shadow: 0 0 0 3px #ffffff;\n    }\n    .discount-badge__amount {\n      font-size: 22px;\n    }\n    .discount-badge__label {\n      font-size: 14px;\n    }\n  }\n</style>"
+                "custom_liquid": "<div class=\"discount-badge\">\n  <span class=\"discount-badge__amount\">10%</span>\n  <span class=\"discount-badge__label\">OFF</span>\n</div>\n\n<style>\n  .discount-badge {\n    position: absolute;\n    top: -26px;\n    right: -20px;\n    width: 110px;\n    height: 110px;\n    border-radius: 50%;\n    background: rgb(247, 184, 206);\n    transform: rotate(9deg);\n    display: flex;\n    flex-direction: column;\n    align-items: center;\n    justify-content: center;\n    gap: 2px;\n    box-shadow: 0 0 0 5px #ffffff;\n  }\n  .discount-badge__amount {\n    font-size: 38px;\n    font-weight: 800;\n    color: #ffffff;\n    line-height: 1;\n  }\n  .discount-badge__label {\n    font-size: 20px;\n    font-weight: 700;\n    letter-spacing: 0.16em;\n    color: #ffffff;\n    line-height: 1em;\n  }\n\n  @media (max-width: 749px) {\n    .discount-badge {\n      top: -16px;\n      right: 1rem;\n      width: 72px;\n      height: 72px;\n      gap: 1px;\n      box-shadow: 0 0 0 3px #ffffff;\n    }\n    .discount-badge__amount {\n      font-size: 24px;\n    }\n    .discount-badge__label {\n      font-size: 15px;\n    }\n  }\n</style>"
               },
               "blocks": {}
             },
