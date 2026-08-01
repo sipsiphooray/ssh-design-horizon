@@ -540,6 +540,10 @@ summary .svg-wrapper {
     font-weight: normal;
 }
 
+.product-card:has(quick-add-component) .product-subline {
+    padding-inline-end: var(--gap-xs);
+}
+
 /*
  * Desktop: quick-add is always visible. Vendor quick-add-styles sets .quick-add__button to
  * opacity 0 above 750px and only reveals it on product-card hover/focus-within. Scoped to
@@ -548,16 +552,6 @@ summary .svg-wrapper {
 @media screen and (min-width: 750px) {
     .product-card .quick-add__button {
         opacity: 1;
-    }
-}
-
-/*
- * Mobile: keep the subline clear of the quick-add button, which overlays the bottom-right of
- * .product-card__content. Only cards that actually render a quick-add reserve the gutter.
- */
-@media screen and (max-width: 749px) {
-    .product-card:has(quick-add-component) .product-subline {
-        padding-inline-end: var(--gap-xs);
     }
 }
 
