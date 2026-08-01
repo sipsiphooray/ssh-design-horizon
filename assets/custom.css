@@ -561,6 +561,10 @@ summary .svg-wrapper {
     }
 }
 
+.scroll-list__item {
+    font-size: var(--font-size--sm);
+}
+
 .quick-add__button .add-to-cart-icon {
     height: calc(var(--button-size-md) - 4px) !important;
     width: calc(var(--button-size-md) - 4px);
