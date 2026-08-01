@@ -2474,6 +2474,7 @@
               "name": "t:names.collection_card_image",
               "static": true,
               "settings": {
+                "custom_image": "{{ closest.collection.metafields.custom.card_image.value }}",
                 "image_ratio": "square",
                 "toggle_overlay": false,
                 "overlay_color": "#00000026",
