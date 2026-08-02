@@ -12,7 +12,7 @@
   assign price_variant = active_variant
   if price_variant == blank and product_resource != blank
     capture curated_variant_id
-      render 'curated-pinned-variant-id', product: product_resource, section: section
+      render 'curated-pinned-variant-id', product: product_resource, section: section, block_id: block.id
     endcapture
     assign curated_variant_id = curated_variant_id | strip
     if curated_variant_id != ''

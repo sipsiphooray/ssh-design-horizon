@@ -9,26 +9,72 @@
   dynamic blocks lose the pin. The section's curated_list metaobject setting IS readable
   from every block in the section, so we re-resolve the pin from it.
 
-  Caveat: matches on product id. If one curated list pins two variants of the SAME
-  product, every card for that product resolves to the first pinned entry.
+  Resolution is positional, not by product, because one curated list may pin several
+  variants of the SAME product — matching on product id alone gives every one of those
+  cards the first pinned entry's price. Shopify suffixes repeated block ids (-1, -2, …),
+  which makes block_id the only per-card key a nested block can see.
+
+  The positional hit is verified against the card's own product and falls back to the
+  first entry for that product when it misses, so an unexpected id scheme degrades to
+  per-product behavior instead of rendering an unrelated variant.
 
   @param {object} product - The card's closest.product
   @param {object} section - The section object (snippets cannot read `section` directly)
+  @param {string} block_id - The calling block's block.id, used to derive the card position
 {%- enddoc -%}
 {% liquid
   assign out = ''
   assign curated_metaobject = section.settings.curated_list
-  if product != blank and curated_metaobject != blank
-    for slot in curated_metaobject.product_variants.value
-      assign curated_variant = slot.value | default: slot
-      if curated_variant == blank
+  assign slots = curated_metaobject.product_variants.value
+  assign max_items = section.settings.max_products
+
+  if product != blank and slots != blank
+    # Card position from the repeated-block suffix. The first card has no suffix, so it is
+    # position 0. Only treat a trailing segment as a position when it is entirely numeric,
+    # so a block key that merely ends in a digit is not misread as a position.
+    assign card_index = 0
+    assign id_parts = block_id | split: '-'
+    if id_parts.size > 1
+      assign last_part = id_parts | last
+      assign maybe_index = last_part | plus: 0
+      assign maybe_index_str = maybe_index | append: ''
+      if maybe_index_str == last_part
+        assign card_index = maybe_index
+      endif
+    endif
+
+    # Walk the list exactly the way the section does — same limit, same skips — so the Nth
+    # surviving entry is the Nth rendered card. A skipped slot would otherwise shift every
+    # position after it.
+    assign seen = 0
+    for slot in slots limit: max_items
+      assign candidate = slot.value | default: slot
+      if candidate == blank or candidate.product == blank
         continue
       endif
-      if curated_variant.product.id == product.id
-        assign out = curated_variant.id
+      if seen == card_index
+        if candidate.product.id == product.id
+          assign out = candidate.id
+        endif
         break
       endif
+      assign seen = seen | plus: 1
     endfor
+
+    # Fallback: the position lookup missed. Use the first entry for this product, which is
+    # correct whenever the list holds a single variant per product.
+    if out == ''
+      for slot in slots limit: max_items
+        assign candidate = slot.value | default: slot
+        if candidate == blank or candidate.product == blank
+          continue
+        endif
+        if candidate.product.id == product.id
+          assign out = candidate.id
+          break
+        endif
+      endfor
+    endif
   endif
 -%}
 {{- out -}}

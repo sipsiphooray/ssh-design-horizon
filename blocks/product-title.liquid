@@ -16,7 +16,7 @@
     assign link_variant = active_variant
     if link_variant == blank
       capture curated_variant_id
-        render 'curated-pinned-variant-id', product: closest.product, section: section
+        render 'curated-pinned-variant-id', product: closest.product, section: section, block_id: block.id
       endcapture
       assign curated_variant_id = curated_variant_id | strip
       if curated_variant_id != ''
