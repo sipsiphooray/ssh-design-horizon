@@ -2015,36 +2015,6 @@
                     "padding-inline-end": 0
                   },
                   "blocks": {
-                    "card_taXLKy": {
-                      "type": "_card",
-                      "name": "t:names.card",
-                      "settings": {
-                        "content_direction": "column",
-                        "vertical_on_mobile": true,
-                        "horizontal_alignment": "flex-start",
-                        "vertical_alignment": "center",
-                        "align_baseline": false,
-                        "horizontal_alignment_flex_direction_column": "flex-start",
-                        "vertical_alignment_flex_direction_column": "center",
-                        "gap": 12,
-                        "background_media": "none",
-                        "background_color": "",
-                        "video_position": "cover",
-                        "background_image_position": "cover",
-                        "aspect_ratio": "adapt",
-                        "toggle_overlay": false,
-                        "overlay_color": "#00000026",
-                        "overlay_style": "solid",
-                        "gradient_direction": "to top",
-                        "link": "",
-                        "open_in_new_tab": false,
-                        "padding-block-start": 0,
-                        "padding-block-end": 0,
-                        "padding-inline-start": 0,
-                        "padding-inline-end": 0
-                      },
-                      "blocks": {}
-                    },
                     "card_4JFX3J": {
                       "type": "_card",
                       "name": "t:names.card",
@@ -2341,7 +2311,6 @@
                     }
                   },
                   "block_order": [
-                    "card_taXLKy",
                     "card_4JFX3J",
                     "card_7q9EXt",
                     "card_gEM8gG"
