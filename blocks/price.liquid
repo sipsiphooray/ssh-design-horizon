@@ -6,9 +6,25 @@
   assign block_settings = block.settings
   assign product_resource = closest.product
 
+  # active_variant only arrives when this block is rendered directly with it. As a nested
+  # dynamic block it is blank, because content_for 'blocks' forwards closest.* only.
+  # Re-resolve the curated pin from the section setting, which every block can read.
+  assign price_variant = active_variant
+  if price_variant == blank and product_resource != blank
+    capture curated_variant_id
+      render 'curated-pinned-variant-id', product: product_resource, section: section
+    endcapture
+    assign curated_variant_id = curated_variant_id | strip
+    if curated_variant_id != ''
+      assign curated_numeric_id = curated_variant_id | plus: 0
+      assign curated_matches = product_resource.variants | where: 'id', curated_numeric_id
+      assign price_variant = curated_matches.first
+    endif
+  endif
+
   assign selected_variant = product_resource.selected_or_first_available_variant
-  if active_variant != blank
-    assign selected_variant = active_variant
+  if price_variant != blank
+    assign selected_variant = price_variant
   endif
 -%}
 
@@ -95,7 +111,7 @@
     product_resource: product_resource,
     badge: badge,
     show_sale_price_first: block_settings.show_sale_price_first,
-    pricing_variant: active_variant
+    pricing_variant: price_variant
   %}
 
   {% if block_settings.show_tax_info %}

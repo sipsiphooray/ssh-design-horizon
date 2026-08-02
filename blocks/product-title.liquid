@@ -9,9 +9,26 @@
 {% else %}
   {% liquid
     assign product_title = '<p role="heading" aria-level="3">' | append: closest.product.title | append: '</p>'
+
+    # active_variant only arrives when this block is rendered directly with it. As a nested
+    # dynamic block it is blank, because content_for 'blocks' forwards closest.* only.
+    # Re-resolve the curated pin so the title link matches the card link and the price.
+    assign link_variant = active_variant
+    if link_variant == blank
+      capture curated_variant_id
+        render 'curated-pinned-variant-id', product: closest.product, section: section
+      endcapture
+      assign curated_variant_id = curated_variant_id | strip
+      if curated_variant_id != ''
+        assign curated_numeric_id = curated_variant_id | plus: 0
+        assign curated_matches = closest.product.variants | where: 'id', curated_numeric_id
+        assign link_variant = curated_matches.first
+      endif
+    endif
+
     assign title_href = closest.product.url
-    if active_variant != blank
-      assign title_href = active_variant.url
+    if link_variant != blank
+      assign title_href = link_variant.url
     endif
   %}
   <a

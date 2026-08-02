@@ -133,7 +133,12 @@
       position: relative, so the absolute positioning carries over unchanged.
     {%- endcomment -%}
     {% if show_quick_add and has_quick_add or show_quick_add and has_mobile_quick_add %}
-      {% render 'quick-add', product: product, section_id: section_id %}
+      {% comment %}
+        Forward the pinned variant (curated-variant-list) so quick-add renders Add-only and
+        adds that variant straight to cart instead of opening the choose-options modal.
+        Blank elsewhere, so every other card keeps its existing add/choose behavior.
+      {% endcomment %}
+      {% render 'quick-add', product: product, section_id: section_id, active_variant: active_variant %}
     {% endif %}
   </div>
 </product-card>

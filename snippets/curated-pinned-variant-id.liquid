@@ -1,0 +1,34 @@
+{%- doc -%}
+  Returns the curated-variant-list pinned variant id (digits only) for a card's product,
+  or empty when the section is not a curated list / the product is not pinned.
+
+  Why blocks re-resolve instead of being handed the variant: the section passes
+  active_variant into the static _product-card block, but that card renders its children
+  with the content_for 'blocks' tag, which only forwards closest.* resources (product,
+  collection, article, blog, page, metaobject — there is no closest.variant). So nested
+  dynamic blocks lose the pin. The section's curated_list metaobject setting IS readable
+  from every block in the section, so we re-resolve the pin from it.
+
+  Caveat: matches on product id. If one curated list pins two variants of the SAME
+  product, every card for that product resolves to the first pinned entry.
+
+  @param {object} product - The card's closest.product
+  @param {object} section - The section object (snippets cannot read `section` directly)
+{%- enddoc -%}
+{% liquid
+  assign out = ''
+  assign curated_metaobject = section.settings.curated_list
+  if product != blank and curated_metaobject != blank
+    for slot in curated_metaobject.product_variants.value
+      assign curated_variant = slot.value | default: slot
+      if curated_variant == blank
+        continue
+      endif
+      if curated_variant.product.id == product.id
+        assign out = curated_variant.id
+        break
+      endif
+    endfor
+  endif
+-%}
+{{- out -}}
