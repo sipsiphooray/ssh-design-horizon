@@ -1003,7 +1003,7 @@
         "image_C8m3Gy": {
           "type": "image",
           "settings": {
-            "image": "shopify://shop_images/GHF_main_blue-svg.webp",
+            "image": "shopify://shop_images/RTNOhighres.png",
             "link": "",
             "image_ratio": "adapt",
             "width": "custom",
@@ -1113,7 +1113,7 @@
               "type": "text",
               "name": "t:names.heading",
               "settings": {
-                "text": "<h2>JULY 2026</h2>",
+                "text": "<h2>AUGUST 2026</h2>",
                 "width": "fit-content",
                 "max_width": "normal",
                 "alignment": "left",
@@ -1146,7 +1146,7 @@
             "text_RzAQbb": {
               "type": "text",
               "settings": {
-                "text": "<p><strong>Pour It Forward: Glass Half Full <br/><br/></strong>Did you know  the planet is facing a global sand shortage? Sand is CRITICAL for rebuilding the barrier islands and sandbars that protect our coast during hurricanes and tropical storms, and encourages wildlife survival.</p><p>Enter: Glass Half Full. Established in 2020, GHF has recycled over 14 million pounds of glass across 3 states & they’ve created 4 islands used for coastal restoration research! <br/><br/>GHF collects and sorts glassware at their facilities, pulverizes it, and turns that glass into sand products.<br/><br/>10% of July’s profit’s will be donated to their organization, to support their incredible work across Mississippi, Alabama, and of course our home state Louisiana!</p><p>As always, <em>thank you</em> for helping us pour into <em>something bigger.</em> 💛 <br/><a href=\"https://glasshalffull.co/\" title=\"https://glasshalffull.co/\">Read more or donate directly here. </a></p>",
+                "text": "<p><strong>Pour It Forward: Rebuilding Together New Orleans<br/></strong></p><p>Home is where some of our most important memories are made, but for many New Orleans families, keeping that home safe can become overwhelming. Especially when critical repairs are out of reach.</p><p>For more than 37 years, <em>Rebuilding Together: New Orleans </em>has helped local homeowners stay safely in the homes they love by providing essential repairs and accessibility improvements. From repairing roofs and replacing unsafe flooring to building wheelchair ramps, they've helped make more than <strong>2,200 New Orleans homes</strong> <strong>safer.</strong></p><p>10% of August's profits will be donated to Rebuilding Together: New Orleans to help support their incredible mission of repairing homes, strengthening neighborhoods, and giving more families a safe place to call home.As always, <em>thank you</em> for helping us pour into <em>something bigger.</em> 💛 <br/><a href=\"https://www.rtno.org/\" target=\"_blank\" title=\"https://www.rtno.org/\">Read more or donate directly here. </a></p>",
                 "width": "100%",
                 "max_width": "none",
                 "alignment": "left",
@@ -1427,10 +1427,6 @@
                     "padding-inline-end": 0
                   },
                   "blocks": {
-                    "judge_me_reviews_preview_badge_tkFkCr": {
-                      "type": "shopify://apps/judge-me-reviews/blocks/preview_badge/61ccd3b1-a9f2-4160-9fe9-4fec8413e5d8",
-                      "settings": {}
-                    },
                     "product_title_QkgD33": {
                       "type": "product-title",
                       "name": "t:names.product_title",
@@ -1468,7 +1464,6 @@
                     }
                   },
                   "block_order": [
-                    "judge_me_reviews_preview_badge_tkFkCr",
                     "product_title_QkgD33",
                     "custom_liquid_CKaM9P"
                   ]
@@ -1527,10 +1522,9 @@
           ]
         }
       },
-      "disabled": true,
       "name": "Cause of the Month w/ products",
       "settings": {
-        "collection": "mug-rugs",
+        "collection": "pif",
         "layout_type": "carousel",
         "carousel_on_mobile": false,
         "carousel_contain_width": false,
@@ -1696,6 +1690,36 @@
                     "padding-inline-end": 0
                   },
                   "blocks": {
+                    "card_taXLKy": {
+                      "type": "_card",
+                      "name": "t:names.card",
+                      "settings": {
+                        "content_direction": "column",
+                        "vertical_on_mobile": true,
+                        "horizontal_alignment": "flex-start",
+                        "vertical_alignment": "center",
+                        "align_baseline": false,
+                        "horizontal_alignment_flex_direction_column": "flex-start",
+                        "vertical_alignment_flex_direction_column": "center",
+                        "gap": 12,
+                        "background_media": "none",
+                        "background_color": "",
+                        "video_position": "cover",
+                        "background_image_position": "cover",
+                        "aspect_ratio": "adapt",
+                        "toggle_overlay": false,
+                        "overlay_color": "#00000026",
+                        "overlay_style": "solid",
+                        "gradient_direction": "to top",
+                        "link": "",
+                        "open_in_new_tab": false,
+                        "padding-block-start": 0,
+                        "padding-block-end": 0,
+                        "padding-inline-start": 0,
+                        "padding-inline-end": 0
+                      },
+                      "blocks": {}
+                    },
                     "card_4JFX3J": {
                       "type": "_card",
                       "name": "t:names.card",
@@ -1992,6 +2016,7 @@
                     }
                   },
                   "block_order": [
+                    "card_taXLKy",
                     "card_4JFX3J",
                     "card_7q9EXt",
                     "card_gEM8gG"
