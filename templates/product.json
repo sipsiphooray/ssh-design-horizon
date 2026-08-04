@@ -326,13 +326,19 @@
               },
               "blocks": {}
             },
-            "custom_liquid_Qykf4E": {
-              "type": "custom-liquid",
-              "name": "t:names.custom_liquid",
+            "subscriptions_app_block_8cfzFx": {
+              "type": "shopify://apps/subscriptions/blocks/app-block/a3bfe9ec-96f8-4508-a003-df608a36d2ad",
               "settings": {
-                "custom_liquid": "{% if closest.product.selling_plan_groups != blank %}\n  <div class=\"subscriptions_app_embed_block\"></div>\n{% endif %}"
-              },
-              "blocks": {}
+                "widget_style": "card",
+                "widget_style_card_selector": "radio_button",
+                "subscription_policy_url": "",
+                "color_text_body": "#6D7175",
+                "dividers_color": "#8F8D8D",
+                "background_color": "#FFFFFF",
+                "border_thickness": 1,
+                "border_radius": 0,
+                "product": "{{closest.product}}"
+              }
             },
             "product_inventory_CGNRga": {
               "type": "product-inventory",
@@ -1024,7 +1030,7 @@
             "ai_gen_block_426582e_ADbVqH",
             "variant_picker_R3rGDr",
             "sibling_swatches_iHkm3i",
-            "custom_liquid_Qykf4E",
+            "subscriptions_app_block_8cfzFx",
             "product_inventory_CGNRga",
             "buy_buttons_eYQEYi",
             "group_Yfptbh",
