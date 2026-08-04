@@ -1115,3 +1115,24 @@ for (const [type, preview] of /** @type {const} */ ([
     true
   );
 }
+
+/**
+ * Close the search popup once an add-to-cart from inside it succeeds.
+ *
+ * cart-drawer.js defers its auto-open when the add originates inside an open modal <dialog>,
+ * waiting for that dialog's `close` event so focus restoration runs first. The search modal is
+ * exactly such a dialog, so nothing opened and nothing closed. Closing search on a successful
+ * add lets the theme's own deferred open fire. CartAddEvent bubbles and reuses
+ * ThemeEvents.cartUpdate ('cart:update'), so no import is needed here.
+ */
+document.addEventListener('cart:update', (event) => {
+  const target = event.target;
+  if (!(target instanceof Element)) return;
+  if (/** @type {any} */ (event).detail?.data?.didError) return;
+
+  const searchModal = target.closest('dialog-component#search-modal');
+  if (!searchModal || !searchModal.querySelector('dialog[open]')) return;
+  if (typeof (/** @type {any} */ (searchModal).closeDialog) !== 'function') return;
+
+  /** @type {any} */ (searchModal).closeDialog();
+});

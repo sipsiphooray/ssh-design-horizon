@@ -69,7 +69,7 @@
             {%- liquid
               assign title = 'content.search_results_resource_products' | t
               assign products = predictive_search.resources.products
-              render 'predictive-search-products-list', title: title, products: products
+              render 'predictive-search-products-list', title: title, products: products, section_id: section.id
             -%}
           {% endif %}
 
@@ -119,7 +119,7 @@
           if search.terms contains 'id:'
             assign new_products_ids = search.terms | replace: 'id:', '' | split: ' OR '
           endif
-          render 'predictive-search-products-list', title: title, products: products, order_ids: new_products_ids, limit: 4
+          render 'predictive-search-products-list', title: title, products: products, order_ids: new_products_ids, limit: 4, section_id: section.id
         -%}
       {% endif %}
 

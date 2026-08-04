@@ -474,7 +474,7 @@ div:has(> .size-available-text) {
 }
 
 .media-gallery--carousel slideshow-arrows .slideshow-control {
-    padding-inline: var(--padding-3xs);
+    padding-inline: var(--padding-3xs) !important;
     background: rgba(var(--color-background-rgb) / .5);
     min-width: unset;
     opacity: 1 !important;
@@ -1320,7 +1320,7 @@ body:has(.page-wrapper--drawer-open) #shopify-chat {
     }
 
     .media-gallery--carousel slideshow-arrows .slideshow-control {
-        padding-inline: var(--padding-xs);
+        padding-inline: var(--padding-2xs) !important;
     }
 
     .product-title > * {
@@ -1363,4 +1363,78 @@ html[scroll-lock] {
 .menu-list__link-inner .icon-caret {
     width: var(--icon-size-xs) !important;
     height: var(--icon-size-xs) !important;
+}
+/* ===== Search popup product cards (predictive search) ===== */
+
+/* Square media; outranks resource-card's inline --resource-card-aspect-ratio. */
+.predictive-search-results__card--product .resource-card__media {
+    --resource-card-aspect-ratio: 1 !important;
+}
+
+/* Containing block for the quick-add overlay. */
+.predictive-search-results__card--product .resource-card {
+    position: relative;
+}
+
+/* Vendor only reveals quick-add on product-card hover, and these cards are
+   product-component. Border/shadow reset mirrors .product-card. */
+.predictive-search-results__card--product .quick-add__button {
+    display: flex;
+    opacity: 1;
+    position: absolute;
+    right: calc(var(--padding-2xs) + 2px);
+    bottom: calc(var(--padding-2xs) + 2px);
+    width: auto;
+    height: var(--button-size-sm);
+    min-width: var(--button-size-sm);
+    font-size: var(--font-size--2xs);
+    border: 0 !important;
+    box-shadow: none !important;
+    outline: none;
+}
+
+/* Full token, not token - 4px: the vendor subtracted the 2px border we just removed,
+   which left the collapsed button taller than it was wide. */
+.predictive-search-results__card--product .quick-add__button .add-to-cart-icon {
+    height: var(--button-size-sm) !important;
+    width: var(--button-size-sm);
+}
+
+.predictive-search-results__card--product .quick-add__button .svg-wrapper .checkmark-burst {
+    width: calc(var(--button-size-sm) - 12px);
+    height: calc(var(--button-size-sm) - 12px);
+}
+
+/* Tighten the expanded "Add" pill to match the smaller button. */
+.predictive-search-results__card--product .quick-add__button .add-to-cart-text__content > span span {
+    padding-right: var(--padding-xs);
+}
+
+.predictive-search-results__card--product .resource-card__content [ref='priceContainer'] {
+    font-size: var(--font-size--xs);
+}
+
+.predictive-search-results__card--product .resource-card__rating {
+    font-size: var(--font-size--2xs);
+}
+
+.predictive-search-results__card--product .resource-card__rating .jdgm-star.jdgm-star {
+    font-size: var(--font-size--2xs) !important;
+}
+
+/* Show the average instead of the review count. attr() only reads the element it
+   sits on, and data-average-rating is on .jdgm-prev-badge. */
+.predictive-search-results__card--product .resource-card__rating .jdgm-prev-badge__text {
+    display: none !important;
+}
+
+.predictive-search-results__card--product .resource-card__rating .jdgm-prev-badge::after {
+    content: attr(data-average-rating);
+    margin-inline-start: var(--gap-2xs);
+    color: rgb(var(--color-foreground-rgb) / var(--opacity-subdued-text));
+}
+
+/* No reviews yet. */
+.predictive-search-results__card--product .resource-card__rating:has(.jdgm-prev-badge[data-average-rating='0.00']) {
+    display: none !important;
 }

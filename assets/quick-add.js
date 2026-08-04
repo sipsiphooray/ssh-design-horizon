@@ -17,6 +17,14 @@ export class QuickAddComponent extends Component {
     const productCard = /** @type {import('./product-card').ProductCard | null} */ (this.closest('product-card'));
     if (productCard) return productCard.productPageUrl;
 
+    // Store customization: search popup cards are resource-card wrapped in <product-component>,
+    // not <product-card>, so neither branch below matched and this returned '' - which made
+    // fetchProductPage bail and the Choose modal open with no content.
+    const resourceCardLink = /** @type {HTMLAnchorElement | null} */ (
+      this.closest('.resource-card')?.querySelector('.resource-card__link') ?? null
+    );
+    if (resourceCardLink?.href) return resourceCardLink.href;
+
     const hotspotProduct = /** @type {import('./product-hotspot').ProductHotspotComponent | null} */ (
       this.closest('product-hotspot-component')
     );

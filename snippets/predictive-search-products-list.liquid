@@ -6,6 +6,7 @@
   @param {string[]} [order_ids] - array of product ids
   @param {number} [limit] - limit of products to display
   @param {string} [products_test_id] - a playwright test id, used to differentiate empty state from 'real' search results
+  @param {string} [section_id] - Section ID forwarded to quick-add (snippets cannot read `section` directly).
 {%- enddoc -%}
 {%- liquid
   assign recently_viewed_title_text = 'content.recently_viewed_products' | t
@@ -60,8 +61,11 @@
                 resource: product,
                 image_width: 500,
                 image_hover: true,
-                image_aspect_ratio: '4 / 5',
-                product_view_context: 'search'
+                image_aspect_ratio: '1',
+                product_view_context: 'search',
+                show_rating: true,
+                show_quick_add: true,
+                section_id: section_id
               %}
             </li>
           {% endfor %}
@@ -76,8 +80,11 @@
                 resource: product,
                 image_width: 500,
                 image_hover: true,
-                image_aspect_ratio: '4 / 5',
-                product_view_context: 'search'
+                image_aspect_ratio: '1',
+                product_view_context: 'search',
+                show_rating: true,
+                show_quick_add: true,
+                section_id: section_id
               %}
             </li>
           {% endfor %}
@@ -106,8 +113,11 @@
             resource: product,
             image_width: 500,
             image_hover: true,
-            image_aspect_ratio: '4 / 5',
-            product_view_context: 'search'
+            image_aspect_ratio: '1',
+            product_view_context: 'search',
+            show_rating: true,
+            show_quick_add: true,
+            section_id: section_id
           %}
         </li>
       {% endfor %}

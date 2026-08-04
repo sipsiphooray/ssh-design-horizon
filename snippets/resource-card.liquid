@@ -10,6 +10,9 @@
   @param {boolean} [image_hover] - Whether to show a secondary image on hover and focus
   @param {string} [image_sizes] - The sizes attribute for responsive images. Defaults to 'auto'
   @param {string} [product_view_context] - The context for product view events (e.g., 'search'). Omit to disable view events.
+  @param {boolean} [show_rating] - Store customization: render the Judge.me preview badge under the title. Opt-in so the mega-menu and header-drawer callers are unaffected.
+  @param {boolean} [show_quick_add] - Store customization: overlay quick-add on the card media. Opt-in for the same reason.
+  @param {string} [section_id] - Section ID forwarded to quick-add (snippets cannot read `section` directly).
 {%- enddoc -%}
 
 {% liquid
@@ -154,6 +157,20 @@
       {{- resource.title -}}
     </p>
 
+    {%- comment -%}
+      Store customization: Judge.me legacy preview badge. The metafield holds the badge HTML
+      that the app renders; custom.css rewrites its text to the average rating and hides the
+      badge entirely when there are no reviews (data-average-rating='0.00').
+    {%- endcomment -%}
+    {%- if show_rating and resource_type == 'product' and resource.metafields.judgeme.badge != blank -%}
+      <div
+        class="resource-card__rating jdgm-widget jdgm-preview-badge"
+        data-id="{{ resource.id }}"
+      >
+        {{ resource.metafields.judgeme.badge }}
+      </div>
+    {%- endif -%}
+
     {% if resource_type == 'product' %}
       {% render 'price', product_resource: resource, show_unit_price: true %}
     {% elsif resource_type == 'collection' and single_thumbnail_collection == false %}
@@ -166,6 +183,15 @@
       </p>
     {% endif %}
   </div>
+
+  {%- comment -%}
+    Store customization: quick-add overlay. .resource-card is position: relative, so the
+    vendor .quick-add (position: absolute; inset: 0) anchors to the whole card; custom.css
+    constrains it to the square media area so the button sits over the image, not the price.
+  {%- endcomment -%}
+  {%- if show_quick_add and resource_type == 'product' and settings.quick_add and resource.available -%}
+    {% render 'quick-add', product: resource, section_id: section_id %}
+  {%- endif -%}
 </div>
 {%- if resource_type == 'product' -%}
   </{{ product_wrapper_tag }}>
