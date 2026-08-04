@@ -46,71 +46,83 @@
       role="search"
       aria-label="{{ 'content.search_input_label' | t }}"
     >
-      <form
-        action="{{ routes.search_url }}"
-        method="get"
-        role="search"
+      {%- comment -%}
+        Store customization: the search form wraps the header only. The results live outside it,
+        because the HTML parser drops a nested form -- which made quick-add's Add button submit
+        the search form and redirect to /search on the server-rendered empty state.
+        `.predictive-search-form` keeps being the positioning context; the inner form is
+        `display: contents`, so the box tree is unchanged.
+      {%- endcomment -%}
+      <div
         class="predictive-search-form"
-        ref="form"
         on:keydown="/onSearchKeyDown"
       >
-        <div
-          class="predictive-search-form__header"
+        <form
+          action="{{ routes.search_url }}"
+          method="get"
+          role="search"
+          id="predictive-search-modal-form"
+          class="predictive-search-form__form"
+          ref="form"
         >
-          <div class="predictive-search-form__header-inner">
-            <label
-              for="{{ 'cmdk-input' | default: 'Search' }}"
-              class="visually-hidden"
-            >
-              {{- 'content.search_input_label' | t -}}
-            </label>
-            <input
-              class="search-input"
-              id="{{ 'cmdk-input' | default: 'Search' }}"
-              type="search"
-              name="q"
-              role="combobox"
-              aria-expanded="false"
-              aria-owns="predictive-search-results"
-              aria-controls="predictive-search-results"
-              aria-haspopup="listbox"
-              aria-autocomplete="list"
-              autocomplete="off"
-              placeholder="{{ 'content.search_input_placeholder' | t }}"
-              ref="searchInput"
-              on:input="/search"
-              on:keydown="/onSearchKeyDown"
-            >
-            <input
-              name="options[prefix]"
-              type="hidden"
-              value="last"
-            >
-            <span class="svg-wrapper predictive-search__icon">
-              {{ 'icon-search.svg' | inline_asset_content }}
-            </span>
+          <div
+            class="predictive-search-form__header"
+          >
+            <div class="predictive-search-form__header-inner">
+              <label
+                for="{{ 'cmdk-input' | default: 'Search' }}"
+                class="visually-hidden"
+              >
+                {{- 'content.search_input_label' | t -}}
+              </label>
+              <input
+                class="search-input"
+                id="{{ 'cmdk-input' | default: 'Search' }}"
+                type="search"
+                name="q"
+                role="combobox"
+                aria-expanded="false"
+                aria-owns="predictive-search-results"
+                aria-controls="predictive-search-results"
+                aria-haspopup="listbox"
+                aria-autocomplete="list"
+                autocomplete="off"
+                placeholder="{{ 'content.search_input_placeholder' | t }}"
+                ref="searchInput"
+                on:input="/search"
+                on:keydown="/onSearchKeyDown"
+              >
+              <input
+                name="options[prefix]"
+                type="hidden"
+                value="last"
+              >
+              <span class="svg-wrapper predictive-search__icon">
+                {{ 'icon-search.svg' | inline_asset_content }}
+              </span>
+              <button
+                type="button"
+                class="button-unstyled predictive-search__reset-button"
+                ref="resetButton"
+                hidden
+                on:click="/resetSearch"
+              >
+                {{ 'actions.clear' | t }}
+              </button>
+            </div>
             <button
               type="button"
-              class="button-unstyled predictive-search__reset-button"
-              ref="resetButton"
-              hidden
-              on:click="/resetSearch"
+              class="button predictive-search__close-modal-button"
+              aria-label="{{ 'accessibility.close_dialog' | t }}"
+              on:click="dialog-component/closeDialog"
+              ref="closeModalButton"
             >
-              {{ 'actions.clear' | t }}
+              <span class="svg-wrapper">
+                {{ 'icon-close.svg' | inline_asset_content }}
+              </span>
             </button>
           </div>
-          <button
-            type="button"
-            class="button predictive-search__close-modal-button"
-            aria-label="{{ 'accessibility.close_dialog' | t }}"
-            on:click="dialog-component/closeDialog"
-            ref="closeModalButton"
-          >
-            <span class="svg-wrapper">
-              {{ 'icon-close.svg' | inline_asset_content }}
-            </span>
-          </button>
-        </div>
+        </form>
 
         <div class="predictive-search-form__content-wrapper">
           {%- assign trending = shop.metafields.custom.trending_searches.value -%}
@@ -138,15 +150,17 @@
           </div>
 
           <div class="predictive-search-form__footer">
+            {%- comment -%} Lives outside the form now, so associate it explicitly. {%- endcomment -%}
             <button
               class="button predictive-search__search-button"
+              form="predictive-search-modal-form"
               ref="viewAllButton"
             >
               {{ 'content.search_results_view_all' | t }}
             </button>
           </div>
         </div>
-      </form>
+      </div>
     </predictive-search-component>
   </dialog>
 </dialog-component>
@@ -289,6 +303,11 @@
     position: relative;
     width: 100%;
     align-self: flex-start;
+  }
+
+  /* Form wraps the header only; no box of its own so the layout is unchanged */
+  .predictive-search-form__form {
+    display: contents;
   }
 
   .predictive-search-form__content {
