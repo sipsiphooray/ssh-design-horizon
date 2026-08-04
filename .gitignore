@@ -1,0 +1,10 @@
+# Local AI assistant config (Claude Code)
+.claude/
+
+# Shopify CLI writes these next to the file it is syncing; they are not theme assets
+# and would upload to the theme if committed.
+*.tmp.*
+
+# OS cruft
+.DS_Store
+Thumbs.db
