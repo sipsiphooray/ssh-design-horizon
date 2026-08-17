@@ -130,6 +130,9 @@
             {% if section.settings.carousel_contain_width %}
               resource-list--carousel-contained
             {% endif %}
+            {% if section.settings.grid_on_mobile %}
+              hidden--mobile
+            {% endif %}
           {% endif %}
           {% if section.settings.carousel_on_mobile and section.settings.layout_type != 'carousel' %}
             hidden--mobile
@@ -153,6 +156,25 @@
             %}
         {% endcase %}
       </div>
+
+      {% comment %} Mobile grid for the carousel layout {% endcomment %}
+      {% if section.settings.layout_type == 'carousel' and section.settings.grid_on_mobile %}
+        <div
+          class="
+            resource-list
+            hidden--desktop
+            resource-list--grid
+          "
+          style="
+            --resource-list-column-gap-desktop: {{ section.settings.columns_gap }}px;
+            --resource-list-row-gap-desktop: {{ section.settings.rows_gap }}px;
+            --resource-list-columns-mobile: repeat({{ section.settings.mobile_columns }}, 1fr);
+            --column-count-mobile: {{ section.settings.mobile_columns }};
+          "
+        >
+          {{ list_items }}
+        </div>
+      {% endif %}
 
       {% if section.settings.carousel_on_mobile and section.settings.layout_type != 'carousel' %}
         {% liquid
@@ -291,6 +313,13 @@
       "visible_if": "{{ section.settings.layout_type == 'carousel' }}"
     },
     {
+      "type": "checkbox",
+      "id": "grid_on_mobile",
+      "label": "t:settings.grid_on_mobile",
+      "default": false,
+      "visible_if": "{{ section.settings.layout_type == 'carousel' }}"
+    },
+    {
       "type": "range",
       "id": "max_products",
       "label": "t:settings.product_count",
@@ -323,7 +352,7 @@
         }
       ],
       "default": "2",
-      "visible_if": "{{ section.settings.layout_type == 'grid' and section.settings.carousel_on_mobile == false }}"
+      "visible_if": "{{ section.settings.carousel_on_mobile == false or section.settings.grid_on_mobile == true }}"
     },
     {
       "type": "range",
@@ -345,7 +374,7 @@
       "step": 1,
       "unit": "px",
       "default": 16,
-      "visible_if": "{{ section.settings.layout_type == 'grid' }}"
+      "visible_if": "{{ section.settings.layout_type == 'grid' or section.settings.grid_on_mobile == true }}"
     },
     {
       "type": "header",
@@ -484,6 +513,7 @@
         "recommendation_type": "related",
         "layout_type": "grid",
         "carousel_on_mobile": false,
+        "grid_on_mobile": false,
         "max_products": 4,
         "columns": 4,
         "mobile_columns": "2",
