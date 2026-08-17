@@ -2846,7 +2846,6 @@
         "layout_type": "carousel",
         "carousel_on_mobile": true,
         "carousel_contain_width": false,
-        "grid_on_mobile": true,
         "max_products": 5,
         "columns": 4,
         "mobile_columns": "2",
