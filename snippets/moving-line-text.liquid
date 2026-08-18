@@ -66,6 +66,10 @@
     {%- if block_settings.type_preset == 'custom' and block_settings.font_size != blank -%}
       --font-size: {{ block_settings.font_size }};
     {%- endif -%}
+    {% if block_settings.text_color != blank %}
+      --color: {{ block_settings.text_color }};
+      --color-rgb: {{ block_settings.text_color.rgb }};
+    {% endif %}
     --width: {{ text_width }};
     --max-width: var(--max-width--{{ type }}-{{ block_settings.max_width }});
     {% if text_width == "100%" %}
