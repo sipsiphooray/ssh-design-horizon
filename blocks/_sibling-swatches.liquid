@@ -145,6 +145,24 @@
     border-radius: var(--variant-picker-swatch-radius);
   }
 
+  /* Five swatches to a row, then wrap. The theme lays these out with flex-wrap, which packs
+     as many as the container fits; a grid of five max-content columns fixes the count without
+     stretching the swatches. Desktop only: five image swatches across a phone are unreadably
+     small, so below the theme's 750px breakpoint the original flex wrapping still applies.
+     Two classes to outrank `.variant-option--buttons { display: flex }`. */
+  @media screen and (min-width: 750px) {
+    .sibling-swatches__option.variant-option--buttons {
+      display: grid;
+      grid-template-columns: repeat(5, max-content);
+      gap: var(--gap-sm);
+      justify-content: start;
+    }
+
+    .sibling-swatches__option.variant-option--buttons > legend {
+      grid-column: 1 / -1;
+    }
+  }
+
   .sibling-swatches__option:not(:last-child) {
     margin-block-end: var(--margin-md);
   }
