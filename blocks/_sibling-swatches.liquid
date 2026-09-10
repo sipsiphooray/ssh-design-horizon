@@ -147,15 +147,32 @@
 
   /* Five swatches to a row, then wrap, at every width. The theme lays these out with
      flex-wrap, which packs as many as the container fits; a five-column grid fixes the count.
-     Columns are `minmax(0, 1fr)` rather than max-content so five can never overflow a narrow
-     phone, and `justify-items: center` keeps each swatch its natural size inside its fifth
-     instead of stretching the anchor's border box to fill it.
+     Tracks cap at the Swatches setting's own width so the row sits flush under the legend
+     instead of spreading each swatch across a full fifth of the container, and `minmax(0, ...)`
+     lets them shrink below it so five never overflow a narrow phone.
+     The 6px gap is a literal because no `--gap-*` token carries that value (2 / 4.8 / 8 / 11.2).
      Two classes to outrank `.variant-option--buttons { display: flex }`. */
   .sibling-swatches__option.variant-option--buttons {
     display: grid;
-    grid-template-columns: repeat(5, minmax(0, 1fr));
-    gap: var(--gap-sm);
-    justify-items: center;
+    grid-template-columns: repeat(5, minmax(0, var(--variant-picker-swatch-width)));
+    gap: 6px;
+  }
+
+  /* `.swatch--unscaled` is fixed at the setting's px size, so it would overrun a shrunken track
+     on a narrow phone. Fill the track instead, holding the setting's own aspect ratio, and
+     restate custom.css's `swatch-width / 1.2` image inset as its percentage equivalent so the
+     graphic scales with the box. */
+  .sibling-swatches__item {
+    width: 100%;
+  }
+
+  .sibling-swatches__item .swatch,
+  .sibling-swatches__item .swatch.swatch--image-contain {
+    --swatch-width: 100%;
+    --swatch-height: auto;
+
+    aspect-ratio: var(--variant-picker-swatch-width-unitless) / var(--variant-picker-swatch-height-unitless);
+    background-size: 83.3333%;
   }
 
   .sibling-swatches__option.variant-option--buttons > legend {
