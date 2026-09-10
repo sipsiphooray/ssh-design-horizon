@@ -145,17 +145,22 @@
     border-radius: var(--variant-picker-swatch-radius);
   }
 
-  /* Five swatches to a row, then wrap, at every width. The theme lays these out with
-     flex-wrap, which packs as many as the container fits; a five-column grid fixes the count.
-     Tracks cap at the Swatches setting's own width so the row sits flush under the legend
-     instead of spreading each swatch across a full fifth of the container, and `minmax(0, ...)`
-     lets them shrink below it so five never overflow a narrow phone.
-     The 6px gap is a literal because no `--gap-*` token carries that value (2 / 4.8 / 8 / 11.2).
+  /* Fill the row before wrapping: `auto-fill` fits as many swatch-wide columns as the container
+     holds (seven in the product info column, not five), so no space is left idle on the right.
+     The track is the Swatches setting's own width, capped by the width a fifth of the row would
+     give it, which sets a floor of five per row — a phone shrinks the swatches to keep five
+     rather than dropping to four and stranding a column's worth of space.
      Two classes to outrank `.variant-option--buttons { display: flex }`. */
   .sibling-swatches__option.variant-option--buttons {
+    --sibling-swatch-gap: var(--gap-xs);
+    --sibling-swatch-size: min(
+      var(--variant-picker-swatch-width),
+      calc((100% - 4 * var(--sibling-swatch-gap)) / 5)
+    );
+
     display: grid;
-    grid-template-columns: repeat(5, minmax(0, var(--variant-picker-swatch-width)));
-    gap: 6px;
+    grid-template-columns: repeat(auto-fill, var(--sibling-swatch-size));
+    gap: var(--sibling-swatch-gap);
   }
 
   /* `.swatch--unscaled` is fixed at the setting's px size, so it would overrun a shrunken track
