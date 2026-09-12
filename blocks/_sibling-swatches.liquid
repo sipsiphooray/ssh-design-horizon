@@ -147,15 +147,15 @@
 
   /* Fill the row before wrapping: `auto-fill` fits as many swatch-wide columns as the container
      holds (seven in the product info column, not five), so no space is left idle on the right.
-     The track is the Swatches setting's own width, capped by the width a fifth of the row would
-     give it, which sets a floor of five per row — a phone shrinks the swatches to keep five
+     The track is the Swatches setting's own width, capped by the width a sixth of the row would
+     give it, which sets a floor of six per row — a phone shrinks the swatches to keep six
      rather than dropping to four and stranding a column's worth of space.
      Two classes to outrank `.variant-option--buttons { display: flex }`. */
   .sibling-swatches__option.variant-option--buttons {
     --sibling-swatch-gap: var(--gap-xs);
     --sibling-swatch-size: min(
       var(--variant-picker-swatch-width),
-      calc((100% - 4 * var(--sibling-swatch-gap)) / 5)
+      calc((100% - 5 * var(--sibling-swatch-gap)) / 6)
     );
 
     display: grid;
