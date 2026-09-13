@@ -176,7 +176,7 @@
               "type": "moving-line-text",
               "name": "Moving line text",
               "settings": {
-                "text": "<h1>cute & <em>slightly</em><br/>cursed.</h1>",
+                "text": "<h1>Cute & <em>slightly</em><br/>cursed.</h1>",
                 "line_vector": "shopify://shop_images/orangesquiggle.png",
                 "height": 28,
                 "mobile_height": 11,
