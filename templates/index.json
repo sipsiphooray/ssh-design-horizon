@@ -213,7 +213,7 @@
               "name": "t:names.button",
               "settings": {
                 "label": "Shop Fall",
-                "link": "shopify://collections/im-an-autumn",
+                "link": "shopify://collections/halloween-shop",
                 "open_in_new_tab": false,
                 "style_class": "button-custom",
                 "add_arrow": true,
@@ -249,7 +249,7 @@
         "stack_media_on_mobile": false,
         "custom_mobile_media": true,
         "media_type_1_mobile": "image",
-        "image_1_mobile": "shopify://shop_images/Final_Mobile_Size_1200x1500_a71d2818-bf86-417e-8760-f06aaee31963.png",
+        "image_1_mobile": "shopify://shop_images/Final_Mobile_Size_1200x1500_d25da017-830c-48ec-80c9-c0f3cce17186.png",
         "media_type_2_mobile": "image",
         "link": "shopify://collections/new-sips-1",
         "open_in_new_tab": false,
