@@ -1522,6 +1522,7 @@
           ]
         }
       },
+      "disabled": true,
       "custom_css": [
         ".product-list-content:has(.link) .link {position: absolute !important; top: 50%; right: 0; transform: translateY(-50%);}"
       ],
