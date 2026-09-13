@@ -1479,7 +1479,7 @@
               "type": "_product-list-text",
               "name": "t:names.collection_title",
               "settings": {
-                "text": "<p>AS SEEN IN</p>",
+                "text": "<p><strong>AS SEEN IN</strong></p>",
                 "width": "fit-content",
                 "max_width": "normal",
                 "alignment": "left",
