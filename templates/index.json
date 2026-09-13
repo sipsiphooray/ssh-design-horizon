@@ -244,7 +244,7 @@
       "name": "t:names.hero",
       "settings": {
         "media_type_1": "image",
-        "image_1": "shopify://shop_images/SIPSIP_HOORAY_WEB_BANNERS_2026_Updated_Size_4ae2094f-4ccf-4d6a-8193-bc033ae73b24.png",
+        "image_1": "shopify://shop_images/2SIPSIP_HOORAY_WEB_BANNERS_2026_Updated_Size.png",
         "media_type_2": "image",
         "stack_media_on_mobile": false,
         "custom_mobile_media": true,
@@ -263,7 +263,7 @@
         "gap": 11,
         "section_width": "page-width",
         "section_height": "custom",
-        "section_height_custom": 70,
+        "section_height_custom": 75,
         "section_height_fixed_desktop": 460,
         "section_height_fixed_mobile": 430,
         "background_color": "",
@@ -3361,8 +3361,8 @@
             "display_order": "media_first",
             "no_image_fallback": "review_text_only",
             "max_reviews": 20,
-            "review_length": "medium",
-            "text_size": "medium",
+            "review_length": "small",
+            "text_size": "small",
             "image_ratio": "1",
             "reviews_shown": 4,
             "show_reviewer_name": true,
@@ -3770,6 +3770,7 @@
     },
     "ssh_about_seo": {
       "type": "custom-liquid",
+      "custom_css": [],
       "settings": {
         "custom_liquid": "<style>.ssh-about{max-width:820px;margin:0 auto;padding:8px 20px 44px;text-align:center;}.ssh-about h2{margin-bottom:.55em;}.ssh-about p{line-height:1.65;font-size:1rem;}.ssh-about a{text-decoration:underline;}</style><div class=\"ssh-about\"><h2>Aesthetic Glass Drinkware, Made by Hand</h2><p>Sip-Sip Hooray! designs original UVDTF glass cups, mugs, and tumblers with bamboo lids and reusable straws. Every piece is printed in-house on premium heat-resistant glass with vibrant, permanent prints that won't fade, and it's dishwasher safe for everyday sipping. Women-owned and handmade in Louisiana. <a href=\"/pages/about-us\">Our story</a>&nbsp;&middot;&nbsp;<a href=\"/pages/faq\">Care &amp; FAQ</a>&nbsp;&middot;&nbsp;<a href=\"/collections/all\">Shop all cups</a></p><p>Popular collections: <a href=\"/collections/glass-cups-with-lids-and-straws\">Glass Cups with Lids &amp; Straws</a>&nbsp;&middot;&nbsp;<a href=\"/collections/tumblers\">Glass Tumblers with Lids &amp; Straws</a>&nbsp;&middot;&nbsp;<a href=\"/collections/back-to-school\">Back to School</a>&nbsp;&middot;&nbsp;<a href=\"/collections/teacher-gifts\">Teacher Gifts</a>&nbsp;&middot;&nbsp;<a href=\"/collections/book-lovers\">Book Lover Cups</a></p></div>",
         "background_color": "",
