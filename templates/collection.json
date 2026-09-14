@@ -380,6 +380,7 @@
                       "type": "product-title",
                       "name": "t:names.product_title",
                       "settings": {
+                        "show_variant_format": true,
                         "width": "100%",
                         "max_width": "none",
                         "alignment": "left",

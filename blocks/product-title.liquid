@@ -8,8 +8,6 @@
   {% render 'text', fallback_text: product_title, block: block %}
 {% else %}
   {% liquid
-    assign product_title = '<p role="heading" aria-level="3">' | append: closest.product.title | append: '</p>'
-
     # active_variant only arrives when this block is rendered directly with it. As a nested
     # dynamic block it is blank, because content_for 'blocks' forwards closest.* only.
     # Re-resolve the curated pin so the title link matches the card link and the price.
@@ -30,6 +28,32 @@
     if link_variant != blank
       assign title_href = link_variant.url
     endif
+
+    # Store customization: append the format of the variant this card shows, mirroring the
+    # PDP <h1> suffix in custom.js (updateProductTitleSuffix, same option names). Curated rows
+    # use the pinned variant; collection cards use the variant the collection item resolves to
+    # (native variants-as-collection-items), falling back to the first available variant.
+    assign product_title_text = closest.product.title
+    if block.settings.show_variant_format
+      assign format_variant = link_variant
+      if format_variant == blank
+        assign format_variant = closest.product.selected_or_first_available_variant
+      endif
+      if format_variant != blank
+        assign format_label = ''
+        for option_name in closest.product.options
+          assign option_key = option_name | strip | downcase
+          if option_key == 'cup style' or option_key == 'size'
+            assign format_label = format_variant.options[forloop.index0]
+            break
+          endif
+        endfor
+        if format_label != blank
+          assign product_title_text = product_title_text | append: ' - ' | append: format_label
+        endif
+      endif
+    endif
+    assign product_title = '<p role="heading" aria-level="3">' | append: product_title_text | append: '</p>'
   %}
   <a
     class="contents user-select-text"
@@ -48,6 +72,13 @@
     {
       "type": "paragraph",
       "content": "t:content.resource_reference_product_title"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_variant_format",
+      "label": "Add variant format to title",
+      "info": "Appends the Cup Style / Size of the variant this card shows, e.g. \" - 17oz Glass Mug\". Uses the pinned variant in curated rows and the collection's variant on collection pages. Leave off in add-on cards.",
+      "default": false
     },
     {
       "type": "header",
