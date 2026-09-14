@@ -1,0 +1,17 @@
+{%- doc -%}
+  Outputs Horizon's `hidden--mobile` / `hidden--desktop` utility class for a block's
+  "Show on" (visibility) setting, so the block renders on the chosen device only.
+
+  @param {object} settings - Block settings that include `visibility` (all | desktop | mobile)
+
+  @example
+  {% render 'device-visibility-class', settings: block.settings %}
+{%- enddoc -%}
+
+{%- liquid
+  if settings.visibility == 'desktop'
+    echo 'hidden--mobile'
+  elsif settings.visibility == 'mobile'
+    echo 'hidden--desktop'
+  endif
+-%}

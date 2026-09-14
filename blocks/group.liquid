@@ -4,12 +4,15 @@
   {% content_for 'blocks' %}
 {% endcapture %}
 
+{% capture visibility_class %}{% render 'device-visibility-class', settings: block.settings %}{% endcapture %}
+
 {% render 'group',
   children: children,
   settings: block.settings,
   shopify_attributes: block.shopify_attributes,
   background_color: block.settings.background_color,
-  block_id: block.id
+  block_id: block.id,
+  class: visibility_class
 %}
 
 {% schema %}
@@ -636,6 +639,31 @@
       "id": "css_class",
       "label": "CSS class",
       "info": "optional"
+    },
+    {
+      "type": "header",
+      "content": "Visibility"
+    },
+    {
+      "type": "select",
+      "id": "visibility",
+      "label": "Show on",
+      "options": [
+        {
+          "value": "all",
+          "label": "All devices"
+        },
+        {
+          "value": "desktop",
+          "label": "Desktop only"
+        },
+        {
+          "value": "mobile",
+          "label": "Mobile only"
+        }
+      ],
+      "default": "all",
+      "info": "To lay out desktop and mobile separately, duplicate the block and show one copy on each device."
     }
   ],
   "presets": [

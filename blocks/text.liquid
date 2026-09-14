@@ -1,6 +1,8 @@
 
 
-{% render 'text', block: block, class: block.settings.custom_class %}
+{% capture text_class %}{{ block.settings.custom_class }} {% render 'device-visibility-class', settings: block.settings %}{% endcapture %}
+
+{% render 'text', block: block, class: text_class %}
 
 {% schema %}
 {
@@ -542,6 +544,31 @@
       "id": "custom_class",
       "label": "Custom class",
       "info": "Add a CSS class (without the dot) to target this block from custom.css."
+    },
+    {
+      "type": "header",
+      "content": "Visibility"
+    },
+    {
+      "type": "select",
+      "id": "visibility",
+      "label": "Show on",
+      "options": [
+        {
+          "value": "all",
+          "label": "All devices"
+        },
+        {
+          "value": "desktop",
+          "label": "Desktop only"
+        },
+        {
+          "value": "mobile",
+          "label": "Mobile only"
+        }
+      ],
+      "default": "all",
+      "info": "To lay out desktop and mobile separately, duplicate the block and show one copy on each device."
     }
   ],
   "presets": [
