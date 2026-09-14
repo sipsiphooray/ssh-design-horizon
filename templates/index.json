@@ -2039,7 +2039,7 @@
                 "padding-inline-end": 0,
                 "custom_mobile_padding": true,
                 "mobile-padding-block-start": 12,
-                "mobile-padding-block-end": 0,
+                "mobile-padding-block-end": 16,
                 "mobile-padding-inline-start": 0,
                 "mobile-padding-inline-end": 0,
                 "css_class": ""
@@ -2217,7 +2217,7 @@
             "width": "fill",
             "custom_width": 100,
             "width_mobile": "custom",
-            "custom_width_mobile": 80,
+            "custom_width_mobile": 85,
             "height": "fit",
             "custom_height": 100,
             "background_media": "none",
