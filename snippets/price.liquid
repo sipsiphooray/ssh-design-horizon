@@ -9,6 +9,8 @@
   @param {object} [pricing_variant] - When set on product-card templates, use this variant for price (not product min/max range).
 {%- enddoc -%}
 
+{% render 'price-styles' %}
+
 {%- liquid
   assign customer_tag_shop = shop.metafields.custom.customer_discounts.value
   assign discount = blank

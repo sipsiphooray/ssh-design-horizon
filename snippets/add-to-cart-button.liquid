@@ -6,6 +6,7 @@
   @param {boolean} [quick_add] - Quick add
   @param {object} product - The product object to be added to the cart.
   @param {boolean} [icon_only_on_mobile] - If `true`, only the icon is shown on mobile devices (label collapses).
+  @param {boolean} [show_icon] - Whether to render the cart icon. Omitted keeps the icon (fork callers predate the param); pass false to hide it.
   @param {string} [class] - Additional CSS classes to apply to the button.
   @param {string} [id] - The ID attribute for the button.
   @param {string} [data_testid] - The data-testid attribute for testing.
@@ -43,7 +44,7 @@
     {% endunless %}
   >
     <span class="add-to-cart-text">
-      {% if can_add_to_cart %}
+      {% if can_add_to_cart and show_icon != false %}
         <span
           aria-hidden="true"
           class="svg-wrapper add-to-cart-icon"

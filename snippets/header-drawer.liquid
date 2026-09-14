@@ -12,6 +12,8 @@
   {% render 'header-drawer', linklist: section.settings.menu, class: 'header-drawer--mobile' %}
 {%- enddoc -%}
 
+{% render 'summary-icon-styles' %}
+
 {% liquid
   assign block_settings = block.settings
   assign max_featured_items = 4
@@ -70,7 +72,7 @@
         {{- 'icon-menu.svg' | inline_asset_content -}}
       </span>
       <span class="svg-wrapper header-drawer-icon header-drawer-icon--close">
-        {{- 'icon-close.svg' | inline_asset_content -}}
+        {{- 'icon-close-menu.svg' | inline_asset_content -}}
       </span>
     </summary>
     {%- comment -%}
@@ -103,7 +105,7 @@
         on:click="/close"
       >
         <span class="svg-wrapper header-drawer-icon header-drawer-icon--close">
-          {{- 'icon-close.svg' | inline_asset_content -}}
+          {{- 'icon-close-menu.svg' | inline_asset_content -}}
         </span>
       </button>
       <nav
@@ -147,7 +149,7 @@
                     >
                       <summary
                         id="HeaderDrawer-{{ link.handle }}"
-                        class="menu-drawer__menu-item menu-drawer__menu-item--mainlist menu-drawer__animated-element focus-inset"
+                        class="menu-drawer__menu-item menu-drawer__menu-item--mainlist menu-drawer__animated-element"
                       >
                         <span class="menu-drawer__menu-item-text wrap-text">{{ link.title | escape }}</span>
                         <span class="svg-wrapper icon-caret icon-animated">
@@ -185,7 +187,7 @@
                             <a
                               id="HeaderDrawer-{{ link.handle }}-{{ childlink.handle }}"
                               href="{{ childlink.url }}"
-                              class="menu-drawer__menu-item menu-drawer__menu-item--child focus-inset {% if thumbnail[0] != blank %}link-menu-thumbnail{% endif %}{% if childlink.current %} menu-drawer__menu-item--active{% endif %}"
+                              class="menu-drawer__menu-item menu-drawer__menu-item--child {% if thumbnail[0] != blank %}link-menu-thumbnail{% endif %}{% if childlink.current %} menu-drawer__menu-item--active{% endif %}"
                               {% if childlink.current %}
                                 aria-current="page"
                               {% endif %}
@@ -232,7 +234,7 @@
                   <a
                     id="HeaderDrawer-{{ link.handle }}"
                     href="{{ link.url }}"
-                    class="menu-drawer__menu-item menu-drawer__menu-item--mainlist menu-drawer__animated-element focus-inset"
+                    class="menu-drawer__menu-item menu-drawer__menu-item--mainlist menu-drawer__animated-element"
                     {% if link.current %}
                       aria-current="page"
                     {% endif %}
@@ -269,7 +271,7 @@
                       >
                         <a
                           href="{{ childlink.url }}"
-                          class="menu-drawer__menu-item menu-drawer__menu-item--child {% if thumbnail[0] != blank %}link-menu-thumbnail{% endif %} menu-drawer__animated-element focus-inset{% if childlink.current %} menu-drawer__menu-item--active{% endif %}"
+                          class="menu-drawer__menu-item menu-drawer__menu-item--child {% if thumbnail[0] != blank %}link-menu-thumbnail{% endif %} menu-drawer__animated-element{% if childlink.current %} menu-drawer__menu-item--active{% endif %}"
                           {% if childlink.current %}
                             aria-current="page"
                           {% endif %}
@@ -310,7 +312,7 @@
                   <a
                     id="HeaderDrawer-{{ link.handle }}"
                     href="{{ link.url }}"
-                    class="menu-drawer__menu-item menu-drawer__menu-item--mainlist menu-drawer__animated-element focus-inset"
+                    class="menu-drawer__menu-item menu-drawer__menu-item--mainlist menu-drawer__animated-element"
                     {% if link.current %}
                       aria-current="page"
                     {% endif %}
@@ -371,7 +373,7 @@
                   >
                     <summary
                       id="HeaderDrawer-{{ link.handle }}"
-                      class="menu-drawer__menu-item menu-drawer__menu-item--mainlist menu-drawer__animated-element focus-inset{% if link.child_active %} menu-drawer__menu-item--active{% endif %}"
+                      class="menu-drawer__menu-item menu-drawer__menu-item--mainlist menu-drawer__animated-element{% if link.child_active %} menu-drawer__menu-item--active{% endif %}"
                       on:click="header-drawer/open/submenu"
                     >
                       <span class="menu-drawer__menu-item-text wrap-text">{{ link.title | escape }}</span>
@@ -386,7 +388,7 @@
                       style="--menu-drawer-animation-index: {{ animation_index }};"
                     >
                       <div class="menu-drawer__inner-submenu">
-                        <div class="menu-drawer__nav-buttons">
+                        <div class="menu-drawer__nav-buttons menu-drawer__nav-buttons--with-title">
                           <button
                             class="button menu-drawer__back-button focus-inset"
                             aria-expanded="true"
@@ -396,8 +398,16 @@
                             <span class="svg-wrapper icon-caret icon-caret--backward">
                               {{- 'icon-caret.svg' | inline_asset_content -}}
                             </span>
-                            <span class="menu-drawer__menu-item-text wrap-text">{{ link.title | escape }}</span>
                           </button>
+                          <a
+                            href="{{ link.url }}"
+                            class="menu-drawer__title focus-inset"
+                            {% if link.current %}
+                              aria-current="page"
+                            {% endif %}
+                          >
+                            <span class="menu-drawer__menu-item-text wrap-text">{{ link.title | escape }}</span>
+                          </a>
                           <button
                             class="button button-unstyled close-button menu-drawer__close-button focus-inset"
                             type="button"
@@ -405,7 +415,7 @@
                             on:click="header-drawer/close"
                           >
                             <span class="svg-wrapper header-drawer-icon header-drawer-icon--close">
-                              {{- 'icon-close.svg' | inline_asset_content -}}
+                              {{- 'icon-close-menu.svg' | inline_asset_content -}}
                             </span>
                           </button>
                         </div>
@@ -444,7 +454,7 @@
                                 <a
                                   id="HeaderDrawer-{{ link.handle }}-{{ childlink.handle }}"
                                   href="{{ childlink.url }}"
-                                  class="menu-drawer__menu-item menu-drawer__menu-item--parent focus-inset{% if childlink.current %} menu-drawer__menu-item--active{% endif %}"
+                                  class="menu-drawer__menu-item menu-drawer__menu-item--parent{% if childlink.current %} menu-drawer__menu-item--active{% endif %}"
                                   {% if childlink.current %}
                                     aria-current="page"
                                   {% endif %}
@@ -478,7 +488,7 @@
                                     >
                                       <summary
                                         id="HeaderDrawer-{{ link.handle }}-{{ childlink.handle }}"
-                                        class="menu-drawer__menu-item menu-drawer__menu-item--parent focus-inset"
+                                        class="menu-drawer__menu-item menu-drawer__menu-item--parent"
                                       >
                                         <span class="menu-drawer__menu-item-text wrap-text">
                                           {{- childlink.title | escape -}}
@@ -518,7 +528,7 @@
                                             <a
                                               id="HeaderDrawer-{{ link.handle }}-{{ childlink.handle }}-{{ grandchildlink.handle }}"
                                               href="{{ grandchildlink.url }}"
-                                              class="menu-drawer__menu-item menu-drawer__menu-item--child {% if thumbnail[0] != blank %}link-menu-thumbnail{% endif %} focus-inset{% if grandchildlink.current %} menu-drawer__menu-item--active{% endif %}"
+                                              class="menu-drawer__menu-item menu-drawer__menu-item--child {% if thumbnail[0] != blank %}link-menu-thumbnail{% endif %}{% if grandchildlink.current %} menu-drawer__menu-item--active{% endif %}"
                                               {% if grandchildlink.current %}
                                                 aria-current="page"
                                               {% endif %}
@@ -567,7 +577,7 @@
                                   <a
                                     id="HeaderDrawer-{{ link.handle }}-{{ childlink.handle }}"
                                     href="{{ childlink.url }}"
-                                    class="menu-drawer__menu-item menu-drawer__menu-item--parent focus-inset{% if childlink.current %} menu-drawer__menu-item--active{% endif %}"
+                                    class="menu-drawer__menu-item menu-drawer__menu-item--parent{% if childlink.current %} menu-drawer__menu-item--active{% endif %}"
                                     {% if childlink.current %}
                                       aria-current="page"
                                     {% endif %}
@@ -608,7 +618,7 @@
                                         <a
                                           id="HeaderDrawer-{{ link.handle }}-{{ childlink.handle }}-{{ grandchildlink.handle }}"
                                           href="{{ grandchildlink.url }}"
-                                          class="menu-drawer__menu-item menu-drawer__menu-item--child {% if thumbnail[0] != blank %}link-menu-thumbnail{% endif %} focus-inset{% if grandchildlink.current %} menu-drawer__menu-item--active{% endif %}"
+                                          class="menu-drawer__menu-item menu-drawer__menu-item--child {% if thumbnail[0] != blank %}link-menu-thumbnail{% endif %}{% if grandchildlink.current %} menu-drawer__menu-item--active{% endif %}"
                                           {% if grandchildlink.current %}
                                             aria-current="page"
                                           {% endif %}
@@ -793,7 +803,7 @@
                   <a
                     id="HeaderDrawer-{{ link.handle }}"
                     href="{{ link.url }}"
-                    class="menu-drawer__menu-item {% if block_settings.drawer_dividers %} menu-drawer__menu-container--divider{% endif %} menu-drawer__menu-item--mainlist menu-drawer__animated-element focus-inset"
+                    class="menu-drawer__menu-item {% if block_settings.drawer_dividers %} menu-drawer__menu-container--divider{% endif %} menu-drawer__menu-item--mainlist menu-drawer__animated-element"
                     {% if link.current %}
                       aria-current="page"
                     {% endif %}
@@ -918,19 +928,22 @@
                   class="menu-drawer__submenu has-submenu color-custom-drawer"
                 >
                   <div
-                    class="menu-drawer__nav-buttons"
+                    class="menu-drawer__nav-buttons menu-drawer__nav-buttons--with-title"
                     ref="navButtons"
                   >
                     <button
                       class="button menu-drawer__back-button focus-inset"
                       aria-expanded="true"
                       on:click="header-drawer/back"
+                      aria-label="{{ 'actions.back_to_main_menu' | t }}"
                     >
                       <span class="svg-wrapper icon-caret icon-caret--backward">
                         {{- 'icon-caret.svg' | inline_asset_content -}}
                       </span>
-                      {{ 'content.localization_region_and_language' | t }}
                     </button>
+                    <span class="menu-drawer__title">
+                      {{- 'content.localization_region_and_language' | t -}}
+                    </span>
                     <button
                       class="button close-button menu-drawer__close-button focus-inset"
                       type="button"
@@ -938,7 +951,7 @@
                       on:click="header-drawer/close"
                     >
                       <span class="svg-wrapper header-drawer-icon header-drawer-icon--close">
-                        {{- 'icon-close.svg' | inline_asset_content -}}
+                        {{- 'icon-close-menu.svg' | inline_asset_content -}}
                       </span>
                     </button>
                   </div>
@@ -1039,6 +1052,14 @@
 </header-drawer>
 
 {% stylesheet %}
+  .icon-caret--forward svg {
+    transform: rotate(-90deg);
+  }
+
+  .icon-caret--backward svg {
+    transform: rotate(90deg);
+  }
+
   .header__icon--menu {
     position: initial;
   }
@@ -1232,6 +1253,23 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
+  }
+
+  /* Submenu header with a centered, clickable title flanked by the back and
+     close controls. */
+  .menu-drawer__nav-buttons--with-title {
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+  }
+
+  .menu-drawer__title {
+    justify-self: center;
+    min-width: 0;
+    padding: var(--padding-md) var(--padding-sm);
+    color: var(--color-foreground);
+    text-align: center;
+    text-decoration: none;
+    line-height: 1.2;
   }
 
   .menu-drawer__menu {
@@ -1480,9 +1518,29 @@
     box-shadow: none;
   }
 
+  /* Match the menu links' focus style: a rectangular outline in the current color.
+     These buttons sit flush against the drawer edges, so inset the outline to keep
+     it from being clipped. */
   .menu-drawer__close-button.menu-drawer__close-button,
   .menu-drawer__back-button.menu-drawer__back-button {
-    outline-color: var(--color-foreground-subdued);
+    border-radius: 0;
+    outline-offset: calc(var(--padding-2xs) * -1);
+  }
+
+  /* Safari < 16.4 draws the close focus ring via a pseudo-element; keep it
+     rectangular there too. */
+  .menu-drawer__close-button:focus-visible::after {
+    border-radius: 0;
+  }
+
+  .menu-drawer__nav-buttons--with-title .menu-drawer__back-button {
+    width: fit-content;
+    padding: var(--padding-lg);
+    justify-self: start;
+  }
+
+  .menu-drawer__nav-buttons--with-title .menu-drawer__close-button {
+    justify-self: end;
   }
 
   .menu-drawer__menu-item-text {

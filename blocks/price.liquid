@@ -2,6 +2,8 @@
   @param {object} [active_variant] - Pinned variant (e.g. curated-variant-list). Overrides the displayed price variant.
 {%- enddoc -%}
 
+{% render 'text-block-styles' %}
+
 {%- liquid
   assign block_settings = block.settings
   assign product_resource = closest.product

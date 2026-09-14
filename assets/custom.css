@@ -1376,6 +1376,12 @@ html[scroll-lock] {
     position: relative;
 }
 
+/* Horizon 4.1.5 dropped --button-size-sm (30px) from theme-styles-variables; the
+   predictive-search quick-add rules below still size from it, so keep the token here. */
+:root {
+    --button-size-sm: 30px;
+}
+
 /* Vendor only reveals quick-add on product-card hover, and these cards are
    product-component. Border/shadow reset mirrors .product-card. */
 .predictive-search-results__card--product .quick-add__button {
