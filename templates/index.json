@@ -4114,7 +4114,7 @@
                   "settings": {
                     "icon_position": "left",
                     "icon": "heart",
-                    "custom_svg": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\" aria-hidden=\"true\" focusable=\"false\"><path fill=\"currentColor\" d=\"M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z\"/></svg>",
+                    "custom_svg": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewbox=\"0 0 24 24\" aria-hidden=\"true\" focusable=\"false\"><path fill=\"currentColor\" d=\"M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z\"></path></svg>",
                     "icon_width": 22,
                     "use_height": true,
                     "icon_height": 22,
@@ -4236,7 +4236,7 @@
                   "settings": {
                     "icon_position": "left",
                     "icon": "map_pin",
-                    "custom_svg": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\" aria-hidden=\"true\" focusable=\"false\"><path fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.5\" stroke-linejoin=\"round\" stroke-linecap=\"round\" d=\"M4 3h9.5l1 2.5-1.5 2.5 1.5 2.5h6v3l2.5 2-1 2.5-3-.5-2.5 1-2.5-1-3 2-3.5-.5-3 .5-1-5.5z\"/></svg>",
+                    "custom_svg": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewbox=\"0 0 24 24\" aria-hidden=\"true\" focusable=\"false\"><path fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.5\" stroke-linejoin=\"round\" stroke-linecap=\"round\" d=\"M4 3h9.5l1 2.5-1.5 2.5 1.5 2.5h6v3l2.5 2-1 2.5-3-.5-2.5 1-2.5-1-3 2-3.5-.5-3 .5-1-5.5z\"></path></svg>",
                     "icon_width": 22,
                     "use_height": true,
                     "icon_height": 22,
@@ -4358,7 +4358,7 @@
                   "settings": {
                     "icon_position": "left",
                     "icon": "star",
-                    "custom_svg": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\" aria-hidden=\"true\" focusable=\"false\"><path fill=\"currentColor\" d=\"M9.5 6Q9.5 14.5 18 14.5Q9.5 14.5 9.5 23Q9.5 14.5 1 14.5Q9.5 14.5 9.5 6ZM18 1.5Q18 6 22.5 6Q18 6 18 10.5Q18 6 13.5 6Q18 6 18 1.5Z\"/></svg>",
+                    "custom_svg": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewbox=\"0 0 24 24\" aria-hidden=\"true\" focusable=\"false\"><path fill=\"currentColor\" d=\"M9.5 6Q9.5 14.5 18 14.5Q9.5 14.5 9.5 23Q9.5 14.5 1 14.5Q9.5 14.5 9.5 6ZM18 1.5Q18 6 22.5 6Q18 6 18 10.5Q18 6 13.5 6Q18 6 18 1.5Z\"></path></svg>",
                     "icon_width": 22,
                     "use_height": true,
                     "icon_height": 22,
@@ -4860,6 +4860,12 @@
     "178457773879567f1c": {
       "type": "_blocks",
       "blocks": {
+        "sendlane_marketing_automation_sendlane_forms_block_Qft3UE": {
+          "type": "shopify://apps/sendlane-marketing-automation/blocks/sendlane-forms-block/5a768830-d9c3-4d16-9e83-ae2a731c69be",
+          "settings": {
+            "form_key": "eyJkb21haW4iOiJzaXBzaXBob29yYXlkZXNpZ24iLCJmb3JtX2lkIjoiOGQ4ZGI3MzQtYjEwMi00ZTk3LWFjOTItYTE2YTI5YWQ3NWJiIn0="
+          }
+        },
         "sendlane_marketing_automation_sendlane_forms_block_TchAnU": {
           "type": "shopify://apps/sendlane-marketing-automation/blocks/sendlane-forms-block/5a768830-d9c3-4d16-9e83-ae2a731c69be",
           "settings": {
@@ -4874,6 +4880,7 @@
         }
       },
       "block_order": [
+        "sendlane_marketing_automation_sendlane_forms_block_Qft3UE",
         "sendlane_marketing_automation_sendlane_forms_block_TchAnU",
         "sendlane_marketing_automation_sendlane_forms_block_hhL4dj"
       ],
