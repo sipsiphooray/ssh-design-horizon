@@ -20,5 +20,8 @@
     /* Light border slot (color3). v4's --color-border resolves to the dark
        foreground; store borders (e.g. menu-drawer dividers) were light in v3. */
     --color-border-light: {{ settings.color_palette.color3 }};
+    /* Extra palette slots for static CSS (custom.css) that can't read settings. */
+    --color-palette-color10: {{ settings.color_palette.color10 }};
+    --color-palette-color13: {{ settings.color_palette.color13 }};
   }
 {% endstyle %}

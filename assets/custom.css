@@ -77,7 +77,7 @@ a.size-style.link:after {
     object-fit: contain;
 }
 
-.button:has(.button--arrow),.button-secondary:has(.button--arrow),.button-custom:has(.button--arrow) {
+.button:has(.button--arrow),.button-secondary:has(.button--arrow),.button-custom:has(.button--arrow),.button-unstyled:has(.button--arrow) {
     display: flex;
     align-items: center;
     gap: var(--gap-xs);
@@ -86,6 +86,67 @@ a.size-style.link:after {
 
 .button--arrow svg {
     display: block;
+}
+
+/* Homepage "About" section (ssh_about_seo, templates/index.json), built from native
+   text/group/button/text-icon blocks. Hooks are the blocks' own "CSS class" settings. */
+.ssh-about-badge .icon-block__media {
+    color: var(--color-palette-color13);
+}
+
+.ssh-about-badge--map .icon-block__media {
+    color: var(--color-palette-color10);
+}
+
+.ssh-about-badges .ssh-about-badge + .ssh-about-badge,
+.ssh-about-links .button-unstyled + .button-unstyled {
+    padding-inline-start: var(--gap-xl);
+    border-inline-start: 1px solid rgb(var(--color-foreground-rgb) / var(--opacity-20));
+}
+
+.ssh-about-links .button-unstyled {
+    gap: var(--gap-2xs);
+    font-size: var(--font-size--sm);
+    letter-spacing: var(--letter-spacing-sm);
+    text-transform: uppercase;
+    text-decoration: underline;
+    text-underline-offset: 4px;
+}
+
+.ssh-about-links .button--arrow svg {
+    width: var(--icon-size-xs);
+    height: auto;
+}
+
+.text-block.ssh-about-eyebrow,
+.text-block.ssh-about-eyebrow > * {
+    letter-spacing: 0.18em !important;
+}
+
+/* Native button-custom inherits the store's global button style (square, CTA-sized);
+   this row wants compact rounded chips. */
+.ssh-about-collections .button-custom {
+    padding: var(--padding-xs) var(--padding-xl);
+    border-radius: 999px;
+    font-size: var(--font-size--sm);
+    font-weight: var(--font-body--weight);
+}
+
+@media screen and (max-width: 749px) {
+    .ssh-about-badges .ssh-about-badge + .ssh-about-badge,
+    .ssh-about-links .button-unstyled + .button-unstyled {
+        padding-inline-start: 0;
+        border-inline-start: 0;
+    }
+
+    /* Tighter tracking/padding on phones; text stays at --font-size--sm. */
+    .ssh-about-links .button-unstyled {
+        letter-spacing: normal;
+    }
+
+    .ssh-about-collections .button-custom {
+        padding: var(--padding-xs) var(--padding-sm);
+    }
 }
 
 .product-card .jdgm-star.jdgm-star {
