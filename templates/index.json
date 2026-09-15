@@ -4862,6 +4862,7 @@
       "blocks": {
         "sendlane_marketing_automation_sendlane_forms_block_Qft3UE": {
           "type": "shopify://apps/sendlane-marketing-automation/blocks/sendlane-forms-block/5a768830-d9c3-4d16-9e83-ae2a731c69be",
+          "name": "Sendlane Forms (questionaire welcome popup)",
           "settings": {
             "form_key": "eyJkb21haW4iOiJzaXBzaXBob29yYXlkZXNpZ24iLCJmb3JtX2lkIjoiOGQ4ZGI3MzQtYjEwMi00ZTk3LWFjOTItYTE2YTI5YWQ3NWJiIn0="
           }
