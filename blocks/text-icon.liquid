@@ -2,6 +2,20 @@
 {% assign block_settings = block.settings %}
 {% assign icon_block_class = 'icon-block__media icon-block-' | append: block.id %}
 
+{% liquid
+  # In use-height mode custom.css renders the image `icon_height` tall with width:auto, so
+  # its real width is height x aspect ratio. Pass that (not the width setting, which the
+  # CSS ignores) so icon-or-image's srcset/sizes fetch a rendition that is actually sharp.
+  assign icon_width = block_settings.icon_width
+  if block_settings.use_height != blank and block_settings.image_upload != blank
+    assign icon_height = block_settings.icon_height
+    if block_settings.custom_mobile_height == true and block_settings.mobile-height > icon_height
+      assign icon_height = block_settings.mobile-height
+    endif
+    assign icon_width = icon_height | times: block_settings.image_upload.aspect_ratio | ceil
+  endif
+%}
+
 {% capture children %}
   {% content_for 'blocks' %}
 {% endcapture %}
@@ -67,7 +81,7 @@
             {% render 'icon-or-image',
                 icon: block_settings.icon,
                 image_upload: block_settings.image_upload,
-                width: block_settings.icon_width,
+                width: icon_width,
                 class_name: icon_block_class,
                 attributes: block.shopify_attributes
             %}
