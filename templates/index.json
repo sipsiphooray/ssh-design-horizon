@@ -1949,7 +1949,7 @@
               "type": "custom-liquid",
               "name": "Pills",
               "settings": {
-                "custom_liquid": "<div class=\"launch-badges\">\n  <span class=\"launch-badges__live\">NOW LIVE \u2726</span>\n  <span class=\"launch-badges__save\">SAVE 10%</span>\n</div>\n\n<style>\n  .launch-badges {\n    display: flex;\n    gap: 10px;\n    font-family: 'Poppins', sans-serif;\n  }\n  .launch-badges span {\n    font-size: 11px;\n    letter-spacing: 0.14em;\n    padding: 7px 14px;\n    border-radius: 999px;\n    white-space: nowrap;\n  }\n  .launch-badges__live {\n    background: #1e1e1e;\n    color: #ffffff;\n    font-weight: 600;\n  }\n  .launch-badges__save {\n    background: #FBE1EC;\n    color: #c2497a;\n    font-weight: 700;\n  }\n</style>"
+                "custom_liquid": "<div class=\"launch-badges\">\n  <span class=\"launch-badges__live\">NOW LIVE ✦</span>\n  <span class=\"launch-badges__save\">SAVE 10%</span>\n</div>\n\n<style>\n  .launch-badges {\n    display: flex;\n    gap: 10px;\n    font-family: 'Poppins', sans-serif;\n  }\n  .launch-badges span {\n    font-size: 11px;\n    letter-spacing: 0.14em;\n    padding: 7px 14px;\n    border-radius: 999px;\n    white-space: nowrap;\n  }\n  .launch-badges__live {\n    background: #1e1e1e;\n    color: #ffffff;\n    font-weight: 600;\n  }\n  .launch-badges__save {\n    background: #FBE1EC;\n    color: #c2497a;\n    font-weight: 700;\n  }\n</style>"
               },
               "blocks": {}
             },
@@ -2769,7 +2769,7 @@
               "type": "text",
               "name": "t:names.text",
               "settings": {
-                "text": "<p>At <strong>Sip-Sip Hooray\u00ae</strong>, we also know that looking cute and trendy doesn't have to break the bank. We take pride in affordability and we launch fresh collections every month to keep your style on point. Not to mention, you\u2019ll love our customer service just as much as you love our designs!</p>",
+                "text": "<p>At <strong>Sip-Sip Hooray®</strong>, we also know that looking cute and trendy doesn't have to break the bank. We take pride in affordability and we launch fresh collections every month to keep your style on point. Not to mention, you’ll love our customer service just as much as you love our designs!</p>",
                 "width": "fit-content",
                 "max_width": "normal",
                 "alignment": "left",
@@ -3447,6 +3447,7 @@
         "group_qwbtmz",
         "group_7tfRFL"
       ],
+      "disabled": true,
       "custom_css": [
         ".Shopvid__VideoBlock__Card .Shopvid__VideoBlock__ProductCard {background: transparent;}",
         ".Shopvid__VideoBlock__Carousel {padding-block: 0;}",
@@ -3492,8 +3493,7 @@
         "css_class": "",
         "add_section_id": false,
         "section_id": ""
-      },
-      "disabled": true
+      }
     },
     "178310801969b21aeb": {
       "type": "_blocks",
@@ -3630,7 +3630,7 @@
               "type": "text",
               "name": "t:names.header",
               "settings": {
-                "text": "<p>Distinct By Design\u2122</p>",
+                "text": "<p>Distinct By Design™</p>",
                 "width": "fit-content",
                 "max_width": "normal",
                 "alignment": "left",
@@ -3970,7 +3970,7 @@
           "type": "text",
           "name": "t:names.text",
           "settings": {
-            "text": "<p>Sip-Sip Hooray! designs original UVDTF glass cups, mugs, and tumblers with bamboo lids and reusable straws \u2014 printed in-house on premium, heat-resistant glass with vibrant, permanent prints that won't fade, and dishwasher safe for everyday sipping.</p>",
+            "text": "<p>Sip-Sip Hooray! designs original UVDTF glass cups, mugs, and tumblers with bamboo lids and reusable straws — printed in-house on premium, heat-resistant glass with vibrant, permanent prints that won't fade, and dishwasher safe for everyday sipping.</p>",
             "width": "100%",
             "max_width": "normal",
             "alignment": "center",
