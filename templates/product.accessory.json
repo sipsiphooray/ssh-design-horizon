@@ -541,7 +541,7 @@
                     "text_E9xwtU": {
                       "type": "text",
                       "settings": {
-                        "text": "<p>Every Sip-Sip Hooray order includes <strong>one free replacement per order, for life</strong>.</p><p>Replacements are for the <strong>same item originally purchased</strong> and require a <strong>clear photo of the damage</strong>. Exchanges for different items are not allowed. Applies to eligible products and US orders only.</p><p><a href=\"https://sipsiphooraydesign.com/policies/contact-information\" title=\"Contact Information\">Contact Us</a></p>",
+                        "text": "<p>Every Sip-Sip Hooray! order includes <strong>one free replacement per order, for life</strong>.</p><p>Replacements are for the <strong>same item originally purchased</strong> and require a <strong>clear photo of the damage</strong>. Exchanges for different items are not allowed. Applies to eligible products and US orders only.</p><p><a href=\"https://sipsiphooraydesign.com/policies/contact-information\" title=\"Contact Information\">Contact Us</a></p>",
                         "width": "100%",
                         "max_width": "none",
                         "alignment": "left",
@@ -1676,7 +1676,7 @@
               "type": "text",
               "name": "t:names.heading",
               "settings": {
-                "text": "<h2>Thanks, I Got It At Sip-Sip Hooray.</h2>",
+                "text": "<h2>Thanks, I Got It At Sip-Sip Hooray!.</h2>",
                 "width": "100%",
                 "max_width": "none",
                 "alignment": "left",
@@ -1889,7 +1889,7 @@
             "text_n7UhBT": {
               "type": "text",
               "settings": {
-                "text": "<p>Choose the vessel that fits your day. Opt for our clear and frosted glass for a pure, zero-taste transfer experience, or grab our lightweight acrylic options for durable, shatter-resistant sipping on the go. Every cup is BPA-free and crafted to keep your favorite brews tasting exactly as they should.</p>",
+                "text": "<p>Choose the vessel that fits your day. Opt for our clear and frosted glass for a pure, zero-taste transfer experience, or grab our lightweight plastic options for durable, shatter-resistant sipping on the go. Every cup is BPA-free and crafted to keep your favorite brews tasting exactly as they should.</p>",
                 "width": "100%",
                 "max_width": "normal",
                 "alignment": "left",
@@ -2333,7 +2333,7 @@
               "name": "Accordion row (dynamic)",
               "settings": {
                 "heading": "What are your cups made from?",
-                "content": "<p>Our cups and straws are made from 100% non-toxic, lead-free borosilicate glass, a very long-lasting and sturdy material. Our lids are made from sustainably sourced, reusable bamboo.</p>",
+                "content": "<p>Our glass cups and glass straws are made from non-toxic, lead-free, premium heat-resistant glass that is long-lasting and sturdy. Our 40oz plastic tumblers are BPA-free and shatter-resistant. Our lids are made from sustainably sourced, reusable bamboo.</p>",
                 "open_by_default": false,
                 "icon": "none",
                 "width": 20,
@@ -2359,7 +2359,7 @@
               "name": "Accordion row (dynamic)",
               "settings": {
                 "heading": "How do I care for my bamboo lid?",
-                "content": "<p>Because bamboo is a natural, porous material, it needs specific care. Hand wash only (no soaking), and ensure it is dried completely before sealing it back on your cup. Do not leave your lid sealed on your cup for more than 24 hours at a time, as trapped moisture without airflow can cause mold growth. (Note: Check out our acrylic lids for a dishwasher-safe, low-maintenance option!)</p>",
+                "content": "<p>Because bamboo is a natural, porous material, it needs specific care. Hand wash only (no soaking), and ensure it is dried completely before sealing it back on your cup. Do not leave your lid sealed on your cup for more than 24 hours at a time, as trapped moisture without airflow can cause mold growth. (Note: Check out our plastic lids for a dishwasher-safe, low-maintenance option!)</p>",
                 "open_by_default": false,
                 "icon": "none",
                 "width": 20,
@@ -2398,7 +2398,7 @@
               "name": "Accordion row (dynamic)",
               "settings": {
                 "heading": "Can I return or exchange my cup?",
-                "content": "<p>We accept returns on non-used, non-personalized items within 7 days of delivery. We are also happy to replace or refund any items that arrive broken in transit or appear to be defective. If you need to cancel or swap an item on a new order, please reach out within 12 hours of placing the order!</p>",
+                "content": "<p>We accept returns on non-used, non-personalized items within 14 days of delivery. We are also happy to replace or refund any items that arrive broken in transit or appear to be defective. If you need to cancel or swap an item on a new order, please reach out within 12 hours of placing the order!</p>",
                 "open_by_default": false,
                 "icon": "none",
                 "width": 20,

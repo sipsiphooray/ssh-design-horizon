@@ -69,7 +69,7 @@
           "type": "text",
           "name": "t:names.heading",
           "settings": {
-            "text": "<h2>Sip-Sip Hooray Reviews ⭐</h2>",
+            "text": "<h2>Sip-Sip Hooray! Reviews ⭐</h2>",
             "width": "100%",
             "max_width": "normal",
             "alignment": "center",

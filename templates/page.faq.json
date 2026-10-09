@@ -129,7 +129,7 @@
                   "name": "Accordion row (dynamic)",
                   "settings": {
                     "heading": "What types of cups do you offer?",
-                    "content": "<p>We carry 32 oz tumblers, 16 oz and 20 oz glass cups, 17 oz glass mugs, 40 oz plastic tumblers, and 40 oz glass tumblers. Each style is made with durable, non-toxic materials.</p>",
+                    "content": "<p>We carry 16 oz glass cups (clear or frosted), 17 oz glass mugs, 32 oz glass tumblers, 40 oz glass tumblers, and 40 oz plastic tumblers. Each style is made with durable, non-toxic materials.</p>",
                     "open_by_default": false,
                     "icon": "none",
                     "width": 20
@@ -141,7 +141,7 @@
                   "name": "Accordion row (dynamic)",
                   "settings": {
                     "heading": "What are your cups made from?",
-                    "content": "<p>Glass options are made from lead-free borosilicate glass. Plastic tumblers are BPA-free and shatter-resistant. Designs are printed with UV-cured DTF for a permanent, glossy finish that won’t peel or fade.</p>",
+                    "content": "<p>Glass options are made from lead-free, premium heat-resistant glass. Plastic tumblers are BPA-free and shatter-resistant. Designs are printed with UV-cured DTF for a permanent, glossy finish that won’t peel or fade.</p>",
                     "open_by_default": false,
                     "icon": "none",
                     "width": 20
@@ -153,7 +153,7 @@
                   "name": "Accordion row (dynamic)",
                   "settings": {
                     "heading": "Do all cups come with lids?",
-                    "content": "<p>Most styles include a lid. Options vary by product: bamboo lids (hand-wash only) or dishwasher-safe acrylic lids. Check the individual product listing for details.</p>",
+                    "content": "<p>Most styles include a lid. Options vary by product: bamboo lids (hand-wash only) or dishwasher-safe plastic lids. Check the individual product listing for details.</p>",
                     "open_by_default": false,
                     "icon": "none",
                     "width": 20

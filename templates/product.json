@@ -541,7 +541,7 @@
                     "text_E9xwtU": {
                       "type": "text",
                       "settings": {
-                        "text": "<p>Every Sip-Sip Hooray order includes <strong>one free replacement per order, for life</strong>.</p><p>Replacements are for the <strong>same item originally purchased</strong> and require a <strong>clear photo of the damage</strong>. Exchanges for different items are not allowed. Applies to eligible products and US orders only.</p><p><a href=\"https://sipsiphooraydesign.com/policies/contact-information\" title=\"Contact Information\">Contact Us</a></p>",
+                        "text": "<p>Every Sip-Sip Hooray! order includes <strong>one free replacement per order, for life</strong>.</p><p>Replacements are for the <strong>same item originally purchased</strong> and require a <strong>clear photo of the damage</strong>. Exchanges for different items are not allowed. Applies to eligible products and US orders only.</p><p><a href=\"https://sipsiphooraydesign.com/policies/contact-information\" title=\"Contact Information\">Contact Us</a></p>",
                         "width": "100%",
                         "max_width": "none",
                         "alignment": "left",
@@ -696,7 +696,7 @@
                     "text-1": {
                       "type": "text",
                       "settings": {
-                        "text": "<p><strong>Bamboo lid care (for bamboo lid styles)</strong></p><ul><li><strong>No soaking. Hand wash only.</strong> Dry completely before putting it back on the cup.</li><li><strong>Do not leave the lid on for more than 24 hours</strong> at a time. Closed containers with no airflow can cause growth.</li><li><strong>We are not responsible for lids that develop mold or fuzzies</strong> due to improper care. Want low maintenance? Choose a plastic dishwasher-safe lid style.</li></ul><p><strong>Dishwasher guidance</strong></p><ul><li>Glass cups: Top rack is usually fine, but soaps, heat, and water hardness vary. Hand wash is safest.</li><li><strong>Do not dishwash plastic cups or tumblers.<br/></strong></li></ul><p><strong>No vent hole note</strong></p><ul><li>Our lids <strong>do not have vent holes.</strong> This does not affect suction as long as the cup is not overfilled.</li></ul><p><strong>Straw note (40oz glass)</strong></p><ul><li>The <strong>glass straw may not reach the very bottom</strong>, but it still sips perfectly. Every 40oz glass tumbler also includes a <strong>plastic straw that reaches the bottom</strong>.<br/></li></ul><p><strong>Why liquid creeps up the straw (easy fix)</strong></p><ul><li>If liquid rises when inserting the straw after securing the lid, it is <strong>air displacement</strong>. Insert the straw <strong>before </strong>sealing the lid to avoid it.</li></ul><p><strong>Plastic tumbler scuffing PSA</strong></p><ul><li>Acrylic and plastic can pick up light surface marks from static and friction during shipping or normal use. If you are sensitive to that look, choose glass. We do not accept returns or exchanges for slight shipping scuffs.</li></ul><p><strong>Need help choosing?<br/></strong>Message us and we will help you pick the best size and lid style for how you sip.</p>",
+                        "text": "<p><strong>Bamboo lid care (for bamboo lid styles)</strong></p><ul><li><strong>No soaking. Hand wash only.</strong> Dry completely before putting it back on the cup.</li><li><strong>Do not leave the lid on for more than 24 hours</strong> at a time. Closed containers with no airflow can cause growth.</li><li><strong>We are not responsible for lids that develop mold or fuzzies</strong> due to improper care. Want low maintenance? Choose a plastic dishwasher-safe lid style.</li></ul><p><strong>Dishwasher guidance</strong></p><ul><li>Glass cups: Top rack is usually fine, but soaps, heat, and water hardness vary. Hand wash is safest.</li><li><strong>Do not dishwash plastic cups or tumblers.<br/></strong></li></ul><p><strong>No vent hole note</strong></p><ul><li>Our lids <strong>do not have vent holes.</strong> This does not affect suction as long as the cup is not overfilled.</li></ul><p><strong>Straw note (40oz glass)</strong></p><ul><li>The <strong>glass straw may not reach the very bottom</strong>, but it still sips perfectly. Every 40oz glass tumbler also includes a <strong>plastic straw that reaches the bottom</strong>.<br/></li></ul><p><strong>Why liquid creeps up the straw (easy fix)</strong></p><ul><li>If liquid rises when inserting the straw after securing the lid, it is <strong>air displacement</strong>. Insert the straw <strong>before </strong>sealing the lid to avoid it.</li></ul><p><strong>Plastic tumbler scuffing PSA</strong></p><ul><li>Plastic can pick up light surface marks from static and friction during shipping or normal use. If you are sensitive to that look, choose glass. We do not accept returns or exchanges for slight shipping scuffs.</li></ul><p><strong>Need help choosing?<br/></strong>Message us and we will help you pick the best size and lid style for how you sip.</p>",
                         "width": "100%",
                         "max_width": "normal",
                         "alignment": "left",
@@ -1821,7 +1821,7 @@
               "type": "text",
               "name": "t:names.heading",
               "settings": {
-                "text": "<h2>Thanks, I Got It At Sip-Sip Hooray.</h2>",
+                "text": "<h2>Thanks, I Got It At Sip-Sip Hooray!.</h2>",
                 "width": "100%",
                 "max_width": "none",
                 "alignment": "left",
@@ -2034,7 +2034,7 @@
             "text_n7UhBT": {
               "type": "text",
               "settings": {
-                "text": "<p>Choose the vessel that fits your day. Opt for our clear and frosted glass for a pure, zero-taste transfer experience, or grab our lightweight acrylic options for durable, shatter-resistant sipping on the go. Every cup is BPA-free and crafted to keep your favorite brews tasting exactly as they should.</p>",
+                "text": "<p>Choose the vessel that fits your day. Opt for our clear and frosted glass for a pure, zero-taste transfer experience, or grab our lightweight plastic options for durable, shatter-resistant sipping on the go. Every cup is BPA-free and crafted to keep your favorite brews tasting exactly as they should.</p>",
                 "width": "100%",
                 "max_width": "normal",
                 "alignment": "left",
@@ -2460,7 +2460,7 @@
               "name": "Accordion row (dynamic)",
               "settings": {
                 "heading": "What are your cups made from?",
-                "content": "<p>Our cups and straws are made from 100% non-toxic, lead-free borosilicate glass, a very long-lasting and sturdy material. Our lids are made from sustainably sourced, reusable bamboo.</p>",
+                "content": "<p>Our glass cups and glass straws are made from non-toxic, lead-free, premium heat-resistant glass that is long-lasting and sturdy. Our 40oz plastic tumblers are BPA-free and shatter-resistant. Our lids are made from sustainably sourced, reusable bamboo.</p>",
                 "open_by_default": false,
                 "icon": "none",
                 "width": 20,
@@ -2486,7 +2486,7 @@
               "name": "Accordion row (dynamic)",
               "settings": {
                 "heading": "How do I care for my bamboo lid?",
-                "content": "<p>Because bamboo is a natural, porous material, it needs specific care. Hand wash only (no soaking), and ensure it is dried completely before sealing it back on your cup. Do not leave your lid sealed on your cup for more than 24 hours at a time, as trapped moisture without airflow can cause mold growth. (Note: Check out our acrylic lids for a dishwasher-safe, low-maintenance option!)</p>",
+                "content": "<p>Because bamboo is a natural, porous material, it needs specific care. Hand wash only (no soaking), and ensure it is dried completely before sealing it back on your cup. Do not leave your lid sealed on your cup for more than 24 hours at a time, as trapped moisture without airflow can cause mold growth. (Note: Check out our plastic lids for a dishwasher-safe, low-maintenance option!)</p>",
                 "open_by_default": false,
                 "icon": "none",
                 "width": 20,
@@ -2525,7 +2525,7 @@
               "name": "Accordion row (dynamic)",
               "settings": {
                 "heading": "Can I return or exchange my cup?",
-                "content": "<p>We accept returns on non-used, non-personalized items within 7 days of delivery. We are also happy to replace or refund any items that arrive broken in transit or appear to be defective. If you need to cancel or swap an item on a new order, please reach out within 12 hours of placing the order!</p>",
+                "content": "<p>We accept returns on non-used, non-personalized items within 14 days of delivery. We are also happy to replace or refund any items that arrive broken in transit or appear to be defective. If you need to cancel or swap an item on a new order, please reach out within 12 hours of placing the order!</p>",
                 "open_by_default": false,
                 "icon": "none",
                 "width": 20,

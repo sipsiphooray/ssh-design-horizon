@@ -2769,7 +2769,7 @@
               "type": "text",
               "name": "t:names.text",
               "settings": {
-                "text": "<p>At <strong>Sip-Sip Hooray®</strong>, we also know that looking cute and trendy doesn't have to break the bank. We take pride in affordability and we launch fresh collections every month to keep your style on point. Not to mention, you’ll love our customer service just as much as you love our designs!</p>",
+                "text": "<p>At <strong>Sip-Sip Hooray!®</strong>, we also know that looking cute and trendy doesn't have to break the bank. We take pride in affordability and we launch fresh collections every month to keep your style on point. Not to mention, you’ll love our customer service just as much as you love our designs!</p>",
                 "width": "fit-content",
                 "max_width": "normal",
                 "alignment": "left",
@@ -3970,7 +3970,7 @@
           "type": "text",
           "name": "t:names.text",
           "settings": {
-            "text": "<p>Sip-Sip Hooray! designs original UVDTF glass cups, mugs, and tumblers with bamboo lids and reusable straws — printed in-house on premium, heat-resistant glass with vibrant, permanent prints that won't fade, and dishwasher safe for everyday sipping.</p>",
+            "text": "<p>Sip-Sip Hooray! designs original UVDTF glass cups, mugs, and tumblers with bamboo lids and reusable straws, printed in-house on premium, heat-resistant glass with vibrant, permanent prints that won't fade, and top-rack top-rack dishwasher safe for everyday sipping.</p>",
             "width": "100%",
             "max_width": "normal",
             "alignment": "center",
@@ -4826,7 +4826,7 @@
       "custom_css": [
         "{--max-width--body-normal: 37.5em;}"
       ],
-      "name": "About Sip-Sip Hooray",
+      "name": "About Sip-Sip Hooray!",
       "settings": {
         "content_direction": "column",
         "vertical_on_mobile": true,
