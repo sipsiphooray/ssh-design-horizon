@@ -1016,7 +1016,7 @@
         "image_C8m3Gy": {
           "type": "image",
           "settings": {
-            "image": "shopify://shop_images/Wounded_Warrior_Project_logo.svg",
+            "image": "shopify://shop_images/pf_logo_gradientlogo.jpg",
             "link": "",
             "image_ratio": "adapt",
             "width": "custom",
@@ -1128,7 +1128,7 @@
               "type": "text",
               "name": "t:names.heading",
               "settings": {
-                "text": "<h2>SEPTEMBER 2026</h2>",
+                "text": "<h2>OCTOBER 2026</h2>",
                 "width": "fit-content",
                 "max_width": "normal",
                 "alignment": "left",
@@ -1162,7 +1162,7 @@
             "text_RzAQbb": {
               "type": "text",
               "settings": {
-                "text": "<p><strong>Pour It Forward: Wounded Warrior Project<br/></strong></p><p>This September, we’re proud to support <strong>Wounded Warrior Project® (WWP)</strong>, an organization dedicated to helping post-9/11 wounded, ill, and injured veterans and their families. Through programs supporting mental and physical wellness, benefits assistance, peer connection, and more, WWP helps veterans and their families thrive for a lifetime.</p><p><strong>Throughout September, 10% of Sip-Sip Hooray! profits will be donated to Wounded Warrior Project.</strong></p><p>As always, <em>thank you</em> for helping us pour into <em>something bigger.</em> 💛 <br/><a href=\"https://support.woundedwarriorproject.org/Default.aspx?tsid=43458&campaignSource=ONLINE&source=BS26038GAABREMA&gclsrc=aw.ds&gad_source=1&gad_campaignid=8674262121&gbraid=0AAAAADg1WjpHYoXz1DpdJZV457fLlXyll&gclid=Cj0KCQjwk5nVBhDiARIsAHNGqaefZRp9znpi8TjfwkZTa5jtec68dH_bV4h8whgqeJkhNVHiNS-g_0IaAu9BEALw_wcB\" target=\"_blank\" title=\"https://support.woundedwarriorproject.org/Default.aspx?tsid=43458&campaignSource=ONLINE&source=BS26038GAABREMA&gclsrc=aw.ds&gad_source=1&gad_campaignid=8674262121&gbraid=0AAAAADg1WjpHYoXz1DpdJZV457fLlXyll&gclid=Cj0KCQjwk5nVBhDiARIsAHNGqaefZRp9znpi8TjfwkZTa5jtec68dH_bV4h8whgqeJkhNVHiNS-g_0IaAu9BEALw_wcB\">Read more or donate directly here. </a></p>",
+                "text": "<p><strong>Pour It Forward: The Pink Fund<br/></strong></p><p>Founded in 2006 by breast cancer survivor Molly MacDonald, <strong>Pink Fund</strong> is a nonprofit dedicated to easing the financial burden of breast cancer treatment. They provide 90 days of financial assistance for everyday essentials like housing, utilities, and transportation, giving patients one less thing to worry about while they focus on healing. Because fighting breast cancer is hard enough without having to fight to keep the lights on, too. 💗</p><p><strong>Throughout September Sip-Sip Hooray will be donating to The Pink Fund.&nbsp;</strong></p><p>As always, <em>thank you</em> for helping us pour into <em>something bigger.</em> 💛&nbsp;<br/><a href=\"https://pinkfund.org/\" target=\"_blank\" title=\"https://pinkfund.org/\">Read more or donate directly here.&nbsp;</a></p>",
                 "width": "100%",
                 "max_width": "none",
                 "alignment": "left",
@@ -1205,7 +1205,6 @@
         "image_C8m3Gy",
         "group_PpGfJT"
       ],
-      "disabled": true,
       "custom_css": [],
       "name": "Cause of the Month",
       "settings": {
@@ -1548,7 +1547,7 @@
       "name": "t:names.curated_variant_list",
       "settings": {
         "curated_list": "pif",
-        "collection": "pif",
+        "collection": "breast-cancer-awareness",
         "layout_type": "grid",
         "carousel_on_mobile": false,
         "max_products": 4,
@@ -1862,10 +1861,9 @@
           ]
         }
       },
-      "disabled": true,
       "name": "Cause of the Month w/ products",
       "settings": {
-        "collection": "pif",
+        "collection": "breast-cancer-awareness",
         "layout_type": "carousel",
         "carousel_on_mobile": false,
         "carousel_contain_width": false,
