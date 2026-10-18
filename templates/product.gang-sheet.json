@@ -1080,7 +1080,7 @@
         "equal_columns": true,
         "limit_details_width": true,
         "gap": 24,
-        "enable_sticky_add_to_cart": true,
+        "enable_sticky_add_to_cart": false,
         "background_color": "",
         "padding-block-start": 12,
         "padding-block-end": 52
