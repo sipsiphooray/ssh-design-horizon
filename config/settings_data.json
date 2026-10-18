@@ -232,6 +232,11 @@
         "settings": {
           "event_id": "SVOZTMDoIiSLA"
         }
+      },
+      "14395122966275055373": {
+        "type": "shopify://apps/build-a-gang-sheet/blocks/gang-edit/ee9ed31c-1d66-4e11-bf77-f31e69c2ec2b",
+        "disabled": false,
+        "settings": {}
       }
     },
     "color_palette": {
