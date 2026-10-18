@@ -299,7 +299,8 @@
                 "padding-inline-start": 0,
                 "padding-inline-end": 0
               },
-              "blocks": {}
+              "blocks": {},
+              "disabled": true
             },
             "sibling_swatches_iHkm3i": {
               "type": "_sibling-swatches",
@@ -326,7 +327,8 @@
                 "mobile-padding-inline-start": 0,
                 "mobile-padding-inline-end": 0
               },
-              "blocks": {}
+              "blocks": {},
+              "disabled": true
             },
             "subscriptions_app_block_8cfzFx": {
               "type": "shopify://apps/subscriptions/blocks/app-block/a3bfe9ec-96f8-4508-a003-df608a36d2ad",
