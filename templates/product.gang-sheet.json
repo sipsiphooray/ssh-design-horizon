@@ -26,17 +26,6 @@
     "main": {
       "type": "product-information",
       "blocks": {
-        "build_a_gang_sheet_main_product_zUanfE": {
-          "type": "shopify://apps/build-a-gang-sheet/blocks/main-product/ee9ed31c-1d66-4e11-bf77-f31e69c2ec2b",
-          "settings": {
-            "btn-label": "Build your own Gang Sheet",
-            "btn-bg": "#000000",
-            "btn-fg": "#ffffff",
-            "show_quantity": false,
-            "product": "{{closest.product}}",
-            "custom_button_css": ""
-          }
-        },
         "media-gallery": {
           "type": "_product-media-gallery",
           "static": true,
@@ -1047,6 +1036,17 @@
               "settings": {
                 "mp_tiktok_feed_id": "1803-164740"
               }
+            },
+            "gang_sheet_builder": {
+              "type": "shopify://apps/build-a-gang-sheet/blocks/main-product/ee9ed31c-1d66-4e11-bf77-f31e69c2ec2b",
+              "settings": {
+                "btn-label": "Build your own Gang Sheet",
+                "btn-bg": "#000000",
+                "btn-fg": "#ffffff",
+                "show_quantity": false,
+                "product": "{{closest.product}}",
+                "custom_button_css": ""
+              }
             }
           },
           "block_order": [
@@ -1056,6 +1056,7 @@
             "sibling_swatches_iHkm3i",
             "subscriptions_app_block_8cfzFx",
             "product_inventory_CGNRga",
+            "gang_sheet_builder",
             "buy_buttons_eYQEYi",
             "group_Yfptbh",
             "text_aEtTtq",
@@ -1065,9 +1066,6 @@
           ]
         }
       },
-      "block_order": [
-        "build_a_gang_sheet_main_product_zUanfE"
-      ],
       "custom_css": [
         ".Shopvid__VideoBlock__Title {text-align: left; font-size: inherit !important; font-weight: normal;}",
         "product-inventory {margin-bottom: -1rem !important;}",
