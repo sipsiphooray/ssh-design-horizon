@@ -1064,7 +1064,7 @@
               "type": "text",
               "name": "Gang sheet claim",
               "settings": {
-                "text": "<p>Upload your art, we nest it on a 23 inch roll and print it here in Lafayette, Louisiana. Ships in 2 business days.</p>",
+                "text": "<p><strong>The price shown is for one foot of roll, 23 x 12 inches.</strong> Upload your art and the builder nests it and shows your exact total as the sheet grows. Longer sheets cost less per foot. Printed here in Lafayette, Louisiana, shipped in 2 business days.</p>",
                 "width": "100%",
                 "max_width": "normal",
                 "alignment": "left",
