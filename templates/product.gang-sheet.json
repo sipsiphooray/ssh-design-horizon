@@ -1059,10 +1059,315 @@
                 "product": "{{closest.product}}",
                 "custom_button_css": ""
               }
+            },
+            "gang_claim": {
+              "type": "text",
+              "name": "Gang sheet claim",
+              "settings": {
+                "text": "<p>Upload your art, we nest it on a 23 inch roll and print it here in Lafayette, Louisiana. Ships in 2 business days.</p>",
+                "width": "100%",
+                "max_width": "normal",
+                "alignment": "left",
+                "type_preset": "rte",
+                "font": "var(--font-primary--family)",
+                "font_size": "1.05rem",
+                "enable_mobile_size": false,
+                "mobile_font_size": "1rem",
+                "line_height": "normal",
+                "letter_spacing": "normal",
+                "case": "none",
+                "wrap": "pretty",
+                "text_color": "",
+                "background": false,
+                "background_color": "#00000026",
+                "corner_radius": 0,
+                "padding-block-start": 0,
+                "padding-block-end": 0,
+                "padding-inline-start": 0,
+                "padding-inline-end": 0,
+                "custom_mobile_padding": false,
+                "mobile-padding-block-start": 0,
+                "mobile-padding-block-end": 0,
+                "mobile-padding-inline-start": 0,
+                "mobile-padding-inline-end": 0,
+                "custom_class": "",
+                "visibility": "all"
+              },
+              "blocks": {}
+            },
+            "gang_faq": {
+              "type": "accordion",
+              "settings": {
+                "icon": "plus",
+                "dividers": true,
+                "divider_color": "",
+                "type_preset": "",
+                "background_color": "",
+                "text_color": "",
+                "border": "none",
+                "border_width": 1,
+                "border_opacity": 100,
+                "border_color": "",
+                "border_radius": 0,
+                "padding-block-start": 0,
+                "padding-block-end": 0,
+                "padding-inline-start": 0,
+                "padding-inline-end": 0
+              },
+              "blocks": {
+                "gs_row_1": {
+                  "type": "_accordion-row",
+                  "settings": {
+                    "heading": "File requirements",
+                    "open_by_default": false,
+                    "icon": "image",
+                    "width": 20
+                  },
+                  "blocks": {
+                    "text-1": {
+                      "type": "text",
+                      "settings": {
+                        "text": "<ul><li><strong>Formats:</strong> PNG with a transparent background is best. SVG, PDF, AI, EPS and PSD also upload.</li><li><strong>Resolution:</strong> 300 DPI at the size you place it. The builder colours each piece green, amber or red so you can see it before you pay.</li><li><strong>Backgrounds:</strong> anything that is not transparent prints. The builder warns you, and has a background remove tool if you need it.</li></ul>",
+                        "width": "100%",
+                        "max_width": "normal",
+                        "alignment": "left",
+                        "type_preset": "rte",
+                        "font": "var(--font-body--family)",
+                        "font_size": "1rem",
+                        "enable_mobile_size": false,
+                        "mobile_font_size": "1rem",
+                        "line_height": "normal",
+                        "letter_spacing": "normal",
+                        "case": "none",
+                        "wrap": "pretty",
+                        "text_color": "",
+                        "background": false,
+                        "background_color": "#00000026",
+                        "corner_radius": 0,
+                        "padding-block-start": 0,
+                        "padding-block-end": 0,
+                        "padding-inline-start": 0,
+                        "padding-inline-end": 0,
+                        "custom_mobile_padding": false,
+                        "mobile-padding-block-start": 0,
+                        "mobile-padding-block-end": 0,
+                        "mobile-padding-inline-start": 0,
+                        "mobile-padding-inline-end": 0,
+                        "custom_class": "",
+                        "visibility": "all"
+                      },
+                      "blocks": {}
+                    }
+                  },
+                  "block_order": [
+                    "text-1"
+                  ]
+                },
+                "gs_row_2": {
+                  "type": "_accordion-row",
+                  "settings": {
+                    "heading": "How pricing works",
+                    "open_by_default": false,
+                    "icon": "price_tag",
+                    "width": 20
+                  },
+                  "blocks": {
+                    "text-1": {
+                      "type": "text",
+                      "settings": {
+                        "text": "<p>You pay for the length of roll your sheet uses, 23 inches wide, in one foot steps. Longer sheets cost less per foot, and the builder shows the exact total as you build. Minimum one foot, maximum ten feet per sheet.</p>",
+                        "width": "100%",
+                        "max_width": "normal",
+                        "alignment": "left",
+                        "type_preset": "rte",
+                        "font": "var(--font-body--family)",
+                        "font_size": "1rem",
+                        "enable_mobile_size": false,
+                        "mobile_font_size": "1rem",
+                        "line_height": "normal",
+                        "letter_spacing": "normal",
+                        "case": "none",
+                        "wrap": "pretty",
+                        "text_color": "",
+                        "background": false,
+                        "background_color": "#00000026",
+                        "corner_radius": 0,
+                        "padding-block-start": 0,
+                        "padding-block-end": 0,
+                        "padding-inline-start": 0,
+                        "padding-inline-end": 0,
+                        "custom_mobile_padding": false,
+                        "mobile-padding-block-start": 0,
+                        "mobile-padding-block-end": 0,
+                        "mobile-padding-inline-start": 0,
+                        "mobile-padding-inline-end": 0,
+                        "custom_class": "",
+                        "visibility": "all"
+                      },
+                      "blocks": {}
+                    }
+                  },
+                  "block_order": [
+                    "text-1"
+                  ]
+                },
+                "gs_row_3": {
+                  "type": "_accordion-row",
+                  "settings": {
+                    "heading": "DTF or UV DTF?",
+                    "open_by_default": false,
+                    "icon": "question_mark",
+                    "width": 20
+                  },
+                  "blocks": {
+                    "text-1": {
+                      "type": "text",
+                      "settings": {
+                        "text": "<p><strong>DTF</strong> is a hot peel transfer you heat press onto cotton, poly, blends, canvas and leatherette. <strong>UV DTF</strong> is peel and stick for glass, metal, acrylic, plastic, ceramic and sealed wood, with no heat press. It is the print on every Sip-Sip Hooray! cup.</p>",
+                        "width": "100%",
+                        "max_width": "normal",
+                        "alignment": "left",
+                        "type_preset": "rte",
+                        "font": "var(--font-body--family)",
+                        "font_size": "1rem",
+                        "enable_mobile_size": false,
+                        "mobile_font_size": "1rem",
+                        "line_height": "normal",
+                        "letter_spacing": "normal",
+                        "case": "none",
+                        "wrap": "pretty",
+                        "text_color": "",
+                        "background": false,
+                        "background_color": "#00000026",
+                        "corner_radius": 0,
+                        "padding-block-start": 0,
+                        "padding-block-end": 0,
+                        "padding-inline-start": 0,
+                        "padding-inline-end": 0,
+                        "custom_mobile_padding": false,
+                        "mobile-padding-block-start": 0,
+                        "mobile-padding-block-end": 0,
+                        "mobile-padding-inline-start": 0,
+                        "mobile-padding-inline-end": 0,
+                        "custom_class": "",
+                        "visibility": "all"
+                      },
+                      "blocks": {}
+                    }
+                  },
+                  "block_order": [
+                    "text-1"
+                  ]
+                },
+                "gs_row_4": {
+                  "type": "_accordion-row",
+                  "settings": {
+                    "heading": "Turnaround and shipping",
+                    "open_by_default": false,
+                    "icon": "truck",
+                    "width": 20
+                  },
+                  "blocks": {
+                    "text-1": {
+                      "type": "text",
+                      "settings": {
+                        "text": "<p>Sheets print in our Lafayette, Louisiana workshop and ship within two business days. Orders over $40 ship free in the USA.</p>",
+                        "width": "100%",
+                        "max_width": "normal",
+                        "alignment": "left",
+                        "type_preset": "rte",
+                        "font": "var(--font-body--family)",
+                        "font_size": "1rem",
+                        "enable_mobile_size": false,
+                        "mobile_font_size": "1rem",
+                        "line_height": "normal",
+                        "letter_spacing": "normal",
+                        "case": "none",
+                        "wrap": "pretty",
+                        "text_color": "",
+                        "background": false,
+                        "background_color": "#00000026",
+                        "corner_radius": 0,
+                        "padding-block-start": 0,
+                        "padding-block-end": 0,
+                        "padding-inline-start": 0,
+                        "padding-inline-end": 0,
+                        "custom_mobile_padding": false,
+                        "mobile-padding-block-start": 0,
+                        "mobile-padding-block-end": 0,
+                        "mobile-padding-inline-start": 0,
+                        "mobile-padding-inline-end": 0,
+                        "custom_class": "",
+                        "visibility": "all"
+                      },
+                      "blocks": {}
+                    }
+                  },
+                  "block_order": [
+                    "text-1"
+                  ]
+                },
+                "gs_row_5": {
+                  "type": "_accordion-row",
+                  "settings": {
+                    "heading": "Who prints it",
+                    "open_by_default": false,
+                    "icon": "heart",
+                    "width": 20
+                  },
+                  "blocks": {
+                    "text-1": {
+                      "type": "text",
+                      "settings": {
+                        "text": "<p>Sip-Sip Hooray! is a woman owned workshop in Lafayette, Louisiana. The same printers, film and crew that make our cups every day print your sheet.</p>",
+                        "width": "100%",
+                        "max_width": "normal",
+                        "alignment": "left",
+                        "type_preset": "rte",
+                        "font": "var(--font-body--family)",
+                        "font_size": "1rem",
+                        "enable_mobile_size": false,
+                        "mobile_font_size": "1rem",
+                        "line_height": "normal",
+                        "letter_spacing": "normal",
+                        "case": "none",
+                        "wrap": "pretty",
+                        "text_color": "",
+                        "background": false,
+                        "background_color": "#00000026",
+                        "corner_radius": 0,
+                        "padding-block-start": 0,
+                        "padding-block-end": 0,
+                        "padding-inline-start": 0,
+                        "padding-inline-end": 0,
+                        "custom_mobile_padding": false,
+                        "mobile-padding-block-start": 0,
+                        "mobile-padding-block-end": 0,
+                        "mobile-padding-inline-start": 0,
+                        "mobile-padding-inline-end": 0,
+                        "custom_class": "",
+                        "visibility": "all"
+                      },
+                      "blocks": {}
+                    }
+                  },
+                  "block_order": [
+                    "text-1"
+                  ]
+                }
+              },
+              "block_order": [
+                "gs_row_1",
+                "gs_row_2",
+                "gs_row_3",
+                "gs_row_4",
+                "gs_row_5"
+              ]
             }
           },
           "block_order": [
             "group_icgrde",
+            "gang_claim",
             "ai_gen_block_426582e_ADbVqH",
             "variant_picker_R3rGDr",
             "sibling_swatches_iHkm3i",
@@ -1072,6 +1377,7 @@
             "buy_buttons_eYQEYi",
             "group_Yfptbh",
             "text_aEtTtq",
+            "gang_faq",
             "accordion_ssh_tabs",
             "addon_products_LmHTx7",
             "shopvid_mp_tiktok_block_QzJRyi"
