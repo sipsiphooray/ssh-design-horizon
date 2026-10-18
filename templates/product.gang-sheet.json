@@ -21,7 +21,8 @@
         "custom_mobile_padding": false,
         "mobile-padding-block-start": 0,
         "mobile-padding-block-end": 0
-      }
+      },
+      "disabled": true
     },
     "main": {
       "type": "product-information",
@@ -189,7 +190,8 @@
                   "settings": {
                     "custom_liquid": "<div class='jdgm-widget jdgm-preview-badge' data-id='{{ closest.product.id }}'>{{ closest.product.metafields.judgeme.badge }}</div>"
                   },
-                  "blocks": {}
+                  "blocks": {},
+                  "disabled": true
                 },
                 "custom_liquid_7CG8xm": {
                   "type": "custom-liquid",
@@ -197,7 +199,8 @@
                   "settings": {
                     "custom_liquid": "{%- assign _h = closest.product.handle -%}{%- assign _isbundle = false -%}{%- if _h contains 'bundle' -%}{%- assign _isbundle = true -%}{%- endif -%}{%- if _h contains 'glass-tumbler' and _isbundle == false -%}<div class=\"product-subline\" style=\"display: flex; align-items: center; gap: var(--gap-xs); font-size: var(--font-size--sm); line-height: 1.2em;\"><span>Glass Cups, Mugs &amp; Tumblers, Lid + Straw</span></div>{%- else -%}{%- assign subline = closest.product.metafields.custom.subline.value -%}{%- if subline != blank -%}<div class=\"product-subline\" style=\"display: flex; align-items: center; gap: var(--gap-xs); font-size: var(--font-size--sm); line-height: 1.2em;\">{%- for item in subline -%}{%- unless forloop.first -%}<span aria-hidden=\"true\">&bull;</span>{%- endunless -%}<span>{{ item }}</span>{%- endfor -%}</div>{%- endif -%}{%- endif -%}"
                   },
-                  "blocks": {}
+                  "blocks": {},
+                  "disabled": true
                 },
                 "price_tVjtKg": {
                   "type": "price",
@@ -228,7 +231,8 @@
                   "settings": {
                     "custom_liquid": "<div class='xb-wishlist__btn-custom'>\n  <div\n    class='xb-wishlist__add'\n    xb-product-id='{{closest.product.id}}'\n    xb-product-title='{{closest.product.title }}'\n    xb-product-variant='{{closest.product.selected_or_first_available_variant.id }}'\n    xb-is-in-stock='{{closest.product.available }}'\n    xb-product-handle='{{closest.product.handle }}'\n  >\n    <button>\n      <svg\n        xmlns='http://www.w3.org/2000/svg'\n        width='20'\n        height='20'\n        viewBox='0 0 24 24'\n        fill='none'\n        stroke='#2b2b2b'\n        stroke-width='1.5'\n        stroke-linecap='round'\n        stroke-linejoin='round'\n      >\n        <path d=\"M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z\"></path>\n      </svg>\n    </button>\n  </div>\n  <div class=\"xb-wishlist__loading\" xb-product-id=\"{{closest.product.id}}\">\n    <svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 200 200\"><radialGradient id=\"a10\" cx=\".66\" fx=\".66\" cy=\".3125\" fy=\".3125\" gradientTransform=\"scale(1.5)\"><stop offset=\"0\" stop-color=\"#2b2b2b\"></stop><stop offset=\".3\" stop-color=\"#2b2b2b\" stop-opacity=\".9\"></stop><stop offset=\".6\" stop-color=\"#2b2b2b\" stop-opacity=\".6\"></stop><stop offset=\".8\" stop-color=\"#2b2b2b\" stop-opacity=\".3\"></stop><stop offset=\"1\" stop-color=\"#2b2b2b\" stop-opacity=\"0\"></stop></radialGradient><circle transform-origin=\"center\" fill=\"none\" stroke=\"url(#a10)\" stroke-width=\"15\" stroke-linecap=\"round\" stroke-dasharray=\"200 1000\" stroke-dashoffset=\"0\" cx=\"100\" cy=\"100\" r=\"70\"><animateTransform type=\"rotate\" attributeName=\"transform\" calcMode=\"spline\" dur=\"2\" values=\"360;0\" keyTimes=\"0;1\" keySplines=\"0 0 1 1\" repeatCount=\"indefinite\"></animateTransform></circle><circle transform-origin=\"center\" fill=\"none\" opacity=\".2\" stroke=\"#2b2b2b\" stroke-width=\"15\" stroke-linecap=\"round\" cx=\"100\" cy=\"100\" r=\"70\"></circle></svg>\n  </div>\n  <div class='xb-wishlist__remove' xb-product-id='{{closest.product.id}}' xb-is-in-stock='{{closest.product.available }}' xb-product-variant=\"{{closest.product.selected_or_first_available_variant.id }}\">\n    <button>\n      <svg\n        xmlns='http://www.w3.org/2000/svg'\n        width='20'\n        height='20'\n        viewBox='0 0 24 24'\n        fill='#f0dfe7'\n        stroke='#f0dfe7'\n        stroke-width='1.5'\n        stroke-linecap='round'\n        stroke-linejoin='round'\n      >\n        <path d=\"M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z\"></path>\n      </svg>\n    </button>\n  </div>\n</div>"
                   },
-                  "blocks": {}
+                  "blocks": {},
+                  "disabled": true
                 }
               },
               "block_order": [
@@ -277,7 +281,8 @@
                 "border_width": 1,
                 "border_color": "#e5e5e5"
               },
-              "blocks": {}
+              "blocks": {},
+              "disabled": true
             },
             "variant_picker_R3rGDr": {
               "type": "variant-picker",
@@ -342,7 +347,8 @@
                 "border_thickness": 1,
                 "border_radius": 0,
                 "product": "{{closest.product}}"
-              }
+              },
+              "disabled": true
             },
             "product_inventory_CGNRga": {
               "type": "product-inventory",
@@ -589,7 +595,8 @@
               "block_order": [
                 "product_shipping_callout_UNKMw4",
                 "popup_link_yA8PQ7"
-              ]
+              ],
+              "disabled": true
             },
             "text_aEtTtq": {
               "type": "text",
@@ -845,7 +852,8 @@
                 "acc_row_2",
                 "acc_row_3",
                 "acc_row_4"
-              ]
+              ],
+              "disabled": true
             },
             "addon_products_LmHTx7": {
               "type": "addon-products",
@@ -1031,13 +1039,15 @@
               },
               "block_order": [
                 "text_LtTDHn"
-              ]
+              ],
+              "disabled": true
             },
             "shopvid_mp_tiktok_block_QzJRyi": {
               "type": "shopify://apps/ag-shoppable-video/blocks/mp_tiktok_block/1216543a-6237-4445-a5f2-61991cd76022",
               "settings": {
                 "mp_tiktok_feed_id": "1803-164740"
-              }
+              },
+              "disabled": true
             },
             "gang_sheet_builder": {
               "type": "shopify://apps/build-a-gang-sheet/blocks/main-product/ee9ed31c-1d66-4e11-bf77-f31e69c2ec2b",
@@ -1973,7 +1983,8 @@
         "css_class": "",
         "add_section_id": false,
         "section_id": ""
-      }
+      },
+      "disabled": true
     },
     "section_jfT3jX": {
       "type": "section",
@@ -2638,7 +2649,8 @@
         "css_class": "",
         "add_section_id": false,
         "section_id": ""
-      }
+      },
+      "disabled": true
     },
     "product_recommendations_YNgW8t": {
       "type": "product-recommendations",
@@ -2902,7 +2914,8 @@
         "background_color": "",
         "padding-block-start": 48,
         "padding-block-end": 48
-      }
+      },
+      "disabled": true
     }
   },
   "order": [
