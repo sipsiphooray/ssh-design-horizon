@@ -2753,7 +2753,8 @@
         "border_radius": 0,
         "padding-block-start": 24,
         "padding-block-end": 72
-      }
+      },
+      "disabled": true
     },
     "section_qV8z8P": {
       "type": "section",
