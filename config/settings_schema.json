@@ -2281,6 +2281,12 @@
         "id": "free_gift_minimum",
         "label": "Minimum order before the gift is added ($)",
         "default": 5
+      },
+      {
+        "type": "text",
+        "id": "free_gift_last_day",
+        "label": "Last day of the gift (YYYY-MM-DD)",
+        "info": "After this date the gift switches itself off. Leave empty to run until you turn it off."
       }
     ]
   }

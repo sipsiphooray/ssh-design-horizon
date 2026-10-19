@@ -9,13 +9,17 @@
  * the cart qualifies, and removes it when it stops qualifying, when the gift
  * product changes, or when the feature is switched off. Gift lines are marked
  * with the hidden line property `_free_gift`, so a gift left over from an
- * earlier week is still recognised and removed.
+ * earlier week is still recognised and removed. After the optional "last day"
+ * (YYYY-MM-DD, shopper's local date) the feature counts as switched off.
  */
 import { CartLinesUpdateEvent, StandardEvents } from '@shopify/events';
 
 const config = JSON.parse(document.getElementById('free-gift-config')?.textContent || '{}');
 const GIFT_PROP = '_free_gift';
 let busy = false;
+
+const today = new Date().toLocaleDateString('en-CA'); // YYYY-MM-DD
+const expired = /^\d{4}-\d{2}-\d{2}$/.test(config.lastDay || '') && today > config.lastDay;
 
 const isGiftLine = (item) => item.properties && item.properties[GIFT_PROP];
 
@@ -64,7 +68,7 @@ async function reconcile() {
     const giftLines = cart.items.filter(isGiftLine);
     const paidSubtotal = cart.items.filter((i) => !isGiftLine(i)).reduce((s, i) => s + i.final_line_price, 0);
     const qualifies =
-      config.enabled && config.variantId && cart.items.some((i) => !isGiftLine(i)) && paidSubtotal >= config.minimum;
+      config.enabled && !expired && config.variantId && cart.items.some((i) => !isGiftLine(i)) && paidSubtotal >= config.minimum;
 
     for (const line of giftLines) {
       const keep = qualifies && line.variant_id === config.variantId;

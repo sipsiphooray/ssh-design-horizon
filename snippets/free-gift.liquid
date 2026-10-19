@@ -14,7 +14,8 @@
   {
     "enabled": {{ settings.free_gift_enabled | json }},
     "variantId": {% if gift_variant != blank %}{{ gift_variant.id }}{% else %}null{% endif %},
-    "minimum": {{ minimum | json }}
+    "minimum": {{ minimum | json }},
+    "lastDay": {{ settings.free_gift_last_day | strip | json }}
   }
 </script>
 <script type="module" src="{{ 'free-gift.js' | asset_url }}"></script>
