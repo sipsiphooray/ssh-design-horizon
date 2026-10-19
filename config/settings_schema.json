@@ -2257,5 +2257,31 @@
         "default": "equal-width-buttons"
       }
     ]
+  },
+  {
+    "name": "Free gift with purchase",
+    "settings": [
+      {
+        "type": "paragraph",
+        "content": "Adds one free gift to the cart when the order reaches the minimum, and removes it if the order drops below. The gift product must be a $0 product."
+      },
+      {
+        "type": "checkbox",
+        "id": "free_gift_enabled",
+        "label": "Free gift on",
+        "default": false
+      },
+      {
+        "type": "product",
+        "id": "free_gift_product",
+        "label": "Gift product ($0)"
+      },
+      {
+        "type": "number",
+        "id": "free_gift_minimum",
+        "label": "Minimum order before the gift is added ($)",
+        "default": 5
+      }
+    ]
   }
 ]

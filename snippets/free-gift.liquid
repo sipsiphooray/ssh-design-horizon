@@ -1,0 +1,20 @@
+{%- comment -%}
+  Free gift with purchase. Settings: Theme settings > Free gift with purchase.
+  Always rendered, so switching it off also clears gifts already sitting in carts.
+{%- endcomment -%}
+{%- liquid
+  assign gift = settings.free_gift_product
+  assign gift_variant = blank
+  if gift != blank
+    assign gift_variant = gift.selected_or_first_available_variant
+  endif
+  assign minimum = settings.free_gift_minimum | times: 100
+-%}
+<script type="application/json" id="free-gift-config">
+  {
+    "enabled": {{ settings.free_gift_enabled | json }},
+    "variantId": {% if gift_variant != blank %}{{ gift_variant.id }}{% else %}null{% endif %},
+    "minimum": {{ minimum | json }}
+  }
+</script>
+<script type="module" src="{{ 'free-gift.js' | asset_url }}"></script>
