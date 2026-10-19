@@ -255,7 +255,10 @@
       "color11": "#f1dbe6",
       "color12": "#d64d90",
       "color13": "#CBA3AB"
-    }
+    },
+    "free_gift_enabled": true,
+    "free_gift_product": "free-gift-presale-ghostie-40oz-32oz-tumbler-boot",
+    "free_gift_minimum": 5
   },
   "presets": {
     "Default": {
