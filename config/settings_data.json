@@ -118,6 +118,10 @@
     "variant_button_border_width": 1,
     "variant_button_radius": 0,
     "variant_button_width": "default-width-buttons",
+    "free_gift_enabled": true,
+    "free_gift_product": "free-gift-presale-ghostie-40oz-32oz-tumbler-boot",
+    "free_gift_minimum": 5,
+    "free_gift_last_day": "2026-10-25",
     "drawer_drop_shadow": true,
     "popover_border": "none",
     "button_font_weight_secondary": "default",
@@ -160,11 +164,6 @@
       },
       "13768625480086291342": {
         "type": "shopify://apps/forms/blocks/forms/8744a304-fcb1-4347-b211-bb6b4759a76a",
-        "disabled": false,
-        "settings": {}
-      },
-      "14060646107696862457": {
-        "type": "shopify://apps/judge-me-reviews/blocks/judgeme_core/61ccd3b1-a9f2-4160-9fe9-4fec8413e5d8",
         "disabled": false,
         "settings": {}
       },
@@ -237,6 +236,11 @@
         "type": "shopify://apps/build-a-gang-sheet/blocks/gang-edit/ee9ed31c-1d66-4e11-bf77-f31e69c2ec2b",
         "disabled": false,
         "settings": {}
+      },
+      "14060646107696862457": {
+        "type": "shopify://apps/judge-me-reviews/blocks/judgeme_core/61ccd3b1-a9f2-4160-9fe9-4fec8413e5d8",
+        "disabled": false,
+        "settings": {}
       }
     },
     "color_palette": {
@@ -255,11 +259,7 @@
       "color11": "#f1dbe6",
       "color12": "#d64d90",
       "color13": "#CBA3AB"
-    },
-    "free_gift_enabled": true,
-    "free_gift_product": "free-gift-presale-ghostie-40oz-32oz-tumbler-boot",
-    "free_gift_minimum": 5,
-    "free_gift_last_day": "2026-10-25"
+    }
   },
   "presets": {
     "Default": {
