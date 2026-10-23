@@ -82,11 +82,28 @@
 
         resource.featured_image is needed for collections with a single thumbnail
       {% endcomment %}
-      {% assign featured_image = resource.featured_media.preview_image | default: resource.featured_image %}
+      {% liquid
+        assign card_media = resource.featured_media
+        assign primary_media = resource.media[0]
+        assign secondary_media = resource.media[1]
+
+        # Store customization: custom.website_image leads the card on this site, while the
+        # featured image (first media) is what Shop, Google and Meta show. Only when
+        # featured_media is still the first media, so a search variant image wins.
+        if resource_type == 'product' and resource.metafields.custom.website_image != blank and resource.featured_media.id == resource.media[0].id
+          assign website_media = resource.media | where: 'id', resource.metafields.custom.website_image.value.id | first
+          if website_media
+            assign card_media = website_media
+            assign primary_media = website_media
+            assign secondary_media = resource.media | reject: 'id', website_media.id | first
+          endif
+        endif
+      %}
+      {% assign featured_image = card_media.preview_image | default: resource.featured_image %}
       {% liquid
         assign primary_focal_point_style = ''
-        if resource.media[0].presentation.focal_point != blank
-          assign primary_focal_point_style = 'object-position: ' | append: resource.media[0].presentation.focal_point | append: ';'
+        if primary_media.presentation.focal_point != blank
+          assign primary_focal_point_style = 'object-position: ' | append: primary_media.presentation.focal_point | append: ';'
         endif
       %}
       {%- if featured_image != blank -%}
@@ -111,12 +128,12 @@
         {%- if image_hover and resource.media.size > 1 -%}
           {% liquid
             assign secondary_focal_point_style = ''
-            if resource.media[1].presentation.focal_point != blank
-              assign secondary_focal_point_style = 'object-position: ' | append: resource.media[1].presentation.focal_point | append: ';'
+            if secondary_media.presentation.focal_point != blank
+              assign secondary_focal_point_style = 'object-position: ' | append: secondary_media.presentation.focal_point | append: ';'
             endif
           %}
           {{
-            resource.media[1]
+            secondary_media
             | image_url: width: image_width
             | image_tag:
               loading: 'lazy',
@@ -124,7 +141,7 @@
               widths: widths,
               sizes: image_sizes,
               ref: ref_image_to_transition,
-              data-media-id: resource.media[1].id,
+              data-media-id: secondary_media.id,
               style: secondary_focal_point_style
           }}
         {%- endif -%}

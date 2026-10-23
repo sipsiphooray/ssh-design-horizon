@@ -24,6 +24,17 @@
     endif
   endif
 
+  # Store customization: custom.website_image leads the card on this site, while the
+  # featured image (first media) is what Shop, Google and Meta show. Only when
+  # featured_media is still the first media, so a search or filter variant image wins.
+  assign card_featured_media = product.featured_media
+  if product.metafields.custom.website_image != blank and product.featured_media.id == product.media[0].id
+    assign website_media = product.media | where: 'id', product.metafields.custom.website_image.value.id | first
+    if website_media
+      assign card_featured_media = website_media
+    endif
+  endif
+
   # if the card-gallery has a section.settings.product_card_size:
   # assume grid-template autofill(card-size, 1fr) and calculate the sizes attribute based on the minimum card size
   #
@@ -53,7 +64,7 @@
     when 'square'
       assign ratio = '1'
     when 'adapt'
-      assign ratio = product.featured_media.preview_image.aspect_ratio | default: '1'
+      assign ratio = card_featured_media.preview_image.aspect_ratio | default: '1'
   endcase
 
   if block_settings.image_ratio == 'adapt' and block_settings.constrain_to_viewport
@@ -95,7 +106,7 @@
       aria-label="{{- product.title -}}"
     >
       {% liquid
-        assign featured_media = product.featured_media
+        assign featured_media = card_featured_media
 
         assign featured_media_loading = 'lazy'
         assign featured_media_sizes = 'auto, ' | append: image_sizes
@@ -135,10 +146,10 @@
           # Sort media so product.featured_media.preview_image comes first as that is the most relevant image to display
           # product.featured_media updates based on search context and filters applied
 
-          assign other_media = product.media | reject: 'src', product.featured_media
-          assign media_list_to_show = product.featured_media | concat: other_media
+          assign other_media = product.media | reject: 'src', featured_media
+          assign media_list_to_show = featured_media | concat: other_media
 
-          if gallery_resolved_variant != blank and gallery_resolved_variant.featured_media != blank and gallery_resolved_variant.featured_media.id != product.featured_media.id and variant_images
+          if gallery_resolved_variant != blank and gallery_resolved_variant.featured_media != blank and gallery_resolved_variant.featured_media.id != featured_media.id and variant_images
             # Match by ID instead of src, and query product.media to guarantee an object array
             assign variant_media = product.media | where: 'id', gallery_resolved_variant.featured_media.id
             assign other_media = product.media | reject: 'src', gallery_resolved_variant.featured_media
